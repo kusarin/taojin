@@ -9,12 +9,12 @@ import cn.it.pojo.Users;
  * 用户信息的Dao类
  * */
 
-public class UsersDao {
+public interface UsersDao {
 	
 	
-	public void UsersAdd(Users user){}
-	public void UsersDelete(int num){}
-	public void UsersUpdate(int num){}
-	public void UsersSearch(int num){}
+	public void UsersAdd(Users user);
+	public void UsersDelete(int num);
+	public void UsersUpdate(int num);
+	public void UsersSearch(int num);
 	
 }
