@@ -16,7 +16,7 @@ public class Users {
 	private boolean type;//用户身份为普通/商家用户（0为普通，1为商家）；
 	private String ID;//用户绑定的身份证号，普通用户可不绑定身份证；
 	
-	
+	/*********************set******get***************************************/
 	public int getNum() {
 		return num;
 	}
