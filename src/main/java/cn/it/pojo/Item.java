@@ -10,7 +10,8 @@ public class Item {
 	private int ID;          //商品编号：ID(PK);
 	private String name;     //商品名称：name；
 	private String part;     //商品类别：part；（拍卖品或者非拍卖品）
-	private String type;     //商品类型：type；
+	private String typeh;    //商品类型：typeh；（商品的上层类型）
+	private String typel;    //商品类型：typel；（商品的下层类型）
 	private double price;    //商品价格：price；
 	private String detail;   //商品描述：detail；
 	private String image;    //商品图片：image；
@@ -36,10 +37,16 @@ public class Item {
 		this.part = part;
 	}
 	public String getType() {
-		return type;
+		return typeh;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setTypeh(String typeh) {
+		this.typeh = typeh;
+	}	
+	public String getTypel() {
+		return typel;
+	}
+	public void setTypel(String typel) {
+		this.typel = typel;
 	}
 	public double getPrice() {
 		return price;
