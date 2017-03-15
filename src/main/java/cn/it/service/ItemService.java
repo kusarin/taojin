@@ -1,5 +1,9 @@
 package cn.it.service;
-
-public class ItemService {
+/**
+ * 
+ * @author zhj
+ *
+ */
+public interface ItemService {
 
 }
