@@ -9,19 +9,34 @@ package cn.it.pojo;
 public class Users {
 	
 	private int num;//用户ID（PK）
-	private String name;//用户名；
+	private String username;//用户名；
+	private String password;//密码；
+	
+	private String name;//姓名；
 	private int tele;//用户电话；
 	private String email;//用户email；
-	private String password;//密码；
 	private boolean type;//用户身份为普通/商家用户（0为普通，1为商家）；
 	private String ID;//用户绑定的身份证号，普通用户可不绑定身份证；
 	
 	/*********************set******get***************************************/
+
 	public int getNum() {
 		return num;
 	}
 	public void setNum(int num) {
 		this.num = num;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getName() {
 		return name;
@@ -41,12 +56,6 @@ public class Users {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	public boolean isType() {
 		return type;
 	}
@@ -59,5 +68,4 @@ public class Users {
 	public void setID(String iD) {
 		ID = iD;
 	}
-	
 }
