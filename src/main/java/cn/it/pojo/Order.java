@@ -15,7 +15,7 @@ public class Order {
 	private double unitPrice;   //单价：unitPrice
 	private int quantity;       //购买的数量：quantity
 	private double actulPayment;  //实际的付款：actulPayment
-	private String statusString;  //交易状态：待付款、取消订单、交易成功、待收货：statusString
+	private String status;  //交易状态：待付款、取消订单、交易成功、待收货：statusString
 	private String paymentMethod;  //支付方式：paymentMethod
 	private String recivingAddress; //收货地址：recivingAddress
 	private String freight;      //运费：freight
@@ -38,8 +38,8 @@ public class Order {
 	public double getActulPayment() {
 		return actulPayment;
 	}
-	public String getStatusString() {
-		return statusString;
+	public String getStatus() {
+		return status;
 	}
 	public String getPaymentMethod() {
 		return paymentMethod;
@@ -68,8 +68,8 @@ public class Order {
 	public void setActulPayment(double actulPayment) {
 		this.actulPayment = actulPayment;
 	}
-	public void setStatusString(String statusString) {
-		this.statusString = statusString;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public void setPaymentMethod(String paymentMethod) {
 		this.paymentMethod = paymentMethod;
