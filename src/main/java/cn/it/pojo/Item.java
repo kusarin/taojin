@@ -7,7 +7,7 @@ package cn.it.pojo;
  * */
 public class Item {
 
-	private int ID;          //商品编号：ID(PK);
+	private int id;          //商品编号：id(PK);
 	private String name;     //商品名称：name；
 	private String part;     //商品类别：part；（拍卖品或者非拍卖品）
 	private String typeh;    //商品类型：typeh；（商品的上层类型）
@@ -16,14 +16,14 @@ public class Item {
 	private double price;    //商品价格：price；
 	private String detail;   //商品描述：detail；
 	private String image;    //商品图片：image；
-	private String evaluate; //商品评论：evaluate；
+//商品评论变为新的一张表	private String evaluate; //商品评论：evaluate；
 	
 /*********************set******get***************************************/
-	public int getID() {
-		return ID;
+	public int getid() {
+		return id;
 	}
-	public void setID(int iD) {
-		ID = iD;
+	public void setid(int id) {
+		id = id;
 	}
 	public String getName() {
 		return name;
@@ -73,11 +73,19 @@ public class Item {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public String getEvaluate() {
-		return evaluate;
-	}
-	public void setEvaluate(String evaluate) {
-		this.evaluate = evaluate;
-	}
+	
+//	public String getEvaluate() {
+//		return evaluate;
+//	}
+//	public void setEvaluate(String evaluate) {
+//		this.evaluate = evaluate;
+//	}
 
+	/**
+	 * toString方法，测试用。
+	 */
+	@Override
+	public String toString(){
+		return "Item is OK!!";
+	}
 }
