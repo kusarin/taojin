@@ -23,7 +23,7 @@
 		</where>
 	</insert>
 	<insert id="search"  parameterType="cn.it.pojo.Item">
-		select *from user
+		select * from user
 		<where>
 			and id=#{id}
 		</where>
