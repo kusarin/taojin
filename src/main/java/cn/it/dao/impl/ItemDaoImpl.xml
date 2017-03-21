@@ -3,24 +3,28 @@
 <mapper namespace = "cn.it.dao.ItemDao">
 
 <!-- 增删改方法 -->
-	<insert id="add" parameterType="cn.it.pojo.Item">
+	<insert id="ItemAdd" parameterType="cn.it.pojo.Item">
 		insert into item(name,part,typeh,typel,number,price,detail,image) 
 		        values(#{name},#{part},#{typeh},#{typel},#{number},#{price},#{detail},#{image})
 	</insert>
-	<delete id="delete"  parameterType="cn.it.pojo.Item">
+	<delete id="ItemDelete" parameterType="int">
 		delete from item 
 		<where>
-			id = #{id}
+			<if test="item_id!=0">
+				item_id = #{item_id}
+			</if>
 		</where> 		
 	</delete>
-	<update id="update"  parameterType="int">
+	<update id="ItemUpdate" parameterType="cn.it.pojo.Item">
 		update item set name=#{name},part=#{part},typeh=#{typeh},typel=#{typel},
 		                number=#{number},price=#{price},detail=#{detail},image=#{image}
 		<where>
-			<if test="id!=0">
-				and id=#{id}				
+			<if test="item_id!=0">
+				and item_id = #{item_id}				
 			</if>
 		</where>
 	</update>
-
+	<select id="ItemSearch" parameterType="int" resultType="cn.it.pojo.Item">
+		select * from item where item_id = #{item_id}
+	</select>
 </mapper>
