@@ -18,7 +18,7 @@
  </head> 
   
  <body> 
- <form action="login_action.jsp" method="post"> 
+ <form action="login.do" method="post"> http;//localhost:8080/login.do
   <table> 
    <tr> 
     <td colspan="2">登录窗口</td> 
