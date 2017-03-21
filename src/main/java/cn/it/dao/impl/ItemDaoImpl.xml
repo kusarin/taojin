@@ -14,7 +14,7 @@
 		</where> 		
 	</insert>
 	<insert id="update"  parameterType="cn.it.pojo.Item">
-		update user set name=#{name},part=#{part},typeh=#{typeh},typel=#{typel},
+		update item set name=#{name},part=#{part},typeh=#{typeh},typel=#{typel},
 		                number=#{number},price=#{price},detail=#{detail},image=#{image}
 		<where>
 			<if test="id!=0">
@@ -23,7 +23,7 @@
 		</where>
 	</insert>
 	<insert id="search"  parameterType="cn.it.pojo.Item">
-		select * from user
+		select * from item
 		<where>
 			and id=#{id}
 		</where>
