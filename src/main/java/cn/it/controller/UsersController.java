@@ -16,9 +16,9 @@ public class UsersController {
 	
 	 private UsersService usersService;
  
-	@RequestMapping("login.do")//http://localhost:8080/Taojin/login.do
-	public String login(Users user,Map<String,Object> map,Model model,ModelMap maps){
-		String result = usersService.login(user,map);
+	@RequestMapping("login.do")//http://localhost:8080/Taojin/login
+	public String login(String username,String password,Map<String,Object> map){
+		String result = usersService.login(username,password,map);
 		return result;
 	}
 	//添加用户

@@ -2,30 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "cn.it.dao.UsersDao">
 
+
+<!-- login -->
+<select id="login"  parameterType="cn.it.pojo.Users">
+		select * from Users where username = #{username} and password = #{password}
+	</select>
 <!-- 增删改查方法 -->
-	<insert id="add" parameterType="cn.it.pojo.Users">
+	<insert id="UsersAdd" parameterType="cn.it.pojo.Users">
 		insert into Users(username,password,name,tele,email,type,ID) 
 		        values(#{username},#{password},#{name},#{tele},#{email},#{type},#{ID})
 	</insert>
-	<insert id="delete"  parameterType="cn.it.pojo.Users">
+	<delete id="UsersDelete"  parameterType="cn.it.pojo.Users">
 		delete from Users
 		<where>
 			userID = #{userID}
 		</where>
-	</insert>
-	<insert id="update"  parameterType="cn.it.pojo.Users">
-		update users set username=#{username},password=#{password},name=#{name},tele=#{tele},
+	</delete>
+	<update id="UsersUpdate"  parameterType="cn.it.pojo.Users">
+		update Users set username=#{username},password=#{password},name=#{name},tele=#{tele},
 		                email=#{email},type=#{type},ID=#{ID}
 		<where>
 			<if test="userID!=0">
 				and userID=#{userID}
 			</if>
 		</where>
-	</insert>
-	<insert id="search"  parameterType="cn.it.pojo.Users">
-		select *from users
-		<where>
-			and userID=#{userID}
-		</where>
-	</insert>
+	</update>
+	<select id="UsersSearch"  parameterType="cn.it.pojo.Users">
+		select * from Users where userID = #{userID}
+	</select>
 </mapper>
