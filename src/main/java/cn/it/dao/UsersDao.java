@@ -31,6 +31,6 @@ public interface UsersDao {
 	 * @param （变量为用户ID:userID，类型为int）；
 	 */
 	public void UsersSearch(int userID);
-	public void login(String username,String password);
+	public Users login(String username,String password);
 	
 }

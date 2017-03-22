@@ -5,21 +5,21 @@
 
 <!-- login -->
 <select id="login"  parameterType="cn.it.pojo.Users">
-		select * from Users where username = #{username} and password = #{password}
+		select * from users where username = #{username} and password = #{password}
 	</select>
 <!-- 增删改查方法 -->
 	<insert id="UsersAdd" parameterType="cn.it.pojo.Users">
-		insert into Users(username,password,name,tele,email,type,ID) 
+		insert into users(username,password,name,tele,email,type,ID) 
 		        values(#{username},#{password},#{name},#{tele},#{email},#{type},#{ID})
 	</insert>
 	<delete id="UsersDelete"  parameterType="cn.it.pojo.Users">
-		delete from Users
+		delete from users
 		<where>
 			userID = #{userID}
 		</where>
 	</delete>
 	<update id="UsersUpdate"  parameterType="cn.it.pojo.Users">
-		update Users set username=#{username},password=#{password},name=#{name},tele=#{tele},
+		update users set username=#{username},password=#{password},name=#{name},tele=#{tele},
 		                email=#{email},type=#{type},ID=#{ID}
 		<where>
 			<if test="userID!=0">
