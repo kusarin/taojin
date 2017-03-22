@@ -2,6 +2,9 @@ package cn.it.controller;
 
 import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +15,9 @@ import cn.it.pojo.Users;
 /**
 	 * @author wz
 	 */
+@Controller
 public class UsersController {
-	
+	 @Resource
 	 private UsersService usersService;
  
 	@RequestMapping("login.do")//http://localhost:8080/Taojin/login
