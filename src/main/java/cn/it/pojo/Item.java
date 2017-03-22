@@ -7,26 +7,37 @@ package cn.it.pojo;
  * */
 public class Item {
 
-	private int id;          //商品编号：id(PK);
+	private int item_id;     //商品编号：item_id(PK)，自增数据，不能手动修改;
+	private int shop_id;     //店铺编号：shop_id，用来表示商品的归属店铺；    
+	
 	private String name;     //商品名称：name；
 	private String part;     //商品类别：part；（拍卖品或者非拍卖品）
 	private String typeh;    //商品类型：typeh；（商品的上层类型）
 	private String typel;    //商品类型：typel；（商品的下层类型）
-	private String number;   //商品数量：number；
+	private int number;      //商品数量：number；
 	private double price;    //商品价格：price；
 	private String detail;   //商品描述：detail；
 	private String image;    //商品图片：image；
-//商品评论变为新的一张表	private String evaluate; //商品评论：evaluate；
+	
+	private int browingtimes; //商品浏览次数：browingtimes，后台数据，初始化为0，不能手动修改；
+
 	
 /*********************set******get***************************************/
-	public int getid() {
-		return id;
-	}
-	public void setid(int id) {
-		id = id;
-	}
+	
 	public String getName() {
 		return name;
+	}
+	public int getItem_id() {
+		return item_id;
+	}
+	public void setItem_id(int item_id) {
+		this.item_id = item_id;
+	}
+	public int getShop_id() {
+		return shop_id;
+	}
+	public void setShop_id(int shop_id) {
+		this.shop_id = shop_id;
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -49,10 +60,10 @@ public class Item {
 	public void setTypel(String typel) {
 		this.typel = typel;
 	}
-	public String getNumber() {
+	public int getNumber() {
 		return number;
 	}
-	public void setNumber(String number) {
+	public void setNumber(int number) {
 		this.number = number;
 	}
 	public double getPrice() {
@@ -73,13 +84,23 @@ public class Item {
 	public void setImage(String image) {
 		this.image = image;
 	}
+
+	public int getBrowingtimes() {
+		return browingtimes;
+	}
+	public void setBrowingtimes(int browingtimes) {
+		this.browingtimes = browingtimes;
+	}	
 	
+	
+//商品评论变为新的一张表	private String evaluate; //商品评论：evaluate；	
 //	public String getEvaluate() {
 //		return evaluate;
 //	}
 //	public void setEvaluate(String evaluate) {
 //		this.evaluate = evaluate;
 //	}
+
 
 	/**
 	 * toString方法，测试用。
