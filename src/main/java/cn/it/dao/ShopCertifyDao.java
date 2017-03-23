@@ -1,5 +1,5 @@
 package cn.it.dao;
-
-public class ShopCertifyDao {
-
+import cn.it.pojo.Shop;
+public interface ShopCertifyDao {
+   public void CertifyShop(Shop shop);
 }

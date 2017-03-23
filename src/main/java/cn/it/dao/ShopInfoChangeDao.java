@@ -1,5 +1,7 @@
 package cn.it.dao;
 
-public class ShopInfoChangeDao {
+import cn.it.pojo.Shop;
 
+public interface ShopInfoChangeDao {
+    public void InfoChange(Shop shop);
 }
