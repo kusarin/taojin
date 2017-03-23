@@ -2,6 +2,7 @@ package cn.it.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.swing.text.View;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import cn.it.pojo.Shop;
 import cn.it.service.ShopService;
 @Controller
 public class ShopController {
-	@Autowired
+	@Resource
    private ShopService shopService;
 	
 	@RequestMapping(value = "/Certify.do")
@@ -28,22 +29,13 @@ public class ShopController {
 		modelAndView.setViewName("Change");
 		return modelAndView;
 	}
-	@RequestMapping(value = "/shopList.do")
-	public String findShopList(Map<String,Object> map,List<Shop> list){
-		return null;
-		
-	}
-	/*public ModelAndView shopList(){
-		ModelAndView modelAndView = new ModelAndView();
+	@RequestMapping(value = "shopList.do")
+    public ModelAndView shopList(){
+		ModelAndView modelAndView = new ModelAndView("shopList");
+		int num = 1;
 		List<Shop> list;
-		try{
-			list = shopService.findShopList();
-			modelAndView.addObject("shop", list);
-			modelAndView.setViewName("Shop.jsp");
-		}catch(Exception e){
-			modelAndView.addObject("error", e.getMessage());
-			modelAndView.setViewName("error.jsp");
-		}
+		list = shopService.findShopList(num);
+		modelAndView.addObject("shopli", list);
 		return modelAndView;
-	}*/
+	}
 }
