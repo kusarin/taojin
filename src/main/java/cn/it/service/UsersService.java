@@ -6,5 +6,5 @@ import cn.it.pojo.Users;
 
 public interface UsersService {
   
-	 public String login(Users user,Map<String,Object> map);
+	 public String login(String userID,String password,Map<String,Object> map);
 }
