@@ -15,7 +15,7 @@
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
 		<property name="url" value="jdbc:mysql://localhost:3306/taojin"/>
 		<property name="username" value="root"/>
-		<property name="password" value="231456"/>
+		<property name="password" value="123456"/>
 		<property name="filters" value="stat,log4j,wall"/>
 		<property name="maxActive" value="50"/>
 		<property name="initialSize" value="1"/>
@@ -42,6 +42,7 @@
 		<property name="basePackage" value="cn.it.dao"></property>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
+	<bean id="ShopService" class="cn.it.service.impl.ShopServiceImpl"></bean>
 
 
 	<!-- 事务管理器 -->
