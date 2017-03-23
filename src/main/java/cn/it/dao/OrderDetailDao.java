@@ -1,5 +1,8 @@
 package cn.it.dao;
 
+import java.util.List;
+
+
 import cn.it.pojo.OrderDetail;
 
 /**
@@ -20,5 +23,10 @@ public interface OrderDetailDao {
 	 * 
 	 **/
 	public OrderDetail select(int id);
+	/***
+	 * 根据订单号查询对应的所有商品的信息
+	 * @param(id订单表的唯一标识)
+	 * */
+	public List<OrderDetail> selectAll(int id);
 	
 }

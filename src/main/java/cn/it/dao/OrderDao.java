@@ -1,5 +1,7 @@
 package cn.it.dao;
 
+import java.util.List;
+
 import cn.it.pojo.Order;
 
 /**
@@ -11,7 +13,7 @@ public interface OrderDao {
 	 * 添加订单记录
 	 * @param(参数类型为Order)
 	 */
-	public void add(OrderDao order);
+	public void add(Order order);
 	/**
 	 * 获取订单信息
 	 * @return(Order表示返回一个订单对象)
@@ -23,4 +25,10 @@ public interface OrderDao {
       * @param(id 指一个订单记录的唯一标识)
       */
      public void update(int id);
+     /***
+      * 根据用户id查询该用户的所有订单*
+      * 
+      *
+      * */
+     public List<Order> selectAll(int num);     
 }

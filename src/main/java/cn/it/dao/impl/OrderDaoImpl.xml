@@ -2,5 +2,43 @@
 <!DOCTYPE mapper   
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-   <mapper namespace="OrderDao">
-   </mapper>
+ <mapper namespace="cn.it.dao.OrderDao">
+        <resultMap type="cn.it.pojo.Order" id="findAll">
+            <id column="Indent_id" property="id" javaType="int" jdbcType="INTEGER"/>
+            <result column="num" property="num" javaType="int" jdbcType="INTEGER"/>
+            <result column="OrderNumber" property="orderNumber" javaType="String" jdbcType="VARCHAR"/>
+            <result column="OrderTime" property="orderTime" javaType="java.sql.Date" jdbcType="DATE"/>
+            <result column="UnitPrice" property="unitPrice" javaType="double" jdbcType="DOUBLE"/>
+            <result column="Quantity" property="quantity" javaType="int" jdbcType="INTEGER"/>
+            <result column="ActulPayment" property="actulPayment" javaType="double" jdbcType="DOUBLE"/>
+            <result column="Status" property="status" javaType="String" jdbcType="VARCHAR"/>
+            <result column="PaymentMethod" property="paymentMethod" javaType="String" jdbcType="VARCHAR"/>
+            <result column="RecivingAddress" property="recivingAddress" javaType="String" jdbcType="VARCHAR"/>
+            <result column="freight" property="freight" javaType="double" jdbcType="DOUBLE"/>
+        </resultMap>
+        <parameterMap type="cn.it.pojo.Order" id="OrderParameterMap">
+            <parameter property="id" resultMap="findAll"/>  
+            <parameter property="num" resultMap="findAll"/>  
+            <parameter property="orderNumber" resultMap="findAll"/> 
+            <parameter property="orderTime" resultMap="findAll"/> 
+            <parameter property="unitPrice" resultMap="findAll"/> 
+            <parameter property="quantity" resultMap="findAll"/> 
+            <parameter property="actulPayment" resultMap="findAll"/> 
+            <parameter property="status" resultMap="findAll"/> 
+            <parameter property="paymentMethod" resultMap="findAll"/> 
+            <parameter property="recivingAddress" resultMap="findAll"/> 
+            <parameter property="freight" resultMap="findAll"/>  
+       </parameterMap>
+     <select id="selectAll" parameterType="int" resultMap="findAll">
+          select* from indent where num=#{num}
+     </select>
+     <insert id="add" parameterMap="OrderParameterMap">
+           insert into indent(num,OrderNumber,OrderTime,UnitPrice,Quantity,ActulPayment,Status,PaymentMethod,RecivingAddress,freight) 
+           values(#{num},#{orderNumber},#{orderTime},#{unitPrice},#{quantity},#{actulPayment},#{status},#{paymentMethod},#{recivingAddress},#{freight})
+     </insert>
+        <update id="update" parameterType="int">
+          
+	    </update>
+ </mapper>
+ 
+
