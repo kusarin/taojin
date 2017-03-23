@@ -6,6 +6,6 @@ import java.util.List;
 public interface ShopService {
    Item ItemSearch(int id);
    Shop findByid(int id);
-   List<Shop> findShopList() throws Exception;
+   List<Shop> findShopList(int num);
    long viewHits(Long id);
 }

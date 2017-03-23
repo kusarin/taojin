@@ -32,7 +32,7 @@
 			value="20" />
 	</bean>
 
-
+    <bean id="ShopService" class="cn.it.service.impl.ShopServiceImpl"></bean>
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="mapperLocations" value="classpath:cn/it/dao/impl/*.xml"></property>

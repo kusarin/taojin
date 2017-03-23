@@ -25,7 +25,7 @@ import cn.it.service.OrderService;
 
 
 /**
- * 对订单信息进行控制
+ * 瀵硅鍗曚俊鎭繘琛屾帶鍒�
  * 
  */
 
@@ -33,33 +33,32 @@ import cn.it.service.OrderService;
 public class OrderController {
 	@Resource
 	private OrderService orderService;
-	//提交订单
+	//鎻愪氦璁㈠崟
 	@RequestMapping("/submitOrder.do")
 	public ModelAndView submitOrder(Order order){
 		return null;
 	}
-   //删除订单
+   //鍒犻櫎璁㈠崟
 	@RequestMapping("deleteOrder.do")
 	public ModelAndView deleteOrder(int orderId){
 		return null;
 	}
-	//查看订单详情
+	//鏌ョ湅璁㈠崟璇︽儏
 	@RequestMapping("lookOrderDeatil.do")
 	public ModelAndView lookOrderDeatil(int orderId){
 		return null;
 	}
-	//某用户的所有订单
+	//鏌愮敤鎴风殑鎵�湁璁㈠崟
 	@RequestMapping("orderItem.do")
 	public ModelAndView lookAllOrder(HttpServletRequest request){
-		//获取session域中的值
+		//鑾峰彇session鍩熶腑鐨勫�
 //	    int num1=(Integer)(request.getSession().getAttribute("num"));
 		
-		int num=1;//用户编号
+		int num=1;//鐢ㄦ埛缂栧彿
 		ModelAndView view=new ModelAndView("orderItem");
-		List<Order> order=orderService.getAllOrder(num);//获取所有订单
-		List<OrderDetail> delist=orderService.getALLItem(num);//获取订单明细
-		List<OrderCollection> collectList =new ArrayList<OrderCollection>();//创建OrderCollecton容器
-		
+		List<Order> order=orderService.getAllOrder(num);//鑾峰彇鎵�湁璁㈠崟
+		List<OrderDetail> delist=orderService.getALLItem(num);//鑾峰彇璁㈠崟鏄庣粏
+		List<OrderCollection> collectList =new ArrayList<OrderCollection>();//鍒涘缓OrderCollecton瀹瑰櫒		
 		collectList=orderService.mergeList(order, delist);
 		view.addObject("orderList",collectList);
 		return view;
