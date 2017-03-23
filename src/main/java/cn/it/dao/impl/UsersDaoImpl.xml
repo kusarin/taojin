@@ -4,8 +4,8 @@
 
 
 <!-- login -->
-<select id="login"  parameterType="cn.it.pojo.Users">
-		select * from users where username = #{username} and password = #{password}
+   <select id="login"  parameterType="java.lang.String" resultType="cn.it.pojo.Users">
+		select * from users where username = #{0} and password = #{1}
 	</select>
 <!-- 增删改查方法 -->
 	<insert id="UsersAdd" parameterType="cn.it.pojo.Users">
@@ -15,7 +15,7 @@
 	<delete id="UsersDelete"  parameterType="cn.it.pojo.Users">
 		delete from users
 		<where>
-			userID = #{userID}
+			user_ID = #{user_ID}
 		</where>
 	</delete>
 	<update id="UsersUpdate"  parameterType="cn.it.pojo.Users">
@@ -23,11 +23,11 @@
 		                email=#{email},type=#{type},ID=#{ID}
 		<where>
 			<if test="userID!=0">
-				and userID=#{userID}
+				and user_ID=#{user_ID}
 			</if>
 		</where>
 	</update>
 	<select id="UsersSearch"  parameterType="cn.it.pojo.Users">
-		select * from Users where userID = #{userID}
+		select * from Users where user_ID = #{user_ID}
 	</select>
 </mapper>
