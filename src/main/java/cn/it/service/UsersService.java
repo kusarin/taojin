@@ -1,5 +1,10 @@
 package cn.it.service;
 
-public interface UsersService {
+import java.util.Map;
 
+import cn.it.pojo.Users;
+
+public interface UsersService {
+  
+	 public String login(String userID,String password,Map<String,Object> map);
 }

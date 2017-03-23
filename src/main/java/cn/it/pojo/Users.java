@@ -8,7 +8,7 @@ package cn.it.pojo;
 
 public class Users {
 	
-	private int num;//用户ID（PK）
+	private int userID;//用户ID（PK）
 	private String username;//用户名；
 	private String password;//密码；
 	
@@ -20,11 +20,11 @@ public class Users {
 	
 	/*********************set******get***************************************/
 
-	public int getNum() {
-		return num;
+	public int getUserID() {
+		return userID;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 	public String getUsername() {
 		return username;
