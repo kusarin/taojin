@@ -7,89 +7,89 @@ package cn.it.pojo;
  * */
 public class Item {
 
-	private int item_id;     //商品编号：item_id(PK)，自增数据，不能手动修改;
-	private int shop_id;     //店铺编号：shop_id，用来表示商品的归属店铺；    
+	private int Item_id;     //商品编号：Item_id(PK)，自增数据，不能手动修改;
+	private int Shop_id;     //店铺编号：Shop_id，用来表示商品的归属店铺；    
 	
-	private String name;     //商品名称：name；
-	private String part;     //商品类别：part；（拍卖品或者非拍卖品）
-	private String typeh;    //商品类型：typeh；（商品的上层类型）
-	private String typel;    //商品类型：typel；（商品的下层类型）
-	private int number;      //商品数量：number；
-	private double price;    //商品价格：price；
-	private String detail;   //商品描述：detail；
-	private String image;    //商品图片：image；
+	private String Name;     //商品名称：Name；
+	private String Part;     //商品类别：Part；（拍卖品或者非拍卖品）
+	private String Typeh;    //商品类型：Typeh；（商品的上层类型）
+	private String Typel;    //商品类型：Typel；（商品的下层类型）
+	private int Number;      //商品数量：Number；
+	private double Price;    //商品价格：Price；
+	private String Detail;   //商品描述：Detail；
+	private String Image;    //商品图片：Image；
 	
-	private int browingtimes; //商品浏览次数：browingtimes，后台数据，初始化为0，不能手动修改；
+	private int BrowingTimes; //商品浏览次数：BrowingTimes，后台数据，初始化为0，不能手动修改；
 
 	
 /*********************set******get***************************************/
 	
 	public String getName() {
-		return name;
+		return Name;
 	}
 	public int getItem_id() {
-		return item_id;
+		return Item_id;
 	}
-	public void setItem_id(int item_id) {
-		this.item_id = item_id;
+	public void setItem_id(int Item_id) {
+		this.Item_id = Item_id;
 	}
 	public int getShop_id() {
-		return shop_id;
+		return Shop_id;
 	}
-	public void setShop_id(int shop_id) {
-		this.shop_id = shop_id;
+	public void setShop_id(int Shop_id) {
+		this.Shop_id = Shop_id;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String Name) {
+		this.Name = Name;
 	}
 	public String getPart() {
-		return part;
+		return Part;
 	}
-	public void setPart(String part) {
-		this.part = part;
+	public void setPart(String Part) {
+		this.Part = Part;
 	}
 	public String getTypeh() {
-		return typeh;
+		return Typeh;
 	}
-	public void setTypeh(String typeh) {
-		this.typeh = typeh;
+	public void setTypeh(String Typeh) {
+		this.Typeh = Typeh;
 	}
 	public String getTypel() {
-		return typel;
+		return Typel;
 	}
-	public void setTypel(String typel) {
-		this.typel = typel;
+	public void setTypel(String Typel) {
+		this.Typel = Typel;
 	}
 	public int getNumber() {
-		return number;
+		return Number;
 	}
-	public void setNumber(int number) {
-		this.number = number;
+	public void setNumber(int Number) {
+		this.Number = Number;
 	}
 	public double getPrice() {
-		return price;
+		return Price;
 	}
-	public void setPrice(double price) {
-		this.price = price;
+	public void setPrice(double Price) {
+		this.Price = Price;
 	}
 	public String getDetail() {
-		return detail;
+		return Detail;
 	}
-	public void setDetail(String detail) {
-		this.detail = detail;
+	public void setDetail(String Detail) {
+		this.Detail = Detail;
 	}
 	public String getImage() {
-		return image;
+		return Image;
 	}
-	public void setImage(String image) {
-		this.image = image;
+	public void setImage(String Image) {
+		this.Image = Image;
 	}
 
-	public int getBrowingtimes() {
-		return browingtimes;
+	public int getBrowingTimes() {
+		return BrowingTimes;
 	}
-	public void setBrowingtimes(int browingtimes) {
-		this.browingtimes = browingtimes;
+	public void setBrowingTimes(int BrowingTimes) {
+		this.BrowingTimes = BrowingTimes;
 	}	
 	
 	
