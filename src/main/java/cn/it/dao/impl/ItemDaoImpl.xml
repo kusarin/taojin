@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "cn.it.dao.ItemDao">
 
+<!-- 数据库中数据和实体类中数据的统一 -->
+
+
+
+
 <!-- 增删改方法 -->
 	<insert id="ItemAdd" parameterType="cn.it.pojo.Item">
 		insert into item(name,part,typeh,typel,number,price,detail,image) 
@@ -26,5 +31,8 @@
 	</update>
 	<select id="FindItemById" parameterType="int" resultType="cn.it.pojo.Item">
 		select * from item where item_id = #{item_id}
+	</select>
+		<select id="FindItemByType" parameterType="String" resultType="cn.it.pojo.Item">
+		select * from item where typeh = #{0} and typel = #{1}
 	</select>
 </mapper>

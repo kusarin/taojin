@@ -7,89 +7,89 @@ package cn.it.pojo;
  * */
 public class Item {
 
-	private int Item_id;     //商品编号：Item_id(PK)，自增数据，不能手动修改;
-	private int Shop_id;     //店铺编号：Shop_id，用来表示商品的归属店铺；    
+	private int item_id;     //商品编号：item_id(PK)，自增数据，不能手动修改;
+	private int shop_id;     //店铺编号：shop_id，用来表示商品的归属店铺；    
 	
-	private String Name;     //商品名称：Name；
-	private String Part;     //商品类别：Part；（拍卖品或者非拍卖品）
-	private String Typeh;    //商品类型：Typeh；（商品的上层类型）
-	private String Typel;    //商品类型：Typel；（商品的下层类型）
-	private int Number;      //商品数量：Number；
-	private double Price;    //商品价格：Price；
-	private String Detail;   //商品描述：Detail；
-	private String Image;    //商品图片：Image；
+	private String name;     //商品名称：name；
+	private String part;     //商品类别：part；（拍卖品或者非拍卖品）
+	private String typeh;    //商品类型：typeh；（商品的上层类型）
+	private String typel;    //商品类型：typel；（商品的下层类型）
+	private int number;      //商品数量：number；
+	private double price;    //商品价格：price；
+	private String detail;   //商品描述：detail；
+	private String image;    //商品图片：image；
 	
-	private int BrowingTimes; //商品浏览次数：BrowingTimes，后台数据，初始化为0，不能手动修改；
+	private int browingTimes; //商品浏览次数：browingTimes，后台数据，初始化为0，不能手动修改；
 
 	
 /*********************set******get***************************************/
 	
-	public String getName() {
-		return Name;
+	public String getname() {
+		return name;
 	}
-	public int getItem_id() {
-		return Item_id;
+	public int getitem_id() {
+		return item_id;
 	}
-	public void setItem_id(int Item_id) {
-		this.Item_id = Item_id;
+	public void setitem_id(int item_id) {
+		this.item_id = item_id;
 	}
-	public int getShop_id() {
-		return Shop_id;
+	public int getshop_id() {
+		return shop_id;
 	}
-	public void setShop_id(int Shop_id) {
-		this.Shop_id = Shop_id;
+	public void setshop_id(int shop_id) {
+		this.shop_id = shop_id;
 	}
-	public void setName(String Name) {
-		this.Name = Name;
+	public void setname(String name) {
+		this.name = name;
 	}
-	public String getPart() {
-		return Part;
+	public String getpart() {
+		return part;
 	}
-	public void setPart(String Part) {
-		this.Part = Part;
+	public void setpart(String part) {
+		this.part = part;
 	}
-	public String getTypeh() {
-		return Typeh;
+	public String gettypeh() {
+		return typeh;
 	}
-	public void setTypeh(String Typeh) {
-		this.Typeh = Typeh;
+	public void settypeh(String typeh) {
+		this.typeh = typeh;
 	}
-	public String getTypel() {
-		return Typel;
+	public String gettypel() {
+		return typel;
 	}
-	public void setTypel(String Typel) {
-		this.Typel = Typel;
+	public void settypel(String typel) {
+		this.typel = typel;
 	}
-	public int getNumber() {
-		return Number;
+	public int getnumber() {
+		return number;
 	}
-	public void setNumber(int Number) {
-		this.Number = Number;
+	public void setnumber(int number) {
+		this.number = number;
 	}
-	public double getPrice() {
-		return Price;
+	public double getprice() {
+		return price;
 	}
-	public void setPrice(double Price) {
-		this.Price = Price;
+	public void setprice(double price) {
+		this.price = price;
 	}
-	public String getDetail() {
-		return Detail;
+	public String getdetail() {
+		return detail;
 	}
-	public void setDetail(String Detail) {
-		this.Detail = Detail;
+	public void setdetail(String detail) {
+		this.detail = detail;
 	}
-	public String getImage() {
-		return Image;
+	public String getimage() {
+		return image;
 	}
-	public void setImage(String Image) {
-		this.Image = Image;
+	public void setimage(String image) {
+		this.image = image;
 	}
 
-	public int getBrowingTimes() {
-		return BrowingTimes;
+	public int getbrowingTimes() {
+		return browingTimes;
 	}
-	public void setBrowingTimes(int BrowingTimes) {
-		this.BrowingTimes = BrowingTimes;
+	public void setbrowingTimes(int browingTimes) {
+		this.browingTimes = browingTimes;
 	}	
 	
 	
