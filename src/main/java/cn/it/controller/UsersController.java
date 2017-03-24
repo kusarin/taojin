@@ -3,11 +3,13 @@ package cn.it.controller;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.HttpServletBean;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.service.UsersService;
@@ -19,10 +21,11 @@ import cn.it.pojo.Users;
 public class UsersController {
 	 @Resource
 	 private UsersService usersService;
- 
-	@RequestMapping("login.do")//http://localhost:8080/Taojin/login
-	public String login(String username,String password,Map<String,Object> map){
-		String result = usersService.login(username,password,map);
+
+	@RequestMapping("login.do")
+	public String login(Users user){
+	
+		String result = usersService.login(user);
 		return result;
 	}
 	//添加用户

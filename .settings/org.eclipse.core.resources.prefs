@@ -1,5 +1,9 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=branch 'master' of git@git.oschina.net\:ershoutaojin/Taojin.git
 eclipse.preferences.version=1
 encoding//src/main/java/cn/it/controller/OrderController.java=UTF-8
 encoding//src/main/webapp/TaoJin/index.jsp=UTF-8
-encoding//src/main/webapp/TaoJin/login.jsp=UTF-8
 encoding//src/main/webapp/TaoJin/shopinfoChange.jsp=UTF-8
+encoding//src/main/webapp/login.jsp=UTF-8
+encoding//src/main/webapp/showitem.jsp=UTF-8

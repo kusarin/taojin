@@ -1,6 +1,9 @@
 package cn.it.dao;
 
+import java.util.List;
+
 import cn.it.pojo.Manager;
+import cn.it.pojo.Users;
 
 /**
  * 
@@ -12,21 +15,24 @@ public interface ManagerDao {
 	 * 管理员添加；
 	 * @param （变量为管理员对象manager，类型为Manager）；
 	 */
-	public void ManagerAdd(Manager manager);
+	public void managerAdd(Manager manager);
 	/**
 	 * 管理员删除；
 	 * @param （变量为管理员编号 id，类型为int）；
 	 */
-	public void ManagerDelete(int num);
+	public void managerDelete(int num);
 	/**
 	 * 管理员修改；
 	 * @param （变量为管理员编号 id，类型为int）；
 	 */
-	public void ManagerUpdate(int num);
+	public void managerUpdate(int num);
 	/**
 	 * 管理员查看；
 	 * @param （变量为管理员编号 id，类型为int）；
 	 */
-	public void ManagerSearch(int num);
-	
+	public void managerSearch(int num);
+	/**
+	 * 管理员登录：
+	 */
+	public Manager login(String account, String password);
 }

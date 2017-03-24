@@ -1,5 +1,12 @@
 package cn.it.service.impl;
 
-public class ItemServiceImpl {
+import cn.it.service.ItemService;
 
+/**
+ * 
+ * @author zhj
+ *
+ */
+public class ItemServiceImpl implements ItemService {
+	
 }

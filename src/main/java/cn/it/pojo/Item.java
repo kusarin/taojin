@@ -19,77 +19,77 @@ public class Item {
 	private String detail;   //商品描述：detail；
 	private String image;    //商品图片：image；
 	
-	private int browingtimes; //商品浏览次数：browingtimes，后台数据，初始化为0，不能手动修改；
+	private int browingTimes; //商品浏览次数：browingTimes，后台数据，初始化为0，不能手动修改；
 
 	
 /*********************set******get***************************************/
 	
-	public String getName() {
+	public String getname() {
 		return name;
 	}
-	public int getItem_id() {
+	public int getitem_id() {
 		return item_id;
 	}
-	public void setItem_id(int item_id) {
+	public void setitem_id(int item_id) {
 		this.item_id = item_id;
 	}
-	public int getShop_id() {
+	public int getshop_id() {
 		return shop_id;
 	}
-	public void setShop_id(int shop_id) {
+	public void setshop_id(int shop_id) {
 		this.shop_id = shop_id;
 	}
-	public void setName(String name) {
+	public void setname(String name) {
 		this.name = name;
 	}
-	public String getPart() {
+	public String getpart() {
 		return part;
 	}
-	public void setPart(String part) {
+	public void setpart(String part) {
 		this.part = part;
 	}
-	public String getTypeh() {
+	public String gettypeh() {
 		return typeh;
 	}
-	public void setTypeh(String typeh) {
+	public void settypeh(String typeh) {
 		this.typeh = typeh;
 	}
-	public String getTypel() {
+	public String gettypel() {
 		return typel;
 	}
-	public void setTypel(String typel) {
+	public void settypel(String typel) {
 		this.typel = typel;
 	}
-	public int getNumber() {
+	public int getnumber() {
 		return number;
 	}
-	public void setNumber(int number) {
+	public void setnumber(int number) {
 		this.number = number;
 	}
-	public double getPrice() {
+	public double getprice() {
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setprice(double price) {
 		this.price = price;
 	}
-	public String getDetail() {
+	public String getdetail() {
 		return detail;
 	}
-	public void setDetail(String detail) {
+	public void setdetail(String detail) {
 		this.detail = detail;
 	}
-	public String getImage() {
+	public String getimage() {
 		return image;
 	}
-	public void setImage(String image) {
+	public void setimage(String image) {
 		this.image = image;
 	}
 
-	public int getBrowingtimes() {
-		return browingtimes;
+	public int getbrowingTimes() {
+		return browingTimes;
 	}
-	public void setBrowingtimes(int browingtimes) {
-		this.browingtimes = browingtimes;
+	public void setbrowingTimes(int browingTimes) {
+		this.browingTimes = browingTimes;
 	}	
 	
 	

@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace = "cn/it/dao/ManagerDao">
-	
+<mapper namespace = "cn.it.dao.ManagerDao">
+
+
+<!-- 登录 -->
+   <select id="login"  parameterType="java.lang.String" resultType="cn.it.pojo.Manager">
+		select account,password from manager where account = #{0} and password = #{1}
+	</select>
+<!-- 增删改查方法 -->
+	<insert id="managerAdd" parameterType="cn.it.pojo.Manager">
+		insert into manager(account,password) 
+		        values(#{account},#{password})
+	</insert>
+	<delete id="managerDelete"  parameterType="cn.it.pojo.Manager">
+		delete from manager
+		<where>
+			Manager_ID = #{ID}
+		</where>
+	</delete>
+	<update id="managerUpdate"  parameterType="cn.it.pojo.Manager">
+		update Manager set password=#{password}
+		<where>
+			<if test="num!=0">
+				and Manager_ID=#{ID}
+			</if>
+		</where>
+	</update>
+	<select id="managerSearch"  parameterType="cn.it.pojo.Manager">
+		select account,password from manager where Manager_ID = #{ID}
+	</select>
 </mapper>

@@ -21,11 +21,15 @@
 		<parameter property="intro" resultMap="findAll" />
 	</parameterMap>
 	<select id="findByid" parameterType="int" resultType="cn.it.pojo.Shop">
-		Select * from shop
-		<where>shop_id=#{id}
-		</where>
+		Select * from shop where shop_id=#{id}
 	</select>
 	<select id="findShopList" resultMap="findAll">
 		Select * from shop where shop_id =#{id}
 	</select>
+	<select id="getAllByUserid" resultMap="findAll">
+	    Select * from shop where num = #{num}
+	</select>
+	<update id="changeInfoByid" parameterType="cn.it.pojo.Shop">
+		update shop set name=#{name},type=#{type},intro=#{intro} where shop_id = #{id}
+	</update>
 </mapper>

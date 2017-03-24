@@ -11,7 +11,7 @@ public class Shop {
 	}
 
 	public void setshop_id(int shop_id) {
-		shop_id = shop_id;
+		this.shop_id = shop_id;
 	}
 
 	public int getNum() {

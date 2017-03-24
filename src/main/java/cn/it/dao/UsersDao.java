@@ -1,5 +1,7 @@
 package cn.it.dao;
 
+import java.util.List;
+
 import cn.it.pojo.Users;
 
 
@@ -31,6 +33,7 @@ public interface UsersDao {
 	 * @param （变量为用户ID:userID，类型为int）；
 	 */
 	public void UsersSearch(int userID);
-	public Users login(String username,String password);
+
+	public Users login(Users user);
 	
 }

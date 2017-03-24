@@ -42,6 +42,7 @@
 		<property name="basePackage" value="cn.it.dao"></property>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
+	<bean id="ShopService" class="cn.it.service.impl.ShopServiceImpl"></bean>
 
 
 	<!-- 事务管理器 -->
