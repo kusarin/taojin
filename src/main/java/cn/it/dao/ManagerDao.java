@@ -34,5 +34,5 @@ public interface ManagerDao {
 	/**
 	 * 管理员登录：
 	 */
-	public Manager login(String account, String password);
+	public Manager login(Manager manager);
 }
