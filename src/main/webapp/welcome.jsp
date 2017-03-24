@@ -67,7 +67,7 @@ pageEncoding="UTF-8"%>
      </tr> 
     </table></td> 
    <td> 
-    <form action="loginout.jsp" method="post"> 
+    <form action="login.jsp" method="post"> 
      <table> 
       <tr> 
        <td colspan="2">登录成功!</td> 
