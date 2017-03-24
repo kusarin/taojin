@@ -17,12 +17,12 @@ public interface ItemDao {
 	public void ItemAdd(Item i);
 	/**
 	 * 删除商品方法
-	 * @param 变量id为商品编号，为int型
+	 * @param （变量为商品编号 id，类型为int）；
 	 */
 	public void ItemDelete(int id);
 	/**
 	 * 修改商品方法
-	 * @param 变量id为商品编号，为int型
+	 * @param （变量为商品编号 id，类型为int）；
 	 */
 	public void ItemUpdate(int id);
 	/**
@@ -38,5 +38,12 @@ public interface ItemDao {
 	 * 在impl中还没有具体方法
 	 */
 	public void FindItemByType(String typeh,String typel);
+	
+	/**
+	 * ItemSearch方法，在shopservice中使用
+	 * @param id （变量为商品编号 id，类型为int）；
+	 * @return
+	 */
+	public Item ItemSearch(int id);
 
 }
