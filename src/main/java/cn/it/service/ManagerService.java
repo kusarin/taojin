@@ -7,5 +7,7 @@ import cn.it.pojo.Manager;
  *
  */
 public interface ManagerService {
+	
 	public String login(String account,String password);
+	
 }
