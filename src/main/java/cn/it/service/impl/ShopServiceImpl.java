@@ -2,9 +2,12 @@ package cn.it.service.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 import cn.it.dao.ItemDao;
 import cn.it.dao.ShopDao;
@@ -16,12 +19,12 @@ public class ShopServiceImpl implements ShopService {
 	@Autowired
 	//@Qualifier("shopDao")
 	private ShopDao shopDao;
-	@Autowired
-	private ItemDao itemDao;
-
-	public Item ItemSearch(int id) {
-		// TODO Auto-generated method stub
-		return itemDao.ItemSearch(id);
+    
+	public List<Shop> getAllByUserid(int num){
+		return shopDao.getAllByUserid(num);
+	}
+	public void changeInfoByid(Shop shop){
+		shopDao.changeInfoByid(shop);;
 	}
 
 	public Shop findByid(int id) {

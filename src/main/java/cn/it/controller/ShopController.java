@@ -8,9 +8,13 @@ import javax.swing.text.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sun.org.apache.regexp.internal.recompile;
+
 import cn.it.pojo.Shop;
+import cn.it.pojo.Users;
 import cn.it.service.ShopService;
 @Controller
 public class ShopController {
@@ -23,19 +27,23 @@ public class ShopController {
 		modelAndView.setViewName("Certify");
 		return modelAndView;
 	}
-	@RequestMapping(value ="/Change.do")
-	public ModelAndView Change(){
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("Change");
-		return modelAndView;
+	@RequestMapping(value ="toChange.do",method={RequestMethod.GET,RequestMethod.POST}
+	)
+	public String toChange(Shop shop,Map<String,Object> map){
+		map.put("shop", shopService.findByid(shop.getshop_id()));
+		return "shopInfoChange.jsp";
 	}
-	@RequestMapping(value = "shopList.do")
-    public ModelAndView shopList(){
-		ModelAndView modelAndView = new ModelAndView("shopList");
-		int num = 1;
+	@RequestMapping(value ="doChange.do",method={RequestMethod.GET,RequestMethod.POST})
+	public String doChange(Shop shop){
+		shopService.changeInfoByid(shop);
+		return "shoplist.do";
+	}
+	@RequestMapping(value = "shopList.do",method={RequestMethod.GET,RequestMethod.POST})
+    public String getShoplist(Shop shop,Map<String,Object> map){
+		int num = 2;
 		List<Shop> list;
-		list = shopService.findShopList(num);
-		modelAndView.addObject("shopli", list);
-		return modelAndView;
+		list = shopService.getAllByUserid(num);
+		map.put("shop", list);		
+		return "shoplist";
 	}
 }

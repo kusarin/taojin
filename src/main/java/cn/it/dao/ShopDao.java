@@ -5,7 +5,8 @@ import cn.it.pojo.Shop;
 
 import java.util.List;
 public interface ShopDao {
-    public void showInfo(Shop shop);
+	List<Shop> getAllByUserid(int num);
     Shop findByid(int id);
+    public void changeInfoByid(Shop shop);
     List<Shop> findShopList(int num);
 }

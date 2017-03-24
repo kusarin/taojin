@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="shopList.do"></form>
+<form action="shopList.do" name="myform" method="post"></form>
 <table style="border-left-width:0px;border-collapse:collapse;border-right-width:0px;"bordercolor="#ff6600"bgcolor="#DFFFDF" cellspacing="0" cellpadding="0" width="250" align="center" border="1">
 <tbody>
 <tr align="middle">
@@ -27,15 +27,15 @@
                 <td>类型</td>  
                 <td>介绍</td>  
             </tr>  
-            <c:forEach items="${shopli}" var="c">  
+            <c:forEach items="${shop}" var="c">  
               
               <tr>  
-                <td>  ${c.shop_id}  </td>  
+                <td>  ${c.shop_id}  </td>                
                 <td> ${c.num} </td>  
                 <td> ${c.name} </td>  
                 <td> ${c.type} </td>  
                 <td> ${c.intro} </td>  
-                <td><a href="">查看</a></td>  
+                <td><a href="toChange.do?id=${c.shop_id}">查看</a></td>  
             </tr>  
               
             </c:forEach>  
