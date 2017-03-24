@@ -24,4 +24,11 @@ public class ManagerController {
 		String result = managerService.login(account,password);
 		return result;
 	}
+	@RequestMapping("addmanager.do")
+	public String add(HttpServletRequest request){
+		String account=request.getParameter("account");
+		String password=request.getParameter("password");
+		String result = managerService.add(account,password);
+		return result;
+	}
 }

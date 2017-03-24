@@ -19,7 +19,7 @@ public class ManagerServiceImpl implements ManagerService{
 	private ManagerDao managerDao;
 	
 	public String login(String account, String password) {
-		String str = "welcome";
+		String str = "addmanager";
 		if(account==null||account.equals("")||password==null||password.equals("")){
 			str = "mlogin";
 		}else{
@@ -31,5 +31,11 @@ public class ManagerServiceImpl implements ManagerService{
 		
 		return str;
 	}
-	
+
+	public String add(String account, String password) {
+		String str = "mlogin";
+		
+		return null;
+	}
+
 }
