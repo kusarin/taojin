@@ -1,32 +1,10 @@
 package cn.it.service.impl;
 
-import java.util.List;
-
-
-
-
-
-
-
-
-
-
-
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
-
-
 import org.springframework.test.context.ContextConfiguration;
-
-
-
-
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import cn.it.dao.UsersDao;
 import cn.it.pojo.Users;
 import cn.it.service.UsersService;
@@ -42,7 +20,7 @@ public class UsersServiceImpl implements UsersService{
 		if(username==null||username.equals("")||password==null||password.equals("")){
 			str = "login";
 		}else{
-			List<Users> user = usersDao.login(username, password);
+			Users user = usersDao.login(username, password);
 			if(user == null){
 				str = "login";
 			}
