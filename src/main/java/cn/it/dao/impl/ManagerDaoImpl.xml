@@ -27,6 +27,6 @@
 		</where>
 	</update>
 	<select id="managerSearch"  parameterType="cn.it.pojo.Manager">
-		select * from manager where Manager_ID = #{ID}
+		select account,password from manager where Manager_ID = #{ID}
 	</select>
 </mapper>
