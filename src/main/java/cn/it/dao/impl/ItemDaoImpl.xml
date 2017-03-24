@@ -24,7 +24,7 @@
 			</if>
 		</where>
 	</update>
-	<select id="ItemSearch" parameterType="int" resultType="cn.it.pojo.Item">
+	<select id="FindItemById" parameterType="int" resultType="cn.it.pojo.Item">
 		select * from item where item_id = #{item_id}
 	</select>
 </mapper>

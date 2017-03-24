@@ -5,30 +5,45 @@ import cn.it.pojo.Item;
  * 
  * @author zhj
  * 
- *  鍟嗗搧鐨凞ao鎺ュ彛锛屽鍒犳敼鏌ワ紱
+ *  
  *
  */
 public interface ItemDao {
 	
 	/**
-	 * 鍟嗗搧娣诲姞锛�
-	 * @param 锛堝彉閲忎负鍟嗗搧 i锛岀被鍨嬩负Item锛夛紱
+	 * 添加商品方法
+	 * @param 变量i为商品item
 	 */
 	public void ItemAdd(Item i);
 	/**
-	 * 鍟嗗搧鍒犻櫎锛�
-	 * @param 锛堝彉閲忎负鍟嗗搧缂栧彿 id锛岀被鍨嬩负int锛夛紱
+	 * 删除商品方法
+	 * @param （变量为商品编号 id，类型为int）；
 	 */
 	public void ItemDelete(int id);
 	/**
-	 * 鍟嗗搧淇敼锛�
-	 * @param 锛堝彉閲忎负鍟嗗搧缂栧彿 id锛岀被鍨嬩负int锛夛紱
+	 * 修改商品方法
+	 * @param （变量为商品编号 id，类型为int）；
 	 */
 	public void ItemUpdate(int id);
 	/**
-	 * 鍟嗗搧鏌ョ湅锛�
-	 * @param 锛堝彉閲忎负鍟嗗搧缂栧彿 id锛岀被鍨嬩负int锛夛紱
-	 * @return 
+	 * 按照商品编号查看商品；
+	 * @param （变量为商品编号 id，类型为int）；
+	 */
+	public void FindItemById(int id);
+	/**
+	 * 按照商品类型查看商品；
+	 * @param typeh
+	 * @param typel
+	 * 
+	 * 在impl中还没有具体方法
+	 */
+	public void FindItemByType(String typeh,String typel);
+	
+	/**
+	 * ItemSearch方法，在shopservice中使用
+	 * @param id （变量为商品编号 id，类型为int）；
+	 * @return
 	 */
 	public Item ItemSearch(int id);
+
 }
