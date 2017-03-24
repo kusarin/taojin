@@ -1,21 +1,16 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%> 
-<% 
-String path = request.getContextPath(); 
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/"; 
-%> 
-  
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
 <html> 
  <head> 
- <base href="<%=basePath%>"> 
+
    
- <title>My JSP 'welcom.jsp' starting page</title> 
+ <title>欢迎进入主页</title> 
    
- <meta http-equiv="pragma" content="no-cache"> 
- <meta http-equiv="cache-control" content="no-cache"> 
- <meta http-equiv="expires" content="0">  
- <meta http-equiv="keywords" content="keyword1,keyword2,keyword3"> 
- <meta http-equiv="description" content="This is my page"> 
+
  <!-- 
  <link rel="stylesheet" type="text/css" href="styles.css"> 
  -->
@@ -24,9 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <body> 
  <table> 
   <tr> 
-   <td><img src="images/logo4.png" /> 
-   </td> 
-   <td><img src="images/logo2.png" height="90" /> 
+   <td><img src="image/1.png" /> 
    </td> 
   </tr> 
   <tr> 
@@ -74,14 +67,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </tr> 
     </table></td> 
    <td> 
-    <form action="loginout.jsp" method="post"> 
+    <form action="login.jsp" method="post"> 
      <table> 
       <tr> 
        <td colspan="2">登录成功!</td> 
       </tr> 
       <tr> 
        <td>欢迎你，</td> 
-       <td>${username }</td> 
+       <td>${username}</td> 
       </tr> 
       <tr> 
        <td colspan="2"><input type="submit" value="退出" /></td> 

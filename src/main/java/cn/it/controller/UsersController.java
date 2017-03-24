@@ -23,10 +23,9 @@ public class UsersController {
 	 private UsersService usersService;
 
 	@RequestMapping("login.do")
-	public String login(HttpServletRequest request){
-		String name=request.getParameter("username");
-		String password=request.getParameter("password");
-		String result = usersService.login(name,password);
+	public String login(Users user){
+	
+		String result = usersService.login(user);
 		return result;
 	}
 	//添加用户

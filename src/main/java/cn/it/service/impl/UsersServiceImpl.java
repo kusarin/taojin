@@ -11,17 +11,19 @@ public class UsersServiceImpl implements UsersService{
 	@Autowired
 	private UsersDao usersDao;
 	
-	public String login(String username,String password) {
+	public String login(Users user) {
 		String str = "welcome";
-		if(username==null||username.equals("")||password==null||password.equals("")){
-			str = "login";
+		if(user==null){
+			if(user.getUsername().equals("")||user.getUsername()==null||user.getPassword().equals("")||user.getPassword()==null){
+				str = "login";
+			}
 		}else{
-			Users user = usersDao.login(username, password);
-			if(user == null){
+			Users u = usersDao.login(user);
+			if(u == null){
 				str = "login";
 			}
 		}
-		
+
 		return str;
 	}
 
