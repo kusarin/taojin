@@ -23,9 +23,9 @@ public class ManagerController {
 		String result = managerService.login(manager);
 		return result;
 	}
-//	@RequestMapping("addmanager.do")
-//	public String add(Manager manager){
-//		String result = managerService.add(manager);
-//		return result;
-//	}
+	@RequestMapping("addmanager.do")
+	public String add(Manager manager){
+		String result = managerService.add(manager);
+		return result;
+	}
 }

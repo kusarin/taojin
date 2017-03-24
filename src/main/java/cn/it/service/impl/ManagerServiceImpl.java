@@ -10,7 +10,7 @@ import cn.it.service.ManagerService;
 /**
  * 
  * @author sunchen
- *
+ * 
  */
 
 @Service("managerService")
@@ -22,26 +22,18 @@ public class ManagerServiceImpl implements ManagerService{
 		String str = "addmanager";
 		if(manager==null){
 			if(manager.getAccount()==null||manager.getAccount().equalsIgnoreCase("")||
-					manager.getPassword()==null||manager.getPassword().equalsIgnoreCase(""))
-			str = "mlogin";
+					manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
+				str = "mlogin";
+			}
 		}else{
 			Manager m = managerDao.login(manager);
 			if(m == null){
 				str = "mlogin";
 			}
 		}
-		
 		return str;
 	}
-
-	public String add(String account, String password) {
-		String str = "mlogin";
-		
-		return null;
-	}
-
 	public String add(Manager manager) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
