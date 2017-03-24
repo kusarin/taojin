@@ -1,0 +1,154 @@
+body{
+	font-family:"Î¢ÈíÑÅºÚ";
+	font-size:12px;
+}
+.container{
+	width:980px;
+	height:auto;
+}
+.orderTitle{
+	width:980px;
+	height:50px;
+	font-size:18px;
+	margin-left:200px;
+	margin-top:40px;
+}
+.nav{
+	width:980px;
+	height:45px;
+	margin-left:200px;
+	margin-top:10px;
+	font-size:13px;
+}
+.nav table{
+	width:980px;
+	height:45px;
+	background-color:#80FFFF;	
+}
+.nav table td.shop{
+	width:500px;
+	text-align:center;
+	height:45px;
+}
+.nav table td.common{
+	width:96px;
+	text-align:center;
+	height:45px;
+}
+
+.bton{
+    width:980px;
+	height:50px;
+	margin-left:200px;
+    height:45px;
+}
+.bton button.btn1{
+    float:right;
+	margin-left:20px;
+	height:30px;
+	margin-top:12px;
+}
+a:hover{
+	text-decoration:underline;
+	color:red;
+}
+a:link{
+	text-decoration:none;
+	color:black;
+}
+a:active {
+	text-decoration:underline;
+	color:red;
+}
+a:visited {
+	color:black;
+}
+.bton button.btn2{
+    float:right;
+	height:30px;
+	margin-top:12px;
+}
+.content{
+	width:980px;
+	height:auto;
+	margin-left:200px;
+	margin-top:5px;
+}
+.orderOne{
+	width:980px;
+	height:50px;
+	margin-top:5px;
+	font-size:13px;
+}
+.orderOne table{
+	width:980px;
+	height:45px;
+	background-color:#80FFFF;
+}
+.orderOne table td.orderNumber{
+	width:500px;
+	text-align:center;
+	height:45px;
+}
+.orderOne table td.orderNumber span.date{
+	font-weight:bold;
+	padding-right:15px;
+}
+.orderOne table td.buyer1{
+	width:96px;
+	text-align:center;
+	height:45px;
+}
+.orderOne table td.buyer1 a p{
+	width:96px;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.orderOne table td.buyer{
+	width:96px;
+	text-align:center;
+	height:45px;
+}
+.orderOne table td.bg{
+	width:96px;
+	text-align:center;
+	height:45px;
+}
+.orderOne table td.bg img{
+	width:45px;
+	height:45px;
+}
+.orderContent{
+	width:980px;
+	height:120px;
+}
+.orderContent table{
+	border:1px solid #80FFFF;
+	border-right:0px;
+	width:980px;
+	height:120px;
+}
+.orderContent table td{
+	border-right:1px solid #80FFFF;
+}
+.orderContent table td.huanhang{
+	word-break:break-all;
+	width:500px;
+	height:120px;
+}
+.orderContent table td.huanhang img{
+	width:100px;
+	height:120px;
+	float:left;	
+}
+.orderContent table td.huanhang p{
+	word-break:break-all;
+	height:120px;
+	width:400px;
+}
+.orderContent table td.same{
+	width:96px;
+	height:120px;
+	text-align:center;
+}

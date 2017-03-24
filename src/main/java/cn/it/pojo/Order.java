@@ -1,6 +1,6 @@
 package cn.it.pojo;
 
-import java.sql.Date;
+import java.util.Date;
 /**
  * 
  * @author Administrator
@@ -18,8 +18,22 @@ public class Order {
 	private String status;  //交易状态：待付款、取消订单、交易成功、待收货：statusString
 	private String paymentMethod;  //支付方式：paymentMethod
 	private String recivingAddress; //收货地址：recivingAddress
-	private String freight;      //运费：freight
-/******************************get****************************set**********/
+	private double freight;   //运费：freight
+	private int num; //用户编号
+
+	/******************************get****************************set**********/
+    public int getNum() {
+		return num;
+	}
+	public double getFreight() {
+		return freight;
+	}
+	public void setFreight(double freight) {
+		this.freight = freight;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public int getId() {
 		return id;
 	}
@@ -46,9 +60,6 @@ public class Order {
 	}
 	public String getRecivingAddress() {
 		return recivingAddress;
-	}
-	public String getFreight() {
-		return freight;
 	}
 	public void setId(int id) {
 		this.id = id;
@@ -77,8 +88,4 @@ public class Order {
 	public void setRecivingAddress(String recivingAddress) {
 		this.recivingAddress = recivingAddress;
 	}
-	public void setFreight(String freight) {
-		this.freight = freight;
-	}
-	
 }

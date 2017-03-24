@@ -5,24 +5,24 @@ import cn.it.pojo.Item;
  * 
  * @author zhj
  * 
- *  商品的Dao接口，增删改查；
+ *  
  *
  */
 public interface ItemDao {
 	
 	/**
-	 * 商品添加；
-	 * @param （变量为商品 i，类型为Item）；
+	 * 添加商品方法
+	 * @param 变量i为商品item
 	 */
 	public void ItemAdd(Item i);
 	/**
-	 * 商品删除；
-	 * @param （变量为商品编号 id，类型为int）；
+	 * 删除商品方法
+	 * @param 变量id为商品编号，为int型
 	 */
 	public void ItemDelete(int id);
 	/**
-	 * 商品修改；
-	 * @param （变量为商品编号 id，类型为int）；
+	 * 修改商品方法
+	 * @param 变量id为商品编号，为int型
 	 */
 	public void ItemUpdate(int id);
 	/**
@@ -38,4 +38,5 @@ public interface ItemDao {
 	 * 在impl中还没有具体方法
 	 */
 	public void FindItemByType(String typeh,String typel);
+
 }

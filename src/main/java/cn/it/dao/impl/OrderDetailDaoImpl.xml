@@ -2,5 +2,39 @@
     <!DOCTYPE mapper   
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-   <mapper namespace="OrderDetailDao">
+   <mapper namespace="cn.it.dao.OrderDetailDao">
+            <resultMap type="cn.it.pojo.OrderDetail" id="findList">
+            <id column="OrderDetail_id" property="id" javaType="int" jdbcType="INTEGER"/>
+            <id column="Order_id" property="orderId" javaType="int" jdbcType="INTEGER"/>
+            <id column="Item_id" property="itemId" javaType="int" jdbcType="INTEGER"/>
+            <id column="TotalQuantity" property="totalQuantity" javaType="int" jdbcType="INTEGER"/>
+            
+            <association property="item"  javaType="cn.it.pojo.Item">
+	          <id column="Item_id" property="item_id" javaType="int" jdbcType="INTEGER"/>
+	          <result column="Shop_id" property="shop_id" javaType="int" jdbcType="INTEGER"/>
+	          <result column="Name" property="name" javaType="String" jdbcType="VARCHAR"/>
+	          <result column="Part" property="part" javaType="String" jdbcType="VARCHAR"/>
+	          <result column="number" property="number" javaType="int" jdbcType="INTEGER"/>
+	          <result column="Typeh" property="typeh" javaType="String" jdbcType="VARCHAR"/>
+	          <result column="Typel" property="typel" javaType="String" jdbcType="VARCHAR"/>
+	          <result column="Price" property="price" javaType="double" jdbcType="DOUBLE"/>
+	          <result column="Detail" property="detail" javaType="String" jdbcType="VARCHAR"/>
+	          <result column="Image" property="image" javaType="String" jdbcType="VARCHAR"/>
+	          <result column="BrowingTiems" property="browingtimes" javaType="int" jdbcType="INTEGER"/>
+	       </association>
+	     
+        </resultMap>
+         <parameterMap type="cn.it.pojo.OrderDetail" id="OrderDetailParameterMap">
+            <parameter property="id" resultMap="findList"/>  
+            <parameter property="orderId" resultMap="findList"/>  
+            <parameter property="itemId" resultMap="findList"/> 
+            <parameter property="totalQuantity" resultMap="findList"/> 
+       </parameterMap>
+          <select id="selectAll" parameterType="int" resultMap="findList">
+                select i.*,o.TotalQuantity from orderdetail o, item i where i.Item_id=o.Item_id and o.Order_id=#{id}
+	      </select>
+	      <insert id="add" parameterMap="OrderDetailParameterMap">
+	             insert into orderdetail(Order_id,Item_id,TotalQuantity)values(#{orderId},#{itemId},#{totalQuantity})
+	      </insert>
+	   
    </mapper>
