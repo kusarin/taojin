@@ -34,6 +34,6 @@ public interface UsersDao {
 	 */
 	public void UsersSearch(int userID);
 
-	public List<Users> login(String username, String password);
+	public Users login(String username, String password);
 	
 }
