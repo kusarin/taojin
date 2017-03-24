@@ -5,7 +5,7 @@
 
 <!-- 登录 -->
    <select id="login"  parameterType="java.lang.String" resultType="cn/it/pojo/Manager">
-		select * from manager where account = #{0} and password = #{1}
+		select account,password from manager where account = #{0} and password = #{1}
 	</select>
 <!-- 增删改查方法 -->
 	<insert id="managerAdd" parameterType="cn.it.pojo.Manager">
