@@ -40,16 +40,18 @@ public class ManagerServiceImpl implements ManagerService{
 		List<Manager> mId =managerDao.managerIdFind();
 		Boolean flag = true; 
 		for(Manager mana:mId){
-			if(mana.getID()==manager.getID()){
+			if(mana.getAccount().equals(manager.getAccount())){
 				flag = false;
+				str = "addmanager";
 				break;
 			}
+			
 		}
 		if(manager==null){
-			if(manager.getAccount()==null||manager.getAccount().equalsIgnoreCase("")||
-					manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
-				str = "addmanager";
-			}
+			str = "addmanager";
+		}else if(manager.getAccount()==null||manager.getAccount().equalsIgnoreCase("")||
+				manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
+			str = "addmanager";
 		}else if(flag){
 			managerDao.managerAdd(manager);
 			str = "managerInterface";
