@@ -40,8 +40,9 @@ public class ManagerServiceImpl implements ManagerService{
 		List<Manager> mId =managerDao.managerIdFind();
 		Boolean flag = true; 
 		for(Manager mana:mId){
-			if(mana.getID()==manager.getID()){
+			if(mana.getAccount()==manager.getAccount()){
 				flag = false;
+				str = "addmanager";
 				break;
 			}
 		}
@@ -51,7 +52,7 @@ public class ManagerServiceImpl implements ManagerService{
 				str = "addmanager";
 			}
 		}else if(flag){
-			managerDao.managerAdd(manager);
+//			managerDao.managerAdd(manager);
 			str = "managerInterface";
 		}
 		return str;

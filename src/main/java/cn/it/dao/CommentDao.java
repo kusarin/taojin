@@ -1,5 +1,7 @@
 package cn.it.dao;
 
+import java.util.List;
+
 import cn.it.pojo.Comment;
 
 /**
@@ -26,7 +28,7 @@ public interface CommentDao {
 	public void CommentUpdate(int num);
 	/**
 	 * 留言查看；
-	 * @param （变量为留言编号 id，类型为int）；
+	 * @param （返回所有留言信息）；
 	 */
-	public void CommentSearch(int num);
+	public List<Comment> findAll();
 }
