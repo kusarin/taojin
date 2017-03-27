@@ -26,7 +26,7 @@ public interface ItemDao {
 	 * 修改商品方法
 	 * @param （变量为商品编号 id，类型为int）；
 	 */
-	public void ItemUpdate(int id);
+	public void ItemUpdate(Item i);
 	/**
 	 * 按照商品编号查看商品；
 	 * @param （变量为商品编号 id，类型为int）；

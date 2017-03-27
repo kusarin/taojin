@@ -57,42 +57,42 @@ public class ItemController {
 //				
 //		
 //		int id = 1;
-//		Item item = itemservice.find(id);
+//		Item item = itemservice.findbyId(id);
 //		return null;
 //	}
 //
-
-	
-	
-	/**
-	 * 上架商品；i为商品
-	 * @param i
-	 * @return
-	 */
-	@RequestMapping("addItem.do")
-	public ModelAndView addItem(Item i){
-		return null;
-	}
-	
-	/**
-	 * 下架商品，id为商品编号
-	 * @param id
-	 * @return
-	 */
-	@RequestMapping("deleteItem.do")
-	public ModelAndView deleteItem(int id){
-		return null;
-	}
-	
-	/**
-	 * 修改商品信息，id为商品编号
-	 * @param id
-	 * @return
-	 */
-	@RequestMapping("changeItem.do")
-	public ModelAndView changeItem(int id){
-		return null;
-	}
-	
+//
+//	
+//	
+//	/**
+//	 * 上架商品；i为商品
+//	 * @param i
+//	 * @return
+//	 */
+//	@RequestMapping("addItem.do")
+//	public ModelAndView addItem(Item i){
+//		return null;
+//	}
+//	
+//	/**
+//	 * 下架商品，id为商品编号
+//	 * @param id
+//	 * @return
+//	 */
+//	@RequestMapping("deleteItem.do")
+//	public ModelAndView deleteItem(int id){
+//		return null;
+//	}
+//	
+//	/**
+//	 * 修改商品信息，id为商品编号
+//	 * @param id
+//	 * @return
+//	 */
+//	@RequestMapping("changeItem.do")
+//	public ModelAndView changeItem(int id){
+//		return null;
+//	}
+//	
 
 }

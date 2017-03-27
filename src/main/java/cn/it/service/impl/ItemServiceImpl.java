@@ -29,9 +29,35 @@ public class ItemServiceImpl implements ItemService {
 	private ItemDao itemDao;
 	
 	/**
+	 * 添加商品
+	 * @param i
+	 */
+	public void addItem(Item i) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/**
+	 * 删除商品
+	 * @param id
+	 */
+	public void deleteItem(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * 更新商品
+	 */
+	public void updateItem(Item i) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/**
 	 * 查看单条商品信息
 	 */
-	public Item find(int id) {
+	public Item findById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -44,8 +70,9 @@ public class ItemServiceImpl implements ItemService {
 		// TODO Auto-generated method stub
 		return itemDao.FindAll();
 	}
+	
 	/**
-	 * 测试是否已经传值
+	 * 测试用方法，此处测试是否已经传值
 	 */
 	@Test
 	public void test1(){
@@ -57,5 +84,5 @@ public class ItemServiceImpl implements ItemService {
 	     }
 	   
 	}
-	
+
 }
