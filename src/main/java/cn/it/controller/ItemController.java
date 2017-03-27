@@ -17,6 +17,8 @@ import cn.it.service.ItemService;
  * 
  * @author zhj
  *
+ * 商品的Controller层操作类
+ *
  */
 
 @Controller
@@ -36,8 +38,8 @@ public class ItemController {
 		List<Item> list;
 		list = itemservice.findItemList();//获取商品条目list
 		
-		System.out.println("----------------"); // 测试list是否已经获取到Item中的数据
-		System.out.println(list);
+		System.out.println("----------------"); 
+		System.out.println(list);// 测试list是否已经获取到Item中的数据
 		System.out.println("----------------");
 		
 		modeandview.addObject("itemlist",list);//将商品条目list传递到itemlist	
