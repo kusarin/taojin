@@ -4,8 +4,8 @@
 
 
 <!-- 登录 -->
-   <select id="login"  parameterType="java.lang.String" resultType="cn.it.pojo.Manager">
-		select account,password from manager where account = #{0} and password = #{1}
+   <select id="login"  parameterType="cn.it.pojo.Manager" resultType="cn.it.pojo.Manager">
+		select account,password from manager where account = #{account} and password = #{password}
 	</select>
 <!-- 增删改查方法 -->
 	<insert id="managerAdd" parameterType="cn.it.pojo.Manager">
@@ -26,7 +26,7 @@
 			</if>
 		</where>
 	</update>
-	<select id="managerSearch"  parameterType="cn.it.pojo.Manager">
-		select account,password from manager where Manager_ID = #{ID}
+	<select id="managerSearch"  parameterType="cn.it.pojo.Manager" resultType="cn.it.pojo.Manager">
+		select account,password from manager where account = #{account}
 	</select>
 </mapper>

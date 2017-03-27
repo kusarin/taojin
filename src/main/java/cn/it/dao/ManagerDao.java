@@ -14,6 +14,7 @@ public interface ManagerDao {
 	/**
 	 * 管理员添加；
 	 * @param （变量为管理员对象manager，类型为Manager）；
+	 * @return 
 	 */
 	public void managerAdd(Manager manager);
 	/**
@@ -34,5 +35,5 @@ public interface ManagerDao {
 	/**
 	 * 管理员登录：
 	 */
-	public Manager login(String account, String password);
+	public Manager login(Manager manager);
 }
