@@ -20,6 +20,7 @@ public class Item {
 	private String image;    //商品图片：image；
 	
 	private int browingTimes; //商品浏览次数：browingTimes，后台数据，初始化为0，不能手动修改；
+	private int saleNumbers;  //商品出售数量saleNumbers，后台数据，初始化为0，不能手动修改；
 
 	
 /*********************set******get***************************************/
@@ -90,9 +91,13 @@ public class Item {
 	}
 	public void setbrowingTimes(int browingTimes) {
 		this.browingTimes = browingTimes;
+	}		
+	public int getSaleNumbers() {
+		return saleNumbers;
+	}
+	public void setSaleNumbers(int saleNumbers) {
+		this.saleNumbers = saleNumbers;
 	}	
-	
-	
 //商品评论变为新的一张表	private String evaluate; //商品评论：evaluate；	
 //	public String getEvaluate() {
 //		return evaluate;
@@ -100,6 +105,7 @@ public class Item {
 //	public void setEvaluate(String evaluate) {
 //		this.evaluate = evaluate;
 //	}
+
 
 
 	/**
