@@ -2,6 +2,7 @@ package cn.it.dao;
 
 import java.util.List;
 
+import cn.it.pojo.Manager;
 import cn.it.pojo.Users;
 
 
@@ -35,5 +36,11 @@ public interface UsersDao {
 	public void UsersSearch(int userID);
 
 	public Users login(Users user);
+	
+	/**
+	 * 查询（遍历）用户（注册时）确认无重复
+	 * @param
+	 */
+	public List<Users> UsersFind();
 	
 }
