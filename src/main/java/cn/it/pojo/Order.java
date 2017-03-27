@@ -19,20 +19,22 @@ public class Order {
 	private String paymentMethod;  //支付方式：paymentMethod
 	private String recivingAddress; //收货地址：recivingAddress
 	private double freight;   //运费：freight
-	private int num; //用户编号
+	private int userID; //用户编号
 
 	/******************************get****************************set**********/
-    public int getNum() {
-		return num;
-	}
+ 
 	public double getFreight() {
 		return freight;
 	}
 	public void setFreight(double freight) {
 		this.freight = freight;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	
+	public int getUserID() {
+		return userID;
+	}
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 	public int getId() {
 		return id;
