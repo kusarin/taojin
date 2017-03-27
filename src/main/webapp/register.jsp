@@ -16,7 +16,7 @@ pageEncoding="UTF-8"%>
  </head> 
   
  <body> 
- <form action="login.do" method="post"> 
+ <form action="addUser.do" method="post"> 
   <table> 
    <tr> 
     <td colspan="2">注册窗口</td> 
