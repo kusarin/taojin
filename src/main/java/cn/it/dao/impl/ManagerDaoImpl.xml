@@ -26,7 +26,7 @@
 			</if>
 		</where>
 	</update>
-	<select id="managerSearch"  parameterType="cn.it.pojo.Manager" resultType="cn.it.pojo.Manager">
-		select account,password from manager where account = #{account}
+	<select id="managerIdFind"   resultType="cn.it.pojo.Manager">
+		select account from manager
 	</select>
 </mapper>

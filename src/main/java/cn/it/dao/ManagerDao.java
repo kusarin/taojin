@@ -31,7 +31,7 @@ public interface ManagerDao {
 	 * 管理员查看；
 	 * @param （变量为管理员编号 id，类型为int）；
 	 */
-	public void managerSearch(int num);
+	public List<Manager> managerIdFind();
 	/**
 	 * 管理员登录：
 	 */
