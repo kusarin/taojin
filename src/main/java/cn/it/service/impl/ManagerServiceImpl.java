@@ -33,8 +33,17 @@ public class ManagerServiceImpl implements ManagerService{
 		}
 		return str;
 	}
-	public String add(Manager manager) {
-		return null;
+	public void add(Manager manager) {
+		String str = "mlogin";
+		if(manager==null){
+			if(manager.getAccount()==null||manager.getAccount().equalsIgnoreCase("")||
+					manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
+				str = "addmanager";
+			}
+		}else {
+			managerDao.managerAdd(manager);
+		}
+		
 	}
 
 }

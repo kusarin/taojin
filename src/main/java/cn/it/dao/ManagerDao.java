@@ -14,6 +14,7 @@ public interface ManagerDao {
 	/**
 	 * 管理员添加；
 	 * @param （变量为管理员对象manager，类型为Manager）；
+	 * @return 
 	 */
 	public void managerAdd(Manager manager);
 	/**
