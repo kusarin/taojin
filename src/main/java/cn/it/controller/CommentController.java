@@ -1,6 +1,10 @@
 package cn.it.controller;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
+
+import cn.it.service.CommentService;
 
 /**
  * 
@@ -10,5 +14,5 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class CommentController {
-
+	//@Resource CommentService commentService;
 }
