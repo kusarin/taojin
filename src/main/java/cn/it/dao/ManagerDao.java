@@ -28,10 +28,10 @@ public interface ManagerDao {
 	 */
 	public void managerUpdate(int num);
 	/**
-	 * 管理员查看；
-	 * @param （变量为管理员编号 id，类型为int）；
+	 * 管理员添加的辅助方法；
+	 * @param （返回所有管理员对象的列表）；
 	 */
-	public void managerSearch(int num);
+	public List<Manager> managerIdFind();
 	/**
 	 * 管理员登录：
 	 */
