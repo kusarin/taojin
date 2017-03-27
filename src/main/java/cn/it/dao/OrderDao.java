@@ -3,7 +3,7 @@ package cn.it.dao;
 import java.util.List;
 
 import cn.it.pojo.Order;
-
+import java.lang.String;
 /**
  * 
  * Order（订单）的接口
@@ -17,18 +17,27 @@ public interface OrderDao {
 	/**
 	 * 获取订单信息
 	 * @return(Order表示返回一个订单对象)
-	 * @param(id订单表中唯一标识一个订单记录)
+	 * @param(orderNumber订单表中唯一标识一个订单记录)
 	 */
      public Order select(int id);
+     
+     /**
+      * 根据订单号查询订单
+      * */
+     public Order findOrder(String orderNumber);
      /**
       * 更改订单中的交易状态（待付款、交易成功、交易失败）
-      * @param(id 指一个订单记录的唯一标识)
+      * @param(or 指一个订单记录的实体)
       */
-     public void update(int id);
+     public void update(Order or);
      /***
-      * 根据用户id查询该用户的所有订单*
+      * 根据用户编号查询该用户的所有订单*
       * 
-      *
       * */
-     public List<Order> selectAll(int num);     
+     public List<Order> selectAll(int userId);
+     /**
+      * 
+      * 根据订单号删除订单 
+      * */
+	public void delete(String orderNumber);     
 }

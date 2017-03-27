@@ -8,7 +8,7 @@ package cn.it.pojo;
 public class Item {
 
 	private int item_id;     //商品编号：item_id(PK)，自增数据，不能手动修改;
-	private int shop_id;     //店铺编号：shop_id，用来表示商品的归属店铺；    
+	private int shop_id;     //店铺编号：shop_id，用来表示商品的归属店铺,直通自动匹配量；
 	
 	private String name;     //商品名称：name；
 	private String part;     //商品类别：part；（拍卖品或者非拍卖品）
@@ -106,14 +106,23 @@ public class Item {
 //		this.evaluate = evaluate;
 //	}
 
-
-
 	/**
 	 * toString方法，测试用。
 	 */
 	@Override
 	public String toString(){
-		return "Item is OK!!";
+		return "\n Item ["+item_id+"] =("+shop_id+"   "
+									  +name+"   "
+				                      +part+"   "
+				                      +typeh+"   "
+				                      +typel+"   "
+				                      +number+"   "
+				                      +price+"   "
+				                      +detail+"   "
+				                      +image+"   "
+				                      +browingTimes+"   "
+						              +saleNumbers+"   "
+									  +")";
 	}
 }
 
