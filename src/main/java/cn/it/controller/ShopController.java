@@ -21,7 +21,7 @@ public class ShopController {
 	@Resource
    private ShopService shopService;
 	
-	@RequestMapping(value ={"/doAdd.do"},method={RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value ={"/TaoJin/doAdd.do"},method={RequestMethod.GET,RequestMethod.POST})
 	public String doAdd(Shop shop){
 		shopService.addShop(shop);
 		return "redirect:/shopList.do";
@@ -30,7 +30,7 @@ public class ShopController {
 	)
 	public String toChange(Shop shop,Map<String,Object> map){
 		map.put("shop", shopService.findByid(shop.getshop_id()));
-		return "shopinfoChange";
+		return "/shopinfoChange";
 	}
 	@RequestMapping(value ={"/doChange.do"},method={RequestMethod.GET,RequestMethod.POST})
 	public String doChange(Shop shop){
@@ -43,6 +43,6 @@ public class ShopController {
 		List<Shop> list;
 		list = shopService.getAllByUserid(num);
 		map.put("shopli", list);		
-		return "shopList";
+		return "/shopList";
 	}
 }

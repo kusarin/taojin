@@ -32,7 +32,7 @@
               
               <tr>  
                 <td> ${c.shop_id}</td>                
-                <td> ${c.num} </td>  
+                <td> ${c.User_ID} </td>  
                 <td> ${c.name} </td>  
                 <td> ${c.type} </td>  
                 <td> ${c.intro} </td>  
@@ -41,7 +41,7 @@
              
             </c:forEach> 
             <tr>
-            <td><a href="doAdd.do">添加</a> 
+            <td><a href="TaoJin/addShop.jsp">添加</a> 
 </tbody></table>
 </body>
 </html>
