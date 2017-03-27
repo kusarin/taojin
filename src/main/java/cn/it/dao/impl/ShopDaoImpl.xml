@@ -30,6 +30,6 @@
 	    Select * from shop where num = #{num}
 	</select>
 	<update id="changeInfoByid" parameterType="cn.it.pojo.Shop">
-		update shop set name=#{name},type=#{type},intro=#{intro} where shop_id = #{id}
+		update shop set name=#{name},type=#{type},intro=#{intro} where shop_id = #{shop_id}
 	</update>
 </mapper>

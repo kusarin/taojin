@@ -7,6 +7,6 @@ import java.util.List;
 public interface ShopDao {
 	List<Shop> getAllByUserid(int num);
     Shop findByid(int id);
-    public void changeInfoByid(Shop shop);
+    public Shop changeInfoByid(int id);
     List<Shop> findShopList(int num);
 }
