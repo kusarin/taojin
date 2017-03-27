@@ -36,5 +36,12 @@ public interface ItemService {
 	 * @return
 	 */
 	public List<Item> findItemList();
+	/**
+	 * 按照商品类型查找商品信息
+	 * @param typeh
+	 * @param typel
+	 * @return
+	 */
+	public List<Item> findByType(String typeh,String typel);
 	
 }

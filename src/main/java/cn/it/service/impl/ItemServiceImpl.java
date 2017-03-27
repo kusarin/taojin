@@ -59,7 +59,9 @@ public class ItemServiceImpl implements ItemService {
 	 */
 	public Item findById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		Item item=null;
+		item = itemDao.FindItemById(id);
+		return item;
 	}
 	
 	
@@ -70,6 +72,14 @@ public class ItemServiceImpl implements ItemService {
 		// TODO Auto-generated method stub
 		return itemDao.FindAll();
 	}
+	
+	/**
+	 * 通过调用itemDao.FindItemByType，根据所选的类型查看商品
+	 */
+	public List<Item> findByType(String typeh,String typel){
+		return itemDao.FindItemByType(typeh, typel);
+	}	
+	
 	
 	/**
 	 * 测试用方法，此处测试是否已经传值

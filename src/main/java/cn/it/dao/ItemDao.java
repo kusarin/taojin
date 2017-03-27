@@ -45,7 +45,7 @@ public interface ItemDao {
 	 * 
 	 * 在impl中还没有具体方法
 	 */
-	public void FindItemByType(String typeh,String typel);
+	public List<Item> FindItemByType(String typeh,String typel);
 	
 	/**
 	 * ItemSearch方法，在shopservice中使用
