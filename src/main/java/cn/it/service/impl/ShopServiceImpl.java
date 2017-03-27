@@ -23,10 +23,12 @@ public class ShopServiceImpl implements ShopService {
 	public List<Shop> getAllByUserid(int num){
 		return shopDao.getAllByUserid(num);
 	}
-	public Shop changeInfoByid(int id){
-		return shopDao.changeInfoByid(id);
+	public void changeInfoByid(Shop shop){
+		shopDao.changeInfoByid(shop);
 	}
-
+    public void addShop(Shop shop){
+    	shopDao.addShop(shop);
+    }
 	public Shop findByid(int id) {
 		// TODO Auto-generated method stub
 		return shopDao.findByid(id);

@@ -9,23 +9,22 @@
 <body>
 <h1 align="center">店铺信息修改</h1>
 	<div align="center">
-		<form id="myform" action="doChange.do" method="post" enctype="multipart/form-data">
+		<form id="myform" action="doChange.do" method="post">
 			<table>
-			 <input type="hidden" value="${shop.shop_id}" name="id"/>
+			 <input type="hidden" value="${shop.shop_id}" name="shop_id"/>
 				<tr>
 					<td>name</td>
-					<td><input type="text" name="name" value="${shop.name }"></td>
+					<td><input type="text" name="name" value="${shop.name }" id="name"></td>
 				</tr>
-				<% System.out.println(1);%>
 				<tr>
 					<td>type</td>
-					<td><input type="text" name="price" value="${shop.type}"></td>
+					<td><input type="text" name="type" value="${shop.type}" id="type"></td>
 				</tr>
 				<tr>
 					<td>intro</td>
-					<td><input type="text" name="author" value="${shop.intro}"></td>
+					<td><input type="text" name="intro" value="${shop.intro}" id="intro"></td>
 			</table>
-			 <input type="submit" value="修改" />
+			 <input type="submit" value="修改"  />
 			 <input type="button" value="返回" onclick="javaScript:history.back(-1)"/>
 		</form>
 	</div>
