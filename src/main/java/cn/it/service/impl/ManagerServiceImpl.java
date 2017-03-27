@@ -1,5 +1,7 @@
 package cn.it.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,7 @@ public class ManagerServiceImpl implements ManagerService{
 	private ManagerDao managerDao;
 	
 	public String login(Manager manager) {
-		String str = "addmanager";
+		String str = "managerInterface";
 		if(manager==null){
 			if(manager.getAccount()==null||manager.getAccount().equalsIgnoreCase("")||
 					manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
@@ -33,17 +35,26 @@ public class ManagerServiceImpl implements ManagerService{
 		}
 		return str;
 	}
-	public void add(Manager manager) {
+	public String add(Manager manager) {
 		String str = "mlogin";
+		List<Manager> mId =managerDao.managerIdFind();
+		Boolean flag = true; 
+		for(Manager mana:mId){
+			if(mana.getID()==manager.getID()){
+				flag = false;
+				break;
+			}
+		}
 		if(manager==null){
 			if(manager.getAccount()==null||manager.getAccount().equalsIgnoreCase("")||
 					manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
 				str = "addmanager";
 			}
-		}else {
+		}else if(flag){
 			managerDao.managerAdd(manager);
+			str = "managerInterface";
 		}
-		
+		return str;
 	}
 
 }

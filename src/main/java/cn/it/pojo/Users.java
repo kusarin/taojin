@@ -13,7 +13,7 @@ public class Users {
 	private String password;//密码；
 	
 	private String name;//姓名；
-	private int tele;//用户电话；
+	private String tele;//用户电话；
 	private String email;//用户email；
 	private boolean type;//用户身份为普通/商家用户（0为普通，1为商家）；
 	private String ID;//用户绑定的身份证号，普通用户可不绑定身份证；
@@ -44,10 +44,10 @@ public class Users {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getTele() {
+	public String getTele() {
 		return tele;
 	}
-	public void setTele(int tele) {
+	public void setTele(String tele) {
 		this.tele = tele;
 	}
 	public String getEmail() {

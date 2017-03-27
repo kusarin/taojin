@@ -32,7 +32,10 @@
 	<select id="FindItemById" parameterType="int" resultType="cn.it.pojo.Item">
 		select * from item where item_id = #{item_id}
 	</select>
-		<select id="FindItemByType" parameterType="String" resultType="cn.it.pojo.Item">
+	<select id="FindAll" resultType="cn.it.pojo.Item">
+		select * from item
+	</select>
+	<select id="FindItemByType" parameterType="String" resultType="cn.it.pojo.Item">
 		select * from item where typeh = #{0} and typel = #{1}
 	</select>
 </mapper>

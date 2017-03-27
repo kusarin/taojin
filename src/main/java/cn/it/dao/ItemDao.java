@@ -1,5 +1,7 @@
 package cn.it.dao;
 
+import java.util.List;
+
 import cn.it.pojo.Item;
 /**
  * 
@@ -24,12 +26,18 @@ public interface ItemDao {
 	 * 修改商品方法
 	 * @param （变量为商品编号 id，类型为int）；
 	 */
-	public void ItemUpdate(int id);
+	public void ItemUpdate(Item i);
 	/**
 	 * 按照商品编号查看商品；
 	 * @param （变量为商品编号 id，类型为int）；
+	 * @return 
 	 */
-	public void FindItemById(int id);
+	public Item FindItemById(int id);
+	/**
+	 * 参看所有商品；
+	 * @return
+	 */
+	public List<Item> FindAll();
 	/**
 	 * 按照商品类型查看商品；
 	 * @param typeh

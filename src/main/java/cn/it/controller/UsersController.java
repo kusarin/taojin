@@ -29,7 +29,7 @@ public class UsersController {
 		return result;
 	}
 	//添加用户
-		@RequestMapping("addUser")
+		@RequestMapping("addUser.do")
 		public ModelAndView addUser(Users user){
 			return null;
 		}
