@@ -7,6 +7,6 @@ public interface ShopService {
    Shop findByid(int id);
    List<Shop> getAllByUserid(int num);
    List<Shop> findShopList(int num);
-   public void changeInfoByid(Shop shop);
+   public Shop changeInfoByid(int num);
    long viewHits(Long id);
 }

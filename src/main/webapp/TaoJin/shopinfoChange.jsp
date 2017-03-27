@@ -16,6 +16,7 @@
 					<td>name</td>
 					<td><input type="text" name="name" value="${shop.name }"></td>
 				</tr>
+				<% System.out.println(1);%>
 				<tr>
 					<td>type</td>
 					<td><input type="text" name="price" value="${shop.type}"></td>
@@ -24,7 +25,7 @@
 					<td>intro</td>
 					<td><input type="text" name="author" value="${shop.intro}"></td>
 			</table>
-			 <input type="submit" value="修改"/>
+			 <input type="submit" value="修改" />
 			 <input type="button" value="返回" onclick="javaScript:history.back(-1)"/>
 		</form>
 	</div>

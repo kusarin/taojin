@@ -27,23 +27,27 @@ public class ShopController {
 		modelAndView.setViewName("Certify");
 		return modelAndView;
 	}
-	@RequestMapping(value ="toChange.do",method={RequestMethod.GET,RequestMethod.POST}
+	@RequestMapping(value ={"/toChange.do"},method={RequestMethod.GET,RequestMethod.POST}
 	)
 	public String toChange(Shop shop,Map<String,Object> map){
 		map.put("shop", shopService.findByid(shop.getshop_id()));
-		return "shopInfoChange.jsp";
+		return "shopinfoChange";
 	}
-	@RequestMapping(value ="doChange.do",method={RequestMethod.GET,RequestMethod.POST})
-	public String doChange(Shop shop){
-		shopService.changeInfoByid(shop);
-		return "shoplist.do";
+	@RequestMapping(value ={"/doChange.do"},method={RequestMethod.GET,RequestMethod.POST})
+	public String doChange(Shop shop,Map<String,Object> map){
+		int num = 2;
+		List<Shop> list;
+		shopService.changeInfoByid(shop.getshop_id());
+		list = shopService.getAllByUserid(num);
+		map.put("shopli", list);
+		return "shopList";
 	}
-	@RequestMapping(value = "shopList.do",method={RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = {"/shopList.do"},method={RequestMethod.GET,RequestMethod.POST})
     public String getShoplist(Shop shop,Map<String,Object> map){
 		int num = 2;
 		List<Shop> list;
 		list = shopService.getAllByUserid(num);
-		map.put("shop", list);		
-		return "shoplist";
+		map.put("shopli", list);		
+		return "shopList";
 	}
 }

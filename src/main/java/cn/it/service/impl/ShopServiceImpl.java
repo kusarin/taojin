@@ -23,8 +23,8 @@ public class ShopServiceImpl implements ShopService {
 	public List<Shop> getAllByUserid(int num){
 		return shopDao.getAllByUserid(num);
 	}
-	public void changeInfoByid(Shop shop){
-		shopDao.changeInfoByid(shop);;
+	public Shop changeInfoByid(int id){
+		return shopDao.changeInfoByid(id);
 	}
 
 	public Shop findByid(int id) {
