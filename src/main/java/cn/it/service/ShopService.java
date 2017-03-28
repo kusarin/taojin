@@ -9,5 +9,6 @@ public interface ShopService {
    List<Shop> findShopList(int num);
    public void changeInfoByid(Shop shop);
    public void addShop(Shop shop);
+   public void deleteShop(Shop shop); 
    long viewHits(Long id);
 }
