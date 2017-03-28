@@ -27,60 +27,18 @@ pageEncoding="UTF-8"%>
    </td> 
   </tr> 
   <tr> 
-   <td> 
-    <table> 
-     <tr> 
-      <td><a>Main</a> 
-      </td> 
-     </tr> 
-     <tr> 
-      <td><a>Menu1</a> 
-      </td> 
-     </tr> 
-     <tr> 
-      <td><a>Menu2</a> 
-      </td> 
-     </tr> 
-     <tr> 
-      <td><a>Menu3</a> 
-      </td> 
-     </tr> 
-     <tr> 
-      <td><a>Menu4</a> 
-      </td> 
-     </tr> 
-     <tr> 
-      <td><a>Menu5</a> 
-      </td> 
-     </tr> 
-     <tr> 
-      <td><a>Menu6</a> 
-      </td> 
-     </tr> 
-     <tr> 
-      <td><a>Menu7</a> 
-      </td> 
-     </tr> 
-     <tr> 
-      <td><a>Menu8</a> 
-      </td> 
-     </tr> 
-    </table></td> 
-   <td> 
-    <form action="login.jsp" method="post"> 
      <table> 
       <tr> 
        <td colspan="2">登录成功!</td> 
       </tr> 
       <tr> 
        <td>欢迎你，</td> 
-       <td>${username}</td> 
+       <td>${user.username}</td> 
       </tr> 
       <tr> 
        <td colspan="2"><input type="submit" value="退出" /></td> 
       </tr> 
-     </table> 
-    </form></td> 
+     </table>
   </tr> 
  </table> 
 </body> 

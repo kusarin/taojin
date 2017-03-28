@@ -2,11 +2,14 @@ package cn.it.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONObject;
+
 import cn.it.dao.UsersDao;
-import cn.it.pojo.Manager;
 import cn.it.pojo.Users;
 import cn.it.service.UsersService;
 
@@ -16,8 +19,9 @@ public class UsersServiceImpl implements UsersService{
 	private UsersDao usersDao;
 	
 	@SuppressWarnings("null")
-	public String login(Users user) {
+	public String login(Users user,HttpSession session) {
 		String str = "welcome";
+        JSONObject json = new JSONObject();  
 		if(user==null){
 			if(user.getUsername().equals("")||user.getUsername()==null||user.getPassword().equals("")||user.getPassword()==null){
 				str = "login";
@@ -25,9 +29,14 @@ public class UsersServiceImpl implements UsersService{
 		}else{
 			Users u = usersDao.login(user);
 			if(u == null){
+	             json.put("success", false);
+	             json.put("meg", "sorry");
 				str = "login";
+			}else{
+				session.setAttribute("user", u);
 			}
 		}
+		
 		return str;
 	}
 
@@ -50,4 +59,5 @@ public class UsersServiceImpl implements UsersService{
 		}
 		return str;
 	}
+
 }
