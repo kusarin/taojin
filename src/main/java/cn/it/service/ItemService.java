@@ -14,6 +14,8 @@ public interface ItemService {
 	
 	/**
 	 * 添加商品
+	 * 
+	 * @param shop_id 店铺编号，int
 	 * @param name 商品名称，String
 	 * @param part 商品类别，String
 	 * @param typeh 商品一级分类，String
@@ -23,15 +25,17 @@ public interface ItemService {
 	 * @param detail 商品描述，String
 	 * @param image 商品图片，String
 	 */
-	public void addItem(String name,String part,String typeh,String typel,
-			int number,double price,String detail,String image);
+	public String addItem(int shop_id,String name,String part,String typeh,String typel,
+			String number,String price,String detail,String image);
 	/**
 	 * 删除商品
-	 * @param id 商品编号，int
+	 * @param item_id 商品编号，int
 	 */
-	public void deleteItem(int id);
+	public String deleteItem(int item_id);
 	/**
 	 * 更新商品
+	 * 
+	 * @param item_id 商品编号，int
 	 * @param name 商品名称，String
 	 * @param part 商品类别，String
 	 * @param typeh 商品一级分类，String
@@ -41,14 +45,14 @@ public interface ItemService {
 	 * @param detail 商品描述，String
 	 * @param image 商品图片，String
 	 */
-	public void updateItem(String name,String part,String typeh,String typel,
-			int number,double price,String detail,String image);
+	public String updateItem(int item_id, String name,String part,String typeh,String typel,
+			String number,String price,String detail,String image);
 	/**
 	 * 按照商品编号查找商品信息
-	 * @param id 商品编号，int
+	 * @param item_id 商品编号，int
 	 * @return
 	 */
-	public  Item findById(int id);
+	public  Item findById(int item_id);
 	/**
 	 * 按照条目查找商品信息
 	 * @return

@@ -21,7 +21,7 @@ public interface ItemDao {
 	 * 删除商品方法
 	 * @param id 商品编号，int
 	 */
-	public void ItemDelete(int id);
+	public void ItemDelete(int item_id);
 	/**
 	 * 修改商品方法
 	 * @param id 商品编号，int
@@ -32,7 +32,7 @@ public interface ItemDao {
 	 * @param id 商品编号，int
 	 * @return 
 	 */
-	public Item FindItemById(int id);
+	public Item FindItemById(int item_id);
 	/**
 	 * 查看所有商品；
 	 * @return
