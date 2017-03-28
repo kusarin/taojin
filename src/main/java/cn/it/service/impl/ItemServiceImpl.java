@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
@@ -28,6 +27,7 @@ public class ItemServiceImpl implements ItemService {
 	
 	/**
 	 * 添加商品
+	 * 
 	 * @param name 商品名称，String
 	 * @param part 商品类别，String
 	 * @param typeh 商品一级分类，String
@@ -37,41 +37,66 @@ public class ItemServiceImpl implements ItemService {
 	 * @param detail 商品描述，String
 	 * @param image 商品图片，String
 	 */
-	public void addItem(String name, String part, String typeh, String typel,
-			int number, double price, String detail, String image) {
-		
-		// 定义商品；
-		Item i = null;
-		// 设置商品属性；
-		i.setname(name);
-		i.setpart(part);
-		i.settypeh(typeh);
-		i.settypel(typel);
-		i.setnumber(number);
-		i.setprice(price);
-		i.setdetail(detail);
-		i.setimage(image);
-		
-		// 浏览次数和出售数量初始值为0；
-		i.setbrowingTimes(0);
-		i.setSaleNumbers(0);
-		
-		// 添加商品信息；
-		itemDao.ItemAdd(i);
-		
+	public String addItem(int shop_id,String name, String part, String typeh, String typel,
+			String number, String price, String detail, String image) {	
+		// 判断参数是否为空 
+		if(name==null||name.equals("")
+				||part==null||part.equals("")
+				||typeh==null||typeh.equals("")
+				||typel==null||typel.equals("")
+				||number==null||number.equals("")
+				||price==null||price.equals("")
+				||detail==null||detail.equals("")
+				||image==null||image.equals("")){
+			
+			// 返回提示信息 "输入数据不能为空！！！"
+			return "输入数据不能为空！！！";
+			
+		}else{
+			
+			int num = Integer.parseInt(number);
+			double pri = Double.parseDouble(price);
+			
+			// 定义商品；
+			Item i = null;
+			// 设置商品属性；
+			i.setshop_id(shop_id);
+			i.setname(name);
+			i.setpart(part);
+			i.settypeh(typeh);
+			i.settypel(typel);
+			i.setnumber(num);
+			i.setprice(pri);
+			i.setdetail(detail);
+			i.setimage(image);
+			
+			// 浏览次数和出售数量初始值为0；
+			i.setbrowsingTimes(0);
+			i.setSaleNumbers(0);
+			
+			// 添加商品信息；
+			itemDao.ItemAdd(i);	
+			// 返回提示信息 "上架商品成功！！！"
+			return "上架商品成功！！！";
+		}
+
 	}
 	
 	/**
 	 * 删除商品
+	 * 
 	 * @param id 商品编号，int
 	 */
-	public void deleteItem(int id) {
-		itemDao.ItemDelete(id);
-		
+	public String deleteItem(int id) {
+		itemDao.ItemDelete(id);	
+		// 返回提示信息 "下架商品成功！！！"
+		return "下架商品成功！！！";
 	}
 
 	/**
 	 * 更新商品
+	 * 
+	 * @param id 商品编号，int
 	 * @param name 商品名称，String
 	 * @param part 商品类别，String
 	 * @param typeh 商品一级分类，String
@@ -81,44 +106,64 @@ public class ItemServiceImpl implements ItemService {
 	 * @param detail 商品描述，String
 	 * @param image 商品图片，String
 	 */
-	public void updateItem(String name,String part,String typeh,String typel,
-			int number,double price,String detail,String image) {
+	public String updateItem(int id,String name,String part,String typeh,String typel,
+			String number,String price,String detail,String image) {
+		// 判断参数是否为空 
+		if(name==null||name.equals("")
+			||part==null||part.equals("")
+			||typeh==null||typeh.equals("")
+			||typel==null||typel.equals("")
+			||number==null||number.equals("")
+			||price==null||price.equals("")
+			||detail==null||detail.equals("")
+			||image==null||image.equals("")){
+			
+			// 返回提示信息 "输入数据不能为空！！！"		
+			return "输入数据不能为空！！！";
+					
+		}else{
+			int num = Integer.parseInt(number);
+			double pri = Double.parseDouble(price);
 		
-		// 定义商品；
-		Item i = null;
-		// 设置商品属性；
-		i.setname(name);
-		i.setpart(part);
-		i.settypeh(typeh);
-		i.settypel(typel);
-		i.setnumber(number);
-		i.setprice(price);
-		i.setdetail(detail);
-		i.setimage(image);
+			// 定义商品；
+			Item i = null;
+			// 设置商品属性；
+			i.setitem_id(id);
+			i.setname(name);
+			i.setpart(part);
+			i.settypeh(typeh);
+			i.settypel(typel);
+			i.setnumber(num);
+			i.setprice(pri);
+			i.setdetail(detail);
+			i.setimage(image);
 		
-		// 更新商品信息
-		itemDao.ItemUpdate(i);
+			// 更新商品信息
+			itemDao.ItemUpdate(i);
+			// 返回提示信息 "修改商品信息成功！！！"
+			return "修改商品信息成功！！！";
+		}
 	}
 	
 	/**
 	 * 查看单条商品信息
+	 * 
 	 * @param id 商品编号，int
 	 */
-	public Item findById(int id) {
-		// TODO Auto-generated method stub
+	public Item findById(int id) { 
 		return itemDao.FindItemById(id);
 	}
 		
 	/**
 	 * 通过调用itemDao.FindAll()查看所有商品
 	 */
-	public List<Item> findItemList() {
-		// TODO Auto-generated method stub
+	public List<Item> findItemList() {	
 		return itemDao.FindAll();
 	}
 	
 	/**
 	 * 通过调用itemDao.FindItemByType，根据所选的类型查看商品
+	 * 
 	 * @param typeh 商品一级分类，String
 	 * @param typel 商品二级分类，String
 	 */
@@ -126,55 +171,119 @@ public class ItemServiceImpl implements ItemService {
 		return itemDao.FindItemByType(typeh, typel);
 	}	
 	
+	// 判断输入字符串是否为数字的方法，用来判断number和price是否为数字
+	public static boolean isNumeric(String str){
+		for (int i = 0; i < str.length(); i++){
+			System.out.println(str.charAt(i));
+			if (!Character.isDigit(str.charAt(i))){
+				return false;
+			}
+		}
+		return true;
+	}
 	
-	/*******************************测试类*************************************/
+	/*******************************测试类,用于测试能否成功调用来自Dao层的方法*************************************/
 	
 	/**
-	 * 测试1，用于测试FindAll()是否已经传值；
+	 * 测试1，用于测试是否添加商品
 	 */
 	@Test
 	public void test1(){
 		 ApplicationContext ac=new ClassPathXmlApplicationContext("config.xml");
-		 ItemDao item= (ItemDao) ac.getBean("itemDao");
-	     List<Item> i=item.FindAll();
-	     System.out.println(i);   
+		 ItemDao itemdao= (ItemDao) ac.getBean("itemDao");
+		 Item i = new Item();
+	 
+			// 设置商品属性；
+		 	i.setshop_id(1);
+			i.setname("第五个商品");
+			i.setpart("拍卖品");
+			i.settypeh("高级分类1");
+			i.settypel("低级分类2");
+			i.setnumber(23);
+			i.setprice(150.25);
+			i.setdetail("五个详细信息");
+			i.setimage("这就是一张图片");
+
+		     System.out.println("设置商品属性完成");
+			// 浏览次数和出售数量初始值为0；
+			i.setbrowsingTimes(1);
+//			i.setSaleNumbers(0);
+//			
+		 
+	     itemdao.ItemAdd(i);
+	     System.out.println("添加成功！！！");
 	}
 	
 	/**
-	 * 测试2，用于测试FindItemById(id)是否传值
+	 * 测试2，用于测试是否删除商品
 	 */
 	@Test
 	public void test2(){
 		 ApplicationContext ac=new ClassPathXmlApplicationContext("config.xml");
-		 ItemDao item= (ItemDao) ac.getBean("itemDao");
-		 int id = 1;
-	     Item i = item.FindItemById(id);
-	     System.out.println(i);  
+		 ItemDao itemdao= (ItemDao) ac.getBean("itemDao");
+	     itemdao.ItemDelete(6);
+	     System.out.println("删除成功！！！");
 	}
 	/**
-	 * 测试3，用于测试FindItemByType(typeh,typel)是否传值
+	 * 测试3，用于测试是否修改商品
 	 */
 	@Test
 	public void test3(){
 		 ApplicationContext ac=new ClassPathXmlApplicationContext("config.xml");
-		 ItemDao item= (ItemDao) ac.getBean("itemDao");
-		 String typeh = "高级分类1";
-		 String typel = "低级分类1";
-	     List<Item> i = item.FindItemByType(typeh,typel);
-    	 System.out.println(i); 
+		 ItemDao itemdao= (ItemDao) ac.getBean("itemDao");
+		 
+		 Item i =  new Item();
+	     System.out.println("设置完成");
+	 
+			// 设置商品属性；
+	     	i.setitem_id(7);
+			i.setname("第7五个商品");
+			i.setpart("拍卖品");
+			i.settypeh("高级分类2");
+			i.settypel("低级分类1");
+			i.setnumber(41);
+			i.setprice(158.23);
+			i.setdetail("7个详细信息");
+			i.setimage("这999是一张图片");
+			
+	     itemdao.ItemUpdate(i);
+	     System.out.println("修改成功！！！");
 	}
 	
+	
 	/**
-	 * 测试4，用于测试是否删除商品
+	 * 测试4，用于测试FindAll()是否已经传值；
 	 */
 	@Test
 	public void test4(){
 		 ApplicationContext ac=new ClassPathXmlApplicationContext("config.xml");
-	     System.out.println("K1");
-		 ItemDao item= (ItemDao) ac.getBean("itemDao");
-	     System.out.println("K2");
-	     item.ItemDelete(5);
-	     System.out.println("删除成功");
+		 ItemDao itemdao= (ItemDao) ac.getBean("itemDao");
+	     List<Item> i=itemdao.FindAll();
+	     System.out.println(i);   
 	}
-
+	
+	/**
+	 * 测试5，用于测试FindItemById(id)是否传值
+	 */
+	@Test
+	public void test5(){
+		 ApplicationContext ac=new ClassPathXmlApplicationContext("config.xml");
+		 ItemDao itemdao= (ItemDao) ac.getBean("itemDao");
+		 int id = 1;
+	     Item i = itemdao.FindItemById(id);
+	     System.out.println(i);  
+	}
+	/**
+	 * 测试6，用于测试FindItemByType(typeh,typel)是否传值
+	 */
+	@Test
+	public void test6(){
+		 ApplicationContext ac=new ClassPathXmlApplicationContext("config.xml");
+		 ItemDao itemdao= (ItemDao) ac.getBean("itemDao");
+		 String typeh = "高级分类1";
+		 String typel = "低级分类1";
+	     List<Item> i = itemdao.FindItemByType(typeh,typel);
+    	 System.out.println(i); 
+	}
+	
 }

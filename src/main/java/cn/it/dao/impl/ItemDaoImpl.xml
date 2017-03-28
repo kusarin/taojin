@@ -6,8 +6,8 @@
 
 <!-- 增删改方法 -->
 	<insert id="ItemAdd" parameterType="cn.it.pojo.Item">
-		insert into item(name,part,typeh,typel,number,price,detail,image) 
-		        values(#{name},#{part},#{typeh},#{typel},#{number},#{price},#{detail},#{image})
+		insert into item(shop_id,name,part,typeh,typel,number,price,detail,image,browsingTimes) 
+		        values(#{shop_id},#{name},#{part},#{typeh},#{typel},#{number},#{price},#{detail},#{image},#{browsingTimes})
 	</insert>
 	<delete id="ItemDelete" parameterType="int">
 		delete from item where item_id = #{item_id}
@@ -16,11 +16,7 @@
 	<update id="ItemUpdate" parameterType="cn.it.pojo.Item">
 		update item set name=#{name},part=#{part},typeh=#{typeh},typel=#{typel},
 		                number=#{number},price=#{price},detail=#{detail},image=#{image}
-		<where>
-			<if test="item_id!=0">
-				and item_id = #{item_id}				
-			</if>
-		</where>
+		where item_id = #{item_id}					
 	</update>
 	<select id="FindItemById" parameterType="int" resultType="cn.it.pojo.Item">
 		select * from item where item_id = #{item_id}

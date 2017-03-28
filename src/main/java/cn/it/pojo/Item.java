@@ -19,15 +19,12 @@ public class Item {
 	private String detail;   //商品描述：detail；
 	private String image;    //商品图片：image；
 	
-	private int browingTimes; //商品浏览次数：browingTimes，后台数据，初始化为0，不能手动修改；
+	private int browsingTimes; //商品浏览次数：browsingTimes，后台数据，初始化为0，不能手动修改；
 	private int saleNumbers;  //商品出售数量saleNumbers，后台数据，初始化为0，不能手动修改；
 
 	
 /*********************set******get***************************************/
 	
-	public String getname() {
-		return name;
-	}
 	public int getitem_id() {
 		return item_id;
 	}
@@ -39,6 +36,9 @@ public class Item {
 	}
 	public void setshop_id(int shop_id) {
 		this.shop_id = shop_id;
+	}
+	public String getname() {
+		return name;
 	}
 	public void setname(String name) {
 		this.name = name;
@@ -86,11 +86,11 @@ public class Item {
 		this.image = image;
 	}
 
-	public int getbrowingTimes() {
-		return browingTimes;
+	public int getbrowsingTimes() {
+		return browsingTimes;
 	}
-	public void setbrowingTimes(int browingTimes) {
-		this.browingTimes = browingTimes;
+	public void setbrowsingTimes(int browsingTimes) {
+		this.browsingTimes = browsingTimes;
 	}		
 	public int getSaleNumbers() {
 		return saleNumbers;
@@ -120,7 +120,7 @@ public class Item {
 				                      +price+"   "
 				                      +detail+"   "
 				                      +image+"   "
-				                      +browingTimes+"   "
+				                      +browsingTimes+"   "
 						              +saleNumbers+"   "
 									  +")";
 	}
