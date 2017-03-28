@@ -15,6 +15,7 @@ public class UsersServiceImpl implements UsersService{
 	@Autowired
 	private UsersDao usersDao;
 	
+	@SuppressWarnings("null")
 	public String login(Users user) {
 		String str = "welcome";
 		if(user==null){
@@ -31,23 +32,21 @@ public class UsersServiceImpl implements UsersService{
 	}
 
 	public String add(Users user) {
-		String str = "login";
+		String str = "register";
 		List<Users> userlist =usersDao.UsersFind();
-		Boolean flag = true; 
+		Boolean flag = true;
 		for(Users u:userlist){
-			if(u.getID()==user.getID()){
+			if(u.getUsername().equalsIgnoreCase(user.getUsername())){
 				flag = false;
 				break;
 			}
 		}
-		if(user==null){
-			if(user.getUsername()==null||user.getUsername().equalsIgnoreCase("")||
-					user.getPassword()==null||user.getPassword().equalsIgnoreCase("")){
-				str = "addmanager";
-			}
+		if(user.getUsername()==null||user.getUsername().equalsIgnoreCase("")||
+				user.getPassword()==null||user.getPassword().equalsIgnoreCase("")){
+			flag = false;
 		}else if(flag){
 			usersDao.UsersAdd(user);
-			str = "managerInterface";
+			str = "login";
 		}
 		return str;
 	}
