@@ -13,4 +13,7 @@ public interface OrderService {
 	public List<OrderDetail> getAllOrderDetail(int userId);
 	public List<Order> getAllOrder(int userId);
 	public List<OrderCollection> mergeList(List<Order> orderList,List<OrderDetail> orderDetailList);
+	public void submmitOrder(int itemId,int payLabel,String address,int userId);
+	public void deleteOrder(String orderNumber);
+	public OrderCollection getOrderDetail(String orderNumber);
 }
