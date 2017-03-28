@@ -11,18 +11,18 @@
 	<div align="center">
 		<form id="myform" action="doChange.do" method="post">
 			<table>
-			 <input type="hidden" value="${shop.shop_id}" name="shop_id"/>
+			 <input type="hidden" value="${shop.shop_id}" name="Shop_id"/>
 				<tr>
 					<td>name</td>
-					<td><input type="text" name="name" value="${shop.name }" id="name"></td>
+					<td><input type="text" name="Name" value="${shop.Name }" id="Name"></td>
 				</tr>
 				<tr>
 					<td>type</td>
-					<td><input type="text" name="type" value="${shop.type}" id="type"></td>
+					<td><input type="text" name="Type" value="${shop.Type}" id="Type"></td>
 				</tr>
 				<tr>
 					<td>intro</td>
-					<td><input type="text" name="intro" value="${shop.intro}" id="intro"></td>
+					<td><input type="text" name="Intro" value="${shop.Intro}" id="Intro"></td>
 			</table>
 			 <input type="submit" value="修改"  />
 			 <input type="button" value="返回" onclick="javaScript:history.back(-1)"/>

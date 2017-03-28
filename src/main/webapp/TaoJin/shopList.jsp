@@ -32,10 +32,10 @@
               
               <tr>  
                 <td> ${c.shop_id}</td>                
-                <td> ${c.User_ID} </td>  
+                <td> ${c.user_ID} </td>  
                 <td> ${c.name} </td>  
                 <td> ${c.type} </td>  
-                <td> ${c.intro} </td>  
+                <td> ${c.intro} </td> 
                 <td><a href="toChange.do?shop_id=${c.shop_id}">查看</a></td>  
             </tr>  
              

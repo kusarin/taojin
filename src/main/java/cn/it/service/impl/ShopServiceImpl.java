@@ -29,6 +29,9 @@ public class ShopServiceImpl implements ShopService {
     public void addShop(Shop shop){
     	shopDao.addShop(shop);
     }
+    public void deleteShop(Shop shop){
+    	shopDao.deleteShop(shop);
+    }
 	public Shop findByid(int id) {
 		// TODO Auto-generated method stub
 		return shopDao.findByid(id);
