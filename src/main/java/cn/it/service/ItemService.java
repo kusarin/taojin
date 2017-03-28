@@ -24,12 +24,17 @@ public interface ItemService {
 	 * @param price 商品价格，double
 	 * @param detail 商品描述，String
 	 * @param image 商品图片，String
+	 * 
+	 * @return String 返回值为一个提示信息，String
 	 */
 	public String addItem(int shop_id,String name,String part,String typeh,String typel,
 			String number,String price,String detail,String image);
 	/**
 	 * 删除商品
+	 * 
 	 * @param item_id 商品编号，int
+	 * 
+	 * @return String 返回值为一个提示信息，String
 	 */
 	public String deleteItem(int item_id);
 	/**
@@ -44,25 +49,32 @@ public interface ItemService {
 	 * @param price 商品价格，double
 	 * @param detail 商品描述，String
 	 * @param image 商品图片，String
+	 * 
+	 * @return String 返回值为一个提示信息，String
 	 */
 	public String updateItem(int item_id, String name,String part,String typeh,String typel,
 			String number,String price,String detail,String image);
 	/**
 	 * 按照商品编号查找商品信息
+	 * 
 	 * @param item_id 商品编号，int
-	 * @return
+	 * 
+	 * @return Item 返回值为一个商品
 	 */
 	public  Item findById(int item_id);
 	/**
 	 * 按照条目查找商品信息
-	 * @return
+	 * 
+	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Item> findItemList();
 	/**
 	 * 按照商品类型查找商品信息
+	 * 
 	 * @param typeh 商品一级分类，String
 	 * @param typel 商品二级分类，String
-	 * @return
+	 * 
+	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Item> findByType(String typeh,String typel);
 	

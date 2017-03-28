@@ -6,9 +6,9 @@
 
 <!-- 增删改方法 -->
 	<!-- 添加商品 -->
-	<insert id="ItemAdd" parameterType="cn.it.pojo.Item"><!-- 数据库中暂时缺少属性，出售数量saleNumbers -->
-		insert into item(shop_id,name,part,typeh,typel,number,price,detail,image,browsingTimes) 
-		        values(#{shop_id},#{name},#{part},#{typeh},#{typel},#{number},#{price},#{detail},#{image},#{browsingTimes})
+	<insert id="ItemAdd" parameterType="cn.it.pojo.Item">
+		insert into item(shop_id,name,part,typeh,typel,number,price,detail,image,browsingTimes,tradingTimes) 
+		        values(#{shop_id},#{name},#{part},#{typeh},#{typel},#{number},#{price},#{detail},#{image},#{browsingTimes},#{tradingTimes})
 	</insert>
 	<!-- 删除商品 -->
 	<delete id="ItemDelete" parameterType="int">
@@ -24,12 +24,16 @@
 	<select id="FindItemById" parameterType="int" resultType="cn.it.pojo.Item">
 		select * from item where item_id = #{item_id}
 	</select>
-	<!-- 查看所有商品信息 -->
+	<!-- 查看所有商品 -->
 	<select id="FindAll" resultType="cn.it.pojo.Item">
 		select * from item
 	</select>
 	<!-- 查看某种类型的商品信息 -->
 	<select id="FindItemByType" parameterType="String" resultType="cn.it.pojo.Item">
 		select * from item where typeh = #{0} and typel = #{1}
+	</select>
+	<!-- 查看归属于某个店铺的所有商品 -->
+	<select id="FindItemByShopId" parameterType="int" resultType="cn.it.pojo.Item">
+		select * from item where shop_id = #{shop_id}
 	</select>
 </mapper>

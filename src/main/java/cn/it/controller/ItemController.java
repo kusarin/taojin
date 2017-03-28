@@ -154,7 +154,35 @@ public class ItemController {
 		modeandview.addObject("itemlist",list);	
 		return modeandview;
 	}
+	
+	
+	/**
+	 * 查看单个商品
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("lookItem.do")
+	public ModelAndView lookItem(HttpServletRequest request){
+		ModelAndView modeandview = new ModelAndView("lookItem"); // 到lookItem.jsp界面
+		
+		//--------------
+		// 暂时缺少获取前台typeh和typel的操作！！！
+		//---------------
+		int item_id = 0;
 
+		// 根据商品编号，获得商品；
+		Item i = itemservice.findById(item_id);
+		
+		// 测试i是否已经获取到Item中的数据
+		System.out.println("----------------"); 
+		System.out.println(i);
+		System.out.println("----------------");
+		
+		//将商品i传递到lookitem
+		modeandview.addObject("lookitem",i);		
+		return modeandview;
+	}
 	
 	/**
 	 * 按照选择的商品类型查看商品
@@ -184,35 +212,6 @@ public class ItemController {
 		
 		//将商品条目list传递到itemtype
 		modeandview.addObject("itemtype",list);	
-		return modeandview;
-	}
-	
-	
-	/**
-	 * 查看单个商品
-	 * 
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping("lookItem.do")
-	public ModelAndView lookItem(HttpServletRequest request){
-		ModelAndView modeandview = new ModelAndView("lookItem"); // 到lookItem.jsp界面
-		
-		//--------------
-		// 暂时缺少获取前台typeh和typel的操作！！！
-		//---------------
-		int item_id = 0;
-
-		// 根据商品编号，获得商品；
-		Item i = itemservice.findById(item_id);
-		
-		// 测试i是否已经获取到Item中的数据
-		System.out.println("----------------"); 
-		System.out.println(i);
-		System.out.println("----------------");
-		
-		//将商品i传递到lookitem
-		modeandview.addObject("lookitem",i);		
 		return modeandview;
 	}
 }

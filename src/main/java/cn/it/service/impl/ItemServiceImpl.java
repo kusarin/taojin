@@ -37,6 +37,8 @@ public class ItemServiceImpl implements ItemService {
 	 * @param price 商品价格，double
 	 * @param detail 商品描述，String
 	 * @param image 商品图片，String
+	 * 
+	 * @return String 返回值为一个提示信息，String
 	 */
 	public String addItem(int shop_id,String name, String part, String typeh, String typel,
 			String number, String price, String detail, String image) {	
@@ -74,7 +76,7 @@ public class ItemServiceImpl implements ItemService {
 			
 			// 设置浏览次数和出售数量初始值为0；
 			i.setbrowsingTimes(0);
-			i.setSaleNumbers(0);
+			i.settradingTimes(0);
 			
 			// 添加商品信息；
 			itemDao.ItemAdd(i);	
@@ -87,6 +89,8 @@ public class ItemServiceImpl implements ItemService {
 	 * 删除商品
 	 * 
 	 * @param item_id 商品编号，int
+	 * 
+	 * @return String 返回值为一个提示信息，String
 	 */
 	public String deleteItem(int item_id) {
 		itemDao.ItemDelete(item_id);	
@@ -106,6 +110,8 @@ public class ItemServiceImpl implements ItemService {
 	 * @param price 商品价格，double
 	 * @param detail 商品描述，String
 	 * @param image 商品图片，String
+	 * 
+	 * @return String 返回值为一个提示信息，String
 	 */
 	public String updateItem(int item_id,String name,String part,String typeh,String typel,
 			String number,String price,String detail,String image) {
@@ -131,15 +137,15 @@ public class ItemServiceImpl implements ItemService {
 			// 定义商品；
 			Item i = new Item();
 			// 设置商品属性；
-			i.setitem_id(item_id);       // 商品编号
-			i.setname(name);        // 商品名称
-			i.setpart(part);        // 商品类别
-			i.settypeh(typeh);      // 商品一阶类型
-			i.settypel(typel);      // 商品二阶类型
-			i.setnumber(num);       // 商品数量
-			i.setprice(pri);        // 商品价格
-			i.setdetail(detail);    // 商品描述
-			i.setimage(image);      // 商品图片
+			i.setitem_id(item_id);    // 商品编号
+			i.setname(name);          // 商品名称
+			i.setpart(part);          // 商品类别
+			i.settypeh(typeh);        // 商品一阶类型
+			i.settypel(typel);        // 商品二阶类型
+			i.setnumber(num);         // 商品数量
+			i.setprice(pri);          // 商品价格
+			i.setdetail(detail);      // 商品描述
+			i.setimage(image);        // 商品图片
 			
 			// 更新商品信息
 			itemDao.ItemUpdate(i);
@@ -152,6 +158,8 @@ public class ItemServiceImpl implements ItemService {
 	 * 通过调用itemDao.FindItemById(),查看单个商品信息
 	 * 
 	 * @param item_id 商品编号，int
+	 * 
+	 * @return Item 返回值为一个商品
 	 */
 	public Item findById(int item_id) { 
 		return itemDao.FindItemById(item_id);
@@ -159,6 +167,8 @@ public class ItemServiceImpl implements ItemService {
 		
 	/**
 	 * 通过调用itemDao.FindAll(),查看所有商品
+	 * 
+	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Item> findItemList() {	
 		return itemDao.FindAll();
@@ -169,6 +179,8 @@ public class ItemServiceImpl implements ItemService {
 	 * 
 	 * @param typeh 商品一阶类型，String
 	 * @param typel 商品二阶类型，String
+	 * 
+	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Item> findByType(String typeh,String typel){
 		return itemDao.FindItemByType(typeh, typel);
@@ -185,8 +197,7 @@ public class ItemServiceImpl implements ItemService {
 //		return true;
 //	}
 	
-/*******************************测试类,用于测试能否成功调用来自Dao层的方法*************************************/
-	
+/*******************************测试类,用于测试能否成功调用来自Dao层的方法*************************************/	
 	/**
 	 * 测试1，用于测试是否添加商品
 	 */
@@ -210,7 +221,7 @@ public class ItemServiceImpl implements ItemService {
 		     System.out.println("设置商品属性完成");
 			// 设置浏览次数和出售数量初始值为0；
 			i.setbrowsingTimes(0);
-			i.setSaleNumbers(0);
+			i.settradingTimes(0);
 			
 		 
 	     itemdao.ItemAdd(i);
@@ -224,9 +235,10 @@ public class ItemServiceImpl implements ItemService {
 	public void test2(){
 		 ApplicationContext ac=new ClassPathXmlApplicationContext("config.xml");
 		 ItemDao itemdao= (ItemDao) ac.getBean("itemDao");
-	     itemdao.ItemDelete(6);
+	     itemdao.ItemDelete(5);
 	     System.out.println("删除成功！！！");
 	}
+	
 	/**
 	 * 测试3，用于测试是否修改商品
 	 */
@@ -239,8 +251,8 @@ public class ItemServiceImpl implements ItemService {
 	     System.out.println("设置完成");
 	 
 			// 设置商品属性；
-	     	i.setitem_id(7);
-			i.setname("第7五个商品");
+	     	i.setitem_id(5);
+			i.setname("第7个商品");
 			i.setpart("拍卖品");
 			i.settypeh("高级分类2");
 			i.settypel("低级分类1");
@@ -252,7 +264,6 @@ public class ItemServiceImpl implements ItemService {
 	     itemdao.ItemUpdate(i);
 	     System.out.println("修改成功！！！");
 	}
-	
 	
 	/**
 	 * 测试4，用于测试FindAll()是否已经传值；
@@ -276,6 +287,7 @@ public class ItemServiceImpl implements ItemService {
 	     Item i = itemdao.FindItemById(id);
 	     System.out.println(i);  
 	}
+	
 	/**
 	 * 测试6，用于测试FindItemByType(typeh,typel)是否传值
 	 */
@@ -287,6 +299,5 @@ public class ItemServiceImpl implements ItemService {
 		 String typel = "低级分类1";
 	     List<Item> i = itemdao.FindItemByType(typeh,typel);
     	 System.out.println(i); 
-	}
-	
+	}	
 }
