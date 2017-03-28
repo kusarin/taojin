@@ -3,7 +3,7 @@
 <mapper namespace = "cn/it/dao/CommentDao">
 
 	<select id ="findAll" resultType="cn.it.pojo.Comment">
-		select content,datetime,use_id from comment
+		select content,datetime,users_id from comment
 	</select>
 	
 </mapper>

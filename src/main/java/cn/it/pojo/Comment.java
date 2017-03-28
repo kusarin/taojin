@@ -11,6 +11,7 @@ public class Comment {
 	private int ID;            //留言编号：ID(PK)
 	private String content;    //留言内容
 	private Date time;	   //留言的时间
+	private int Users_id;
 	
 /*********************set******get***************************************/	
 	public int getID() {
@@ -30,6 +31,12 @@ public class Comment {
 	}
 	public void setTime(Date time) {
 		this.time = time;
+	}
+	public int getUsers_id() {
+		return Users_id;
+	}
+	public void setUsers_id(int users_id) {
+		Users_id = users_id;
 	}
 	
 	
