@@ -220,8 +220,8 @@ public class ItemServiceImpl implements ItemService {
 
 		     System.out.println("设置商品属性完成");
 			// 设置浏览次数和出售数量初始值为0；
-			i.setbrowsingTimes(0);
-			i.settradingTimes(0);
+//			i.setbrowsingTimes(0);
+//			i.settradingTimes(0);
 			
 		 
 	     itemdao.ItemAdd(i);

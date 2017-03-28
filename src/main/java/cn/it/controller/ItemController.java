@@ -36,31 +36,27 @@ public class ItemController {
 	 */
 	@RequestMapping("addItem.do")
 	public ModelAndView addItem(HttpServletRequest request){
-		ModelAndView modeandview = new ModelAndView("addItem"); //到addItem界面 
-		
-		//-------------------
-		//暂时缺少获取前台数据的操作！！！
-		//-------------------
-		int shop_id = 0;
-		String name = null;
-		String part = null;
-		String typeh = null;
-		String typel = null;
-		String number = null;
-		String price = null;
-		String detail = null;
-		String image = null;
+		ModelAndView modeandview = new ModelAndView("addItemok"); //到addItem界面 
+
+		int shop_id = 1;
+		String name = request.getParameter("name");
+		String part = request.getParameter("part");
+		String typeh = request.getParameter("typeh");
+		String typel = request.getParameter("typel");
+		String number = request.getParameter("number");
+		String price = request.getParameter("price");
+		String detail = request.getParameter("detail");
+		String image = request.getParameter("image");
 		
 		// 定义提示信息str
 		String str;
 		// 进行添加商品信息操作，并且获取提示信息
 		str=itemservice.addItem(shop_id,name, part, typeh, typel, number, price, detail, image);
 		
-		
+		System.out.println(str);
 		//-------------------
 		//暂时缺少将提示信息传递到前台的操作！！！
 		//-------------------
-		
 		
 		return modeandview;
 	}
