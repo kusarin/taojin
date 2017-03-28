@@ -20,6 +20,7 @@ public class ManagerServiceImpl implements ManagerService{
 	@Autowired
 	private ManagerDao managerDao;
 	
+	//管理员登录
 	public String login(Manager manager) {
 		String str = "managerInterface";
 		if(manager==null){
@@ -46,7 +47,6 @@ public class ManagerServiceImpl implements ManagerService{
 				str = "addmanager";
 				break;
 			}
-			
 		}
 		if(manager==null){
 			str = "addmanager";
@@ -59,5 +59,4 @@ public class ManagerServiceImpl implements ManagerService{
 		}
 		return str;
 	}
-
 }
