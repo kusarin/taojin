@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 import cn.it.dao.CommentDao;
 import cn.it.pojo.Comment;
+import cn.it.service.CommentService;
 
 @Service("commentService") 
-public class CommentServiceImpl {
+public class CommentServiceImpl implements CommentService {
 	@Autowired
 	private CommentDao commentDao;
 	
