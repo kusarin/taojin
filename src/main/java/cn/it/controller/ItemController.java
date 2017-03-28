@@ -79,11 +79,12 @@ public class ItemController {
 		//-------------------
 		//暂时缺少获取前台数据的操作！！！
 		//-------------------
-		int id=0;
+		
+		int item_id=0;
 		
 		// 定义提示信息str
 		String str;
-		str = itemservice.deleteItem(id);
+		str = itemservice.deleteItem(item_id);
 		
 		//-------------------
 		//暂时缺少将提示信息传递到前台的操作！！！
@@ -103,10 +104,12 @@ public class ItemController {
 	public ModelAndView changeItem(HttpServletRequest request){
 
 		ModelAndView modeandview = new ModelAndView("changeitem"); //到changeitem界面 
+		
 		//-------------------
 		//暂时缺少获取前台数据的操作！！！
 		//-------------------
-		int id = 0;
+		
+		int item_id = 0;
 		String name = null;
 		String part = null;
 		String typeh = null;
@@ -119,13 +122,11 @@ public class ItemController {
 		// 定义提示信息str
 		String str;
 		// 进行修改商品信息操作，并且获取提示信息
-		str=itemservice.updateItem(id,name, part, typeh, typel, number, price, detail, image);
-		
-		
+		str=itemservice.updateItem(item_id,name, part, typeh, typel, number, price, detail, image);
+			
 		//-------------------
 		//暂时缺少将提示信息传递到前台的操作！！！
 		//-------------------
-		
 		
 		return modeandview;
 	}
@@ -140,15 +141,17 @@ public class ItemController {
 	@RequestMapping("Itemlist.do")
 	public ModelAndView showItem(HttpServletRequest request){
 		ModelAndView modeandview = new ModelAndView("Itemlist"); // 到Itemlist.jsp界面
+		//获取商品条目list
 		List<Item> list;
-		list = itemservice.findItemList();//获取商品条目list
+		list = itemservice.findItemList();
 		
 		// 测试list是否已经获取到Item中的数据
 		System.out.println("----------------"); 
 		System.out.println(list);
 		System.out.println("----------------");
 		
-		modeandview.addObject("itemlist",list);//将商品条目list传递到itemlist	
+		//将商品条目list传递到itemlist
+		modeandview.addObject("itemlist",list);	
 		return modeandview;
 	}
 
@@ -179,7 +182,8 @@ public class ItemController {
 		System.out.println(list);
 		System.out.println("----------------");
 		
-		modeandview.addObject("itemtype",list);//将商品条目list传递到itemtype	
+		//将商品条目list传递到itemtype
+		modeandview.addObject("itemtype",list);	
 		return modeandview;
 	}
 	
@@ -192,8 +196,23 @@ public class ItemController {
 	 */
 	@RequestMapping("lookItem.do")
 	public ModelAndView lookItem(HttpServletRequest request){
+		ModelAndView modeandview = new ModelAndView("lookItem"); // 到lookItem.jsp界面
 		
-		return null;
-	}
+		//--------------
+		// 暂时缺少获取前台typeh和typel的操作！！！
+		//---------------
+		int item_id = 0;
 
+		// 根据商品编号，获得商品；
+		Item i = itemservice.findById(item_id);
+		
+		// 测试i是否已经获取到Item中的数据
+		System.out.println("----------------"); 
+		System.out.println(i);
+		System.out.println("----------------");
+		
+		//将商品i传递到lookitem
+		modeandview.addObject("lookitem",i);		
+		return modeandview;
+	}
 }

@@ -8,12 +8,12 @@ package cn.it.pojo;
 public class Item {
 
 	private int item_id;     //商品编号：item_id(PK)，自增数据，不能手动修改;
-	private int shop_id;     //店铺编号：shop_id，用来表示商品的归属店铺,直通自动匹配量；
+	private int shop_id;     //店铺编号：shop_id，用来表示商品的归属店铺,系统自动匹配；
 	
 	private String name;     //商品名称：name；
 	private String part;     //商品类别：part；（拍卖品或者非拍卖品）
-	private String typeh;    //商品类型：typeh；（商品的上层类型）
-	private String typel;    //商品类型：typel；（商品的下层类型）
+	private String typeh;    //商品类型：typeh；（商品的一阶类型)
+	private String typel;    //商品类型：typel；（商品的二阶类型）
 	private int number;      //商品数量：number；
 	private double price;    //商品价格：price；
 	private String detail;   //商品描述：detail；
@@ -23,7 +23,7 @@ public class Item {
 	private int saleNumbers;  //商品出售数量saleNumbers，后台数据，初始化为0，不能手动修改；
 
 	
-/*********************set******get***************************************/
+/**************************************set********get*********************************************/
 	
 	public int getitem_id() {
 		return item_id;
@@ -98,31 +98,20 @@ public class Item {
 	public void setSaleNumbers(int saleNumbers) {
 		this.saleNumbers = saleNumbers;
 	}	
-//商品评论变为新的一张表	private String evaluate; //商品评论：evaluate；	
-//	public String getEvaluate() {
-//		return evaluate;
-//	}
-//	public void setEvaluate(String evaluate) {
-//		this.evaluate = evaluate;
-//	}
-
+	/**************************************set********get*******end********************************/
+	
 	/**
 	 * toString方法，测试用。
+	 * 输出商品的属性
 	 */
 	@Override
 	public String toString(){
-		return "\n Item ["+item_id+"] =("+shop_id+"   "
-									  +name+"   "
-				                      +part+"   "
-				                      +typeh+"   "
-				                      +typel+"   "
-				                      +number+"   "
-				                      +price+"   "
-				                      +detail+"   "
-				                      +image+"   "
-				                      +browsingTimes+"   "
-						              +saleNumbers+"   "
-									  +")";
+		return "\n Item ["+item_id+"] =("+shop_id+"   "+name+"   "
+				                      +part+"   "+typeh+"   "
+				                      +typel+"   "+number+"   "
+				                      +price+"   "+detail+"   "
+				                      +image+"   "+browsingTimes+"   "
+						              +saleNumbers+"   " +")";
 	}
 }
 

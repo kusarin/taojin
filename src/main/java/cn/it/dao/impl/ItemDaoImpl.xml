@@ -5,25 +5,30 @@
 <!-- 商品的Dao层操作 -->
 
 <!-- 增删改方法 -->
-	<insert id="ItemAdd" parameterType="cn.it.pojo.Item">
+	<!-- 添加商品 -->
+	<insert id="ItemAdd" parameterType="cn.it.pojo.Item"><!-- 数据库中暂时缺少属性，出售数量saleNumbers -->
 		insert into item(shop_id,name,part,typeh,typel,number,price,detail,image,browsingTimes) 
 		        values(#{shop_id},#{name},#{part},#{typeh},#{typel},#{number},#{price},#{detail},#{image},#{browsingTimes})
 	</insert>
+	<!-- 删除商品 -->
 	<delete id="ItemDelete" parameterType="int">
-		delete from item where item_id = #{item_id}
-				
+		delete from item where item_id = #{item_id}				
 	</delete>
+	<!-- 修改商品信息 -->
 	<update id="ItemUpdate" parameterType="cn.it.pojo.Item">
 		update item set name=#{name},part=#{part},typeh=#{typeh},typel=#{typel},
 		                number=#{number},price=#{price},detail=#{detail},image=#{image}
 		where item_id = #{item_id}					
 	</update>
+	<!-- 查看单个商品信息 -->
 	<select id="FindItemById" parameterType="int" resultType="cn.it.pojo.Item">
 		select * from item where item_id = #{item_id}
 	</select>
+	<!-- 查看所有商品信息 -->
 	<select id="FindAll" resultType="cn.it.pojo.Item">
 		select * from item
 	</select>
+	<!-- 查看某种类型的商品信息 -->
 	<select id="FindItemByType" parameterType="String" resultType="cn.it.pojo.Item">
 		select * from item where typeh = #{0} and typel = #{1}
 	</select>

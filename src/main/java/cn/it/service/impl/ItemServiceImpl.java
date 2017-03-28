@@ -28,6 +28,7 @@ public class ItemServiceImpl implements ItemService {
 	/**
 	 * 添加商品
 	 * 
+	 * @param shop_id 店铺编号，int
 	 * @param name 商品名称，String
 	 * @param part 商品类别，String
 	 * @param typeh 商品一级分类，String
@@ -39,7 +40,7 @@ public class ItemServiceImpl implements ItemService {
 	 */
 	public String addItem(int shop_id,String name, String part, String typeh, String typel,
 			String number, String price, String detail, String image) {	
-		// 判断参数是否为空 
+		// 判断传入参数是否为空 
 		if(name==null||name.equals("")
 				||part==null||part.equals("")
 				||typeh==null||typeh.equals("")
@@ -52,25 +53,26 @@ public class ItemServiceImpl implements ItemService {
 			// 返回提示信息 "输入数据不能为空！！！"
 			return "输入数据不能为空！！！";
 			
-		}else{
+		}else{// 参数不为空时候，执行添加操作
 			
+			// 将商品数量和价格转为规定格式：商品数量int，商品价格double
 			int num = Integer.parseInt(number);
 			double pri = Double.parseDouble(price);
 			
 			// 定义商品；
-			Item i = null;
+			Item i = new Item();
 			// 设置商品属性；
-			i.setshop_id(shop_id);
-			i.setname(name);
-			i.setpart(part);
-			i.settypeh(typeh);
-			i.settypel(typel);
-			i.setnumber(num);
-			i.setprice(pri);
-			i.setdetail(detail);
-			i.setimage(image);
+			i.setshop_id(shop_id);  // 店鋪编号
+			i.setname(name);        // 商品名称
+			i.setpart(part);        // 商品类别
+			i.settypeh(typeh);      // 商品一阶类型
+			i.settypel(typel);      // 商品二阶类型
+			i.setnumber(num);       // 商品数量
+			i.setprice(pri);        // 商品价格
+			i.setdetail(detail);    // 商品描述
+			i.setimage(image);      // 商品图片
 			
-			// 浏览次数和出售数量初始值为0；
+			// 设置浏览次数和出售数量初始值为0；
 			i.setbrowsingTimes(0);
 			i.setSaleNumbers(0);
 			
@@ -79,16 +81,15 @@ public class ItemServiceImpl implements ItemService {
 			// 返回提示信息 "上架商品成功！！！"
 			return "上架商品成功！！！";
 		}
-
 	}
 	
 	/**
 	 * 删除商品
 	 * 
-	 * @param id 商品编号，int
+	 * @param item_id 商品编号，int
 	 */
-	public String deleteItem(int id) {
-		itemDao.ItemDelete(id);	
+	public String deleteItem(int item_id) {
+		itemDao.ItemDelete(item_id);	
 		// 返回提示信息 "下架商品成功！！！"
 		return "下架商品成功！！！";
 	}
@@ -96,7 +97,7 @@ public class ItemServiceImpl implements ItemService {
 	/**
 	 * 更新商品
 	 * 
-	 * @param id 商品编号，int
+	 * @param item_id 商品编号，int
 	 * @param name 商品名称，String
 	 * @param part 商品类别，String
 	 * @param typeh 商品一级分类，String
@@ -106,9 +107,9 @@ public class ItemServiceImpl implements ItemService {
 	 * @param detail 商品描述，String
 	 * @param image 商品图片，String
 	 */
-	public String updateItem(int id,String name,String part,String typeh,String typel,
+	public String updateItem(int item_id,String name,String part,String typeh,String typel,
 			String number,String price,String detail,String image) {
-		// 判断参数是否为空 
+		// 判断传入参数是否为空 
 		if(name==null||name.equals("")
 			||part==null||part.equals("")
 			||typeh==null||typeh.equals("")
@@ -121,23 +122,25 @@ public class ItemServiceImpl implements ItemService {
 			// 返回提示信息 "输入数据不能为空！！！"		
 			return "输入数据不能为空！！！";
 					
-		}else{
+		}else{// 参数不为空时候，执行修改操作
+			
+			// 将商品数量和价格转为规定格式：商品数量int，商品价格double
 			int num = Integer.parseInt(number);
 			double pri = Double.parseDouble(price);
 		
 			// 定义商品；
-			Item i = null;
+			Item i = new Item();
 			// 设置商品属性；
-			i.setitem_id(id);
-			i.setname(name);
-			i.setpart(part);
-			i.settypeh(typeh);
-			i.settypel(typel);
-			i.setnumber(num);
-			i.setprice(pri);
-			i.setdetail(detail);
-			i.setimage(image);
-		
+			i.setitem_id(item_id);       // 商品编号
+			i.setname(name);        // 商品名称
+			i.setpart(part);        // 商品类别
+			i.settypeh(typeh);      // 商品一阶类型
+			i.settypel(typel);      // 商品二阶类型
+			i.setnumber(num);       // 商品数量
+			i.setprice(pri);        // 商品价格
+			i.setdetail(detail);    // 商品描述
+			i.setimage(image);      // 商品图片
+			
 			// 更新商品信息
 			itemDao.ItemUpdate(i);
 			// 返回提示信息 "修改商品信息成功！！！"
@@ -146,43 +149,43 @@ public class ItemServiceImpl implements ItemService {
 	}
 	
 	/**
-	 * 查看单条商品信息
+	 * 通过调用itemDao.FindItemById(),查看单个商品信息
 	 * 
-	 * @param id 商品编号，int
+	 * @param item_id 商品编号，int
 	 */
-	public Item findById(int id) { 
-		return itemDao.FindItemById(id);
+	public Item findById(int item_id) { 
+		return itemDao.FindItemById(item_id);
 	}
 		
 	/**
-	 * 通过调用itemDao.FindAll()查看所有商品
+	 * 通过调用itemDao.FindAll(),查看所有商品
 	 */
 	public List<Item> findItemList() {	
 		return itemDao.FindAll();
 	}
 	
 	/**
-	 * 通过调用itemDao.FindItemByType，根据所选的类型查看商品
+	 * 通过调用itemDao.FindItemByType()，根据所选的类型查看商品
 	 * 
-	 * @param typeh 商品一级分类，String
-	 * @param typel 商品二级分类，String
+	 * @param typeh 商品一阶类型，String
+	 * @param typel 商品二阶类型，String
 	 */
 	public List<Item> findByType(String typeh,String typel){
 		return itemDao.FindItemByType(typeh, typel);
 	}	
 	
-	// 判断输入字符串是否为数字的方法，用来判断number和price是否为数字
-	public static boolean isNumeric(String str){
-		for (int i = 0; i < str.length(); i++){
-			System.out.println(str.charAt(i));
-			if (!Character.isDigit(str.charAt(i))){
-				return false;
-			}
-		}
-		return true;
-	}
+//	// 判断输入字符串是否为数字的方法，用来判断number和price是否为数字【听说可以在前端网页执行，所以先注释掉】
+//	public static boolean isNumeric(String str){
+//		for (int i = 0; i < str.length(); i++){
+//			System.out.println(str.charAt(i));
+//			if (!Character.isDigit(str.charAt(i))){
+//				return false;
+//			}
+//		}
+//		return true;
+//	}
 	
-	/*******************************测试类,用于测试能否成功调用来自Dao层的方法*************************************/
+/*******************************测试类,用于测试能否成功调用来自Dao层的方法*************************************/
 	
 	/**
 	 * 测试1，用于测试是否添加商品
@@ -205,10 +208,10 @@ public class ItemServiceImpl implements ItemService {
 			i.setimage("这就是一张图片");
 
 		     System.out.println("设置商品属性完成");
-			// 浏览次数和出售数量初始值为0；
-			i.setbrowsingTimes(1);
-//			i.setSaleNumbers(0);
-//			
+			// 设置浏览次数和出售数量初始值为0；
+			i.setbrowsingTimes(0);
+			i.setSaleNumbers(0);
+			
 		 
 	     itemdao.ItemAdd(i);
 	     System.out.println("添加成功！！！");
