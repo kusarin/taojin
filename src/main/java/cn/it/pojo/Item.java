@@ -20,7 +20,7 @@ public class Item {
 	private String image;    //商品图片：image；
 	
 	private int browsingTimes; //商品浏览次数：browsingTimes，后台数据，初始化为0，不能手动修改；
-	private int saleNumbers;  //商品出售数量saleNumbers，后台数据，初始化为0，不能手动修改；
+	private int tradingTimes;  //商品出售数量tradingTimes，后台数据，初始化为0，不能手动修改；
 
 	
 /**************************************set********get*********************************************/
@@ -92,11 +92,11 @@ public class Item {
 	public void setbrowsingTimes(int browsingTimes) {
 		this.browsingTimes = browsingTimes;
 	}		
-	public int getSaleNumbers() {
-		return saleNumbers;
+	public int gettradingTimes() {
+		return tradingTimes;
 	}
-	public void setSaleNumbers(int saleNumbers) {
-		this.saleNumbers = saleNumbers;
+	public void settradingTimes(int tradingTimes) {
+		this.tradingTimes = tradingTimes;
 	}	
 	/**************************************set********get*******end********************************/
 	
@@ -111,7 +111,7 @@ public class Item {
 				                      +typel+"   "+number+"   "
 				                      +price+"   "+detail+"   "
 				                      +image+"   "+browsingTimes+"   "
-						              +saleNumbers+"   " +")";
+						              +tradingTimes+"   " +")";
 	}
 }
 

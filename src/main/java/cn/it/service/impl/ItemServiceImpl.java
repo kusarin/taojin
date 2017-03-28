@@ -74,7 +74,7 @@ public class ItemServiceImpl implements ItemService {
 			
 			// 设置浏览次数和出售数量初始值为0；
 			i.setbrowsingTimes(0);
-			i.setSaleNumbers(0);
+			i.settradingTimes(0);
 			
 			// 添加商品信息；
 			itemDao.ItemAdd(i);	
@@ -210,7 +210,7 @@ public class ItemServiceImpl implements ItemService {
 		     System.out.println("设置商品属性完成");
 			// 设置浏览次数和出售数量初始值为0；
 			i.setbrowsingTimes(0);
-			i.setSaleNumbers(0);
+			i.settradingTimes(0);
 			
 		 
 	     itemdao.ItemAdd(i);
@@ -224,7 +224,7 @@ public class ItemServiceImpl implements ItemService {
 	public void test2(){
 		 ApplicationContext ac=new ClassPathXmlApplicationContext("config.xml");
 		 ItemDao itemdao= (ItemDao) ac.getBean("itemDao");
-	     itemdao.ItemDelete(6);
+	     itemdao.ItemDelete(5);
 	     System.out.println("删除成功！！！");
 	}
 	/**
@@ -239,8 +239,8 @@ public class ItemServiceImpl implements ItemService {
 	     System.out.println("设置完成");
 	 
 			// 设置商品属性；
-	     	i.setitem_id(7);
-			i.setname("第7五个商品");
+	     	i.setitem_id(5);
+			i.setname("第7个商品");
 			i.setpart("拍卖品");
 			i.settypeh("高级分类2");
 			i.settypel("低级分类1");
