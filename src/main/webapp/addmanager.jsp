@@ -31,9 +31,6 @@ pageEncoding="UTF-8"%>
     </td> 
    </tr> 
   </table> 
- </form> 
-    </form></td> 
-  </tr> 
- </table> 
+ </form>
 </body> 
 </html> 
