@@ -19,7 +19,8 @@
                            <td colspan="10"  align="center">店铺信息管理</td>  
                      </tr>        
          </thead>  
-         <tbody>  
+         <tbody> 
+         
             <tr align="center">  
                 <td>编号</td>  
                 <td>用户名</td>  
@@ -30,15 +31,17 @@
             <c:forEach items="${shopli}" var="c">  
               
               <tr>  
-                <td>  ${c.shop_id}  </td>                
-                <td> ${c.num} </td>  
+                <td> ${c.shop_id}</td>                
+                <td> ${c.user_ID} </td>  
                 <td> ${c.name} </td>  
                 <td> ${c.type} </td>  
-                <td> ${c.intro} </td>  
-                <td><a href="toChange.do?id=${c.shop_id}">查看</a></td>  
+                <td> ${c.intro} </td> 
+                <td><a href="toChange.do?shop_id=${c.shop_id}">查看</a></td>  
             </tr>  
-              
-            </c:forEach>  
+             
+            </c:forEach> 
+            <tr>
+            <td><a href="TaoJin/addShop.jsp">添加</a> 
 </tbody></table>
 </body>
 </html>

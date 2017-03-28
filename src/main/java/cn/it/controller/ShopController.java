@@ -21,26 +21,21 @@ public class ShopController {
 	@Resource
    private ShopService shopService;
 	
-	@RequestMapping(value = "/Certify.do")
-	public ModelAndView Certify(){
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("Certify");
-		return modelAndView;
+	@RequestMapping(value ={"TaoJin/doAdd.do"},method={RequestMethod.GET,RequestMethod.POST})
+	public String doAdd(Shop shop){
+		shopService.addShop(shop);
+		return "redirect:/shopList.do";
 	}
 	@RequestMapping(value ={"/toChange.do"},method={RequestMethod.GET,RequestMethod.POST}
 	)
 	public String toChange(Shop shop,Map<String,Object> map){
-		map.put("shop", shopService.findByid(shop.getshop_id()));
-		return "shopinfoChange";
+		map.put("shop", shopService.findByid(shop.getShop_id()));
+		return "/shopinfoChange";
 	}
 	@RequestMapping(value ={"/doChange.do"},method={RequestMethod.GET,RequestMethod.POST})
-	public String doChange(Shop shop,Map<String,Object> map){
-		int num = 2;
-		List<Shop> list;
-		shopService.changeInfoByid(shop.getshop_id());
-		list = shopService.getAllByUserid(num);
-		map.put("shopli", list);
-		return "shopList";
+	public String doChange(Shop shop){
+		shopService.changeInfoByid(shop);
+		return "redirect:/shopList.do";
 	}
 	@RequestMapping(value = {"/shopList.do"},method={RequestMethod.GET,RequestMethod.POST})
     public String getShoplist(Shop shop,Map<String,Object> map){
@@ -48,6 +43,11 @@ public class ShopController {
 		List<Shop> list;
 		list = shopService.getAllByUserid(num);
 		map.put("shopli", list);		
-		return "shopList";
+		return "/shopList";
+	}
+	@RequestMapping(value = {"/delete.do"},method={RequestMethod.GET,RequestMethod.POST})
+	public String doDelete(Shop shop){
+		shopService.deleteShop(shop);
+		return "redirect:/shopList.do";
 	}
 }

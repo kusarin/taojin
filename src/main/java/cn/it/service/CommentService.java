@@ -5,5 +5,5 @@ package cn.it.service;
  *
  */
 public interface CommentService {
-
+	public String findAll();
 }

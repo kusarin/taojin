@@ -1,16 +1,17 @@
 package cn.it.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+
 
 
 
@@ -25,7 +26,7 @@ import cn.it.service.OrderService;
 
 
 /**
- * 瀵硅鍗曚俊鎭繘琛屾帶鍒�
+ * 对订单信息进行控制
  * 
  */
 
@@ -33,32 +34,45 @@ import cn.it.service.OrderService;
 public class OrderController {
 	@Resource
 	private OrderService orderService;
-	//鎻愪氦璁㈠崟
+	
+	
+	//提交订单
 	@RequestMapping("/submitOrder.do")
-	public ModelAndView submitOrder(Order order){
-		return null;
+	public ModelAndView submitOrder(@RequestParam int itemId){
+		ModelAndView view=new ModelAndView("pay");
+		itemId=1;  //商品编号
+		int payLabel=0; //支付方式标记
+		String address="";  //收货地址
+		int userId=1;   //用户Id
+		orderService.submmitOrder(itemId, payLabel, address, userId);
+		return view;
 	}
-   //鍒犻櫎璁㈠崟
+   //删除订单
 	@RequestMapping("deleteOrder.do")
-	public ModelAndView deleteOrder(int orderId){
-		return null;
+	public ModelAndView deleteOrder(String orderNumber){
+		ModelAndView view=new ModelAndView("orderItem");
+		orderService.deleteOrder(orderNumber);
+		return view;
 	}
-	//鏌ョ湅璁㈠崟璇︽儏
+	//查看订单详情
 	@RequestMapping("lookOrderDeatil.do")
-	public ModelAndView lookOrderDeatil(int orderId){
-		return null;
+	public ModelAndView lookOrderDeatil(String orderNumber){
+		ModelAndView view=new ModelAndView("orderInfo");
+		OrderCollection collection=orderService.getOrderDetail(orderNumber);
+		view.addObject("orderNumber",collection);
+		return view;
 	}
-	//鏌愮敤鎴风殑鎵�湁璁㈠崟
+	//查看所有订单
 	@RequestMapping("orderItem.do")
 	public ModelAndView lookAllOrder(HttpServletRequest request){
-		//鑾峰彇session鍩熶腑鐨勫�
-//	    int num1=(Integer)(request.getSession().getAttribute("num"));
+		//获取用户账号
+      //int num1=(Integer)(request.getSession().getAttribute("num"));
 		
-		int num=1;//鐢ㄦ埛缂栧彿
+		int userId=1;
 		ModelAndView view=new ModelAndView("orderItem");
-		List<Order> order=orderService.getAllOrder(num);//鑾峰彇鎵�湁璁㈠崟
-		List<OrderDetail> delist=orderService.getALLItem(num);//鑾峰彇璁㈠崟鏄庣粏
-		List<OrderCollection> collectList =new ArrayList<OrderCollection>();//鍒涘缓OrderCollecton瀹瑰櫒		
+		List<Order> order=orderService.getAllOrder(userId);
+		List<OrderDetail> delist=orderService.getAllOrderDetail(userId);
+		List<OrderCollection> collectList =new ArrayList<OrderCollection>();		
 		collectList=orderService.mergeList(order, delist);
 		view.addObject("orderList",collectList);
 		return view;

@@ -20,10 +20,10 @@ public class Users {
 	
 	/*********************set******get***************************************/
 
-	public int getUserID() {
+	public int getUser_ID() {
 		return user_ID;
 	}
-	public void setUserID(int user_ID) {
+	public void setUser_ID(int user_ID) {
 		this.user_ID = user_ID;
 	}
 	public String getUsername() {

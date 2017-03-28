@@ -5,7 +5,7 @@
  <mapper namespace="cn.it.dao.OrderDao">
         <resultMap type="cn.it.pojo.Order" id="findAll">
             <id column="Indent_id" property="id" javaType="int" jdbcType="INTEGER"/>
-            <result column="num" property="num" javaType="int" jdbcType="INTEGER"/>
+            <result column="User_ID" property="userID" javaType="int" jdbcType="INTEGER"/>
             <result column="OrderNumber" property="orderNumber" javaType="String" jdbcType="VARCHAR"/>
             <result column="OrderTime" property="orderTime" javaType="java.sql.Date" jdbcType="DATE"/>
             <result column="UnitPrice" property="unitPrice" javaType="double" jdbcType="DOUBLE"/>
@@ -18,7 +18,7 @@
         </resultMap>
         <parameterMap type="cn.it.pojo.Order" id="OrderParameterMap">
             <parameter property="id" resultMap="findAll"/>  
-            <parameter property="num" resultMap="findAll"/>  
+            <parameter property="userID" resultMap="findAll"/>  
             <parameter property="orderNumber" resultMap="findAll"/> 
             <parameter property="orderTime" resultMap="findAll"/> 
             <parameter property="unitPrice" resultMap="findAll"/> 
@@ -30,15 +30,21 @@
             <parameter property="freight" resultMap="findAll"/>  
        </parameterMap>
      <select id="selectAll" parameterType="int" resultMap="findAll">
-          select* from indent where num=#{num}
+          select* from indent where User_ID=#{userId}
      </select>
      <insert id="add" parameterMap="OrderParameterMap">
-           insert into indent(num,OrderNumber,OrderTime,UnitPrice,Quantity,ActulPayment,Status,PaymentMethod,RecivingAddress,freight) 
-           values(#{num},#{orderNumber},#{orderTime},#{unitPrice},#{quantity},#{actulPayment},#{status},#{paymentMethod},#{recivingAddress},#{freight})
+           insert into indent(User_ID,OrderNumber,OrderTime,UnitPrice,Quantity,ActulPayment,Status,PaymentMethod,RecivingAddress,freight) 
+           values(#{userID},#{orderNumber},#{orderTime},#{unitPrice},#{quantity},#{actulPayment},#{status},#{paymentMethod},#{recivingAddress},#{freight})
      </insert>
-        <update id="update" parameterType="int">
-          
-	    </update>
+      <update id="update" parameterMap="OrderParameterMap">
+           update indent set Status=#{status} where OrderNumber=#{orderNumber}
+      </update>
+      <select id="findOrder" parameterType="java.lang.String" resultMap="findAll">
+          select* from indent where OrderNumber=#{orderNumber}
+     </select>
+     <delete id="delete" parameterType="java.lang.String">
+          delete from indent where OrderNumber=#{orderNumber}
+     </delete>
  </mapper>
  
 

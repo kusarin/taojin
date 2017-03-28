@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "cn.it.dao.UsersDao">
 
-<!-- login -->
+<!-- 搜索用户名（查重） -->
 	<select id="UsersFind"   resultType="cn.it.pojo.Users">
-		select account from users
+		select * from users
 	</select>
 <!-- login -->
    <select id="login"  parameterType="cn.it.pojo.Users" resultType="cn.it.pojo.Users">

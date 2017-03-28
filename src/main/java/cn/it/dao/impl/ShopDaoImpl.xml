@@ -5,31 +5,38 @@
 <mapper namespace="cn.it.dao.ShopDao">
 	<resultMap type="cn.it.pojo.Shop" id="findAll">
 		<id column="shop_id" property="shop_id" javaType="int" jdbcType="INTEGER" />
-		<result column="num" property="num" javaType="int" jdbcType="INTEGER" />
-		<result column="name" property="name" javaType="String"
+		<result column="user_ID" property="user_ID" javaType="int" jdbcType="INTEGER" />
+		<result column="Name" property="Name" javaType="String"
 			jdbcType="VARCHAR" />
-		<result column="type" property="type" javaType="String"
+		<result column="Type" property="Type" javaType="String"
 			jdbcType="VARCHAR" />
-		<result column="intro" property="intro" javaType="String"
+		<result column="Intro" property="Intro" javaType="String"
 			jdbcType="VARCHAR" />
+		<result column="BrowsingTiems" property="BrowsingTimes" javaType="int" jdbcType="INTEGER"/>
 	</resultMap>
 	<parameterMap type="cn.it.pojo.Shop" id="ShopParameterMap">
 		<parameter property="shop_id" resultMap="findAll" />
-		<parameter property="num" resultMap="findAll" />
-		<parameter property="name" resultMap="findAll" />
-		<parameter property="type" resultMap="findAll" />
-		<parameter property="intro" resultMap="findAll" />
+		<parameter property="user_ID" resultMap="findAll" />
+		<parameter property="Name" resultMap="findAll" />
+		<parameter property="Type" resultMap="findAll" />
+		<parameter property="Intro" resultMap="findAll" />
+		<parameter property="BrowsingTiems" resultMap="findAll"/>
 	</parameterMap>
 	<select id="findByid" parameterType="int" resultType="cn.it.pojo.Shop">
 		Select * from shop where shop_id=#{id}
 	</select>
+	<insert id="addShop" parameterType="cn.it.pojo.Shop">
+	    Insert into shop(user_ID ,Name,Type,Intro,BrowsingTiems) values(2,#{Name},#{Type},#{Intro},null)
+	</insert>
 	<select id="findShopList" resultMap="findAll">
 		Select * from shop where shop_id =#{id}
 	</select>
 	<select id="getAllByUserid" resultMap="findAll">
-	    Select * from shop where num = #{num}
+	    Select * from shop where user_ID = #{user_ID}
 	</select>
 	<update id="changeInfoByid" parameterType="cn.it.pojo.Shop">
-		update shop set name=#{name},type=#{type},intro=#{intro} where shop_id = #{shop_id}
+		Update shop set Name=#{name},Type=#{type},Intro=#{intro} where shop_id = #{shop_id}
 	</update>
+	<delete id="deleteShop" parameterType="cn.it.pojo.Shop">
+	</delete>
 </mapper>

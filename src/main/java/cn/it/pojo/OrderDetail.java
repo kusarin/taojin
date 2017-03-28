@@ -2,6 +2,8 @@ package cn.it.pojo;
 
 
 
+
+
 /**
  * 
  * 订单明细 OrderDetail
@@ -11,8 +13,8 @@ public class OrderDetail {
 
 	private int id;  //订单明细表:id
 	private int totalQuantity; //购买的商品总数：totalQuantity
-	private int orderId;
-	private int itemId;
+	private String orderNumber;
+	private int itemId; //商品Id
 	private Item item;
     /*****************************get***************set*******/
 	public int getId() {
@@ -24,11 +26,11 @@ public class OrderDetail {
 	public void setItem(Item item) {
 		this.item = item;
 	}
-	public int getOrderId() {
-		return orderId;
+	public String getOrderNumber() {
+		return orderNumber;
 	}
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 	public int getItemId() {
 		return itemId;
@@ -44,6 +46,5 @@ public class OrderDetail {
 	}
 	public void setTotalQuantity(int totalQuantity) {
 		this.totalQuantity = totalQuantity;
-	}
-	
+	}	
 }
