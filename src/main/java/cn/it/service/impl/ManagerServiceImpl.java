@@ -35,6 +35,7 @@ public class ManagerServiceImpl implements ManagerService{
 		}
 		return str;
 	}
+	//新增管理员账户
 	public String add(Manager manager) {
 		String str = "mlogin";
 		List<Manager> mId =managerDao.managerIdFind();
@@ -50,7 +51,7 @@ public class ManagerServiceImpl implements ManagerService{
 		if(manager==null){
 			str = "addmanager";
 		}else if(manager.getAccount()==null||manager.getAccount().equalsIgnoreCase("")||
-				manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
+					manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
 			str = "addmanager";
 		}else if(flag){
 			managerDao.managerAdd(manager);
