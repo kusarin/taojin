@@ -17,7 +17,9 @@
         <h4><strong>管理员账户管理</strong></h4>
       </div></td>
       <td width="181"><div align="center">
+        <form action="lookComment.do" method="post">
         <h4><strong>用户留言管理</strong></h4>
+        </form>
       </div></td>
       <td width="181"><div align="center">
         <h4><strong>文件资源管理</strong></h4>

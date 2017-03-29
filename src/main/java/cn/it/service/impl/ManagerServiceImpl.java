@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.dao.ManagerDao;
 import cn.it.pojo.Manager;
@@ -21,42 +22,42 @@ public class ManagerServiceImpl implements ManagerService{
 	private ManagerDao managerDao;
 	
 	//管理员登录
-	public String login(Manager manager) {
-		String str = "managerInterface";
+	public ModelAndView login(Manager manager) {
+		ModelAndView mav =new ModelAndView("managerInterface");
 		if(manager==null){
 			if(manager.getAccount()==null||manager.getAccount().equalsIgnoreCase("")||
 					manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
-				str = "mlogin";
+				mav.setViewName("mlogin");
 			}
 		}else{
 			Manager m = managerDao.login(manager);
 			if(m == null){
-				str = "mlogin";
+				mav.setViewName("mlogin");
 			}
 		}
-		return str;
+		return mav;
 	}
 	//新增管理员账户
-	public String add(Manager manager) {
-		String str = "mlogin";
+	public ModelAndView add(Manager manager) {
+		ModelAndView mav =new ModelAndView("mlogin");
 		List<Manager> mId =managerDao.managerIdFind();
 		Boolean flag = true; 
 		for(Manager mana:mId){
 			if(mana.getAccount().equals(manager.getAccount())){
 				flag = false;
-				str = "addmanager";
+				mav.setViewName("addmanager");
 				break;
 			}
 		}
 		if(manager==null){
-			str = "addmanager";
+			mav.setViewName("addmanager");
 		}else if(manager.getAccount()==null||manager.getAccount().equalsIgnoreCase("")||
 					manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
-			str = "addmanager";
+			mav.setViewName("addmanager");
 		}else if(flag){
 			managerDao.managerAdd(manager);
-			str = "managerInterface";
+			mav.setViewName("managerInterface");
 		}
-		return str;
+		return mav;
 	}
 }

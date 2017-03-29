@@ -30,4 +30,10 @@ public class ResourceFileController {
 		modelandview.addObject("ResourceFile",list);
 		return modelandview;
 	}
+	
+	@RequestMapping("addRF.do")
+	public ModelAndView addRF(ResourceFile rf){
+		ModelAndView result = resourceFileService.add(rf);
+		return result;
+	}
 }
