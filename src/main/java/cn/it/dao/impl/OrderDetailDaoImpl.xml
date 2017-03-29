@@ -5,10 +5,12 @@
    <mapper namespace="cn.it.dao.OrderDetailDao">
             <resultMap type="cn.it.pojo.OrderDetail" id="findList">
                   <id column="OrderDetail_id" property="id" javaType="int" jdbcType="INTEGER"/>
-                  <id column="OrderNumber" property="orderNumber" javaType="String" jdbcType="VARCHAR"/>
-                  <id column="Item_id" property="itemId" javaType="int" jdbcType="INTEGER"/>
-                  <id column="TotalQuantity" property="totalQuantity" javaType="int" jdbcType="INTEGER"/>
-            
+                  <result column="OrderNumber" property="orderNumber" javaType="String" jdbcType="VARCHAR"/>
+                  <result column="Item_id" property="itemId" javaType="int" jdbcType="INTEGER"/>
+                  <result column="unitPrice" property="unitPrice" javaType="double" jdbcType="DOUBLE"/>
+                  <result column="itemPrice" property="itemPrice" javaType="double" jdbcType="DOUBLE"/>
+                  <result column="itemNumbers" property="itemNumbers" javaType="int" jdbcType="INTEGER"/>
+                  <result column="shopName" property="shopName" javaType="String" jdbcType="VARCHAR"/>
                 <association property="item"  javaType="cn.it.pojo.Item">
 	                <id column="Item_id" property="item_id" javaType="int" jdbcType="INTEGER"/>
 	                <result column="Shop_id" property="shop_id" javaType="int" jdbcType="INTEGER"/>
@@ -28,15 +30,18 @@
             <parameter property="id" resultMap="findList"/>  
             <parameter property="orderNumber" resultMap="findList"/>  
             <parameter property="itemId" resultMap="findList"/> 
-            <parameter property="totalQuantity" resultMap="findList"/> 
+            <parameter property="unitPrice" resultMap="findList"/> 
+            <parameter property="itemPrice" resultMap="findList"/> 
+            <parameter property="itemNumbers" resultMap="findList"/> 
+            <parameter property="shopName" resultMap="findList"/> 
          </parameterMap>
          
           <select id="selectAll" parameterType="java.lang.String" resultMap="findList">
-                select i.*,o.TotalQuantity from orderdetail o,item i where i.Item_id=o.Item_id and o.OrderNumber=#{orderNumber}
+                select i.*,o.* from orderdetail o,item i where i.Item_id=o.Item_id and o.OrderNumber=#{orderNumber}
 	      </select>
 	      
 	      <insert id="add" parameterMap="OrderDetailParameterMap">
-	             insert into orderdetail(Item_id,OrderNumber,TotalQuantity)values(#{itemId},#{orderNumber},#{totalQuantity})
+	             insert into orderdetail(Item_id,OrderNumber,unitPrice,itemPrice,itemNumbers,shopName)values(#{itemId},#{orderNumber},#{unitPrice},#{itemPrice},#{itemNumbers},#{shopName})
 	      </insert>
 	      
 	      <delete id="delete" parameterType="java.lang.String">

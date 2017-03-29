@@ -32,9 +32,10 @@ public class UsersController {
 	 private UsersService usersService;
 
 	@RequestMapping("login.do")
-	public String login(Users user,HttpSession session){
+	public ModelAndView login(Users user,HttpSession session,HttpServletResponse response) 
+			throws IOException{
 	
-		String result = usersService.login(user,session);
+		ModelAndView result = usersService.login(user,session,response);
 		return result;
 	}
 	//添加用户

@@ -11,14 +11,44 @@ package cn.it.pojo;
  * */
 public class OrderDetail {
 
-	private int id;  //订单明细表:id
-	private int totalQuantity; //购买的商品总数：totalQuantity
-	private String orderNumber;
-	private int itemId; //商品Id
+	private int id;    //订单明细表:id
+	private String orderNumber;   //订单编号
+	private int itemId;     //商品Id
+	private double unitPrice;   //商品单价
+	private int itemNumbers;   //购买的某件商品的数量
+	private double itemPrice;   //商品总价
+	private String shopName; //店铺对应的名称
 	private Item item;
     /*****************************get***************set*******/
 	public int getId() {
 		return id;
+	}
+	public String getShopName() {
+		return shopName;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public double getUnitPrice() {
+		return unitPrice;
+	}
+	public void setUnitPrice(double unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+	public int getItemNumbers() {
+		return itemNumbers;
+	}
+	public void setItemNumbers(int itemNumbers) {
+		this.itemNumbers = itemNumbers;
+	}
+	public double getItemPrice() {
+		return itemPrice;
+	}
+	public void setItemPrice(double itemPrice) {
+		this.itemPrice = itemPrice;
 	}
 	public Item getItem() {
 		return item;
@@ -38,13 +68,4 @@ public class OrderDetail {
 	public void setItemId(int itemId) {
 		this.itemId = itemId;
 	}
-	public int getTotalQuantity() {
-		return totalQuantity;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public void setTotalQuantity(int totalQuantity) {
-		this.totalQuantity = totalQuantity;
-	}	
 }

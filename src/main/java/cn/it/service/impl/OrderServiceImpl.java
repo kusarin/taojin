@@ -52,56 +52,25 @@ public class OrderServiceImpl implements OrderService{
 	private int maxPerMSECSize=1000; 
 	
 	
-	/**
-	 * 获取订单详情
-	 * @param(userId表示用户编号)
+	/****
 	 * 
+	 * 获取某用户的所有订单
+	 * @param(userId用户编号)
 	 * */
-	public List<OrderDetail> getAllOrderDetail(int userId){
-		List<Order> olist=orderDao.selectAll(userId);//根据用户标号获取该用户的所有订单
-		List<OrderDetail> rlist=new ArrayList<OrderDetail>();//存放订单明细的容器
-		
-		Iterator<Order> order = olist.iterator();//订单迭代器
-		while(order.hasNext()){ //订单容器不为空
-		    Order or= order.next();//提取容器中的元素
-		    if(orderDetailDao.selectAll(or.getOrderNumber())!=null){  //根据订单id查询订单明细
-		    	List<OrderDetail> list=orderDetailDao.selectAll(or.getOrderNumber());//获取订单明细对应的容器
-		    	
-		    	Iterator<OrderDetail> od = list.iterator();//获取订单迭代器
-		    	while(od.hasNext()){ //容器不为空
-		    	    OrderDetail ol= od.next(); //获取容器中的一个元素
-		    	    rlist.add(ol);//将元素加入容器
-		    	}
-		    }
+	public List<OrderCollection> getAllOrder(int userId){
+		List<OrderCollection> clist=new ArrayList<OrderCollection>();
+		List<Order> olist=orderDao.selectAll(userId);
+		Iterator<Order> oitr=olist.iterator();
+		while(oitr.hasNext()){
+			OrderCollection collection=new OrderCollection();
+			Order o=oitr.next();
+			collection.setOrder(o);
+			if(orderDetailDao.selectAll(o.getOrderNumber())!=null){
+			   List<OrderDetail> ordlist=orderDetailDao.selectAll(o.getOrderNumber());
+			   collection.setOrderDeatail(ordlist);
+			}
 		}
-		return rlist;
-	}
-	
-    /**roe
-     *获取所有订单
-	 * @param(userId表示用户编号) 
-     * */
-	public List<Order> getAllOrder(int userId){
-		
-		return orderDao.selectAll(userId);
-	}
-	
-	/**
-	 * 
-	 * 合并两个list
-	 * */
-	public List<OrderCollection> mergeList(List<Order> orderList,List<OrderDetail> orderDetailList){
-		List<OrderCollection> collection = new ArrayList<OrderCollection>();
-		Iterator<Order> iter1=orderList.iterator();
-		Iterator<OrderDetail> iter2=orderDetailList.iterator();
-		
-		  while(iter1.hasNext()&&iter2.hasNext()){
-		    	OrderCollection orderCollection =new OrderCollection();
-		    	orderCollection.setOrder(iter1.next());
-		    	orderCollection.setOrderDeatail(iter2.next());
-		    	collection.add(orderCollection);
-		    }
-		return collection;
+		return clist;
 	}
 	
 	/**
@@ -137,15 +106,16 @@ public class OrderServiceImpl implements OrderService{
 	 * 获取某订单详细信息
 	 * */
 	public OrderCollection getOrderDetail(String orderNumber){
-		OrderCollection collectionDetail=new OrderCollection();
+		OrderCollection orderDetail=new OrderCollection();
 		Order order=orderDao.findOrder(orderNumber);
-		collectionDetail.setOrder(order);
-		List<OrderDetail> orlist=orderDetailDao.selectAll(orderNumber);
-		
-		for(OrderDetail detail:orlist){
-			collectionDetail.setOrderDeatail(detail);
+		if(order!=null){
+			orderDetail.setOrder(order);
 		}
-		return collectionDetail;	
+		List<OrderDetail> orlist=orderDetailDao.selectAll(orderNumber);
+		if(orlist!=null){
+			orderDetail.setOrderDeatail(orlist);
+		}
+		return orderDetail;	
 	}
 	
 	/**
@@ -160,21 +130,18 @@ public class OrderServiceImpl implements OrderService{
 	
 	/**
 	 * 提交订单
-	 * @param(itemId表示订单id
+	 * @param(itemId表示商品id，paylabel支付方式标记，userId用户Id)
 	 * 
 	 * */
-	public void submmitOrder(int itemId,int payLabel,String address,int userId){
+	public void submmitOrder(int itemId,int payLabel,int userId){
+		//提交订单并保存
 		Order order=new Order();
-		order.setUserID(userId);
+		order.setUserID(userId); //设置下单用户
         String orderNumber =new OrderServiceImpl().createOrderNum();//创建订单号
 		order.setOrderNumber(orderNumber);
 		order.setOrderTime(new java.sql.Date(new Date().getTime()));//下单时间
 		Item item=itemDao.FindItemById(itemId);
-		double unitPrice=item.getprice();      //商品单价
-		order.setUnitPrice(unitPrice);
-		int numbers=item.getSaleNumbers();
-		order.setQuantity(numbers);  //购买的数量
-		double actulPayment=item.getSaleNumbers()*item.getprice();//最终支付
+		double actulPayment=item.gettradingTimes()*item.getprice();//最终支付
 		order.setActulPayment(actulPayment);
 		String status="待付款";  //订单的交易状态
 		order.setStatus(status);
@@ -186,16 +153,22 @@ public class OrderServiceImpl implements OrderService{
             default:
             	break;
 		}
+	   String address="";
 	   order.setRecivingAddress(address);  //收货地址
 	   double freight=0;   //运费
 	   order.setFreight(freight);
 	   orderDao.add(order);
 	   
+	   //插入订单明细
 	   OrderDetail orderDetail=new OrderDetail();
-	   int totalQuantity =item.getSaleNumbers();
-	   orderDetail.setTotalQuantity(totalQuantity);
-	   orderDetail.setOrderNumber(orderNumber);
-	   orderDetail.setItemId(itemId);
+	   orderDetail.setOrderNumber(orderNumber); //设置订单编号
+	   orderDetail.setItemId(itemId);   //设置商品编号
+	   double unitPrice=item.getprice();  //设置商品单价
+	   orderDetail.setUnitPrice(unitPrice); 
+	   int itemNumbers=item.gettradingTimes();
+	   orderDetail.setItemNumbers(itemNumbers);//设置已购买的某件商品的数量
+	   double itemPrice=itemNumbers*unitPrice;
+	   orderDetail.setItemPrice(itemPrice);//设置商品总价
 	   orderDetailDao.add(orderDetail);
 	}
 	
@@ -204,7 +177,7 @@ public class OrderServiceImpl implements OrderService{
 	 * 创建订单号
 	 * 
 	 * */
-	public String createOrderNum(){
+	public  String createOrderNum(){
 		String orderNum=""; //最终生成的订单
 		 synchronized (lockObj) {  
              // 取系统当前时间作为订单号变量前半部分，精确到毫秒  
