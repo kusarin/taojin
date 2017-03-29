@@ -17,13 +17,21 @@
         <h4><strong>管理员账户管理</strong></h4>
       </div></td>
       <td width="181"><div align="center">
-        <form action="lookComment.do" method="post">
-        <h4><strong>用户留言管理</strong></h4>
-        </form>
+        <a href="Comment.jsp"><h4><strong>用户留言管理</strong></h4></a>
       </div></td>
       <td width="181"><div align="center">
-        <h4><strong>文件资源管理</strong></h4>
+        <a href="ResourceFile.jsp"><h4><strong>文件资源管理</strong></h4></a>
       </div></td>
+    </tr>
+    <tr>
+    <td colspan="3">
+    <a href="addmanager.jsp"><strong>新增管理员</strong></a>
+    </td>
+    </tr>
+    <tr>
+    <td colspan="3">
+    <a href="updateMpassword.jsp"><strong>修改密码</strong></a>
+    </td>
     </tr>
   </table>
 		
