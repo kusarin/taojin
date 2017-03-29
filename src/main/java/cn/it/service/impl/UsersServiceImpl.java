@@ -1,16 +1,11 @@
 package cn.it.service.impl;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.dao.UsersDao;
@@ -42,24 +37,29 @@ public class UsersServiceImpl implements UsersService{
 		return str;
 	}
 
-	public String add(Users user) {
-		String str = "register";
+	public ModelAndView add(Users user) {
+		ModelAndView str = new ModelAndView("register");
 		List<Users> userlist =usersDao.UsersFind();
 		Boolean flag = true;
 		for(Users u:userlist){
 			if(u.getUsername().equalsIgnoreCase(user.getUsername())){
 				flag = false;
+				str.addObject("error", "用户名重复");
 				break;
 			}
 		}
 		if(user.getUsername()==null||user.getUsername().equalsIgnoreCase("")||
 				user.getPassword()==null||user.getPassword().equalsIgnoreCase("")){
+			str.addObject("error", "用户名或密码为空");
 			flag = false;
 		}else if(flag){
 			usersDao.UsersAdd(user);
-			str = "login";
+			str.setViewName("login");
 		}
 		return str;
 	}
-
+	public ModelAndView update(Users user){
+		return null;
+		
+	}
 }
