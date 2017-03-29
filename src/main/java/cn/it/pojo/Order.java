@@ -12,8 +12,6 @@ public class Order {
 	private int id;   //唯一标识一个订单记录：id
 	private String orderNumber;  //订单号，唯一标识一个订单：orderNumber
 	private Date orderTime;     //下单时间：orderTime
-	private double unitPrice;   //单价：unitPrice
-	private int quantity;       //购买的数量：quantity
 	private double actulPayment;  //实际的付款：actulPayment
 	private String status;  //交易状态：待付款、取消订单、交易成功、待收货：statusString
 	private String paymentMethod;  //支付方式：paymentMethod
@@ -29,7 +27,6 @@ public class Order {
 	public void setFreight(double freight) {
 		this.freight = freight;
 	}
-	
 	public int getUserID() {
 		return userID;
 	}
@@ -45,12 +42,7 @@ public class Order {
 	public Date getOrderTime() {
 		return orderTime;
 	}
-	public double getUnitPrice() {
-		return unitPrice;
-	}
-	public int getQuantity() {
-		return quantity;
-	}
+
 	public double getActulPayment() {
 		return actulPayment;
 	}
@@ -71,12 +63,6 @@ public class Order {
 	}
 	public void setOrderTime(Date orderTime) {
 		this.orderTime = orderTime;
-	}
-	public void setUnitPrice(double unitPrice) {
-		this.unitPrice = unitPrice;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
 	}
 	public void setActulPayment(double actulPayment) {
 		this.actulPayment = actulPayment;

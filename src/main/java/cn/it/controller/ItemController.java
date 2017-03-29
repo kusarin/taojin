@@ -36,7 +36,7 @@ public class ItemController {
 	 */
 	@RequestMapping("addItem.do")
 	public ModelAndView addItem(HttpServletRequest request){
-		ModelAndView modeandview = new ModelAndView("addItemok"); //到addItem界面 
+		ModelAndView modeandview = new ModelAndView("addItemok"); //到addItemok界面 ，暂时用于表示跳转成功 
 
 		int shop_id = 1;
 		String name = request.getParameter("name");
@@ -99,30 +99,36 @@ public class ItemController {
 	@RequestMapping("changeItem.do")
 	public ModelAndView changeItem(HttpServletRequest request){
 
-		ModelAndView modeandview = new ModelAndView("changeitem"); //到changeitem界面 
+		ModelAndView modeandview = new ModelAndView("addItemok"); //到addItemok界面 ，暂时用于表示跳转成功
 		
 		//-------------------
-		//暂时缺少获取前台数据的操作！！！
+		//暂时缺少商品编号的获取；非输入数据，来源于跳转用数据。
+		//暂时先设定为10，用于测试使用
 		//-------------------
 		
-		int item_id = 0;
-		String name = null;
-		String part = null;
-		String typeh = null;
-		String typel = null;
-		String number = null;
-		String price = null;
-		String detail = null;
-		String image = null;
+		int item_id = 10;
+		
+		//-------------------
+		//暂时缺少将商品的原始数据传递到前台的数据框中的方法
+		//-------------------	
+		
+		String name = request.getParameter("name");
+		String part = request.getParameter("part");
+		String typeh = request.getParameter("typeh");
+		String typel = request.getParameter("typel");
+		String number = request.getParameter("number");
+		String price = request.getParameter("price");
+		String detail = request.getParameter("detail");
+		String image = request.getParameter("image");
 		
 		// 定义提示信息str
 		String str;
 		// 进行修改商品信息操作，并且获取提示信息
 		str=itemservice.updateItem(item_id,name, part, typeh, typel, number, price, detail, image);
 			
-		//-------------------
+		//-------------------------------------
 		//暂时缺少将提示信息传递到前台的操作！！！
-		//-------------------
+		//-------------------------------------
 		
 		return modeandview;
 	}
@@ -163,9 +169,10 @@ public class ItemController {
 		ModelAndView modeandview = new ModelAndView("lookItem"); // 到lookItem.jsp界面
 		
 		//--------------
-		// 暂时缺少获取前台typeh和typel的操作！！！
+		// 暂时缺少获取前台传入item_id的操作！！！
+		// 暂时先设定为10，用于测试使用
 		//---------------
-		int item_id = 0;
+		int item_id = 10;
 
 		// 根据商品编号，获得商品；
 		Item i = itemservice.findById(item_id);
@@ -189,22 +196,22 @@ public class ItemController {
 	@RequestMapping("ItemType.do")
 	public ModelAndView showTypeItem(HttpServletRequest request){
 		ModelAndView modeandview = new ModelAndView("Itemtype"); // 到Itemtype.jsp界面
-		
-		//--------------
-		// 暂时缺少获取前台typeh和typel的操作！！！
-		//---------------
-		
-		String typeh = null;
-		String typel = null;
+
+		String typeh = request.getParameter("typeh");
+		String typel = request.getParameter("typel");
 		
 		// 根据类型，获得商品；
 		List<Item> list;
 		list = itemservice.findByType(typeh, typel);
 		
-		// 测试list是否已经获取到Item中的数据
+		// 测试list是否已经获取到Item中对应的数据
 		System.out.println("----------------"); 
 		System.out.println(list);
 		System.out.println("----------------");
+		
+		//这里用来传递已经选择的类型
+		Item i = list.get(1);
+		modeandview.addObject("itemtypechoice",i);	
 		
 		//将商品条目list传递到itemtype
 		modeandview.addObject("itemtype",list);	

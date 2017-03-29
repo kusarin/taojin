@@ -63,5 +63,4 @@ public interface ItemDao {
 	 */
 	public List<Item> FindItemByShopId(int shop_id);
 	
-
 }
