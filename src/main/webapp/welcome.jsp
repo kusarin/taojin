@@ -27,19 +27,18 @@ pageEncoding="UTF-8"%>
    </td> 
   </tr> 
   <tr> 
-     <table> 
       <tr> 
        <td colspan="2">登录成功!</td> 
       </tr> 
       <tr> 
        <td>欢迎你，</td> 
-       <td>${user.username}</td> 
-      </tr> 
+       <td>${user.username}</td>
       <tr> 
        <td colspan="2"><input type="submit" value="退出" /></td> 
       </tr> 
-     </table>
-  </tr> 
+      <td colspan="2">
+    	<a href="usersearch.jsp">查看个人信息</a> 
+    </td> 
  </table> 
 </body> 
 </html> 

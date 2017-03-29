@@ -1,25 +1,12 @@
 package cn.it.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
-import java.util.Map;
-
 import javax.annotation.Resource;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.HttpServletBean;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.alibaba.fastjson.JSONObject;
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion.User;
 
 import cn.it.service.UsersService;
 import cn.it.pojo.Users;
@@ -32,10 +19,10 @@ public class UsersController {
 	 private UsersService usersService;
 
 	@RequestMapping("login.do")
-	public ModelAndView login(Users user,HttpSession session,HttpServletResponse response) 
+	public ModelAndView login(Users user,HttpSession session) 
 			throws IOException{
 	
-		ModelAndView result = usersService.login(user,session,response);
+		ModelAndView result = usersService.login(user,session);
 		return result;
 	}
 	//添加用户

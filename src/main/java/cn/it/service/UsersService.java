@@ -11,7 +11,7 @@ import cn.it.pojo.Users;
 
 public interface UsersService {
   
-	public ModelAndView login(Users user,HttpSession session,HttpServletResponse response) 
+	public ModelAndView login(Users user,HttpSession session) 
 			throws IOException;	 
 	 public String add(Users user);
 }
