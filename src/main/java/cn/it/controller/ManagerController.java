@@ -31,4 +31,10 @@ public class ManagerController {
 		ModelAndView result = managerService.add(manager);
 		return result;
 	}
+	
+	@RequestMapping("updatepassword.do")
+	public ModelAndView updatepassword(Manager manager){
+		ModelAndView result = managerService.update(manager);
+		return result;
+	}
 }
