@@ -36,7 +36,7 @@ public class ItemController {
 	 */
 	@RequestMapping("addItem.do")
 	public ModelAndView addItem(HttpServletRequest request){
-		ModelAndView modeandview = new ModelAndView("addItemok"); //到addItemok界面 ，暂时用于表示跳转成功 
+		
 
 		int shop_id = 1;
 		String name = request.getParameter("name");
@@ -47,16 +47,9 @@ public class ItemController {
 		String price = request.getParameter("price");
 		String detail = request.getParameter("detail");
 		String image = request.getParameter("image");
-		
-		// 定义提示信息str
-		String str;
+				
 		// 进行添加商品信息操作，并且获取提示信息
-		str=itemservice.addItem(shop_id,name, part, typeh, typel, number, price, detail, image);
-		
-		System.out.println(str);
-		//-------------------
-		//暂时缺少将提示信息传递到前台的操作！！！
-		//-------------------
+		ModelAndView modeandview=itemservice.addItem(shop_id,name, part, typeh, typel, number, price, detail, image);
 		
 		return modeandview;
 	}

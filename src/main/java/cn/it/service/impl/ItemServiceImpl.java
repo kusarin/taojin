@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.dao.ItemDao;
 import cn.it.pojo.Item;
@@ -40,8 +41,10 @@ public class ItemServiceImpl implements ItemService {
 	 * 
 	 * @return String 返回值为一个提示信息，String
 	 */
-	public String addItem(int shop_id,String name, String part, String typeh, String typel,
+	public ModelAndView addItem(int shop_id,String name, String part, String typeh, String typel,
 			String number, String price, String detail, String image) {	
+		ModelAndView str = new ModelAndView("addItem");
+		
 		// 判断传入参数是否为空 
 		if(name==null||name.equals("")
 				||part==null||part.equals("")
@@ -53,7 +56,8 @@ public class ItemServiceImpl implements ItemService {
 				||image==null||image.equals("")){
 			
 			// 返回提示信息 "输入数据不能为空！！！"
-			return "输入数据不能为空！！！";
+			str.addObject("error", "输入数据不能为空！！！");
+			str.setViewName("addItem");
 			
 		}else{// 参数不为空时候，执行添加操作
 			
@@ -80,9 +84,12 @@ public class ItemServiceImpl implements ItemService {
 			
 			// 添加商品信息；
 			itemDao.ItemAdd(i);	
-			// 返回提示信息 "上架商品成功！！！"
-			return "上架商品成功！！！";
+			// 返回提示信息 "上架成功！！！"
+			str.addObject("error", "上架成功！！！");
+			str.setViewName("addItem");
 		}
+		// 返回提示信息 
+		return str;
 	}
 	
 	/**
