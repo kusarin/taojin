@@ -15,7 +15,6 @@ public class CommentServiceImpl implements CommentService {
 	private CommentDao commentDao;
 	
 	public List<Comment> findAll(){
-//		String str = "managerInterface";
 		
 		List<Comment> comment = commentDao.findAll();
 		

@@ -27,7 +27,7 @@ public class CommentController {
 		ModelAndView modelandview = new ModelAndView("Comment");
 		List<Comment> list;
 		list = commentService.findAll();
-		modelandview.addObject("lookComment",list);
+		modelandview.addObject("Comment",list);
 		return modelandview;
 	}
 }

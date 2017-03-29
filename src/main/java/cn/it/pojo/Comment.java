@@ -8,18 +8,12 @@ import java.util.Date;
  *
  */
 public class Comment {
-	private int ID;            //留言编号：ID(PK)
+	private int id;            //留言编号：ID(PK)
 	private String content;    //留言内容
 	private Date datetime;	   //留言的时间
-	private int User_id;
+	private int user_id;
 	
 /*********************set******get***************************************/	
-	public int getID() {
-		return ID;
-	}
-	public void setID(int iD) {
-		ID = iD;
-	}
 	public String getContent() {
 		return content;
 	}
@@ -32,10 +26,16 @@ public class Comment {
 	public void setDatetime(Date datetime) {
 		this.datetime = datetime;
 	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public int getUser_id() {
-		return User_id;
+		return user_id;
 	}
 	public void setUser_id(int user_id) {
-		User_id = user_id;
+		this.user_id = user_id;
 	}
 }
