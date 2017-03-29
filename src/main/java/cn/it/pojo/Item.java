@@ -21,8 +21,9 @@ public class Item {
 	
 	private int browsingTimes; //商品浏览次数：browsingTimes，后台数据，初始化为0，不能手动修改；
 	private int tradingTimes;  //商品出售数量tradingTimes，后台数据，初始化为0，不能手动修改；
-
 	
+	private Shop shop;  //属性：店铺，继承店铺的所有属性
+
 /**************************************set********get*********************************************/
 	
 	public int getitem_id() {
@@ -98,6 +99,13 @@ public class Item {
 	public void settradingTimes(int tradingTimes) {
 		this.tradingTimes = tradingTimes;
 	}	
+	
+	public Shop getShop() {
+		return shop;
+	}
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
 	/**************************************set********get*******end********************************/
 	
 	/**
