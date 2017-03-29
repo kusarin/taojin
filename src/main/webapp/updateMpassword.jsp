@@ -14,14 +14,14 @@ pageEncoding="UTF-8"%>
     	  }
     }
 </script>
- <title>二手淘金网--新增管理员</title> 
+ <title>二手淘金网--修改管理员密码</title> 
  </head> 
   
  <body> 
- <form action="addmanager.do" method="post"> 
+ <form action="updatepassword.do" method="post"> 
   <table> 
    <tr> 
-    <td colspan="2">新增窗口</td> 
+    <td colspan="2">修改密码</td> 
    </tr> 
    <tr> 
     <td>账户：</td> 
@@ -29,13 +29,13 @@ pageEncoding="UTF-8"%>
     </td> 
    </tr> 
    <tr> 
-    <td>密码：</td> 
+    <td>新密码：</td> 
     <td><input type="password" name="password" /> 
     </td> 
    </tr> 
    <tr> 
     <td colspan="2">
-    	<input type="submit" value="新增" />  
+    	<input type="submit" value="修改" />  
     </td> 
    </tr> 
   </table> 

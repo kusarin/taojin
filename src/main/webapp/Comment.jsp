@@ -9,7 +9,7 @@
 <title>用户留言管理</title>
 </head>
 <body>
-<form action="lookComment.do" method="post">
+
 <table width="90%" border="1" align="center">  
  <tbody>  
             <tr align="center">  
@@ -25,10 +25,11 @@
             </tr>  
             </c:forEach>  
             <tr>
+            <form action="lookComment.do" method="post">
             <td><input type="submit" value="显示" /></td>
+            </form>
             </tr>
 </tbody>
 </table>
-</form>
 </body>
 </html>

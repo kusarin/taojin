@@ -21,9 +21,7 @@
 	<update id="managerUpdate"  parameterType="cn.it.pojo.Manager">
 		update Manager set password=#{password}
 		<where>
-			<if test="num!=0">
-				and Manager_ID=#{ID}
-			</if>
+			account=#{account}
 		</where>
 	</update>
 	<select id="managerIdFind"   resultType="cn.it.pojo.Manager">

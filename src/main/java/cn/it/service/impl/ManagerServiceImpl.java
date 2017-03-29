@@ -2,8 +2,10 @@ package cn.it.service.impl;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.dao.ManagerDao;
 import cn.it.pojo.Manager;
@@ -21,42 +23,65 @@ public class ManagerServiceImpl implements ManagerService{
 	private ManagerDao managerDao;
 	
 	//管理员登录
-	public String login(Manager manager) {
-		String str = "managerInterface";
-		if(manager==null){
-			if(manager.getAccount()==null||manager.getAccount().equalsIgnoreCase("")||
-					manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
-				str = "mlogin";
-			}
+	public ModelAndView login(Manager manager) {
+		ModelAndView mav =new ModelAndView("managerInterface");
+		if(manager.getAccount()==null||manager.getAccount().equalsIgnoreCase("")||
+			manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
+			mav.addObject("error","账户或密码为空！");
+			mav.setViewName("mlogin");
+			
 		}else{
 			Manager m = managerDao.login(manager);
 			if(m == null){
-				str = "mlogin";
+				mav.addObject("error","账户或密码错误！");
+				mav.setViewName("mlogin");
 			}
 		}
-		return str;
+		return mav;
 	}
 	//新增管理员账户
-	public String add(Manager manager) {
-		String str = "mlogin";
+	public ModelAndView add(Manager manager) {
+		ModelAndView mav =new ModelAndView("mlogin");
 		List<Manager> mId =managerDao.managerIdFind();
 		Boolean flag = true; 
 		for(Manager mana:mId){
 			if(mana.getAccount().equals(manager.getAccount())){
 				flag = false;
-				str = "addmanager";
+				mav.setViewName("addmanager");
 				break;
 			}
 		}
 		if(manager==null){
-			str = "addmanager";
+			mav.setViewName("addmanager");
 		}else if(manager.getAccount()==null||manager.getAccount().equalsIgnoreCase("")||
 					manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
-			str = "addmanager";
+			mav.addObject("error","账户名或密码不能为空！");
+			mav.setViewName("addmanager");
 		}else if(flag){
 			managerDao.managerAdd(manager);
-			str = "managerInterface";
+			mav.setViewName("managerInterface");
+		}else{
+			mav.addObject("error","账户名重复！");
 		}
-		return str;
+		return mav;
 	}
-}
+	
+	public ModelAndView update(Manager manager) {
+		ModelAndView mav =new ModelAndView("updateMpassword");
+		List<Manager> mId =managerDao.managerIdFind();
+		if(manager.getAccount()==null||manager.getAccount().equalsIgnoreCase("")||
+				manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
+				mav.addObject("error","账户或密码为空！");
+		}else{
+			for(Manager mana:mId){
+				if(mana.getAccount().equals(manager.getAccount())){
+					mav.setViewName("managerInterface");
+					managerDao.managerUpdate(manager);
+					return mav;
+				}
+			}
+			mav.addObject("error","账户不存在！");
+		}
+		return mav;
+		}
+	}

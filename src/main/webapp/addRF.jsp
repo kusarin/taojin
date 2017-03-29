@@ -14,23 +14,28 @@ pageEncoding="UTF-8"%>
     	  }
     }
 </script>
- <title>二手淘金网--新增管理员</title> 
+ <title>二手淘金网--添加资源文件</title> 
  </head> 
   
  <body> 
- <form action="addmanager.do" method="post"> 
+ <form action="addRF.do" method="post"> 
   <table> 
    <tr> 
     <td colspan="2">新增窗口</td> 
    </tr> 
    <tr> 
-    <td>账户：</td> 
-    <td><input type="text" name="account" /> 
+    <td>文件名：</td> 
+    <td><input type="text" name="name" /> 
     </td> 
    </tr> 
    <tr> 
-    <td>密码：</td> 
-    <td><input type="password" name="password" /> 
+    <td>文件地址：</td> 
+    <td><input type="text" name="address" /> 
+    </td> 
+   </tr> 
+   <tr> 
+    <td>文件类型：</td> 
+    <td><input type="text" name="type" /> 
     </td> 
    </tr> 
    <tr> 
