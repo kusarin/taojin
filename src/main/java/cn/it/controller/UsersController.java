@@ -27,8 +27,8 @@ public class UsersController {
 	}
 	//添加用户
 		@RequestMapping("addUser.do")
-		public String addUser(Users user){
-			String result = usersService.add(user);
+		public ModelAndView addUser(Users user){
+			ModelAndView result = usersService.add(user);
 			return result;
 		}
 	   //删除用户
