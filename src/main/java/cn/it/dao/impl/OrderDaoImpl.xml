@@ -8,8 +8,6 @@
             <result column="User_ID" property="userID" javaType="int" jdbcType="INTEGER"/>
             <result column="OrderNumber" property="orderNumber" javaType="String" jdbcType="VARCHAR"/>
             <result column="OrderTime" property="orderTime" javaType="java.sql.Date" jdbcType="DATE"/>
-            <result column="UnitPrice" property="unitPrice" javaType="double" jdbcType="DOUBLE"/>
-            <result column="Quantity" property="quantity" javaType="int" jdbcType="INTEGER"/>
             <result column="ActulPayment" property="actulPayment" javaType="double" jdbcType="DOUBLE"/>
             <result column="Status" property="status" javaType="String" jdbcType="VARCHAR"/>
             <result column="PaymentMethod" property="paymentMethod" javaType="String" jdbcType="VARCHAR"/>
@@ -21,8 +19,6 @@
             <parameter property="userID" resultMap="findAll"/>  
             <parameter property="orderNumber" resultMap="findAll"/> 
             <parameter property="orderTime" resultMap="findAll"/> 
-            <parameter property="unitPrice" resultMap="findAll"/> 
-            <parameter property="quantity" resultMap="findAll"/> 
             <parameter property="actulPayment" resultMap="findAll"/> 
             <parameter property="status" resultMap="findAll"/> 
             <parameter property="paymentMethod" resultMap="findAll"/> 
@@ -33,8 +29,8 @@
           select* from indent where User_ID=#{userId}
      </select>
      <insert id="add" parameterMap="OrderParameterMap">
-           insert into indent(User_ID,OrderNumber,OrderTime,UnitPrice,Quantity,ActulPayment,Status,PaymentMethod,RecivingAddress,freight) 
-           values(#{userID},#{orderNumber},#{orderTime},#{unitPrice},#{quantity},#{actulPayment},#{status},#{paymentMethod},#{recivingAddress},#{freight})
+           insert into indent(User_ID,OrderNumber,OrderTime,ActulPayment,Status,PaymentMethod,RecivingAddress,freight) 
+           values(#{userID},#{orderNumber},#{orderTime},#{actulPayment},#{status},#{paymentMethod},#{recivingAddress},#{freight})
      </insert>
       <update id="update" parameterMap="OrderParameterMap">
            update indent set Status=#{status} where OrderNumber=#{orderNumber}
