@@ -7,18 +7,18 @@ import org.springframework.stereotype.Service;
 
 import cn.it.dao.CommentDao;
 import cn.it.pojo.Comment;
+import cn.it.service.CommentService;
 
 @Service("commentService") 
-public class CommentServiceImpl {
-//	@Autowired
-//	private CommentDao commentDao;
-//	
-//	public List<Comment> findAll(){
-////		String str = "managerInterface";
-//		
-//		List<Comment> comment = commentDao.findAll();
-//		
-//		return comment;
-//		
-//	}
+public class CommentServiceImpl implements CommentService {
+	@Autowired
+	private CommentDao commentDao;
+	
+	public List<Comment> findAll(){
+		
+		List<Comment> comment = commentDao.findAll();
+		
+		return comment;
+		
+	}
 }
