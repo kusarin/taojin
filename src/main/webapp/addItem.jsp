@@ -5,7 +5,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>上架商品</title>
+<!-- 弹窗设置点 -->
+<script type="text/javascript">
+    window.onload=function(){
+    	var error="${requestScope.error}";
+    	  if(error!=""&&error!=null&&typeof(error)!="undefined"){
+    		  alert(error);
+    	  }
+    }
+</script>
+
+<title>二手淘金--上架商品</title>
 <link />
 </head>
 <body>

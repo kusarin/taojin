@@ -36,9 +36,13 @@ public class ItemController {
 	 */
 	@RequestMapping("addItem.do")
 	public ModelAndView addItem(HttpServletRequest request){
-		ModelAndView modeandview = new ModelAndView("addItemok"); //到addItemok界面 ，暂时用于表示跳转成功 
-
+		
+		//-------------------
+		//暂时缺少店铺编号的获取；非输入数据，来源于跳转用数据。
+		//暂时先设定为1，用于测试使用
+		//-------------------
 		int shop_id = 1;
+		
 		String name = request.getParameter("name");
 		String part = request.getParameter("part");
 		String typeh = request.getParameter("typeh");
@@ -47,20 +51,12 @@ public class ItemController {
 		String price = request.getParameter("price");
 		String detail = request.getParameter("detail");
 		String image = request.getParameter("image");
-		
-		// 定义提示信息str
-		String str;
+				
 		// 进行添加商品信息操作，并且获取提示信息
-		str=itemservice.addItem(shop_id,name, part, typeh, typel, number, price, detail, image);
-		
-		System.out.println(str);
-		//-------------------
-		//暂时缺少将提示信息传递到前台的操作！！！
-		//-------------------
+		ModelAndView modeandview=itemservice.addItem(shop_id,name, part, typeh, typel, number, price, detail, image);
 		
 		return modeandview;
-	}
-	
+	}	
 	
 	/**
 	 * 下架商品
@@ -98,19 +94,12 @@ public class ItemController {
 	 */
 	@RequestMapping("changeItem.do")
 	public ModelAndView changeItem(HttpServletRequest request){
-
-		ModelAndView modeandview = new ModelAndView("addItemok"); //到addItemok界面 ，暂时用于表示跳转成功
 		
 		//-------------------
 		//暂时缺少商品编号的获取；非输入数据，来源于跳转用数据。
 		//暂时先设定为10，用于测试使用
-		//-------------------
-		
+		//-------------------		
 		int item_id = 10;
-		
-		//-------------------
-		//暂时缺少将商品的原始数据传递到前台的数据框中的方法
-		//-------------------	
 		
 		String name = request.getParameter("name");
 		String part = request.getParameter("part");
@@ -121,10 +110,8 @@ public class ItemController {
 		String detail = request.getParameter("detail");
 		String image = request.getParameter("image");
 		
-		// 定义提示信息str
-		String str;
 		// 进行修改商品信息操作，并且获取提示信息
-		str=itemservice.updateItem(item_id,name, part, typeh, typel, number, price, detail, image);
+		ModelAndView modeandview =itemservice.updateItem(item_id,name, part, typeh, typel, number, price, detail, image);
 			
 		//-------------------------------------
 		//暂时缺少将提示信息传递到前台的操作！！！
