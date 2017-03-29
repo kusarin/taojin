@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.dao.ResourceFileDao;
-import cn.it.pojo.Manager;
 import cn.it.pojo.ResourceFile;
 import cn.it.service.ResourceFileService;
 
@@ -27,17 +26,17 @@ public class ResourceFileServiceImpl implements ResourceFileService{
 	}
 	
 	public ModelAndView add(ResourceFile rf) {
-		ModelAndView mav =new ModelAndView("mlogin");
+		ModelAndView mav =new ModelAndView("ResourceFile");
 		
 		if(rf==null){
-			mav.setViewName("ResourceFile");
+			mav.setViewName("addRF");
 		}else if(rf.getName()==null||rf.getName().equalsIgnoreCase("")||
 					rf.getAddress()==null||rf.getAddress().equalsIgnoreCase("")||
 					rf.getType()==null||rf.getType().equalsIgnoreCase("")){
-			mav.setViewName("ResourceFile");
+			mav.setViewName("addRF");
+			mav.addObject("error","信息为空！");
 		}else {
 			resourceFileDao.add(rf);
-			mav.setViewName("managerInterface");
 		}
 		return mav;
 	}

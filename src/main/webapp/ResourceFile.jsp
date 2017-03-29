@@ -13,9 +13,9 @@
 <table width="90%" border="1" align="center">  
  <tbody>  
             <tr align="center">  
-                <td width="60%">文件名</td>  
-                <td width="30%">文件地址</td>  
-                <td width="10%">文件类型</td> 
+                <td width="30%">文件名</td>  
+                <td width="50%">文件地址</td>  
+                <td width="20%">文件类型</td> 
             </tr>  
             <c:forEach items="${ResourceFile}" var="r">  
               <tr>  
@@ -25,7 +25,10 @@
             </tr>  
             </c:forEach>  
             <tr>
-            <td><input type="submit" value="显示" /></td>
+            <td colspan="3"><input type="submit" value="显示" /></td>
+            </tr>
+            <tr>
+            <td colspan="3"><a href="addRF.jsp" >新增文件资源</a></td>
             </tr>
 </tbody>
 </table>
