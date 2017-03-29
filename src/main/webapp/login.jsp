@@ -6,7 +6,14 @@ pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html> 
  <head> 
-
+<script type="text/javascript">
+    window.onload=function(){
+    	var error="${requestScope.error}";
+    	  if(error!=""&&error!=null&&typeof(error)!="undefined"){
+    		  alert(error);
+    	  }
+    }
+</script>
    
  <title>二手淘金网--用户登录</title> 
    

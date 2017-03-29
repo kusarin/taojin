@@ -3,6 +3,7 @@ package cn.it.service.impl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,25 +22,18 @@ public class UsersServiceImpl implements UsersService{
 	@Autowired
 	private UsersDao usersDao;
 	
-	@SuppressWarnings("null")
 	@RequestMapping(value = "/js")
-	public ModelAndView login(Users user,HttpSession session,HttpServletResponse response) 
+	public ModelAndView login(Users user,HttpSession session) 
 	throws IOException{
 		ModelAndView str = new ModelAndView("welcome");
-		if(user==null){
 			if(user.getUsername().equals("")||user.getUsername()==null||
 			user.getPassword().equals("")||user.getPassword()==null){
-				response.setContentType("text/html; charset=gbk");  
-			    PrintWriter out = response.getWriter();
-			    out.println("<script language='javascript'>");   
-			    out.println("alert('账号或密码为空');");  
-			    out.println("history.back();");   
-			    out.print("</script>");  
-				return new ModelAndView("Error", "message", "账号或密码为空！");  
-			}
+				str.addObject("error", "用户名或密码为空");
+				str.setViewName("login");
 		}else{
 			Users u = usersDao.login(user);
 			if(u == null){
+				str.addObject("error", "用户名或密码错误");
 				str.setViewName("login");
 			}else{
 				session.setAttribute("user", u);
