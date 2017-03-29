@@ -54,7 +54,7 @@ public interface ItemService {
 	 * 
 	 * @return String 返回值为一个提示信息，String
 	 */
-	public String updateItem(int item_id, String name,String part,String typeh,String typel,
+	public ModelAndView updateItem(int item_id, String name,String part,String typeh,String typel,
 			String number,String price,String detail,String image);
 	/**
 	 * 按照商品编号查找商品信息

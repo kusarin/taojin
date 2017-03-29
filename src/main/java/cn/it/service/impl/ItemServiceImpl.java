@@ -43,7 +43,7 @@ public class ItemServiceImpl implements ItemService {
 	 */
 	public ModelAndView addItem(int shop_id,String name, String part, String typeh, String typel,
 			String number, String price, String detail, String image) {	
-		ModelAndView str = new ModelAndView("addItem");
+		ModelAndView str = new ModelAndView("addItem");  //跳转到addItem.jsp界面
 		
 		// 判断传入参数是否为空 
 		if(name==null||name.equals("")
@@ -120,8 +120,10 @@ public class ItemServiceImpl implements ItemService {
 	 * 
 	 * @return String 返回值为一个提示信息，String
 	 */
-	public String updateItem(int item_id,String name,String part,String typeh,String typel,
+	public ModelAndView updateItem(int item_id,String name,String part,String typeh,String typel,
 			String number,String price,String detail,String image) {
+		ModelAndView str = new ModelAndView("changeItem");  //跳转到changeItem.jsp界面
+		
 		// 判断传入参数是否为空 
 		if(name==null||name.equals("")
 			||part==null||part.equals("")
@@ -132,8 +134,9 @@ public class ItemServiceImpl implements ItemService {
 			||detail==null||detail.equals("")
 			||image==null||image.equals("")){
 			
-			// 返回提示信息 "输入数据不能为空！！！"		
-			return "输入数据不能为空！！！";
+			// 返回提示信息 "输入数据不能为空！！！"
+			str.addObject("error", "输入数据不能为空！！！");
+			str.setViewName("addItem");
 					
 		}else{// 参数不为空时候，执行修改操作
 			
@@ -157,8 +160,10 @@ public class ItemServiceImpl implements ItemService {
 			// 更新商品信息
 			itemDao.ItemUpdate(i);
 			// 返回提示信息 "修改商品信息成功！！！"
-			return "修改商品信息成功！！！";
+			str.addObject("error", "修改商品信息成功！！！");
+			str.setViewName("addItem");
 		}
+		return str;
 	}
 	
 	/**
