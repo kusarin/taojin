@@ -22,7 +22,6 @@ public class UsersServiceImpl implements UsersService{
 	@Autowired
 	private UsersDao usersDao;
 	
-	@RequestMapping(value = "/js")
 	public ModelAndView login(Users user,HttpSession session) 
 	throws IOException{
 		ModelAndView str = new ModelAndView("welcome");
