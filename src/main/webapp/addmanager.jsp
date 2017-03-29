@@ -22,7 +22,7 @@ pageEncoding="UTF-8"%>
    </tr> 
    <tr> 
     <td>密码：</td> 
-    <td><input type="text" name="password" /> 
+    <td><input type="password" name="password" /> 
     </td> 
    </tr> 
    <tr> 
@@ -31,9 +31,6 @@ pageEncoding="UTF-8"%>
     </td> 
    </tr> 
   </table> 
- </form> 
-    </form></td> 
-  </tr> 
- </table> 
+ </form>
 </body> 
 </html> 
