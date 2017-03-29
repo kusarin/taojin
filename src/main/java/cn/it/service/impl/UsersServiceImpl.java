@@ -1,13 +1,16 @@
 package cn.it.service.impl;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.alibaba.fastjson.JSONObject;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.dao.UsersDao;
 import cn.it.pojo.Users;
@@ -19,19 +22,25 @@ public class UsersServiceImpl implements UsersService{
 	private UsersDao usersDao;
 	
 	@SuppressWarnings("null")
-	public String login(Users user,HttpSession session) {
-		String str = "welcome";
-        JSONObject json = new JSONObject();  
+	@RequestMapping(value = "/js")
+	public ModelAndView login(Users user,HttpSession session,HttpServletResponse response) 
+	throws IOException{
+		ModelAndView str = new ModelAndView("welcome");
 		if(user==null){
-			if(user.getUsername().equals("")||user.getUsername()==null||user.getPassword().equals("")||user.getPassword()==null){
-				str = "login";
+			if(user.getUsername().equals("")||user.getUsername()==null||
+			user.getPassword().equals("")||user.getPassword()==null){
+				response.setContentType("text/html; charset=gbk");  
+			    PrintWriter out = response.getWriter();
+			    out.println("<script language='javascript'>");   
+			    out.println("alert('账号或密码为空');");  
+			    out.println("history.back();");   
+			    out.print("</script>");  
+				return new ModelAndView("Error", "message", "账号或密码为空！");  
 			}
 		}else{
 			Users u = usersDao.login(user);
 			if(u == null){
-	             json.put("success", false);
-	             json.put("meg", "sorry");
-				str = "login";
+				str.setViewName("login");
 			}else{
 				session.setAttribute("user", u);
 			}
