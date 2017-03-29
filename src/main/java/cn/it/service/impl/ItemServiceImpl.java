@@ -55,9 +55,8 @@ public class ItemServiceImpl implements ItemService {
 				||detail==null||detail.equals("")
 				||image==null||image.equals("")){
 			
-			// 返回提示信息 "输入数据不能为空！！！"
+			// 提示信息 "输入数据不能为空！！！"
 			str.addObject("error", "输入数据不能为空！！！");
-			str.setViewName("addItem");
 			
 		}else{// 参数不为空时候，执行添加操作
 			
@@ -84,8 +83,9 @@ public class ItemServiceImpl implements ItemService {
 			
 			// 添加商品信息；
 			itemDao.ItemAdd(i);	
-			// 返回提示信息 "上架成功！！！"
+			// 提示信息 "上架成功！！！"
 			str.addObject("error", "上架成功！！！");
+			// 上架成功后跳转的界面，暂时先设置为addItem【上架商品界面】
 			str.setViewName("addItem");
 		}
 		// 返回提示信息 
@@ -134,10 +134,8 @@ public class ItemServiceImpl implements ItemService {
 			||detail==null||detail.equals("")
 			||image==null||image.equals("")){
 			
-			// 返回提示信息 "输入数据不能为空！！！"
-			str.addObject("error", "输入数据不能为空！！！");
-			str.setViewName("addItem");
-					
+			// 提示信息 "输入数据不能为空！！！"
+			str.addObject("error", "输入数据不能为空！！！");				
 		}else{// 参数不为空时候，执行修改操作
 			
 			// 将商品数量和价格转为规定格式：商品数量int，商品价格double
@@ -159,9 +157,10 @@ public class ItemServiceImpl implements ItemService {
 			
 			// 更新商品信息
 			itemDao.ItemUpdate(i);
-			// 返回提示信息 "修改商品信息成功！！！"
+			// 提示信息 "修改商品信息成功！！！"
 			str.addObject("error", "修改商品信息成功！！！");
-			str.setViewName("addItem");
+			// 修改商品信息成功后跳转的界面，暂时先设置为changeItem【修改商品信息界面】
+			str.setViewName("changeItem"); 
 		}
 		return str;
 	}
