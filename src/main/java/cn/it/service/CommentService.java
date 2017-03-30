@@ -2,6 +2,8 @@ package cn.it.service;
 
 import java.util.List;
 
+import org.springframework.web.servlet.ModelAndView;
+
 import cn.it.pojo.Comment;
 
 /**
@@ -11,4 +13,5 @@ import cn.it.pojo.Comment;
  */
 public interface CommentService {
 	public List<Comment> findAll();
+	public void delete(int id);
 }

@@ -9,24 +9,22 @@
 <title>资源文件管理</title>
 </head>
 <body>
-<form action="findResourceFile.do" method="post">
 <table width="90%" border="1" align="center">  
  <tbody>  
             <tr align="center">  
                 <td width="30%">文件名</td>  
                 <td width="50%">文件地址</td>  
-                <td width="20%">文件类型</td> 
+                <td width="10%">文件类型</td> 
+                <td width="10%"></td>
             </tr>  
             <c:forEach items="${ResourceFile}" var="r">  
               <tr>  
                 <td> ${r.name} </td>  
                 <td> ${r.address}</td>  
                 <td> ${r.type} </td>  
+                <td><a href="./deleteRF.do?id=${r.id}"><button>删除</button></a></td>
             </tr>  
             </c:forEach>  
-            <tr>
-            <td colspan="3"><input type="submit" value="显示" /></td>
-            </tr>
             <tr>
             <td colspan="3"><a href="addRF.jsp" >新增文件资源</a></td>
             </tr>

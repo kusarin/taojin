@@ -40,4 +40,8 @@ public class ResourceFileServiceImpl implements ResourceFileService{
 		}
 		return mav;
 	}
+	
+	public void delete(int id){
+		resourceFileDao.delete(id);
+	}
 }

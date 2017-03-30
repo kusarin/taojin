@@ -83,5 +83,5 @@ public class ManagerServiceImpl implements ManagerService{
 			mav.addObject("error","账户不存在！");
 		}
 		return mav;
-		}
 	}
+}

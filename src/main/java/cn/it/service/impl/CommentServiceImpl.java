@@ -15,10 +15,11 @@ public class CommentServiceImpl implements CommentService {
 	private CommentDao commentDao;
 	
 	public List<Comment> findAll(){
-		
 		List<Comment> comment = commentDao.findAll();
-		
 		return comment;
-		
+	}
+	
+	public void delete(int id){
+		commentDao.delete(id);
 	}
 }
