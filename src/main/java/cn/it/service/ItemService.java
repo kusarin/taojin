@@ -38,7 +38,7 @@ public interface ItemService {
 	 * 
 	 * @return String 返回值为一个提示信息，String
 	 */
-	public String deleteItem(int item_id);
+	public ModelAndView deleteItem(int item_id);
 	/**
 	 * 更新商品
 	 * 

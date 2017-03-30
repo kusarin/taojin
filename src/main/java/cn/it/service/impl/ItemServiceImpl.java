@@ -99,10 +99,12 @@ public class ItemServiceImpl implements ItemService {
 	 * 
 	 * @return String 返回值为一个提示信息，String
 	 */
-	public String deleteItem(int item_id) {
+	public ModelAndView deleteItem(int item_id) {
+		ModelAndView str = new ModelAndView("deleteItem");  //跳转到deleteItem.jsp界面
 		itemDao.ItemDelete(item_id);	
 		// 返回提示信息 "下架商品成功！！！"
-		return "下架商品成功！！！";
+		str.addObject("error", "下架商品成功！！！");
+		return str;
 	}
 
 	/**
