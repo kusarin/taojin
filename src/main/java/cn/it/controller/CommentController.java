@@ -31,6 +31,7 @@ public class CommentController {
 		modelandview.addObject("Comment",list);
 		return modelandview;
 	}
+	
 	@RequestMapping("deleteComment.do")
 	public String delete(@RequestParam("id") String id){
 		int id1=Integer.parseInt(id);

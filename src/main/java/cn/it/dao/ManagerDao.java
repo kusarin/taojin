@@ -18,12 +18,7 @@ public interface ManagerDao {
 	 */
 	public void managerAdd(Manager manager);
 	/**
-	 * 管理员删除；
-	 * @param （变量为管理员编号 id，类型为int）；
-	 */
-	public void managerDelete(int num);
-	/**
-	 * 管理员修改；
+	 * 管理员密码修改；
 	 * @param （变量为管理员对象，类型为Manager）；
 	 */
 	public void managerUpdate(Manager manager);
