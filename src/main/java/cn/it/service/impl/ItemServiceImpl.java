@@ -175,7 +175,15 @@ public class ItemServiceImpl implements ItemService {
 	 * @return Item 返回值为一个商品
 	 */
 	public Item findById(int item_id) { 
-		return itemDao.FindItemById(item_id);
+		//获取要查看的商品
+		Item i = itemDao.FindItemById(item_id);
+		// 浏览次数+1；
+		int num = i.getbrowsingTimes()+1;
+		i.setbrowsingTimes(num);
+		// 更新
+		itemDao.ItemUpdate(i);
+		// 返回查看的商品
+		return i;
 	}
 		
 	/**
