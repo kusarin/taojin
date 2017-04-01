@@ -63,7 +63,7 @@ public interface ItemService {
 	 */
 	public  Item findById(int item_id);
 	/**
-	 * 按照条目查找商品信息
+	 * 按照条目显示商品
 	 * 
 	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
@@ -77,5 +77,13 @@ public interface ItemService {
 	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Item> findByType(String typeh,String typel);
+	/**
+	 * 按照店铺归宿查找所有商品
+	 * 
+	 * @param shop_id 店铺编号，int
+	 * 
+	 * @returnList<Item> 返回值为一个商品列表，包括一个或者多个商品
+	 */
+	public List<Item> findByShopId(int shop_id);
 	
 }

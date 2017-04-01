@@ -199,7 +199,18 @@ public class ItemServiceImpl implements ItemService {
 	 */
 	public List<Item> findByType(String typeh,String typel){
 		return itemDao.FindItemByType(typeh, typel);
-	}	
+	}
+	/**
+	 * 通过调用itemDao.FindItemByShopId(shop_id)，根据店铺编号查看商品
+	 * 
+	 * @param shop_id 店铺编号，int
+	 * 
+	 * @returnList<Item> 返回值为一个商品列表，包括一个或者多个商品
+	 */
+	public List<Item> findByShopId(int shop_id){
+		return itemDao.FindItemByShopId(shop_id);
+	}
+	
 	
 //	// 判断输入字符串是否为数字的方法，用来判断number和price是否为数字【听说可以在前端网页执行，所以先注释掉】
 //	public static boolean isNumeric(String str){
