@@ -33,12 +33,12 @@ public class ItemServiceImpl implements ItemService {
 	 * @param name 商品名称，String
 	 * @param typeh 商品一级分类，String
 	 * @param typel 商品二级分类，String
-	 * @param number 商品数量，int
-	 * @param price 商品价格，double
+	 * @param number 商品数量，String，之后强转为int
+	 * @param price 商品价格，String，之后强转为double
 	 * @param detail 商品描述，String
 	 * @param image 商品图片，String
 	 * 
-	 * @return String 返回值为一个提示信息，String
+	 * @return ModelAndView
 	 */
 	public ModelAndView addItem(int shop_id,String name, String typeh, String typel,
 			String number, String price, String detail, String image) {	
@@ -94,7 +94,7 @@ public class ItemServiceImpl implements ItemService {
 	 * 
 	 * @param item_id 商品编号，int
 	 * 
-	 * @return String 返回值为一个提示信息，String
+	 * @return ModelAndView
 	 */
 	public ModelAndView deleteItem(int item_id) {
 		ModelAndView str = new ModelAndView("deleteItem");  //跳转到deleteItem.jsp界面
@@ -111,12 +111,12 @@ public class ItemServiceImpl implements ItemService {
 	 * @param name 商品名称，String
 	 * @param typeh 商品一级分类，String
 	 * @param typel 商品二级分类，String
-	 * @param number 商品数量，int
-	 * @param price 商品价格，double
+	 * @param number 商品数量，String，之后强转为int
+	 * @param price 商品价格，String，之后强转为double
 	 * @param detail 商品描述，String
 	 * @param image 商品图片，String
 	 * 
-	 * @return String 返回值为一个提示信息，String
+	 * @return ModelAndView
 	 */
 	public ModelAndView updateItem(int item_id,String name,String typeh,String typel,
 			String number,String price,String detail,String image) {
