@@ -31,7 +31,6 @@ public class ItemServiceImpl implements ItemService {
 	 * 
 	 * @param shop_id 店铺编号，int
 	 * @param name 商品名称，String
-	 * @param part 商品类别，String
 	 * @param typeh 商品一级分类，String
 	 * @param typel 商品二级分类，String
 	 * @param number 商品数量，int
@@ -41,13 +40,12 @@ public class ItemServiceImpl implements ItemService {
 	 * 
 	 * @return String 返回值为一个提示信息，String
 	 */
-	public ModelAndView addItem(int shop_id,String name, String part, String typeh, String typel,
+	public ModelAndView addItem(int shop_id,String name, String typeh, String typel,
 			String number, String price, String detail, String image) {	
 		ModelAndView str = new ModelAndView("addItem");  //跳转到addItem.jsp界面
 		
 		// 判断传入参数是否为空 
 		if(name==null||name.equals("")
-				||part==null||part.equals("")
 				||typeh==null||typeh.equals("")
 				||typel==null||typel.equals("")
 				||number==null||number.equals("")
@@ -69,7 +67,6 @@ public class ItemServiceImpl implements ItemService {
 			// 设置商品属性；
 			i.setshop_id(shop_id);  // 店鋪编号
 			i.setname(name);        // 商品名称
-			i.setpart(part);        // 商品类别
 			i.settypeh(typeh);      // 商品一阶类型
 			i.settypel(typel);      // 商品二阶类型
 			i.setnumber(num);       // 商品数量
@@ -112,7 +109,6 @@ public class ItemServiceImpl implements ItemService {
 	 * 
 	 * @param item_id 商品编号，int
 	 * @param name 商品名称，String
-	 * @param part 商品类别，String
 	 * @param typeh 商品一级分类，String
 	 * @param typel 商品二级分类，String
 	 * @param number 商品数量，int
@@ -122,13 +118,12 @@ public class ItemServiceImpl implements ItemService {
 	 * 
 	 * @return String 返回值为一个提示信息，String
 	 */
-	public ModelAndView updateItem(int item_id,String name,String part,String typeh,String typel,
+	public ModelAndView updateItem(int item_id,String name,String typeh,String typel,
 			String number,String price,String detail,String image) {
 		ModelAndView str = new ModelAndView("changeItem");  //跳转到changeItem.jsp界面
 		
 		// 判断传入参数是否为空 
 		if(name==null||name.equals("")
-			||part==null||part.equals("")
 			||typeh==null||typeh.equals("")
 			||typel==null||typel.equals("")
 			||number==null||number.equals("")
@@ -149,7 +144,6 @@ public class ItemServiceImpl implements ItemService {
 			// 设置商品属性；
 			i.setitem_id(item_id);    // 商品编号
 			i.setname(name);          // 商品名称
-			i.setpart(part);          // 商品类别
 			i.settypeh(typeh);        // 商品一阶类型
 			i.settypel(typel);        // 商品二阶类型
 			i.setnumber(num);         // 商品数量
@@ -231,7 +225,6 @@ public class ItemServiceImpl implements ItemService {
 			// 设置商品属性；
 		 	i.setshop_id(1);
 			i.setname("第五个商品");
-			i.setpart("拍卖品");
 			i.settypeh("高级分类1");
 			i.settypel("低级分类2");
 			i.setnumber(23);
@@ -274,7 +267,6 @@ public class ItemServiceImpl implements ItemService {
 			// 设置商品属性；
 	     	i.setitem_id(5);
 			i.setname("第7个商品");
-			i.setpart("拍卖品");
 			i.settypeh("高级分类2");
 			i.settypel("低级分类1");
 			i.setnumber(41);

@@ -11,7 +11,6 @@ public class Item {
 	private int shop_id;     //店铺编号：shop_id，用来表示商品的归属店铺,系统自动匹配；
 	
 	private String name;     //商品名称：name；
-	private String part;     //商品类别：part；（拍卖品或者非拍卖品）
 	private String typeh;    //商品类型：typeh；（商品的一阶类型)
 	private String typel;    //商品类型：typel；（商品的二阶类型）
 	private int number;      //商品数量：number；
@@ -43,12 +42,6 @@ public class Item {
 	}
 	public void setname(String name) {
 		this.name = name;
-	}
-	public String getpart() {
-		return part;
-	}
-	public void setpart(String part) {
-		this.part = part;
 	}
 	public String gettypeh() {
 		return typeh;
@@ -114,8 +107,7 @@ public class Item {
 	 */
 	@Override
 	public String toString(){
-		return "\n Item ["+item_id+"] =("+shop_id+"   "+name+"   "
-				                      +part+"   "+typeh+"   "
+		return "\n Item ["+item_id+"] =("+shop_id+"   "+name+"   "+typeh+"   "
 				                      +typel+"   "+number+"   "
 				                      +price+"   "+detail+"   "
 				                      +image+"   "+browsingTimes+"   "
