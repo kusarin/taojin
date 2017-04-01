@@ -7,8 +7,8 @@
 <!-- 增删改方法 -->
 	<!-- 添加拍卖品 -->
 	<insert id="LotAdd" parameterType="cn.it.pojo.Lot">
-		insert into Lot(shop_id,name,typeh,typel,number,nowPrice,maxPrice,detail,image,browsingTimes,tradingTimes) 
-		        values(#{shop_id},#{name},#{typeh},#{typel},#{number},#{nowPrice},#{maxPrice},#{detail},#{image},#{browsingTimes},#{tradingTimes})
+		insert into Lot(shop_id,name,typeh,typel,number,nowPrice,maxPrice,detail,image
+		        values(#{shop_id},#{name},#{typeh},#{typel},#{number},#{nowPrice},#{maxPrice},#{detail},#{image})
 	</insert>
 	<!-- 删除拍卖品 -->
 	<delete id="LotDelete" parameterType="int">
