@@ -1,6 +1,11 @@
 package cn.it.service;
 
+import java.util.List;
+
 import org.springframework.web.servlet.ModelAndView;
+
+import cn.it.pojo.Lot;
+
 
 /**
  * 
@@ -53,6 +58,36 @@ public interface LotService {
 	 */
 	public ModelAndView updateLot(int lot_id,String name,String typeh,String typel,
 			String number,String nowPrice,String maxPrice,String detail,String image);
-	
+	/**
+	 * 按照拍卖品编号查找拍卖品信息
+	 * 
+	 * @param lot_id 拍卖品编号，int
+	 * 
+	 * @return Lot 返回值为一个拍卖品
+	 */
+	public  Lot findById(int lot_id);
+	/**
+	 * 按照条目显示拍卖品
+	 * 
+	 * @return List<Lot> 返回值为一个拍卖品列表，包括一个或者多个拍卖品
+	 */
+	public List<Lot> findLotList();
+	/**
+	 * 按照拍卖品类型查找拍卖品信息
+	 * 
+	 * @param typeh 拍卖品一级分类，String
+	 * @param typel 拍卖品二级分类，String
+	 * 
+	 * @return List<Lot> 返回值为一个拍卖品列表，包括一个或者多个拍卖品
+	 */
+	public List<Lot> findByType(String typeh,String typel);
+	/**
+	 * 按照店铺归宿查找所有拍卖品
+	 * 
+	 * @param shop_id 店铺编号，int
+	 * 
+	 * @returnList<Lot> 返回值为一个拍卖品列表，包括一个或者多个拍卖品
+	 */
+	public List<Lot> findByShopId(int shop_id);
 	
 }
