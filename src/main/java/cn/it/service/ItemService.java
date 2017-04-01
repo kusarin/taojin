@@ -19,7 +19,6 @@ public interface ItemService {
 	 * 
 	 * @param shop_id 店铺编号，int
 	 * @param name 商品名称，String
-	 * @param part 商品类别，String
 	 * @param typeh 商品一级分类，String
 	 * @param typel 商品二级分类，String
 	 * @param number 商品数量，int
@@ -29,7 +28,7 @@ public interface ItemService {
 	 * 
 	 * @return String 返回值为一个提示信息，String
 	 */
-	public ModelAndView addItem(int shop_id,String name,String part,String typeh,String typel,
+	public ModelAndView addItem(int shop_id,String name,String typeh,String typel,
 			String number,String price,String detail,String image);
 	/**
 	 * 删除商品
@@ -44,7 +43,6 @@ public interface ItemService {
 	 * 
 	 * @param item_id 商品编号，int
 	 * @param name 商品名称，String
-	 * @param part 商品类别，String
 	 * @param typeh 商品一级分类，String
 	 * @param typel 商品二级分类，String
 	 * @param number 商品数量，int
@@ -54,7 +52,7 @@ public interface ItemService {
 	 * 
 	 * @return String 返回值为一个提示信息，String
 	 */
-	public ModelAndView updateItem(int item_id, String name,String part,String typeh,String typel,
+	public ModelAndView updateItem(int item_id, String name,String typeh,String typel,
 			String number,String price,String detail,String image);
 	/**
 	 * 按照商品编号查找商品信息

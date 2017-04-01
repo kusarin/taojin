@@ -45,7 +45,6 @@ public class ItemController {
 		int shop_id = 1;
 		
 		String name = request.getParameter("name");
-		String part = request.getParameter("part");
 		String typeh = request.getParameter("typeh");
 		String typel = request.getParameter("typel");
 		String number = request.getParameter("number");
@@ -54,7 +53,7 @@ public class ItemController {
 		String image = request.getParameter("image");
 				
 		// 进行添加商品信息操作，并且获取提示信息
-		ModelAndView modeandview=itemservice.addItem(shop_id,name, part, typeh, typel, number, price, detail, image);
+		ModelAndView modeandview=itemservice.addItem(shop_id,name, typeh, typel, number, price, detail, image);
 		
 		return modeandview;
 	}	
@@ -99,7 +98,6 @@ public class ItemController {
 		int item_id = 10;
 		
 		String name = request.getParameter("name");
-		String part = request.getParameter("part");
 		String typeh = request.getParameter("typeh");
 		String typel = request.getParameter("typel");
 		String number = request.getParameter("number");
@@ -108,7 +106,7 @@ public class ItemController {
 		String image = request.getParameter("image");
 		
 		// 进行修改商品信息操作，并且获取提示信息
-		ModelAndView modeandview =itemservice.updateItem(item_id,name, part, typeh, typel, number, price, detail, image);
+		ModelAndView modeandview =itemservice.updateItem(item_id,name, typeh, typel, number, price, detail, image);
 
 		return modeandview;
 	}

@@ -7,8 +7,8 @@
 <!-- 增删改方法 -->
 	<!-- 添加商品 -->
 	<insert id="ItemAdd" parameterType="cn.it.pojo.Item">
-		insert into item(shop_id,name,part,typeh,typel,number,price,detail,image,browsingTimes,tradingTimes) 
-		        values(#{shop_id},#{name},#{part},#{typeh},#{typel},#{number},#{price},#{detail},#{image},#{browsingTimes},#{tradingTimes})
+		insert into item(shop_id,name,typeh,typel,number,price,detail,image,browsingTimes,tradingTimes) 
+		        values(#{shop_id},#{name},#{typeh},#{typel},#{number},#{price},#{detail},#{image},#{browsingTimes},#{tradingTimes})
 	</insert>
 	<!-- 删除商品 -->
 	<delete id="ItemDelete" parameterType="int">

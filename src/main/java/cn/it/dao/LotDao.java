@@ -3,7 +3,6 @@ package cn.it.dao;
 import java.util.List;
 
 import cn.it.pojo.Lot;
-import cn.it.pojo.Lot;
 
 /**
  * 
@@ -64,5 +63,4 @@ public interface LotDao {
 	 * @return List<Lot> 返回值为一个拍卖品列表，包括一个或者多个拍卖品
 	 */
 	public List<Lot> FindLotByShopId(int shop_id);
-	
 }
