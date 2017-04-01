@@ -18,9 +18,6 @@ public class Lot {
 	private String detail;   //拍卖品描述：detail；
 	private String image;    //拍卖品图片：image；
 	
-	private int browsingTimes; //拍卖品浏览次数：browsingTimes，后台数据，初始化为0，不能手动修改；
-	private int tradingTimes;  //拍卖品出售数量tradingTimes，后台数据，初始化为0，不能手动修改；
-	
 	private Shop shop;  //属性：店铺，继承店铺的所有属性
 	
 	private double nowPrice; // 拍卖品当前价格（拍卖价）
@@ -76,18 +73,6 @@ public class Lot {
 	}
 	public void setImage(String image) {
 		this.image = image;
-	}
-	public int getBrowsingTimes() {
-		return browsingTimes;
-	}
-	public void setBrowsingTimes(int browsingTimes) {
-		this.browsingTimes = browsingTimes;
-	}
-	public int getTradingTimes() {
-		return tradingTimes;
-	}
-	public void setTradingTimes(int tradingTimes) {
-		this.tradingTimes = tradingTimes;
 	}
 	public Shop getShop() {
 		return shop;
