@@ -2,7 +2,6 @@ package cn.it.service;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;

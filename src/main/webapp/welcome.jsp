@@ -39,6 +39,9 @@ pageEncoding="UTF-8"%>
       <td colspan="2">
     	<a href="usersearch.jsp">查看个人信息</a> 
     </td> 
+    <td colspan="2">
+    	<a href="UsersUpdate.jsp">修改个人信息</a> 
+    </td> 
  </table> 
 </body> 
 </html> 
