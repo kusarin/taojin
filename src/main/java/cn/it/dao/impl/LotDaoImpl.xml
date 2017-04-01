@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "cn.it.dao.LotDao">
+
+<!-- 拍卖品的Dao层操作 -->
+
+<!-- 增删改方法 -->
+	<!-- 添加拍卖品 -->
+	<insert id="LotAdd" parameterType="cn.it.pojo.Lot">
+		insert into Lot(shop_id,name,typeh,typel,number,nowPrice,maxPrice,detail,image,browsingTimes,tradingTimes) 
+		        values(#{shop_id},#{name},#{typeh},#{typel},#{number},#{nowPrice},#{maxPrice},#{detail},#{image},#{browsingTimes},#{tradingTimes})
+	</insert>
+	<!-- 删除拍卖品 -->
+	<delete id="LotDelete" parameterType="int">
+		delete from Lot where Lot_id = #{Lot_id}				
+	</delete>
+	<!-- 修改拍卖品信息 -->
+	<update id="LotUpdate" parameterType="cn.it.pojo.Lot">
+		update Lot set name=#{name},typeh=#{typeh},typel=#{typel},number=#{number},
+					   nowPrice=#{nowPrice},maxPrice=#{maxPrice},detail=#{detail},image=#{image}
+		where Lot_id = #{Lot_id}					
+	</update>
+	<!-- 查看单个拍卖品信息 -->
+	<select id="FindLotById" parameterType="int" resultType="cn.it.pojo.Lot">
+		select * from Lot where Lot_id = #{Lot_id}
+	</select>
+	<!-- 查看所有拍卖品 -->
+	<select id="FindAll" resultType="cn.it.pojo.Lot">
+		select * from Lot
+	</select>
+	<!-- 查看某种类型的拍卖品信息 -->
+	<select id="FindLotByType" parameterType="String" resultType="cn.it.pojo.Lot">
+		select * from Lot where typeh = #{0} and typel = #{1}
+	</select>
+	<!-- 查看归属于某个店铺的所有拍卖品 -->
+	<select id="FindLotByShopId" parameterType="int" resultType="cn.it.pojo.Lot">
+		select * from Lot where shop_id = #{shop_id}
+	</select>
+</mapper>

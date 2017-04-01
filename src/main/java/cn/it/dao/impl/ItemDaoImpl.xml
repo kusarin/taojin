@@ -16,7 +16,7 @@
 	</delete>
 	<!-- 修改商品信息 -->
 	<update id="ItemUpdate" parameterType="cn.it.pojo.Item">
-		update item set name=#{name},part=#{part},typeh=#{typeh},typel=#{typel},
+		update item set name=#{name},typeh=#{typeh},typel=#{typel},
 		                number=#{number},price=#{price},detail=#{detail},image=#{image}
 		where item_id = #{item_id}					
 	</update>
