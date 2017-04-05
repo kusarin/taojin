@@ -31,23 +31,21 @@ public class ItemServiceImpl implements ItemService {
 	 * 
 	 * @param shop_id 店铺编号，int
 	 * @param name 商品名称，String
-	 * @param part 商品类别，String
 	 * @param typeh 商品一级分类，String
 	 * @param typel 商品二级分类，String
-	 * @param number 商品数量，int
-	 * @param price 商品价格，double
+	 * @param number 商品数量，String，之后强转为int
+	 * @param price 商品价格，String，之后强转为double
 	 * @param detail 商品描述，String
 	 * @param image 商品图片，String
 	 * 
-	 * @return String 返回值为一个提示信息，String
+	 * @return ModelAndView
 	 */
-	public ModelAndView addItem(int shop_id,String name, String part, String typeh, String typel,
+	public ModelAndView addItem(int shop_id,String name, String typeh, String typel,
 			String number, String price, String detail, String image) {	
 		ModelAndView str = new ModelAndView("addItem");  //跳转到addItem.jsp界面
 		
 		// 判断传入参数是否为空 
 		if(name==null||name.equals("")
-				||part==null||part.equals("")
 				||typeh==null||typeh.equals("")
 				||typel==null||typel.equals("")
 				||number==null||number.equals("")
@@ -69,7 +67,6 @@ public class ItemServiceImpl implements ItemService {
 			// 设置商品属性；
 			i.setshop_id(shop_id);  // 店鋪编号
 			i.setname(name);        // 商品名称
-			i.setpart(part);        // 商品类别
 			i.settypeh(typeh);      // 商品一阶类型
 			i.settypel(typel);      // 商品二阶类型
 			i.setnumber(num);       // 商品数量
@@ -97,7 +94,7 @@ public class ItemServiceImpl implements ItemService {
 	 * 
 	 * @param item_id 商品编号，int
 	 * 
-	 * @return String 返回值为一个提示信息，String
+	 * @return ModelAndView
 	 */
 	public ModelAndView deleteItem(int item_id) {
 		ModelAndView str = new ModelAndView("deleteItem");  //跳转到deleteItem.jsp界面
@@ -112,23 +109,21 @@ public class ItemServiceImpl implements ItemService {
 	 * 
 	 * @param item_id 商品编号，int
 	 * @param name 商品名称，String
-	 * @param part 商品类别，String
 	 * @param typeh 商品一级分类，String
 	 * @param typel 商品二级分类，String
-	 * @param number 商品数量，int
-	 * @param price 商品价格，double
+	 * @param number 商品数量，String，之后强转为int
+	 * @param price 商品价格，String，之后强转为double
 	 * @param detail 商品描述，String
 	 * @param image 商品图片，String
 	 * 
-	 * @return String 返回值为一个提示信息，String
+	 * @return ModelAndView
 	 */
-	public ModelAndView updateItem(int item_id,String name,String part,String typeh,String typel,
+	public ModelAndView updateItem(int item_id,String name,String typeh,String typel,
 			String number,String price,String detail,String image) {
 		ModelAndView str = new ModelAndView("changeItem");  //跳转到changeItem.jsp界面
 		
 		// 判断传入参数是否为空 
 		if(name==null||name.equals("")
-			||part==null||part.equals("")
 			||typeh==null||typeh.equals("")
 			||typel==null||typel.equals("")
 			||number==null||number.equals("")
@@ -149,7 +144,6 @@ public class ItemServiceImpl implements ItemService {
 			// 设置商品属性；
 			i.setitem_id(item_id);    // 商品编号
 			i.setname(name);          // 商品名称
-			i.setpart(part);          // 商品类别
 			i.settypeh(typeh);        // 商品一阶类型
 			i.settypel(typel);        // 商品二阶类型
 			i.setnumber(num);         // 商品数量
@@ -205,7 +199,18 @@ public class ItemServiceImpl implements ItemService {
 	 */
 	public List<Item> findByType(String typeh,String typel){
 		return itemDao.FindItemByType(typeh, typel);
-	}	
+	}
+	/**
+	 * 通过调用itemDao.FindItemByShopId(shop_id)，根据店铺编号查看商品
+	 * 
+	 * @param shop_id 店铺编号，int
+	 * 
+	 * @returnList<Item> 返回值为一个商品列表，包括一个或者多个商品
+	 */
+	public List<Item> findByShopId(int shop_id){
+		return itemDao.FindItemByShopId(shop_id);
+	}
+	
 	
 //	// 判断输入字符串是否为数字的方法，用来判断number和price是否为数字【听说可以在前端网页执行，所以先注释掉】
 //	public static boolean isNumeric(String str){
@@ -231,7 +236,6 @@ public class ItemServiceImpl implements ItemService {
 			// 设置商品属性；
 		 	i.setshop_id(1);
 			i.setname("第五个商品");
-			i.setpart("拍卖品");
 			i.settypeh("高级分类1");
 			i.settypel("低级分类2");
 			i.setnumber(23);
@@ -274,7 +278,6 @@ public class ItemServiceImpl implements ItemService {
 			// 设置商品属性；
 	     	i.setitem_id(5);
 			i.setname("第7个商品");
-			i.setpart("拍卖品");
 			i.settypeh("高级分类2");
 			i.settypel("低级分类1");
 			i.setnumber(41);

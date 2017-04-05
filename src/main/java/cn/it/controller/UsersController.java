@@ -25,12 +25,12 @@ public class UsersController {
 		ModelAndView result = usersService.login(user,session);
 		return result;
 	}
-	//添加用户
-		@RequestMapping("addUser.do")
-		public ModelAndView addUser(Users user){
-			ModelAndView result = usersService.add(user);
-			return result;
-		}
+		//添加用户
+			@RequestMapping("addUser.do")
+			public ModelAndView addUser(Users user){
+				ModelAndView result = usersService.add(user);
+				return result;
+			}
 	   //删除用户
 		@RequestMapping("deleteUser")
 		public ModelAndView deleteUser(int userId){
@@ -42,5 +42,9 @@ public class UsersController {
 			return null;
 			
 		}
-		
+		@RequestMapping("updateUser.do")
+		public ModelAndView updateUser(int userId){
+			return null;
+			
+		}
 	}

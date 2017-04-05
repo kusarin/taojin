@@ -11,25 +11,23 @@
 		select * from users where username = #{username} and password = #{password}
 	</select>
 <!-- 增删改查方法 -->
+
 	<insert id="UsersAdd" parameterType="cn.it.pojo.Users">
 		insert into users(username,password,name,tele,email,type,ID) 
 		        values(#{username},#{password},#{name},#{tele},#{email},#{type},#{ID})
 	</insert>
+	
 	<delete id="UsersDelete"  parameterType="cn.it.pojo.Users">
 		delete from users
 		<where>
 			user_ID = #{user_ID}
 		</where>
 	</delete>
+	
 	<update id="UsersUpdate"  parameterType="cn.it.pojo.Users">
-		update users set username=#{username},password=#{password},name=#{name},tele=#{tele},
-		                email=#{email},type=#{type},ID=#{ID}
-		<where>
-			<if test="userID!=0">
-				and user_ID=#{user_ID}
-			</if>
-		</where>
+		update users set password=#{password},name=#{name},tele=#{tele},email=#{email}
 	</update>
+	
 	<select id="UsersSearch"  parameterType="cn.it.pojo.Users">
 		select * from Users where user_ID = #{user_ID}
 	</select>
