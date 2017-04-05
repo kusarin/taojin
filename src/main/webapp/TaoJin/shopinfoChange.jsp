@@ -4,13 +4,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href='http://fonts.useso.com/css?family=Open+Sans:400,300italic,400italic,600,600italic'
-	rel='stylesheet' type='text/css'>
-<link href='http://fonts.useso.com/css?family=Crete+Round'
-	rel='stylesheet' type='text/css'>
-<link href='http://fonts.useso.com/css?family=Crete+Round'
-	rel='stylesheet' type='text/css'>
 <link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
 <link href="./TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="./TaoJin/css/style.css" rel="stylesheet">
