@@ -13,7 +13,7 @@ pageEncoding="UTF-8"%>
 </head>
 <body>
 <div class="pagecontainer">
-     <div class="orderInfo">
+     <div class="orderInfo">	
 	     <strong>订单信息</strong>
 	 </div>
 	 <div class="line">

@@ -45,7 +45,7 @@ public class ShopController {
 		map.put("shopli", list);		
 		return "/shopList";
 	}
-	@RequestMapping(value = {"/delete.do"},method={RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = {"TaoJin/delete.do"},method={RequestMethod.GET,RequestMethod.POST})
 	public String doDelete(Shop shop){
 		shopService.deleteShop(shop);
 		return "redirect:/shopList.do";
