@@ -26,13 +26,6 @@
 					<td><input type="text" name="name" /></td>
 				</tr>
 				<tr>
-					<td>商品类别:</td>
-					<td><select id="code" name="part">
-							<option value="普通商品">普通商品</option>
-							<option value="拍卖品">拍卖品</option>
-					</select></td>
-				</tr>
-				<tr>
 					<td>商品类型:</td>
 					<td><select id="code" name="typeh">
 							<option value="高级分类1">高级分类1</option>
