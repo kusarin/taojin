@@ -15,7 +15,7 @@
             <tr align="center">  
                 <td>编号</td>  
                 <td>商品名称</td>  
-                <td>商品类别</td>  
+                <td>商品类型</td>  
                 <td>商品价格</td>  
                 <td>商品描述</td>  
             </tr>  
@@ -24,7 +24,7 @@
               <tr>  
                 <td>  ${i.item_id}  </td>  
                 <td> ${i.name} </td>  
-                <td> ${i.part} </td>  
+                <td> ${i.typel} </td>  
                 <td> ${i.price} </td>  
                 <td> ${i.detail} </td>    
             </tr>  
