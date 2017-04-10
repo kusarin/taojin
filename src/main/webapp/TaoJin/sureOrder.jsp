@@ -9,13 +9,13 @@ pageEncoding="UTF-8"%>
  <title>确认订单</title>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
  
-<link rel="stylesheet" href="./css/sureOrder.css"/>
-<link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
-<link href="./TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
-<link href="./TaoJin/css/style.css" rel="stylesheet">
-<link href="./TaoJin/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
-<link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
-<link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/TaoJin/css/sureOrder.css"/>
+<link href="${pageContext.request.contextPath}/TaoJin/css/bootstrap.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/TaoJin/css/style.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/TaoJin/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
+<link href="${pageContext.request.contextPath}/TaoJin/css/jquery.fancybox.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/TaoJin/css/cloud-zoom.css" rel="stylesheet">
 
 <script>
   function plus(val){
@@ -160,7 +160,7 @@ pageEncoding="UTF-8"%>
 		</div>
     </div> 
 	<footer style="margin-top:20px">
-       <img  src="./TaoJin/image/footer-tri.png" style="width:100%;">
+       <img  src="${pageContext.request.contextPath}/TaoJin/image/footer-tri.png" style="width:100%;">
             <div style="margin: 0px 0px 10px;text-align:center;padding-top:10px;">
 			 
              <span>友情链接/</span>
