@@ -1,6 +1,7 @@
-.container{
+.containers{
 	width:auto;
 	height:auto;
+	color:black;
 }
 .orderTitle{
 	width:680px;
@@ -74,7 +75,7 @@
 	border-bottom:2px solid #80ffff;
 }
 .nav12{
-	width:90px;
+	width:120px;
 	text-align:center;
 	border-bottom:2px solid #80ffff;
 }
@@ -90,6 +91,11 @@
 	margin:0 auto;
 	margin-top:5px;
 }
+.orderDe table{
+	height:auto;
+	width:680px;
+	margin-left:0px;
+}
 .orderDe table td.test1{
 	width:320px;
 	height:auto;
@@ -97,16 +103,20 @@
 .orderDe table td.test1 img{
 	width:90px;
 	height:auto;
-	float:left;
+	margin-left:0px;
+	
 }
 .orderDe table td.test1 p{
-   	word-break:break-all;
+   	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 	width:230px;
 	height:auto;
 	color:black;
+	margin-top:0px;
 }
 .orderDe table td.common{
-	width:90px;
+	width:120px;
 	height:auto;
 	text-align:center;
 }
@@ -120,12 +130,13 @@ a:hover{
 	width:680px;
 	height:auto;
 	text-align:right;
-	margin-left:0px;
+	margin-right:0px;
 }
 .pay{
 	font-weight:bold;
 	font-size:20px;
 	color:red;
+    margin-top:-10px;
 }
 .commit{
 	height:auto;
@@ -134,10 +145,11 @@ a:hover{
 	text-align:right;
 	margin-top:10px;
 }
-.commit button{
+.commit input{
 	text-align:center;
 	height:30px;
 	width:120px;
 	border:0px;
 	background-color:#e3170d;
+	cursor:pointer;
 }

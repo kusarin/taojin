@@ -10,12 +10,13 @@ pageEncoding="UTF-8"%>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
  
 <link rel="stylesheet" href="./css/sureOrder.css"/>
-<link href="./css/bootstrap.css" rel="stylesheet">
-<link href="./css/bootstrap-responsive.css" rel="stylesheet">
-<link href="./css/style.css" rel="stylesheet">
-<link href="./css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
-<link href="./css/jquery.fancybox.css" rel="stylesheet">
-<link href="./css/cloud-zoom.css" rel="stylesheet">
+<link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
+<link href="./TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="./TaoJin/css/style.css" rel="stylesheet">
+<link href="./TaoJin/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
+<link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
+<link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
+
 <script>
   function plus(val){
    var num=document.getElementById("mp");
@@ -126,7 +127,7 @@ pageEncoding="UTF-8"%>
 		<div class="orderDe" style="border:1px solid #80ffff;">
 		<table>
 		   <tr>
-			     <td class="test1"><a href="#"><img src="image/order1.jpg"/></a>
+			     <td class="test1"><a href="#"><img src="./TaoJin/image/order1.jpg"/></a>
 		        <a href="#"><p>Seagate希捷移动硬盘1T Backup Plus 新睿品4 2tb USB3.0超薄包邮 [交易快照]套餐类型：套餐一颜色分类：土豪金500G
 		        gdfghjkll;lkjhjkl;;jkjiuygjhgghoopll</p></a></td>
 				 <td class="common" style="padding-left:0px;text-align:center;">
@@ -159,7 +160,7 @@ pageEncoding="UTF-8"%>
 		</div>
     </div> 
 	<footer style="margin-top:20px">
-       <img  src="image/footer-tri.png" style="width:100%;">
+       <img  src="./TaoJin/image/footer-tri.png" style="width:100%;">
             <div style="margin: 0px 0px 10px;text-align:center;padding-top:10px;">
 			 
              <span>友情链接/</span>
