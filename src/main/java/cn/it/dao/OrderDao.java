@@ -14,13 +14,6 @@ public interface OrderDao {
 	 * @param(参数类型为Order)
 	 */
 	public void add(Order order);
-	/**
-	 * 获取订单信息
-	 * @return(Order表示返回一个订单对象)
-	 * @param(orderNumber订单表中唯一标识一个订单记录)
-	 */
-     public Order select(int id);
-     
      /**
       * 根据订单号查询订单
       * */
