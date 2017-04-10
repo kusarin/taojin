@@ -15,16 +15,20 @@ import java.util.List;
 
 
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.it.dao.ItemDao;
 import cn.it.dao.OrderDao;
 import cn.it.dao.OrderDetailDao;
+import cn.it.dao.ShopDao;
 import cn.it.pojo.Item;
 import cn.it.pojo.Order;
 import cn.it.pojo.OrderCollection;
 import cn.it.pojo.OrderDetail;
+import cn.it.pojo.Shop;
 import cn.it.service.OrderService;
 
 /**
@@ -42,6 +46,8 @@ public class OrderServiceImpl implements OrderService{
 	private OrderDao orderDao;
 	@Autowired
 	private ItemDao itemDao;
+	@Autowired
+	private ShopDao shopDao;
 	//任意对象
 	private static Object lockObj = "lockerOrder"; 
 	//订单数量
@@ -193,4 +199,54 @@ public class OrderServiceImpl implements OrderService{
 		return orderNum;
 	   }
 	}
+	
+/**
+ * 确认订单信息
+ * @param(itemId表示商品编号，userId用户编号，number购买某件商品的数量)
+ * */
+	public OrderCollection sureOrder(int itemId, int userId, int number) {
+Item item=itemDao.FindItemById(itemId);
+		
+		OrderCollection orderCollection=new OrderCollection(); //订单信息、订单详细信息的对象
+		/**暂不处理收货地址*/
+//		//根据ueserId，获取收货地址
+//		Address address=addressDao.select(userId);
+//		//设置收货地址信息
+//	    orderCollection.setAddress(address);
+	    
+	    /**
+	     * 支付方式暂不设定
+	     * */
+	    
+		/***
+		 * 生成订单细目
+		 * 
+		 * */
+		List<OrderDetail> orderDetailList=orderCollection.getOrderDeatail();
+		OrderDetail orderDetail=new OrderDetail();
+		orderDetail.setItem(item);
+		orderDetail.setId(itemId); //设置商品编号
+		double unitPrice=item.getprice();   //商品单价
+		orderDetail.setItemPrice(unitPrice);
+		orderDetail.setItemNumbers(number);   //此次购买某件商品的数量
+		double itemPrice=number*unitPrice;   //购买某件商品的总价
+		orderDetail.setItemPrice(itemPrice);
+	    Shop shop =shopDao.findByid(item.getshop_id());//获取该商品所属的店铺名称
+	    String shopName=shop.getName();
+	    orderDetail.setShopName(shopName);
+	    orderDetailList.add(orderDetail);//将订单明细放入容器
+	    
+	    //设置订单信息
+	 	Order order=new Order();
+	    double actulPayment=0; //订单总价
+	    double freight=0;   //运费
+	    order.setFreight(freight);
+	    actulPayment=actulPayment+itemPrice+freight;
+	    order.setActulPayment(actulPayment); //订单总价
+	    orderCollection.setOrder(order);//设置订单信息
+	    
+	    orderCollection.setOrderDeatail(orderDetailList);//设置订单细目
+	    return orderCollection; //返回订单信息
+	}
+	
 }
