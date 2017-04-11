@@ -214,12 +214,13 @@ public class OrderServiceImpl implements OrderService {
 		 * 生成订单细目
 		 * 
 		 * */
-		List<OrderDetail> orderDetailList = orderCollection.getOrderDeatail();
+		
+		List<OrderDetail> orderDetailList =new ArrayList<OrderDetail>();
 		OrderDetail orderDetail = new OrderDetail();
 		orderDetail.setItem(item);
 		orderDetail.setId(itemId); // 设置商品编号
 		double unitPrice = item.getprice(); // 商品单价
-		orderDetail.setItemPrice(unitPrice);
+		orderDetail.setUnitPrice(unitPrice);
 		orderDetail.setItemNumbers(number); // 此次购买某件商品的数量
 		double itemPrice = number * unitPrice; // 购买某件商品的总价
 		orderDetail.setItemPrice(itemPrice);
@@ -227,7 +228,7 @@ public class OrderServiceImpl implements OrderService {
 		String shopName = shop.getName();
 		orderDetail.setShopName(shopName);
 		orderDetailList.add(orderDetail);// 将订单明细放入容器
-
+         
 		// 设置订单信息
 		Order order = new Order();
 		double actulPayment = 0; // 订单总价
@@ -238,7 +239,8 @@ public class OrderServiceImpl implements OrderService {
 		orderCollection.setOrder(order);// 设置订单信息
 
 		orderCollection.setOrderDeatail(orderDetailList);// 设置订单细目
+		orderCollection.setTotalNumbers(number);//订单中商品总数
+		orderCollection.setShopName(shopName);
 		return orderCollection; // 返回订单信息
 	}
-
 }

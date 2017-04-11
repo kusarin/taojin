@@ -21,8 +21,11 @@ pageEncoding="UTF-8"%>
   function plus(val){
    var num=document.getElementById("mp");
    var value=parseInt(num.value);
+   var total=document.getElementById("total");
+   
    if(value<val){
     num.value=value+1;
+    total.innerHTML=num.value;
    }
    else{
     alert("这样的商品总共"+num.value+"件！抱歉！！");
@@ -31,8 +34,11 @@ pageEncoding="UTF-8"%>
   function minus(){
     var num=document.getElementById("mp");
 	var value=parseInt(num.value);
+	var total=document.getElementById("total");
+	
 	if(value>1){
     num.value=value-1;
+    total.innerHTML=num.value;
 	}
   }
 </script>
@@ -119,37 +125,39 @@ pageEncoding="UTF-8"%>
 				</tr>
 				</table>
 			</div>
-			<div class="shoper">
-			    <span>店铺：<a href="#">dkbov帝克博威旗舰店</a></span>
-			</div>
+			
 		</div>
 		
+		<div class="shoper">
+			    <span>店铺：<a href="#">${c.shopName}</a></span>
+			    <input type="hidden" value="${c.shopName}" name="shopName">
+		</div>
+		<c:forEach items="${c.orderDeatail}" var="collection">
 		<div class="orderDe" style="border:1px solid #80ffff;">
 		<table>
 		   <tr>
-			     <td class="test1"><a href="#"><img src="./TaoJin/image/order1.jpg"/></a>
-		        <a href="#"><p>Seagate希捷移动硬盘1T Backup Plus 新睿品4 2tb USB3.0超薄包邮 [交易快照]套餐类型：套餐一颜色分类：土豪金500G
-		        gdfghjkll;lkjhjkl;;jkjiuygjhgghoopll</p></a></td>
+			     <td class="test1"><a href="#"><img src="${pageContext.request.contextPath}/${collection.item.image}"/></a>
+		        <a href="#"><p>${collection.item.detail}</p></a></td>
 				 <td class="common" style="padding-left:0px;text-align:center;">
 				 <input type="button" value="-"  id="m" onclick="minus()" style="text-align:center;height:30px;width:30px;float:left;border:0;">
-				 <input type="text" value="1" id="mp" readonly="true" style="background-color:white;text-align:center;width:40px;float:left;border:1px;">
+				 <input type="text" value="${collection.itemNumbers}" id="mp" readonly="readonly" name="number" style="background-color:white;text-align:center;width:40px;float:left;border:1px;">
 				 <input type="button" value="+"  onclick="plus(3)" style="height:30px;width:30px;text-align:center;float:left;border:0;"></td>
-				 <td class="common">370.00</td>
-				 <td class="common">270.00</td>
+				 <td class="common">${collection.unitPrice}</td>
+				 <td class="common">${collection.itemPrice}</td>
 			 </tr>
 		 </table>
 		</div>
-		
+		</c:forEach>
 		<div class="orderDe">
 		    <table class="same">
-			     <tr><td style="padding-top:15px;padding-bottom:15px;"><strong class="pay">1</strong>件商品，总商品金额：<strong class="pay">￥29.90</strong></td></tr>
-			     <tr><td style="padding-bottom:15px;"> 运费：<strong class="pay">￥0.00</strong></td></tr>
+			     <tr><td style="padding-top:15px;padding-bottom:15px;"><strong class="pay" id="total">${c.totalNumbers}</strong>件商品，总商品金额：<strong class="pay">${c.order.actulPayment}</strong></td></tr>
+			     <tr><td style="padding-bottom:15px;"> 运费：<strong class="pay">${c.order.freight}</strong></td></tr>
 			</table>
 		</div>
 		
 		<div class="orderDe" style="margin-top:0px;border:1px solid #80ffff;">
 		  <table  class="same" style="background-color:#f0ffff;">
-			     <tr><td style="padding-top:15px;">应付总额： <span class="pay">￥270.00</span></td></tr>
+			     <tr><td style="padding-top:15px;">应付总额： <span class="pay">${c.order.actulPayment}</span></td></tr>
 			     <tr><td style="padding-top:15px;"> 寄送至： 陕西 西安市  </td></tr>
 				 <tr><td style="padding-top:15px;padding-bottom:15px;">收货人:********</td></tr>
 		  </table>
@@ -159,6 +167,7 @@ pageEncoding="UTF-8"%>
 		    <input type="submit" value="提交订单"/>
 		</div>
     </div> 
+    <!-- footer -->
 	<footer style="margin-top:20px">
        <img  src="${pageContext.request.contextPath}/TaoJin/image/footer-tri.png" style="width:100%;">
             <div style="margin: 0px 0px 10px;text-align:center;padding-top:10px;">

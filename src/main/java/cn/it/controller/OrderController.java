@@ -78,7 +78,8 @@ public class OrderController {
 	 * 
 	 * */
 	@RequestMapping("sureOrder.do")
-	public ModelAndView sureOrder(int itemId,int userId,int number){
+	public ModelAndView sureOrder(int itemId,int number){
+		int userId=1;
 		ModelAndView view =new ModelAndView("sureOrder");
 		OrderCollection collection=orderService.sureOrder(itemId, userId, number);
 		view.addObject("c", collection);
