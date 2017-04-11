@@ -1,9 +1,5 @@
 package cn.it.pojo;
 
-
-
-
-
 /**
  * 
  * 订单明细 OrderDetail

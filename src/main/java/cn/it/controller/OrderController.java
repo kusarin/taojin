@@ -73,5 +73,16 @@ public class OrderController {
 		view.addObject("orderList",collectList);
 		return view;
 	}
-	
+	/***
+	 * 确认订单信息
+	 * 
+	 * */
+	@RequestMapping("sureOrder.do")
+	public ModelAndView sureOrder(int itemId,int userId,int number){
+		ModelAndView view =new ModelAndView("sureOrder");
+		OrderCollection collection=orderService.sureOrder(itemId, userId, number);
+		view.addObject("c", collection);
+		return view;
+		
+	}
 }

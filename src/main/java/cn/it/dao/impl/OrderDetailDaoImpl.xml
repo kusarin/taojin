@@ -15,7 +15,6 @@
 	                <id column="Item_id" property="item_id" javaType="int" jdbcType="INTEGER"/>
 	                <result column="Shop_id" property="shop_id" javaType="int" jdbcType="INTEGER"/>
 	                <result column="Name" property="name" javaType="String" jdbcType="VARCHAR"/>
-	                <result column="Part" property="part" javaType="String" jdbcType="VARCHAR"/>
 	                <result column="Number" property="number" javaType="int" jdbcType="INTEGER"/>
 	               <result column="Typeh" property="typeh" javaType="String" jdbcType="VARCHAR"/>
 	               <result column="Typel" property="typel" javaType="String" jdbcType="VARCHAR"/>
@@ -23,7 +22,7 @@
 	               <result column="Detail" property="detail" javaType="String" jdbcType="VARCHAR"/>
 	               <result column="Image" property="image" javaType="String" jdbcType="VARCHAR"/>
 	               <result column="BrowingTiems" property="browingtimes" javaType="int" jdbcType="INTEGER"/>
-	               <result column="saleNumbers" property="saleNumbers" javaType="int" jdbcType="INTEGER"/>
+	               <result column="tradingTimes" property="tradingTimes" javaType="int" jdbcType="INTEGER"/>
 	          </association>
               </resultMap>
          <parameterMap type="cn.it.pojo.OrderDetail" id="OrderDetailParameterMap">

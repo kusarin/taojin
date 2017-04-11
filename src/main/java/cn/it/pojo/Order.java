@@ -1,6 +1,6 @@
 package cn.it.pojo;
 
-import java.util.Date;
+import java.sql.Date;
 /**
  * 
  * @author Administrator

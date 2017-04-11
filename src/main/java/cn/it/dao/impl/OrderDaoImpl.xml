@@ -12,7 +12,7 @@
             <result column="Status" property="status" javaType="String" jdbcType="VARCHAR"/>
             <result column="PaymentMethod" property="paymentMethod" javaType="String" jdbcType="VARCHAR"/>
             <result column="RecivingAddress" property="recivingAddress" javaType="String" jdbcType="VARCHAR"/>
-            <result column="freight" property="freight" javaType="double" jdbcType="DOUBLE"/>
+            <result column="Freight" property="freight" javaType="double" jdbcType="DOUBLE"/>
         </resultMap>
         <parameterMap type="cn.it.pojo.Order" id="OrderParameterMap">
             <parameter property="id" resultMap="findAll"/>  
