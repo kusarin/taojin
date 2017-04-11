@@ -2,7 +2,6 @@ package cn.it.service.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -10,10 +9,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.it.dao.AddressDao;
 import cn.it.dao.ItemDao;
 import cn.it.dao.OrderDao;
 import cn.it.dao.OrderDetailDao;
 import cn.it.dao.ShopDao;
+import cn.it.pojo.Address;
 import cn.it.pojo.Item;
 import cn.it.pojo.Order;
 import cn.it.pojo.OrderCollection;
@@ -35,6 +36,8 @@ public class OrderServiceImpl implements OrderService {
 	private ItemDao itemDao;
 	@Autowired
 	private ShopDao shopDao;
+	@Autowired
+	private AddressDao addressDao;
 	// 任意对象
 	private static Object lockObj = "lockerOrder";
 	// 订单数量
@@ -242,5 +245,15 @@ public class OrderServiceImpl implements OrderService {
 		orderCollection.setTotalNumbers(number);//订单中商品总数
 		orderCollection.setShopName(shopName);
 		return orderCollection; // 返回订单信息
+	}
+	
+	/****
+	 * 
+	 * 根据用户Id获取收货地址
+	 * 
+	 * */
+	public Address getAddress(int userId){
+		
+		return addressDao.select(userId);
 	}
 }
