@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<h1>管理员界面 </h1>
+<h1>管理员界面--${manager.account}</h1>
 <div>
   <table width="565" border="0">
     <tr>
