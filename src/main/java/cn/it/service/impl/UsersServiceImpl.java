@@ -13,53 +13,59 @@ import cn.it.pojo.Users;
 import cn.it.service.UsersService;
 
 @Service("usersService")
-public class UsersServiceImpl implements UsersService{
+public class UsersServiceImpl implements UsersService {
 	@Autowired
 	private UsersDao usersDao;
-	
-	public ModelAndView login(Users user,HttpSession session) 
-	throws IOException{
+
+	public ModelAndView login(Users user, HttpSession session)
+			throws IOException {
 		ModelAndView str = new ModelAndView("welcome");
-			if(user.getUsername().equals("")||user.getUsername()==null||
-			user.getPassword().equals("")||user.getPassword()==null){
-				str.addObject("error", "用户名或密码为空");
-				str.setViewName("login");
-		}else{
+		if (user.getUsername().equals("") || user.getUsername() == null
+				|| user.getPassword().equals("") || user.getPassword() == null) {
+			str.addObject("error", "用户名或密码为空");
+			str.setViewName("login");
+		} else {
 			Users u = usersDao.login(user);
-			if(u == null){
+			if (u == null) {
 				str.addObject("error", "用户名或密码错误");
 				str.setViewName("login");
-			}else{
+			} else {
 				session.setAttribute("user", u);
 			}
 		}
-		
+
 		return str;
 	}
 
 	public ModelAndView add(Users user) {
 		ModelAndView str = new ModelAndView("register");
-		List<Users> userlist =usersDao.UsersFind();
+		List<Users> userlist = usersDao.UsersFind();
 		Boolean flag = true;
-		for(Users u:userlist){
-			if(u.getUsername().equalsIgnoreCase(user.getUsername())){
+		for (Users u : userlist) {
+			if (u.getUsername().equalsIgnoreCase(user.getUsername())) {
 				flag = false;
 				str.addObject("error", "用户名重复");
 				break;
 			}
 		}
-		if(user.getUsername()==null||user.getUsername().equalsIgnoreCase("")||
-				user.getPassword()==null||user.getPassword().equalsIgnoreCase("")){
+		if (user.getUsername() == null
+				|| user.getUsername().equalsIgnoreCase("")
+				|| user.getPassword() == null
+				|| user.getPassword().equalsIgnoreCase("")) {
 			str.addObject("error", "用户名或密码为空");
 			flag = false;
-		}else if(flag){
+		} else if (flag) {
 			usersDao.UsersAdd(user);
 			str.setViewName("login");
 		}
 		return str;
 	}
-	public ModelAndView update(Users user){
-		return null;
-		
+
+	public ModelAndView update(Users user, HttpSession session) {
+		ModelAndView str = new ModelAndView("welcome");
+		user = (Users) session.getAttribute("user");
+		usersDao.UsersUpdate(user);
+		return str;
+
 	}
 }
