@@ -27,7 +27,6 @@ public class ResourceFileServiceImpl implements ResourceFileService{
 	
 	public ModelAndView add(ResourceFile rf) {
 		ModelAndView mav =new ModelAndView("ResourceFile");
-		
 		if(rf==null){
 			mav.setViewName("addRF");
 		}else if(rf.getName()==null||rf.getName().equalsIgnoreCase("")||

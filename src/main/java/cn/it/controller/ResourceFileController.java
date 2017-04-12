@@ -43,6 +43,5 @@ public class ResourceFileController {
 		int id1=Integer.parseInt(id);
 		resourceFileService.delete(id1);
 		return "redirect:findResourceFile.do";
-		
 	}
 }

@@ -22,4 +22,8 @@ public class CommentServiceImpl implements CommentService {
 	public void delete(int id){
 		commentDao.delete(id);
 	}
+	
+	public void add(Comment comment){
+		commentDao.add(comment);
+	}
 }
