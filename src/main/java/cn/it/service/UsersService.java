@@ -13,5 +13,5 @@ public interface UsersService {
 	public ModelAndView login(Users user,HttpSession session) 
 			throws IOException;	 
 	 public ModelAndView add(Users user);
-	 public ModelAndView update(Users user);
+	 public ModelAndView update(Users user,HttpSession session);
 }

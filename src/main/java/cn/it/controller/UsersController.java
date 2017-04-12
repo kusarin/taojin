@@ -43,8 +43,9 @@ public class UsersController {
 			
 		}
 		@RequestMapping("updateUser.do")
-		public ModelAndView updateUser(int userId){
-			return null;
+		public ModelAndView updateUser(Users user,HttpSession session){
+			ModelAndView result = usersService.update(user,session);
+			return result;
 			
 		}
 	}
