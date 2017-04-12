@@ -1,0 +1,110 @@
+body{
+	font-family:"Î¢ÈíÑÅºÚ";
+	font-size:12px;
+}
+.pagecontainer{
+	width:980px;
+	height:auto;
+}
+.orderInfo{
+    width:680px;
+	height:30px;
+	margin-top:50px;
+	margin-left:200px;
+	margin-right:200px;
+	font-size:20px;
+
+}
+.line{
+	width:680px;
+	height:1px;
+	margin-left:200px;
+	margin-right:200px;
+	background-color:#80ffff;
+}
+.addr{
+	width:680px;
+	margin-left:200px;
+	margin-right:200px;
+	margin-top:10px;
+	font-size:15px;
+}
+.way{
+	width:680px;
+	margin-left:200px;
+	margin-right:200px;
+	margin-top:10px;
+	font-size:15px;
+}
+.bussiness{
+	width:680px;
+	margin-left:200px;
+	margin-right:200px;
+}
+.bname{
+	margin-top:10px;
+	font-size:15px;
+}
+table{
+	font-size:13px;
+	margin-left:50px;
+}
+.order{
+	width:680px;
+	margin-left:200px;
+	margin-right:200px;
+}
+.orderDetail{
+	width:680px;
+	margin-left:200px;
+	margin-right:200px;
+}
+.orderDetail table{
+	border:1px solid #80ffff;
+	width:680px;
+	margin-left:0px;
+	border-right:0px;
+} 
+.orderDetail table td.shopInfo{
+	width:320px;
+	height:35px;
+	background-color:#80ffff;
+	text-align:center;
+}
+.orderDetail table td.item{
+	height:35px;
+	width:90px;
+	background-color:#80ffff;
+	text-align:center;
+}
+.orderDetail table td.test1{
+	width:320px;
+	height:100px;
+}
+.orderDetail table td.test1 img{
+	width:90px;
+	height:100px;
+	float:left;
+}
+.orderDetail table td.test1 p{
+   	word-break:break-all;
+	width:230px;
+	height:100px;
+}
+.orderDetail table td.common{
+	width:90px;
+	height:100px;
+	border-right:1px solid #80ffff;
+	text-align:center;
+}
+.end{
+	width:680px;
+	height:50px;
+	font-size:15px;
+    margin-top:20px;
+	margin-left:200px;
+	
+}
+.end p{
+	float:right;
+}
