@@ -80,9 +80,12 @@
 	border-bottom:2px solid #80ffff;
 }
 .shoper{
-	margin-top:30px;
+	padding-top:10px;
 	font-size:13px;
 	padding-bottom:5px;
+	width:680px;
+	margin:0 auto;
+	height:auto;
 }
 .orderDe{
 	font-size:13px;

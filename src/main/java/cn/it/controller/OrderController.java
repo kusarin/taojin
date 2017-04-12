@@ -19,8 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
-import cn.it.pojo.OrderCollection;
 
+import cn.it.pojo.Address;
+import cn.it.pojo.OrderCollection;
 import cn.it.service.OrderService;
 
 
@@ -35,7 +36,9 @@ public class OrderController {
 	private OrderService orderService;
 	
 	
-	//提交订单
+	/*******
+	 * 提交订单、下单
+	 * */
 	@RequestMapping("/submitOrder.do")
 	public ModelAndView submitOrder(OrderCollection orderCollection){
 		ModelAndView view=new ModelAndView("payment");
@@ -45,14 +48,19 @@ public class OrderController {
 		orderService.submmitOrder(itemId, payLabel,userId);
 		return view;
 	}
-   //删除订单
+	
+   /***********
+    * 删除订单
+    * */
 	@RequestMapping("deleteOrder.do")
 	public ModelAndView deleteOrder(String orderNumber){
 		ModelAndView view=new ModelAndView("orderItem");
 		orderService.deleteOrder(orderNumber);
 		return view;
 	}
-	//查看订单详情
+	/*******
+	 * 查看订单详情
+	 * */
 	@RequestMapping("lookOrderDeatil.do")
 	public ModelAndView lookOrderDeatil(String orderNumber){
 		ModelAndView view=new ModelAndView("orderInfo");
@@ -60,7 +68,11 @@ public class OrderController {
 		view.addObject("orderDetail",collection);
 		return view;
 	}
-	//查看所有订单
+	
+	/*********
+	 * 查看所有订单
+	 * 
+	 * */
 	@RequestMapping("orderItem.do")
 	public ModelAndView lookAllOrder(HttpServletRequest request){
 		//获取用户账号
@@ -73,15 +85,19 @@ public class OrderController {
 		view.addObject("orderList",collectList);
 		return view;
 	}
+	
 	/***
 	 * 确认订单信息
 	 * 
 	 * */
 	@RequestMapping("sureOrder.do")
-	public ModelAndView sureOrder(int itemId,int userId,int number){
+	public ModelAndView sureOrder(int itemId,int number){
+		int userId=1;
 		ModelAndView view =new ModelAndView("sureOrder");
 		OrderCollection collection=orderService.sureOrder(itemId, userId, number);
 		view.addObject("c", collection);
+		Address address=orderService.getAddress(userId);
+		view.addObject("address",address);
 		return view;
 		
 	}
