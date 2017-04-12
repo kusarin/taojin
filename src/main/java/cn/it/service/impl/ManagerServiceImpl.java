@@ -72,20 +72,12 @@ public class ManagerServiceImpl implements ManagerService{
 	}
 	
 	public ModelAndView update(Manager manager) {
-		ModelAndView mav =new ModelAndView("updateMpassword");
-		List<Manager> mId =managerDao.managerIdFind();
-		if(manager.getAccount()==null||manager.getAccount().equalsIgnoreCase("")||
-				manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
-				mav.addObject("error","账户或密码为空！");
+		ModelAndView mav =new ModelAndView("managerInterface");
+		if(manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
+			mav.addObject("error", "新密码为空！");
+			mav.setViewName("updateMpassword");
 		}else{
-			for(Manager mana:mId){
-				if(mana.getAccount().equals(manager.getAccount())){
-					mav.setViewName("managerInterface");
-					managerDao.managerUpdate(manager);
-					return mav;
-				}
-			}
-			mav.addObject("error","账户不存在！");
+			managerDao.managerUpdate(manager);
 		}
 		return mav;
 	}
