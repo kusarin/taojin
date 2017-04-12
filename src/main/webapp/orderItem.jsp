@@ -156,7 +156,7 @@ a:hover{
 				</table>
 				</div>
 				<div style="height:30px;width:auto;"></div>
-				<div style="height:auto;width:700px;">
+				<div style="height:auto;width:700px;margin-bottom:5px;">
 				    <table  style="font-size:12px;height:auto;width:700px;color:black;">
 		                <tr style="background-color:#F5F5F5;">
 		                     <td class="orderNumber"><sub><input type="checkbox" name="itemId" value="" style="float:left;"></sub><span style="float:left;margin-left:20px;margin-right:5px;"><strong style="color:black;">2017-02-25</strong></span><span><p style="float:left;margin-right:5px;">订单号: </p>
