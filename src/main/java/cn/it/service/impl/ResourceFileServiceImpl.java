@@ -26,7 +26,7 @@ public class ResourceFileServiceImpl implements ResourceFileService{
 	}
 	
 	public ModelAndView add(ResourceFile rf) {
-		ModelAndView mav =new ModelAndView("ResourceFile");
+		ModelAndView mav =new ModelAndView("redirect:addRF.do");
 		if(rf==null){
 			mav.setViewName("addRF");
 		}else if(rf.getName()==null||rf.getName().equalsIgnoreCase("")||
