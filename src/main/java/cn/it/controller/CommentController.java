@@ -1,5 +1,6 @@
 package cn.it.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.pojo.Comment;
+import cn.it.pojo.Users;
 import cn.it.service.CommentService;
 
 /**
@@ -31,10 +33,18 @@ public class CommentController {
 		modelandview.addObject("Comment",list);
 		return modelandview;
 	}
+	
 	@RequestMapping("deleteComment.do")
 	public String delete(@RequestParam("id") String id){
 		int id1=Integer.parseInt(id);
 		commentService.delete(id1);
 		return "redirect:lookComment.do";
+	}
+	
+	@RequestMapping("addComment.do")
+	public void add(Comment comment,Users u){
+		comment.setDatetime(new Date());
+		comment.setUser_id(u.getUser_ID());
+		commentService.add(comment);
 	}
 }

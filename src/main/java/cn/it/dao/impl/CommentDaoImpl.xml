@@ -9,5 +9,9 @@
 	<delete id="delete" parameterType="java.lang.Integer">
           delete from comment where comment_id=#{id}
      </delete>
-     
+<!-- 新增留言 -->
+	<insert id="add" parameterType="cn.it.pojo.Comment">
+		insert into comment(user_id,content,datetime)
+		values(#{user_id}#{content}#{datetime})
+	</insert>
 </mapper>
