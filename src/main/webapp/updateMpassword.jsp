@@ -22,10 +22,7 @@ pageEncoding="UTF-8"%>
   <table> 
    <tr> 
     <td colspan="2">修改密码</td> 
-   </tr> 
-   <tr> 
-    <td>账户：</td> 
-    <td><input type="text" name="account" /> 
+    <td><input type="hidden" name="account" value="${manager.account}"/> 
     </td> 
    </tr> 
    <tr> 

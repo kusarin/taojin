@@ -14,4 +14,5 @@ import cn.it.pojo.Comment;
 public interface CommentService {
 	public List<Comment> findAll();
 	public void delete(int id);
+	public void add(Comment comment);
 }

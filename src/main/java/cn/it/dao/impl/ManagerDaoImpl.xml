@@ -12,12 +12,6 @@
 		insert into manager(account,password) 
 		        values(#{account},#{password})
 	</insert>
-	<delete id="managerDelete"  parameterType="cn.it.pojo.Manager">
-		delete from manager
-		<where>
-			Manager_ID = #{ID}
-		</where>
-	</delete>
 	<update id="managerUpdate"  parameterType="cn.it.pojo.Manager">
 		update Manager set password=#{password}
 		<where>

@@ -3,6 +3,9 @@ package cn.it.service.impl;
 import java.util.List;
 
 
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,7 +26,7 @@ public class ManagerServiceImpl implements ManagerService{
 	private ManagerDao managerDao;
 	
 	//管理员登录
-	public ModelAndView login(Manager manager) {
+	public ModelAndView login(Manager manager,HttpSession session) {
 		ModelAndView mav =new ModelAndView("managerInterface");
 		if(manager.getAccount()==null||manager.getAccount().equalsIgnoreCase("")||
 			manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
@@ -35,6 +38,8 @@ public class ManagerServiceImpl implements ManagerService{
 			if(m == null){
 				mav.addObject("error","账户或密码错误！");
 				mav.setViewName("mlogin");
+			}else{
+				session.setAttribute("manager", m);
 			}
 		}
 		return mav;
