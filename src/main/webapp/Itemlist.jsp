@@ -26,7 +26,7 @@
                 <td> ${i.name} </td>  
                 <td> ${i.typel} </td>  
                 <td> ${i.price} </td>  
-                <td> ${i.detail} </td>    
+                <td> ${i.detail} </td>
             </tr>  
               
             </c:forEach>  

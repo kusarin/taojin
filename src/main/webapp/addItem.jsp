@@ -308,8 +308,7 @@
 													</div>
 												</tr>
 											</table>
-											<input type="submit" value="确认上架" /> <input type="button"
-												value="返回" onclick="javaScript:history.back(-1)" />
+											<input type="submit" value="确认上架" /> 
 										</form>
 									</div>
 </body>

@@ -193,4 +193,34 @@ public class ItemController {
 		modeandview.addObject("itemtype",list);	
 		return modeandview;
 	}
+	
+	/**
+	 * 根据店铺编号shop_id按照条目显示商品
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("ShopItem.do")
+	public ModelAndView showShopItem(HttpServletRequest request){
+		ModelAndView modeandview = new ModelAndView("ShopItem"); // 到Itemlist.jsp界面
+		
+		//--------------
+		// 暂时缺少获取前台传入shop_id的操作！！！
+		// 暂时先设定为1，用于测试使用
+		//---------------
+		int shop_id=1;
+		
+		//获取商品条目list
+		List<Item> list;
+		list = itemservice.findByShopId(shop_id);
+		
+		// 测试list是否已经获取到Item中的数据
+		System.out.println("----------------"); 
+		System.out.println(list);
+		System.out.println("----------------");
+		
+		//将商品条目list传递到itemlist
+		modeandview.addObject("ShopItem",list);	
+		return modeandview;
+	}
 }
