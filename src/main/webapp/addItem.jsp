@@ -14,12 +14,12 @@
 
 <!-- 弹窗设置点 -->
 <script type="text/javascript">
-    window.onload=function(){
-    	var error="${requestScope.error}";
-    	  if(error!=""&&error!=null&&typeof(error)!="undefined"){
-    		  alert(error);
-    	  }
-    }
+	window.onload = function() {
+		var error = "${requestScope.error}";
+		if (error != "" && error != null && typeof (error) != "undefined") {
+			alert(error);
+		}
+	}
 </script>
 <!-- 缺少部分：图片上传+获取店铺ID -->
 
@@ -218,13 +218,8 @@
 					<ul class="nav nav-list categories">
 						<li><a href="blog.html">认证店铺 </a></li>
 						<li><a href="查看记录.html">查看记录 </a></li>
-						<li><a href="商品上下架.html">商品上/下架 </a>
-							<ul>
-								<li><a href="addItem.jsp">上架 </a></li>
-								<li><a href="product.html">下架</a></li>
-							</ul></li>
-						<li><a href="商品信息管理.html">商品信息管理</a></li>
-
+						<li><a href="addItem.jsp">商品上架 </a></li>
+						<li><a href="shopItem.do">商品管理</a></li>
 						<li><a href="店铺基本信息.html">店铺信息管理</a></li>
 					</ul>
 				</div>
@@ -239,76 +234,71 @@
 						<h2 class="heading2">
 							<span>上架商品</span>
 						</h2>
-						<div class="blogicons">
-							<div class="pull-left"></div>
-						</div>
 						<ul class="margin-none">
 							<li class="listblcok">
 								<div class="mb20">
 									<section class="leavecomment">
-									<h2 class="heading2">
-										<span>商品基本信息</span>
-									</h2>
 									<div align="center">
-										<form action="addItem.do" method = "post">
+										<form action="addItem.do" method="post">
 											<table>
 												<input type="hidden" value="${shop.shop_id}" name="Shop_id" />
 												<tr>
 													<div class="control-group">
-													<td>商品名称:</td>
-													<div class="controls">
-													<td><input type="text" name="name"></td>
-													</div>
-													</div>
-												</tr>
-												<tr>
-													<div class="control-group">
-													<td>商品类型:</td>
-													<div class="controls">
-													<td><select id="code" name="typeh">
-													<option value="高级分类1">高级分类1</option>
-													<option value="高级分类2">高级分类2</option>
-													</select> <select id="code" name="typel">
-													<option value="低级分类1">低级分类1</option>
-													<option value="低级分类2">低级分类2</option>
-													</select></td>
-													</div>
+														<td>商品名称:</td>
+														<div class="controls">
+															<td><input type="text" name="name"></td>
+														</div>
 													</div>
 												</tr>
 												<tr>
 													<div class="control-group">
-													<td>商品数量:</td>
-													<div class="controls">
-													<td><input type="text" name="number" onkeyup="value=value.replace(/[^(\d)]/g,'')"/></td>
-													</div>
-													</div>
-												</tr>
-												<tr>
-													<div class="control-group">
-													<td>商品价格:¥</td>
-													<div class="controls">
-													<td><input type="text" name="price" /></td>
-													</div>
+														<td>商品类型:</td>
+														<div class="controls">
+															<td><select id="code" name="typeh">
+																	<option value="高级分类1">高级分类1</option>
+																	<option value="高级分类2">高级分类2</option>
+															</select> <select id="code" name="typel">
+																	<option value="低级分类1">低级分类1</option>
+																	<option value="低级分类2">低级分类2</option>
+															</select></td>
+														</div>
 													</div>
 												</tr>
 												<tr>
 													<div class="control-group">
-													<td>商品图片:</td>
-													<div class="controls">
-													<td><input type="text" name="image" /></td>
-													</div>
+														<td>商品数量:</td>
+														<div class="controls">
+															<td><input type="text" name="number"
+																onkeyup="value=value.replace(/[^(\d)]/g,'')" /></td>
+														</div>
 													</div>
 												</tr>
 												<tr>
 													<div class="control-group">
-													<td>商品描述:</td>
-													<div class="controls">
-													<td><input type="text" name="detail" /></td>
+														<td>商品价格:¥</td>
+														<div class="controls">
+															<td><input type="text" name="price" /></td>
+														</div>
 													</div>
+												</tr>
+												<tr>
+													<div class="control-group">
+														<td>商品图片:</td>
+														<div class="controls">
+															<td><input type="text" name="image" /></td>
+														</div>
+													</div>
+												</tr>
+												<tr>
+													<div class="control-group">
+														<td>商品描述:</td>
+														<div class="controls">
+															<td><input type="text" name="detail" /></td>
+														</div>
 													</div>
 												</tr>
 											</table>
-											<input type="submit" value="确认上架" /> 
+											<input type="submit" value="确认上架" />
 										</form>
 									</div>
 </body>
