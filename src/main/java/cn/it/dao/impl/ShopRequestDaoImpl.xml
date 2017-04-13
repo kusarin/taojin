@@ -12,10 +12,10 @@
 	</insert>
 	
 	<delete id="delete" parameterType="java.lang.Integer">
-          delete from shoprequest where shoprequest_id=#{id}
+          delete from shoprequest where shoprequest_id=#{shopRequest_id}
      </delete>
      
      <select id ="findById" resultType="cn.it.pojo.ShopRequest" parameterType="java.lang.Integer">
-		select *  from shoprequest where shoprequest_id=#{id}
+		select *  from shoprequest where shoprequest_id=#{shopRequest_id}
 	</select>
 </mapper>

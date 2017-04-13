@@ -12,5 +12,5 @@ public interface ShopRequestDao {
 	public void delete(int num);
 	
 	public ShopRequest findById(int num);
-	
+
 }

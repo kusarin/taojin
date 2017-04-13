@@ -11,4 +11,6 @@ public interface ShopRequestService {
 
 	public void passSR(int num);
 
+	public ShopRequest find(int num);
+
 }

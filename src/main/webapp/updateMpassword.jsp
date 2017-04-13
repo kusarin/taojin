@@ -13,6 +13,17 @@ pageEncoding="UTF-8"%>
     		  alert(error);
     	  }
     }
+    
+    function check() {
+		var password = document
+			.getElementById("pwd1").value;
+		var repsword = document
+			.getElementById("pwd2").value;
+		if (password != repsword) {
+			alert("两次密码不同，请重新输入");
+			return false;
+		}
+	}
 </script>
  <title>二手淘金网--修改管理员密码</title> 
  </head> 
@@ -27,12 +38,17 @@ pageEncoding="UTF-8"%>
    </tr> 
    <tr> 
     <td>新密码：</td> 
-    <td><input type="password" name="password" /> 
+    <td><input type="password" name="password" id="pwd1"/> 
+    </td> 
+   </tr> 
+   <tr> 
+    <td>确认密码：</td> 
+    <td><input type="password" id="pwd2"/> 
     </td> 
    </tr> 
    <tr> 
     <td colspan="2">
-    	<input type="submit" value="修改" />  
+    	<input type="submit" value="修改" onclick="return check()"/>  
     </td> 
    </tr> 
   </table> 

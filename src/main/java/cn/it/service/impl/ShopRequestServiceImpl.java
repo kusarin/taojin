@@ -19,8 +19,7 @@ public class ShopRequestServiceImpl implements ShopRequestService{
 	private ShopDao shopDao;
 	
 	public List<ShopRequest> findAll(){
-		List<ShopRequest> SR;
-		SR = shopRequestDao.findAll();
+		List<ShopRequest> SR = shopRequestDao.findAll();
 		return SR;
 	}
 
@@ -36,5 +35,9 @@ public class ShopRequestServiceImpl implements ShopRequestService{
 		shop.setUser_ID(SR.getUser_id());
 		shopDao.addShop(shop);
 		shopRequestDao.delete(num);
+	}
+
+	public ShopRequest find(int num) {
+		return shopRequestDao.findById(num);
 	}
 }
