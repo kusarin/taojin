@@ -19,9 +19,8 @@
                 <td>商品价格</td>  
                 <td>商品描述</td>  
             </tr>  
-            <c:forEach items="${itemlist}" var="i">  
-              
-              <tr>  
+            <c:forEach items="${itemlist}" var="i">             
+              <tr>
                 <td>  ${i.item_id}  </td>  
                 <td> ${i.name} </td>  
                 <td> ${i.typel} </td>  

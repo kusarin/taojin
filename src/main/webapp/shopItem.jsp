@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,7 +25,7 @@
 </script>
 <!-- 缺少部分：图片上传+获取店铺ID -->
 
-<title>商品上架</title>
+<title>商品管理</title>
 </head>
 <body>
 	<!-- Header Start -->
@@ -232,74 +234,49 @@
 					<section id="latestblog">
 					<div class="blogdetail">
 						<h2 class="heading2">
-							<span>商品上架</span>
+							<span>商品管理</span>
 						</h2>
 						<ul class="margin-none">
 							<li class="listblcok">
 								<div class="mb20">
 									<section class="leavecomment">
 									<div align="center">
-										<form action="addItem.do" method="post">
-											<table>
-												<input type="hidden" value="${shop.shop_id}" name="Shop_id" />
-												<tr>
-													<div class="control-group">
-														<td>商品名称:</td>
-														<div class="controls">
-															<td><input type="text" name="name"></td>
-														</div>
-													</div>
-												</tr>
-												<tr>
-													<div class="control-group">
-														<td>商品类型:</td>
-														<div class="controls">
-															<td><select id="code" name="typeh">
-																	<option value="高级分类1">高级分类1</option>
-																	<option value="高级分类2">高级分类2</option>
-															</select> <select id="code" name="typel">
-																	<option value="低级分类1">低级分类1</option>
-																	<option value="低级分类2">低级分类2</option>
-															</select></td>
-														</div>
-													</div>
-												</tr>
-												<tr>
-													<div class="control-group">
-														<td>商品数量:</td>
-														<div class="controls">
-															<td><input type="text" name="number"
-																onkeyup="value=value.replace(/[^(\d)]/g,'')" /></td>
-														</div>
-													</div>
-												</tr>
-												<tr>
-													<div class="control-group">
-														<td>商品价格:¥</td>
-														<div class="controls">
-															<td><input type="text" name="price" /></td>
-														</div>
-													</div>
-												</tr>
-												<tr>
-													<div class="control-group">
-														<td>商品图片:</td>
-														<div class="controls">
-															<td><input type="text" name="image" /></td>
-														</div>
-													</div>
-												</tr>
-												<tr>
-													<div class="control-group">
-														<td>商品描述:</td>
-														<div class="controls">
-															<td><input type="text" name="detail" /></td>
-														</div>
-													</div>
-												</tr>
-											</table>
-											<input type="submit" value="确认上架" />
-										</form>
+
+										<tbody>
+											<tr align="middle">
+												<table width="90%" border="1" align="center">
+													<thead>
+														<tr>
+															<td colspan="10" align="center">商品管理</td>
+														</tr>
+													</thead>
+													<tbody>
+
+														<tr align="center">
+															<td>商品编号</td>
+															<td>商品图片</td>
+															<td>商品名称</td>
+															<td>商品数量</td>
+															<td>商品价格</td>
+															<td>商品管理操作</td>
+														</tr>
+														<c:forEach items="${shopItem}" var="i">
+
+															<tr>
+																<td>${i.item_id}</td>
+																<td>${i.price}</td>
+																<td>${i.name}</td>
+																<td>${i.number}</td>
+																<td>${i.price}</td>
+																<td><a href="showchangeItem.do?id=${i.item_id}">修改商品信息</a>
+																	<a href="deleteItem.do?id=${i.item_id}">下架商品</a>
+															</tr>
+
+														</c:forEach>
+
+													</tbody>
+												</table>
+												</form>
 									</div>
 </body>
 </html>
