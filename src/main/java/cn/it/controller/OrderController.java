@@ -38,14 +38,13 @@ public class OrderController {
 	
 	/*******
 	 * 提交订单、下单
+	 * @param(address表示收货地址，orderCollection表示订单信息，payway表示支付方式)
 	 * */
 	@RequestMapping("/submitOrder.do")
-	public ModelAndView submitOrder(OrderCollection orderCollection){
+	public ModelAndView submmitOrder(Address address,OrderCollection orderCollection, int payway){
 		ModelAndView view=new ModelAndView("payment");
-		int itemId = 1;  //商品编号
-		int payLabel=0; //支付方式标记
 		int userId=1;   //用户Id
-		orderService.submmitOrder(itemId, payLabel,userId);
+		orderService.submmitOrder(address, orderCollection,payway,userId);
 		return view;
 	}
 	
@@ -99,6 +98,5 @@ public class OrderController {
 		Address address=orderService.getAddress(userId);
 		view.addObject("address",address);
 		return view;
-		
 	}
 }

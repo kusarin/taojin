@@ -97,7 +97,7 @@ public class ItemServiceImpl implements ItemService {
 	 * @return ModelAndView
 	 */
 	public ModelAndView deleteItem(int item_id) {
-		ModelAndView str = new ModelAndView("deleteItem");  //跳转到deleteItem.jsp界面
+		ModelAndView str = new ModelAndView("shopItem");  //跳转到shopList.jsp界面
 		itemDao.ItemDelete(item_id);	
 		// 返回提示信息 "下架商品成功！！！"
 		str.addObject("error", "下架商品成功！！！");
@@ -120,7 +120,7 @@ public class ItemServiceImpl implements ItemService {
 	 */
 	public ModelAndView updateItem(int item_id,String name,String typeh,String typel,
 			String number,String price,String detail,String image) {
-		ModelAndView str = new ModelAndView("changeItem");  //跳转到changeItem.jsp界面
+		ModelAndView str = new ModelAndView("shopItem");  //跳转到shopItem.jsp界面
 		
 		// 判断传入参数是否为空 
 		if(name==null||name.equals("")
@@ -155,8 +155,6 @@ public class ItemServiceImpl implements ItemService {
 			itemDao.ItemUpdate(i);
 			// 提示信息 "修改商品信息成功！！！"
 			str.addObject("error", "修改商品信息成功！！！");
-			// 修改商品信息成功后跳转的界面，暂时先设置为changeItem【修改商品信息界面】
-			str.setViewName("changeItem"); 
 		}
 		return str;
 	}

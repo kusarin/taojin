@@ -52,7 +52,7 @@
 				<tr>
 					<td>${i.item_id}</td>
 					<td>${i.name}</td>
-					<td>${i.part}</td>
+					<td>${i.typeh}</td>
 					<td>${i.price}</td>
 					<td>${i.detail}</td>
 				</tr>

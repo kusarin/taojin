@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page isELIgnored="false"%>
+	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,17 +9,23 @@
 <link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
 <link href="./TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="./TaoJin/css/style.css" rel="stylesheet">
-<link href="./TaoJin/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
+<link href="./TaoJin/css/flexslider.css" type="text/css" media="screen"
+	rel="stylesheet" />
 <link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
 <link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
-<title>Insert title here</title>
+
+<!-- 弹窗设置点 -->
 <script type="text/javascript">
-function deleteone(shop_id){
-if(confirm("确定要删除这条数据吗？")){
-	window.location.href="delete.do?shop_id="+shop_id;
-}
-}
+	window.onload = function() {
+		var error = "${requestScope.error}";
+		if (error != "" && error != null && typeof (error) != "undefined") {
+			alert(error);
+		}
+	}
 </script>
+<!-- 缺少部分：图片上传+获取店铺ID -->
+
+<title>商品管理</title>
 </head>
 <body>
 	<!-- Header Start -->
@@ -214,13 +220,8 @@ if(confirm("确定要删除这条数据吗？")){
 					<ul class="nav nav-list categories">
 						<li><a href="blog.html">认证店铺 </a></li>
 						<li><a href="查看记录.html">查看记录 </a></li>
-						<li><a href="商品上下架.html">商品上/下架 </a>
-							<ul>
-								<li><a href="product.html">上架 </a></li>
-								<li><a href="product.html">下架</a></li>
-							</ul></li>
-						<li><a href="商品信息管理.html">商品信息管理</a></li>
-
+						<li><a href="addItem.jsp">商品上架 </a></li>
+						<li><a href="shopItem.do">商品管理</a></li>
 						<li><a href="店铺基本信息.html">店铺信息管理</a></li>
 					</ul>
 				</div>
@@ -233,60 +234,49 @@ if(confirm("确定要删除这条数据吗？")){
 					<section id="latestblog">
 					<div class="blogdetail">
 						<h2 class="heading2">
-							<span>认证店铺</span>
+							<span>商品管理</span>
 						</h2>
-						<div class="blogicons">
-							<div class="pull-left"></div>
-						</div>
 						<ul class="margin-none">
 							<li class="listblcok">
 								<div class="mb20">
 									<section class="leavecomment">
-									<h2 class="heading2">
-										<span>店铺基本信息</span>
-									</h2>
-                                    <a href="addShop.jsp">添加</a>
-									<form action="shopList.do" name="myform" method="get"></form>
-									<table
-										style="border-left-width: 0px; border-collapse: collapse; border-right-width: 0px;"
-										bordercolor="#ff6600" bgcolor="#DFFFDF" cellspacing="0"
-										cellpadding="0" width="250" align="center" border="1">
+									<div align="center">
+
 										<tbody>
 											<tr align="middle">
 												<table width="90%" border="1" align="center">
 													<thead>
 														<tr>
-															<td colspan="10" align="center">店铺信息管理</td>
+															<td colspan="10" align="center">商品管理</td>
 														</tr>
 													</thead>
 													<tbody>
 
 														<tr align="center">
-															<td>编号</td>
-															<td>用户名</td>
-															<td>店名</td>
-															<td>类型</td>
-															<td>介绍</td>
-							                                <td>操作</td>
+															<td>商品编号</td>
+															<td>商品图片</td>
+															<td>商品名称</td>
+															<td>商品数量</td>
+															<td>商品价格</td>
+															<td>商品管理操作</td>
 														</tr>
-														<c:forEach items="${shopli}" var="c">
+														<c:forEach items="${shopItem}" var="i">
 
 															<tr>
-																<td>${c.shop_id}</td>
-																<td>${c.user_ID}</td>
-																<td>${c.name}</td>
-																<td>${c.type}</td>
-																<td>${c.intro}</td>
-																<td><a href="toChange.do?shop_id=${c.shop_id}">查看</a>
-																<a href="showItem.do?shop_id=${c.shop_id}">商品</a>
-																<a onclick="deleteone(${c.shop_id})"
-																	href="javascript:void(0)">删除</a></td>
-
+																<td>${i.item_id}</td>
+																<td>${i.price}</td>
+																<td>${i.name}</td>
+																<td>${i.number}</td>
+																<td>${i.price}</td>
+																<td><a href="showchangeItem.do?id=${i.item_id}">修改商品信息</a>
+																	<a href="deleteItem.do?id=${i.item_id}">下架商品</a>
 															</tr>
 
 														</c:forEach>
-														
+
 													</tbody>
 												</table>
+												</form>
+									</div>
 </body>
 </html>
