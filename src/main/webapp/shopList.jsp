@@ -16,7 +16,7 @@
 <script type="text/javascript">
 function deleteone(shop_id){
 if(confirm("确定要删除这条数据吗？")){
-	window.location.href="TaoJin/delete.do?shop_id="+shop_id;
+	window.location.href="delete.do?shop_id="+shop_id;
 }
 }
 </script>
@@ -245,7 +245,7 @@ if(confirm("确定要删除这条数据吗？")){
 									<h2 class="heading2">
 										<span>店铺基本信息</span>
 									</h2>
-                                    <a href="TaoJin/addShop.jsp">添加</a>
+                                    <a href="addShop.jsp">添加</a>
 									<form action="shopList.do" name="myform" method="get"></form>
 									<table
 										style="border-left-width: 0px; border-collapse: collapse; border-right-width: 0px;"

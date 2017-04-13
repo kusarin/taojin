@@ -15,12 +15,14 @@ import com.sun.org.apache.regexp.internal.recompile;
 
 import cn.it.pojo.Shop;
 import cn.it.pojo.Users;
+import cn.it.service.ItemService;
 import cn.it.service.ShopService;
 @Controller
 public class ShopController {
 	@Resource
    private ShopService shopService;
-	
+	@Resource
+	   private ItemService itemService;
 	@RequestMapping(value ={"/doAdd.do"},method={RequestMethod.GET,RequestMethod.POST})
 	public String doAdd(Shop shop){
 		shopService.addShop(shop);
@@ -49,5 +51,10 @@ public class ShopController {
 	public String doDelete(Shop shop){
 		shopService.deleteShop(shop);
 		return "redirect:/shopList.do";
+	}
+	@RequestMapping(value={"/showItem.do"},method = {RequestMethod.GET,RequestMethod.POST})
+	public String showItem(Shop shop,Map<String,Object> map){
+		map.put("shopit", itemService.findByShopId(shop.getShop_id()));
+		return "shopItem";
 	}
 }
