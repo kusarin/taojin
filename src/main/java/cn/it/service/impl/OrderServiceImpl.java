@@ -160,9 +160,10 @@ public class OrderServiceImpl implements OrderService {
 		List<OrderDetail> orderDetail = orderCollection.getOrderDeatail();
 		for(OrderDetail orderDe:orderDetail){
 			orderDe.setOrderNumber(orderNumber); // 设置订单编号
+			int itemId=orderDe.getItemId();
+			orderDe.setItemId(itemId);
 			orderDetailDao.add(orderDe);
 		}
-		
 	}
 
 	/**
@@ -216,7 +217,7 @@ public class OrderServiceImpl implements OrderService {
 		List<OrderDetail> orderDetailList =new ArrayList<OrderDetail>();
 		OrderDetail orderDetail = new OrderDetail();
 		orderDetail.setItem(item);
-		orderDetail.setId(itemId); // 设置商品编号
+		orderDetail.setItemId(itemId); // 设置商品编号
 		double unitPrice = item.getprice(); // 商品单价
 		orderDetail.setUnitPrice(unitPrice);
 		orderDetail.setItemNumbers(number); // 此次购买某件商品的数量
