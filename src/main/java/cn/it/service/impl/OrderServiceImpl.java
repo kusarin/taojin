@@ -55,7 +55,8 @@ public class OrderServiceImpl implements OrderService {
 	 * */
 	public List<OrderCollection> getAllOrder(int userId) {
 		List<OrderCollection> clist = new ArrayList<OrderCollection>();
-		List<Order> olist = orderDao.selectAll(userId);
+		
+		List<Order> olist = orderDao.selectAll(userId); //获取该用户的所有订单
 		Iterator<Order> oitr = olist.iterator();
 		while (oitr.hasNext()) {
 			OrderCollection collection = new OrderCollection();
@@ -66,6 +67,7 @@ public class OrderServiceImpl implements OrderService {
 						.getOrderNumber());
 				collection.setOrderDeatail(ordlist);
 			}
+			clist.add(collection);
 		}
 		return clist;
 	}
