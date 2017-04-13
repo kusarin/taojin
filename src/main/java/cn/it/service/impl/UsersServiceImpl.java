@@ -61,10 +61,9 @@ public class UsersServiceImpl implements UsersService {
 		return str;
 	}
 
-	public ModelAndView update(Users user,HttpSession session) {
+	public ModelAndView update(Users user, HttpSession session) {
 		ModelAndView str = new ModelAndView("welcome");
 		usersDao.UsersUpdate(user);
-		
 		session.setAttribute("user", user);
 		return str;
 
