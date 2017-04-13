@@ -55,7 +55,8 @@ public class OrderServiceImpl implements OrderService {
 	 * */
 	public List<OrderCollection> getAllOrder(int userId) {
 		List<OrderCollection> clist = new ArrayList<OrderCollection>();
-		List<Order> olist = orderDao.selectAll(userId);
+		
+		List<Order> olist = orderDao.selectAll(userId); //获取该用户的所有订单
 		Iterator<Order> oitr = olist.iterator();
 		while (oitr.hasNext()) {
 			OrderCollection collection = new OrderCollection();
@@ -66,6 +67,7 @@ public class OrderServiceImpl implements OrderService {
 						.getOrderNumber());
 				collection.setOrderDeatail(ordlist);
 			}
+			clist.add(collection);
 		}
 		return clist;
 	}
@@ -131,19 +133,16 @@ public class OrderServiceImpl implements OrderService {
 	 * @param(itemId表示商品id，paylabel支付方式标记，userId用户Id)
 	 * 
 	 * */
-	public void submmitOrder(int itemId, int payLabel, int userId) {
-		// 提交订单并保存
-		Order order = new Order();
-		order.setUserID(userId); // 设置下单用户
+	public void submmitOrder(Address address,OrderCollection orderCollection, int payway, int userId) {
+		
+		Order order = orderCollection.getOrder();   //创建订单
+		order.setUserID(userId);    // 设置下单用户
 		String orderNumber = new OrderServiceImpl().createOrderNum();// 创建订单号
-		order.setOrderNumber(orderNumber);
-		order.setOrderTime(new java.sql.Date(new Date().getTime()));// 下单时间
-		Item item = itemDao.FindItemById(itemId);
-		double actulPayment = item.gettradingTimes() * item.getprice();// 最终支付
-		order.setActulPayment(actulPayment);
-		String status = "待付款"; // 订单的交易状态
-		order.setStatus(status);
-		switch (payLabel) {
+		order.setOrderNumber(orderNumber);  //设置订单号
+		order.setOrderTime(new java.sql.Date(new Date().getTime()));// 设置下单时间
+		String status = "待付款";
+		order.setStatus(status); // 设置订单的交易状态（待付款、已付款、待收货、已完成、已取消）
+		switch (payway) {
 		case 0:
 			order.setPaymentMethod("货到付款");
 		case 1:
@@ -151,23 +150,19 @@ public class OrderServiceImpl implements OrderService {
 		default:
 			break;
 		}
-		String address = "";
-		order.setRecivingAddress(address); // 收货地址
+		
+		order.setRecivingAddress(address.getReceivingaddress()); // 收货地址
 		double freight = 0; // 运费
 		order.setFreight(freight);
 		orderDao.add(order);
 
 		// 插入订单明细
-		OrderDetail orderDetail = new OrderDetail();
-		orderDetail.setOrderNumber(orderNumber); // 设置订单编号
-		orderDetail.setItemId(itemId); // 设置商品编号
-		double unitPrice = item.getprice(); // 设置商品单价
-		orderDetail.setUnitPrice(unitPrice);
-		int itemNumbers = item.gettradingTimes();
-		orderDetail.setItemNumbers(itemNumbers);// 设置已购买的某件商品的数量
-		double itemPrice = itemNumbers * unitPrice;
-		orderDetail.setItemPrice(itemPrice);// 设置商品总价
-		orderDetailDao.add(orderDetail);
+		List<OrderDetail> orderDetail = orderCollection.getOrderDeatail();
+		for(OrderDetail orderDe:orderDetail){
+			orderDe.setOrderNumber(orderNumber); // 设置订单编号
+			orderDetailDao.add(orderDe);
+		}
+		
 	}
 
 	/**
