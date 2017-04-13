@@ -98,11 +98,6 @@ public class ItemController {
 		// 根据商品编号，获得商品；
 		Item i = itemservice.findById(item_id);
 		
-		// 测试i是否已经获取到Item中的数据
-		System.out.println("----------------"); 
-		System.out.println(i);
-		System.out.println("----------------");
-		
 		//将商品i传递到lookitem
 		modeandview.addObject("change",i);		
 		return modeandview;
