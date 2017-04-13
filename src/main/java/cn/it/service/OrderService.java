@@ -12,7 +12,7 @@ import cn.it.pojo.OrderCollection;
  */
 public interface OrderService {
 	public List<OrderCollection> getAllOrder(int userId);
-	public void submmitOrder(int itemId,int payLabel,int userId);
+	public void submmitOrder(Address address,OrderCollection orderCollection, int payway, int userId);
 	public void deleteOrder(String orderNumber);
 	public OrderCollection getOrderDetail(String orderNumber);
 	public OrderCollection sureOrder(int itemId,int userId,int number);
