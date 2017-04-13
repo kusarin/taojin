@@ -7,12 +7,12 @@ pageEncoding="UTF-8"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link href="./css/bootstrap.css" rel="stylesheet">
-<link href="./css/bootstrap-responsive.css" rel="stylesheet">
-<link href="./css/style.css" rel="stylesheet">
-<link href="./css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
-<link href="./css/jquery.fancybox.css" rel="stylesheet">
-<link href="./css/cloud-zoom.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
+<link href="${pageContext.request.contextPath}/css/jquery.fancybox.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/cloud-zoom.css" rel="stylesheet">
 <title>我的订单</title>
 <style>
 .item{
@@ -156,7 +156,7 @@ a:hover{
 				</table>
 				</div>
 				<div style="height:30px;width:auto;"></div>
-				<div style="height:auto;width:700px;">
+				<div style="height:auto;width:700px;margin-bottom:5px;">
 				    <table  style="font-size:12px;height:auto;width:700px;color:black;">
 		                <tr style="background-color:#F5F5F5;">
 		                     <td class="orderNumber"><sub><input type="checkbox" name="itemId" value="" style="float:left;"></sub><span style="float:left;margin-left:20px;margin-right:5px;"><strong style="color:black;">2017-02-25</strong></span><span><p style="float:left;margin-right:5px;">订单号: </p>
@@ -191,7 +191,7 @@ a:hover{
 	</div>
 	<!--footer-->
     <footer style="margin-top:20px">
-       <img  src="image/footer-tri.png" style="width:100%;">
+       <img  src="${pageContext.request.contextPath}/image/footer-tri.png" style="width:100%;">
             <div style="margin: 0px 0px 10px;text-align:center;padding-top:10px;">
 			 
              <span>友情链接/</span>

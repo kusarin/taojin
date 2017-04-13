@@ -9,13 +9,13 @@ pageEncoding="UTF-8"%>
  <title>确认订单</title>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
  
-<link rel="stylesheet" href="${pageContext.request.contextPath}/TaoJin/css/sureOrder.css"/>
-<link href="${pageContext.request.contextPath}/TaoJin/css/bootstrap.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/TaoJin/css/style.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/TaoJin/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
-<link href="${pageContext.request.contextPath}/TaoJin/css/jquery.fancybox.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/TaoJin/css/cloud-zoom.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/sureOrder.css"/>
+<link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
+<link href="${pageContext.request.contextPath}/css/jquery.fancybox.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/cloud-zoom.css" rel="stylesheet">
 
 <script>
   function plus(val){
@@ -167,7 +167,7 @@ pageEncoding="UTF-8"%>
 		<div class="orderDe" style="border:1px solid #80ffff;">
 		<table>
 		   <tr>
-			     <td class="test1"><a href="#"><img src="${pageContext.request.contextPath}/${collection.item.image}"/></a>
+			     <td class="test1"><a href="#"><img src="${pageContext.request.contextPath}${collection.item.image}"/></a>
 		        <a href="#"><p>${collection.item.detail}</p></a></td>
 				 <td class="common" style="padding-left:0px;text-align:center;">
 				 <input type="button" value="-"  id="m" onclick="minus()" style="text-align:center;height:30px;width:30px;float:left;border:0;">
@@ -202,7 +202,7 @@ pageEncoding="UTF-8"%>
     </div> 
     <!-- footer -->
 	<footer style="margin-top:20px">
-       <img  src="${pageContext.request.contextPath}/TaoJin/image/footer-tri.png" style="width:100%;">
+       <img  src="${pageContext.request.contextPath}/image/footer-tri.png" style="width:100%;">
             <div style="margin: 0px 0px 10px;text-align:center;padding-top:10px;">
 			 
              <span>友情链接/</span>

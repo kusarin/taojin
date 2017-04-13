@@ -30,7 +30,8 @@
 	<update id="UsersUpdate" parameterType="cn.it.pojo.Users">
 		update users set
 		password=#{password},name=#{name},tele=#{tele},email=#{email}
-		where username = #{username}
+		<where> username = #{username}
+		</where>
 	</update>
 
 	<select id="UsersSearch" parameterType="cn.it.pojo.Users">
