@@ -21,11 +21,13 @@
             </tr>  
             <c:forEach items="${itemlist}" var="i">             
               <tr>
-                <td>  ${i.item_id}  </td>  
-                <td> ${i.name} </td>  
-                <td> ${i.typel} </td>  
-                <td> ${i.price} </td>  
-                <td> ${i.detail} </td>
+              
+                <td><a href="lookItem.do?id=${i.item_id}">  ${i.item_id}  </a></td>  
+                <td><a href="lookItem.do?id=${i.item_id}"> ${i.name} </a></td>  
+                <td><a href="lookItem.do?id=${i.item_id}"> ${i.typel} </a></td>  
+                <td><a href="lookItem.do?id=${i.item_id}"> ${i.price} </a></td>  
+                <td><a href="lookItem.do?id=${i.item_id}"> ${i.detail} </a></td>
+                
             </tr>  
               
             </c:forEach>  
