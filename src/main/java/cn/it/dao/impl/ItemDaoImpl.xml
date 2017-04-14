@@ -37,4 +37,12 @@
 	<select id="FindItemByShopId" parameterType="int" resultType="cn.it.pojo.Item">
 		select * from item where shop_id = #{shop_id}
 	</select>
+	<!-- 查询商品功能 -->
+	<select id="SearchItem" parameterType="String" resultType="cn.it.pojo.Item">
+		select * from item where name like concat(concat('%',#{str}),'%')
+		                      or typeh like concat(concat('%',#{str}),'%')
+		                      or typel like concat(concat('%',#{str}),'%')
+		                      or detail like concat(concat('%',#{str}),'%')
+									
+	</select>
 </mapper>

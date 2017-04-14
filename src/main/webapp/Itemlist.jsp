@@ -9,6 +9,50 @@
 <link />
 </head>
 <body>
+
+<!-- Header Start -->
+	<header>
+	<div class="headerstrip">
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<!-- Top Nav Start -->
+					<div class="pull-left">
+						<div class="navbar" id="topnav">
+						
+							<div class="navbar-inner">
+							<div style="float:left;color:white;margin-top:26px;">
+							  <span>您好,</span>
+							  <a href="#"><span style="color:white;">登录</span></a>
+							  <a href="#"> <span style="margin-left:20px;color:white;">注册</span></a>
+							 </div>
+							  <div style="margin-left:250px;">
+								<ul class="nav">
+								    <li><a class="home active" href="#">首页</a></li>
+									<li><a class="myaccount" href="#">个人账户</a></li>
+									<li><a class="shoppingcart" href="#">购物车</a></li>
+									<li><a class="checkout" href="#">我的订单</a></li>
+								    <li><a class="checkout" href="#">发布二手</a></li>
+								</ul>
+							 </div>
+							</div>
+						</div>
+					</div>
+					<!-- Top Nav End -->
+					<div class="pull-right">
+						<form class="form-search top-search">
+							<input type="text" class="input-medium search-query"  style="width:auto;border:4px solid #FFA07A"
+								placeholder="搜索你想要的二手"><input type="submit" value="搜索"
+								style="height:40px;width:auto;background-color:#FFA07A;border:4px solid #FFA07A;">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</header>
+	<!-- Header End -->
+
 <form action="Itemlist.do"></form>
 <table width="90%" border="1" align="center">  
  <tbody>  
