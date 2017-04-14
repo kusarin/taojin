@@ -13,7 +13,7 @@
 		}
 	}
 </script>
-<title>二手淘金网--信息更改</title>
+<title>二手淘金网--修改密码</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
 <link href="./TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
@@ -257,27 +257,27 @@
 												<h2 class="heading2">
 													<span>修改个人信息</span>
 												</h2>
-												<form action="updateUser.do" method="post"
+												<form action="changepw.do" method="post"
 													class="form-horizontal commentform2" novalidate>
 													<fieldset>
 														<input type="hidden" name="username"
 															value="${user.username}" />
 														<div class="control-group">
-															<label class="control-label">电话/手机 </label>
+															<label class="control-label">原密码 </label>
 															<div class="controls">
-																<input type="text" name="tele" id="tele" />
+																<input type="text" id="fwpw" />
 															</div>
 														</div>
 														<div class="control-group">
-															<label class="control-label">真实姓名</label>
+															<label class="control-label">新密码</label>
 															<div class="controls">
-																<input type="text" name="name" id="name" />
+																<input type="text" name="password" id="pw1" />
 															</div>
 														</div>
 														<div class="control-group">
-															<label class="control-label">电子邮箱</label>
+															<label class="control-label">请重复输入新密码</label>
 															<div class="controls">
-																<input type="text" name="email" id="email" />
+																<input type="text" id="pw2" />
 															</div>
 														</div>
 														<div class="control-group">
@@ -291,19 +291,25 @@
 														</div>
 														<script>
 															function check() {
-																var tele = document
-																		.getElementById("tele").value;
-																var name = document
-																		.getElementById("name").value;
-																var email = document
-																		.getElementById("email").value;
-																if (tele == null
-																		|| name == null
-																		|| email == null
-																		|| tele == ''
-																		|| name == ''
-																		|| email == '') {
-																	alert("请将个人信息完善后再进行提交");
+																var fwpw = document
+																		.getElementById("fwpw").value;
+																var pw1 = document
+																		.getElementById("pw1").value;
+																var pw2 = document
+																		.getElementById("pw2").value;
+																if (fwpw == null
+																		|| pw1 == null
+																		|| pw2 == null
+																		|| fwpw == ''
+																		|| pw1 == ''
+																		|| pw2 == '') {
+																	alert("请将信息完善后再进行提交");
+																	return false;
+																} else if (fwpw != "${user.password}") {
+																	alert("原密码错误");
+																	return false;
+																} else if (pw1 != pw2) {
+																	alert("两次密码不同，请重新输入");
 																	return false;
 																}
 															}

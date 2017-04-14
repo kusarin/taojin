@@ -30,11 +30,11 @@ public interface UsersDao {
 	 */
 	public void UsersUpdate(Users user);
 	/**
-	 * 用户信息查询；
+	 * 用户信息查询；changepw
 	 * @param （变量为用户ID:userID，类型为int）；
 	 */
 	public void UsersSearch(int userID);
-
+	public void changepw(Users user);
 	public Users login(Users user);
 	
 	/**
