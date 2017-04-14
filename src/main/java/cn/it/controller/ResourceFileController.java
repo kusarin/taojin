@@ -35,6 +35,7 @@ public class ResourceFileController {
 	@RequestMapping("addRF.do")
 	public ModelAndView addRF(ResourceFile rf){
 		ModelAndView result = resourceFileService.add(rf);
+		result.setViewName("redirect:findResourceFile.do");
 		return result;
 	}
 	

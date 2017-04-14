@@ -13,6 +13,7 @@
             <result column="PaymentMethod" property="paymentMethod" javaType="String" jdbcType="VARCHAR"/>
             <result column="RecivingAddress" property="recivingAddress" javaType="String" jdbcType="VARCHAR"/>
             <result column="Freight" property="freight" javaType="double" jdbcType="DOUBLE"/>
+            <result column="TotalQuantity" property="totalQuantity" javaType="int" jdbcType="INTEGER"/>
         </resultMap>
         <parameterMap type="cn.it.pojo.Order" id="OrderParameterMap">
             <parameter property="id" resultMap="findAll"/>  
@@ -24,6 +25,7 @@
             <parameter property="paymentMethod" resultMap="findAll"/> 
             <parameter property="recivingAddress" resultMap="findAll"/> 
             <parameter property="freight" resultMap="findAll"/>  
+            <parameter property="totalQuantity" resultMap="findAll"/>
        </parameterMap>
      <select id="selectAll" resultMap="findAll">
           select* from indent where User_ID=#{0} LIMIT #{1},#{2}

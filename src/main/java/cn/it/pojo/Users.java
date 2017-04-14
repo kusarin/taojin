@@ -15,7 +15,7 @@ public class Users {
 	private String name;//姓名；
 	private String tele;//用户电话；
 	private String email;//用户email；
-	private boolean type;//用户身份为普通/商家用户（0为普通，1为商家）；
+	private int type;//用户身份为普通/商家用户（0为普通，1为商家）；
 	private String ID;//用户绑定的身份证号，普通用户可不绑定身份证；
 	
 	/*********************set******get***************************************/
@@ -56,16 +56,16 @@ public class Users {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public boolean isType() {
+	public int isType() {
 		return type;
 	}
-	public void setType(boolean type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 	public String getID() {
 		return ID;
 	}
-	public void setID(String iD) {
-		ID = iD;
+	public void setID(String ID) {
+		this.ID = ID;
 	}
 }
