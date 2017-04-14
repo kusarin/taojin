@@ -77,6 +77,8 @@ public class ItemServiceImpl implements ItemService {
 			// 设置浏览次数和出售数量初始值为0；
 			i.setbrowsingTimes(0);
 			i.settradingTimes(0);
+			// 设置商品状态为0，在售；
+			i.setStatus(0);
 			
 			// 添加商品信息；
 			itemDao.ItemAdd(i);	
