@@ -187,7 +187,7 @@ pageEncoding="UTF-8"%>
 		</c:forEach>
 		<div class="orderDe">
 		    <table class="same">
-			     <tr><td style="padding-top:15px;padding-bottom:15px;"><strong class="pay" id="total">${c.totalNumbers}</strong>件商品，总商品金额：<strong class="pay" id="ac">${c.order.actulPayment}</strong></td></tr>
+			     <tr><td style="padding-top:15px;padding-bottom:15px;"><strong class="pay" id="total">${c.order.totalQuantity}</strong>件商品，总商品金额：<strong class="pay" id="ac">${c.order.actulPayment}</strong></td></tr>
 			     <tr><td style="padding-bottom:15px;"> 运费：<strong class="pay">${c.order.freight}</strong></td></tr>
 			</table>
 		</div>

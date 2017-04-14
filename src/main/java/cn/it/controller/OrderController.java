@@ -1,6 +1,5 @@
 package cn.it.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -23,9 +22,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
 import cn.it.pojo.Address;
 import cn.it.pojo.OrderCollection;
 import cn.it.pojo.OrderDetail;
+import cn.it.pojo.Page;
 import cn.it.service.OrderService;
 
 
@@ -83,16 +84,15 @@ public class OrderController {
 	 * 查看所有订单
 	 * 
 	 * */
-	@RequestMapping("orderItem.do")
-	public ModelAndView lookAllOrder(HttpServletRequest request){
+	@RequestMapping(value="orderItem.do",method=RequestMethod.POST)
+	public ModelAndView lookAllOrder(HttpServletRequest request,Page<OrderCollection> page){
 		//获取用户账号
       //int num1=(Integer)(request.getSession().getAttribute("num"));
 		
 		int userId=1;
 		ModelAndView view=new ModelAndView("orderItem");
-		List<OrderCollection> collectList =new ArrayList<OrderCollection>();		
-		//collectList=orderService.getAllOrder(userId);
-		view.addObject("orderList",collectList);
+	    
+		view.addObject("pages",orderService.getAllOrder(userId, page));
 		return view;
 	}
 	
