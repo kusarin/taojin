@@ -6,7 +6,13 @@
 <html>
 <head>
 <title>商品列表</title>
-<link />
+<link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
+<link href="./TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="./TaoJin/css/style.css" rel="stylesheet">
+<link href="./TaoJin/css/flexslider.css" type="text/css" media="screen"
+	rel="stylesheet" />
+<link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
+<link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
 </head>
 <body>
 
@@ -28,7 +34,7 @@
 							 </div>
 							  <div style="margin-left:250px;">
 								<ul class="nav">
-								    <li><a class="home active" href="#">首页</a></li>
+								    <li><a class="home active" href="Itemlist.do">首页</a></li>
 									<li><a class="myaccount" href="#">个人账户</a></li>
 									<li><a class="shoppingcart" href="#">购物车</a></li>
 									<li><a class="checkout" href="#">我的订单</a></li>
@@ -40,9 +46,9 @@
 					</div>
 					<!-- Top Nav End -->
 					<div class="pull-right">
-						<form class="form-search top-search">
-							<input type="text" class="input-medium search-query"  style="width:auto;border:4px solid #FFA07A"
-								placeholder="搜索你想要的二手"><input type="submit" value="搜索"
+						<form action="searchItem.do" method="post">
+							<input input type="text" name="str" style="width:auto;border:4px solid #FFA07A"
+								><input type="submit" value="搜索"
 								style="height:40px;width:auto;background-color:#FFA07A;border:4px solid #FFA07A;">
 						</form>
 					</div>
@@ -53,7 +59,7 @@
 	</header>
 	<!-- Header End -->
 
-<form action="Itemlist.do"></form>
+
 <table width="90%" border="1" align="center">  
  <tbody>  
             <tr align="center">  
@@ -72,10 +78,27 @@
                 <td><a href="lookItem.do?id=${i.item_id}"> ${i.price} </a></td>  
                 <td><a href="lookItem.do?id=${i.item_id}"> ${i.detail} </a></td>
                 
-            </tr>  
-              
-            </c:forEach>  
+            </tr> 
+            </c:forEach>
 </tbody>
 </table>
+<!--footer-->
+    <footer style="margin-top:20px">
+       <img  src="${pageContext.request.contextPath}/image/footer-tri.png" style="width:100%;">
+            <div style="margin: 0px 0px 10px;text-align:center;padding-top:10px;">
+			 
+             <span>友情链接/</span>
+                <a href="http://www.nwpu.edu.cn/" target="_top" class="links">西北工业大学</a>
+				
+            </div>
+            <div style="text-align:center;margin-bottom:10px;">
+               <a id="fd_footer" href="javascript:;">产品意见反馈</a>
+               <a href="http://www.2shoujie.com/joinUs" target="_top">加入我们</a>
+            </div>
+        <div style="text-align:center;margin-bottom:10px;">
+            <span>©2017   版权所有</span>
+            <span>鄂ICP备14003265号-2</span>
+        </div>
+    </footer>
 </body>
 </html>
