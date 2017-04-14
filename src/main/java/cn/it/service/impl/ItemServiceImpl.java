@@ -217,6 +217,7 @@ public class ItemServiceImpl implements ItemService {
 	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Item> findBystr(String str){
+		
 		return itemDao.SearchItem(str);
 	}
 //	// 判断输入字符串是否为数字的方法，用来判断number和price是否为数字【听说可以在前端网页执行，所以先注释掉】
