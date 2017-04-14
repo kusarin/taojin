@@ -3,7 +3,6 @@ package cn.it.dao;
 import java.util.List;
 
 import cn.it.pojo.Manager;
-import cn.it.pojo.Users;
 
 /**
  * 

@@ -265,7 +265,7 @@ public class ItemController {
 		System.out.println("----------------");
 
 		// 将商品条目list传递到searchlist
-		modeandview.addObject("searchlist", list);
+		modeandview.addObject("itemlist", list);
 		
 		return modeandview;
 	}

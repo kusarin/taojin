@@ -77,6 +77,8 @@ public class ItemServiceImpl implements ItemService {
 			// 设置浏览次数和出售数量初始值为0；
 			i.setbrowsingTimes(0);
 			i.settradingTimes(0);
+			// 设置商品状态为0，在售；
+			i.setStatus(0);
 			
 			// 添加商品信息；
 			itemDao.ItemAdd(i);	
@@ -217,6 +219,7 @@ public class ItemServiceImpl implements ItemService {
 	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Item> findBystr(String str){
+		
 		return itemDao.SearchItem(str);
 	}
 //	// 判断输入字符串是否为数字的方法，用来判断number和price是否为数字【听说可以在前端网页执行，所以先注释掉】
