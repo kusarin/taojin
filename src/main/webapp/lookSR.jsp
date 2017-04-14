@@ -32,8 +32,8 @@
                 <td> ${sr.type}</td>  
                 <td> ${sr.user_id} </td> 
                 <td align="center">
-                	<a href="./passSR.do?id=${sr.shopRequest_id}"><button>查看</button></a>
-                	<a href="./deleteSR.do?id=${sr.shopRequest_id}"><button>删除</button></a>
+                	<a href="./passSR.do?id=${sr.shopRequest_id}"><button>通过</button></a>
+                	<a href="./refuseSR.do?id=${sr.shopRequest_id}"><button>不通过</button></a>
                 </td> 
               </tr>  
             </c:forEach>  
