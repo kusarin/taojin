@@ -27,13 +27,13 @@
 		</where>
 	</delete>
 
-	<update id="UsersUpdate" parameterType="cn.it.pojo.Users">
+	<update id="updateUser" parameterType="cn.it.pojo.Users">
 		update users set
-		name=#{name},tele=#{tele},email=#{email}
+		name=#{name},tele=#{tele},email=#{email},ID=#{ID},type=#{type}
 		<where> username = #{username}
 		</where>
 	</update>
-	
+
 	<update id="changepw" parameterType="cn.it.pojo.Users">
 		update users set
 		password=#{password}
