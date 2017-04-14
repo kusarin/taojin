@@ -91,7 +91,7 @@ public class OrderController {
 		int userId=1;
 		ModelAndView view=new ModelAndView("orderItem");
 		List<OrderCollection> collectList =new ArrayList<OrderCollection>();		
-		collectList=orderService.getAllOrder(userId);
+		//collectList=orderService.getAllOrder(userId);
 		view.addObject("orderList",collectList);
 		return view;
 	}
