@@ -19,6 +19,7 @@ import cn.it.pojo.Item;
 import cn.it.pojo.Order;
 import cn.it.pojo.OrderCollection;
 import cn.it.pojo.OrderDetail;
+import cn.it.pojo.Page;
 import cn.it.pojo.Shop;
 import cn.it.service.OrderService;
 
@@ -53,10 +54,12 @@ public class OrderServiceImpl implements OrderService {
 	 * 
 	 * @param(userId用户编号)
 	 * */
-	public List<OrderCollection> getAllOrder(int userId) {
+	public List<OrderCollection> getAllOrder(int userId,Page<OrderCollection> page) {
 		List<OrderCollection> clist = new ArrayList<OrderCollection>();
 		
-		List<Order> olist = orderDao.selectAll(userId); //获取该用户的所有订单
+		page.setPagestart((page.getPageNo()-1)*page.getPagesize());//设置初始的页面条数
+		List<Order> olist = orderDao.selectAll(userId,page.getPagestart(),page.getPagesize());
+		
 		Iterator<Order> oitr = olist.iterator();
 		while (oitr.hasNext()) {
 			OrderCollection collection = new OrderCollection();
@@ -123,8 +126,8 @@ public class OrderServiceImpl implements OrderService {
 	 * */
 	public void deleteOrder(String orderNumber) {
 
-		orderDao.delete(orderNumber); // 删除该订单号对应的订单
 		orderDetailDao.delete(orderNumber); // 删除此订单对应的订单明细
+		orderDao.delete(orderNumber); // 删除该订单号对应的订单
 	}
 
 	/**
@@ -160,9 +163,10 @@ public class OrderServiceImpl implements OrderService {
 		List<OrderDetail> orderDetail = orderCollection.getOrderDeatail();
 		for(OrderDetail orderDe:orderDetail){
 			orderDe.setOrderNumber(orderNumber); // 设置订单编号
+			int itemId=orderDe.getItemId();
+			orderDe.setItemId(itemId);
 			orderDetailDao.add(orderDe);
 		}
-		
 	}
 
 	/**
@@ -216,7 +220,7 @@ public class OrderServiceImpl implements OrderService {
 		List<OrderDetail> orderDetailList =new ArrayList<OrderDetail>();
 		OrderDetail orderDetail = new OrderDetail();
 		orderDetail.setItem(item);
-		orderDetail.setId(itemId); // 设置商品编号
+		orderDetail.setItemId(itemId); // 设置商品编号
 		double unitPrice = item.getprice(); // 商品单价
 		orderDetail.setUnitPrice(unitPrice);
 		orderDetail.setItemNumbers(number); // 此次购买某件商品的数量

@@ -85,5 +85,13 @@ public interface ItemService {
 	 * @returnList<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Item> findByShopId(int shop_id);
+	/**
+	 * 按照输入的关键词查看商品；
+	 * 
+	 * @param str 传入的查询字段
+	 * 
+	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
+	 */
+	public List<Item> findBystr(String str);	
 	
 }

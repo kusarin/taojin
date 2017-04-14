@@ -275,11 +275,11 @@
 									</div>
 									<script>
 										function check() {
-											var password = document
+											var pwd1 = document
 													.getElementById("pwd1").value;
-											var repsword = document
+											var pwd2 = document
 													.getElementById("pwd2").value;
-											if (password != repsword) {
+											if (pwd1 != pwd2) {
 												alert("两次密码不同，请重新输入");
 													return false;
 												}

@@ -44,7 +44,7 @@ public class UsersServiceImpl implements UsersService {
 		for (Users u : userlist) {
 			if (u.getUsername().equalsIgnoreCase(user.getUsername())) {
 				flag = false;
-				str.addObject("error", "用户名重复");
+				str.addObject("error", "该用户名已存在");
 				break;
 			}
 		}
@@ -66,6 +66,12 @@ public class UsersServiceImpl implements UsersService {
 		usersDao.UsersUpdate(user);
 		session.setAttribute("user", user);
 		return str;
-
+	}
+	
+	public ModelAndView changepw(Users user, HttpSession session) {
+		ModelAndView str = new ModelAndView("welcome");
+		usersDao.changepw(user);
+		session.setAttribute("user", user);
+		return str;
 	}
 }

@@ -114,7 +114,6 @@ public class ItemController {
 
 		// 获取前台传入的数据，商品编号id转为int类型；
 		int item_id = Integer.parseInt(id);
-
 		String name = request.getParameter("name");
 		String typeh = request.getParameter("typeh");
 		String typel = request.getParameter("typel");
@@ -193,6 +192,7 @@ public class ItemController {
 	public ModelAndView showTypeItem(HttpServletRequest request) {
 		ModelAndView modeandview = new ModelAndView("Itemtype"); // 到Itemtype.jsp界面
 
+		// 从前台获取商品类型信息；
 		String typeh = request.getParameter("typeh");
 		String typel = request.getParameter("typel");
 
@@ -241,8 +241,32 @@ public class ItemController {
 
 		// 将商品条目list传递到shopItem
 		modeandview.addObject("shopItem", list);
+		return modeandview;
+	}
+	/**
+	 * 根据输入的关键词str查询商品
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("searchItem.do")
+	public ModelAndView showSearchItem(HttpServletRequest request){
+		ModelAndView modeandview = new ModelAndView("Itemlist"); // 到Itemlist.jsp界面
+		// 从前台获取搜索关键词str；
+		String str = request.getParameter("str");
+		
+		//根据输入关键词，搜索商品
+		List<Item> list;
+		list = itemservice.findBystr(str);
+		
+		// 测试list是否已经获取到Item中的数据
+		System.out.println("----------------");
+		System.out.println(list);
+		System.out.println("----------------");
 
-		System.out.println("ko");
+		// 将商品条目list传递到searchlist
+		modeandview.addObject("itemlist", list);
+		
 		return modeandview;
 	}
 }

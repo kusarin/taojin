@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+
 
 
 
@@ -22,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.pojo.Address;
 import cn.it.pojo.OrderCollection;
+import cn.it.pojo.OrderDetail;
 import cn.it.service.OrderService;
 
 
@@ -40,11 +44,17 @@ public class OrderController {
 	 * 提交订单、下单
 	 * @param(address表示收货地址，orderCollection表示订单信息，payway表示支付方式)
 	 * */
-	@RequestMapping("/submitOrder.do")
+	@RequestMapping(value="submitOrder.do", method=RequestMethod.POST)
 	public ModelAndView submmitOrder(Address address,OrderCollection orderCollection, int payway){
 		ModelAndView view=new ModelAndView("payment");
 		int userId=1;   //用户Id
 		orderService.submmitOrder(address, orderCollection,payway,userId);
+		
+		view.addObject("address", address.getReceivingaddress());
+		view.addObject("actulpayment",orderCollection.getOrder().getActulPayment());
+		List<OrderDetail> orderDe=orderCollection.getOrderDeatail();
+		view.addObject("orderDe",orderDe);
+		view.addObject("payway",payway);
 		return view;
 	}
 	
@@ -57,6 +67,7 @@ public class OrderController {
 		orderService.deleteOrder(orderNumber);
 		return view;
 	}
+	
 	/*******
 	 * 查看订单详情
 	 * */
@@ -80,7 +91,7 @@ public class OrderController {
 		int userId=1;
 		ModelAndView view=new ModelAndView("orderItem");
 		List<OrderCollection> collectList =new ArrayList<OrderCollection>();		
-		collectList=orderService.getAllOrder(userId);
+		//collectList=orderService.getAllOrder(userId);
 		view.addObject("orderList",collectList);
 		return view;
 	}
