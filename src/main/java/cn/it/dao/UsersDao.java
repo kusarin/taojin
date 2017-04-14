@@ -28,7 +28,7 @@ public interface UsersDao {
 	 * 用户信息修改；
 	 * @param （变量为用户ID:userID，类型为int）；
 	 */
-	public void UsersUpdate(Users user);
+	public void updateUser(Users user);
 	/**
 	 * 用户信息查询；changepw
 	 * @param （变量为用户ID:userID，类型为int）；

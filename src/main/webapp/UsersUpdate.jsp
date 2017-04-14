@@ -261,7 +261,8 @@
 													class="form-horizontal commentform2" novalidate>
 													<fieldset>
 														<input type="hidden" name="username"
-															value="${user.username}" />
+															value="${user.username}" /> <input type="hidden"
+															name="type" value=1 />
 														<div class="control-group">
 															<label class="control-label">电话/手机 </label>
 															<div class="controls">
@@ -281,7 +282,12 @@
 															</div>
 														</div>
 														<div class="control-group">
-
+															<label class="control-label">个人身份证</label>
+															<div class="controls">
+																<input type="text" name="ID" id="ID" />
+															</div>
+														</div>
+														<div class="control-group">
 															<div class="controls"></div>
 														</div>
 														<div class="controls">
@@ -297,12 +303,16 @@
 																		.getElementById("name").value;
 																var email = document
 																		.getElementById("email").value;
+																var ID = document
+																		.getElementById("ID").value;
 																if (tele == null
 																		|| name == null
 																		|| email == null
+																		|| ID == null
 																		|| tele == ''
 																		|| name == ''
-																		|| email == '') {
+																		|| email == ''
+																		|| ID == '') {
 																	alert("请将个人信息完善后再进行提交");
 																	return false;
 																}
