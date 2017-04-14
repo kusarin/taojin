@@ -18,6 +18,8 @@ public class Item {
 	private String detail;   //商品描述：detail；
 	private String image;    //商品图片：image；
 	
+	private int status;      //商品状态：0/1；0表示在售状态，1表示不在售状态。
+	
 	private int browsingTimes; //商品浏览次数：browsingTimes，后台数据，初始化为0，不能手动修改；
 	private int tradingTimes;  //商品出售数量tradingTimes，后台数据，初始化为0，不能手动修改；
 	
@@ -80,6 +82,12 @@ public class Item {
 		this.image = image;
 	}
 
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	public int getbrowsingTimes() {
 		return browsingTimes;
 	}
