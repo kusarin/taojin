@@ -209,7 +209,17 @@ public class ItemServiceImpl implements ItemService {
 		return itemDao.FindItemByShopId(shop_id);
 	}
 	
-	
+	/**
+	 * 按照输入的关键词查看商品；
+	 * 
+	 * @param str 传入的查询字段
+	 * 
+	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
+	 */
+	public List<Item> findBystr(String str){
+		
+		return itemDao.SearchItem(str);
+	}
 //	// 判断输入字符串是否为数字的方法，用来判断number和price是否为数字【听说可以在前端网页执行，所以先注释掉】
 //	public static boolean isNumeric(String str){
 //		for (int i = 0; i < str.length(); i++){
@@ -322,4 +332,15 @@ public class ItemServiceImpl implements ItemService {
 	     List<Item> i = itemdao.FindItemByType(typeh,typel);
     	 System.out.println(i); 
 	}	
+	/**
+	 * 测试7，用于测试SearchItem(str)是否传值
+	 */
+	@Test
+	public void test7(){
+		 ApplicationContext ac=new ClassPathXmlApplicationContext("config.xml");
+		 ItemDao itemdao= (ItemDao) ac.getBean("itemDao");
+		 String str="一个";
+	     List<Item> i = itemdao.SearchItem(str);
+    	 System.out.println(i); 
+	}
 }

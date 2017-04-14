@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>SimpleOne - A Responsive Html5 Ecommerce Template</title>
+<title>${lookitem.name}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -84,7 +84,7 @@
 							 </div>
 							  <div style="margin-left:250px;">
 								<ul class="nav">
-								    <li><a class="home active" href="#">首页</a></li>
+								    <li><a class="home active" href="Itemlist.do">首页</a></li>
 									<li><a class="myaccount" href="#">个人账户</a></li>
 									<li><a class="shoppingcart" href="#">购物车</a></li>
 									<li><a class="checkout" href="#">我的订单</a></li>

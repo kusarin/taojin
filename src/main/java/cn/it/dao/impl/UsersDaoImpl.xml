@@ -33,6 +33,13 @@
 		<where> username = #{username}
 		</where>
 	</update>
+	
+	<update id="changepw" parameterType="cn.it.pojo.Users">
+		update users set
+		password=#{password}
+		<where> username = #{username}
+		</where>
+	</update>
 
 	<select id="UsersSearch" parameterType="cn.it.pojo.Users">
 		select * from Users where
