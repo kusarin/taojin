@@ -120,7 +120,7 @@
           <ul class="thumbnails mainimage">
             <span>这里应该有图片</span>
           </ul>
-           <tr><td>${lookitem.image}</td></tr>
+           <tr><td>><img src=${pageContext.request.contextPath}${lookitem.image}></td></tr>
           
         </div>   
         

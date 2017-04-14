@@ -118,17 +118,17 @@ pageEncoding="UTF-8"%>
 	</header>
 	<!-- Header End -->
 	
+	<form action="submitOrder.do" method="post">
     <div class="containers">
 	   <div class="orderTitle" style="color:gray;">
 	      <p>请核对订单信息</p>
 	   </div>
-	   
 	   <div class="receiver">
 	       <div class="info">
 	       <strong>收货人地址</strong><a href="#"><strong style="float:right;font-size:12px;">新增地址</strong></a>
 		   </div>
 		   <div class="receiverInfo">
-			     <input checked="checked" type="radio">${address.receivingaddress}
+			     <input checked="checked" type="radio" name="receivingaddress" value="${address.receivingaddress}">${address.receivingaddress}
 		   </div>
 	   </div>
 	   <div class="receive">
@@ -138,7 +138,7 @@ pageEncoding="UTF-8"%>
              <div class="butt">
 			   <button class="btnn" id="btn1" onclick="test(this)" style="border:1px solid #DCDCDC;">货到付款</button>
 			   <button class="bttn" id="btn2" onclick="test(this)" style="border:1px solid #DCDCDC;">在线支付</button>
-			   <input type="hidden" id="payway" value="0">
+			   <input type="hidden" id="payway" value="1" name="payway">
 		     </div>
 		 </div>
 		 <div class="downline"></div>
@@ -168,15 +168,19 @@ pageEncoding="UTF-8"%>
 		<table>
 		   <tr>
 			     <td class="test1"><a href="#"><img src="${pageContext.request.contextPath}${collection.item.image}"/></a>
-		        <a href="#"><p>${collection.item.detail}</p></a></td>
+			     <input type="hidden" value="${collection.item.image}" name="orderDeatail[${s.index}].item.image">
+		        <a href="#"><p>${collection.item.detail}</p></a>
+		        <input type="hidden" value="${collection.item.image}" name="orderDeatail[${s.index}].item.detail">
+		        <input type="hidden" value="${collection.itemId}" name="orderDeatail[${s.index}].itemId">
+		        </td>
 				 <td class="common" style="padding-left:0px;text-align:center;">
 				 <input type="button" value="-"  id="m" onclick="minus()" style="text-align:center;height:30px;width:30px;float:left;border:0;">
 				 <input type="text" value="${collection.itemNumbers}" id="mp" readonly="readonly" name="number" style="background-color:white;text-align:center;width:40px;float:left;border:1px;">
-				 <input type="button" value="+"  onclick="plus(3)" style="height:30px;width:30px;text-align:center;float:left;border:0;"></td>
+				 <input type="button" value="+" onclick="plus(3)" style="height:30px;width:30px;text-align:center;float:left;border:0;"></td>
 				 <td class="common">${collection.unitPrice}
-				 <input type="hidden" value="${collection.unitPrice}" name="orderDeatail[${s}].unitPrice" id="unitPrice">
+				 <input type="hidden" value="${collection.unitPrice}" name="orderDeatail[${s.index}].unitPrice" id="unitPrice">
 				 </td>
-				 <td class="common" id="itemprice">${collection.itemPrice}</td>
+				 <td class="common" id="itemprice">${collection.itemPrice}/你${collection.itemId}</td>
 			 </tr>
 		 </table>
 		</div>
@@ -190,7 +194,9 @@ pageEncoding="UTF-8"%>
 		
 		<div class="orderDe" style="margin-top:0px;border:1px solid #80ffff;">
 		  <table  class="same" style="background-color:#f0ffff;">
-			     <tr><td style="padding-top:15px;">实际支付： <span class="pay" id="actulpayment">${c.order.actulPayment}</span></td></tr>
+			     <tr><td style="padding-top:15px;">实际支付： <span class="pay" id="actulpayment">${c.order.actulPayment}</span>
+			      <input type="hidden" value="${c.order.actulPayment}" name="order.actulPayment" id="unitPrice">
+			     </td></tr>
 			     <tr><td style="padding-top:15px;"> 寄送至： ${address.receivingaddress}</td></tr>
 				 <tr><td style="padding-top:15px;padding-bottom:15px;">收货人:${address.name}</td></tr>
 		  </table>
@@ -200,6 +206,7 @@ pageEncoding="UTF-8"%>
 		    <input type="submit" value="提交订单"/>
 		</div>
     </div> 
+    </form>
     <!-- footer -->
 	<footer style="margin-top:20px">
        <img  src="${pageContext.request.contextPath}/image/footer-tri.png" style="width:100%;">
