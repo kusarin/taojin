@@ -31,11 +31,11 @@
                 <td> ${sr.name} </td>  
                 <td> ${sr.type}</td>  
                 <td> ${sr.user_id} </td> 
-                <td>
-                	<a href="./findSR.do?id=${sr.shopRequest_id}"><button>查看</button></a>
+                <td align="center">
+                	<a href="./passSR.do?id=${sr.shopRequest_id}"><button>查看</button></a>
                 	<a href="./deleteSR.do?id=${sr.shopRequest_id}"><button>删除</button></a>
                 </td> 
-            </tr>  
+              </tr>  
             </c:forEach>  
 </tbody>
 </table>

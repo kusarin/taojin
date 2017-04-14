@@ -33,6 +33,7 @@ public class ShopRequestServiceImpl implements ShopRequestService{
 		shop.setType(SR.getType());
 		shop.setIntro(SR.getIntro());
 		shop.setUser_ID(SR.getUser_id());
+		shop.setBrowsingTimes(0);
 		shopDao.addShop(shop);
 		shopRequestDao.delete(num);
 	}
