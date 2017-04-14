@@ -13,7 +13,7 @@ public class Order {
 	private String orderNumber;  //订单号，唯一标识一个订单：orderNumber
 	private Date orderTime;     //下单时间：orderTime
 	private double actulPayment;  //实际的付款：actulPayment
-	private String status;  //交易状态：待付款、取消订单、交易成功、待收货：statusString
+	private String status;  //交易状态：待付款、取消订单、交易成功、待收货
 	private String paymentMethod;  //支付方式：paymentMethod
 	private String recivingAddress; //收货地址：recivingAddress
 	private double freight;   //运费：freight

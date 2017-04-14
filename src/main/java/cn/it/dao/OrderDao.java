@@ -27,10 +27,14 @@ public interface OrderDao {
       * 根据用户编号查询该用户的所有订单*
       * 
       * */
-     public List<Order> selectAll(int userId);
+     public List<Order> selectAll(int userId,int startNo,int pageSize);
      /**
       * 
       * 根据订单号删除订单 
       * */
 	public void delete(String orderNumber);     
+	/**
+	 * 计算订单记录总数
+	 * */
+	public int getCount(int userId);
 }
