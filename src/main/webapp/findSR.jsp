@@ -6,7 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
- <script type="text/javascript">
+<script type="text/javascript">
     window.onload=function(){
     	var error="${requestScope.error}";
     	  if(error!=""&&error!=null&&typeof(error)!="undefined"){
@@ -50,7 +50,7 @@
             </tr> 
 </tbody>
 </table>
-<table width="30%" border="1" align="center">
+<table width="30%" border="1">
             <tr>  
              	<td align="center">
                 	<a href="./passSR.do?id=${sr.shop_id}"><button>同意</button></a>
