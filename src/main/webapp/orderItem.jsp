@@ -178,7 +178,7 @@ a:hover{
 		                    <a href="#"><p>${ord.item.detail}</p></a></td>
 		                    <td class="sa">${ord.unitPrice}</td>
 		                 </c:forEach>
-		                    <td class="sa">${orderc.totalNumbers}</td>
+		                    <td class="sa">${orderc.order.totalQuantity}</td>
 		                    <td class="sa">${orderc.order.actulPayment}</td>
 		                    <td class="sa">${orderc.order.status}</td>
 	                        <td class="sa"><a href="#"><p>订单详情</p></a>

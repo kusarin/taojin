@@ -180,7 +180,7 @@ pageEncoding="UTF-8"%>
 				 <td class="common">${collection.unitPrice}
 				 <input type="hidden" value="${collection.unitPrice}" name="orderDeatail[${s.index}].unitPrice" id="unitPrice">
 				 </td>
-				 <td class="common" id="itemprice">${collection.itemPrice}/你${collection.itemId}</td>
+				 <td class="common" id="itemprice">${collection.itemPrice}</td>
 			 </tr>
 		 </table>
 		</div>
@@ -188,7 +188,7 @@ pageEncoding="UTF-8"%>
 		<div class="orderDe">
 		    <table class="same">
 			     <tr><td style="padding-top:15px;padding-bottom:15px;"><strong class="pay" id="total">${c.order.totalQuantity}</strong>件商品，总商品金额：<strong class="pay" id="ac">${c.order.actulPayment}</strong>
-			     <input type="hidden" value="${c.order.totalQuantity}" name="order.totalQuantity" id="unitPrice"></td></tr>
+			     <input type="hidden" value="${c.order.totalQuantity}" name="order.totalQuantity"></td></tr>
 			     <tr><td style="padding-bottom:15px;"> 运费：<strong class="pay">${c.order.freight}</strong></td></tr>
 			</table>
 		</div>

@@ -34,8 +34,8 @@
           select count(OrderNumber) from indent where User_ID=#{userId}
      </select>
      <insert id="add" parameterMap="OrderParameterMap">
-           insert into indent(User_ID,OrderNumber,OrderTime,ActulPayment,Status,PaymentMethod,RecivingAddress,freight) 
-           values(#{userID},#{orderNumber},#{orderTime},#{actulPayment},#{status},#{paymentMethod},#{recivingAddress},#{freight})
+           insert into indent(User_ID,OrderNumber,OrderTime,ActulPayment,Status,PaymentMethod,RecivingAddress,freight,TotalQuantity) 
+           values(#{userID},#{orderNumber},#{orderTime},#{actulPayment},#{status},#{paymentMethod},#{recivingAddress},#{freight},#{totalQuantity})
      </insert>
       <update id="update" parameterMap="OrderParameterMap">
            update indent set Status=#{status} where OrderNumber=#{orderNumber}

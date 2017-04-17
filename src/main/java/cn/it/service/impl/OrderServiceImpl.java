@@ -6,7 +6,10 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import cn.it.dao.AddressDao;
@@ -58,19 +61,17 @@ public class OrderServiceImpl implements OrderService {
 		List<OrderCollection> clist = new ArrayList<OrderCollection>();
 		
 		page.setPagestart((page.getPageNo()-1)*page.getPagesize());//设置初始的页面条数
-		List<Order> olist = orderDao.selectAll(userId,page.getPagestart(),page.getPagesize());
+		List<Order> olist = orderDao.selectAll(userId,page.getPagestart(),page.getPagesize());//查询结
+		 
+		for(Order or:olist) {
 	
-		Iterator<Order> oitr = olist.iterator();
-		while (oitr.hasNext()) {
 			OrderCollection collection = new OrderCollection();
-			Order o = oitr.next();
-			collection.setOrder(o);
-			if (orderDetailDao.selectAll(o.getOrderNumber()) != null) {
-				List<OrderDetail> ordlist = orderDetailDao.selectAll(o
-						.getOrderNumber());
+			
+			List<OrderDetail> ordlist = orderDetailDao.selectAll(or.getOrderNumber());
+			
+				collection.setOrder(or);//查询到的订单
 				collection.setOrderDeatail(ordlist);
-			}
-			clist.add(collection);
+				clist.add(collection);
 		}
 		page.setDatas(clist);
 		page.setTotalrecord(orderDao.getCount(userId));
@@ -240,6 +241,7 @@ public class OrderServiceImpl implements OrderService {
 		order.setFreight(freight);
 		actulPayment = actulPayment + itemPrice + freight;
 		order.setActulPayment(actulPayment); // 订单总价
+		
 		order.setTotalQuantity(number);//订单中商品总数
 		orderCollection.setOrder(order);// 设置订单信息
 
