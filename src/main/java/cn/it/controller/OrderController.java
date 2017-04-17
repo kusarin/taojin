@@ -48,6 +48,7 @@ public class OrderController {
 	@RequestMapping(value="submitOrder.do", method=RequestMethod.POST)
 	public ModelAndView submmitOrder(Address address,OrderCollection orderCollection, int payway){
 		ModelAndView view=new ModelAndView("payment");
+		System.out.println(orderCollection.getOrder().getTotalQuantity());
 		int userId=1;   //用户Id
 		orderService.submmitOrder(address, orderCollection,payway,userId);
 		
@@ -84,7 +85,7 @@ public class OrderController {
 	 * 查看所有订单
 	 * 
 	 * */
-	@RequestMapping(value="orderItem.do",method=RequestMethod.POST)
+	@RequestMapping(value="orderItem.do")
 	public ModelAndView lookAllOrder(HttpServletRequest request,Page<OrderCollection> page){
 		//获取用户账号
       //int num1=(Integer)(request.getSession().getAttribute("num"));
