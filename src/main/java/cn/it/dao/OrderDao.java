@@ -32,7 +32,11 @@ public interface OrderDao {
       * 
       * 根据订单号删除订单 
       * */
-	public void delete(String orderNumber);     
+	public void delete(String orderNumber); 
+	/****
+	 * 批量删除订单
+	 * ***/
+	public void deleteAll(String[] orderNumber);
 	/**
 	 * 计算订单记录总数
 	 * */
