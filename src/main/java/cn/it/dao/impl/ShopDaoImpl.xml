@@ -12,7 +12,7 @@
 			jdbcType="VARCHAR" />
 		<result column="Intro" property="Intro" javaType="String"
 			jdbcType="VARCHAR" />
-		<result column="BrowsingTiems" property="BrowsingTimes" javaType="int" jdbcType="INTEGER"/>
+		<result column="BrowsingTimes" property="BrowsingTimes" javaType="int" jdbcType="INTEGER"/>
 	</resultMap>
 	<parameterMap type="cn.it.pojo.Shop" id="ShopParameterMap">
 		<parameter property="shop_id" resultMap="findAll" />
@@ -20,13 +20,13 @@
 		<parameter property="Name" resultMap="findAll" />
 		<parameter property="Type" resultMap="findAll" />
 		<parameter property="Intro" resultMap="findAll" />
-		<parameter property="BrowsingTiems" resultMap="findAll"/>
+		<parameter property="BrowsingTimes" resultMap="findAll"/>
 	</parameterMap>
 	<select id="findByid" parameterType="int" resultType="cn.it.pojo.Shop">
 		Select * from shop where shop_id=#{id}
 	</select>
 	<insert id="addShop" parameterType="cn.it.pojo.Shop">
-	    Insert into shop(user_ID ,Name,Type,Intro,BrowsingTiems) values(2,#{Name},#{Type},#{Intro},null)
+	    Insert into shop(user_ID ,Name,Type,Intro,BrowsingTimes) values(2,#{Name},#{Type},#{Intro},0)
 	</insert>
 	<select id="findShopList" resultMap="findAll">
 		Select * from shop where shop_id =#{id}
@@ -40,4 +40,16 @@
 	<delete id="deleteShop" parameterType="int">
 	    Delete from shop where shop_id =#{shop_id}
 	</delete>
+	
+	<select id="findSRList" resultMap="findAll">
+	    Select * from shop where status = 0
+	</select>
+	
+	<select id="findUserByid" parameterType="int" resultType="int">
+	    Select user_ID from shop where shop_id = #{0}
+	</select>
+	
+	<update id="updateStatus" parameterType="int">
+		Update shop set status = #{0} where shop_id = #{1}
+	</update>
 </mapper>

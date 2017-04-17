@@ -75,4 +75,8 @@ public class UsersServiceImpl implements UsersService {
 		session.setAttribute("user", user);
 		return str;
 	}
+
+	public Users findById(int userid) {
+		return usersDao.findById(userid);
+	}
 }
