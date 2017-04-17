@@ -192,9 +192,14 @@ a:hover{
 				
 				
 				<div style="height:40px;width:700px;text-align:right;padding-top:5px;margin-top:15px;">
-				    <a href="#" style="line-height:40px;">上一页</a>
-					<span style="margin-left:10px;margin-right:10px;color:red;">1</span>
-				    <a href="#" style="line-height:40px;">下一页</a>
+				    <span>总页数</span><span style="margin-right:10px;color:red;margin-left:10px;">${pages.totalpage}</span>
+				    <c:if test="${pages.pageNo>1}">
+				    <a href="orderItem.do?pageNo=${pages.pageNo-1}" style="line-height:40px;">上一页</a>
+				    </c:if>
+					<span style="margin-left:10px;margin-right:10px;color:red;">${pages.pageNo}</span>
+					<c:if test="${pages.pageNo<pages.totalpage}">
+				    <a href="orderItem.do?pageNo=${pages.pageNo+1}" style="line-height:40px;">下一页</a>
+				    </c:if>
 				</div>
 			</div>
 		</div>	
