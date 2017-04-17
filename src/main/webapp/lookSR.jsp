@@ -26,14 +26,13 @@
                 <td width="50%">申请者ID</td> 
                 <td width="20%"></td>
             </tr>  
-            <c:forEach items="${ShopRequest}" var="sr">  
+            <c:forEach items="${SR}" var="sr">  
               <tr>  
                 <td> ${sr.name} </td>  
                 <td> ${sr.type}</td>  
-                <td> ${sr.user_id} </td> 
+                <td> ${sr.user_ID} </td> 
                 <td align="center">
-                	<a href="./passSR.do?id=${sr.shopRequest_id}"><button>通过</button></a>
-                	<a href="./refuseSR.do?id=${sr.shopRequest_id}"><button>不通过</button></a>
+                	<a href="./findSR.do?id=${sr.shop_id}"><button>查看详情</button></a>
                 </td> 
               </tr>  
             </c:forEach>  
