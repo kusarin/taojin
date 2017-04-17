@@ -118,7 +118,8 @@ public class Item {
 		return "\n Item ["+item_id+"] =("+shop_id+"   "+name+"   "+typeh+"   "
 				                      +typel+"   "+number+"   "
 				                      +price+"   "+detail+"   "
-				                      +image+"   "+browsingTimes+"   "
+				                      +image+"   "+status+"   "
+				                      +browsingTimes+"   "
 						              +tradingTimes+"   " +")";
 	}
 }
