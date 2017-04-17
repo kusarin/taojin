@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
@@ -64,12 +64,21 @@ public class OrderController {
     * 删除订单
     * */
 	@RequestMapping("deleteOrder.do")
-	public ModelAndView deleteOrder(String orderNumber){
-		ModelAndView view=new ModelAndView("orderItem");
+	public String deleteOrder(String orderNumber, RedirectAttributes arr, Page<OrderCollection> page){
+		
 		orderService.deleteOrder(orderNumber);
-		return view;
+		arr.addAttribute("pageNo", page.getPageNo());
+		return "redirect:orderItem.do";
 	}
-	
+	/**
+	 * 批量删除
+	 * */
+	@RequestMapping(value="deleteAllOrder.do",method=RequestMethod.POST)
+	public String deleteAllOrder(String[] orderNumber,RedirectAttributes arr, Page<OrderCollection> page){
+		orderService.deleteAllOrder(orderNumber);
+		arr.addAttribute("pageNo", page.getPageNo());
+		return "redirect:orderItem.do";
+	}
 	/*******
 	 * 查看订单详情
 	 * */

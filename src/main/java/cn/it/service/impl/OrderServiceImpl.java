@@ -132,7 +132,13 @@ public class OrderServiceImpl implements OrderService {
 		orderDetailDao.delete(orderNumber); // 删除此订单对应的订单明细
 		orderDao.delete(orderNumber); // 删除该订单号对应的订单
 	}
-
+	/***
+	 *批量删除 
+	 * **/
+	public void deleteAllOrder(String[] orderNumber){
+		orderDetailDao.deleteAll(orderNumber); // 删除此订单对应的订单明细
+		orderDao.deleteAll(orderNumber); // 删除该订单号对应的订单
+	}
 	/**
 	 * 提交订单
 	 * 

@@ -11,7 +11,7 @@ public class CartItem {
 	private int cartItemId;//购物车Id
 	private int itemId;// 商品表Id
 	private int tradingNumbers;//购买的某件商品的数量
-	private double totalPrice;//销售
+	private double totalPrice;//销售额
 	private String shopName;//店铺名称
 	private Item item;//商品
 	public int getCartId() {
