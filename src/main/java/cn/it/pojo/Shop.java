@@ -7,13 +7,12 @@ public class Shop {
 	private String Type;
 	private String Intro;
 	private int BrowsingTimes;
-	private int status;
-
+	private int Status;
 	public int getStatus() {
-		return status;
+		return Status;
 	}
 	public void setStatus(int status) {
-		this.status = status;
+		Status = status;
 	}
 	public int getShop_id() {
 		return shop_id;
