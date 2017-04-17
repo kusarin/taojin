@@ -55,6 +55,11 @@ public interface ItemService {
 	public ModelAndView updateItem(int item_id, String name,String typeh,String typel,
 			String number,String price,String detail,String image);
 	/**
+	 * 下架商品
+	 * @return ModelAndView
+	 */
+	public ModelAndView downItem(int item_id);
+	/**
 	 * 按照商品编号查找商品信息
 	 * 
 	 * @param item_id 商品编号，int

@@ -101,8 +101,8 @@ public class ItemServiceImpl implements ItemService {
 	public ModelAndView deleteItem(int item_id) {
 		ModelAndView str = new ModelAndView("shopItem");  //跳转到shopList.jsp界面
 		itemDao.ItemDelete(item_id);	
-		// 返回提示信息 "下架商品成功！！！"
-		str.addObject("error", "下架商品成功！！！");
+		// 返回提示信息 "删除商品成功！！！"
+		str.addObject("error", "删除商品成功！！！");
 		return str;
 	}
 
@@ -142,9 +142,8 @@ public class ItemServiceImpl implements ItemService {
 			double pri = Double.parseDouble(price);
 		
 			// 定义商品；
-			Item i = new Item();
-			// 设置商品属性；
-			i.setitem_id(item_id);    // 商品编号
+			Item i = itemDao.FindItemById(item_id);
+			// 设置商品新属性；
 			i.setname(name);          // 商品名称
 			i.settypeh(typeh);        // 商品一阶类型
 			i.settypel(typel);        // 商品二阶类型
@@ -160,7 +159,22 @@ public class ItemServiceImpl implements ItemService {
 		}
 		return str;
 	}
-	
+	/**
+	 * 下架商品
+	 * 
+	 * @param item_id 商品编号，int
+	 * 
+	 * @return ModelAndView
+	 */
+	public ModelAndView downItem(int item_id){
+		ModelAndView str = new ModelAndView("shopItem");  //跳转到shopList.jsp界面
+		Item i = itemDao.FindItemById(item_id);
+		i.setStatus(1);
+		itemDao.ItemUpdate(i);
+		// 返回提示信息 "下架商品成功！！！"
+		str.addObject("error", "下架商品成功！！！");
+		return str;
+	}
 	/**
 	 * 通过调用itemDao.FindItemById(),查看单个商品信息
 	 * 
@@ -186,7 +200,14 @@ public class ItemServiceImpl implements ItemService {
 	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Item> findItemList() {	
-		return itemDao.FindAll();
+		List<Item> shoplist = itemDao.FindAll();
+		// 将不属于“在售”状态的商品从列表中删除
+		for(int i=0;i<shoplist.size();i++){
+			if(shoplist.get(i).getStatus()==1){
+				shoplist.remove(i);
+			}
+		}
+		return shoplist;
 	}
 	
 	/**
@@ -208,7 +229,14 @@ public class ItemServiceImpl implements ItemService {
 	 * @returnList<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Item> findByShopId(int shop_id){
-		return itemDao.FindItemByShopId(shop_id);
+		List<Item> shoplist = itemDao.FindItemByShopId(shop_id);
+		// 将不属于“在售”状态的商品从列表中删除
+		for(int i=0;i<shoplist.size();i++){
+			if(shoplist.get(i).getStatus()==1){
+				shoplist.remove(i);
+			}
+		}
+		return shoplist;
 	}
 	
 	/**
