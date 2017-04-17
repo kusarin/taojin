@@ -253,23 +253,23 @@
 													<tbody>
 
 														<tr align="center">
-															<td>商品编号</td>
 															<td>商品图片</td>
 															<td>商品名称</td>
 															<td>商品数量</td>
 															<td>商品价格</td>
+															<td>商品状态</td>
 															<td>商品管理操作</td>
 														</tr>
 														<c:forEach items="${shopItem}" var="i">
 
 															<tr>
-																<td>${i.item_id}</td>
 																<td>${i.price}</td>
 																<td>${i.name}</td>
 																<td>${i.number}</td>
 																<td>${i.price}</td>
+																<td>在售</td>
 																<td><a href="showchangeItem.do?id=${i.item_id}">修改商品信息</a>
-																	<a href="deleteItem.do?id=${i.item_id}">下架商品</a>
+																	<a href="downItem.do?id=${i.item_id}">下架商品</a>
 															</tr>
 
 														</c:forEach>
