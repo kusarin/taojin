@@ -59,7 +59,7 @@ public class ItemController {
 	}
 
 	/**
-	 * 下架商品
+	 * 删除商品
 	 * 
 	 * @param request
 	 *            ，@RequestParam("id")前台传递的商品编号
@@ -79,6 +79,18 @@ public class ItemController {
 		return modeandview;
 	}
 
+	@RequestMapping("downItem.do")
+	public ModelAndView downItem(HttpServletRequest request,
+			@RequestParam("id") String id){
+		// 获取前台传入的数据，商品编号id转为int类型；
+				int item_id = Integer.parseInt(id);
+				// 进行下架商品信息操作；
+				ModelAndView modeandview = itemservice.downItem(item_id);
+				// 重定向刷新页面；
+				modeandview.setViewName("redirect:shopItem.do");
+
+				return modeandview;
+	}
 	/**
 	 * 进入要修改的商品信息
 	 * 
