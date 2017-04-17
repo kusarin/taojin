@@ -11,4 +11,7 @@ public interface ShopService {
    public void deleteShop(Shop shop); 
    long viewHits(Long id);
    List<Shop> findSR();
+   int findUserId(int id1);
+   void passSR(int id);
+   void refuseSR(int id1);
 }

@@ -17,20 +17,20 @@
 <title>店铺认证管理</title>
 </head>
 <body>
-
+店铺认证申请列表
 <table width="90%" border="1" align="center">  
  <tbody>  
             <tr align="center">  
                 <td width="20%">店铺名</td>  
-                <td width="10%">店铺类型</td>  
-                <td width="50%">申请者ID</td> 
-                <td width="20%"></td>
+                <td width="20%">申请者ID</td>  
+                <td width="50%">店铺类型</td> 
+                <td width="10%"></td>
             </tr>  
             <c:forEach items="${SR}" var="sr">  
               <tr>  
                 <td> ${sr.name} </td>  
-                <td> ${sr.type}</td>  
-                <td> ${sr.user_ID} </td> 
+                <td> ${sr.user_ID}</td>  
+                <td> ${sr.type} </td> 
                 <td align="center">
                 	<a href="./findSR.do?id=${sr.shop_id}"><button>查看详情</button></a>
                 </td> 

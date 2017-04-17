@@ -47,4 +47,16 @@ public class ShopServiceImpl implements ShopService {
 	public List<Shop> findSR() {
 		return shopDao.findSRList();
 	}
+	public int findUserId(int id1) {
+		return shopDao.findUserByid(id1);
+	}
+	public void passSR(int id1) {
+		int i = 1;
+		shopDao.updateStatus(i,id1);
+	}
+	public void refuseSR(int id1) {
+		int i = 2;
+		shopDao.updateStatus(i,id1);
+	}
+
 }

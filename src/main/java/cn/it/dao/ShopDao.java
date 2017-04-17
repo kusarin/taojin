@@ -11,4 +11,6 @@ public interface ShopDao {
     public void deleteShop(Shop shop);
     List<Shop> findShopList(int num);
 	List<Shop> findSRList();
+	int findUserByid(int id1);
+	void updateStatus(int id,int id1);
 }

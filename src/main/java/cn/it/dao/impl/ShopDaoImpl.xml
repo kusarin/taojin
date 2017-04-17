@@ -44,4 +44,12 @@
 	<select id="findSRList" resultMap="findAll">
 	    Select * from shop where status = 0
 	</select>
+	
+	<select id="findUserByid" parameterType="int" resultType="int">
+	    Select user_ID from shop where shop_id = #{0}
+	</select>
+	
+	<update id="updateStatus" parameterType="int">
+		Update shop set status = #{0} where shop_id = #{1}
+	</update>
 </mapper>

@@ -17,26 +17,48 @@
 <title>店铺认证管理</title>
 </head>
 <body>
-
+店铺认证申请
 <table width="90%" border="1" align="center">  
  <tbody>  
-            <tr align="center">  
-                <td width="20%">店铺名</td>  
-                <td width="10%">店铺类型</td>  
-                <td width="50%">申请者ID</td> 
-                <td width="20%"></td>
+            <tr >  
+                <td width="30%">店铺名</td>  
+                <td width="70%">${sr.name}</td>  
             </tr>  
-            <c:forEach items="${SR}" var="sr">  
-              <tr>  
-                <td> ${sr.name} </td>  
-                <td> ${sr.type}</td>  
-                <td> ${sr.user_ID} </td> 
-                <td align="center">
-                	<a href="./findSR.do?id=${sr.shop_id}"><button>查看详情</button></a>
-                </td> 
-              </tr>  
-            </c:forEach>  
+            <tr>  
+                <td >店铺类型</td>  
+                <td >${sr.type}</td>  
+            </tr>  
+            <tr >  
+                <td >店铺介绍</td>  
+                <td >${sr.intro}</td>  
+            </tr>  
+            <tr >  
+                <td >用户名</td>  
+                <td>${user.username}</td>  
+            </tr>  
+            <tr >  
+                <td>用户真实姓名</td>  
+                <td>${user.name}</td>  
+            </tr>  
+            <tr >  
+                <td>用户联系方式</td>  
+                <td>${user.tele}</td>  
+            </tr>  
+            <tr >  
+                <td>用户身份证号</td>  
+                <td>${user.ID}</td>  
+            </tr> 
 </tbody>
 </table>
+<table width="30%" border="1" align="center">
+            <tr>  
+             	<td align="center">
+                	<a href="./passSR.do?id=${sr.shop_id}"><button>同意</button></a>
+                </td> 
+             	<td align="center">
+                	<a href="./refuseSR.do?id=${sr.shop_id}"><button>拒绝</button></a>
+                </td> 
+            </tr>
+</table> 
 </body>
 </html>
