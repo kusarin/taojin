@@ -232,7 +232,6 @@
 						<li><a href="店铺基本信息.html">店铺信息管理</a></li>
 					</ul>
 				</div>
-				<div class="sidewidt"></div>
 
 				</aside>
 				<!-- Sidebar End-->
@@ -270,7 +269,7 @@
 														<c:forEach items="${shopItem}" var="i">
 
 															<tr>
-																<td class="itemimage"><img
+																<td><img class="itemimage"
 																	src=${pageContext.request.contextPath}${i.image}></td>
 																<td>${i.name}</td>
 																<td>${i.number}</td>
@@ -282,7 +281,7 @@
 														</c:forEach>
 														<c:forEach items="${shopItem2}" var="m">
 															<tr>
-																<td class="itemimage"><img
+																<td ><img class="itemimage"
 																	src=${pageContext.request.contextPath}${m.image}></td>
 																<td>${m.name}</td>
 																<td>${m.number}</td>
