@@ -21,51 +21,23 @@ pageEncoding="UTF-8"%>
 	height:45px;
  }
 .co{
-    width:80px;
+    width:100px;
 	text-align:center;
 	height:45px;
 	
  }
-.orderNumber{
-    width:300px;
-	text-align:center;
-	height:45px;
- }
-.buyer1{
-    width:80px;
-	text-align:center;
-	height:45px;
- }
-.buyer{
-    width:80px;
-	text-align:center;
-	height:45px;
- }
-.buyer1{
-	width:80px;
-	text-align:center;
-	height:45px;
-}
-.buyer1 a p{
-	width:80px;
-	overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
 .huanhang{
     width:300px;
-	height:120px;
-	float:left;	
+	height:120px;	
 }
-.huanhang p{
-    word-break:break-all;
-	width:200px;
-	overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+.huanhang img{
+   width:60px;
+   height:80px;
+   float:left;
+   margin-left:20px;
 }
 .sa{
-    width:80px;
+    width:100px;
 	height:120px;
 	text-align:center;
 }
@@ -74,31 +46,6 @@ a:hover{
 	color:red;
 }
 </style>
-<script>
-function deleteone(orderNumber){
-	if(confirm("确定要删除这条订单吗？")){
-		window.location.href="deleteOrder.do?pageNo=${pages.pageNo}&orderNumber="+orderNumber;
-	}
-}
-
-function deleteAll(){
-	var ii=0;
-	var cks=document.getElementsByName("orderNumber");
-    for(var i =0;i<cks.length;i++){
- 	   if(cks[i].checked){
- 		   ii++;
- 	   }
-    }
-    if(ii==0){
- 	   alert("至少选择一条");
-      return;
-    }
-    if(confirm("确定要删除这"+ii+"条订单吗？")){
- 	   document.myform.action="deleteAllOrder.do?pageNo=${pages.pageNo}";
- 	   document.myform.submit();
-    }
-}
-</script>
 </head>
 <body>
 	<!-- Header Start -->
@@ -171,8 +118,8 @@ function deleteAll(){
 				<div style="height:auto;width:700px;">
 				<table style="height:auto;width:700px; font-size:14px;">
 				    <tr style="background-color:#F5F5F5;height:auto;width:700px;">
-					    <td class="item">订单编号</td>
-						<td class="co">商品</td>
+					    <td class="co">订单编号</td>
+						<td class="item">商品</td>
 						<td class="co">取消时间</td>
 						<td class="co">支付</td>
 						<td class="co">退款状态</td>
@@ -182,18 +129,18 @@ function deleteAll(){
 				
 				<form action="orderItem.do" method="post" name="myform">
 				<c:forEach items="${pages.datas}" var="orderc">
-				<div style="height:auto;width:700px;">
+				<div style="height:auto;width:700px;border-left:1px solid #F5F5F5;border-right:1px solid #F5F5F5;border-bottom:1px solid #F5F5F5;">
 				    <table  style="font-size:12px;height:auto;width:700px;color:black;">
 						<tr> 
-						<td class="sa">${orderc.order.orderNumber}</td>
+						<td class="sa" style="border-right:1px solid #F5F5F5;">${orderc.order.orderNumber}</td>
 						
-	                     <td class="huanhang"><a href="#">
+	                     <td class="huanhang" style="border-right:1px solid #F5F5F5;">
 	                     <c:forEach items="${orderc.orderDeatail}" var="ord">
-	                     <img src="${pageContext.request.contextPath}${ord.item.image}"/></a> 
+	                     <a href="#"><img src="${pageContext.request.contextPath}${ord.item.image}"/></a> 
 	                     </c:forEach>
 	                     </td>
-		                    <td class="sa">${orderc.order.removeOrderTime}</td>
-		                    <td class="sa">${orderc.order.actulPayment}</td>
+		                    <td class="sa" style="border-right:1px solid #F5F5F5;">${orderc.order.removeOrderTime}</td>
+		                    <td class="sa" style="border-right:1px solid #F5F5F5;">${orderc.order.actulPayment}</td>
 		                    <td class="sa">已完成</td>
 		                </tr>
 		            </table>  
