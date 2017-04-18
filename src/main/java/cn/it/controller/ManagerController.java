@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.it.pojo.Item;
 import cn.it.pojo.Manager;
 import cn.it.pojo.Shop;
 import cn.it.pojo.Users;
+import cn.it.service.ItemService;
 import cn.it.service.ManagerService;
 import cn.it.service.ShopService;
 import cn.it.service.UsersService;
@@ -30,6 +32,8 @@ public class ManagerController {
 	private ShopService shopService;
 	@Resource
 	private UsersService usersService;
+	@Resource
+	private ItemService itemService;
 	
 	@RequestMapping("mlogin.do")
 	public ModelAndView login(Manager manager,HttpSession session){
@@ -125,4 +129,26 @@ public class ManagerController {
 		mav.addObject("shop",s);
 		return mav;
 	}	
+
+	@RequestMapping("itemManage.do")
+	public ModelAndView itemManage(){
+		ModelAndView mav = new ModelAndView("itemManage");
+		List<Item> i = itemService.itemManage();
+		mav.addObject("item",i);
+		return mav;
+	}
+
+	@RequestMapping("findItem.do")
+	public ModelAndView findItem(@RequestParam("id") String id){
+		ModelAndView mav = new ModelAndView("findItem");
+		int id1=Integer.parseInt(id);
+		Item i = itemService.itemManagefind(id1);
+		if(i == null){
+			mav.addObject("error", "商品不存在！");
+			mav.setViewName("redirect:itemManage.do");
+		}
+		mav.addObject("item",i);
+		return mav;
+	}	
+
 }
