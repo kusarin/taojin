@@ -52,7 +52,7 @@ public class OrderController {
 		int userId=1;   //用户Id
 		orderService.submmitOrder(address, orderCollection,payway,userId);
 		
-		view.addObject("address", address.getReceivingaddress());
+		view.addObject("address", address.getAddr());
 		view.addObject("actulpayment",orderCollection.getOrder().getActulPayment());
 		List<OrderDetail> orderDe=orderCollection.getOrderDeatail();
 		view.addObject("orderDe",orderDe);
@@ -101,7 +101,7 @@ public class OrderController {
 		int userId=1;
 		
 		ModelAndView v=new ModelAndView("removeRecord");
-		v.addObject("page",orderService.getOrder(userId,"已取消", page));
+		v.addObject("pages",orderService.getOrder(userId,"已取消", page));
 		return v;
 	}
 	

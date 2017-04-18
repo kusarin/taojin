@@ -46,4 +46,9 @@ public interface OrderDao {
 	 * @param(userId用户Id,status：订单状态)
 	 * */
 	public List<Order> select(int userId,String status,int startNo,int pageSize);
+	/****
+	 * 设置取消时间
+	 * 
+	 * */
+	public void updateTime(Order o);
 }

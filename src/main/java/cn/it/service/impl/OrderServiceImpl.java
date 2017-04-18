@@ -137,7 +137,10 @@ public  class OrderServiceImpl implements OrderService {
 	 * 取消订单
 	 * **/
 	public void remove(int flag, String orderNumber){
-		changeOrderStatus( flag, orderNumber);
+		Order o=orderDao.findOrder(orderNumber);
+		o.setOrderTime(new java.sql.Date(new Date().getTime()));// 设置取消时间
+		orderDao.updateTime(o);  //更新取消时间
+		changeOrderStatus( flag, orderNumber);//更改订单状态
 	}
 	/**
 	 * 
@@ -185,7 +188,7 @@ public  class OrderServiceImpl implements OrderService {
 			break;
 		}
 		
-		order.setRecivingAddress(address.getReceivingaddress()); // 收货地址
+		order.setRecivingAddress(address.getAddr()); // 收货地址
 		double freight = 0; // 运费
 		order.setFreight(freight);
 		orderDao.add(order);
