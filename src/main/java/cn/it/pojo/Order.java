@@ -12,6 +12,7 @@ public class Order {
 	private int id;   //唯一标识一个订单记录：id
 	private String orderNumber;  //订单号，唯一标识一个订单：orderNumber
 	private Date orderTime;     //下单时间：orderTime
+	private Date removeOrderTime;//取消订单时间
 	private double actulPayment;  //实际的付款：actulPayment
 	private String status;  //交易状态：待付款、取消订单、交易成功、待收货
 	private String paymentMethod;  //支付方式：paymentMethod
@@ -24,6 +25,12 @@ public class Order {
  
 	public double getFreight() {
 		return freight;
+	}
+	public Date getRemoveOrderTime() {
+		return removeOrderTime;
+	}
+	public void setRemoveOrderTime(Date removeOrderTime) {
+		this.removeOrderTime = removeOrderTime;
 	}
 	public int getTotalQuantity() {
 		return totalQuantity;

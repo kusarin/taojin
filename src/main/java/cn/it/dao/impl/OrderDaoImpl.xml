@@ -14,6 +14,7 @@
             <result column="RecivingAddress" property="recivingAddress" javaType="String" jdbcType="VARCHAR"/>
             <result column="Freight" property="freight" javaType="double" jdbcType="DOUBLE"/>
             <result column="TotalQuantity" property="totalQuantity" javaType="int" jdbcType="INTEGER"/>
+            <result column="removeOrderTime" property="removeOrderTime" javaType="java.sql.Date" jdbcType="DATE"/>
         </resultMap>
         <parameterMap type="cn.it.pojo.Order" id="OrderParameterMap">
             <parameter property="id" resultMap="findAll"/>  
@@ -26,6 +27,8 @@
             <parameter property="recivingAddress" resultMap="findAll"/> 
             <parameter property="freight" resultMap="findAll"/>  
             <parameter property="totalQuantity" resultMap="findAll"/>
+            <parameter property="removeOrderTime" resultMap="findAll"/>
+            
        </parameterMap>
      <select id="selectAll" resultMap="findAll">
           select* from indent where User_ID=#{0} LIMIT #{1},#{2}
@@ -34,8 +37,8 @@
           select count(OrderNumber) from indent where User_ID=#{userId}
      </select>
      <insert id="add" parameterMap="OrderParameterMap">
-           insert into indent(User_ID,OrderNumber,OrderTime,ActulPayment,Status,PaymentMethod,RecivingAddress,freight,TotalQuantity) 
-           values(#{userID},#{orderNumber},#{orderTime},#{actulPayment},#{status},#{paymentMethod},#{recivingAddress},#{freight},#{totalQuantity})
+           insert into indent(User_ID,OrderNumber,OrderTime,ActulPayment,Status,PaymentMethod,RecivingAddress,freight,TotalQuantity,removeOrderTime) 
+           values(#{userID},#{orderNumber},#{orderTime},#{actulPayment},#{status},#{paymentMethod},#{recivingAddress},#{freight},#{totalQuantity},#{removeOrderTime})
      </insert>
       <update id="update" parameterMap="OrderParameterMap">
            update indent set Status=#{status} where OrderNumber=#{orderNumber}
@@ -55,6 +58,13 @@
 			</foreach>
 		</where>
 	</delete>
+	<select id="select" resultMap="findAll">
+	select* from indent where User_ID=#{0} and Status=#{1} LIMIT #{2},#{3}
+	</select>
+	<update id="updateTime" parameterMap="OrderParameterMap">
+           update indent set removeOrderTime=#{removeOrderTime} where OrderNumber=#{orderNumber}
+      </update>
+	
  </mapper>
  
 

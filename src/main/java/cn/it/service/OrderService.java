@@ -1,11 +1,12 @@
 package cn.it.service;
 
+
+
+
 import java.util.List;
 
-
-
-
 import cn.it.pojo.Address;
+import cn.it.pojo.Order;
 import cn.it.pojo.OrderCollection;
 import cn.it.pojo.Page;
 /**
@@ -19,5 +20,7 @@ public interface OrderService {
 	public void deleteAllOrder(String[] orderNumber);
 	public OrderCollection getOrderDetail(String orderNumber);
 	public OrderCollection sureOrder(int itemId,int userId,int number);
-	public Address getAddress(int userId);
+	public List<Address> getAddress(int userId);
+	public void remove(int flag,String orderNumber);
+	public Page<OrderCollection> getOrder(int userId,String status,Page<OrderCollection> page);
 }
