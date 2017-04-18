@@ -1,6 +1,7 @@
 package cn.it.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,4 +20,6 @@ public interface UsersService {
 	public ModelAndView changepw(Users user, HttpSession session);
 
 	public Users findById(int userid);
+
+	public List<Users> findAll();
 }

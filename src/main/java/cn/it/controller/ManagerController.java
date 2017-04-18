@@ -83,4 +83,26 @@ public class ManagerController {
 		shopService.refuseSR(id1);
 		return "redirect:lookSR.do";
 	}
+	
+	@RequestMapping("userManage.do")
+	public ModelAndView userManage(){
+		ModelAndView mav = new ModelAndView("userManage");
+		List<Users> u = usersService.findAll();
+		mav.addObject("user",u);
+		return mav;
+	}
+	
+	@RequestMapping("findUser.do")
+	public ModelAndView findUser(@RequestParam("id") String id){
+		ModelAndView mav = new ModelAndView("findUser");
+		int id1=Integer.parseInt(id);
+		Users u = usersService.findById(id1);
+		if(u == null){
+			mav.setViewName("redirect:userManage.do");
+		}
+		mav.addObject("user",u);
+		return mav;
+	}
+	
+	
 }
