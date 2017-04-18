@@ -80,6 +80,72 @@ public class OrderController {
 		return "redirect:orderItem.do";
 	}
 	/*******
+	 * 
+	 * 取消订单
+	 * @param(flag标记购买操作进行到那一步)
+	 * */
+	@RequestMapping(value="removeOrder.do")
+	public String removeOrder(int flag,String orderNumber){
+		
+		orderService.remove(flag,orderNumber);
+		return "redirect:orderItem.do";
+		
+	}
+	
+	/***
+	 *已取消的
+	 *订单记录 
+	 * */
+	@RequestMapping("removeRecord.do")
+	public ModelAndView removeRecord(Page<OrderCollection> page){
+		int userId=1;
+		
+		ModelAndView v=new ModelAndView("removeRecord");
+		v.addObject("page",orderService.getOrder(userId,"已取消", page));
+		return v;
+	}
+	
+	/***
+	 *待付款
+	 *订单 
+	 * */
+	@RequestMapping("pendingPayment.do")
+	public ModelAndView pendingPayment(Page<OrderCollection> page){
+		int userId=0;
+		int flag=0;
+		ModelAndView v=new ModelAndView("orderItem");
+		v.addObject("page",orderService.getOrder(userId,"待付款", page));
+		v.addObject("flag", flag);
+		return v;
+	}
+	
+	/***
+	 *待收货
+	 *订单 
+	 * */
+	@RequestMapping("receivingGoods.do")
+	public ModelAndView receivingGoods(Page<OrderCollection> page){
+		int userId=1;
+		int flag=1;
+		ModelAndView v=new ModelAndView("orderItem");
+		v.addObject("page",orderService.getOrder(userId,"待收货", page));
+		v.addObject("flag", flag);
+		return v;
+	}
+	/***
+	 *已完成交易
+	 *订单 
+	 * */
+	@RequestMapping("saledGoods.do")
+	public ModelAndView saledGoods(Page<OrderCollection> page){
+		int userId=1;
+		int flag=3;
+		ModelAndView v=new ModelAndView("orderItem");
+		v.addObject("page",orderService.getOrder(userId,"已完成", page));
+		v.addObject("flag", flag);
+		return v;
+	}
+	/*******
 	 * 查看订单详情
 	 * */
 	@RequestMapping("lookOrderDeatil.do")

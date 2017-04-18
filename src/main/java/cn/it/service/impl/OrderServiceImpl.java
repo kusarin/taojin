@@ -31,7 +31,7 @@ import cn.it.service.OrderService;
  * 对订单进行处理 包括提交订单，保存生成的订单信息、查看所有订单、查看订单详情 删除订单 修改订单中的交易状态
  */
 @Service("orderService")
-public class OrderServiceImpl implements OrderService {
+public  class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderDetailDao orderDetailDao;
 	@Autowired
@@ -86,26 +86,20 @@ public class OrderServiceImpl implements OrderService {
 	public void changeOrderStatus(int flag, String orderNumber) {
 		Order order = orderDao.findOrder(orderNumber);
 		switch (flag) {
-		case 0:
-			order.setStatus("待付款");
-			break;
 		case 1:
-			order.setStatus("已付款");
-			break;
-		case 2:
 			order.setStatus("待收货");
 			break;
-		case 3:
+		case 2:
 			order.setStatus("交易成功");
 			break;
-		case 4:
+		case 3:
 			order.setStatus("已取消");
 		default:
 			break;
 		}
 		orderDao.update(order);
 	}
-
+   
 	/**
 	 * 
 	 * @param(id表示订单表的唯一标识) 获取某订单详细信息
@@ -138,6 +132,34 @@ public class OrderServiceImpl implements OrderService {
 	public void deleteAllOrder(String[] orderNumber){
 		orderDetailDao.deleteAll(orderNumber); // 删除此订单对应的订单明细
 		orderDao.deleteAll(orderNumber); // 删除该订单号对应的订单
+	}
+	/****
+	 * 取消订单
+	 * **/
+	public void remove(int flag, String orderNumber){
+		changeOrderStatus( flag, orderNumber);
+	}
+	/**
+	 * 
+	 * 根据订单状态获取订单记录
+	 * （status:待付款、待收货、已完成、已取消）
+	 * */
+	public Page<OrderCollection> getOrder(int userId,String status,Page<OrderCollection> page){
+		List<OrderCollection> coll=new ArrayList<OrderCollection>();
+		
+		page.setPagestart((page.getPageNo()-1)*page.getPagesize());
+		List<Order> ol=orderDao.select(userId, status, page.getPagestart(), page.getPagesize());
+		for(Order oo:ol){
+			OrderCollection orc=new OrderCollection();
+			List<OrderDetail> ord=orderDetailDao.selectAll(oo.getOrderNumber());
+			
+			orc.setOrder(oo);
+			orc.setOrderDeatail(ord);
+			coll.add(orc);
+		}
+		page.setDatas(coll);
+		page.setTotalrecord(ol.size());
+		return page;
 	}
 	/**
 	 * 提交订单

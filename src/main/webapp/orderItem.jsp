@@ -211,9 +211,13 @@ function deleteAll(){
 		                 </c:forEach>
 		                    <td class="sa">${orderc.order.totalQuantity}</td>
 		                    <td class="sa">${orderc.order.actulPayment}</td>
-		                    <td class="sa">${orderc.order.status}</td>
+		                    <td class="sa">${orderc.order.status}
+		                    <input type="hidden" name="status" value="${orderc.order.status}">
+		                    </td>
 	                        <td class="sa"><a href="#"><p>订单详情</p></a>
-							<a href="#"><p>取消订单</p></a>
+	                        <c:if test="${orderc.order.status!='已取消'}">
+							<a href="removeOrder.do?flag=3&orderNumber=${orderc.order.orderNumber}"><p id="p1">取消订单</p></a>
+							</c:if>
 							<a href="#"><p>评价订单</p></a></td>
 		                </tr>
 		            </table>  

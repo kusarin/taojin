@@ -55,6 +55,9 @@
 			</foreach>
 		</where>
 	</delete>
+	<select id="select" resultMap="findAll">
+	select* from indent where User_ID=#{0} and Status=#{1} LIMIT #{2},#{3}
+	</select>
  </mapper>
  
 
