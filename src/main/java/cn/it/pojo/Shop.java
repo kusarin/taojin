@@ -6,8 +6,14 @@ public class Shop {
 	private String Name;
 	private String Type;
 	private String Intro;
-	private int BrowsingTiems;
-
+	private int BrowsingTimes;
+	private int Status;
+	public int getStatus() {
+		return Status;
+	}
+	public void setStatus(int status) {
+		Status = status;
+	}
 	public int getShop_id() {
 		return shop_id;
 	}
@@ -38,17 +44,11 @@ public class Shop {
 	public void setIntro(String intro) {
 		Intro = intro;
 	}
-	public int getBrowsingTimes() {
-		return BrowsingTiems;
-	}
-	public void setBrowsingTimes(int browsingTimes) {
-		BrowsingTiems = browsingTimes;
-	}
 	@Override
 	public String toString() {
 		return "Shop [Shop_id=" + shop_id + ", User_ID=" + user_ID + ", Name="
 				+ Name + ", Type=" + Type + ", Intro=" + Intro
-				+ ", BrowsingTimes=" + BrowsingTiems + "]";
+				+ ", BrowsingTimes=" + BrowsingTimes + "]";
 	}
 	
 }

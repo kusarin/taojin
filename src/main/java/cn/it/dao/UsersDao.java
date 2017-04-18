@@ -43,4 +43,6 @@ public interface UsersDao {
 	 */
 	public List<Users> UsersFind();
 	
+	public Users findById(int userid);
+	
 }

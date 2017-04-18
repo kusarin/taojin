@@ -74,6 +74,31 @@ a:hover{
 	color:red;
 }
 </style>
+<script>
+function deleteone(orderNumber){
+	if(confirm("确定要删除这条订单吗？")){
+		window.location.href="deleteOrder.do?pageNo=${pages.pageNo}&orderNumber="+orderNumber;
+	}
+}
+
+function deleteAll(){
+	var ii=0;
+	var cks=document.getElementsByName("orderNumber");
+    for(var i =0;i<cks.length;i++){
+ 	   if(cks[i].checked){
+ 		   ii++;
+ 	   }
+    }
+    if(ii==0){
+ 	   alert("至少选择一条");
+      return;
+    }
+    if(confirm("确定要删除这"+ii+"条订单吗？")){
+ 	   document.myform.action="deleteAllOrder.do?pageNo=${pages.pageNo}";
+ 	   document.myform.submit();
+    }
+}
+</script>
 </head>
 <body>
 	<!-- Header Start -->
@@ -156,35 +181,62 @@ a:hover{
 				</table>
 				</div>
 				<div style="height:30px;width:auto;"></div>
-				<div style="height:auto;width:700px;margin-bottom:5px;">
+				
+				<div style="font-size:12px;height:auto;width:700px;color:black;text-align:right;margin-bottom:5px;">
+				<button onclick="deleteAll()">删除选中</button>
+				</div>
+				
+				
+				<form action="orderItem.do" method="post" name="myform">
+				<c:forEach items="${pages.datas}" var="orderc">
+				<div style="height:auto;width:700px;">
 				    <table  style="font-size:12px;height:auto;width:700px;color:black;">
 		                <tr style="background-color:#F5F5F5;">
-		                     <td class="orderNumber"><sub><input type="checkbox" name="itemId" value="" style="float:left;"></sub><span style="float:left;margin-left:20px;margin-right:5px;"><strong style="color:black;">2017-02-25</strong></span><span><p style="float:left;margin-right:5px;">订单号: </p>
-							 <p style="color:black;float:left;">3179981484474492</p></span></td>
+		                     <td class="orderNumber"><input type="checkbox" name="orderNumber" value="${orderc.order.orderNumber}" style="float:left;">
+		                     <span style="float:left;margin-left:20px;margin-right:5px;">
+		                     <strong style="color:black;">${orderc.order.orderTime}</strong></span>
+		                     <span><p style="float:left;margin-right:5px;">订单号: </p>
+							 <p style="color:black;float:left;">${orderc.order.orderNumber}</p></span></td>
 			                 <td class="buyer1"><a href="#"><p>移动硬盘专营店qwertd6y7u89irtyui35uio34567i8qwerdtfy7gu789u0-34t5y6u7i89awearestuyri678d5657ii6i7</p></a></td>
 				             <td class="buyer">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
-				             <td style="text-align:center;"><a href="#">删除</a></td>
+				             <td style="text-align:center;"><a onclick="deleteone(${orderc.order.orderNumber})" href="javascript:void(0)">删除</a></td>
 			            </tr>
 						<tr> 
-	                     <td class="huanhang"><a href="#"><img src="image/order1.jpg"/></a>
-		                    <a href="#"><p>Seagate希捷移动硬盘1T Backup Plus 新睿品4 2tb USB3.0超薄包邮 [交易快照]套餐类型：套餐一颜色分类：土豪金500G
-		                   gdfghjkll;lkjhjkl;;jkjiuygjhgghoopll</p></a></td>
-		                    <td class="sa">￥270.00</td>
-		                    <td class="sa">1</td>
-		                    <td class="sa">￥270.00</td>
-		                    <td class="sa">交易成功</td>
+						<c:forEach items="${orderc.orderDeatail}" var="ord">
+	                     <td class="huanhang"><a href="#"><img src="${pageContext.request.contextPath}${ord.item.image}"/></a>
+		                    <a href="#"><p>${ord.item.detail}</p></a></td>
+		                    <td class="sa">${ord.unitPrice}</td>
+		                 </c:forEach>
+		                    <td class="sa">${orderc.order.totalQuantity}</td>
+		                    <td class="sa">${orderc.order.actulPayment}</td>
+		                    <td class="sa">${orderc.order.status}</td>
 	                        <td class="sa"><a href="#"><p>订单详情</p></a>
 							<a href="#"><p>取消订单</p></a>
 							<a href="#"><p>评价订单</p></a></td>
 		                </tr>
 		            </table>  
 				</div>
+				</c:forEach>
+				</form>
+				
+				
 				<div style="height:40px;width:700px;text-align:right;padding-top:5px;margin-top:15px;">
-				    <a href="#" style="line-height:40px;">上一页</a>
-					<span style="margin-left:10px;margin-right:10px;color:red;">1</span>
-				    <a href="#" style="line-height:40px;">下一页</a>
+				    <span>总页数</span><span style="margin-right:10px;color:red;margin-left:10px;">${pages.totalpage}</span>
+				    <c:if test="${pages.pageNo>1}">
+				    <a href="orderItem.do?pageNo=${pages.pageNo-1}" style="line-height:40px;">上一页</a>
+				    </c:if>
+				    <c:if test="${pages.pageNo==1}">
+				    <span style="line-height:40px;">上一页</span>
+				    </c:if>
+					<span style="margin-left:10px;margin-right:10px;color:red;">${pages.pageNo}</span>
+					<c:if test="${pages.pageNo<pages.totalpage}">
+				    <a href="orderItem.do?pageNo=${pages.pageNo+1}" style="line-height:40px;">下一页</a>
+				    </c:if>
+				    <c:if test="${pages.pageNo==pages.totalpage}">
+				     <span style="line-height:40px;">下一页</span>
+				    </c:if>
 				</div>
 			</div>
 		</div>	

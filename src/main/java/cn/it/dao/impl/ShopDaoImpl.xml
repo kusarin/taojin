@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.it.dao.ShopDao">
+	<resultMap type="cn.it.pojo.Shop" id="findAll">
+		<id column="shop_id" property="shop_id" javaType="int" jdbcType="INTEGER" />
+		<result column="user_ID" property="user_ID" javaType="int" jdbcType="INTEGER" />
+		<result column="Name" property="Name" javaType="String"
+			jdbcType="VARCHAR" />
+		<result column="Type" property="Type" javaType="String"
+			jdbcType="VARCHAR" />
+		<result column="Intro" property="Intro" javaType="String"
+			jdbcType="VARCHAR" />
+		<result column="BrowsingTimes" property="BrowsingTimes" javaType="int" jdbcType="INTEGER"/>
+	    <result column="Status" property="Status" javaType="int" jdbcType="INTEGER"/>
+	</resultMap>
+	<parameterMap type="cn.it.pojo.Shop" id="ShopParameterMap">
+		<parameter property="shop_id" resultMap="findAll" />
+		<parameter property="user_ID" resultMap="findAll" />
+		<parameter property="Name" resultMap="findAll" />
+		<parameter property="Type" resultMap="findAll" />
+		<parameter property="Intro" resultMap="findAll" />
+		<parameter property="BrowsingTimes" resultMap="findAll"/>
+		<parameter property="Status" resultMap="findAll"/>
+	</parameterMap>
+	<select id="findByid" parameterType="int" resultType="cn.it.pojo.Shop">
+		Select * from shop where shop_id=#{id}
+	</select>
+	<insert id="addShop" parameterType="cn.it.pojo.Shop">
+	    Insert into shop(user_ID ,Name,Type,Intro,BrowsingTimes,Status) values(2,#{Name},#{Type},#{Intro},0,0)
+	</insert>
+	<select id="findShopList" resultMap="findAll">
+		Select * from shop where shop_id =#{id}
+	</select>
+	<select id="getAllByUserid" resultMap="findAll">
+	    Select * from shop where user_ID = #{user_ID}
+	</select>
+	<update id="changeInfoByid" parameterType="cn.it.pojo.Shop">
+		Update shop set Name=#{name},Type=#{type},Intro=#{intro} where shop_id = #{shop_id}
+	</update>
+	<delete id="deleteShop" parameterType="int">
+	    Delete from shop where shop_id =#{shop_id}
+	</delete>
+	
+	<select id="findSRList" resultMap="findAll">
+	    Select * from shop where status = 0
+	</select>
+	
+	<select id="findUserByid" parameterType="int" resultType="int">
+	    Select user_ID from shop where shop_id = #{0}
+	</select>
+	
+	<update id="updateStatus" parameterType="int">
+		Update shop set status = #{0} where shop_id = #{1}
+	</update>
+</mapper>

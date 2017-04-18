@@ -277,6 +277,7 @@ if(confirm("确定要删除这条数据吗？")){
 																<td>${c.name}</td>
 																<td>${c.type}</td>
 																<td>${c.intro}</td>
+																<td><c:if test="${c.status==0 }">未审核</c:if></td>
 																<td><a href="toChange.do?shop_id=${c.shop_id}">查看</a>
 																<a href="showItem.do?shop_id=${c.shop_id}">商品</a>
 																<a onclick="deleteone(${c.shop_id})"

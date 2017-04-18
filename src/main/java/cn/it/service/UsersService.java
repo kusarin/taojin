@@ -17,4 +17,6 @@ public interface UsersService {
 
 	public ModelAndView update(Users user, HttpSession session);
 	public ModelAndView changepw(Users user, HttpSession session);
+
+	public Users findById(int userid);
 }

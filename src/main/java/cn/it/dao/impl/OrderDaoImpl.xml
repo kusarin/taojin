@@ -13,6 +13,7 @@
             <result column="PaymentMethod" property="paymentMethod" javaType="String" jdbcType="VARCHAR"/>
             <result column="RecivingAddress" property="recivingAddress" javaType="String" jdbcType="VARCHAR"/>
             <result column="Freight" property="freight" javaType="double" jdbcType="DOUBLE"/>
+            <result column="TotalQuantity" property="totalQuantity" javaType="int" jdbcType="INTEGER"/>
         </resultMap>
         <parameterMap type="cn.it.pojo.Order" id="OrderParameterMap">
             <parameter property="id" resultMap="findAll"/>  
@@ -24,6 +25,7 @@
             <parameter property="paymentMethod" resultMap="findAll"/> 
             <parameter property="recivingAddress" resultMap="findAll"/> 
             <parameter property="freight" resultMap="findAll"/>  
+            <parameter property="totalQuantity" resultMap="findAll"/>
        </parameterMap>
      <select id="selectAll" resultMap="findAll">
           select* from indent where User_ID=#{0} LIMIT #{1},#{2}
@@ -32,8 +34,8 @@
           select count(OrderNumber) from indent where User_ID=#{userId}
      </select>
      <insert id="add" parameterMap="OrderParameterMap">
-           insert into indent(User_ID,OrderNumber,OrderTime,ActulPayment,Status,PaymentMethod,RecivingAddress,freight) 
-           values(#{userID},#{orderNumber},#{orderTime},#{actulPayment},#{status},#{paymentMethod},#{recivingAddress},#{freight})
+           insert into indent(User_ID,OrderNumber,OrderTime,ActulPayment,Status,PaymentMethod,RecivingAddress,freight,TotalQuantity) 
+           values(#{userID},#{orderNumber},#{orderTime},#{actulPayment},#{status},#{paymentMethod},#{recivingAddress},#{freight},#{totalQuantity})
      </insert>
       <update id="update" parameterMap="OrderParameterMap">
            update indent set Status=#{status} where OrderNumber=#{orderNumber}
@@ -44,6 +46,15 @@
      <delete id="delete" parameterType="java.lang.String">
           delete from indent where OrderNumber=#{orderNumber}
      </delete>
+     <delete id="deleteAll">
+		delete from indent
+		<where>
+			<foreach collection="array" item="orderNumber" open="and OrderNumber in("
+				close=")" separator=",">
+				#{orderNumber}
+			</foreach>
+		</where>
+	</delete>
  </mapper>
  
 

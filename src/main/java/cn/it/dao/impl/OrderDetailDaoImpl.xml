@@ -46,5 +46,13 @@
 	      <delete id="delete" parameterType="java.lang.String">
 	            delete from orderdetail where OrderNumber=#{orderNumber}
 	      </delete>
-	          
+	      <delete id="deleteAll">
+		        delete from orderdetail
+		     <where>
+			   <foreach collection="array" item="orderNumber" open="and OrderNumber in("
+				close=")" separator=",">
+				#{orderNumber}
+			   </foreach>
+		    </where>
+	</delete>
    </mapper>

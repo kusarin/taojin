@@ -6,7 +6,10 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import cn.it.dao.AddressDao;
@@ -54,27 +57,27 @@ public class OrderServiceImpl implements OrderService {
 	 * 
 	 * @param(userId用户编号)
 	 * */
-	public List<OrderCollection> getAllOrder(int userId,Page<OrderCollection> page) {
+	public Page<OrderCollection> getAllOrder(int userId,Page<OrderCollection> page) {
 		List<OrderCollection> clist = new ArrayList<OrderCollection>();
 		
 		page.setPagestart((page.getPageNo()-1)*page.getPagesize());//设置初始的页面条数
-		List<Order> olist = orderDao.selectAll(userId,page.getPagestart(),page.getPagesize());
-		
-		Iterator<Order> oitr = olist.iterator();
-		while (oitr.hasNext()) {
+		List<Order> olist = orderDao.selectAll(userId,page.getPagestart(),page.getPagesize());//查询结
+		 
+		for(Order or:olist) {
+	
 			OrderCollection collection = new OrderCollection();
-			Order o = oitr.next();
-			collection.setOrder(o);
-			if (orderDetailDao.selectAll(o.getOrderNumber()) != null) {
-				List<OrderDetail> ordlist = orderDetailDao.selectAll(o
-						.getOrderNumber());
+			
+			List<OrderDetail> ordlist = orderDetailDao.selectAll(or.getOrderNumber());
+			
+				collection.setOrder(or);//查询到的订单
 				collection.setOrderDeatail(ordlist);
-			}
-			clist.add(collection);
+				clist.add(collection);
 		}
-		return clist;
+		page.setDatas(clist);
+		page.setTotalrecord(orderDao.getCount(userId));
+		return page;
 	}
-
+	
 	/**
 	 * 更改订单的交易状态
 	 * 
@@ -129,7 +132,13 @@ public class OrderServiceImpl implements OrderService {
 		orderDetailDao.delete(orderNumber); // 删除此订单对应的订单明细
 		orderDao.delete(orderNumber); // 删除该订单号对应的订单
 	}
-
+	/***
+	 *批量删除 
+	 * **/
+	public void deleteAllOrder(String[] orderNumber){
+		orderDetailDao.deleteAll(orderNumber); // 删除此订单对应的订单明细
+		orderDao.deleteAll(orderNumber); // 删除该订单号对应的订单
+	}
 	/**
 	 * 提交订单
 	 * 
@@ -238,10 +247,11 @@ public class OrderServiceImpl implements OrderService {
 		order.setFreight(freight);
 		actulPayment = actulPayment + itemPrice + freight;
 		order.setActulPayment(actulPayment); // 订单总价
+		
+		order.setTotalQuantity(number);//订单中商品总数
 		orderCollection.setOrder(order);// 设置订单信息
 
 		orderCollection.setOrderDeatail(orderDetailList);// 设置订单细目
-		orderCollection.setTotalNumbers(number);//订单中商品总数
 		orderCollection.setShopName(shopName);
 		return orderCollection; // 返回订单信息
 	}

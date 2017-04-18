@@ -29,4 +29,10 @@ public interface OrderDetailDao {
 	 */
 	public void delete(String orderNumber);
 	
+	/****
+	 * 
+	 * 批量删除
+	 * **/
+	public void deleteAll(String[] orderNumber);
+	
 }

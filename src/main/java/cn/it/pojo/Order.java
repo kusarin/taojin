@@ -18,11 +18,18 @@ public class Order {
 	private String recivingAddress; //收货地址：recivingAddress
 	private double freight;   //运费：freight
 	private int userID; //用户编号
+	private int totalQuantity;
 
 	/******************************get****************************set**********/
  
 	public double getFreight() {
 		return freight;
+	}
+	public int getTotalQuantity() {
+		return totalQuantity;
+	}
+	public void setTotalQuantity(int totalQuantity) {
+		this.totalQuantity = totalQuantity;
 	}
 	public void setFreight(double freight) {
 		this.freight = freight;
