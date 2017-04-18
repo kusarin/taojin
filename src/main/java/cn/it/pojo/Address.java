@@ -5,42 +5,28 @@ package cn.it.pojo;
  * 
  * */
 public class Address {
-	private int id; //address表的主键
-	private String receivingaddress; //收货地址
-	private String contacts;  //联系方式
-	private String name; //收货人姓名
-	private int userId;  //用户Id
+	private int addressid; //address表的主键
+	private String address; //收货地址
+	private int user_ID;  //用户Id
 	
 	/*************get************set**************/
-	public int getId() {
-		return id;
+	public int getuser_ID() {
+		return user_ID;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setuser_ID(int user_ID) {
+		this.user_ID = user_ID;
 	}
-	public String getReceivingaddress() {
-		return receivingaddress;
+	public int getAddressid() {
+		return addressid;
 	}
-	public void setReceivingaddress(String receivingaddress) {
-		this.receivingaddress = receivingaddress;
+	public void setAddressid(int addressid) {
+		this.addressid = addressid;
 	}
-	public String getContacts() {
-		return contacts;
+	public String getAddress() {
+		return address;
 	}
-	public void setContacts(String contacts) {
-		this.contacts = contacts;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 }
