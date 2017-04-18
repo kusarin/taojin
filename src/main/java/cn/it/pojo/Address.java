@@ -6,7 +6,7 @@ package cn.it.pojo;
  * */
 public class Address {
 	private int addressid; //address表的主键
-	private String address; //收货地址
+	private String addr; //收货地址
 	private int user_ID;  //用户Id
 	
 	/*************get************set**************/
@@ -22,11 +22,11 @@ public class Address {
 	public void setAddressid(int addressid) {
 		this.addressid = addressid;
 	}
-	public String getAddress() {
-		return address;
+	public String getAddr() {
+		return addr;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAddress(String addr) {
+		this.addr = addr;
 	}
 
 }
