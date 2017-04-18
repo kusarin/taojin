@@ -3,11 +3,6 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.it.dao.AddressDao">
 
-	<select id="select" parameterType="int" resultType="cn.it.pojo.Address">
-		select * from
-		address where user_ID=#{user_ID}
-	</select>
-	
 	<insert id="addressAdd" parameterType="cn.it.pojo.Address">
 		insert into
 		address(addr,user_ID)
@@ -20,4 +15,8 @@
 			addressid = #{addressid}
 		</where>
 	</delete>
+	
+	<select id="addressFind" resultType="cn.it.pojo.Address">
+	select * from address where user_ID=#{user_ID}
+	</select>
 </mapper>

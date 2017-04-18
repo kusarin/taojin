@@ -2,14 +2,13 @@ package cn.it.dao;
 
 import java.util.List;
 
-import cn.it.pojo.Manager;
 import cn.it.pojo.Users;
 
 
 /**
  * @author wz;
  *
- * 增删改查接口
+ * 用户增删改查接口
  * */
 
 public interface UsersDao {
