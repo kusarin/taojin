@@ -5,6 +5,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<style>
+.itemimage {
+	width: 400px;
+	height: 300px;
+	float: left;
+}
+</style>
 <!-- 弹窗设置点 -->
 <script type="text/javascript">
 	window.onload = function() {
@@ -69,10 +76,10 @@
 	<!-- Header End -->
 	
 	<c:forEach items="${itemlist}" var="i">
-		<li class="span4">
+		<li class="span3">
 			<div class="thumbnail">
 			<a class="prdocutname" href="lookItem.do?id=${i.item_id}">${i.name}</a>
-				<span class="sale tooltip-test">Sale</span> <a href="lookItem.do?id=${i.item_id}">
+				<a href="lookItem.do?id=${i.item_id}">
 				<p>><img src=${pageContext.request.contextPath}${i.image}></p></a>
 			</div> 
 			<div class="pricetag">

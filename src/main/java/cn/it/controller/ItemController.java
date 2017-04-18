@@ -81,13 +81,21 @@ public class ItemController {
 		return modeandview;
 	}
 
-	@RequestMapping("downItem.do")
-	public ModelAndView downItem(HttpServletRequest request,
+	/**
+	 * 改变商品状态（“在售”=>“下架” or “下架”=>“在售”）
+	 * 
+	 * @param request
+	 * @param id
+	 *            ，@RequestParam("id")前台传递的商品编号
+	 * @return
+	 */
+	@RequestMapping("updownItem.do")
+	public ModelAndView updownItem(HttpServletRequest request,
 			@RequestParam("id") String id) {
 		// 获取前台传入的数据，商品编号id转为int类型；
 		int item_id = Integer.parseInt(id);
-		// 进行下架商品信息操作；
-		ModelAndView modeandview = itemservice.downItem(item_id);
+		// 进行修改商品状态操作；
+		ModelAndView modeandview = itemservice.updownItem(item_id);
 		// 重定向刷新页面；
 		modeandview.setViewName("redirect:shopItem.do");
 
@@ -136,13 +144,13 @@ public class ItemController {
 		String number = request.getParameter("number");
 		String price = request.getParameter("price");
 		String detail = request.getParameter("detail");
-		
+
 		// 获取原图片路径
 		String image = request.getParameter("image");
 
 		// 进行修改商品信息操作，并且获取提示信息
 		ModelAndView modeandview = itemservice.updateItem(item_id, name, typeh,
-				typel, number, price, detail, image,file, request);
+				typel, number, price, detail, image, file, request);
 		// 重定向刷新页面；
 		modeandview.setViewName("redirect:shopItem.do");
 
@@ -233,12 +241,17 @@ public class ItemController {
 		// ---------------
 		int shop_id = 1;
 
-		// 获取商品条目list
+		// 获取商品条目list（在售）
 		List<Item> list;
 		list = itemservice.findByShopId(shop_id);
+		// 获取商品条目list2（已下架）
+		List<Item> list2;
+		list2 = itemservice.findByShopId2(shop_id);
 
-		// 将商品条目list传递到shopItem
+		// 将商品条目list（在售）传递到shopItem
 		modeandview.addObject("shopItem", list);
+		// 将商品条目list2（已下架）传递到shopItem2
+		modeandview.addObject("shopItem2", list2);
 		return modeandview;
 	}
 
