@@ -14,4 +14,5 @@ public interface ShopService {
    int findUserId(int id1);
    void passSR(int id);
    void refuseSR(int id1);
+   List<Shop> findAll();
 }

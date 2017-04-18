@@ -98,11 +98,31 @@ public class ManagerController {
 		int id1=Integer.parseInt(id);
 		Users u = usersService.findById(id1);
 		if(u == null){
+			mav.addObject("error", "用户不存在！");
 			mav.setViewName("redirect:userManage.do");
 		}
 		mav.addObject("user",u);
 		return mav;
 	}
 	
+	@RequestMapping("shopManage.do")
+	public ModelAndView shopManage(){
+		ModelAndView mav = new ModelAndView("shopManage");
+		List<Shop> s = shopService.findAll();
+		mav.addObject("shop",s);
+		return mav;
+	}
 	
+	@RequestMapping("findShop.do")
+	public ModelAndView findShop(@RequestParam("id") String id){
+		ModelAndView mav = new ModelAndView("findShop");
+		int id1=Integer.parseInt(id);
+		Shop s = shopService.findByid(id1);
+		if(s == null){
+			mav.addObject("error", "店铺不存在！");
+			mav.setViewName("redirect:shopManage.do");
+		}
+		mav.addObject("shop",s);
+		return mav;
+	}	
 }

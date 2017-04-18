@@ -22,15 +22,15 @@
 		}
 	}
 </script>
-<title>用户信息管理</title>
+<title>店铺信息管理</title>
 </head>
 <body>
-用户信息列表
+店铺信息列表
 
-<form action="findUser.do" method="post"> 
+<form action="findShop.do" method="post"> 
 	<table border="0" align="right">
 		<tr>
-			<td>按照用户编号查找</td>
+			<td>按照店铺编号查找</td>
 			<td><input type="text" id = "id" name="id"></td>
 			<td><input type="submit" value="查找" onclick="return check()" /></td>
 		</tr>
@@ -40,18 +40,18 @@
 <table width="90%" border="1" align="center">  
  <tbody>  
             <tr align="center">  
-                <td width="30%">用户名</td> 
-                <td width="30%">用户编号</td>
-                <td width="30%">用户姓名</td>  
+                <td width="30%">店铺名</td> 
+                <td width="30%">店铺编号</td>
+                <td width="30%">店铺类型</td>  
                 <td width="10%"></td>
             </tr>  
-            <c:forEach items="${user}" var="u">  
+            <c:forEach items="${shop}" var="s">  
               <tr>  
-                <td> ${u.username} </td>
-                <td> ${u.user_ID} </td>  
-                <td> ${u.name}</td>  
+                <td> ${s.name} </td>
+                <td> ${s.shop_id} </td>  
+                <td> ${s.type}</td>  
                 <td align="center">
-                	<a href="./findUser.do?id=${u.user_ID}"><button>查看</button></a>
+                	<a href="./findShop.do?id=${s.shop_id}"><button>查看</button></a>
                 </td> 
               </tr>  
             </c:forEach>  

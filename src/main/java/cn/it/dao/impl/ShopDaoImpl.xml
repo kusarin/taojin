@@ -50,7 +50,11 @@
 	<select id="findUserByid" parameterType="int" resultType="int">
 	    Select user_ID from shop where shop_id = #{0}
 	</select>
-	
+
+	<select id="findAll"  resultType="cn.it.pojo.Shop">
+	    Select * from shop
+	</select>
+		
 	<update id="updateStatus" parameterType="int">
 		Update shop set status = #{0} where shop_id = #{1}
 	</update>
