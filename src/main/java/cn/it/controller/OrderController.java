@@ -182,7 +182,7 @@ public class OrderController {
 		ModelAndView view =new ModelAndView("sureOrder");
 		OrderCollection collection=orderService.sureOrder(itemId, userId, number);
 		view.addObject("c", collection);
-		Address address=orderService.getAddress(userId);
+		List<Address> address=orderService.getAddress(userId);
 		view.addObject("address",address);
 		return view;
 	}
