@@ -239,13 +239,15 @@
 								<div class="mb20">
 									<section class="leavecomment">
 									<div align="center">
-										<form action="changeItem.do?id=${change.item_id}" method="post">
+										<form action="changeItem.do?id=${change.item_id}"
+											method="post" enctype="multipart/form-data">
 											<table>
 												<tr>
 													<div class="control-group">
 														<td>商品名称:</td>
 														<div class="controls">
-															<td><input type="text" name="name" value=${change.name}></td>
+															<td><input type="text" name="name"
+																value=${change.name}></td>
 														</div>
 													</div>
 												</tr>
@@ -267,7 +269,9 @@
 													<div class="control-group">
 														<td>商品数量:</td>
 														<div class="controls">
-															<td><input type="text" name="number"  value=${change.number}
+															<td><input type="text" name="number"
+																value=${change.number
+																}
 																onkeyup="value=value.replace(/[^(\d)]/g,'')" /></td>
 														</div>
 													</div>
@@ -276,7 +280,8 @@
 													<div class="control-group">
 														<td>商品价格:¥</td>
 														<div class="controls">
-															<td><input type="text" name="price"  value=${change.price} /></td>
+															<td><input type="text" name="price"
+																value=${change.price } /></td>
 														</div>
 													</div>
 												</tr>
@@ -284,7 +289,24 @@
 													<div class="control-group">
 														<td>商品图片:</td>
 														<div class="controls">
-															<td><input type="text" name="image"  value=${change.image}/></td>
+															<td><p>注意：上传的图片名中不能包含中文</p></td>
+														</div>
+													</div>
+												</tr>
+												<tr>
+													<div class="control-group">
+														<td></td>
+														<div class="controls">
+															<td><input type="text" name="image"
+																value=${change.image } /></td>
+														</div>
+													</div>
+												</tr>
+												<tr>
+													<div class="control-group">
+														<td></td>
+														<div class="controls">
+															<td><input type="file" name="file" accept="image/*" /></td>
 														</div>
 													</div>
 												</tr>
@@ -292,13 +314,47 @@
 													<div class="control-group">
 														<td>商品描述:</td>
 														<div class="controls">
-															<td><input type="text" name="detail"  value=${change.detail}/></td>
+															<td><input type="text" name="detail"
+																value=${change.detail } /></td>
 														</div>
 													</div>
 												</tr>
 											</table>
-											<input type="submit" value="确认修改" value=${change.image} />
+											<input type="submit" value="确认修改" value=${change.image } />
 										</form>
 									</div>
+
+									</section>
+								</div>
+							</li>
+						</ul>
+					</div>
+					</section>
+				</div>
+			</div>
+		</div>
+		</section>
+	</div>
+	<!--footer-->
+	<footer style="margin-top:20px"> <img
+		src="${pageContext.request.contextPath}/image/footer-tri.png"
+		style="width: 100%;">
+	<div
+		style="margin: 0px 0px 10px; text-align: center; padding-top: 10px;">
+
+		<span>友情链接/</span> <a href="http://www.nwpu.edu.cn/" target="_top"
+			class="links">西北工业大学</a>
+
+	</div>
+	<div style="text-align: center; margin-bottom: 10px;">
+		<a id="fd_footer" href="javascript:;">产品意见反馈</a> <a
+			href="http://www.2shoujie.com/joinUs" target="_top">加入我们</a>
+	</div>
+	<div style="text-align: center; margin-bottom: 10px;">
+		<span>©2017 版权所有</span> <span>鄂ICP备14003265号-2</span>
+	</div>
+	</footer>
+	</form>
+	</div>
 </body>
 </html>

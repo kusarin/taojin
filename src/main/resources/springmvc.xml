@@ -5,11 +5,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
- <context:component-scan base-package="cn.it.controller"></context:component-scan>
+	<context:component-scan base-package="cn.it.controller"></context:component-scan>
 	<!-- 处理器映射器和适配器，可以使用mvc注解驱动 -->
 	<mvc:annotation-driven />
-	
-	
+
+
 	<!-- 视图解析器 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -17,7 +17,14 @@
 		<!-- 前缀和后缀可以去掉的，为了方便开发才加的 -->
 		<property name="suffix" value=".jsp" />
 	</bean>
-     <!-- json转换器 -->
-     <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	<!-- json转换器 -->
+	<bean id="jsonMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 	</bean>
+	<!-- upload settings 上传文件用配置文件 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="102400000"></property>
+	</bean>
+
 </beans>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,6 +13,13 @@
 	rel="stylesheet" />
 <link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
 <link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
+<style>
+.itemimage {
+	width: 150px;
+	height: 100px;
+	float: left;
+}
+</style>
 
 <!-- 弹窗设置点 -->
 <script type="text/javascript">
@@ -263,7 +270,8 @@
 														<c:forEach items="${shopItem}" var="i">
 
 															<tr>
-																<td>${i.price}</td>
+																<td class="itemimage"><img
+																	src=${pageContext.request.contextPath}${i.image}></td>
 																<td>${i.name}</td>
 																<td>${i.number}</td>
 																<td>${i.price}</td>
@@ -278,5 +286,35 @@
 												</table>
 												</form>
 									</div>
+									</section>
+									</div>
+									</li>
+									</ul>
+									</div>
+									</section>
+									</div>
+									</div>
+									</div>
+									</section>
+									</div>
+									
+									<!--footer--> <footer style="margin-top:20px"> <img
+										src="${pageContext.request.contextPath}/image/footer-tri.png"
+										style="width: 100%;">
+									<div
+										style="margin: 0px 0px 10px; text-align: center; padding-top: 10px;">
+
+										<span>友情链接/</span> <a href="http://www.nwpu.edu.cn/"
+											target="_top" class="links">西北工业大学</a>
+
+									</div>
+									<div style="text-align: center; margin-bottom: 10px;">
+										<a id="fd_footer" href="javascript:;">产品意见反馈</a> <a
+											href="http://www.2shoujie.com/joinUs" target="_top">加入我们</a>
+									</div>
+									<div style="text-align: center; margin-bottom: 10px;">
+										<span>©2017 版权所有</span> <span>鄂ICP备14003265号-2</span>
+									</div>
+									</footer>
 </body>
 </html>
