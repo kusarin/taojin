@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.pojo.Item;
@@ -34,7 +35,9 @@ public class ItemController {
 	 * @return
 	 */
 	@RequestMapping("addItem.do")
-	public ModelAndView addItem(HttpServletRequest request) {
+	public ModelAndView addItem(
+			@RequestParam(value = "file", required = false) MultipartFile file,
+			HttpServletRequest request) {
 
 		// 获取前台传入的数据；
 		// -------------------
@@ -49,11 +52,10 @@ public class ItemController {
 		String number = request.getParameter("number");
 		String price = request.getParameter("price");
 		String detail = request.getParameter("detail");
-		String image = request.getParameter("image");
 
 		// 进行添加商品信息操作，并且获取提示信息
 		ModelAndView modeandview = itemservice.addItem(shop_id, name, typeh,
-				typel, number, price, detail, image);
+				typel, number, price, detail, file, request);
 
 		return modeandview;
 	}
@@ -81,16 +83,17 @@ public class ItemController {
 
 	@RequestMapping("downItem.do")
 	public ModelAndView downItem(HttpServletRequest request,
-			@RequestParam("id") String id){
+			@RequestParam("id") String id) {
 		// 获取前台传入的数据，商品编号id转为int类型；
-				int item_id = Integer.parseInt(id);
-				// 进行下架商品信息操作；
-				ModelAndView modeandview = itemservice.downItem(item_id);
-				// 重定向刷新页面；
-				modeandview.setViewName("redirect:shopItem.do");
+		int item_id = Integer.parseInt(id);
+		// 进行下架商品信息操作；
+		ModelAndView modeandview = itemservice.downItem(item_id);
+		// 重定向刷新页面；
+		modeandview.setViewName("redirect:shopItem.do");
 
-				return modeandview;
+		return modeandview;
 	}
+
 	/**
 	 * 进入要修改的商品信息
 	 * 
@@ -121,8 +124,9 @@ public class ItemController {
 	 * @return
 	 */
 	@RequestMapping("changeItem.do")
-	public ModelAndView changeItem(HttpServletRequest request,
-			@RequestParam("id") String id) {
+	public ModelAndView changeItem(
+			@RequestParam(value = "file", required = false) MultipartFile file,
+			HttpServletRequest request, @RequestParam("id") String id) {
 
 		// 获取前台传入的数据，商品编号id转为int类型；
 		int item_id = Integer.parseInt(id);
@@ -132,11 +136,13 @@ public class ItemController {
 		String number = request.getParameter("number");
 		String price = request.getParameter("price");
 		String detail = request.getParameter("detail");
+		
+		// 获取原图片路径
 		String image = request.getParameter("image");
 
 		// 进行修改商品信息操作，并且获取提示信息
 		ModelAndView modeandview = itemservice.updateItem(item_id, name, typeh,
-				typel, number, price, detail, image);
+				typel, number, price, detail, image,file, request);
 		// 重定向刷新页面；
 		modeandview.setViewName("redirect:shopItem.do");
 
@@ -161,11 +167,6 @@ public class ItemController {
 		// 根据商品编号，获得商品；
 		Item i = itemservice.findById(item_id);
 
-		// 测试i是否已经获取到Item中的数据
-		System.out.println("----------------");
-		System.out.println(i);
-		System.out.println("----------------");
-
 		// 将商品i传递到lookitem
 		modeandview.addObject("lookitem", i);
 		return modeandview;
@@ -183,11 +184,6 @@ public class ItemController {
 		// 获取商品条目list
 		List<Item> list;
 		list = itemservice.findItemList();
-
-		// 测试list是否已经获取到Item中的数据
-		System.out.println("----------------");
-		System.out.println(list);
-		System.out.println("----------------");
 
 		// 将商品条目list传递到itemlist
 		modeandview.addObject("itemlist", list);
@@ -211,11 +207,6 @@ public class ItemController {
 		// 根据类型，获得商品；
 		List<Item> list;
 		list = itemservice.findByType(typeh, typel);
-
-		// 测试list是否已经获取到Item中对应的数据
-		System.out.println("----------------");
-		System.out.println(list);
-		System.out.println("----------------");
 
 		// 这里用来传递已经选择的类型
 		Item i = list.get(1);
@@ -246,15 +237,11 @@ public class ItemController {
 		List<Item> list;
 		list = itemservice.findByShopId(shop_id);
 
-		// 测试list是否已经获取到Item中的数据
-		System.out.println("----------------");
-		System.out.println(list);
-		System.out.println("----------------");
-
 		// 将商品条目list传递到shopItem
 		modeandview.addObject("shopItem", list);
 		return modeandview;
 	}
+
 	/**
 	 * 根据输入的关键词str查询商品
 	 * 
@@ -262,23 +249,18 @@ public class ItemController {
 	 * @return
 	 */
 	@RequestMapping("searchItem.do")
-	public ModelAndView showSearchItem(HttpServletRequest request){
+	public ModelAndView showSearchItem(HttpServletRequest request) {
 		ModelAndView modeandview = new ModelAndView("Itemlist"); // 到Itemlist.jsp界面
 		// 从前台获取搜索关键词str；
 		String str = request.getParameter("str");
-		
-		//根据输入关键词，搜索商品
+
+		// 根据输入关键词，搜索商品
 		List<Item> list;
 		list = itemservice.findBystr(str);
-		
-		// 测试list是否已经获取到Item中的数据
-		System.out.println("----------------");
-		System.out.println(list);
-		System.out.println("----------------");
 
 		// 将商品条目list传递到searchlist
 		modeandview.addObject("itemlist", list);
-		
+
 		return modeandview;
 	}
 }

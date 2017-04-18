@@ -254,7 +254,11 @@
 													<div class="control-group">
 													<td>type</td>
 													<div class="controls">
-													<td><input type="text" name="type"></td>
+													<td><select name="type">
+													<option selected="selected">笔记本</option>
+													<option>日常用品</option>
+													<option>电子产品</option>
+													<option>生活用品</option></select></td>
 													</div>
 													</div>
 												</tr>

@@ -69,11 +69,11 @@
 	<!-- Header End -->
 	
 	<c:forEach items="${itemlist}" var="i">
-		<li class="span3">
+		<li class="span4">
 			<div class="thumbnail">
 			<a class="prdocutname" href="lookItem.do?id=${i.item_id}">${i.name}</a>
 				<span class="sale tooltip-test">Sale</span> <a href="lookItem.do?id=${i.item_id}">
-				<p>><img src=${pageContext.request.contextPath}${lookitem.image}>${i.image}</p></a>
+				<p>><img src=${pageContext.request.contextPath}${i.image}></p></a>
 			</div> 
 			<div class="pricetag">
 			<a href="lookItem.do?id=${i.item_id}">${i.detail}</a>
