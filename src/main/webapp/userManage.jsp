@@ -18,16 +18,6 @@
 </head>
 <body>
 用户信息列表
-<form action="findUser.do" method="post">
-		<table align="right">
-			<tr>
-				<td>根据用户编号查找</td>
-				<td><input type="text" name="id" />
-				<td><input type="submit" value="查找"/>
-			</tr>
-		</table>
-</form>
-
 <table width="90%" border="1" align="center">  
  <tbody>  
             <tr align="center">  
