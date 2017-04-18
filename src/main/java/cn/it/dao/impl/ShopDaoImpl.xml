@@ -13,6 +13,7 @@
 		<result column="Intro" property="Intro" javaType="String"
 			jdbcType="VARCHAR" />
 		<result column="BrowsingTimes" property="BrowsingTimes" javaType="int" jdbcType="INTEGER"/>
+	    <result column="Status" property="Status" javaType="int" jdbcType="INTEGER"/>
 	</resultMap>
 	<parameterMap type="cn.it.pojo.Shop" id="ShopParameterMap">
 		<parameter property="shop_id" resultMap="findAll" />
@@ -21,12 +22,13 @@
 		<parameter property="Type" resultMap="findAll" />
 		<parameter property="Intro" resultMap="findAll" />
 		<parameter property="BrowsingTimes" resultMap="findAll"/>
+		<parameter property="Status" resultMap="findAll"/>
 	</parameterMap>
 	<select id="findByid" parameterType="int" resultType="cn.it.pojo.Shop">
 		Select * from shop where shop_id=#{id}
 	</select>
 	<insert id="addShop" parameterType="cn.it.pojo.Shop">
-	    Insert into shop(user_ID ,Name,Type,Intro,BrowsingTimes) values(2,#{Name},#{Type},#{Intro},0)
+	    Insert into shop(user_ID ,Name,Type,Intro,BrowsingTimes,Status) values(2,#{Name},#{Type},#{Intro},0,0)
 	</insert>
 	<select id="findShopList" resultMap="findAll">
 		Select * from shop where shop_id =#{id}

@@ -1,5 +1,5 @@
 package cn.it.controller;
 
-public class Controller {
+public class AddressController {
 
 }
