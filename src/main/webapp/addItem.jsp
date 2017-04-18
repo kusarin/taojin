@@ -239,7 +239,8 @@
 								<div class="mb20">
 									<section class="leavecomment">
 									<div align="center">
-										<form action="addItem.do" method="post">
+										<form action="addItem.do" method="post"
+											enctype="multipart/form-data">
 											<table>
 												<input type="hidden" value="${shop.shop_id}" name="Shop_id" />
 												<tr>
@@ -285,7 +286,15 @@
 													<div class="control-group">
 														<td>商品图片:</td>
 														<div class="controls">
-															<td><input type="text" name="image" /></td>
+															<td><p>注意：上传的图片名中不能包含中文</p></td>
+														</div>
+													</div>
+												</tr>
+												<tr>
+													<div class="control-group">
+													<td></td>
+														<div class="controls">
+															<td><input type="file" name="file" accept="image/*" /></td>
 														</div>
 													</div>
 												</tr>
@@ -301,5 +310,35 @@
 											<input type="submit" value="确认上架" />
 										</form>
 									</div>
+									
+									</section>
+									</div>
+									</li>
+									</ul>
+									</div>
+									</section>
+									</div>
+									</div>
+									</div>
+									</section>
+									</div>
+									<!--footer--> <footer style="margin-top:20px"> <img
+										src="${pageContext.request.contextPath}/image/footer-tri.png"
+										style="width: 100%;">
+									<div
+										style="margin: 0px 0px 10px; text-align: center; padding-top: 10px;">
+
+										<span>友情链接/</span> <a href="http://www.nwpu.edu.cn/"
+											target="_top" class="links">西北工业大学</a>
+
+									</div>
+									<div style="text-align: center; margin-bottom: 10px;">
+										<a id="fd_footer" href="javascript:;">产品意见反馈</a> <a
+											href="http://www.2shoujie.com/joinUs" target="_top">加入我们</a>
+									</div>
+									<div style="text-align: center; margin-bottom: 10px;">
+										<span>©2017 版权所有</span> <span>鄂ICP备14003265号-2</span>
+									</div>
+									</footer>
 </body>
 </html>
