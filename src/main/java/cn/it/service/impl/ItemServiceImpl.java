@@ -359,6 +359,18 @@ public class ItemServiceImpl implements ItemService {
 	public List<Item> findBystr(String str) {
 		return itemDao.SearchItem(str);
 	}
+	
+	/**
+	 * 孙琛改的，用在管理员后台管理。
+	 */
+	public List<Item> itemManage() {
+		return itemDao.FindAll();
+	}
+
+	public Item itemManagefind(int id) {
+		return itemDao.FindItemById(id);
+	}
+
 
 	// // 判断输入字符串是否为数字的方法，用来判断number和price是否为数字【听说可以在前端网页执行，所以先注释掉】
 	// public static boolean isNumeric(String str){
@@ -370,7 +382,7 @@ public class ItemServiceImpl implements ItemService {
 	// }
 	// return true;
 	// }
-
+	
 	/******************************* 测试类,用于测试能否成功调用来自Dao层的方法 *************************************/
 	/**
 	 * 测试1，用于测试是否添加商品
@@ -483,4 +495,6 @@ public class ItemServiceImpl implements ItemService {
 		List<Item> i = itemdao.SearchItem(str);
 		System.out.println(i);
 	}
+
+
 }

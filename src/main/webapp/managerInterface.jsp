@@ -11,28 +11,40 @@
 <body>
 <h1>管理员界面——${manager.account}</h1>
 <div>
-  <table width="640" border="0">
+  <table width="90%" border="0">
     <tr>
-      <td width="160"><div align="center">
-        <h4><strong>管理员账户管理</strong></h4>
+      <td width="10%"><div align="center">
+        <strong>管理员账户管理</strong>
       </div></td>
-      <td width="160"><div align="center">
-        <a href="./lookComment.do"><h4><strong>用户留言管理</strong></h4></a>
+      <td width="10%"><div align="center">
+        <a href="./lookComment.do"><strong>用户留言管理</strong></a>
       </div></td>
-      <td width="160"><div align="center">
-        <a href="./findResourceFile.do" ><h4><strong>文件资源管理</strong></h4></a>
+      <td width="10%"><div align="center">
+        <a href="./findResourceFile.do" ><strong>文件资源管理</strong></a>
       </div></td>
-      <td width="160"><div align="center">
-        <a href="./lookSR.do" ><h4><strong>店铺认证管理</strong></h4></a>
+      <td width="10%"><div align="center">
+        <a href="./lookSR.do" ><strong>店铺认证管理</strong></a>
+      </div></td>
+      <td width="10%"><div align="center">
+        <a href="./userManage.do" ><strong>用户信息管理</strong></a>
+      </div></td>
+      <td width="10%"><div align="center">
+        <a href="./shopManage.do" ><strong>店铺信息管理</strong></a>
+      </div></td>
+      <td width="10%"><div align="center">
+        <a href="./itemManage.do" ><strong>商品信息管理</strong></a>
       </div></td>
     </tr>
+    </table>
+   <h3> 欢迎你！管理员${manager.account}</h3>
+    <table width="50%" border="0">
     <tr>
-    <td colspan="3">
+    <td>
     <a href="addmanager.jsp"><strong>新增管理员</strong></a>
     </td>
     </tr>
     <tr>
-    <td colspan="3">
+    <td>
     <a href="updateMpassword.jsp"><strong>修改密码</strong></a>
     </td>
     </tr>
