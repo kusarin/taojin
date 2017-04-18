@@ -23,6 +23,7 @@ import cn.it.service.ResourceFileService;
 public class ResourceFileController {
 	@Resource
 	private ResourceFileService resourceFileService;
+	
 	@RequestMapping("findResourceFile.do")
 	public ModelAndView findResourceFile(HttpServletRequest request){
 		ModelAndView modelandview = new ModelAndView("ResourceFile");

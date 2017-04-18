@@ -46,6 +46,15 @@
      <delete id="delete" parameterType="java.lang.String">
           delete from indent where OrderNumber=#{orderNumber}
      </delete>
+     <delete id="deleteAll">
+		delete from indent
+		<where>
+			<foreach collection="array" item="orderNumber" open="and OrderNumber in("
+				close=")" separator=",">
+				#{orderNumber}
+			</foreach>
+		</where>
+	</delete>
  </mapper>
  
 

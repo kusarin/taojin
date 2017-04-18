@@ -74,6 +74,31 @@ a:hover{
 	color:red;
 }
 </style>
+<script>
+function deleteone(orderNumber){
+	if(confirm("确定要删除这条订单吗？")){
+		window.location.href="deleteOrder.do?pageNo=${pages.pageNo}&orderNumber="+orderNumber;
+	}
+}
+
+function deleteAll(){
+	var ii=0;
+	var cks=document.getElementsByName("orderNumber");
+    for(var i =0;i<cks.length;i++){
+ 	   if(cks[i].checked){
+ 		   ii++;
+ 	   }
+    }
+    if(ii==0){
+ 	   alert("至少选择一条");
+      return;
+    }
+    if(confirm("确定要删除这"+ii+"条订单吗？")){
+ 	   document.myform.action="deleteAllOrder.do?pageNo=${pages.pageNo}";
+ 	   document.myform.submit();
+    }
+}
+</script>
 </head>
 <body>
 	<!-- Header Start -->
@@ -157,20 +182,26 @@ a:hover{
 				</div>
 				<div style="height:30px;width:auto;"></div>
 				
+				<div style="font-size:12px;height:auto;width:700px;color:black;text-align:right;margin-bottom:5px;">
+				<button onclick="deleteAll()">删除选中</button>
+				</div>
 				
-				<form action="orderItem.do" method="post">
+				
+				<form action="orderItem.do" method="post" name="myform">
 				<c:forEach items="${pages.datas}" var="orderc">
-				<div style="height:auto;width:700px;margin-bottom:5px;">
+				<div style="height:auto;width:700px;">
 				    <table  style="font-size:12px;height:auto;width:700px;color:black;">
 		                <tr style="background-color:#F5F5F5;">
-		                     <td class="orderNumber"><input type="checkbox" name="orderNumber" value="${orderc.order.orderNumber}" style="float:left;"><span style="float:left;margin-left:20px;margin-right:5px;"><strong style="color:black;">${orderc.order.orderTime}</strong></span>
+		                     <td class="orderNumber"><input type="checkbox" name="orderNumber" value="${orderc.order.orderNumber}" style="float:left;">
+		                     <span style="float:left;margin-left:20px;margin-right:5px;">
+		                     <strong style="color:black;">${orderc.order.orderTime}</strong></span>
 		                     <span><p style="float:left;margin-right:5px;">订单号: </p>
 							 <p style="color:black;float:left;">${orderc.order.orderNumber}</p></span></td>
 			                 <td class="buyer1"><a href="#"><p>移动硬盘专营店qwertd6y7u89irtyui35uio34567i8qwerdtfy7gu789u0-34t5y6u7i89awearestuyri678d5657ii6i7</p></a></td>
 				             <td class="buyer">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
-				             <td style="text-align:center;"><a href="#">删除</a></td>
+				             <td style="text-align:center;"><a onclick="deleteone(${orderc.order.orderNumber})" href="javascript:void(0)">删除</a></td>
 			            </tr>
 						<tr> 
 						<c:forEach items="${orderc.orderDeatail}" var="ord">
@@ -192,9 +223,20 @@ a:hover{
 				
 				
 				<div style="height:40px;width:700px;text-align:right;padding-top:5px;margin-top:15px;">
-				    <a href="#" style="line-height:40px;">上一页</a>
-					<span style="margin-left:10px;margin-right:10px;color:red;">1</span>
-				    <a href="#" style="line-height:40px;">下一页</a>
+				    <span>总页数</span><span style="margin-right:10px;color:red;margin-left:10px;">${pages.totalpage}</span>
+				    <c:if test="${pages.pageNo>1}">
+				    <a href="orderItem.do?pageNo=${pages.pageNo-1}" style="line-height:40px;">上一页</a>
+				    </c:if>
+				    <c:if test="${pages.pageNo==1}">
+				    <span style="line-height:40px;">上一页</span>
+				    </c:if>
+					<span style="margin-left:10px;margin-right:10px;color:red;">${pages.pageNo}</span>
+					<c:if test="${pages.pageNo<pages.totalpage}">
+				    <a href="orderItem.do?pageNo=${pages.pageNo+1}" style="line-height:40px;">下一页</a>
+				    </c:if>
+				    <c:if test="${pages.pageNo==pages.totalpage}">
+				     <span style="line-height:40px;">下一页</span>
+				    </c:if>
 				</div>
 			</div>
 		</div>	

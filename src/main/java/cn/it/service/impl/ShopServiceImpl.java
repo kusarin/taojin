@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionalEventListener;
 
-import cn.it.dao.ItemDao;
 import cn.it.dao.ShopDao;
-import cn.it.pojo.Item;
 import cn.it.pojo.Shop;
 import cn.it.service.ShopService;
 @Service("ShopService")
@@ -46,4 +44,19 @@ public class ShopServiceImpl implements ShopService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	public List<Shop> findSR() {
+		return shopDao.findSRList();
+	}
+	public int findUserId(int id1) {
+		return shopDao.findUserByid(id1);
+	}
+	public void passSR(int id1) {
+		int i = 1;
+		shopDao.updateStatus(i,id1);
+	}
+	public void refuseSR(int id1) {
+		int i = 2;
+		shopDao.updateStatus(i,id1);
+	}
+
 }
