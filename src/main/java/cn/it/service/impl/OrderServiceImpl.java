@@ -286,8 +286,8 @@ public  class OrderServiceImpl implements OrderService {
 	 * 根据用户Id获取收货地址
 	 * 
 	 * */
-	public Address getAddress(int userId){
+	public List<Address> getAddress(int userId){
 		
-		return addressDao.select(userId);
+		return addressDao.addressFind(userId);
 	}
 }
