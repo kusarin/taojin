@@ -173,6 +173,9 @@ public class ItemController {
 		// 根据商品编号，获得商品；
 		Item i = itemservice.findById(item_id);
 
+		// 将商品i传递到lookitem
+		modelandview.addObject("lookitem", i);
+		
 		// 获取该商品的店铺编号；
 		int shop_id = i.getshop_id();
 		// 获取同属于商品的列表；
@@ -183,11 +186,20 @@ public class ItemController {
 				list.remove(m);
 			}
 		}
+		
+		// 如果商品多于4个，则只获取前4个商品
+		if(list.size()>4){
+			List<Item> list4 = new ArrayList<Item>();
+			for(int n = 0; n<4; n++){
+				list4.add(list.get(n));
+			}
 
-		// 将商品i传递到lookitem
-		modelandview.addObject("lookitem", i);
-		// 将商品列表list传递到list
-		modelandview.addObject("looklist", list);
+			// 将商品列表list4传递到looklist
+			modelandview.addObject("looklist", list4);
+		}else{
+			// 将商品列表list传递到looklist
+			modelandview.addObject("looklist", list);			
+		}
 
 		return modelandview;
 	}
@@ -218,7 +230,7 @@ public class ItemController {
 	 */
 	@RequestMapping("ItemType.do")
 	public ModelAndView showTypeItem(HttpServletRequest request) {
-		ModelAndView modelandview = new ModelAndView("Itemtype"); // 到Itemtype.jsp界面
+		ModelAndView modelandview = new ModelAndView("Itemlist"); // 到Itemtype.jsp界面
 
 		// 从前台获取商品类型信息；
 		String typeh = request.getParameter("typeh");
@@ -228,12 +240,8 @@ public class ItemController {
 		List<Item> list;
 		list = itemservice.findByType(typeh, typel);
 
-		// 这里用来传递已经选择的类型
-		Item i = list.get(1);
-		modelandview.addObject("itemtypechoice", i);
-
 		// 将商品条目list传递到itemtype
-		modelandview.addObject("itemtype", list);
+		modelandview.addObject("itemlist", list);
 		return modelandview;
 	}
 
@@ -281,7 +289,9 @@ public class ItemController {
 		// 根据输入关键词，搜索商品
 		List<Item> list;
 		list = itemservice.findBystr(str);
-
+		if(list.size()==0){
+			modelandview.addObject("error0","抱歉！！没有找到符合搜索信息的商品！！！！");
+		}
 		// 将商品条目list传递到searchlist
 		modelandview.addObject("itemlist", list);
 
