@@ -282,13 +282,16 @@ public class ItemServiceImpl implements ItemService {
 	 */
 	public List<Item> findItemList() {
 		List<Item> shoplist = itemDao.FindAll();
-		// 将不属于“在售”状态的商品从列表中删除
+
+		// 建立属于“在售”状态的商品列表list
+		List<Item> list = new ArrayList<Item>();
+		// 将属于“在售”状态的商品添加到列表list
 		for (int i = 0; i < shoplist.size(); i++) {
-			if (shoplist.get(i).getStatus() == 1) {
-				shoplist.remove(i);
+			if (shoplist.get(i).getStatus() == 0) {
+				list.add(shoplist.get(i));
 			}
 		}
-		return shoplist;
+		return list;
 	}
 
 	/**
@@ -359,7 +362,7 @@ public class ItemServiceImpl implements ItemService {
 	public List<Item> findBystr(String str) {
 		return itemDao.SearchItem(str);
 	}
-	
+
 	/**
 	 * 孙琛改的，用在管理员后台管理。
 	 */
@@ -371,7 +374,6 @@ public class ItemServiceImpl implements ItemService {
 		return itemDao.FindItemById(id);
 	}
 
-
 	// // 判断输入字符串是否为数字的方法，用来判断number和price是否为数字【听说可以在前端网页执行，所以先注释掉】
 	// public static boolean isNumeric(String str){
 	// for (int i = 0; i < str.length(); i++){
@@ -382,7 +384,7 @@ public class ItemServiceImpl implements ItemService {
 	// }
 	// return true;
 	// }
-	
+
 	/******************************* 测试类,用于测试能否成功调用来自Dao层的方法 *************************************/
 	/**
 	 * 测试1，用于测试是否添加商品
@@ -495,6 +497,5 @@ public class ItemServiceImpl implements ItemService {
 		List<Item> i = itemdao.SearchItem(str);
 		System.out.println(i);
 	}
-
 
 }

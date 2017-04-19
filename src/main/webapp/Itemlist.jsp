@@ -7,8 +7,9 @@
 <head>
 <style>
 .left {
-	width: 350px;
+	width: 130px;
 	heigh: auto;
+	float: left;
 	margin-top: 20px;
 	margin-left: 20px;
 }
@@ -16,12 +17,12 @@
 .right {
 	width: auto;
 	heigh: auto;
-	margin-left: 375px;
-	margin-top: -30px;
+	margin-top: 20px;
+	margin-left: 149px;
 }
 
 .itemimage {
-	width: 350px;
+	width: 300px;
 	height: 175px;
 	float: left;
 }
@@ -29,11 +30,17 @@
 .textname {
 	font-size: 20px;
 	color: black;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .textdetail {
 	font-size: 15px;
-	color: black;
+	color:orange;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .textprice {
@@ -70,7 +77,6 @@
 					<!-- Top Nav Start -->
 					<div class="pull-left">
 						<div class="navbar" id="topnav">
-
 							<div class="navbar-inner">
 								<div style="float: left; color: white; margin-top: 26px;">
 									<span>您好,</span> <a href="login.jsp"><span
@@ -108,47 +114,58 @@
 	</div>
 	</header>
 	<!-- Header End -->
-	<div class="left" >
-		<table border="1">
-			<thead>
-				<tr>
-					<td colspan="10" align="center" >这里是类型</td>
-				</tr>
-			</thead>
-		</table>
-
-	</div>
-
-	<div class="right">
-
-		<c:forEach items="${itemlist}" var="i">
-			<li class="span3">
-			<table border="1" >
-			<thead>
-				<tr><td>
-				<div>
-					<a href="lookItem.do?id=${i.item_id}"> <img class="itemimage"
-						src=${pageContext.request.contextPath}${i.image}>
-					</a>
-				</div>
-				<div>
-					<a href="lookItem.do?id=${i.item_id}" class="textprice" >商品价格: ¥
-						${i.price}</a> <br>
-				</div>
-				<div>
-					<a href="lookItem.do?id=${i.item_id}" class="textname">${i.name}</a>
-					<br> <a href="lookItem.do?id=${i.item_id}" class="textdetail">${i.detail}</a>
-					</div>
-					<br>
-						</td></tr>
-			</thead>
-		</table>
+	
+	<form action="ItemType.do" method="post">
+		<div class="left">
+			<select id="code" name="typeh" style="width: 120px">
+				<option value="高级分类1">高级分类1</option>
+				<option value="高级分类2">高级分类2</option>
+			</select> <select id="code" name="typel" style="width: 120px">
+				<option value="低级分类1">低级分类1</option>
+				<option value="低级分类2">低级分类2</option>
+			</select> <input type="submit" value="确认选择" />
+		</div>
 		<br>
-			</li>
-		</c:forEach>
+	</form>
+
+<div style="margin-left: 250px;">
+<h1 style="color:orange">${error0}</h1>
+	<c:forEach items="${itemlist}" var="i">
+		<li class="span3">
+			<table border="1">
+				<thead>
+					<tr>
+						<td>
+							<div>
+								<a href="lookItem.do?id=${i.item_id}"> <img
+									class="itemimage"
+									src=${pageContext.request.contextPath}${i.image}>
+								</a>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div>
+								<a href="lookItem.do?id=${i.item_id}"><p class="textname"
+										style="height: 20px; width: 200px">${i.name}</p></a> <a
+									href="lookItem.do?id=${i.item_id}" class="textprice">商品价格:
+									¥ ${i.price}</a>
+							</div> <br>
+							<div>
+								<a href="lookItem.do?id=${i.item_id}"><p class="textdetail"
+										style="height: 20px; width: 275px">${i.detail}</p></a>
+							</div>
+						</td>
+					</tr>
+				</thead>
+			</table> <br>
+		</li>
+	</c:forEach>
 	</div>
+	
 	<!--footer-->
-	<footer style="margin-top:20px"> <img
+	<footer style="margin-top:100px"> <img
 		src="${pageContext.request.contextPath}/image/footer-tri.png"
 		style="width: 100%;">
 	<div
