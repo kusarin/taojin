@@ -14,49 +14,42 @@
     	  }
     }
 </script>
-<title>店铺认证管理</title>
+<title>用户信息管理</title>
 </head>
 <body>
-店铺认证申请
+用户信息
 <table width="90%" border="1" align="center">  
  <tbody>  
-            <tr >  
-                <td width="30%">店铺名</td>  
-                <td width="70%">${sr.name}</td>  
+            <tr>  
+                <td width="30%">用户名</td>  
+                <td width="70%">${user.username}</td>  
+            </tr>
+            <tr>  
+                <td>用户编号</td>  
+                <td>${user.user_ID}</td>  
             </tr>  
             <tr>  
-                <td >店铺类型</td>  
-                <td >${sr.type}</td>  
+                <td>用户姓名</td>  
+                <td>${sr.name}</td>  
             </tr>  
-            <tr >  
-                <td >店铺介绍</td>  
-                <td >${sr.intro}</td>  
-            </tr>  
-            <tr >  
-                <td >用户名</td>  
-                <td>${user.username}</td>  
-            </tr>  
-            <tr >  
-                <td>用户真实姓名</td>  
-                <td>${user.name}</td>  
-            </tr>  
-            <tr >  
-                <td>用户联系方式</td>  
+            <tr>  
+                <td>联系电话</td>  
                 <td>${user.tele}</td>  
             </tr>  
-            <tr >  
+            <tr>  
+                <td>联系邮箱</td>  
+                <td>${user.email}</td>  
+            </tr>  
+            <tr>  
                 <td>用户身份证号</td>  
                 <td>${user.ID}</td>  
             </tr> 
 </tbody>
 </table>
-<table width="30%" border="1">
+<table width="30%" border="0">
             <tr>  
              	<td align="center">
-                	<a href="./passSR.do?id=${sr.shop_id}"><button>同意</button></a>
-                </td> 
-             	<td align="center">
-                	<a href="./refuseSR.do?id=${sr.shop_id}"><button>拒绝</button></a>
+                <a href="./userManage.do">返回</a>	
                 </td> 
             </tr>
 </table> 

@@ -5,6 +5,42 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<style>
+.left {
+	width: 350px;
+	heigh: auto;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+.right {
+	width: auto;
+	heigh: auto;
+	margin-left: 375px;
+	margin-top: -30px;
+}
+
+.itemimage {
+	width: 350px;
+	height: 175px;
+	float: left;
+}
+
+.textname {
+	font-size: 20px;
+	color: black;
+}
+
+.textdetail {
+	font-size: 15px;
+	color: black;
+}
+
+.textprice {
+	font-size: 20px;
+	color: red;
+}
+</style>
 <!-- 弹窗设置点 -->
 <script type="text/javascript">
 	window.onload = function() {
@@ -37,16 +73,17 @@
 
 							<div class="navbar-inner">
 								<div style="float: left; color: white; margin-top: 26px;">
-									<span>您好,</span> <a href="#"><span style="color: white;">登录</span></a>
-									<a href="#"> <span style="margin-left: 20px; color: white;">注册</span></a>
+									<span>您好,</span> <a href="login.jsp"><span
+										style="color: white;">登录</span></a> <a href="register.jsp"> <span
+										style="margin-left: 20px; color: white;">注册</span></a>
 								</div>
 								<div style="margin-left: 250px;">
 									<ul class="nav">
 										<li><a class="home active" href="Itemlist.do">首页</a></li>
-										<li><a class="myaccount" href="#">个人账户</a></li>
+										<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
+										<li><a class="checkout" href="shopList.jsp">我的店铺</a></li>
 										<li><a class="shoppingcart" href="#">购物车</a></li>
 										<li><a class="checkout" href="#">我的订单</a></li>
-										<li><a class="checkout" href="#">发布二手</a></li>
 									</ul>
 								</div>
 							</div>
@@ -55,10 +92,14 @@
 					<!-- Top Nav End -->
 					<div class="pull-right">
 						<form action="searchItem.do" method="post">
-							<input input type="text" name="str"
-								style="width: auto; border: 4px solid #FFA07A"><input
-								type="submit" value="搜索"
-								style="height: 40px; width: auto; background-color: #FFA07A; border: 4px solid #FFA07A;">
+							<div style="margin-top: 10px;">
+								<input input type="text" name="str"
+									class="input-medium search-query" placeholder="搜索你想要的二手"
+									style="height: 20px; width: 100; border: 4px solid #FFA07A">
+								<input type="submit" value="搜索"
+									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+							</div>
+
 						</form>
 					</div>
 				</div>
@@ -67,25 +108,45 @@
 	</div>
 	</header>
 	<!-- Header End -->
-	
-	<c:forEach items="${itemlist}" var="i">
-		<li class="span4">
-			<div class="thumbnail">
-			<a class="prdocutname" href="lookItem.do?id=${i.item_id}">${i.name}</a>
-				<span class="sale tooltip-test">Sale</span> <a href="lookItem.do?id=${i.item_id}">
-				<p>><img src=${pageContext.request.contextPath}${i.image}></p></a>
-			</div> 
-			<div class="pricetag">
-			<a href="lookItem.do?id=${i.item_id}">${i.detail}</a>
-				<div class="price">
-					<div class="pricenew">
-						<a href="lookItem.do?id=${i.item_id}">${i.price}</a>
-					</div>
-				</div>
-			</div>
-		</li>
-	</c:forEach>
+	<div class="left" >
+		<table border="1">
+			<thead>
+				<tr>
+					<td colspan="10" align="center" >这里是类型</td>
+				</tr>
+			</thead>
+		</table>
 
+	</div>
+
+	<div class="right">
+
+		<c:forEach items="${itemlist}" var="i">
+			<li class="span3">
+			<table border="1" >
+			<thead>
+				<tr><td>
+				<div>
+					<a href="lookItem.do?id=${i.item_id}"> <img class="itemimage"
+						src=${pageContext.request.contextPath}${i.image}>
+					</a>
+				</div>
+				<div>
+					<a href="lookItem.do?id=${i.item_id}" class="textprice" >商品价格: ¥
+						${i.price}</a> <br>
+				</div>
+				<div>
+					<a href="lookItem.do?id=${i.item_id}" class="textname">${i.name}</a>
+					<br> <a href="lookItem.do?id=${i.item_id}" class="textdetail">${i.detail}</a>
+					</div>
+					<br>
+						</td></tr>
+			</thead>
+		</table>
+		<br>
+			</li>
+		</c:forEach>
+	</div>
 	<!--footer-->
 	<footer style="margin-top:20px"> <img
 		src="${pageContext.request.contextPath}/image/footer-tri.png"

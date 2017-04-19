@@ -232,7 +232,6 @@
 						<li><a href="店铺基本信息.html">店铺信息管理</a></li>
 					</ul>
 				</div>
-				<div class="sidewidt"></div>
 
 				</aside>
 				<!-- Sidebar End-->
@@ -254,7 +253,7 @@
 												<table width="90%" border="1" align="center">
 													<thead>
 														<tr>
-															<td colspan="10" align="center">商品管理</td>
+															<td colspan="10" align="center">在售商品</td>
 														</tr>
 													</thead>
 													<tbody>
@@ -270,14 +269,26 @@
 														<c:forEach items="${shopItem}" var="i">
 
 															<tr>
-																<td class="itemimage"><img
+																<td><img class="itemimage"
 																	src=${pageContext.request.contextPath}${i.image}></td>
 																<td>${i.name}</td>
 																<td>${i.number}</td>
 																<td>${i.price}</td>
 																<td>在售</td>
 																<td><a href="showchangeItem.do?id=${i.item_id}">修改商品信息</a>
-																	<a href="downItem.do?id=${i.item_id}">下架商品</a>
+																	<a href="updownItem.do?id=${i.item_id}">下架商品</a>
+															</tr>
+														</c:forEach>
+														<c:forEach items="${shopItem2}" var="m">
+															<tr>
+																<td ><img class="itemimage"
+																	src=${pageContext.request.contextPath}${m.image}></td>
+																<td>${m.name}</td>
+																<td>${m.number}</td>
+																<td>${m.price}</td>
+																<td>已下架</td>
+																<td><a href="showchangeItem.do?id=${m.item_id}">修改商品信息</a>
+																	<a href="updownItem.do?id=${m.item_id}">上架商品</a>
 															</tr>
 
 														</c:forEach>

@@ -79,4 +79,8 @@ public class UsersServiceImpl implements UsersService {
 	public Users findById(int userid) {
 		return usersDao.findById(userid);
 	}
+
+	public List<Users> findAll() {
+		return usersDao.UsersFind();
+	}
 }

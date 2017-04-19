@@ -96,10 +96,15 @@
 					</div>
 					<!-- Top Nav End -->
 					<div class="pull-right">
-						<form class="form-search top-search">
-							<input type="text" class="input-medium search-query"  style="width:auto;border:4px solid #FFA07A"
-								placeholder="搜索你想要的二手"><input type="submit" value="搜索"
-								style="height:40px;width:auto;background-color:#FFA07A;border:4px solid #FFA07A;">
+						<form action="searchItem.do" method="post">
+						<div style="margin-top: 10px;">
+							<input input type="text" name="str" class="input-medium search-query" placeholder="搜索你想要的二手"
+								style="height: 20px;width: 100; border: 4px solid #FFA07A">
+							<input
+								type="submit" value="搜索"
+								style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+						</div>
+						
 						</form>
 					</div>
 				</div>
@@ -117,9 +122,6 @@
       <div class="row">
        <!-- Left Image-->
         <div class="span5">
-          <ul class="thumbnails mainimage">
-            <span>这里应该有图片</span>
-          </ul>
            <tr><td>><img src=${pageContext.request.contextPath}${lookitem.image}></td></tr>
           
         </div>   

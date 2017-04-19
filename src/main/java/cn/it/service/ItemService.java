@@ -86,11 +86,11 @@ public interface ItemService {
 			String image, MultipartFile file, HttpServletRequest request);
 
 	/**
-	 * 下架商品
+	 * 改变商品状态（“在售”=>“下架” or “下架”=>“在售”）
 	 * 
 	 * @return ModelAndView
 	 */
-	public ModelAndView downItem(int item_id);
+	public ModelAndView updownItem(int item_id);
 
 	/**
 	 * 按照商品编号查找商品信息
@@ -130,6 +130,14 @@ public interface ItemService {
 	 * @returnList<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Item> findByShopId(int shop_id);
+	/**
+	 * 通过调用itemDao.FindItemByShopId(shop_id)， 根据店铺编号查看商品 从中获取status=1的“已下架的商品”
+	 * 
+	 * @param shop_id
+	 *            店铺编号，int
+	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
+	 */
+	public List<Item> findByShopId2(int shop_id);
 
 	/**
 	 * 按照输入的关键词查看商品；
@@ -140,5 +148,13 @@ public interface ItemService {
 	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Item> findBystr(String str);
+	
+	/**
+	 * 后台管理用的。
+	 * @author sunchen
+	 */
+	public List<Item> itemManage();
+
+	public Item itemManagefind(int id1);
 
 }

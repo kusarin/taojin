@@ -1,6 +1,7 @@
 package cn.it.service.impl;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -198,7 +199,8 @@ public class ItemServiceImpl implements ItemService {
 			i.setdetail(detail); // 商品描述
 
 			// 商品图片部分
-			if (file.getOriginalFilename().equals("") || file.getOriginalFilename() == null) {
+			if (file.getOriginalFilename().equals("")
+					|| file.getOriginalFilename() == null) {
 				// 如果没有上传新的图片文件；
 				i.setimage(image);
 			} else {// 如果上传了新的图片文件
@@ -234,20 +236,22 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	/**
-	 * 下架商品
+	 * 改变商品状态（“在售”=>“下架” or “下架”=>“在售”）
 	 * 
 	 * @param item_id
 	 *            商品编号，int
 	 * 
 	 * @return ModelAndView
 	 */
-	public ModelAndView downItem(int item_id) {
+	public ModelAndView updownItem(int item_id) {
 		ModelAndView str = new ModelAndView("shopItem"); // 跳转到shopList.jsp界面
 		Item i = itemDao.FindItemById(item_id);
-		i.setStatus(1);
+		if (i.getStatus() == 0) {
+			i.setStatus(1);
+		} else if (i.getStatus() == 1) {
+			i.setStatus(0);
+		}
 		itemDao.ItemUpdate(i);
-		// 返回提示信息 "下架商品成功！！！"
-		str.addObject("error", "下架商品成功！！！");
 		return str;
 	}
 
@@ -302,22 +306,46 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	/**
-	 * 通过调用itemDao.FindItemByShopId(shop_id)，根据店铺编号查看商品
+	 * 通过调用itemDao.FindItemByShopId(shop_id)，根据店铺编号查看商品(在售)
 	 * 
 	 * @param shop_id
 	 *            店铺编号，int
 	 * 
-	 * @returnList<Item> 返回值为一个商品列表，包括一个或者多个商品
+	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Item> findByShopId(int shop_id) {
+		// 获取所有属于该店铺的商品
 		List<Item> shoplist = itemDao.FindItemByShopId(shop_id);
-		// 将不属于“在售”状态的商品从列表中删除
+		// 建立属于“在售”状态的商品列表list
+		List<Item> list = new ArrayList<Item>();
+		// 将属于“在售”状态的商品添加到列表list
 		for (int i = 0; i < shoplist.size(); i++) {
-			if (shoplist.get(i).getStatus() == 1) {
-				shoplist.remove(i);
+			if (shoplist.get(i).getStatus() == 0) {
+				list.add(shoplist.get(i));
 			}
 		}
-		return shoplist;
+		return list;
+	}
+
+	/**
+	 * 通过调用itemDao.FindItemByShopId(shop_id)， 根据店铺编号查看商品 从中获取status=1的“已下架的商品”
+	 * 
+	 * @param shop_id
+	 *            店铺编号，int
+	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
+	 */
+	public List<Item> findByShopId2(int shop_id) {
+		// 获取所有属于该店铺的商品
+		List<Item> shoplist2 = itemDao.FindItemByShopId(shop_id);
+		// 建立属于“已下架”状态的商品列表list2
+		List<Item> list2 = new ArrayList<Item>();
+		// 将属于“已下架”状态的商品添加到列表list2
+		for (int i = 0; i < shoplist2.size(); i++) {
+			if (shoplist2.get(i).getStatus() == 1) {
+				list2.add(shoplist2.get(i));
+			}
+		}
+		return list2;
 	}
 
 	/**
@@ -329,9 +357,20 @@ public class ItemServiceImpl implements ItemService {
 	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Item> findBystr(String str) {
-
 		return itemDao.SearchItem(str);
 	}
+	
+	/**
+	 * 孙琛改的，用在管理员后台管理。
+	 */
+	public List<Item> itemManage() {
+		return itemDao.FindAll();
+	}
+
+	public Item itemManagefind(int id) {
+		return itemDao.FindItemById(id);
+	}
+
 
 	// // 判断输入字符串是否为数字的方法，用来判断number和price是否为数字【听说可以在前端网页执行，所以先注释掉】
 	// public static boolean isNumeric(String str){
@@ -343,7 +382,7 @@ public class ItemServiceImpl implements ItemService {
 	// }
 	// return true;
 	// }
-
+	
 	/******************************* 测试类,用于测试能否成功调用来自Dao层的方法 *************************************/
 	/**
 	 * 测试1，用于测试是否添加商品
@@ -456,4 +495,6 @@ public class ItemServiceImpl implements ItemService {
 		List<Item> i = itemdao.SearchItem(str);
 		System.out.println(i);
 	}
+
+
 }
