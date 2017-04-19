@@ -3,6 +3,7 @@ package cn.it.pojo;
 public class ShoppingCart {
 	private int cartId;  //购物车Id
 	private int userId;   //用户id
+	private int shop_id; //店铺id
 	private double total;  //合计
 	/*********get***********set*************/
 	public int getCartId() {
@@ -23,4 +24,11 @@ public class ShoppingCart {
 	public void setTotal(double total) {
 		this.total = total;
 	}
+	public int getShop_id() {
+		return shop_id;
+	}
+	public void setShop_id(int shop_id) {
+		this.shop_id = shop_id;
+	}
+	
 }
