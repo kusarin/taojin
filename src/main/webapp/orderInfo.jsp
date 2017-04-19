@@ -3,84 +3,164 @@ pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 
-<!DOCTYPE html>
 <html>
 <head>
-<title>订单详情</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
- <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link rel="stylesheet" type="text/css" href="./TaoJin/css/orderInfo.css"/>
+<link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
+<link href="${pageContext.request.contextPath}/css/jquery.fancybox.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/cloud-zoom.css" rel="stylesheet">
+<title>我的订单</title>
+<style>
+.item{
+    width:300px;
+	text-align:center;
+	height:45px;
+ }
+.co{
+    width:80px;
+	text-align:center;
+	height:45px;
+	
+ }
+.orderNumber{
+    width:300px;
+	text-align:center;
+	height:45px;
+ }
+.buyer1{
+    width:80px;
+	text-align:center;
+	height:45px;
+ }
+.buyer{
+    width:80px;
+	text-align:center;
+	height:45px;
+ }
+.buyer1 a p{
+	width:80px;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.huanhang{
+    width:300px;
+	height:120px;
+		
+}
+.huanhang img{
+   width:100px;
+   height:120px;
+   
+}
+.huanhang p{
+    word-break:break-all;
+	width:200px;
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.sa{
+    width:80px;
+	height:120px;
+	text-align:center;
+}
+a:hover{
+	text-decoration:underline;
+	color:red;
+}
+</style>
+<script>
+function deleteone(orderNumber){
+	if(confirm("确定要删除这条订单吗？")){
+		window.location.href="deleteOrder.do?pageNo=${pages.pageNo}&orderNumber="+orderNumber;
+	}
+}
+
+function deleteAll(){
+	var ii=0;
+	var cks=document.getElementsByName("orderNumber");
+    for(var i =0;i<cks.length;i++){
+ 	   if(cks[i].checked){
+ 		   ii++;
+ 	   }
+    }
+    if(ii==0){
+ 	   alert("至少选择一条");
+      return;
+    }
+    if(confirm("确定要删除这"+ii+"条订单吗？")){
+ 	   document.myform.action="deleteAllOrder.do?pageNo=${pages.pageNo}";
+ 	   document.myform.submit();
+    }
+}
+</script>
 </head>
 <body>
-<div class="pagecontainer">
-     <div class="orderInfo">	
-	     <strong>订单信息</strong>
-	 </div>
-	 <div class="line">
-	 </div>
-	 <div class="addr">
-	    <span><strong>收货地址：</strong>*****,86-18829237012，陕西省 西安市 莲湖区 西关街道 陕西省西安市莲湖区劳动南路西工大旺园学生公寓 ，000000</span>
-	 </div>
-	 <div class="way"><span><strong>运送方式：</strong></span>快递</div>
-	 <div class="line">
-	 </div>
-	 <div class="bussiness">
-	    <div class="bname"><strong>卖家信息</strong></div>
-		<table cellspacing="15">
-		<tr>
-		   <td>昵称：张超1994120</td>
-		   <td>真实姓名：张超 </td>
-		   <td>城市：</td>
-		</tr>
-
-		<tr>
-		    <td>联系电话：</td>
-		   <td>邮件：*** 发送站内信</td>
-		   <td>支 付 宝：1***</td>
-		</tr>
-		</table>
-	 </div>
-	 <div class="line">
-	 </div>
-	 <div class="order">
-	    <div class="bname"><strong>订单信息</strong></div>
-	     <table cellspacing="15">
-		    <tr>
-		      <td>订单编号:3179981484474492</td>
-		      <td>支付宝交易号:2017022521001001230276221311</td>
-		      <td>创建时间:2017-02-25 10:43:10</td>
-		  </tr>
-
-		 <tr>
-		   <td>发货时间:2017-02-26 09:50:00</td>
-		   <td>付款时间:2017-02-25 10:43:43</td>
-		   <td>成交时间:2017-03-04 16:13:36</td>
-		</tr>
-	    </table>
+	<!-- Header Start -->
+	<header>
+	<div class="headerstrip">
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<!-- Top Nav Start -->
+					<div class="pull-left">
+						<div class="navbar" id="topnav">
+						
+							<div class="navbar-inner">
+							<div style="float:left;color:white;margin-top:26px;">
+							  <span>您好,</span>
+							  <a href="#"><span style="color:white;">登录</span></a>
+							  <a href="#"> <span style="margin-left:20px;color:white;">注册</span></a>
+							 </div>
+							  <div style="margin-left:250px;">
+								<ul class="nav">
+								    <li><a class="home active" href="#">首页</a></li>
+									<li><a class="myaccount" href="#">个人账户</a></li>
+									<li><a class="shoppingcart" href="#">购物车</a></li>
+									<li><a class="checkout" href="#">我的订单</a></li>
+								    <li><a class="checkout" href="#">发布二手</a></li>
+								</ul>
+							 </div>
+							</div>
+						</div>
+					</div>
+					<!-- Top Nav End -->
+					<div class="pull-right">
+						<form class="form-search top-search">
+							<input type="text" class="input-medium search-query"  style="width:auto;height:40px;border:4px solid #FFA07A"
+								placeholder="搜索你想要的二手"><input type="submit" value="搜索"
+								style="height:40px;width:auto;background-color:#FFA07A;border:4px solid #FFA07A;">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	 <div class="line">
-	 </div>
-	 <div class="orderDetail">
-	     <table cellspacing="0">
-		     <tr>
-			     <td class="shopInfo">商品</td>
-				 <td class="item">交易状态</td>
-				 <td class="item">单价</td>
-				 <td class="item">数量</td>
-				 <td class="item">商品总价</td>
-			 </tr>
-			 <tr>
-			     <td class="test1"><a href="#"><img src="image/order1.jpg"/></a>
-		         <a href="#"><p>Seagate希捷移动硬盘1T Backup Plus 新睿品4 2tb USB3.0超薄包邮 [交易快照]套餐类型：套餐一颜色分类：土豪金500G
-		        gdfghjkll;lkjhjkl;;jkjiuygjhgghoopll</p></a></td>
-				 <td class="common">已确认收货</td>
-				 <td class="common">370.00</td>
-				 <td class="common">1</td>
-				 <td class="common">270.00</td>
-			 </tr>
-		 </table>
-	 </div>
-	 <div class="end"><p>订单总金额：270.00元</p></div>
-</div>
+	</header>
+	<!-- Header End -->
+    <div></div>
+	<!--footer-->
+    <footer style="margin-top:20px">
+       <img  src="${pageContext.request.contextPath}/image/footer-tri.png" style="width:100%;">
+            <div style="margin: 0px 0px 10px;text-align:center;padding-top:10px;">
+			 
+             <span>友情链接/</span>
+                <a href="http://www.nwpu.edu.cn/" target="_top" class="links">西北工业大学</a>
+				
+            </div>
+            <div style="text-align:center;margin-bottom:10px;">
+               <a id="fd_footer" href="javascript:;">产品意见反馈</a>
+               <a href="http://www.2shoujie.com/joinUs" target="_top">加入我们</a>
+            </div>
+        <div style="text-align:center;margin-bottom:10px;">
+            <span>©2017   版权所有</span>
+            <span>鄂ICP备14003265号-2</span>
+        </div>
+    </footer>		
 </body>
 </html>
