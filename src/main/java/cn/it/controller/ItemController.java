@@ -39,14 +39,11 @@ public class ItemController {
 	public ModelAndView addItem(
 			@RequestParam(value = "file", required = false) MultipartFile file,
 			HttpServletRequest request) {
+		// 获取店铺编号shop_id
+		String id = request.getParameter("Shop_id");
+		int shop_id = Integer.parseInt(id);
 
 		// 获取前台传入的数据；
-		// -------------------
-		// 暂时缺少店铺编号的获取；非输入数据，来源于跳转用数据。
-		// 暂时先设定为1，用于测试使用
-		// -------------------
-		int shop_id = 1;
-
 		String name = request.getParameter("name");
 		String typeh = request.getParameter("typeh");
 		String typel = request.getParameter("typel");
@@ -150,8 +147,8 @@ public class ItemController {
 		String image = request.getParameter("image");
 
 		// 进行修改商品信息操作，并且获取提示信息
-		ModelAndView modelandview = itemservice.updateItem(item_id, name, typeh,
-				typel, number, price, detail, image, file, request);
+		ModelAndView modelandview = itemservice.updateItem(item_id, name,
+				typeh, typel, number, price, detail, image, file, request);
 		// 重定向刷新页面；
 		modelandview.setViewName("redirect:shopItem.do");
 
@@ -175,28 +172,28 @@ public class ItemController {
 
 		// 根据商品编号，获得商品；
 		Item i = itemservice.findById(item_id);
-		
+
 		// 获取该商品的店铺编号；
 		int shop_id = i.getshop_id();
 		// 获取同属于商品的列表；
 		List<Item> list = itemservice.findByShopId(shop_id);
 		// 将本商品从列表中移除；
-		// 将不属于“在售”状态的商品从列表中删除
 		for (int m = 0; m < list.size(); m++) {
 			if (list.get(m).getitem_id() == item_id) {
 				list.remove(m);
 			}
 		}
-		
+
 		// 将商品i传递到lookitem
 		modelandview.addObject("lookitem", i);
 		// 将商品列表list传递到list
 		modelandview.addObject("looklist", list);
+
 		return modelandview;
 	}
 
 	/**
-	 * 按条目显示商品
+	 * 按条目显示商品（显示所有在售商品）
 	 * 
 	 * @param request
 	 * @return
@@ -247,14 +244,12 @@ public class ItemController {
 	 * @return
 	 */
 	@RequestMapping("shopItem.do")
-	public ModelAndView showShopItem(HttpServletRequest request) {
+	public ModelAndView showShopItem(HttpServletRequest request,
+			@RequestParam("shopid") String id) {
 		ModelAndView modelandview = new ModelAndView("shopItem"); // 到shopItem.jsp界面
 
-		// --------------
-		// 暂时缺少获取前台传入shop_id的操作！！！
-		// 暂时先设定为1，用于测试使用
-		// ---------------
-		int shop_id = 1;
+		// 获取店铺编号shop_id
+		int shop_id = Integer.parseInt(id);
 
 		// 获取商品条目list（在售）
 		List<Item> list;
@@ -267,6 +262,7 @@ public class ItemController {
 		modelandview.addObject("shopItem", list);
 		// 将商品条目list2（已下架）传递到shopItem2
 		modelandview.addObject("shopItem2", list2);
+
 		return modelandview;
 	}
 
