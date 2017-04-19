@@ -63,8 +63,10 @@
 	</select>
 	<update id="updateTime" parameterMap="OrderParameterMap">
            update indent set removeOrderTime=#{removeOrderTime} where OrderNumber=#{orderNumber}
-      </update>
-	
+     </update>
+	 <select id="countNumbers" resultType="Integer">
+	  select count(OrderNumber) from indent where User_ID=#{0} and Status=#{1}
+	 </select>
  </mapper>
  
 

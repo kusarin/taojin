@@ -48,7 +48,7 @@ public class OrderController {
 	@RequestMapping(value="submitOrder.do", method=RequestMethod.POST)
 	public ModelAndView submmitOrder(Address address,OrderCollection orderCollection, int payway){
 		ModelAndView view=new ModelAndView("payment");
-		System.out.println(orderCollection.getOrder().getTotalQuantity());
+		
 		int userId=1;   //用户Id
 		orderService.submmitOrder(address, orderCollection,payway,userId);
 		
@@ -102,6 +102,10 @@ public class OrderController {
 		
 		ModelAndView v=new ModelAndView("removeRecord");
 		v.addObject("pages",orderService.getOrder(userId,"已取消", page));
+		
+		v.addObject("pendingPayment",orderService.countNumbers(userId, "待付款"));
+		v.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
+		v.addObject("assessment",orderService.countNumbers(userId, "待评价"));
 		return v;
 	}
 	
@@ -111,11 +115,13 @@ public class OrderController {
 	 * */
 	@RequestMapping("pendingPayment.do")
 	public ModelAndView pendingPayment(Page<OrderCollection> page){
-		int userId=0;
-		int flag=0;
-		ModelAndView v=new ModelAndView("orderItem");
-		v.addObject("page",orderService.getOrder(userId,"待付款", page));
-		v.addObject("flag", flag);
+		int userId=1;
+		ModelAndView v=new ModelAndView("pendingPayment");
+		v.addObject("pages",orderService.getOrder(userId,"待付款", page));
+		
+		v.addObject("pendingPayment",orderService.countNumbers(userId, "待付款"));
+		v.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
+		v.addObject("assessment",orderService.countNumbers(userId, "待评价"));
 		return v;
 	}
 	
@@ -126,23 +132,29 @@ public class OrderController {
 	@RequestMapping("receivingGoods.do")
 	public ModelAndView receivingGoods(Page<OrderCollection> page){
 		int userId=1;
-		int flag=1;
-		ModelAndView v=new ModelAndView("orderItem");
-		v.addObject("page",orderService.getOrder(userId,"待收货", page));
-		v.addObject("flag", flag);
+		
+		ModelAndView v=new ModelAndView("receivingGoods");
+		v.addObject("pages",orderService.getOrder(userId,"待收货", page));
+		
+		v.addObject("pendingPayment",orderService.countNumbers(userId, "待付款"));
+		v.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
+		v.addObject("assessment",orderService.countNumbers(userId, "待评价"));
 		return v;
 	}
 	/***
-	 *已完成交易
+	 *待评价
 	 *订单 
 	 * */
-	@RequestMapping("saledGoods.do")
+	@RequestMapping("pendingEvaluation.do")
 	public ModelAndView saledGoods(Page<OrderCollection> page){
 		int userId=1;
-		int flag=3;
-		ModelAndView v=new ModelAndView("orderItem");
-		v.addObject("page",orderService.getOrder(userId,"已完成", page));
-		v.addObject("flag", flag);
+	
+		ModelAndView v=new ModelAndView("pendingEvaluation");
+		v.addObject("pages",orderService.getOrder(userId,"待评价", page));
+		
+		v.addObject("pendingPayment",orderService.countNumbers(userId, "待付款"));
+		v.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
+		v.addObject("assessment",orderService.countNumbers(userId, "待评价"));
 		return v;
 	}
 	/*******
@@ -166,9 +178,12 @@ public class OrderController {
       //int num1=(Integer)(request.getSession().getAttribute("num"));
 		
 		int userId=1;
+		
 		ModelAndView view=new ModelAndView("orderItem");
-	    
 		view.addObject("pages",orderService.getAllOrder(userId, page));
+		view.addObject("pendingPayment",orderService.countNumbers(userId, "待付款"));
+		view.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
+		view.addObject("assessment",orderService.countNumbers(userId, "待评价"));
 		return view;
 	}
 	
