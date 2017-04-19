@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="utf-8">
 <title>${lookitem.name}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +25,17 @@
     <![endif]-->
 <!-- fav -->
 <link rel="shortcut icon" href="assets/ico/favicon.html">
-
+<style>
+.itemimage {
+	width: 275px;
+	height: 150px;
+	float: left;
+}
+.price {
+	float: left;
+	color: red;
+}
+</style>
 <script>
   function plus(val){
    var num=document.getElementById("mp");
@@ -175,81 +186,22 @@
   <section id="related" class="row">
     <div class="container">
       <h1 class="heading1"><span class="maintext">同店铺商品</span><span class="subtext"> 走过路过错过</span></h1>
-      <ul class="thumbnails">
+      <ul class="thumbnails">   
+      <c:forEach items="${looklist}" var="i">
         <li class="span3">
-          <a class="prdocutname" href="product.html">Product Name Here</a>
+          <a class="prdocutname" href="lookItem.do?id=${i.item_id}">${i.name}</a>
           <div class="thumbnail">
-            <span class="sale tooltip-test">Sale</span>
-            <a href="#"><img alt="" src="img/product1.jpg"></a>
-            <div class="shortlinks">
-              <a class="details" href="#">DETAILS</a>
-              <a class="wishlist" href="#">WISHLIST</a>
-              <a class="compare" href="#">COMPARE</a>
-            </div>
+            <a href="lookItem.do?id=${i.item_id}"><img class="itemimage" src=${pageContext.request.contextPath}${i.image}></a>
             <div class="pricetag">
-              <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
+              <span class="spiral"></span><a href="lookItem.do?id=${i.item_id}" class="productcart">查看详情</a>
               <div class="price">
-                <div class="pricenew">$4459.00</div>
-                <div class="priceold">$5000.00</div>
+                <div class="pricenew"></div>
+                <div class="pricenew"><div class="price">¥${i.price}</div></div>
               </div>
             </div>
           </div>
         </li>
-        <li class="span3">
-          <a class="prdocutname" href="product.html">Product Name Here</a>
-          <div class="thumbnail">
-            <a href="#"><img alt="" src="img/product2.jpg"></a>
-            <div class="shortlinks">
-              <a class="details" href="#">DETAILS</a>
-              <a class="wishlist" href="#">WISHLIST</a>
-              <a class="compare" href="#">COMPARE</a>
-            </div>
-            <div class="pricetag">
-              <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
-              <div class="price">
-                <div class="pricenew">$4459.00</div>
-                <div class="priceold">$5000.00</div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li class="span3">
-          <a class="prdocutname" href="product.html">Product Name Here</a>
-          <div class="thumbnail">
-            <span class="offer tooltip-test" >Offer</span>
-            <a href="#"><img alt="" src="img/product1.jpg"></a>
-            <div class="shortlinks">
-              <a class="details" href="#">DETAILS</a>
-              <a class="wishlist" href="#">WISHLIST</a>
-              <a class="compare" href="#">COMPARE</a>
-            </div>
-            <div class="pricetag">
-              <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
-              <div class="price">
-                <div class="pricenew">$4459.00</div>
-                <div class="priceold">$5000.00</div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li class="span3">
-          <a class="prdocutname" href="product.html">Product Name Here</a>
-          <div class="thumbnail">
-            <a href="#"><img alt="" src="img/product2.jpg"></a>
-            <div class="shortlinks">
-              <a class="details" href="#">DETAILS</a>
-              <a class="wishlist" href="#">WISHLIST</a>
-              <a class="compare" href="#">COMPARE</a>
-            </div>
-            <div class="pricetag">
-              <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
-              <div class="price">
-                <div class="pricenew">$4459.00</div>
-                <div class="priceold">$5000.00</div>
-              </div>
-            </div>
-          </div>
-        </li>
+        </c:forEach>
       </ul>
     </div>
   </section>

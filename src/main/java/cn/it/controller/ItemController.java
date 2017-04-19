@@ -1,5 +1,6 @@
 package cn.it.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,10 +55,10 @@ public class ItemController {
 		String detail = request.getParameter("detail");
 
 		// 进行添加商品信息操作，并且获取提示信息
-		ModelAndView modeandview = itemservice.addItem(shop_id, name, typeh,
+		ModelAndView modelandview = itemservice.addItem(shop_id, name, typeh,
 				typel, number, price, detail, file, request);
 
-		return modeandview;
+		return modelandview;
 	}
 
 	/**
@@ -74,11 +75,11 @@ public class ItemController {
 		// 获取前台传入的数据，商品编号id转为int类型；
 		int item_id = Integer.parseInt(id);
 		// 进行删除商品信息操作；
-		ModelAndView modeandview = itemservice.deleteItem(item_id);
+		ModelAndView modelandview = itemservice.deleteItem(item_id);
 		// 重定向刷新页面；
-		modeandview.setViewName("redirect:shopItem.do");
+		modelandview.setViewName("redirect:shopItem.do");
 
-		return modeandview;
+		return modelandview;
 	}
 
 	/**
@@ -95,11 +96,11 @@ public class ItemController {
 		// 获取前台传入的数据，商品编号id转为int类型；
 		int item_id = Integer.parseInt(id);
 		// 进行修改商品状态操作；
-		ModelAndView modeandview = itemservice.updownItem(item_id);
+		ModelAndView modelandview = itemservice.updownItem(item_id);
 		// 重定向刷新页面；
-		modeandview.setViewName("redirect:shopItem.do");
+		modelandview.setViewName("redirect:shopItem.do");
 
-		return modeandview;
+		return modelandview;
 	}
 
 	/**
@@ -112,16 +113,16 @@ public class ItemController {
 	@RequestMapping("showchangeItem.do")
 	public ModelAndView showchangeItem(HttpServletRequest request,
 			@RequestParam("id") String id) {
-		ModelAndView modeandview = new ModelAndView("changeItem"); // 到changeItem.jsp界面
+		ModelAndView modelandview = new ModelAndView("changeItem"); // 到changeItem.jsp界面
 
 		// 获取前台传入的数据，商品编号id转为int类型；
 		int item_id = Integer.parseInt(id);
 		// 根据商品编号，获得商品；
 		Item i = itemservice.findById(item_id);
 		// 将商品i传递到lookitem
-		modeandview.addObject("change", i);
+		modelandview.addObject("change", i);
 
-		return modeandview;
+		return modelandview;
 	}
 
 	/**
@@ -149,12 +150,12 @@ public class ItemController {
 		String image = request.getParameter("image");
 
 		// 进行修改商品信息操作，并且获取提示信息
-		ModelAndView modeandview = itemservice.updateItem(item_id, name, typeh,
+		ModelAndView modelandview = itemservice.updateItem(item_id, name, typeh,
 				typel, number, price, detail, image, file, request);
 		// 重定向刷新页面；
-		modeandview.setViewName("redirect:shopItem.do");
+		modelandview.setViewName("redirect:shopItem.do");
 
-		return modeandview;
+		return modelandview;
 	}
 
 	/**
@@ -167,17 +168,31 @@ public class ItemController {
 	@RequestMapping("lookItem.do")
 	public ModelAndView lookItem(HttpServletRequest request,
 			@RequestParam("id") String id) {
-		ModelAndView modeandview = new ModelAndView("lookItem"); // 到lookItem.jsp界面
+		ModelAndView modelandview = new ModelAndView("lookItem"); // 到lookItem.jsp界面
 
 		// 获取前台传入的数据，商品编号id转为int类型；
 		int item_id = Integer.parseInt(id);
 
 		// 根据商品编号，获得商品；
 		Item i = itemservice.findById(item_id);
-
+		
+		// 获取该商品的店铺编号；
+		int shop_id = i.getshop_id();
+		// 获取同属于商品的列表；
+		List<Item> list = itemservice.findByShopId(shop_id);
+		// 将本商品从列表中移除；
+		// 将不属于“在售”状态的商品从列表中删除
+		for (int m = 0; m < list.size(); m++) {
+			if (list.get(m).getitem_id() == item_id) {
+				list.remove(m);
+			}
+		}
+		
 		// 将商品i传递到lookitem
-		modeandview.addObject("lookitem", i);
-		return modeandview;
+		modelandview.addObject("lookitem", i);
+		// 将商品列表list传递到list
+		modelandview.addObject("looklist", list);
+		return modelandview;
 	}
 
 	/**
@@ -188,14 +203,14 @@ public class ItemController {
 	 */
 	@RequestMapping("Itemlist.do")
 	public ModelAndView showItem(HttpServletRequest request) {
-		ModelAndView modeandview = new ModelAndView("Itemlist"); // 到Itemlist.jsp界面
+		ModelAndView modelandview = new ModelAndView("Itemlist"); // 到Itemlist.jsp界面
 		// 获取商品条目list
 		List<Item> list;
 		list = itemservice.findItemList();
 
 		// 将商品条目list传递到itemlist
-		modeandview.addObject("itemlist", list);
-		return modeandview;
+		modelandview.addObject("itemlist", list);
+		return modelandview;
 	}
 
 	/**
@@ -206,7 +221,7 @@ public class ItemController {
 	 */
 	@RequestMapping("ItemType.do")
 	public ModelAndView showTypeItem(HttpServletRequest request) {
-		ModelAndView modeandview = new ModelAndView("Itemtype"); // 到Itemtype.jsp界面
+		ModelAndView modelandview = new ModelAndView("Itemtype"); // 到Itemtype.jsp界面
 
 		// 从前台获取商品类型信息；
 		String typeh = request.getParameter("typeh");
@@ -218,11 +233,11 @@ public class ItemController {
 
 		// 这里用来传递已经选择的类型
 		Item i = list.get(1);
-		modeandview.addObject("itemtypechoice", i);
+		modelandview.addObject("itemtypechoice", i);
 
 		// 将商品条目list传递到itemtype
-		modeandview.addObject("itemtype", list);
-		return modeandview;
+		modelandview.addObject("itemtype", list);
+		return modelandview;
 	}
 
 	/**
@@ -233,7 +248,7 @@ public class ItemController {
 	 */
 	@RequestMapping("shopItem.do")
 	public ModelAndView showShopItem(HttpServletRequest request) {
-		ModelAndView modeandview = new ModelAndView("shopItem"); // 到shopItem.jsp界面
+		ModelAndView modelandview = new ModelAndView("shopItem"); // 到shopItem.jsp界面
 
 		// --------------
 		// 暂时缺少获取前台传入shop_id的操作！！！
@@ -249,10 +264,10 @@ public class ItemController {
 		list2 = itemservice.findByShopId2(shop_id);
 
 		// 将商品条目list（在售）传递到shopItem
-		modeandview.addObject("shopItem", list);
+		modelandview.addObject("shopItem", list);
 		// 将商品条目list2（已下架）传递到shopItem2
-		modeandview.addObject("shopItem2", list2);
-		return modeandview;
+		modelandview.addObject("shopItem2", list2);
+		return modelandview;
 	}
 
 	/**
@@ -263,7 +278,7 @@ public class ItemController {
 	 */
 	@RequestMapping("searchItem.do")
 	public ModelAndView showSearchItem(HttpServletRequest request) {
-		ModelAndView modeandview = new ModelAndView("Itemlist"); // 到Itemlist.jsp界面
+		ModelAndView modelandview = new ModelAndView("Itemlist"); // 到Itemlist.jsp界面
 		// 从前台获取搜索关键词str；
 		String str = request.getParameter("str");
 
@@ -272,8 +287,8 @@ public class ItemController {
 		list = itemservice.findBystr(str);
 
 		// 将商品条目list传递到searchlist
-		modeandview.addObject("itemlist", list);
+		modelandview.addObject("itemlist", list);
 
-		return modeandview;
+		return modelandview;
 	}
 }
