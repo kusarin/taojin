@@ -38,6 +38,7 @@
 		<td colspan="2"><a href="usersearch.jsp">查看个人信息</a></td>
 		<td colspan="2"><a href="UsersUpdate.jsp">修改个人信息</a></td>
 		<td colspan="2"><a href="changepw.jsp">修改密码</a></td>
+		<td colspan="2"><a href="addressList.do">收货地址</a></td>
 		</tr>
 	</table>
 </body>
