@@ -102,10 +102,22 @@ a:hover{
 					</h2>
 					<ul class="nav nav-list categories">
 						<li><a href="#">我的订单</a></li>
-						<li><a href="#">待付款<sup></sup></a></li>
-						<li><a href="#">待收货<sup></sup></a></li>
-						<li><a href="#">待评价<sup style="color:red;font-size:12px;">2</sup></a></li>
-						<li><a href="#">取消订单记录</a></li>
+						<li><a href="#">待付款
+						<c:if test="${pendingPayment!=0}">
+						<sup style="color:red;font-size:12px;">${pendingPayment}</sup>
+						</c:if>
+						</a></li>
+						<li><a href="#">待收货
+						<c:if test="${receivingGoods!=0}">
+						<sup style="color:red;font-size:12px;">${receivingGoods}</sup>
+						</c:if>
+						</a></li>
+						<li><a href="#">待评价
+						<c:if test="${assessment!=0}">
+						<sup style="color:red;font-size:12px;">${assessment}</sup>
+						</c:if>
+						</a></li>
+						<li><a href="removeRecord.do">取消订单记录</a></li>
 					</ul>
 				</div>
 				</aside>

@@ -11,6 +11,7 @@
 <input type="text" value="2" name="number" readonly="readonly">
 <input type="text" value="1" name="itemId" readonly="readonly">
 <input type="submit" value="立即购买">
+<input type="submit" value="加入购物车">
 </form>
 </body>
 </html>

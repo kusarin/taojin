@@ -26,7 +26,10 @@
 	height: 175px;
 	float: left;
 }
-
+.textshopname {
+	font-size: 30px;
+	color: red;
+}
 .textname {
 	font-size: 20px;
 	color: black;
@@ -57,7 +60,7 @@
 		}
 	}
 </script>
-<title>商品列表</title>
+<title>店铺商品</title>
 <link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
 <link href="./TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="./TaoJin/css/style.css" rel="stylesheet">
@@ -115,22 +118,16 @@
 	</header>
 	<!-- Header End -->
 	
-	<form action="ItemType.do" method="post">
-		<div class="left">
-			<select id="code" name="typeh" style="width: 120px">
-				<option value="高级分类1">高级分类1</option>
-				<option value="高级分类2">高级分类2</option>
-			</select> <select id="code" name="typel" style="width: 120px">
-				<option value="低级分类1">低级分类1</option>
-				<option value="低级分类2">低级分类2</option>
-			</select> <input type="submit" value="确认选择" />
+	
+	<div class="left">
+			<p class="textshopname" style="height: 40px; width: 200px"> ${shopinfo.name}</p>
+			<p class="textdetail" style="height: 40px; width: 200px"> ${shopinfo.intro}</p>
 		</div>
-		<br>
-	</form>
+	
 
 <div style="margin-left: 250px;">
 <h1 style="color:orange">${error0}</h1>
-	<c:forEach items="${itemlist}" var="i">
+	<c:forEach items="${showshopItem}" var="i">
 		<li class="span3">
 			<table border="1">
 				<thead>

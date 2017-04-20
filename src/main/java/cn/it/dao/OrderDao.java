@@ -51,4 +51,8 @@ public interface OrderDao {
 	 * 
 	 * */
 	public void updateTime(Order o);
+	/***
+	 * 统计不同状态的订单的数量
+	 * */
+	public int countNumbers(int userId,String status);
 }

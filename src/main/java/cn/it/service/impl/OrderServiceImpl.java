@@ -164,6 +164,7 @@ public  class OrderServiceImpl implements OrderService {
 		page.setTotalrecord(ol.size());
 		return page;
 	}
+	
 	/**
 	 * 提交订单
 	 * 
@@ -289,5 +290,15 @@ public  class OrderServiceImpl implements OrderService {
 	public List<Address> getAddress(int userId){
 		
 		return addressDao.addressFind(userId);
+	}
+	
+	/*****
+	 * 根据订单的交易状态查统计不同
+	 * 状态的订单的数量
+	 * @param(status表示订单状态)
+	 * */
+	public int countNumbers(int userId,String status){
+		
+		return orderDao.countNumbers(userId, status);
 	}
 }
