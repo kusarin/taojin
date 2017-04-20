@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.pojo.Item;
+import cn.it.pojo.Shop;
 import cn.it.service.ItemService;
 
 /**
@@ -301,6 +302,13 @@ public class ItemController {
 		// 将商品条目list（在售）传递到showshopItem
 		modelandview.addObject("showshopItem", list);
 		
+		// 获取商品归属的店铺信息；
+		Shop shop;
+		shop = itemservice.showShop(shop_id);
+		
+		// 将获取到的店铺信息shop传递到 shopinfo
+		modelandview.addObject("shopinfo", shop);
+
 		return modelandview;
 	}
 
