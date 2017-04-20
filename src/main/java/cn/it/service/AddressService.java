@@ -14,4 +14,6 @@ public interface AddressService {
 
 	public List<Address> findById(HttpSession session);
 
+	public ModelAndView delete(Address address, HttpSession session);
+
 }
