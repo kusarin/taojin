@@ -224,7 +224,7 @@
 									<ul>
 										<li><a href="UsersUpdate.jsp">修改个人信息 </a></li>
 										<li><a href="changepw.jsp">更改密码</a></li>
-										<li><a href="product.html">更改/添加我的地址</a></li>
+										<li><a href="address.jsp">更改/添加我的地址</a></li>
 									</ul> <a href="category.html">我的订单 </a>
 									<ul>
 										<li><a href="product.html">查看历史订单</a></li>

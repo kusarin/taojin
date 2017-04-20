@@ -7,11 +7,11 @@ package cn.it.pojo;
  * **/
 public class CartItem {
 	
-	private int cartId;  // 购物车项目列表Id
-	private int cartItemId;//购物车Id
+	private int cartId;  // 购物车Id
+	private int cartItemId;//购物车项目列表Id
 	private int itemId;// 商品表Id
 	private int tradingNumbers;//购买的某件商品的数量
-	private double totalPrice;//销售额
+	private double totalPrice;//小计
 	private String shopName;//店铺名称
 	private Item item;//商品
 	public int getCartId() {
@@ -45,17 +45,16 @@ public class CartItem {
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-	public String getShopName() {
-		return shopName;
-	}
-	public void setShopName(String shopName) {
-		this.shopName = shopName;
-	}
 	public Item getItem() {
 		return item;
 	}
 	public void setItem(Item item) {
 		this.item = item;
 	}
-	
+	public String getShopName() {
+		return shopName;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
 }

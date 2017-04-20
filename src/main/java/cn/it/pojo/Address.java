@@ -25,7 +25,7 @@ public class Address {
 	public String getAddr() {
 		return addr;
 	}
-	public void setAddress(String addr) {
+	public void setAddr(String addr) {
 		this.addr = addr;
 	}
 

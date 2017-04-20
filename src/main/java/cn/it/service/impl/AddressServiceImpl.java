@@ -33,4 +33,8 @@ public class AddressServiceImpl implements AddressService {
 		return str;
 	}
 
+	public List<Address> findById(HttpSession session) {
+		Users user = (Users)session.getAttribute("user");
+		return addressDao.addressFind(user.getUser_ID());
+	}
 }
