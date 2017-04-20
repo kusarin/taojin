@@ -36,6 +36,10 @@
 	float: left;
 	color: red;
 }
+.textshop {
+	font-size: 18px;
+	color: orange;
+}
 </style>
 <script>
   function plus(val){
@@ -135,8 +139,9 @@
 					<!-- Left Image-->
 					<div class="span5">
 						<tr>
-							<td>><img
-								src=${pageContext.request.contextPath}${lookitem.image}></td>
+						<br>
+							<td>					
+								<img src=${pageContext.request.contextPath}${lookitem.image}></td>
 						</tr>
 
 					</div>
@@ -189,7 +194,7 @@
 		<section id="related" class="row">
 			<div class="container">
 				<h1 class="heading1">
-					<span class="maintext">同店铺商品</span><span class="subtext">
+					<a href="lookshopItem.do?shopid=${lookitem.shop_id}" ><span class="maintext">同店铺商品</span></a><span class="subtext">
 						走过路过错过</span>
 				</h1>
 				<ul class="thumbnails">
