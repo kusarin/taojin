@@ -6,10 +6,46 @@
 <html>
 <head>
 <style>
-.itemimage {
-	width: 400px;
-	height: 300px;
+.left {
+	width: 130px;
+	heigh: auto;
 	float: left;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+.right {
+	width: auto;
+	heigh: auto;
+	margin-top: 20px;
+	margin-left: 149px;
+}
+
+.itemimage {
+	width: 300px;
+	height: 175px;
+	float: left;
+}
+
+.textname {
+	font-size: 20px;
+	color: black;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.textdetail {
+	font-size: 15px;
+	color:orange;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.textprice {
+	font-size: 20px;
+	color: red;
 }
 </style>
 <!-- 弹窗设置点 -->
@@ -41,19 +77,19 @@
 					<!-- Top Nav Start -->
 					<div class="pull-left">
 						<div class="navbar" id="topnav">
-
 							<div class="navbar-inner">
 								<div style="float: left; color: white; margin-top: 26px;">
-									<span>您好,</span> <a href="#"><span style="color: white;">登录</span></a>
-									<a href="#"> <span style="margin-left: 20px; color: white;">注册</span></a>
+									<span>您好,</span> <a href="login.jsp"><span
+										style="color: white;">登录</span></a> <a href="register.jsp"> <span
+										style="margin-left: 20px; color: white;">注册</span></a>
 								</div>
 								<div style="margin-left: 250px;">
 									<ul class="nav">
 										<li><a class="home active" href="Itemlist.do">首页</a></li>
-										<li><a class="myaccount" href="#">个人账户</a></li>
+										<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
+										<li><a class="checkout" href="shopList.jsp">我的店铺</a></li>
 										<li><a class="shoppingcart" href="#">购物车</a></li>
 										<li><a class="checkout" href="#">我的订单</a></li>
-										<li><a class="checkout" href="#">发布二手</a></li>
 									</ul>
 								</div>
 							</div>
@@ -62,10 +98,14 @@
 					<!-- Top Nav End -->
 					<div class="pull-right">
 						<form action="searchItem.do" method="post">
-							<input input type="text" name="str"
-								style="width: auto; border: 4px solid #FFA07A"><input
-								type="submit" value="搜索"
-								style="height: 40px; width: auto; background-color: #FFA07A; border: 4px solid #FFA07A;">
+							<div style="margin-top: 10px;">
+								<input input type="text" name="str"
+									class="input-medium search-query" placeholder="搜索你想要的二手"
+									style="height: 20px; width: 100; border: 4px solid #FFA07A">
+								<input type="submit" value="搜索"
+									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+							</div>
+
 						</form>
 					</div>
 				</div>
@@ -75,26 +115,57 @@
 	</header>
 	<!-- Header End -->
 	
+	<form action="ItemType.do" method="post">
+		<div class="left">
+			<select id="code" name="typeh" style="width: 120px">
+				<option value="高级分类1">高级分类1</option>
+				<option value="高级分类2">高级分类2</option>
+			</select> <select id="code" name="typel" style="width: 120px">
+				<option value="低级分类1">低级分类1</option>
+				<option value="低级分类2">低级分类2</option>
+			</select> <input type="submit" value="确认选择" />
+		</div>
+		<br>
+	</form>
+
+<div style="margin-left: 250px;">
+<h1 style="color:orange">${error0}</h1>
 	<c:forEach items="${itemlist}" var="i">
 		<li class="span3">
-			<div class="thumbnail">
-			<a class="prdocutname" href="lookItem.do?id=${i.item_id}">${i.name}</a>
-				<a href="lookItem.do?id=${i.item_id}">
-				<p>><img src=${pageContext.request.contextPath}${i.image}></p></a>
-			</div> 
-			<div class="pricetag">
-			<a href="lookItem.do?id=${i.item_id}">${i.detail}</a>
-				<div class="price">
-					<div class="pricenew">
-						<a href="lookItem.do?id=${i.item_id}">${i.price}</a>
-					</div>
-				</div>
-			</div>
+			<table border="1">
+				<thead>
+					<tr>
+						<td>
+							<div>
+								<a href="lookItem.do?id=${i.item_id}"> <img
+									class="itemimage"
+									src=${pageContext.request.contextPath}${i.image}>
+								</a>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div>
+								<a href="lookItem.do?id=${i.item_id}"><p class="textname"
+										style="height: 20px; width: 200px">${i.name}</p></a> <a
+									href="lookItem.do?id=${i.item_id}" class="textprice">商品价格:
+									¥ ${i.price}</a>
+							</div> <br>
+							<div>
+								<a href="lookItem.do?id=${i.item_id}"><p class="textdetail"
+										style="height: 20px; width: 275px">${i.detail}</p></a>
+							</div>
+						</td>
+					</tr>
+				</thead>
+			</table> <br>
 		</li>
 	</c:forEach>
-
+	</div>
+	
 	<!--footer-->
-	<footer style="margin-top:20px"> <img
+	<footer style="margin-top:100px"> <img
 		src="${pageContext.request.contextPath}/image/footer-tri.png"
 		style="width: 100%;">
 	<div

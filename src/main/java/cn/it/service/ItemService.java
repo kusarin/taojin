@@ -148,5 +148,13 @@ public interface ItemService {
 	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Item> findBystr(String str);
+	
+	/**
+	 * 后台管理用的。
+	 * @author sunchen
+	 */
+	public List<Item> itemManage();
+
+	public Item itemManagefind(int id1);
 
 }

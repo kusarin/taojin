@@ -20,7 +20,7 @@ pageEncoding="UTF-8"%>
 		var repsword = document
 			.getElementById("pwd2").value;
 		if (password != repsword) {
-			alert("两次密码不同，请重新输入");
+			alert("两次密码不同，请重新输入！");
 			return false;
 		}
 	}
@@ -36,7 +36,7 @@ pageEncoding="UTF-8"%>
    </tr> 
    <tr> 
     <td>账户：</td> 
-    <td><input type="text" name="account" /> 
+    <td><input type="text" name="account"/> 
     </td> 
    </tr> 
    <tr> 

@@ -58,5 +58,9 @@ public class ShopServiceImpl implements ShopService {
 		int i = 2;
 		shopDao.updateStatus(i,id1);
 	}
+	@Override
+	public List<Shop> findAll() {
+		return shopDao.findAll();
+	}
 
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.it.dao.ShoppingCartDao">
+
+	<insert id="add" parameterType="cn.it.pojo.ShoppingCart">
+		insert into
+		shoppingcart(userId,total)
+		values(#{userId},#{total})
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from shoppingcart
+		<where>
+			cartId = #{cartId}
+		</where>
+	</delete>
+	<select id="select" resultType="cn.it.pojo.ShoppingCart">
+	   select* from shoppingcart where userId=#{userId}
+	</select>
+	
+	<update id="update">
+	  update shoppingcart set total=#{1} where cartId={0}
+	</update>
+</mapper>

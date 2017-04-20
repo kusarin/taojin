@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.it.pojo.Item;
 import cn.it.pojo.Manager;
 import cn.it.pojo.Shop;
 import cn.it.pojo.Users;
+import cn.it.service.ItemService;
 import cn.it.service.ManagerService;
 import cn.it.service.ShopService;
 import cn.it.service.UsersService;
@@ -30,6 +32,8 @@ public class ManagerController {
 	private ShopService shopService;
 	@Resource
 	private UsersService usersService;
+	@Resource
+	private ItemService itemService;
 	
 	@RequestMapping("mlogin.do")
 	public ModelAndView login(Manager manager,HttpSession session){
@@ -83,4 +87,68 @@ public class ManagerController {
 		shopService.refuseSR(id1);
 		return "redirect:lookSR.do";
 	}
+	
+	@RequestMapping("userManage.do")
+	public ModelAndView userManage(){
+		ModelAndView mav = new ModelAndView("userManage");
+		List<Users> u = usersService.findAll();
+		mav.addObject("user",u);
+		return mav;
+	}
+	
+	@RequestMapping("findUser.do")
+	public ModelAndView findUser(@RequestParam("id") String id){
+		ModelAndView mav = new ModelAndView("findUser");
+		int id1=Integer.parseInt(id);
+		Users u = usersService.findById(id1);
+		if(u == null){
+			mav.addObject("error", "用户不存在！");
+			mav.setViewName("redirect:userManage.do");
+		}
+		mav.addObject("user",u);
+		return mav;
+	}
+	
+	@RequestMapping("shopManage.do")
+	public ModelAndView shopManage(){
+		ModelAndView mav = new ModelAndView("shopManage");
+		List<Shop> s = shopService.findAll();
+		mav.addObject("shop",s);
+		return mav;
+	}
+	
+	@RequestMapping("findShop.do")
+	public ModelAndView findShop(@RequestParam("id") String id){
+		ModelAndView mav = new ModelAndView("findShop");
+		int id1=Integer.parseInt(id);
+		Shop s = shopService.findByid(id1);
+		if(s == null){
+			mav.addObject("error", "店铺不存在！");
+			mav.setViewName("redirect:shopManage.do");
+		}
+		mav.addObject("shop",s);
+		return mav;
+	}	
+
+	@RequestMapping("itemManage.do")
+	public ModelAndView itemManage(){
+		ModelAndView mav = new ModelAndView("itemManage");
+		List<Item> i = itemService.itemManage();
+		mav.addObject("item",i);
+		return mav;
+	}
+
+	@RequestMapping("findItem.do")
+	public ModelAndView findItem(@RequestParam("id") String id){
+		ModelAndView mav = new ModelAndView("findItem");
+		int id1=Integer.parseInt(id);
+		Item i = itemService.itemManagefind(id1);
+		if(i == null){
+			mav.addObject("error", "商品不存在！");
+			mav.setViewName("redirect:itemManage.do");
+		}
+		mav.addObject("item",i);
+		return mav;
+	}	
+
 }

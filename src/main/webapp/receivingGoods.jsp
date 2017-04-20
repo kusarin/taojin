@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
@@ -178,7 +178,7 @@ function deleteAll(){
 			<!-- Sidebar End-->
 			<div class="span9" style="float:left;margin-top:20px;">
 			    <div style="margin-top:20px;font-size:15px;color:#808A87;margin-bottom:10px;">
-				 <strong>我的订单</strong>	
+				 <strong>待收货的订单</strong>	
 				</div> 
 				<div style="height:auto;width:700px;">
 				<table style="height:auto;width:700px; font-size:14px;">
@@ -199,7 +199,7 @@ function deleteAll(){
 				</div>
 				
 				
-				<form action="orderItem.do" method="post" name="myform">
+				<c:if test="${pages.totalpage!=0}">
 				<c:forEach items="${pages.datas}" var="orderc">
 				<div style="height:auto;width:700px;margin-bottom:20px;">
 				    <table  style="font-size:12px;height:auto;width:700px;color:black;">
@@ -235,25 +235,15 @@ function deleteAll(){
 		                    <td class="sa" style="border-right:1px solid #F5F5F5;border-bottom:1px solid #F5F5F5;">${orderc.order.totalQuantity}</td>
 		                    <td class="sa" style="border-right:1px solid #F5F5F5;border-bottom:1px solid #F5F5F5;">${orderc.order.actulPayment}</td>
 		                    <td class="sa" style="border-right:1px solid #F5F5F5;border-bottom:1px solid #F5F5F5;">${orderc.order.status}
-		                    <input type="hidden" name="status" value="${orderc.order.status}">
 		                    </td>
 	                        <td class="sa" style="border-bottom:1px solid #F5F5F5;">
 	                        <a href="#"><p>订单详情</p></a>
-	                        <c:if test="${orderc.order.status!='已取消'}">
-							<a href="removeOrder.do?flag=3&orderNumber=${orderc.order.orderNumber}"><p>取消订单</p></a>
-							</c:if>
-							<c:if test="${orderc.order.status=='待付款'}">
-							 <a href="#"><p>立即付款</p></a>
-							</c:if>
-							<c:if test="${orderc.order.status=='已完成'}">
-							<a href="#"><p>评价订单</p></a>
-							</c:if>
+							 <a href="#"><p>确认收货</p></a>
 							</td>
 		                </tr>
 		            </table>  
 				</div>
 				</c:forEach>
-				</form>
 				
 				
 				<div style="height:40px;width:700px;text-align:right;padding-top:5px;margin-top:15px;">
@@ -272,6 +262,7 @@ function deleteAll(){
 				     <span style="line-height:40px;">下一页</span>
 				    </c:if>
 				</div>
+				</c:if>
 			</div>
 		</div>	
 	</div>

@@ -13,4 +13,5 @@ public interface ShopDao {
 	List<Shop> findSRList();
 	int findUserByid(int id1);
 	void updateStatus(int id,int id1);
+	List<Shop> findAll();
 }
