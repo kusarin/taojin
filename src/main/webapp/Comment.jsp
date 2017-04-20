@@ -19,7 +19,7 @@
 <body>
 
 <table width="90%" border="1" align="center">  
- <tbody>  
+	<tbody>  
             <tr align="center">  
                 <td width="50%">内容</td>  
                 <td width="30%">发布时间</td>  
@@ -34,7 +34,48 @@
                 <td><a href="./deleteComment.do?id=${i.id}"><button>删除</button></a></td> 
             </tr>  
             </c:forEach>  
-</tbody>
+	</tbody>
 </table>
+	<div  align="center">
+	<form action="lookComment.do" method="post">
+			<c:choose>
+			<c:when test="${page != 1}">
+				<a href="lookComment.do?page=${page-1}"><input type="button" name="lastPage" value="上一页" /></a>
+			</c:when>
+			<c:otherwise>
+				<input type="button" disabled="true" name="lastPage" value="上一页" />
+			</c:otherwise>
+		</c:choose>
+	
+	<!-- 页数列表 -->
+		<c:forEach items="${pageList}" var="pn">
+			<c:choose>
+				<c:when test="${pn == page}">
+					${pn}
+				</c:when>
+				<c:otherwise>
+					<a href="lookComment.do?page=${pn}">${pn}</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+	
+	<!-- 下一页 按钮 -->
+		<c:choose>
+			<c:when test="${page != totalPage}">
+				<a href="lookComment.do?page=${page+1}">
+					<input type="button" name="nextPage" value="下一页" />
+				</a>
+			</c:when>
+			<c:otherwise>
+				<input type="button" disabled="true" name="nextPage" value="下一页" />
+			</c:otherwise>
+		</c:choose>
+	共${totalPage}页 
+	-向<input type="text" name="page" id="jump" 
+	onkeyup="this.value=this.value.replace(/\D/g,'')" 
+	onafterpaste="this.value=this.value.replace(/\D/g,'')"/>页
+	<input type="submit" value="跳转"/>
+	</form>
+	</div>
 </body>
 </html>

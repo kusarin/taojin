@@ -56,8 +56,7 @@ public class ManagerController {
 	@RequestMapping("lookSR.do")
 	public ModelAndView lookSR(){
 		ModelAndView mav = new ModelAndView("lookSR");
-		List<Shop> SR;
-		SR = shopService.findSR();
+		List<Shop> SR = shopService.findSR();
 		mav.addObject("SR",SR);
 		return mav;
 	}

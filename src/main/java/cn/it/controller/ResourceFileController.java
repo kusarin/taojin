@@ -3,7 +3,6 @@ package cn.it.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,10 +24,9 @@ public class ResourceFileController {
 	private ResourceFileService resourceFileService;
 	
 	@RequestMapping("findResourceFile.do")
-	public ModelAndView findResourceFile(HttpServletRequest request){
+	public ModelAndView findResourceFile(){
 		ModelAndView modelandview = new ModelAndView("ResourceFile");
-		List<ResourceFile> list;
-		list = resourceFileService.findAll();
+		List<ResourceFile> list = resourceFileService.findAll();
 		modelandview.addObject("ResourceFile",list);
 		return modelandview;
 	}

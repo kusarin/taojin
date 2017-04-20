@@ -9,8 +9,9 @@ pageEncoding="UTF-8"%>
 <form action="addComment.do" method="post"> 
   <table> 
    <tr> 
-    <td colspan="2">留言</td> 
+    <td colspan="2">留言给我们！谢谢您参与网站的完善！</td> 
    </tr> 
+   <input type="hidden" name="user_id" value="${user.user_id}" />
    <tr> 
     <td>内容：</td> 
     <td><input type="text" name="content" /> 
@@ -18,7 +19,7 @@ pageEncoding="UTF-8"%>
    </tr> 
    <tr> 
     <td colspan="2">
-    	<input type="submit" value="发布" />  
+    	<a href="./" ><input type="submit" value="发布" /></a> 
     </td> 
    </tr> 
   </table> 

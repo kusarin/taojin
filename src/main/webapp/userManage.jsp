@@ -31,14 +31,16 @@
 	<table border="0" align="right">
 		<tr>
 			<td>按照用户编号查找</td>
-			<td><input type="text" id = "id" name="id"></td>
+			<td><input type="text" id = "id" name="id" 
+					onkeyup="this.value=this.value.replace(/\D/g,'')" 
+					onafterpaste="this.value=this.value.replace(/\D/g,'')"></td>
 			<td><input type="submit" value="查找" onclick="return check()" /></td>
 		</tr>
 	</table>
 </form>
 
 <table width="90%" border="1" align="center">  
- <tbody>  
+	<tbody>  
             <tr align="center">  
                 <td width="30%">用户名</td> 
                 <td width="30%">用户编号</td>
@@ -55,7 +57,7 @@
                 </td> 
               </tr>  
             </c:forEach>  
-</tbody>
+	</tbody>
 </table>
 </body>
 </html>

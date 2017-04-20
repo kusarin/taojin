@@ -31,7 +31,9 @@
 	<table border="0" align="right">
 		<tr>
 			<td>按照商品编号查找</td>
-			<td><input type="text" id = "id" name="id"></td>
+			<td><input type="text" id = "id" name="id"
+					onkeyup="this.value=this.value.replace(/\D/g,'')" 
+					onafterpaste="this.value=this.value.replace(/\D/g,'')"></td>
 			<td><input type="submit" value="查找" onclick="return check()" /></td>
 		</tr>
 	</table>
