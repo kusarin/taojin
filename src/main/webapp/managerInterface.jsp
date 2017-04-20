@@ -20,19 +20,19 @@
         <a href="./lookComment.do?page=1"><strong>用户留言管理</strong></a>
       </div></td>
       <td width="10%"><div align="center">
-        <a href="./findResourceFile.do" ><strong>文件资源管理</strong></a>
+        <a href="./findResourceFile.do?page=1" ><strong>文件资源管理</strong></a>
       </div></td>
       <td width="10%"><div align="center">
-        <a href="./lookSR.do" ><strong>店铺认证管理</strong></a>
+        <a href="./lookSR.do?page=1" ><strong>店铺认证管理</strong></a>
       </div></td>
       <td width="10%"><div align="center">
-        <a href="./userManage.do" ><strong>用户信息管理</strong></a>
+        <a href="./userManage.do?page=1" ><strong>用户信息管理</strong></a>
       </div></td>
       <td width="10%"><div align="center">
-        <a href="./shopManage.do" ><strong>店铺信息管理</strong></a>
+        <a href="./shopManage.do?page=1" ><strong>店铺信息管理</strong></a>
       </div></td>
       <td width="10%"><div align="center">
-        <a href="./itemManage.do" ><strong>商品信息管理</strong></a>
+        <a href="./itemManage.do?page=1" ><strong>商品信息管理</strong></a>
       </div></td>
     </tr>
     </table>

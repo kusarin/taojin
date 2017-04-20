@@ -1,8 +1,7 @@
 package cn.it.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
-
-
 
 import javax.servlet.http.HttpSession;
 
@@ -81,4 +80,25 @@ public class ManagerServiceImpl implements ManagerService{
 		}
 		return mav;
 	}
+
+	public List<Integer> pageList(int page,int totalPage){
+		int n;
+		List<Integer> pageList = new ArrayList<Integer>();
+		for(n = page - 5 ;n <= totalPage && n<= page+5;n++){
+			if(n>0){
+				pageList.add(n);
+			}
+		}
+		return pageList;
+	}
+	
+	public int totalPage(int total){
+		int perPage = 10;
+		int totalPage = total/perPage;
+		if(total % perPage != 0){
+		    totalPage += 1;
+		}
+		return totalPage;
+	}
+	
 }

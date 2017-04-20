@@ -24,17 +24,14 @@ public class ResourceFileController {
 	private ResourceFileService resourceFileService;
 	
 	@RequestMapping("findResourceFile.do")
-	public ModelAndView findResourceFile(){
-		ModelAndView modelandview = new ModelAndView("ResourceFile");
-		List<ResourceFile> list = resourceFileService.findAll();
-		modelandview.addObject("ResourceFile",list);
-		return modelandview;
+	public ModelAndView findResourceFile(int page){
+		return resourceFileService.findAll(page);
 	}
 	
 	@RequestMapping("addRF.do")
 	public ModelAndView addRF(ResourceFile rf){
 		ModelAndView result = resourceFileService.add(rf);
-		result.setViewName("redirect:findResourceFile.do");
+		result.setViewName("redirect:findResourceFile.do?page=1");
 		return result;
 	}
 	
@@ -42,6 +39,6 @@ public class ResourceFileController {
 	public String delete(@RequestParam("id") String id){
 		int id1=Integer.parseInt(id);
 		resourceFileService.delete(id1);
-		return "redirect:findResourceFile.do";
+		return "redirect:findResourceFile.do?page=1";
 	}
 }

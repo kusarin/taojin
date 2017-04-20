@@ -13,6 +13,17 @@
     		  alert(error);
     	  }
     }
+    
+	function refuseone(shop_id){
+		if(confirm("确定要拒绝本申请吗？")){
+			window.location.href="refuseSR.do?id="+shop_id;
+		}
+	}
+	function passone(shop_id){
+		if(confirm("确定要通过本申请吗？")){
+			window.location.href="passSR.do?id="+shop_id;
+		}
+	}
 </script>
 <title>店铺认证管理</title>
 </head>
@@ -53,10 +64,12 @@
 <table width="30%" border="1">
             <tr>  
              	<td align="center">
-                	<a href="./passSR.do?id=${sr.shop_id}"><button>同意</button></a>
+                	<a onclick="passone(${sr.shop_id})"
+					href="javascript:void(0)">通过</a>
                 </td> 
              	<td align="center">
-                	<a href="./refuseSR.do?id=${sr.shop_id}"><button>拒绝</button></a>
+                	<a onclick="refuseone(${sr.shop_id})"
+					href="javascript:void(0)">拒绝</a>
                 </td> 
             </tr>
 </table> 

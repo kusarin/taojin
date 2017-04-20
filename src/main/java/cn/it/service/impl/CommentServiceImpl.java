@@ -37,16 +37,15 @@ public class CommentServiceImpl implements CommentService {
 			page = 1;
 			mav.addObject("error", "指定页码不存在!");
 		}
-		List<Integer> pageList =null;
 		int n = 0;
-		pageList = new ArrayList<Integer>();
+		List<Integer> pageList = new ArrayList<Integer>();
 		for(n = page - 5 ;n <= totalPage && n<= page+5;n++){
 			if(n>0){
 				pageList.add(n);
 			}
 		}
 		if(page<totalPage){
-			List<Comment> c = list.subList((page-1)*perPage, 9 +(page-1)*perPage);
+			List<Comment> c = list.subList((page-1)*perPage, page * perPage);
 			mav.addObject("Comment",c);
 		}else{
 			List<Comment> c = list.subList((page-1)*perPage, list.size());

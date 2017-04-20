@@ -13,6 +13,21 @@
     		  alert(error);
     	  }
     }
+    
+    function check() {
+		var id = document.getElementById("id").value;
+		if(id < 1 || id > 1000000000){
+			alert("输入内容超出范围，请重新输入！");
+			return false;
+		}
+	}
+</script>
+<script type="text/javascript">
+	function deleteone(comment_id){
+		if(confirm("确定要删除这条数据吗？")){
+			window.location.href="deleteComment.do?id="+comment_id;
+		}
+	}
 </script>
 <title>用户留言管理</title>
 </head>
@@ -31,7 +46,9 @@
                 <td> ${i.content} </td>  
                 <td> ${i.datetime}</td>  
                 <td> ${i.user_id} </td> 
-                <td><a href="./deleteComment.do?id=${i.id}"><button>删除</button></a></td> 
+                <td><a onclick="deleteone(${i.comment_id})"
+					href="javascript:void(0)">删除</a>
+                </td> 
             </tr>  
             </c:forEach>  
 	</tbody>

@@ -3,11 +3,11 @@
 <mapper namespace = "cn.it.dao.CommentDao">
 <!-- 显示所有留言 -->
 	<select id ="findAll" resultType="cn.it.pojo.Comment">
-		select c.comment_id id,c.user_id,c.content,c.datetime  from comment c
+		select *  from comment 
 	</select>
 <!-- 删除留言 -->
 	<delete id="delete" parameterType="java.lang.Integer">
-          delete from comment where comment_id=#{id}
+          delete from comment where comment_id=#{comment_id}
      </delete>
 <!-- 新增留言 -->
 	<insert id="add" parameterType="cn.it.pojo.Comment">

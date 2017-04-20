@@ -49,7 +49,7 @@
 <table width="30%" border="0">
             <tr>  
              	<td align="center">
-                <a href="./userManage.do">返回</a>	
+                <a href="./userManage.do?page=1">返回</a>	
                 </td> 
             </tr>
 </table> 
