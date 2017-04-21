@@ -67,19 +67,19 @@ public class ItemController {
 	 *            ，@RequestParam("id")前台传递的商品编号
 	 * @return
 	 */
-	@RequestMapping("deleteItem.do")
-	public ModelAndView deleteItem(HttpServletRequest request,
-			@RequestParam("id") String id) {
-
-		// 获取前台传入的数据，商品编号id转为int类型；
-		int item_id = Integer.parseInt(id);
-		// 进行删除商品信息操作；
-		ModelAndView modelandview = itemservice.deleteItem(item_id);
-		// 重定向刷新页面；
-		modelandview.setViewName("redirect:shopItem.do");
-
-		return modelandview;
-	}
+//	@RequestMapping("deleteItem.do")
+//	public ModelAndView deleteItem(HttpServletRequest request,
+//			@RequestParam("id") String id) {
+//
+//		// 获取前台传入的数据，商品编号id转为int类型；
+//		int item_id = Integer.parseInt(id);
+//		// 进行删除商品信息操作；
+//		ModelAndView modelandview = itemservice.deleteItem(item_id);
+//		// 重定向刷新页面；
+//		modelandview.setViewName("redirect:shopItem.do");
+//
+//		return modelandview;
+//	}
 
 	/**
 	 * 改变商品状态（“在售”=>“下架” or “下架”=>“在售”）

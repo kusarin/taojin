@@ -116,7 +116,7 @@
 								<div style="margin-top: 10px;">
 									<input input type="text" name="str"
 										class="input-medium search-query" placeholder="搜索你想要的二手"
-										style="height: 20px; width: 100; border: 4px solid #FFA07A">
+										style="height: 20px; width: 100; border: 4px solid #FFA07A;" >
 									<input type="submit" value="搜索"
 										style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
 								</div>
@@ -189,7 +189,9 @@
 							</div>
 						</div>
 					</div>
+					</div></div>
 		</section>
+		</div>
 		<!-- 推荐部分-->
 		<section id="related" class="row">
 			<div class="container">
