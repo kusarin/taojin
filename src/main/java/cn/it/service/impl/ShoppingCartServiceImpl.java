@@ -1,5 +1,7 @@
 package cn.it.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +10,7 @@ import cn.it.dao.ItemDao;
 import cn.it.dao.ShopDao;
 import cn.it.dao.ShoppingCartDao;
 import cn.it.pojo.CartItem;
+import cn.it.pojo.CartList;
 import cn.it.pojo.Item;
 import cn.it.pojo.Shop;
 import cn.it.pojo.ShoppingCart;
@@ -47,7 +50,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 				tradingNumber=tradingNumber+number;
 				
 				cc.setTradingNumbers(tradingNumber);
-				cc.setTotalPrice(tradingNumber*number);
+				cc.setTotalPrice(tradingNumber*i.getprice());
 				cartItemDao.update(cc);
 				
 				double total=s.getTotal();
@@ -94,4 +97,81 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		}
 	}
 
+	/***
+	 * 获取某用户购物车中的所有商品
+	 * 一个用户一个购物车
+	 * **/
+	public CartList getAllItem(int userId){
+		CartList cl=new CartList();
+		ShoppingCart sh=shoppingCartDao.select(userId);
+		//判断用户是否拥有购物车
+		if(sh!=null){//拥有购物车
+		   List<CartItem> c=cartItemDao.selectAll(sh.getCartId());
+		   if(c!=null){
+			cl.setSh(sh);
+			cl.setCa(c);
+		   }
+		}
+		return cl;	
+	}
+	/**
+	 * 删除购物车中的商品
+	 * */
+	public void deleteItem(int userId,int cartItemId){
+		
+		ShoppingCart sh=shoppingCartDao.select(userId);
+		List<CartItem> c=cartItemDao.selectAll(sh.getCartId());
+		//清空购物车
+		if(c.size()==1){
+			cartItemDao.delete(cartItemId);
+			shoppingCartDao.delete(sh.getCartId());
+		}
+		else{
+			cartItemDao.delete(cartItemId);
+			CartItem ca=cartItemDao.find(cartItemId);
+			double totalprice=ca.getTotalPrice();
+			double total=sh.getTotal();
+			shoppingCartDao.update(sh.getCartId(), total-totalprice);
+		}
+	}
+	
+	/****
+	 *更新某购物车中的商品数量 、小计、总额
+	 * */
+	public void updatePriceAndTotal(int userId,int itemId,int flag){
+		
+		ShoppingCart sh=shoppingCartDao.select(userId);
+		//用户拥有购物车
+		if(sh!=null){
+		CartItem c =cartItemDao.select(itemId, sh.getCartId());
+		Item i=itemDao.FindItemById(itemId);
+		int salingNumber=c.getTradingNumbers();
+		//获取此商品的总数
+		int number=i.getnumber();
+		switch(flag){
+		case 0:
+			if(salingNumber<number){
+				salingNumber++;
+				c.setTradingNumbers(salingNumber);
+				c.setTotalPrice(salingNumber*i.getprice());
+				cartItemDao.update(c);
+				sh.setTotal(sh.getTotal()+i.getprice());
+				shoppingCartDao.update(sh.getCartId(), sh.getTotal());
+			}
+			break;
+		case 1:
+			if(salingNumber>1){
+				salingNumber=salingNumber-1;
+				c.setTradingNumbers(salingNumber);
+				c.setTotalPrice(salingNumber*i.getprice());
+				cartItemDao.update(c);
+				sh.setTotal(sh.getTotal()-i.getprice());
+				shoppingCartDao.update(sh.getCartId(), sh.getTotal());
+			}
+			break;
+		default:
+			break;
+		}
+		}	
+	}
 }
