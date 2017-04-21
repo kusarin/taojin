@@ -15,4 +15,5 @@ public interface ShopService {
    void passSR(int id);
    void refuseSR(int id1);
    List<Shop> findAll();
+   List<Shop> searchShop(String str);
 }
