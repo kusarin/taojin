@@ -27,15 +27,32 @@ public class AddressController {
 		result.setViewName("redirect:addressList.do");
 		return result;
 	}
-	
+
 	// 添加地址
-		@RequestMapping("deleteAddress.do")
-		public ModelAndView deleteAddress(Address address, HttpSession session) {
-			ModelAndView result = AddressService.delete(address, session);
-			result.setViewName("redirect:addressList.do");
-			return result;
-		}
-		
+	@RequestMapping("deleteAddress.do")
+	public ModelAndView deleteAddress(Address address, HttpSession session) {
+		ModelAndView result = AddressService.delete(address, session);
+		result.setViewName("redirect:addressList.do");
+		return result;
+	}
+
+	// 添加地址
+	@RequestMapping("updateAddress.do")
+	public ModelAndView updateAddress(Address address, HttpSession session) {
+		ModelAndView result = AddressService.update(address, session);
+		result.setViewName("redirect:addressList.do");
+		return result;
+	}
+
+	// 转到添加地址页面
+	@RequestMapping("toupdateAddress.do")
+	public ModelAndView toupdateAddress(int addressid, HttpSession session) {
+		ModelAndView modelandview = new ModelAndView("addressupdate");
+		Address addr = AddressService.findByaddrid(addressid);
+		modelandview.addObject("Addr", addr);
+		return modelandview;
+	}
+
 	// 返回当前用户的收货地址列表
 	@RequestMapping("addressList.do")
 	public ModelAndView getShoplist(Address address, HttpSession session) {

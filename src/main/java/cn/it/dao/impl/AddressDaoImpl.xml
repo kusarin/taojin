@@ -16,7 +16,20 @@
 		</where>
 	</delete>
 
+	<update id="addressUpdate" parameterType="cn.it.pojo.Address">
+		update address set addr=#{addr}
+		<where>
+			addressid = #{addressid}
+		</where>
+	</update>
+
 	<select id="addressFind" resultType="cn.it.pojo.Address">
-	select * from address where user_ID=#{user_ID}
+		select * from address where
+		user_ID=#{user_ID}
+	</select>
+
+	<select id="Findbyaddrid" resultType="cn.it.pojo.Address">
+		select * from address where
+		addressid=#{addressid}
 	</select>
 </mapper>

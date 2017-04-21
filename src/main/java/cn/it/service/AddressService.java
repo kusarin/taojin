@@ -16,4 +16,8 @@ public interface AddressService {
 
 	public ModelAndView delete(Address address, HttpSession session);
 
+	public ModelAndView update(Address address, HttpSession session);
+
+	public Address findByaddrid(int addressid);
+
 }
