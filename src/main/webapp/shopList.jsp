@@ -46,8 +46,9 @@ if(confirm("确定要删除这条数据吗？")){
 					<!-- Top Nav End -->
 					<div class="pull-right">
 						<form class="form-search top-search">
-							<input type="text" class="input-medium search-query"
+							<input type="text" class="input-medium search-query" name="str"
 								placeholder="Search Here…">
+							<a href="searchShop.do?str">搜索</a>
 						</form>
 					</div>
 				</div>
