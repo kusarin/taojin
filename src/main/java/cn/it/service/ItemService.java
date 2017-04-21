@@ -111,7 +111,17 @@ public interface ItemService {
 	public List<Item> findItemList();
 
 	/**
-	 * 按照商品类型查找商品信息
+	 * 按照商品类型查找商品信息，此处输入商品一级分类
+	 * 
+	 * @param typeh
+	 *            商品一级分类，String
+	 * 
+	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
+	 */
+	public List<Item> findByType1(String typeh);
+	
+	/**
+	 * 按照商品类型查找商品信息，此处输入商品一级分类和二级分类
 	 * 
 	 * @param typeh
 	 *            商品一级分类，String
@@ -120,7 +130,7 @@ public interface ItemService {
 	 * 
 	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
-	public List<Item> findByType(String typeh, String typel);
+	public List<Item> findByType2(String typeh, String typel);
 
 	/**
 	 * 按照店铺归宿查找所有商品

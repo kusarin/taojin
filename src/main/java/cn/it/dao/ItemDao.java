@@ -31,7 +31,7 @@ public interface ItemDao {
 	 */
 	public void ItemUpdate(Item i);
 	/**
-	 * 按照商品编号查看商品；
+	 * 按照商品编号查看商品
 	 * 
 	 * @param id 商品编号，int
 	 * 
@@ -45,17 +45,25 @@ public interface ItemDao {
 	 */
 	public List<Item> FindAll();
 	/**
-	 * 按照商品类型查看商品；
+	 * 按照商品类型查看商品，此处输入商品一级分类
+	 * 
+	 * @param typeh 商品一级分类，String
+	 * 
+	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
+	 */
+	public List<Item> FindItemByType1(String typeh);
+	/**
+	 * 按照商品类型查看商品，此处输入商品一级分类和二级分类
 	 * 
 	 * @param typeh 商品一级分类，String
 	 * @param typel 商品二级分类，String
 	 * 
 	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
-	public List<Item> FindItemByType(String typeh,String typel);
+	public List<Item> FindItemByType2(String typeh,String typel);
 	/**
-	 * 按照商品对应的店铺编号来获取商品；
-	 * 用于在店铺中显示所有归属于该店铺的所有商品；
+	 * 按照商品对应的店铺编号来获取商品
+	 * 用于在店铺中显示所有归属于该店铺的所有商品
 	 * 
 	 * @param shop_id 店铺编号，int
 	 * 
@@ -63,7 +71,7 @@ public interface ItemDao {
 	 */
 	public List<Item> FindItemByShopId(int shop_id);
 	/**
-	 * 按照输入的关键词查看商品；
+	 * 按照输入的关键词查看商品
 	 * 
 	 * @param str 传入的查询字段
 	 * 

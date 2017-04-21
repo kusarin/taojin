@@ -18,10 +18,10 @@ public class AddressServiceImpl implements AddressService {
 
 	@Autowired
 	private AddressDao addressDao;
-	
+
 	public ModelAndView add(Address address, HttpSession session) {
 		ModelAndView str = new ModelAndView("address");
-		Users user = (Users)session.getAttribute("user");
+		Users user = (Users) session.getAttribute("user");
 		List<Address> addresslist = addressDao.addressFind(user.getUser_ID());
 		for (Address ad : addresslist) {
 			if (ad.getAddr().equalsIgnoreCase(address.getAddr())) {
@@ -38,9 +38,20 @@ public class AddressServiceImpl implements AddressService {
 		addressDao.addressDelete(address);
 		return str;
 	}
-	
+
+	public ModelAndView update(Address address, HttpSession session) {
+		ModelAndView str = new ModelAndView("address");
+		addressDao.addressUpdate(address);
+		return str;
+	}
+
+	public Address findByaddrid(int addressid) {
+		return addressDao.Findbyaddrid(addressid);
+	}
+
 	public List<Address> findById(HttpSession session) {
-		Users user = (Users)session.getAttribute("user");
+		Users user = (Users) session.getAttribute("user");
 		return addressDao.addressFind(user.getUser_ID());
 	}
+
 }
