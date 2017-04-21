@@ -13,13 +13,6 @@
 		}
 	}
 </script>
-<script type="text/javascript">
-	function deleteone(addressid){
-		if(confirm("确定要删除这条数据吗？")){
-			window.location.href="deleteAddress.do?addressid="+addressid;
-		}
-	}
-</script>
 <title>二手淘金网--信息更改</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
@@ -262,45 +255,17 @@
 										<div class="mb20">
 											<section class="leavecomment">
 												<h2 class="heading2">
-													<span>我的收货地址</span>
+													<span>更改收货地址</span>
 												</h2>
-												<form action="addressList.do" method="post"
+												<form action="updateAddress.do" method="post"
 													class="form-horizontal commentform2" novalidate>
 													<fieldset>
-														<table width="90%" border="1" align="center">
-															<thead>
-																<tr>
-																	<td colspan="10" align="center">收货地址</td>
-																</tr>
-															</thead>
-															<tbody>
-																<c:forEach items="${addressList}" var="i">
-																	<tr>
-																		<td>${i.addr}</td>
-																		<td><a onclick="deleteone(${i.addressid})"
-																			href="javascript:void(0)">删除</a></td>
-																		<td><a
-																			href="toupdateAddress.do?addressid=${i.addressid}">修改</a></td>
-																	</tr>
-																</c:forEach>
-															</tbody>
-														</table>
-													</fieldset>
-												</form>
-											</section>
-										</div>
-										<div class="mb20">
-											<section class="leavecomment">
-												<h2 class="heading2">
-													<span>添加收货地址</span>
-												</h2>
-												<form action="addAddress.do" method="post"
-													class="form-horizontal commentform2" novalidate>
-													<fieldset>
-														<input type="hidden" name="user_ID"
-															value="${user.user_ID}" />
+														<input type="hidden" name="addressid" value="${Addr.addressid}" />
 														<div class="control-group">
-															<label class="control-label">输入要添加的新地址： </label>
+															<h2 class="heading2">
+																<span>当前收货地址：${Addr.addr}</span><br>
+															</h2>
+															<label class="control-label">输入更改后的地址： </label>
 															<div class="controls">
 																<input type="text" style="width: 500px" name="addr"
 																	id="addr" />
@@ -316,10 +281,10 @@
 																		.getElementById("addr").value;
 																if (addr == null
 																		|| addr == '') {
-																	alert("新添加地址不能为空");
+																	alert("地址不能为空");
 																	return false;
-																	}
 																}
+															}
 														</script>
 													</fieldset>
 												</form>
