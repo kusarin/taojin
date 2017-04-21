@@ -32,7 +32,10 @@
 		select * from item
 	</select>
 	<!-- 查看某种类型的商品信息 -->
-	<select id="FindItemByType" parameterType="String" resultType="cn.it.pojo.Item">
+	<select id="FindItemByType1" parameterType="String" resultType="cn.it.pojo.Item">
+		select * from item where typeh = #{typeh}
+	</select>
+	<select id="FindItemByType2" parameterType="String" resultType="cn.it.pojo.Item">
 		select * from item where typeh = #{0} and typel = #{1}
 	</select>
 	<!-- 查看归属于某个店铺的所有商品 -->
