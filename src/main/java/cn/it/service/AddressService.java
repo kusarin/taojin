@@ -1,5 +1,7 @@
 package cn.it.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
@@ -10,5 +12,8 @@ public interface AddressService {
 
 	public ModelAndView add(Address address, HttpSession session);
 
+	public List<Address> findById(HttpSession session);
+
+	public ModelAndView delete(Address address, HttpSession session);
 
 }

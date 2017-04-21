@@ -12,6 +12,6 @@ import cn.it.pojo.Address;
 
 public interface AddressDao {
 	public void addressAdd(Address address);
-
+	public void addressDelete(Address address);
 	public List<Address> addressFind(int user_ID);
 }

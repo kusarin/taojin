@@ -22,8 +22,8 @@ public class UsersController {
 	@RequestMapping("login.do")
 	public ModelAndView login(Users user, HttpSession session)
 			throws IOException {
-
 		ModelAndView result = usersService.login(user, session);
+		result.setViewName("redirect:Itemlist.do");
 		return result;
 	}
 

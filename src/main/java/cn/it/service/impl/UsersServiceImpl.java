@@ -19,7 +19,7 @@ public class UsersServiceImpl implements UsersService {
 
 	public ModelAndView login(Users user, HttpSession session)
 			throws IOException {
-		ModelAndView str = new ModelAndView("welcome");
+		ModelAndView str = new ModelAndView("Itemlist");
 		if (user.getUsername().equals("") || user.getUsername() == null
 				|| user.getPassword().equals("") || user.getPassword() == null) {
 			str.addObject("error", "用户名或密码为空");
