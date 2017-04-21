@@ -127,9 +127,11 @@ pageEncoding="UTF-8"%>
 	       <div class="info">
 	       <strong>收货人地址</strong><a href="#"><strong style="float:right;font-size:12px;">新增地址</strong></a>
 		   </div>
+		   <c:forEach items="${address}" var="adr">
 		   <div class="receiverInfo">
-			     <input checked="checked" type="radio" name="receivingaddress" value="${address.receivingaddress}">${address.receivingaddress}
+			     <input checked="checked" type="radio" name="addr" value="${adr.addr}">${adr.addr}
 		   </div>
+		   </c:forEach>
 	   </div>
 	   <div class="receive">
 	       <div class="info">
@@ -198,8 +200,8 @@ pageEncoding="UTF-8"%>
 			     <tr><td style="padding-top:15px;">实际支付： <span class="pay" id="actulpayment">${c.order.actulPayment}</span>
 			      <input type="hidden" value="${c.order.actulPayment}" name="order.actulPayment" id="unitPrice">
 			     </td></tr>
-			     <tr><td style="padding-top:15px;"> 寄送至： ${address.receivingaddress}</td></tr>
-				 <tr><td style="padding-top:15px;padding-bottom:15px;">收货人:${address.name}</td></tr>
+			     <tr><td style="padding-top:15px;"> 寄送至：##################</td></tr>
+				 <tr><td style="padding-top:15px;padding-bottom:15px;">收货人:######</td></tr>
 		  </table>
 		</div>
 		

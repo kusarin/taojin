@@ -3,6 +3,28 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.it.dao.CartItemDao">
 
+ <resultMap type="cn.it.pojo.CartItem" id="findList">
+                  <id column="cartItemId" property="cartItemId" javaType="int" jdbcType="INTEGER"/>
+                  <result column="cartId" property="cartId" javaType="int" jdbcType="INTEGER"/>
+                  <result column="itemId" property="itemId" javaType="int" jdbcType="INTEGER"/>
+                  <result column="tradingNumbers" property="tradingNumbers" javaType="int" jdbcType="INTEGER"/>
+                  <result column="totalPrice" property="totalPrice" javaType="double" jdbcType="DOUBLE"/>
+                  <result column="shopName" property="shopName" javaType="String" jdbcType="VARCHAR"/>
+ 
+                <association property="item"  javaType="cn.it.pojo.Item">
+	                <id column="Item_id" property="item_id" javaType="int" jdbcType="INTEGER"/>
+	                <result column="Shop_id" property="shop_id" javaType="int" jdbcType="INTEGER"/>
+	                <result column="Name" property="name" javaType="String" jdbcType="VARCHAR"/>
+	                <result column="Number" property="number" javaType="int" jdbcType="INTEGER"/>
+	               <result column="Typeh" property="typeh" javaType="String" jdbcType="VARCHAR"/>
+	               <result column="Typel" property="typel" javaType="String" jdbcType="VARCHAR"/>
+	               <result column="Price" property="price" javaType="double" jdbcType="DOUBLE"/>
+	               <result column="Detail" property="detail" javaType="String" jdbcType="VARCHAR"/>
+	               <result column="Image" property="image" javaType="String" jdbcType="VARCHAR"/>
+	               <result column="BrowingTiems" property="browingtimes" javaType="int" jdbcType="INTEGER"/>
+	               <result column="tradingTimes" property="tradingTimes" javaType="int" jdbcType="INTEGER"/>
+	          </association>
+     </resultMap>
 	<insert id="add" parameterType="cn.it.pojo.CartItem">
 		insert into
 		cartitem(cartId,itemId,tradingNumbers,totalPrice,shopName)
@@ -21,4 +43,10 @@
 	<update id="update" parameterType="cn.it.pojo.CartItem">
 	     update cartitem set tradingNumbers=#{tradingNumbers},totalPrice=#{totalPrice} where cartId=#{cartId} and itemId=#{itemId}
 	</update>
+	<select id="selectAll" parameterType="int" resultMap="findList">
+	      select c.*,i.* from cartitem c,item i where c.itemId=i.Item_id and c.cartId=#{cartId}
+	</select>
+	<select id="find" parameterType="int" resultType="cn.it.pojo.CartItem">
+	       select* from cartitem where cartItemId=#{cartItemId}
+	</select>
 </mapper>

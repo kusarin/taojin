@@ -5,13 +5,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
+<script>
+   function purchase(){
+	   window.location.href="sureOrder.do?number=2&itemId=1";
+   }
+   function addCart(){
+	   window.location.href="index.do?number=2&itemId=1";
+   }
+</script>
 </head>
 <body>
-<form action="sureOrder.do" method="get">
-<input type="text" value="2" name="number" readonly="readonly">
-<input type="text" value="1" name="itemId" readonly="readonly">
-<input type="submit" value="立即购买">
-<input type="submit" value="加入购物车">
-</form>
+<span>
+<button onclick="purchas()">立即购买</button>
+<button onclick="addCart()">加入购物车</button>
+</span>
+
 </body>
 </html>

@@ -14,4 +14,5 @@ public interface ShopDao {
 	int findUserByid(int id1);
 	void updateStatus(int id,int id1);
 	List<Shop> findAll();
+	List<Shop> searchShop(String str);
 }
