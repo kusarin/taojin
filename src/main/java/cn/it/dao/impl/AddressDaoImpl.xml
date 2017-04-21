@@ -8,14 +8,14 @@
 		address(addr,user_ID)
 		values(#{addr},#{user_ID})
 	</insert>
-	
+
 	<delete id="addressDelete" parameterType="cn.it.pojo.Address">
 		delete from address
 		<where>
 			addressid = #{addressid}
 		</where>
 	</delete>
-	
+
 	<select id="addressFind" resultType="cn.it.pojo.Address">
 	select * from address where user_ID=#{user_ID}
 	</select>

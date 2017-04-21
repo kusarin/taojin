@@ -1,5 +1,7 @@
 package cn.it.controller;//Address
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -22,6 +24,25 @@ public class AddressController {
 	@RequestMapping("addAddress.do")
 	public ModelAndView addAddress(Address address, HttpSession session) {
 		ModelAndView result = AddressService.add(address, session);
+		result.setViewName("redirect:addressList.do");
 		return result;
+	}
+	
+	// 添加地址
+		@RequestMapping("deleteAddress.do")
+		public ModelAndView deleteAddress(Address address, HttpSession session) {
+			ModelAndView result = AddressService.delete(address, session);
+			result.setViewName("redirect:addressList.do");
+			return result;
+		}
+		
+	// 返回当前用户的收货地址列表
+	@RequestMapping("addressList.do")
+	public ModelAndView getShoplist(Address address, HttpSession session) {
+		ModelAndView modelandview = new ModelAndView("address");
+		List<Address> list;
+		list = AddressService.findById(session);
+		modelandview.addObject("addressList", list);
+		return modelandview;
 	}
 }

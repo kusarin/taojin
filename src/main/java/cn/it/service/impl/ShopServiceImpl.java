@@ -24,6 +24,9 @@ public class ShopServiceImpl implements ShopService {
 	public void changeInfoByid(Shop shop){
 		shopDao.changeInfoByid(shop);
 	}
+	public List<Shop> searchShop(String str){
+		return shopDao.searchShop(str);
+	}
     public void addShop(Shop shop){
     	shopDao.addShop(shop);
     }

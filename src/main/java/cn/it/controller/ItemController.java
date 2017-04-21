@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.pojo.Item;
+import cn.it.pojo.Shop;
 import cn.it.service.ItemService;
 
 /**
@@ -39,6 +40,7 @@ public class ItemController {
 	public ModelAndView addItem(
 			@RequestParam(value = "file", required = false) MultipartFile file,
 			HttpServletRequest request) {
+
 		// 获取店铺编号shop_id
 		String id = request.getParameter("Shop_id");
 		int shop_id = Integer.parseInt(id);
@@ -149,6 +151,7 @@ public class ItemController {
 		// 进行修改商品信息操作，并且获取提示信息
 		ModelAndView modelandview = itemservice.updateItem(item_id, name,
 				typeh, typel, number, price, detail, image, file, request);
+
 		// 重定向刷新页面；
 		modelandview.setViewName("redirect:shopItem.do");
 
@@ -171,11 +174,11 @@ public class ItemController {
 		int item_id = Integer.parseInt(id);
 
 		// 根据商品编号，获得商品；
-		Item i = itemservice.findById(item_id);
-
+		Item i = itemservice.findById(item_id);		
+		
 		// 将商品i传递到lookitem
 		modelandview.addObject("lookitem", i);
-		
+
 		// 获取该商品的店铺编号；
 		int shop_id = i.getshop_id();
 		// 获取同属于商品的列表；
@@ -186,19 +189,18 @@ public class ItemController {
 				list.remove(m);
 			}
 		}
-		
+
 		// 如果商品多于4个，则只获取前4个商品
-		if(list.size()>4){
+		if (list.size() > 4) {
 			List<Item> list4 = new ArrayList<Item>();
-			for(int n = 0; n<4; n++){
+			for (int n = 0; n < 4; n++) {
 				list4.add(list.get(n));
 			}
-
 			// 将商品列表list4传递到looklist
 			modelandview.addObject("looklist", list4);
-		}else{
+		} else {
 			// 将商品列表list传递到looklist
-			modelandview.addObject("looklist", list);			
+			modelandview.addObject("looklist", list);
 		}
 
 		return modelandview;
@@ -213,12 +215,14 @@ public class ItemController {
 	@RequestMapping("Itemlist.do")
 	public ModelAndView showItem(HttpServletRequest request) {
 		ModelAndView modelandview = new ModelAndView("Itemlist"); // 到Itemlist.jsp界面
+
 		// 获取商品条目list
 		List<Item> list;
 		list = itemservice.findItemList();
 
 		// 将商品条目list传递到itemlist
 		modelandview.addObject("itemlist", list);
+
 		return modelandview;
 	}
 
@@ -242,13 +246,15 @@ public class ItemController {
 
 		// 将商品条目list传递到itemtype
 		modelandview.addObject("itemlist", list);
+
 		return modelandview;
 	}
 
 	/**
-	 * 根据店铺编号shop_id按照条目显示商品
+	 * 根据店铺编号shop_id按照条目显示商品（店家管理商品使用）
 	 * 
 	 * @param request
+	 * @param id 前台传入的店铺编号
 	 * @return
 	 */
 	@RequestMapping("shopItem.do")
@@ -256,7 +262,7 @@ public class ItemController {
 			@RequestParam("shopid") String id) {
 		ModelAndView modelandview = new ModelAndView("shopItem"); // 到shopItem.jsp界面
 
-		// 获取店铺编号shop_id
+		// 获取前台传入的数据，商品编号id转为int类型；
 		int shop_id = Integer.parseInt(id);
 
 		// 获取商品条目list（在售）
@@ -275,6 +281,38 @@ public class ItemController {
 	}
 
 	/**
+	 * 根据店铺编号shop_id按照条目显示商品（买家查看商品使用）
+	 * 
+	 * @param request
+	 * @param id 前台传入的店铺编号
+	 * @return
+	 */
+	@RequestMapping("lookshopItem.do")
+	public ModelAndView lookShopItem(HttpServletRequest request,
+			@RequestParam("shopid") String id) {
+		ModelAndView modelandview = new ModelAndView("showshopItem");// 到showshopItem.jsp界面
+
+		// 获取前台传入的数据，商品编号id转为int类型；
+		int shop_id = Integer.parseInt(id);
+		
+		// 获取商品条目list（在售）
+		List<Item> list;
+		list = itemservice.findByShopId(shop_id);
+
+		// 将商品条目list（在售）传递到showshopItem
+		modelandview.addObject("showshopItem", list);
+		
+		// 获取商品归属的店铺信息；
+		Shop shop;
+		shop = itemservice.showShop(shop_id);
+		
+		// 将获取到的店铺信息shop传递到 shopinfo
+		modelandview.addObject("shopinfo", shop);
+
+		return modelandview;
+	}
+
+	/**
 	 * 根据输入的关键词str查询商品
 	 * 
 	 * @param request
@@ -283,15 +321,17 @@ public class ItemController {
 	@RequestMapping("searchItem.do")
 	public ModelAndView showSearchItem(HttpServletRequest request) {
 		ModelAndView modelandview = new ModelAndView("Itemlist"); // 到Itemlist.jsp界面
+
 		// 从前台获取搜索关键词str；
 		String str = request.getParameter("str");
 
 		// 根据输入关键词，搜索商品
 		List<Item> list;
 		list = itemservice.findBystr(str);
-		if(list.size()==0){
-			modelandview.addObject("error0","抱歉！！没有找到符合搜索信息的商品！！！！");
+		if (list.size() == 0) {
+			modelandview.addObject("error0", "抱歉！！没有找到符合搜索信息的商品！！！！");
 		}
+
 		// 将商品条目list传递到searchlist
 		modelandview.addObject("itemlist", list);
 

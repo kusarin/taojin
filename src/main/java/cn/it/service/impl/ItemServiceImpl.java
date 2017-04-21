@@ -15,7 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.dao.ItemDao;
+import cn.it.dao.ShopDao;
 import cn.it.pojo.Item;
+import cn.it.pojo.Shop;
 import cn.it.service.ItemService;
 
 /**
@@ -30,6 +32,8 @@ import cn.it.service.ItemService;
 public class ItemServiceImpl implements ItemService {
 	@Autowired
 	private ItemDao itemDao;
+	@Autowired
+	private ShopDao shopDao;
 
 	/**
 	 * 添加商品
@@ -362,7 +366,17 @@ public class ItemServiceImpl implements ItemService {
 	public List<Item> findBystr(String str) {
 		return itemDao.SearchItem(str);
 	}
-
+	
+	/**
+	 * 查看商品对应的店铺
+	 * 
+	 * @param shop_id 店铺编号
+	 * @return Shop 返回值为一个店铺
+	 */
+	public Shop showShop(int shop_id){
+		return shopDao.findByid(shop_id);
+	}
+	
 	/**
 	 * 孙琛改的，用在管理员后台管理。
 	 */

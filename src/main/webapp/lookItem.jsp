@@ -36,6 +36,10 @@
 	float: left;
 	color: red;
 }
+.textshop {
+	font-size: 18px;
+	color: orange;
+}
 </style>
 <script>
   function plus(val){
@@ -112,7 +116,7 @@
 								<div style="margin-top: 10px;">
 									<input input type="text" name="str"
 										class="input-medium search-query" placeholder="搜索你想要的二手"
-										style="height: 20px; width: 100; border: 4px solid #FFA07A">
+										style="height: 20px; width: 100; border: 4px solid #FFA07A;" >
 									<input type="submit" value="搜索"
 										style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
 								</div>
@@ -135,8 +139,9 @@
 					<!-- Left Image-->
 					<div class="span5">
 						<tr>
-							<td>><img
-								src=${pageContext.request.contextPath}${lookitem.image}></td>
+						<br>
+							<td>					
+								<img src=${pageContext.request.contextPath}${lookitem.image}></td>
 						</tr>
 
 					</div>
@@ -184,12 +189,14 @@
 							</div>
 						</div>
 					</div>
+					</div></div>
 		</section>
+		</div>
 		<!-- 推荐部分-->
 		<section id="related" class="row">
 			<div class="container">
 				<h1 class="heading1">
-					<span class="maintext">同店铺商品</span><span class="subtext">
+					<a href="lookshopItem.do?shopid=${lookitem.shop_id}" ><span class="maintext">同店铺商品</span></a><span class="subtext">
 						走过路过错过</span>
 				</h1>
 				<ul class="thumbnails">

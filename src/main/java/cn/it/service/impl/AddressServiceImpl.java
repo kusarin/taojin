@@ -33,4 +33,14 @@ public class AddressServiceImpl implements AddressService {
 		return str;
 	}
 
+	public ModelAndView delete(Address address, HttpSession session) {
+		ModelAndView str = new ModelAndView("address");
+		addressDao.addressDelete(address);
+		return str;
+	}
+	
+	public List<Address> findById(HttpSession session) {
+		Users user = (Users)session.getAttribute("user");
+		return addressDao.addressFind(user.getUser_ID());
+	}
 }
