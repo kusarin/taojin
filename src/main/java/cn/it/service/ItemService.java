@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.it.pojo.Discuss;
 import cn.it.pojo.Item;
 import cn.it.pojo.Shop;
 
@@ -159,6 +160,24 @@ public interface ItemService {
 	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Item> findBystr(String str);
+	
+	/**
+	 * 查看商品对应的评论
+	 * 
+	 * @param item_id 商品编号
+	 * @return List<Discuss> 返回值为一个评论列表，包括一个或者多个评论
+	 */
+	public List<Discuss> showDisscussList(int item_id);
+	
+	/**
+	 * 给某个商品添加评论
+	 * 
+	 * @param item_id 商品编号
+	 * @param content 评论内容
+	 * @return
+	 */
+	public ModelAndView addDiscuss1(int item_id,String content, HttpServletRequest request);
+	
 	/**
 	 * 查看商品对应的店铺
 	 * 
