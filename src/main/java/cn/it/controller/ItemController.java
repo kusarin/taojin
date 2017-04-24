@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.it.dao.DiscussDao;
+import cn.it.pojo.Discuss;
 import cn.it.pojo.Item;
 import cn.it.pojo.Shop;
 import cn.it.service.ItemService;
@@ -40,7 +42,8 @@ public class ItemController {
 	@RequestMapping("addItem.do")
 	public ModelAndView addItem(
 			@RequestParam(value = "file", required = false) MultipartFile file,
-			HttpServletRequest request) {
+			HttpServletRequest request
+			) {
 
 		// 获取店铺编号shop_id
 		String id = request.getParameter("Shop_id");
@@ -97,8 +100,13 @@ public class ItemController {
 		int item_id = Integer.parseInt(id);
 		// 进行修改商品状态操作；
 		ModelAndView modelandview = itemservice.updownItem(item_id);
+		
+		// 获取商品的店铺编号
+		Item i = itemservice.findById(item_id);
+		int shop_id = i.getshop_id();
+		
 		// 重定向刷新页面；
-		modelandview.setViewName("redirect:shopItem.do");
+		modelandview.setViewName("redirect:shopItem.do?shopid="+shop_id);
 
 		return modelandview;
 	}
@@ -145,7 +153,7 @@ public class ItemController {
 		String number = request.getParameter("number");
 		String price = request.getParameter("price");
 		String detail = request.getParameter("detail");
-
+		
 		// 获取原图片路径
 		String image = request.getParameter("image");
 
@@ -153,8 +161,12 @@ public class ItemController {
 		ModelAndView modelandview = itemservice.updateItem(item_id, name,
 				typeh, typel, number, price, detail, image, file, request);
 
+		// 获取商品的店铺编号
+		Item i = itemservice.findById(item_id);
+		int shop_id = i.getshop_id();
+		
 		// 重定向刷新页面；
-		modelandview.setViewName("redirect:shopItem.do");
+		modelandview.setViewName("redirect:shopItem.do?shopid="+shop_id);
 
 		return modelandview;
 	}
@@ -204,6 +216,15 @@ public class ItemController {
 			modelandview.addObject("looklist", list);
 		}
 
+		// 获取商品的评论列表
+		List<Discuss> disscuss = itemservice.showDisscussList(item_id);
+		//判断评论是否为空
+		if(disscuss.size()==0){
+			modelandview.addObject("error0", "目前还没有评论哟");
+		}else{
+			modelandview.addObject("discusslist", disscuss);	
+		}
+		
 		return modelandview;
 	}
 
@@ -371,6 +392,24 @@ public class ItemController {
 		// 将商品条目list传递到searchlist
 		modelandview.addObject("itemlist", list);
 
+		return modelandview;
+	}
+
+	@RequestMapping("addItemDiscuss.do")
+	public ModelAndView addItemDiscuss(HttpServletRequest request,
+			@RequestParam("id") String id){
+
+		// 获取商品编号item_id
+		//String id = request.getParameter("item_id");
+		int item_id = Integer.parseInt(id);
+		String content = request.getParameter("content");
+		
+		//进行添加评论的操作
+		ModelAndView modelandview = itemservice.addDiscuss1(item_id, content, request);
+		
+		// 重定向刷新页面；
+		modelandview.setViewName("redirect:lookItem.do?id="+id);
+		
 		return modelandview;
 	}
 }
