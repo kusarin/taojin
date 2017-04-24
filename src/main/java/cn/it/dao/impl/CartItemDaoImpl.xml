@@ -46,7 +46,7 @@
 	<select id="selectAll" parameterType="int" resultMap="findList">
 	      select c.*,i.* from cartitem c,item i where c.itemId=i.Item_id and c.cartId=#{cartId}
 	</select>
-	<select id="find" parameterType="int" resultType="cn.it.pojo.CartItem">
-	       select* from cartitem where cartItemId=#{cartItemId}
+	<select id="find" parameterType="int" resultMap="findList">
+	      select c.*,i.* from cartitem c,item i where c.itemId=i.Item_id and c.cartItemId=#{cartItemId}
 	</select>
 </mapper>

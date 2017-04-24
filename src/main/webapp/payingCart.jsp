@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
@@ -17,7 +17,7 @@ pageEncoding="UTF-8"%>
 <link href="${pageContext.request.contextPath}/css/jquery.fancybox.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/cloud-zoom.css" rel="stylesheet">
 <script>
-function  che(){
+  function  readddr(){
 	  var addr=document.getElementsByName("addr");
 	  var i=-1;
 	 
@@ -30,71 +30,19 @@ function  che(){
 	  if(i==-1){
 		  alert("请选择收货地址");
 		  return;
-	  }else{
-		  document.myform.action="submitOrder.do";
-	    	 // $(".myform")
-	       document.myform.submit();
 	  }
-}
-
-function checadr(){
-	var addr=document.getElementsByName("addr");
-	  var i=-1;
-	 
-	  for( var j=0;j<addr.length;j++){
+  }
+function  ad(){
+	var addr=doucument.getElementsByName("addr");
+    var j=0;
+	for( ;j<addr.length;j++){
 		  if(addr[j].checked){
-			  i=j;
 			  break;
 		  }
 	  }
-	  document.getElementById("adr").innerHTML=addr[i].value;
-	  
+	  document.getElementById("rece").innerHTML= addr[j].value;
 }
-
-//弹出隐藏层  
-function ShowDiv(show_div,bg_div){  
- document.getElementById(show_div).style.display='block';  
- document.getElementById(bg_div).style.display='block' ;  
- var bgdiv = document.getElementById(bg_div);  
- bgdiv.style.width = document.body.scrollWidth;   
- // bgdiv.style.height = $(document).height();  
- $("#"+bg_div).height($(document).height());  
-} 
-//关闭弹出层  
-function CloseDiv(show_div,bg_div)  
-{  
- document.getElementById(show_div).style.display='none';  
- document.getElementById(bg_div).style.display='none';  
-} 
 </script>
-<style>  
-.black_overlay{  
- display: none;  
- position: absolute;  
- top: 0%;  
- left: 0%;  
- width: 100%;  
- height: 100%;  
- background-color: black;  
- z-index:1001;  
- -moz-opacity: 0.8;  
- opacity:.80;  
- filter: alpha(opacity=80);  
-}  
-.white_content {  
- display: none;  
- position: absolute;  
- top: 10%;  
- left: 35%;  
- width: 30%;  
- height: 60%;    
- background-color: white;  
- z-index:1002;  
- overflow: auto;  
-}  
- 
-</style>
-
 </head>
 <body>
 <!-- Header Start -->
@@ -141,61 +89,31 @@ function CloseDiv(show_div,bg_div)
 	</header>
 	<!-- Header End -->
 	
-	<form action="" method="post" name="myform">
+	<form action="commitOrderDeCart.do" method="post">
     <div class="containers">
 	   <div class="orderTitle" style="color:gray;">
 	      <p>请核对订单信息</p>
 	   </div>
 	   <div class="receiver">
 	       <div class="info">
-	       <strong>收货人地址</strong><a href="#" onclick="ShowDiv('MyDiv','fade')"><strong style="float:right;font-size:12px;">新增地址</strong></a>
+	       <strong>收货人地址</strong><a href="#"><strong style="float:right;font-size:12px;">新增地址</strong></a>
 		   </div>
-		   
-		   <div class="receiverInfo">
 		   <c:forEach items="${address}" var="adr">
-			     <input type="radio" name="addr" value="${adr.addr}" onclick="checadr()">${adr.addr}
-		    </c:forEach>
+		   <div class="receiverInfo">
+			     <input type="radio" name="addr" value="${adr.addr}" onclick="ad()">${adr.addr}
 		   </div>
-		  
+		   </c:forEach>
 	   </div>
-	   <!--弹出层时背景层DIV,修改收货地址-->  
- <div id="fade" class="black_overlay">  
-</div>  
- <div id="MyDiv" class="white_content">  
-  <div style="text-align: right; cursor: default; height: 30px;background-color:yellow;line-height:30px;">  
-   <span style="font-size: 30px;padding-right:5px;color:red;cursor:pointer;" onclick="CloseDiv('MyDiv','fade')">x</span>  
-  </div>  
-  <div style="margin-top:20px;">
- <table style="border-collapse:separate; border-spacing:0px 10px;font-size:14px;">
-    <tr>
-	<td>
-    收货人姓名：<input type="text"  placeholder="请填写真实姓名" >
-	</td>
-	</tr>
-	<tr>
-	<td>
-    收货地址：<br/><input type="text"  placeholder="省/市/县(可选)/街道" style="height:80px;width:100%;margin-top:10px;">
-	</td>
-	</tr>
-</table>
- 
- </div>
- <div style="text-align:center;margin-top:80px;">
- <input type="button" onclick="save()" value="保存" style="margin-right:100px;"> 
- <input type="button" onclick="CloseDiv('MyDiv','fade')" value="取消">
- </div>
- </div>
- 
 	   <div class="receive">
 	       <div class="info">
 	             <strong>支付方式</strong>
 		    </div>
              <div class="butt">
-			   
+             
 			   <input type="radio" name="payAway" value="0" style="border:1px solid #DCDCDC;margin-top:-5px;">微信支付
 	
 			   <input type="radio" checked="true" name="payAway" value="1"  style="border:1px solid #DCDCDC;margin-top:-5px;margin-left:40px;">支付宝
-			   
+			  
 		     </div>
 		 </div>
 		 <div class="downline"></div>
@@ -215,56 +133,53 @@ function CloseDiv(show_div,bg_div)
 			</div>
 			
 		</div>
-		<c:forEach items="${c.orderDeatail}" var="collection" varStatus="s">
+		<c:forEach items="${cl.ca}" var="c" varStatus="s">
 		<div class="shoper">
-			    <span>店铺：<a href="#">${collection.shopName}</a></span>
-			    <input type="hidden" value="${collection.shopName}" name="orderDeatail[${s.index}].shopName">
+			    <span>店铺：<a href="#">${c.shopName}</a></span>
+			    <input type="hidden" name="ca[${s.index}].shopName" value="${c.shopName}">
 		</div>
 		
 		<div class="orderDe" style="border:1px solid #80ffff;">
 		<table>
 		   <tr>
-			     <td class="test1"><a href="#"><img src="${pageContext.request.contextPath}${collection.item.image}"/></a>
-			     <input type="hidden" value="${collection.item.image}" name="orderDeatail[${s.index}].item.image">
-		        <a href="#"><p>${collection.item.detail}</p></a>
-		        <input type="hidden" value="${collection.item.image}" name="orderDeatail[${s.index}].item.detail">
-		        <input type="hidden" value="${collection.itemId}" name="orderDeatail[${s.index}].itemId">
+			     <td class="test1"><a href="#" style="float:left;"><img src="${pageContext.request.contextPath}${c.item.image}"/></a>
+			   <!-- <input type="hidden" value="${c.item.image}" name="orderDeatail[${s.index}].item.image"> -->
+		       <p style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;float:left;margin-top:20px;"> <a href="#">${c.item.name}</a></p>
 		        </td>
-				 <td class="common" style="padding-left:0px;text-align:center;">
-				 
-				 <input type="text" value="${collection.itemNumbers}"  readonly="readonly" name="orderDeatail[${s.index}].itemNumbers" style="background-color:white;text-align:center;width:40px;float:left;border:1px;">
-				 
-				 <td class="common">${collection.unitPrice}
-				 <input type="hidden" value="${collection.unitPrice}" name="orderDeatail[${s.index}].unitPrice" id="unitPrice">
+				 <td class="common" style="padding-left:0px;text-align:center;">${c.tradingNumbers}
+				 <input type="hidden" name="ca[${s.index}].tradingNumbers" value="${c.tradingNumbers}">
+				 </td>
+				 <td class="common">${c.item.price}</td>
+				 <td class="common" id="itemprice">${c.totalPrice}
+				 <input type="hidden" name="ca[${s.index}].totalPrice" value="${c.totalPrice}">
+				 <input type="hidden" name="ca[${s.index}].itemId" value="${c.itemId}">
+				 <input type="hidden" name="ca[${s.index}].cartItemId" value="${c.cartItemId}">
 				 </td>
 				 
-				 <td class="common" id="itemprice">${collection.itemPrice}
-				 <input type="hidden" value="${collection.itemPrice}" name="orderDeatail[${s.index}].itemPrice" id="unitPrice">
-				 </td>
 			 </tr>
 		 </table>
 		</div>
 		</c:forEach>
 		<div class="orderDe">
 		    <table class="same">
-			     <tr><td style="padding-top:15px;padding-bottom:15px;"><strong class="pay" id="total">${c.order.totalQuantity}</strong>件商品，总商品金额：<strong class="pay" id="ac">${c.order.actulPayment}</strong>
-			     <input type="hidden" value="${c.order.totalQuantity}" name="order.totalQuantity"></td></tr>
-			     <tr><td style="padding-bottom:15px;"> 运费：<strong class="pay">${c.order.freight}</strong></td></tr>
+			     <tr><td style="padding-top:15px;padding-bottom:15px;"><strong class="pay" id="total">${cl.sh.totalnumber}</strong>件商品，总商品金额：
+			     <strong class="pay" id="ac">${cl.sh.total}</strong></td></tr>
+			     <tr><td style="padding-bottom:15px;"> 运费：<strong class="pay">0.0</strong></td></tr>
 			</table>
 		</div>
 		
 		<div class="orderDe" style="margin-top:0px;border:1px solid #80ffff;">
 		  <table  class="same" style="background-color:#f0ffff;">
-			     <tr><td style="padding-top:15px;">实际支付： <span class="pay" id="actulpayment">${c.order.actulPayment}</span>
-			      <input type="hidden" value="${c.order.actulPayment}" name="order.actulPayment" id="unitPrice">
+			     <tr><td style="padding-top:15px;">实际支付： 
+			     <span class="pay" id="actulpayment">${cl.sh.total}</span>
 			     </td></tr>
-			     <tr><td style="padding-top:15px;"> 寄送至：<span id="adr">##################</span></td></tr>
+			     <tr><td style="padding-top:15px;"><p id="rece"> 寄送至：##################</p></td></tr>
 				 <tr><td style="padding-top:15px;padding-bottom:15px;">收货人:######</td></tr>
 		  </table>
 		</div>
 		
 		<div class="commit">
-		    <input type="button" value="提交订单" onclick="che()"/>
+		    <input type="submit" value="提交订单" onclick="readddr()"/>
 		</div>
     </div> 
     </form>
