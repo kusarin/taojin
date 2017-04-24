@@ -347,7 +347,7 @@
 
 	</div>
 	<div style="text-align: center; margin-bottom: 10px;">
-		<a id="fd_footer" href="javascript:;">产品意见反馈</a> <a
+		<a id="fd_footer" href="addComment.jsp">产品意见反馈</a> <a
 			href="http://www.2shoujie.com/joinUs" target="_top">加入我们</a>
 	</div>
 	<div style="text-align: center; margin-bottom: 10px;">
