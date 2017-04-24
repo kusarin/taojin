@@ -23,9 +23,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
+
+
 import cn.it.pojo.Address;
 import cn.it.pojo.OrderCollection;
-
 import cn.it.pojo.Page;
 import cn.it.service.OrderService;
 
@@ -46,11 +47,11 @@ public class OrderController {
 	 * @param(address表示收货地址，orderCollection表示订单信息，payway表示支付方式)
 	 * */
 	@RequestMapping(value="submitOrder.do", method=RequestMethod.POST)
-	public ModelAndView submmitOrder(String addr,OrderCollection orderCollection, int payAway){
+	public ModelAndView submmitOrder(String addr,OrderCollection orderCollection){
 		ModelAndView view=new ModelAndView("payment");
 		
 		int userId=1;   //用户Id
-		view.addObject("order", orderService.submmitOrder(addr, orderCollection, payAway, userId));
+		view.addObject("order", orderService.submmitOrder(addr, orderCollection,userId));
 		return view;
 	}
 	
@@ -187,10 +188,12 @@ public class OrderController {
 	 * 
 	 * */
 	@RequestMapping("sureOrder.do")
-	public ModelAndView sureOrder(int itemId,int number){
+	public ModelAndView sureOrder(int itemId,String number){
 		int userId=1;
+//		String number = request.getParameter("number");HttpServletRequest request
+		int number1=Integer.parseInt(number);
 		ModelAndView view =new ModelAndView("sureOrder");
-		OrderCollection collection=orderService.sureOrder(itemId, userId, number);
+		OrderCollection collection=orderService.sureOrder(itemId, userId, number1);
 		view.addObject("c", collection);
 		List<Address> address=orderService.getAddress(userId);
 		view.addObject("address",address);

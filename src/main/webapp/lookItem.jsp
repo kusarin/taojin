@@ -79,6 +79,7 @@
 	    ac.innerHTML=actulpayment.innerHTML;
 		}
 	  }
+  
   </script>
 <!-- 弹窗设置点 -->
 <script type="text/javascript">
@@ -87,7 +88,19 @@
 		if (error != "" && error != null && typeof (error) != "undefined") {
 			alert(error);
 		}
+	   
 	}
+	 function purchas(){
+		 var num=parseInt(document.getElementById("mp").value);
+		 window.location.href="sureOrder.do?itemId=${lookitem.item_id}&number="+num;
+	   }
+	 function addCart(){
+		 var num=parseInt(document.getElementById("mp").value);
+		 window.location.href="index.do?itemId=${lookitem.item_id}&number="+num;
+	   }
+	 function succ(){
+		 alert("添加成功！");
+	 }
 </script>
 </head>
 <body>
@@ -195,8 +208,9 @@
 								</div>
 
 								<ul class="productpagecart">
-									<li><a class="cart" href="sureOrder.do?itemId=${lookitem.item_id}">现在购买</a></li>
-									<li><a class="wish" href="index.do?itemId=${lookitem.item_id}">加入购物车</a></li>
+								
+									<li><a class="cart" href="javascript:void(0)" onclick="purchas()">现在购买</a></li>
+									<li><a class="wish" href="javascript:succ()" onclick="addCart()">加入购物车</a></li>
 								</ul>
 							</div>
 						</div>

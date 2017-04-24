@@ -18,14 +18,16 @@ public class ShoppingCartController {
 	private ShoppingCartService shoppingCartService;
 	@Autowired
 	private OrderService orderService;
+	
 	/***
 	 * 添加商品到购物车
 	 * */
 	@RequestMapping("index.do")
-	public void addItem(int number,int itemId){
+	public String addItem(String number,int itemId){
 		int userId=1;
-		shoppingCartService.addItemToCart(userId, number, itemId);
-		return;
+		int number1=Integer.parseInt(number);
+		shoppingCartService.addItemToCart(userId, number1, itemId);
+		return "redirect:lookItem.do?id="+itemId;
 	}
 	/********
 	 *显示购物车所有商品 

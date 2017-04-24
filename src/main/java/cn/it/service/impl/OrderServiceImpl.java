@@ -118,14 +118,15 @@ public  class OrderServiceImpl implements OrderService {
 		orderDetailDao.delete(orderNumber); // 删除此订单对应的订单明细
 		orderDao.delete(orderNumber); // 删除该订单号对应的订单
 	}
-	/***
+	/**
 	 *批量删除 
 	 * **/
 	public void deleteAllOrder(String[] orderNumber){
 		orderDetailDao.deleteAll(orderNumber); // 删除此订单对应的订单明细
 		orderDao.deleteAll(orderNumber); // 删除该订单号对应的订单
 	}
-	/****
+	
+	/**
 	 * 取消订单
 	 * **/
 	public void remove(int flag, String orderNumber){
@@ -163,7 +164,7 @@ public  class OrderServiceImpl implements OrderService {
 	 * @param(itemId表示商品id，paylabel支付方式标记，userId用户Id)
 	 * 
 	 * */
-	public Order submmitOrder(String addr,OrderCollection orderCollection, int payAway, int userId) {
+	public Order submmitOrder(String addr,OrderCollection orderCollection, int userId) {
 		
 		Order order = orderCollection.getOrder();   //创建订单
 		order.setUserID(userId);    // 设置下单用户
@@ -172,14 +173,10 @@ public  class OrderServiceImpl implements OrderService {
 		order.setOrderTime(new java.sql.Date(new Date().getTime()));// 设置下单时间
 		String status = "待付款";
 		order.setStatus(status); // 设置订单的交易状态（待付款、已付款、待收货、已完成、已取消）
-		switch (payAway) {
-		case 0:
-			order.setPaymentMethod("微信支付");
-		case 1:
-			order.setPaymentMethod("支付宝");
-		default:
-			break;
-		}
+		
+	    order.setPaymentMethod("网银支付");
+		
+		
 		
 		order.setRecivingAddress(addr); // 收货地址
 		double freight = 0; // 运费
@@ -294,4 +291,5 @@ public  class OrderServiceImpl implements OrderService {
 		
 		return orderDao.countNumbers(userId, status);
 	}
+	
 }

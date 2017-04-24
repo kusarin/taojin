@@ -192,9 +192,7 @@ function CloseDiv(show_div,bg_div)
 		    </div>
              <div class="butt">
 			   
-			   <input type="radio" name="payAway" value="0" style="border:1px solid #DCDCDC;margin-top:-5px;">微信支付
-	
-			   <input type="radio" checked="true" name="payAway" value="1"  style="border:1px solid #DCDCDC;margin-top:-5px;margin-left:40px;">支付宝
+			   <input type="radio" checked="checked" name="payAway" value="0" style="border:1px solid #DCDCDC;margin-top:-5px;">网银支付
 			   
 		     </div>
 		 </div>
