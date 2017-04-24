@@ -154,8 +154,8 @@
 						</tr>
 
 						<!-- 参与评论 -->
-						<form action="addItemDiscuss.do?id=${lookitem.item_id}" method="post"
-							enctype="multipart/form-data">
+						<form action="addItemDiscuss.do?id=${lookitem.item_id}"
+							method="post" enctype="multipart/form-data">
 							<div class="productdesc">
 								<ul class="nav nav-tabs" id="myTab">
 									<li class="active"><a href="#description">参与评论：</a></li>
@@ -195,8 +195,8 @@
 								</div>
 
 								<ul class="productpagecart">
-									<li><a class="cart" href="#">现在购买</a></li>
-									<li><a class="wish" href="#">加入购物车</a></li>
+									<li><a class="cart" href="sureOrder.do?itemId=${lookitem.item_id}">现在购买</a></li>
+									<li><a class="wish" href="index.do?itemId=${lookitem.item_id}">加入购物车</a></li>
 								</ul>
 							</div>
 						</div>
@@ -222,16 +222,13 @@
 							<div class="tab-content">
 								<div class="tab-pane active" id="description">
 									<p>${error0}</p>
-								</div>
-							</div>
-							<div class="tab-content">
-								<div class="tab-pane active" id="description">
 									<c:forEach items="${discusslist}" var="d">
 										<img src=${pageContext.request.contextPath}/image/dislogo.jpg
 											style="heigh: 20px; width: 20px">:${d.content}<br>
 									</c:forEach>
 								</div>
 							</div>
+
 						</div>
 					</div>
 				</div>
@@ -280,7 +277,7 @@
 
 		</div>
 		<div style="text-align: center; margin-bottom: 10px;">
-			<a id="fd_footer" href="javascript:;">产品意见反馈</a> <a
+			<a id="fd_footer" href="addComment.jsp">产品意见反馈</a> <a
 				href="http://www.2shoujie.com/joinUs" target="_top">加入我们</a>
 		</div>
 		<div style="text-align: center; margin-bottom: 10px;">

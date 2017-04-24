@@ -36,6 +36,7 @@ public class UsersServiceImpl implements UsersService {
 				str.addObject("error", "用户名或密码错误");
 				str.setViewName("login");
 			} else {
+				str.setViewName("redirect:Itemlist.do");
 				session.setAttribute("user", u);
 			}
 		}
