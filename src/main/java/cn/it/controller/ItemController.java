@@ -1,5 +1,6 @@
 package cn.it.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -227,25 +228,60 @@ public class ItemController {
 	}
 
 	/**
-	 * 按照选择的商品类型查看商品
+	 * 按照选择的商品类型查看商品，此处输入商品一级分类
 	 * 
 	 * @param request
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
-	@RequestMapping("ItemType.do")
-	public ModelAndView showTypeItem(HttpServletRequest request) {
+	@RequestMapping("ItemType1.do")
+	public ModelAndView showTypeItem1(HttpServletRequest request, @RequestParam("typeh") String typeh) throws UnsupportedEncodingException {
 		ModelAndView modelandview = new ModelAndView("Itemlist"); // 到Itemtype.jsp界面
-
-		// 从前台获取商品类型信息；
-		String typeh = request.getParameter("typeh");
-		String typel = request.getParameter("typel");
-
+		
+		//将传入的数据转为中文
+		String stypeh=new String(typeh.getBytes("ISO-8859-1"),"utf-8");
+		
 		// 根据类型，获得商品；
 		List<Item> list;
-		list = itemservice.findByType(typeh, typel);
+		list = itemservice.findByType1(stypeh);
 
 		// 将商品条目list传递到itemtype
 		modelandview.addObject("itemlist", list);
+		
+		// 将商品类型typeh和typel传递到前台目前显示分类
+		modelandview.addObject("show","目前显示分类");
+		modelandview.addObject("typeh", " >"+stypeh);
+
+		return modelandview;
+	}
+
+	
+	/**
+	 * 按照选择的商品类型查看商品，此处输入商品一级分类和二级分类
+	 * 
+	 * @param request
+	 * @return
+	 * @throws UnsupportedEncodingException 
+	 */
+	@RequestMapping("ItemType2.do")
+	public ModelAndView showTypeItem2(HttpServletRequest request, @RequestParam("typeh") String typeh, @RequestParam("typel") String typel) throws UnsupportedEncodingException {
+		ModelAndView modelandview = new ModelAndView("Itemlist"); // 到Itemtype.jsp界面
+
+		//将传入的数据转为中文
+		String stypeh=new String(typeh.getBytes("ISO-8859-1"),"utf-8");
+		String stypel=new String(typel.getBytes("ISO-8859-1"),"utf-8");
+		
+		// 根据类型，获得商品；
+		List<Item> list;
+		list = itemservice.findByType2(stypeh, stypel);
+
+		// 将商品条目list传递到itemtype
+		modelandview.addObject("itemlist", list);
+		
+		// 将商品类型typeh和typel传递到前台
+		modelandview.addObject("show","目前显示分类");
+		modelandview.addObject("typeh", "  >"+stypeh);
+		modelandview.addObject("typel", "  >"+stypel);
 
 		return modelandview;
 	}

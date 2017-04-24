@@ -299,7 +299,21 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	/**
-	 * 通过调用itemDao.FindItemByType()，根据所选的类型查看商品
+	 * 通过调用itemDao.FindItemByType2()，根据所选的类型查看商品
+	 * 此处输入商品一级分类
+	 * 
+	 * @param typeh
+	 *            商品一阶类型，String
+	 * 
+	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
+	 */
+	public List<Item> findByType1(String typeh) {
+		return itemDao.FindItemByType1(typeh);
+	}
+	
+	/**
+	 * 通过调用itemDao.FindItemByType2()，根据所选的类型查看商品
+	 * 此处输入商品一级分类和二级分类
 	 * 
 	 * @param typeh
 	 *            商品一阶类型，String
@@ -308,8 +322,8 @@ public class ItemServiceImpl implements ItemService {
 	 * 
 	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
-	public List<Item> findByType(String typeh, String typel) {
-		return itemDao.FindItemByType(typeh, typel);
+	public List<Item> findByType2(String typeh, String typel) {
+		return itemDao.FindItemByType2(typeh, typel);
 	}
 
 	/**
@@ -488,7 +502,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	/**
-	 * 测试6，用于测试FindItemByType(typeh,typel)是否传值
+	 * 测试6，用于测试FindItemByType2(typeh,typel)是否传值
 	 */
 	@Test
 	public void test6() {
@@ -496,7 +510,7 @@ public class ItemServiceImpl implements ItemService {
 		ItemDao itemdao = (ItemDao) ac.getBean("itemDao");
 		String typeh = "高级分类1";
 		String typel = "低级分类1";
-		List<Item> i = itemdao.FindItemByType(typeh, typel);
+		List<Item> i = itemdao.FindItemByType2(typeh, typel);
 		System.out.println(i);
 	}
 

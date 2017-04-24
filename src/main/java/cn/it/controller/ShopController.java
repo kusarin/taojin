@@ -63,6 +63,6 @@ public class ShopController {
 		List<Shop> list;
 		list = shopService.searchShop(str);
 		map.put("search", list);
-		return "/searchShop";
+		return "shopSearch";
 	}
 }

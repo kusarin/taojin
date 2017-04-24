@@ -10,7 +10,6 @@
 	width: 130px;
 	heigh: auto;
 	float: left;
-	margin-top: 20px;
 	margin-left: 20px;
 }
 
@@ -48,23 +47,16 @@
 	color: red;
 }
 </style>
-<!-- 弹窗设置点 -->
-<script type="text/javascript">
-	window.onload = function() {
-		var error = "${requestScope.error}";
-		if (error != "" && error != null && typeof (error) != "undefined") {
-			alert(error);
-		}
-	}
-</script>
+
+
 <title>商品列表</title>
+<link href="./css/itemlist.css" rel="stylesheet">
 <link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
 <link href="./TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="./TaoJin/css/style.css" rel="stylesheet">
 <link href="./TaoJin/css/flexslider.css" type="text/css" media="screen"
 	rel="stylesheet" />
 <link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
-<link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
 </head>
 <body>
 
@@ -115,18 +107,81 @@
 	</header>
 	<!-- Header End -->
 	
-	<form action="ItemType.do" method="post">
-		<div class="left">
-			<select id="code" name="typeh" style="width: 120px">
-				<option value="高级分类1">高级分类1</option>
-				<option value="高级分类2">高级分类2</option>
-			</select> <select id="code" name="typel" style="width: 120px">
-				<option value="低级分类1">低级分类1</option>
-				<option value="低级分类2">低级分类2</option>
-			</select> <input type="submit" value="确认选择" />
-		</div>
+		<form action="ItemType.do" method="post">	
+		
 		<br>
 	</form>
+	
+	
+	<!-- 测试用区域 start-->
+		<div class="left">
+	<div class="all-sort-list">
+			<div class="item bo">
+				<h3><span>·</span><a >所有分类</a></h3>
+				<div class="item-list clearfix">
+					<div class="close">x</div>
+					<div class="subitem">
+						<dl class="fore1">
+							<dt><a href="ItemType1.do?typeh=高级分类1">高级分类1</a></dt>
+							<dd><em><a href="ItemType2.do?typeh=高级分类1&typel=低级分类1">低级分类1</a></em><em><a href="ItemType2.do?typeh=高级分类1&typel=低级分类2">低级分类2</a></em></dd>
+						</dl>
+						<dl class="fore2">
+							<dt><a href="ItemType1.do?typeh=高级分类2">高级分类2</a></dt>
+							<dd><em><a href="ItemType2.do?typeh=高级分类2&typel=低级分类1">  低级分类1</a></em><em><a href="ItemType2.do?typeh=高级分类2&typel=低级分类2">低级分类2</a></em></dd>
+						</dl>
+					</div>
+	</div></div></div>
+	<p>${show}</p>
+	<p>${typeh}</p>
+	<p>${typel}</p>
+	
+	</div>
+	
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript">
+		$('.all-sort-list > .item').hover(function(){
+			var eq = $('.all-sort-list > .item').index(this),				//获取当前滑过是第几个元素
+				h = $('.all-sort-list').offset().top,						//获取当前下拉菜单距离窗口多少像素
+				s = $(window).scrollTop(),									//获取游览器滚动了多少高度
+				i = $(this).offset().top,									//当前元素滑过距离窗口多少像素
+				item = $(this).children('.item-list').height(),				//下拉菜单子类内容容器的高度
+				sort = $('.all-sort-list').height();						//父类分类列表容器的高度
+			
+			if ( item < sort ){												//如果子类的高度小于父类的高度
+				if ( eq == 0 ){
+					$(this).children('.item-list').css('top', (i-h));
+				} else {
+					$(this).children('.item-list').css('top', (i-h)+1);
+				}
+			} else {
+				if ( s > h ) {												//判断子类的显示位置，如果滚动的高度大于所有分类列表容器的高度
+					if ( i-s > 0 ){											//则 继续判断当前滑过容器的位置 是否有一半超出窗口一半在窗口内显示的Bug,
+						$(this).children('.item-list').css('top', (s-h)+2 );
+					} else {
+						$(this).children('.item-list').css('top', (s-h)-(-(i-s))+2 );
+					}
+				} else {
+					$(this).children('.item-list').css('top', 3 );
+				}
+			}	
+
+			$(this).addClass('hover');
+			$(this).children('.item-list').css('display','block');
+		},function(){
+			$(this).removeClass('hover');
+			$(this).children('.item-list').css('display','none');
+		});
+
+		$('.item > .item-list > .close').click(function(){
+			$(this).parent().parent().removeClass('hover');
+			$(this).parent().hide();
+		});
+	</script>
+	<!-- 测试用区域 end-->
+	
+	
+	
+
 
 <div style="margin-left: 250px;">
 <h1 style="color:orange">${error0}</h1>
