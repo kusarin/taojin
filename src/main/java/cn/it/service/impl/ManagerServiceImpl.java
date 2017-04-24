@@ -72,8 +72,12 @@ public class ManagerServiceImpl implements ManagerService{
 	
 	public ModelAndView update(Manager manager) {
 		ModelAndView mav =new ModelAndView("managerInterface");
+
 		if(manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
 			mav.addObject("error", "新密码为空！");
+			mav.setViewName("updateMpassword");
+		}else if(manager.getAccount()==null||manager.getAccount().equalsIgnoreCase("")){
+			mav.addObject("error", "session已过期！请重新登录！");
 			mav.setViewName("updateMpassword");
 		}else{
 			managerDao.managerUpdate(manager);

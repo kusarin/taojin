@@ -36,9 +36,10 @@ public class CommentController {
 	}
 	
 	@RequestMapping("addComment.do")
-	public void add(Comment comment){
+	public ModelAndView add(Comment comment){
 		comment.setDatetime(new Date());
 		commentService.add(comment);
+		return new ModelAndView("Itemlist.jsp");
 	}
 
 }
