@@ -17,7 +17,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			"/lookItem.do", "/lookshopItem.do", "/ItemType1.do",
 			"/ItemType2.do", "/searchItem.do","/findResourceFile.do" ,
 			"RF","anage","/updatepassword.do","SR","/findItem.do","/findShop.do"
-			,"/findUser.do","/deleteComment.do","/lookComment.do"};
+			,"/findUser.do","/deleteComment.do","/lookComment.do","addUser.do"};
 
 	@Override
 	public boolean preHandle(HttpServletRequest request,
