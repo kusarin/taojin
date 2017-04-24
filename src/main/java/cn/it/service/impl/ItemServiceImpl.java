@@ -14,8 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.it.dao.DiscussDao;
 import cn.it.dao.ItemDao;
 import cn.it.dao.ShopDao;
+import cn.it.pojo.Discuss;
 import cn.it.pojo.Item;
 import cn.it.pojo.Shop;
 import cn.it.service.ItemService;
@@ -34,6 +36,8 @@ public class ItemServiceImpl implements ItemService {
 	private ItemDao itemDao;
 	@Autowired
 	private ShopDao shopDao;
+	@Autowired
+	private DiscussDao discussDao;
 
 	/**
 	 * 添加商品
@@ -299,8 +303,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	/**
-	 * 通过调用itemDao.FindItemByType2()，根据所选的类型查看商品
-	 * 此处输入商品一级分类
+	 * 通过调用itemDao.FindItemByType2()，根据所选的类型查看商品 此处输入商品一级分类
 	 * 
 	 * @param typeh
 	 *            商品一阶类型，String
@@ -310,10 +313,9 @@ public class ItemServiceImpl implements ItemService {
 	public List<Item> findByType1(String typeh) {
 		return itemDao.FindItemByType1(typeh);
 	}
-	
+
 	/**
-	 * 通过调用itemDao.FindItemByType2()，根据所选的类型查看商品
-	 * 此处输入商品一级分类和二级分类
+	 * 通过调用itemDao.FindItemByType2()，根据所选的类型查看商品 此处输入商品一级分类和二级分类
 	 * 
 	 * @param typeh
 	 *            商品一阶类型，String
@@ -380,17 +382,69 @@ public class ItemServiceImpl implements ItemService {
 	public List<Item> findBystr(String str) {
 		return itemDao.SearchItem(str);
 	}
-	
+
+	/**
+	 * 查看商品对应的评论
+	 * 
+	 * @param item_id
+	 *            商品编号
+	 * @return List<Discuss> 返回值为一个评论列表，包括一个或者多个评论
+	 */
+	public List<Discuss> showDisscussList(int item_id) {
+		return discussDao.FindItemDiscuss(item_id);
+	}
+
+	/**
+	 * 给某个商品添加评论
+	 * 
+	 * @param item_id
+	 *            商品编号
+	 * @param content
+	 *            评论内容
+	 * @return
+	 */
+	public ModelAndView addDiscuss1(int item_id, String content,
+			HttpServletRequest request) {
+		ModelAndView str = new ModelAndView("lookItem"); // 跳转到addItem.jsp界面
+		
+		// 判断传入参数是否为空
+		if (content == null || content.equals("") ) {
+
+			// 提示信息 "输入数据不能为空！！！"
+			str.addObject("error", "输入评论不能为空！！！");
+		}else{
+
+			// 定义评论；
+			Discuss d = new Discuss();
+			// 设置评论属性；
+			d.setItem_id(item_id); // 商品编号
+			d.setContent(content); // 评论内容
+			
+			// 添加评论信息；
+			discussDao.addDiscuss1(d);
+			request.setAttribute("discuss", d);
+
+			// 提示信息 "上架成功！！！"
+			str.addObject("error", "评论成功！！！");
+
+			str.setViewName("lookItem");
+		}
+		
+		// 返回提示信息
+		return str;
+	}
+
 	/**
 	 * 查看商品对应的店铺
 	 * 
-	 * @param shop_id 店铺编号
+	 * @param shop_id
+	 *            店铺编号
 	 * @return Shop 返回值为一个店铺
 	 */
-	public Shop showShop(int shop_id){
+	public Shop showShop(int shop_id) {
 		return shopDao.findByid(shop_id);
 	}
-	
+
 	/**
 	 * 孙琛改的，用在管理员后台管理。
 	 */
@@ -521,8 +575,42 @@ public class ItemServiceImpl implements ItemService {
 	public void test7() {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("config.xml");
 		ItemDao itemdao = (ItemDao) ac.getBean("itemDao");
-		String str = "一个";
+		String str = "一号";
 		List<Item> i = itemdao.SearchItem(str);
+		System.out.println(i);
+	}
+
+	/**
+	 * 评论部分
+	 */
+	/**
+	 * 测试8，用于测试addDiscuss1(id)是否传值
+	 */
+	@Test
+	public void test8() {
+		ApplicationContext ac = new ClassPathXmlApplicationContext("config.xml");
+		DiscussDao discussdao = (DiscussDao) ac.getBean("discussDao");
+		// 定义评论；
+		Discuss d = new Discuss();
+		// 设置评论属性；
+		d.setItem_id(1); // 商品编号
+		d.setContent("绝对一号的第三条评论"); // 评论内容
+
+		// 添加评论信息；
+		discussdao.addDiscuss1(d);
+		System.out.println(d);
+		System.out.println("添加成功！！！");
+	}
+
+	/**
+	 * 测试9，用于测试FindItemDiscuss(id)是否传值
+	 */
+	@Test
+	public void test9() {
+		ApplicationContext ac = new ClassPathXmlApplicationContext("config.xml");
+		DiscussDao discussdao = (DiscussDao) ac.getBean("discussDao");
+		int id = 1;
+		List<Discuss> i = discussdao.FindItemDiscuss(id);
 		System.out.println(i);
 	}
 
