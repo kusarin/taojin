@@ -4,46 +4,8 @@
 <%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-	<head>
-		<style>
-		.left {
-			width: 130px;
-			heigh: auto;
-			float: left;
-			margin-top: 20px;
-			margin-left: 20px;
-		}
-		.right {
-			width: auto;
-			heigh: auto;
-			margin-top: 20px;
-			margin-left: 149px;
-		}
-		.itemimage {
-			width: 300px;
-			height: 175px;
-			float: left;
-		}
-		.textname {
-			font-size: 20px;
-			color: black;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-		}
-		.textdetail {
-			font-size: 15px;
-			color:orange;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-		}
-		.textprice {
-			font-size: 20px;
-			color: red;
-		}
-		</style>
-		<title>管理员界面</title>
+<head>
+<title>管理员界面</title>
 			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 			<link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
 			<link href="./TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
