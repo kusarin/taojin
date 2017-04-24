@@ -7,10 +7,10 @@
 <title>Insert title here</title>
 <script>
    function purchase(){
-	   window.location.href="sureOrder.do?number=2&itemId=1";
+	   window.location.href="sureOrder.do?number=1&itemId=1";
    }
    function addCart(){
-	   window.location.href="index.do?number=2&itemId=1";
+	   window.location.href="index.do?number=1&itemId=1";
    }
 </script>
 </head>

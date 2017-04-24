@@ -19,6 +19,6 @@ public interface ShoppingCartDao {
 	/***
 	 * 更新购物车中的支付总额
 	 * */
-	public void update(int cartId,double total);
+	public void update(int cartId,double total,int totalnumber);
 	
 }

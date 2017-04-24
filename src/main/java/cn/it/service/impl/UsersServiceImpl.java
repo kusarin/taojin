@@ -17,6 +17,12 @@ public class UsersServiceImpl implements UsersService {
 	@Autowired
 	private UsersDao usersDao;
 
+	public ModelAndView tologin() {
+		ModelAndView str = new ModelAndView("login");
+		str.addObject("error", "请登录后再进行操作！");
+		return str;
+	}
+
 	public ModelAndView login(Users user, HttpSession session)
 			throws IOException {
 		ModelAndView str = new ModelAndView("Itemlist");
@@ -68,7 +74,7 @@ public class UsersServiceImpl implements UsersService {
 		session.setAttribute("user", user);
 		return str;
 	}
-	
+
 	public ModelAndView changepw(Users user, HttpSession session) {
 		ModelAndView str = new ModelAndView("welcome");
 		usersDao.changepw(user);

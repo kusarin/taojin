@@ -55,7 +55,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 				
 				double total=s.getTotal();
 				total=total+number*i.getprice();
-				shoppingCartDao.update(s.getCartId(), total);
+				int totalnumber=s.getTotalnumber();
+				totalnumber=totalnumber+number;
+				shoppingCartDao.update(s.getCartId(), total,totalnumber);
 			}
 			//购物车中无此商品，添加商品到购物车,更新购物车中的支付总额
 			else{
@@ -72,7 +74,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 				cartItemDao.add(c);
 				
 				double total=s.getTotal()+i.getprice()*number;
-				shoppingCartDao.update(s.getCartId(), total);
+				int totalnumber=s.getTotalnumber();//购物车商品总数
+				totalnumber=totalnumber+number;
+				shoppingCartDao.update(s.getCartId(), total,totalnumber);
 			}	
 		}
 	  //用户无购物车,创建购物车并将
@@ -81,6 +85,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 			ShoppingCart sh=new ShoppingCart();
 			sh.setUserId(userId);
 			sh.setTotal(i.getprice()*number);
+			sh.setTotalnumber(number);
 			shoppingCartDao.add(sh);
 			
 			CartItem c=new CartItem();
@@ -125,13 +130,16 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		if(c.size()==1){
 			cartItemDao.delete(cartItemId);
 			shoppingCartDao.delete(sh.getCartId());
-		}
+		}//删除购物车中的某一项
 		else{
-			cartItemDao.delete(cartItemId);
+			
 			CartItem ca=cartItemDao.find(cartItemId);
 			double totalprice=ca.getTotalPrice();
 			double total=sh.getTotal();
-			shoppingCartDao.update(sh.getCartId(), total-totalprice);
+			int totalnumber=sh.getTotalnumber();
+			totalnumber=totalnumber-ca.getTradingNumbers();
+			shoppingCartDao.update(sh.getCartId(), total-totalprice,totalnumber);
+			cartItemDao.delete(cartItemId);//删除
 		}
 	}
 	
@@ -149,6 +157,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		//获取此商品的总数
 		int number=i.getnumber();
 		switch(flag){
+		//加1
 		case 0:
 			if(salingNumber<number){
 				salingNumber++;
@@ -156,9 +165,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 				c.setTotalPrice(salingNumber*i.getprice());
 				cartItemDao.update(c);
 				sh.setTotal(sh.getTotal()+i.getprice());
-				shoppingCartDao.update(sh.getCartId(), sh.getTotal());
+				sh.setTotalnumber(sh.getTotalnumber()+1);
+				shoppingCartDao.update(sh.getCartId(), sh.getTotal(),sh.getTotalnumber());
 			}
 			break;
+			//减1
 		case 1:
 			if(salingNumber>1){
 				salingNumber=salingNumber-1;
@@ -166,7 +177,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 				c.setTotalPrice(salingNumber*i.getprice());
 				cartItemDao.update(c);
 				sh.setTotal(sh.getTotal()-i.getprice());
-				shoppingCartDao.update(sh.getCartId(), sh.getTotal());
+				sh.setTotalnumber(sh.getTotalnumber()-1);
+				shoppingCartDao.update(sh.getCartId(), sh.getTotal(),sh.getTotalnumber());
 			}
 			break;
 		default:
