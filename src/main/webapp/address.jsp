@@ -13,6 +13,13 @@
 		}
 	}
 </script>
+<script type="text/javascript">
+	function deleteone(addressid){
+		if(confirm("确定要删除这条数据吗？")){
+			window.location.href="deleteAddress.do?addressid="+addressid;
+		}
+	}
+</script>
 <title>二手淘金网--信息更改</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
@@ -273,7 +280,7 @@
 																		<td><a onclick="deleteone(${i.addressid})"
 																			href="javascript:void(0)">删除</a></td>
 																		<td><a
-																			href="updateAddress.do?addressid=${i.addressid}">修改</a></td>
+																			href="toupdateAddress.do?addressid=${i.addressid}">修改</a></td>
 																	</tr>
 																</c:forEach>
 															</tbody>
@@ -311,8 +318,8 @@
 																		|| addr == '') {
 																	alert("新添加地址不能为空");
 																	return false;
+																	}
 																}
-															}
 														</script>
 													</fieldset>
 												</form>

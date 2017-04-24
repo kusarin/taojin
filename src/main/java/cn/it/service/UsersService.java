@@ -17,9 +17,12 @@ public interface UsersService {
 	public ModelAndView add(Users user);
 
 	public ModelAndView update(Users user, HttpSession session);
+
 	public ModelAndView changepw(Users user, HttpSession session);
 
 	public Users findById(int userid);
 
 	public List<Users> findAll();
+
+	public ModelAndView tologin();
 }

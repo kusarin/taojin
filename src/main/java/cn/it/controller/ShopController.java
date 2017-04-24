@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sun.org.apache.regexp.internal.recompile;
+import com.sun.tools.internal.ws.processor.model.Request;
 
 import cn.it.pojo.Shop;
 import cn.it.pojo.Users;
@@ -56,5 +57,12 @@ public class ShopController {
 	public String showItem(Shop shop,Map<String,Object> map){
 		map.put("shopit", itemService.findByShopId(shop.getShop_id()));
 		return "shopItem";
+	}
+	@RequestMapping(value = {"/searchShop.do"},method = {RequestMethod.GET,RequestMethod.POST})
+	public String searchShop(String str,Shop shop,Map<String,Object> map){
+		List<Shop> list;
+		list = shopService.searchShop(str);
+		map.put("search", list);
+		return "shopSearch";
 	}
 }

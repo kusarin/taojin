@@ -13,7 +13,7 @@
 		}
 	}
 </script>
-<title>二手淘金网--修改密码</title>
+<title>二手淘金网--信息更改</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
 <link href="./TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
@@ -224,7 +224,7 @@
 									<ul>
 										<li><a href="UsersUpdate.jsp">修改个人信息 </a></li>
 										<li><a href="changepw.jsp">更改密码</a></li>
-										<li><a href="addressList.do">更改/添加我的地址</a></li>
+										<li><a href="address.jsp">更改/添加我的地址</a></li>
 									</ul> <a href="category.html">我的订单 </a>
 									<ul>
 										<li><a href="product.html">查看历史订单</a></li>
@@ -255,61 +255,33 @@
 										<div class="mb20">
 											<section class="leavecomment">
 												<h2 class="heading2">
-													<span>修改个人信息</span>
+													<span>更改收货地址</span>
 												</h2>
-												<form action="changepw.do" method="post"
+												<form action="updateAddress.do" method="post"
 													class="form-horizontal commentform2" novalidate>
 													<fieldset>
-														<input type="hidden" name="username"
-															value="${user.username}" />
+														<input type="hidden" name="addressid" value="${Addr.addressid}" />
 														<div class="control-group">
-															<label class="control-label">原密码 </label>
+															<h2 class="heading2">
+																<span>当前收货地址：${Addr.addr}</span><br>
+															</h2>
+															<label class="control-label">输入更改后的地址： </label>
 															<div class="controls">
-																<input type="text" id="fwpw" />
+																<input type="text" style="width: 500px" name="addr"
+																	id="addr" />
 															</div>
-														</div>
-														<div class="control-group">
-															<label class="control-label">新密码</label>
-															<div class="controls">
-																<input type="text" name="password" id="pw1" />
-															</div>
-														</div>
-														<div class="control-group">
-															<label class="control-label">请重复输入新密码</label>
-															<div class="controls">
-																<input type="text" id="pw2" />
-															</div>
-														</div>
-														<div class="control-group">
-
-															<div class="controls"></div>
 														</div>
 														<div class="controls">
-															<input type="submit" id="submit_id" value="确认提交"
+															<input type="submit" id="submit_id" value="添加新地址"
 																class="btn btn-orange" onclick="return check()">
-															<input type="reset" value="重新输入" class="btn">
 														</div>
 														<script>
 															function check() {
-																var fwpw = document
-																		.getElementById("fwpw").value;
-																var pw1 = document
-																		.getElementById("pw1").value;
-																var pw2 = document
-																		.getElementById("pw2").value;
-																if (fwpw == null
-																		|| pw1 == null
-																		|| pw2 == null
-																		|| fwpw == ''
-																		|| pw1 == ''
-																		|| pw2 == '') {
-																	alert("请将信息完善后再进行提交");
-																	return false;
-																} else if (fwpw != "${user.password}") {
-																	alert("原密码错误");
-																	return false;
-																} else if (pw1 != pw2) {
-																	alert("两次密码不同，请重新输入");
+																var addr = document
+																		.getElementById("addr").value;
+																if (addr == null
+																		|| addr == '') {
+																	alert("地址不能为空");
 																	return false;
 																}
 															}

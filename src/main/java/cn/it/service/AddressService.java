@@ -14,4 +14,10 @@ public interface AddressService {
 
 	public List<Address> findById(HttpSession session);
 
+	public ModelAndView delete(Address address, HttpSession session);
+
+	public ModelAndView update(Address address, HttpSession session);
+
+	public Address findByaddrid(int addressid);
+
 }

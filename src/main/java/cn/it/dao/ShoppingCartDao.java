@@ -17,7 +17,8 @@ public interface ShoppingCartDao {
 	 * */
 	public ShoppingCart select(int userId);
 	/***
-	 * 更新购物车中的商品总额
+	 * 更新购物车中的支付总额
 	 * */
-	public void update(int cartId,double total);
+	public void update(int cartId,double total,int totalnumber);
+	
 }

@@ -36,6 +36,7 @@
 	float: left;
 	color: red;
 }
+
 .textshop {
 	font-size: 18px;
 	color: orange;
@@ -79,7 +80,15 @@
 		}
 	  }
   </script>
-
+<!-- 弹窗设置点 -->
+<script type="text/javascript">
+	window.onload = function() {
+		var error = "${requestScope.error}";
+		if (error != "" && error != null && typeof (error) != "undefined") {
+			alert(error);
+		}
+	}
+</script>
 </head>
 <body>
 	<!-- Header Start -->
@@ -116,7 +125,7 @@
 								<div style="margin-top: 10px;">
 									<input input type="text" name="str"
 										class="input-medium search-query" placeholder="搜索你想要的二手"
-										style="height: 20px; width: 100; border: 4px solid #FFA07A">
+										style="height: 20px; width: 100; border: 4px solid #FFA07A;">
 									<input type="submit" value="搜索"
 										style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
 								</div>
@@ -139,10 +148,26 @@
 					<!-- Left Image-->
 					<div class="span5">
 						<tr>
-						<br>
-							<td>					
-								<img src=${pageContext.request.contextPath}${lookitem.image}></td>
+							<br>
+							<td><img
+								src=${pageContext.request.contextPath}${lookitem.image}></td>
 						</tr>
+
+						<!-- 参与评论 -->
+						<form action="addItemDiscuss.do?id=${lookitem.item_id}" method="post"
+							enctype="multipart/form-data">
+							<div class="productdesc">
+								<ul class="nav nav-tabs" id="myTab">
+									<li class="active"><a href="#description">参与评论：</a></li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane active" id="description">
+										<input type="text" name="content" style="width: 425px"><br>
+										<input type="submit" value="发表评论">
+									</div>
+								</div>
+							</div>
+						</form>
 
 					</div>
 
@@ -168,19 +193,19 @@
 										style="height: 30px; width: 30px; text-align: center; float: left; border: 0;">
 									<p>商品总数：${lookitem.number}</p>
 								</div>
+
 								<ul class="productpagecart">
 									<li><a class="cart" href="#">现在购买</a></li>
 									<li><a class="wish" href="#">加入购物车</a></li>
 								</ul>
-
 							</div>
 						</div>
 
 						<!-- 商品描述和评论部分-->
+						<!-- 商品描述 -->
 						<div class="productdesc">
 							<ul class="nav nav-tabs" id="myTab">
 								<li class="active"><a href="#description">商品描述</a></li>
-								<li><a href="#">评论</a></li>
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane active" id="description">
@@ -188,56 +213,79 @@
 								</div>
 							</div>
 						</div>
+
+						<!-- 商品评论 -->
+						<div class="productdesc">
+							<ul class="nav nav-tabs" id="myTab">
+								<li class="active"><a href="#description">商品评论</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="description">
+									<p>${error0}</p>
+								</div>
+							</div>
+							<div class="tab-content">
+								<div class="tab-pane active" id="description">
+									<c:forEach items="${discusslist}" var="d">
+										<img src=${pageContext.request.contextPath}/image/dislogo.jpg
+											style="heigh: 20px; width: 20px">:${d.content}<br>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
 					</div>
+				</div>
+			</div>
 		</section>
-		<!-- 推荐部分-->
-		<section id="related" class="row">
-			<div class="container">
-				<h1 class="heading1">
-					<a href="lookshopItem.do?shopid=${lookitem.shop_id}" ><span class="maintext">同店铺商品</span></a><span class="subtext">
-						走过路过错过</span>
-				</h1>
-				<ul class="thumbnails">
-					<c:forEach items="${looklist}" var="i">
-						<li class="span3"><a class="prdocutname"
-							href="lookItem.do?id=${i.item_id}"
-							style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 200px">${i.name}</a>
-							<div class="thumbnail">
-								<a href="lookItem.do?id=${i.item_id}"><img class="itemimage"
-									src=${pageContext.request.contextPath}${i.image}></a>
-								<div class="pricetag">
-									<br>
-									<div class="price">
-										<div class="pricenew">
-											<div class="price" style="float: left; margin-top: 20px">
-												<p>¥${i.price}</p>
-											</div>
+	</div>
+	<!-- 推荐部分-->
+	<section id="related" class="row">
+		<div class="container">
+			<h1 class="heading1">
+				<a href="lookshopItem.do?shopid=${lookitem.shop_id}"><span
+					class="maintext">同店铺商品</span></a><span class="subtext"> 走过路过错过</span>
+			</h1>
+			<ul class="thumbnails">
+				<c:forEach items="${looklist}" var="i">
+					<li class="span3"><a class="prdocutname"
+						href="lookItem.do?id=${i.item_id}"
+						style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 200px">${i.name}</a>
+						<div class="thumbnail">
+							<a href="lookItem.do?id=${i.item_id}"><img class="itemimage"
+								src=${pageContext.request.contextPath}${i.image}></a>
+							<div class="pricetag">
+								<br>
+								<div class="price">
+									<div class="pricenew">
+										<div class="price" style="float: left; margin-top: 20px">
+											<p>¥${i.price}</p>
 										</div>
 									</div>
 								</div>
-							</div></li>
-					</c:forEach>
-				</ul>
-			</div>
-		</section>
-		<!--footer-->
-		<footer style="margin-top: 20px">
-			<img src="${pageContext.request.contextPath}/image/footer-tri.png"
-				style="width: 100%;">
-			<div
-				style="margin: 0px 0px 10px; text-align: center; padding-top: 10px;">
+							</div>
+						</div></li>
+				</c:forEach>
+			</ul>
+		</div>
+	</section>
+	<!--footer-->
+	<footer style="margin-top: 20px">
+		<img src="${pageContext.request.contextPath}/image/footer-tri.png"
+			style="width: 100%;">
+		<div
+			style="margin: 0px 0px 10px; text-align: center; padding-top: 10px;">
 
-				<span>友情链接/</span> <a href="http://www.nwpu.edu.cn/" target="_top"
-					class="links">西北工业大学</a>
+			<span>友情链接/</span> <a href="http://www.nwpu.edu.cn/" target="_top"
+				class="links">西北工业大学</a>
 
-			</div>
-			<div style="text-align: center; margin-bottom: 10px;">
-				<a id="fd_footer" href="javascript:;">产品意见反馈</a> <a
-					href="http://www.2shoujie.com/joinUs" target="_top">加入我们</a>
-			</div>
-			<div style="text-align: center; margin-bottom: 10px;">
-				<span>©2017 版权所有</span> <span>鄂ICP备14003265号-2</span>
-			</div>
-		</footer>
+		</div>
+		<div style="text-align: center; margin-bottom: 10px;">
+			<a id="fd_footer" href="javascript:;">产品意见反馈</a> <a
+				href="http://www.2shoujie.com/joinUs" target="_top">加入我们</a>
+		</div>
+		<div style="text-align: center; margin-bottom: 10px;">
+			<span>©2017 版权所有</span> <span>鄂ICP备14003265号-2</span>
+		</div>
+	</footer>
 </body>
 </html>

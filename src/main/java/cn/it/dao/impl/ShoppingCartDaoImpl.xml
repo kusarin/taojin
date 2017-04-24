@@ -5,8 +5,8 @@
 
 	<insert id="add" parameterType="cn.it.pojo.ShoppingCart">
 		insert into
-		shoppingcart(userId,total)
-		values(#{userId},#{total})
+		shoppingcart(userId,total,totalnumber)
+		values(#{userId},#{total},#{totalnumber})
 	</insert>
 	
 	<delete id="delete" parameterType="int">
@@ -20,6 +20,7 @@
 	</select>
 	
 	<update id="update">
-	  update shoppingcart set total=#{1} where cartId={0}
+	  update shoppingcart set total=#{1},totalnumber=#{2} where cartId=#{0}
 	</update>
+
 </mapper>

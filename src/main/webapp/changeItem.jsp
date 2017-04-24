@@ -219,7 +219,7 @@
 						<li><a href="blog.html">认证店铺 </a></li>
 						<li><a href="查看记录.html">查看记录 </a></li>
 						<li><a href="addItem.jsp">商品上架 </a></li>
-						<li><a href="shopItem.do">商品管理</a></li>
+						<li><a href="shopItem.do?shopid=1">商品管理</a></li>
 						<li><a href="店铺基本信息.html">店铺信息管理</a></li>
 					</ul>
 				</div>

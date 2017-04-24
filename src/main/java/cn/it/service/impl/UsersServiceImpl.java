@@ -17,9 +17,15 @@ public class UsersServiceImpl implements UsersService {
 	@Autowired
 	private UsersDao usersDao;
 
+	public ModelAndView tologin() {
+		ModelAndView str = new ModelAndView("login");
+		str.addObject("error", "请登录后再进行操作！");
+		return str;
+	}
+
 	public ModelAndView login(Users user, HttpSession session)
 			throws IOException {
-		ModelAndView str = new ModelAndView("welcome");
+		ModelAndView str = new ModelAndView("Itemlist");
 		if (user.getUsername().equals("") || user.getUsername() == null
 				|| user.getPassword().equals("") || user.getPassword() == null) {
 			str.addObject("error", "用户名或密码为空");
@@ -68,7 +74,7 @@ public class UsersServiceImpl implements UsersService {
 		session.setAttribute("user", user);
 		return str;
 	}
-	
+
 	public ModelAndView changepw(Users user, HttpSession session) {
 		ModelAndView str = new ModelAndView("welcome");
 		usersDao.changepw(user);
