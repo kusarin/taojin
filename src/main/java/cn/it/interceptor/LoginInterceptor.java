@@ -13,7 +13,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * @author wz
  */
 public class LoginInterceptor extends HandlerInterceptorAdapter {
-	private static final String[] IGNORE_URI = { "/login.do" };
+	private static final String[] IGNORE_URI = { "/login.do","/Itemlist.do","/lookItem.do","/lookshopItem.do","/ItemType1.do","/ItemType2.do","/searchItem.do" };
 
 	@Override
 	public boolean preHandle(HttpServletRequest request,

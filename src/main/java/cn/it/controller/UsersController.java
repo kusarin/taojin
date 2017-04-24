@@ -3,7 +3,6 @@ package cn.it.controller;
 import java.io.IOException;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -33,7 +32,6 @@ public class UsersController {
 	public ModelAndView login(Users user, HttpSession session)
 			throws IOException {
 		ModelAndView result = usersService.login(user, session);
-		result.setViewName("redirect:Itemlist.do");
 		return result;
 	}
 
