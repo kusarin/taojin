@@ -20,21 +20,21 @@ import cn.it.service.CommentService;
 public class CommentController {
 	@Resource
 	private CommentService commentService;
-	
+
 	@RequestMapping("lookComment.do")
-	public ModelAndView lookComment(int page){
+	public ModelAndView lookComment(int page) {
 		return commentService.lookComment(page);
 	}
-	
+
 	@RequestMapping("deleteComment.do")
-	public String delete(@RequestParam("id") String id){
-		int id1=Integer.parseInt(id);
+	public String delete(@RequestParam("id") String id) {
+		int id1 = Integer.parseInt(id);
 		commentService.delete(id1);
 		return "redirect:lookComment.do?page=1";
 	}
-	
+
 	@RequestMapping("addComment.do")
-	public ModelAndView add(Comment comment){
+	public ModelAndView add(Comment comment) {
 		commentService.add(comment);
 		return new ModelAndView("redirect:Itemlist.do");
 	}
