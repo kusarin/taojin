@@ -88,8 +88,8 @@ public class ItemServiceImpl implements ItemService {
 			// 获取店铺编号shop_id
 			Users user = (Users)session.getAttribute("user");
 			int user_id = user.getUser_ID();
-			List<Shop> ls = shopDao.getAllByUserid(user_id);
-			int shop_id=ls.get(0).getShop_id();
+			Shop ls = shopDao.getAllByUserid(user_id);
+			int shop_id=ls.getShop_id();
 			
 			// 将商品数量和价格转为规定格式：商品数量int，商品价格double
 			int num = Integer.parseInt(number);
@@ -478,8 +478,8 @@ public class ItemServiceImpl implements ItemService {
 	 * @return
 	 */
 	public int getShopId(int user_id){
-		List<Shop> ls = shopDao.getAllByUserid(user_id);
-		int shop_id=ls.get(0).getShop_id();
+		Shop ls = shopDao.getAllByUserid(user_id);
+		int shop_id=ls.getShop_id();
 		return shop_id;
 	}
 	
