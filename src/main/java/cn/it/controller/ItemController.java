@@ -18,6 +18,7 @@ import cn.it.dao.DiscussDao;
 import cn.it.pojo.Discuss;
 import cn.it.pojo.Item;
 import cn.it.pojo.Shop;
+import cn.it.pojo.Users;
 import cn.it.service.ItemService;
 
 /**
@@ -318,8 +319,10 @@ public class ItemController {
 			,HttpSession session) {
 		ModelAndView modelandview = new ModelAndView("shopItem"); // 到shopItem.jsp界面
 
-		// 获取前台传入的数据，商品编号id转为int类型；
-		int shop_id = 1;
+		// 获取店铺编号shop_id
+		Users user = (Users)session.getAttribute("user");
+		int user_id = user.getUser_ID();
+		int shop_id = itemservice.getShopId(user_id);
 
 		// 获取商品条目list（在售）
 		List<Item> list;

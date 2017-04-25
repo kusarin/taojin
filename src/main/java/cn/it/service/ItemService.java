@@ -188,6 +188,14 @@ public interface ItemService {
 	public Shop showShop(int shop_id);
 
 	/**
+	 * 根据用户编号获得对应的店铺编号
+	 * 
+	 * @param user_id 用户编号
+	 * @return
+	 */
+	public int getShopId(int user_id);
+	
+	/**
 	 * 后台管理用的。
 	 * 
 	 * @author sunchen

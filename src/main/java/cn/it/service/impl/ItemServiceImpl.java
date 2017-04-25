@@ -470,7 +470,19 @@ public class ItemServiceImpl implements ItemService {
 	public Shop showShop(int shop_id) {
 		return shopDao.findByid(shop_id);
 	}
-
+	
+	/**
+	 * 根据用户编号获得对应的店铺编号
+	 * 
+	 * @param user_id 用户编号
+	 * @return
+	 */
+	public int getShopId(int user_id){
+		List<Shop> ls = shopDao.getAllByUserid(user_id);
+		int shop_id=ls.get(0).getShop_id();
+		return shop_id;
+	}
+	
 	/**
 	 * 孙琛改的，用在管理员后台管理。
 	 */
