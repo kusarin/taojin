@@ -17,9 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.it.dao.DiscussDao;
 import cn.it.dao.ItemDao;
 import cn.it.dao.ShopDao;
+import cn.it.dao.TypehDao;
+import cn.it.dao.TypelDao;
 import cn.it.pojo.Discuss;
 import cn.it.pojo.Item;
 import cn.it.pojo.Shop;
+import cn.it.pojo.Typeh;
+import cn.it.pojo.Typel;
 import cn.it.service.ItemService;
 
 /**
@@ -38,6 +42,10 @@ public class ItemServiceImpl implements ItemService {
 	private ShopDao shopDao;
 	@Autowired
 	private DiscussDao discussDao;
+	@Autowired
+	private TypehDao typehDao;
+	@Autowired
+	private TypelDao typelDao;
 
 	/**
 	 * 添加商品
@@ -81,8 +89,11 @@ public class ItemServiceImpl implements ItemService {
 			int num = Integer.parseInt(number);
 			double pri = Double.parseDouble(price);
 
-			// 根据商品的二阶类型获取商品的一阶类型（暂时用的是固定值）
-			String typeh = "动漫";
+			// 根据商品的二阶类型获取商品的一阶类型
+			Typel tyl = typelDao.FindTypelByName(typel);
+			int typeh_id = tyl.getTypeh_id();
+			Typeh tyh = typehDao.FindTypehById(typeh_id);
+			String typeh = tyh.getName();
 			// 获取商品一阶分类结束
 
 			// 定义商品；
@@ -198,8 +209,11 @@ public class ItemServiceImpl implements ItemService {
 			int num = Integer.parseInt(number);
 			double pri = Double.parseDouble(price);
 
-			// 根据商品的二阶类型获取商品的一阶类型（暂时用的是固定值）
-			String typeh = "动漫";
+			// 根据商品的二阶类型获取商品的一阶类型
+			Typel tyl = typelDao.FindTypelByName(typel);
+			int typeh_id = tyl.getTypeh_id();
+			Typeh tyh = typehDao.FindTypehById(typeh_id);
+			String typeh = tyh.getName();
 			// 获取商品一阶分类结束
 
 			// 定义商品；

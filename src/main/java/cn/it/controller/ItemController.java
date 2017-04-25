@@ -42,10 +42,11 @@ public class ItemController {
 	@RequestMapping("addItem.do")
 	public ModelAndView addItem(
 			@RequestParam(value = "file", required = false) MultipartFile file,
-			HttpServletRequest request, @RequestParam("shop_id") String shop_id
+			HttpServletRequest request
 			) {
 
 		// 获取店铺编号shop_id
+		String shop_id = request.getParameter("Shop_id");
 		int s_id = Integer.parseInt(shop_id);
 
 		// 获取前台传入的数据；
