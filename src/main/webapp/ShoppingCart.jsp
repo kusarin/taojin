@@ -2,7 +2,11 @@
 pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
-
+<% 
+response.setHeader("Cache-Control","no-store"); 
+response.setHeader("Pragrma","no-cache"); 
+response.setDateHeader("Expires",0); 
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,10 +39,31 @@ function allc(name,checked){
 		 ac.innerHTML=""+val;
 	 }else{
 		 document.getElementById("cn").innerHTML=""+0;
-		 document.getElementById("ac").innerHTML="￥"+0.0;
+		 document.getElementById("ac").innerHTML=""+0.0;
 	 }
 }
-
+function cl(name,checked,tot){
+	var va=parseFloat(document.getElementById("ac").innerHTML);
+	var cn=parseFloat(document.getElementById("cn").innerHTML);
+	if(checked){
+		va=va+tot;
+		document.getElementById("ac").innerHTML=""+va;
+		cn++;
+		document.getElementById("cn").innerHTML=""+cn;
+		var vv=document.getElementsByName("cartItemId");
+		if(cn==vv.length){
+			document.getElementById("al").checked=true;
+		}else{
+			document.getElementById("al").checked=false;
+		}
+	}else{
+		va=va-tot;
+		document.getElementById("ac").innerHTML=""+va;
+		cn--;
+		document.getElementById("cn").innerHTML=""+cn;
+		document.getElementById("al").checked=false;
+	}
+} 
 function deleteo(cartItemId){
 	if(confirm("确定要移除此商品吗？")){
 		window.location.href="deleteCart.do?cartItemId="+cartItemId;
@@ -54,6 +79,23 @@ function p(id,number,snumber){
 	else{
 		alert("没有这种商品了！");
 	}
+}
+function comm(){
+	 var ii=0;
+	   var cks=document.getElementsByName("cartItemId");
+     for(var i =0;i<cks.length;i++){
+  	   if(cks[i].checked){
+  		   ii++;
+  	   }
+     }
+     if(ii==0){
+  	   alert("至少选择一条");
+       return;
+     }
+     document.myform.action="payingCart.do";
+     // $(".myform")
+     document.myform.submit();
+
 }
 </script>
 </head>
@@ -102,23 +144,22 @@ function p(id,number,snumber){
 	</header>
 	<!-- Header End -->
 	
-	<form action="submitOrder.do" method="post">
+	<form action="" name="myform" method="post">
      <div class="containers">
-	  <form>
 	   <div class="orderTitle" style="color:gray;">
 	      <p>购物车</p>
 	   </div>
 	   
 	   <div class="receive">
 		      <div class="info">
-	             <strong>全部商品</strong><span style="color:red;">2</span>
+	             <strong>全部商品</strong><span style="color:red;">${clist.sh.totalnumber}</span>
 		      </div>
 	   </div>
 		<div class="receive" style="border-bottom:0px;">
 		    <div class="nav1">
 			    <table>
 				<tr>
-				   <td class="nav11"><input type="checkbox" onclick="allc('cartItemId',this.checked)" style="float:left;"><span style="float:left;margin-left:5px;">全选</span><span>商品</span></td>
+				   <td class="nav11"><input type="checkbox" id="al" onclick="allc('cartItemId',this.checked)" style="float:left;"><span style="float:left;margin-left:5px;">全选</span><span>商品</span></td>
 			       <td class="nav12">数量</td>
 			       <td class="nav12">单价</td>
 			       <td class="nav12">小计</td>
@@ -131,12 +172,11 @@ function p(id,number,snumber){
 		
 		<div class="shoper">
 			    <span>店铺：<a href="#">${c.shopName}</a></span>
-				<input type="hidden" value="dkbov帝克博威旗舰店" name="">
 		</div>
 		<div class="orderDe" style="border:1px solid #80ffff;">
 		<table>
 		      <tr>
-			     <td class="test1"><input type="checkbox" name="cartItemId" value="${c.cartItemId}" style="margin-top:0px;float:left;">
+			     <td class="test1"><input type="checkbox" name="cartItemId" onclick="cl('cartItemId',this.checked,${c.totalPrice})" value="${c.cartItemId}" style="margin-top:0px;float:left;">
 			     <a href="#"><img src="${pageContext.request.contextPath}${c.item.image}"/></a>
 		         <a href="#"><p>${c.item.name}</p></a></td>
 				 <td class="common" style="padding-left:0px;text-align:center;">
@@ -153,14 +193,14 @@ function p(id,number,snumber){
 		
 		<div class="orderDe">
 		    <table class="same">
-			     <tr><td style="padding-top:15px;padding-bottom:15px;">已选<strong class="pay" id="cn">0</strong>件商品，总商品金额：<strong class="pay" id="ac">￥0.0</strong></td></tr>
+			     <tr><td style="padding-top:15px;padding-bottom:15px;">已选<strong class="pay" id="cn">0</strong>件商品，总商品金额：<strong class="pay" id="ac">0.0</strong></td></tr>
 			</table>
 		</div>
 		
 		<div class="commit">
-		    <input type="submit" value="去付款"/>
+		    <input type="button" value="结算" onclick="comm()" style="width:70px;height:40px;"/>
 		</div>
-		</form>
+		
     </div> 
     </form>
     <!-- footer -->

@@ -1,7 +1,9 @@
 package cn.it.controller;
 
 import java.io.IOException;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -19,11 +21,18 @@ public class UsersController {
 	@Resource
 	private UsersService usersService;
 
+	// 添加用户
+	@RequestMapping("tologin.do")
+	public ModelAndView tologin() {
+		ModelAndView result = usersService.tologin();
+		return result;
+	}
+
+	// 登录
 	@RequestMapping("login.do")
 	public ModelAndView login(Users user, HttpSession session)
 			throws IOException {
 		ModelAndView result = usersService.login(user, session);
-		result.setViewName("redirect:Itemlist.do");
 		return result;
 	}
 
@@ -46,17 +55,17 @@ public class UsersController {
 		return null;
 	}
 
-	//更新用户信息
+	// 更新用户信息
 	@RequestMapping("updateUser.do")
 	public ModelAndView updateUser(Users user, HttpSession session) {
 		ModelAndView result = usersService.update(user, session);
 		return result;
 	}
-	
-	//更新用户信息
-		@RequestMapping("changepw.do")
-		public ModelAndView changepw(Users user, HttpSession session) {
-			ModelAndView result = usersService.changepw(user, session);
-			return result;
-		}
+
+	// 更新用户信息
+	@RequestMapping("changepw.do")
+	public ModelAndView changepw(Users user, HttpSession session) {
+		ModelAndView result = usersService.changepw(user, session);
+		return result;
+	}
 }

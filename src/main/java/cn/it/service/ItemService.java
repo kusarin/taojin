@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.it.pojo.Discuss;
 import cn.it.pojo.Item;
 import cn.it.pojo.Shop;
 
@@ -111,7 +112,17 @@ public interface ItemService {
 	public List<Item> findItemList();
 
 	/**
-	 * 按照商品类型查找商品信息
+	 * 按照商品类型查找商品信息，此处输入商品一级分类
+	 * 
+	 * @param typeh
+	 *            商品一级分类，String
+	 * 
+	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
+	 */
+	public List<Item> findByType1(String typeh);
+	
+	/**
+	 * 按照商品类型查找商品信息，此处输入商品一级分类和二级分类
 	 * 
 	 * @param typeh
 	 *            商品一级分类，String
@@ -120,7 +131,7 @@ public interface ItemService {
 	 * 
 	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
-	public List<Item> findByType(String typeh, String typel);
+	public List<Item> findByType2(String typeh, String typel);
 
 	/**
 	 * 按照店铺归宿查找所有商品
@@ -149,6 +160,24 @@ public interface ItemService {
 	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Item> findBystr(String str);
+	
+	/**
+	 * 查看商品对应的评论
+	 * 
+	 * @param item_id 商品编号
+	 * @return List<Discuss> 返回值为一个评论列表，包括一个或者多个评论
+	 */
+	public List<Discuss> showDisscussList(int item_id);
+	
+	/**
+	 * 给某个商品添加评论
+	 * 
+	 * @param item_id 商品编号
+	 * @param content 评论内容
+	 * @return
+	 */
+	public ModelAndView addDiscuss1(int item_id,String content, HttpServletRequest request);
+	
 	/**
 	 * 查看商品对应的店铺
 	 * 
