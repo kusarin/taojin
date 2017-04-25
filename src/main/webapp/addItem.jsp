@@ -255,13 +255,30 @@
 													<div class="control-group">
 														<td>商品类型:</td>
 														<div class="controls">
-															<td><select id="code" name="typeh">
-																	<option value="高级分类1">高级分类1</option>
-																	<option value="高级分类2">高级分类2</option>
-															</select> <select id="code" name="typel">
-																	<option value="低级分类1">低级分类1</option>
-																	<option value="低级分类2">低级分类2</option>
-															</select></td>
+															<td>
+															<select id="code" name="typel">
+																	<optgroup label="动漫">
+																	<option value="漫画原本">漫画原本</option>
+																	<option value="读者手绘">读者手绘</option>
+																	<option value="cos女装">cos女装</option>
+																	<option value="cos男装">cos男装</option>
+																	<option value="动漫手办">动漫手办</option>
+																	</optgroup>
+																	<optgroup label="游戏">
+																	<option value="游戏账号">游戏账号</option>
+																	<option value="游戏点卡">游戏点卡</option>
+																	<option value="游戏装备">游戏装备</option>
+																	<option value="游戏金币">游戏金币</option>
+																	<option value="实体盘">实体盘</option>
+																	</optgroup>
+																	<optgroup label="乐器">
+																	<option value="吉他">吉他</option>
+																	<option value="萨克斯">萨克斯</option>
+																	<option value="口琴">口琴</option>
+																	<option value="笛子">笛子</option>
+																	<option value="手风琴">手风琴</option>
+																	</optgroup>
+															</td>
 														</div>
 													</div>
 												</tr>

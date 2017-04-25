@@ -253,11 +253,27 @@
 												</tr>
 												<tr>
 													<div class="control-group">
-														<td>商品类型:</td>
+														<div class="controls">
+															<td>商品原本类型:</td>
+															<td>>${change.typeh}> ${change.typel}</td>
+														</div>
+													</div>
+												</tr>
+												<tr>
+													<div class="control-group">
+														<td>商品类型选择:</td>
 														<div class="controls">
 															<td><select id="code" name="typeh">
-																	<option value="高级分类1">高级分类1</option>
-																	<option value="高级分类2">高级分类2</option>
+																	<option value="动漫">动漫</option>
+																	<option value="游戏">游戏</option>
+																	<option value="乐器">乐器</option>
+																	<option value="数码用品">数码用品</option>
+																	<option value="电脑">电脑</option>
+																	<option value="运动">运动</option>
+																	<option value="户外健身">户外健身</option>
+																	<option value="学习">学习</option>
+																	<option value="服装">服装</option>
+																	<option value="其他商品">其他商品</option>
 															</select> <select id="code" name="typel">
 																	<option value="低级分类1">低级分类1</option>
 																	<option value="低级分类2">低级分类2</option>
