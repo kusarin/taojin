@@ -102,7 +102,7 @@
 					<div class="pull-right">
 						<form action="searchItem.do" method="post">
 							<div style="margin-top: 10px;">
-								<input input type="text" name="str"
+								<input type="text" name="str"
 									class="input-medium search-query" placeholder="搜索你想要的二手"
 									style="height: 20px; width: 100; border: 4px solid #FFA07A">
 								<input type="submit" value="搜索"

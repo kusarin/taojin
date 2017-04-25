@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import cn.it.pojo.Item;
 import cn.it.pojo.Shop;
 import cn.it.pojo.Typeh;
 import cn.it.pojo.Typel;
+import cn.it.pojo.Users;
 import cn.it.service.ItemService;
 
 /**
@@ -50,8 +52,6 @@ public class ItemServiceImpl implements ItemService {
 	/**
 	 * 添加商品
 	 * 
-	 * @param shop_id
-	 *            店铺编号，int
 	 * @param name
 	 *            商品名称，String
 	 * @param typel
@@ -69,9 +69,9 @@ public class ItemServiceImpl implements ItemService {
 	 * 
 	 * @return ModelAndView
 	 */
-	public ModelAndView addItem(int shop_id, String name, String typel,
+	public ModelAndView addItem(String name, String typel,
 			String number, String price, String detail, MultipartFile file,
-			HttpServletRequest request) {
+			HttpServletRequest request,HttpSession session) {
 		ModelAndView str = new ModelAndView("addItem"); // 跳转到addItem.jsp界面
 
 		// 判断传入参数是否为空
@@ -85,6 +85,12 @@ public class ItemServiceImpl implements ItemService {
 
 		} else {// 参数不为空时候，执行添加操作
 
+			// 获取店铺编号shop_id
+			Users user = (Users)session.getAttribute("user");
+			int user_id = user.getUser_ID();
+			List<Shop> ls = shopDao.getAllByUserid(user_id);
+			int shop_id=ls.get(0).getShop_id();
+			
 			// 将商品数量和价格转为规定格式：商品数量int，商品价格double
 			int num = Integer.parseInt(number);
 			double pri = Double.parseDouble(price);
@@ -99,13 +105,13 @@ public class ItemServiceImpl implements ItemService {
 			// 定义商品；
 			Item i = new Item();
 			// 设置商品属性；
-			i.setshop_id(shop_id); // 店鋪编号
-			i.setname(name); // 商品名称
-			i.settypeh(typeh); // 商品一阶类型
-			i.settypel(typel); // 商品二阶类型
-			i.setnumber(num); // 商品数量
-			i.setprice(pri); // 商品价格
-			i.setdetail(detail); // 商品描述
+			i.setshop_id(shop_id);  // 店鋪编号
+			i.setname(name);        // 商品名称
+			i.settypeh(typeh);      // 商品一阶类型
+			i.settypel(typel);      // 商品二阶类型
+			i.setnumber(num);       // 商品数量
+			i.setprice(pri);        // 商品价格
+			i.setdetail(detail);    // 商品描述
 
 			// 商品图片部分
 			// 获取图片存储文件的路径
