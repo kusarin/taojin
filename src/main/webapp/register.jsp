@@ -260,7 +260,7 @@
 												<label class="control-label"><span class="red">*</span>
 													密码:</label>
 												<div class="controls">
-													<input type="text" class="input-xlarge" name="password"
+													<input type="password" class="input-xlarge" name="password"
 														id="pwd1">
 												</div>
 											</div>
@@ -268,7 +268,7 @@
 												<label class="control-label"><span class="red">*</span>
 													确认密码::</label>
 												<div class="controls">
-													<input type="text" class="input-xlarge" id="pwd2">
+													<input type="password" class="input-xlarge" id="pwd2">
 												</div>
 											</div>
 										</fieldset>

@@ -80,8 +80,8 @@
 										<li><a class="home active" href="Itemlist.do">首页</a></li>
 										<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
 										<li><a class="checkout" href="shopList.jsp">我的店铺</a></li>
-										<li><a class="shoppingcart" href="#">购物车</a></li>
-										<li><a class="checkout" href="#">我的订单</a></li>
+										<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
+										<li><a class="checkout" href="orderItem.do">我的订单</a></li>
 									</ul>
 								</div>
 							</div>
@@ -277,6 +277,20 @@
 				<h3>
 					<span>·</span><a href="ItemType1.do?typeh=其他商品">其他商品</a>
 				</h3>
+				<div class="item-list clearfix">
+					<div class="close">x</div>
+					<div class="subitem">
+						<dl class="fore1">
+							<dt>
+								<a href="ItemType1.do?typeh=其他商品">其他商品</a>
+							</dt>
+							<dd>
+								<em>
+								<a href="ItemType2.do?typeh=其他商品&typel=其他商品">其他商品</a></em>
+							</dd>
+						</dl>
+					</div>
+				</div>
 			</div>
 		</div>
 		<p>${show}</p>

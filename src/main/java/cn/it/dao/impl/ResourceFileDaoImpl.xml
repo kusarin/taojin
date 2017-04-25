@@ -3,7 +3,7 @@
 <mapper namespace = "cn.it.dao.ResourceFileDao">
 <!-- 显示所有文件资源 -->
 	<select id ="findAll" resultType="cn.it.pojo.ResourceFile">
-		select r.name,r.address,r.type,r.resourcefile_id id from ResourceFile r
+		select * from ResourceFile 
 	</select>
 <!-- 增添文件资源 -->
 	<insert id="add" parameterType="cn.it.pojo.ResourceFile">
@@ -12,6 +12,6 @@
 	</insert>
 <!-- 删除文件资源 -->
 	<delete id="delete" parameterType="java.lang.Integer">
-          delete from resourcefile where resourcefile_id=#{ID}
+          delete from resourcefile where resourcefile_id=#{resourcefile_id}
      </delete>
 </mapper>

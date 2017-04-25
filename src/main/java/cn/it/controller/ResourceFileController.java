@@ -3,7 +3,6 @@ package cn.it.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,18 +24,14 @@ public class ResourceFileController {
 	private ResourceFileService resourceFileService;
 	
 	@RequestMapping("findResourceFile.do")
-	public ModelAndView findResourceFile(HttpServletRequest request){
-		ModelAndView modelandview = new ModelAndView("ResourceFile");
-		List<ResourceFile> list;
-		list = resourceFileService.findAll();
-		modelandview.addObject("ResourceFile",list);
-		return modelandview;
+	public ModelAndView findResourceFile(int page){
+		return resourceFileService.findAll(page);
 	}
 	
 	@RequestMapping("addRF.do")
 	public ModelAndView addRF(ResourceFile rf){
 		ModelAndView result = resourceFileService.add(rf);
-		result.setViewName("redirect:findResourceFile.do");
+		result.setViewName("redirect:findResourceFile.do?page=1");
 		return result;
 	}
 	
@@ -44,6 +39,6 @@ public class ResourceFileController {
 	public String delete(@RequestParam("id") String id){
 		int id1=Integer.parseInt(id);
 		resourceFileService.delete(id1);
-		return "redirect:findResourceFile.do";
+		return "redirect:findResourceFile.do?page=1";
 	}
 }

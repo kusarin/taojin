@@ -1,8 +1,7 @@
 package cn.it.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
-
-
 
 import javax.servlet.http.HttpSession;
 
@@ -73,12 +72,37 @@ public class ManagerServiceImpl implements ManagerService{
 	
 	public ModelAndView update(Manager manager) {
 		ModelAndView mav =new ModelAndView("managerInterface");
+
 		if(manager.getPassword()==null||manager.getPassword().equalsIgnoreCase("")){
 			mav.addObject("error", "新密码为空！");
+			mav.setViewName("updateMpassword");
+		}else if(manager.getAccount()==null||manager.getAccount().equalsIgnoreCase("")){
+			mav.addObject("error", "session已过期！请重新登录！");
 			mav.setViewName("updateMpassword");
 		}else{
 			managerDao.managerUpdate(manager);
 		}
 		return mav;
 	}
+
+	public List<Integer> pageList(int page,int totalPage){
+		int n;
+		List<Integer> pageList = new ArrayList<Integer>();
+		for(n = page - 5 ;n <= totalPage && n<= page+5;n++){
+			if(n>0){
+				pageList.add(n);
+			}
+		}
+		return pageList;
+	}
+	
+	public int totalPage(int total){
+		int perPage = 10;
+		int totalPage = total/perPage;
+		if(total % perPage != 0){
+		    totalPage += 1;
+		}
+		return totalPage;
+	}
+	
 }

@@ -17,9 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.it.dao.DiscussDao;
 import cn.it.dao.ItemDao;
 import cn.it.dao.ShopDao;
+import cn.it.dao.TypehDao;
+import cn.it.dao.TypelDao;
 import cn.it.pojo.Discuss;
 import cn.it.pojo.Item;
 import cn.it.pojo.Shop;
+import cn.it.pojo.Typeh;
+import cn.it.pojo.Typel;
 import cn.it.service.ItemService;
 
 /**
@@ -38,6 +42,10 @@ public class ItemServiceImpl implements ItemService {
 	private ShopDao shopDao;
 	@Autowired
 	private DiscussDao discussDao;
+	@Autowired
+	private TypehDao typehDao;
+	@Autowired
+	private TypelDao typelDao;
 
 	/**
 	 * 添加商品
@@ -46,8 +54,6 @@ public class ItemServiceImpl implements ItemService {
 	 *            店铺编号，int
 	 * @param name
 	 *            商品名称，String
-	 * @param typeh
-	 *            商品一级分类，String
 	 * @param typel
 	 *            商品二级分类，String
 	 * @param number
@@ -63,16 +69,16 @@ public class ItemServiceImpl implements ItemService {
 	 * 
 	 * @return ModelAndView
 	 */
-	public ModelAndView addItem(int shop_id, String name, String typeh,
-			String typel, String number, String price, String detail,
-			MultipartFile file, HttpServletRequest request) {
+	public ModelAndView addItem(int shop_id, String name, String typel,
+			String number, String price, String detail, MultipartFile file,
+			HttpServletRequest request) {
 		ModelAndView str = new ModelAndView("addItem"); // 跳转到addItem.jsp界面
 
 		// 判断传入参数是否为空
-		if (name == null || name.equals("") || typeh == null
-				|| typeh.equals("") || typel == null || typel.equals("")
-				|| number == null || number.equals("") || price == null
-				|| price.equals("") || detail == null || detail.equals("")) {
+		if (name == null || name.equals("") || typel == null
+				|| typel.equals("") || number == null || number.equals("")
+				|| price == null || price.equals("") || detail == null
+				|| detail.equals("")) {
 
 			// 提示信息 "输入数据不能为空！！！"
 			str.addObject("error", "输入数据不能为空！！！");
@@ -82,6 +88,13 @@ public class ItemServiceImpl implements ItemService {
 			// 将商品数量和价格转为规定格式：商品数量int，商品价格double
 			int num = Integer.parseInt(number);
 			double pri = Double.parseDouble(price);
+
+			// 根据商品的二阶类型获取商品的一阶类型
+			Typel tyl = typelDao.FindTypelByName(typel);
+			int typeh_id = tyl.getTypeh_id();
+			Typeh tyh = typehDao.FindTypehById(typeh_id);
+			String typeh = tyh.getName();
+			// 获取商品一阶分类结束
 
 			// 定义商品；
 			Item i = new Item();
@@ -177,16 +190,16 @@ public class ItemServiceImpl implements ItemService {
 	 * 
 	 * @return ModelAndView
 	 */
-	public ModelAndView updateItem(int item_id, String name, String typeh,
-			String typel, String number, String price, String detail,
-			String image, MultipartFile file, HttpServletRequest request) {
+	public ModelAndView updateItem(int item_id, String name, String typel,
+			String number, String price, String detail, String image,
+			MultipartFile file, HttpServletRequest request) {
 		ModelAndView str = new ModelAndView("shopItem"); // 跳转到shopItem.jsp界面
 
 		// 判断传入参数是否为空
-		if (name == null || name.equals("") || typeh == null
-				|| typeh.equals("") || typel == null || typel.equals("")
-				|| number == null || number.equals("") || price == null
-				|| price.equals("") || detail == null || detail.equals("")) {
+		if (name == null || name.equals("") || typel == null
+				|| typel.equals("") || number == null || number.equals("")
+				|| price == null || price.equals("") || detail == null
+				|| detail.equals("")) {
 
 			// 提示信息 "输入数据不能为空！！！"
 			str.addObject("error", "输入数据不能为空！！！");
@@ -195,6 +208,13 @@ public class ItemServiceImpl implements ItemService {
 			// 将商品数量和价格转为规定格式：商品数量int，商品价格double
 			int num = Integer.parseInt(number);
 			double pri = Double.parseDouble(price);
+
+			// 根据商品的二阶类型获取商品的一阶类型
+			Typel tyl = typelDao.FindTypelByName(typel);
+			int typeh_id = tyl.getTypeh_id();
+			Typeh tyh = typehDao.FindTypehById(typeh_id);
+			String typeh = tyh.getName();
+			// 获取商品一阶分类结束
 
 			// 定义商品；
 			Item i = itemDao.FindItemById(item_id);
@@ -406,20 +426,20 @@ public class ItemServiceImpl implements ItemService {
 	public ModelAndView addDiscuss1(int item_id, String content,
 			HttpServletRequest request) {
 		ModelAndView str = new ModelAndView("lookItem"); // 跳转到addItem.jsp界面
-		
+
 		// 判断传入参数是否为空
-		if (content == null || content.equals("") ) {
+		if (content == null || content.equals("")) {
 
 			// 提示信息 "输入数据不能为空！！！"
 			str.addObject("error", "输入评论不能为空！！！");
-		}else{
+		} else {
 
 			// 定义评论；
 			Discuss d = new Discuss();
 			// 设置评论属性；
 			d.setItem_id(item_id); // 商品编号
 			d.setContent(content); // 评论内容
-			
+
 			// 添加评论信息；
 			discussDao.addDiscuss1(d);
 			request.setAttribute("discuss", d);
@@ -429,7 +449,7 @@ public class ItemServiceImpl implements ItemService {
 
 			str.setViewName("lookItem");
 		}
-		
+
 		// 返回提示信息
 		return str;
 	}

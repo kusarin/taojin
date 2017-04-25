@@ -12,7 +12,7 @@ import cn.it.pojo.ResourceFile;
  *
  */
 public interface ResourceFileService {
-	public List<ResourceFile> findAll();
+	public ModelAndView findAll(int page);
 
 	public ModelAndView add(ResourceFile rf);
 	
