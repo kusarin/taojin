@@ -277,6 +277,20 @@
 				<h3>
 					<span>·</span><a href="ItemType1.do?typeh=其他商品">其他商品</a>
 				</h3>
+				<div class="item-list clearfix">
+					<div class="close">x</div>
+					<div class="subitem">
+						<dl class="fore1">
+							<dt>
+								<a href="ItemType1.do?typeh=其他商品">其他商品</a>
+							</dt>
+							<dd>
+								<em>
+								<a href="ItemType2.do?typeh=其他商品&typel=其他商品">其他商品</a></em>
+							</dd>
+						</dl>
+					</div>
+				</div>
 			</div>
 		</div>
 		<p>${show}</p>
