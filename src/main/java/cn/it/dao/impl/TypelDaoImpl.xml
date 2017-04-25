@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "cn.it.dao.TypelDao">
+<!-- 根据商品二阶类型的名称查看单个商品二阶类型 -->
+	<select id="FindTypelByName" parameterType="String" resultType="cn.it.pojo.Typel">
+		select * from typel where name = #{name}
+	</select>
+</mapper>
