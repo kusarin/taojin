@@ -111,6 +111,7 @@
 									<div align="center">
 										<form id="myform" action="doChange.do" method="post">
 											<table>
+											
 												<input type="hidden" value="${shop.shop_id}" name="Shop_id" />
 												<tr>
 													<div class="control-group">

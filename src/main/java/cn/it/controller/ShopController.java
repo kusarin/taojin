@@ -36,8 +36,9 @@ public class ShopController {
 	}
 	@RequestMapping(value ={"/toChange.do"},method={RequestMethod.GET,RequestMethod.POST}
 	)
-	public String toChange(Shop shop,Map<String,Object> map){
-		map.put("shop", shopService.findByid(shop.getShop_id()));
+	public String toChange(Shop shop,Map<String,Object> map,HttpSession session){
+		Users user = (Users)session.getAttribute("user");
+		map.put("shop", shopService.getAllByUserid(user.getUser_ID()));
 		return "/shopinfoChange";
 	}
 	@RequestMapping(value ={"/doChange.do"},method={RequestMethod.GET,RequestMethod.POST})

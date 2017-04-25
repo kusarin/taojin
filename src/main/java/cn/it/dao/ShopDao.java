@@ -4,7 +4,7 @@ import cn.it.pojo.Shop;
 
 import java.util.List;
 public interface ShopDao {
-	List<Shop> getAllByUserid(int num);
+	Shop getAllByUserid(int num);
     Shop findByid(int id);
     public void changeInfoByid(Shop shop);
     public void addShop(Shop shop);
