@@ -8,29 +8,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import cn.it.pojo.Pay_01;
 
 
 
-
-public class PayController extends HttpServlet
-{
+@Controller
+public class PayController{
 	/**
-	 * 
+	 * 支付
 	 */
 	private static final long serialVersionUID = 1L;
-	public void doGet(HttpServletRequest request,HttpServletResponse response)
+//	public void doGet(HttpServletRequest request,HttpServletResponse response)
+//			throws ServletException, IOException{
+//		doPost(request,response);
+//	}
+	@RequestMapping("payment.do")
+	public void payment(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException, IOException{
-		doPost(request,response);
-	}
-	public void doPost(HttpServletRequest request,HttpServletResponse response)
-			throws ServletException, IOException{
-	request.setCharacterEncoding("utf-8");
+	    request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		String p0_Cmd = "Buy";
 		String p1_MerId = "10001126856";
 		String p2_Order = request.getParameter("p2_Order");
 		String p3_Amt = request.getParameter("p3_Amt");
+		System.out.println("输出参数是"+p2_Order+"\t"+p3_Amt);
 		String p4_Cur = "CNY";
 		String p5_Pid = "";
 		String p6_Pcat = "";
@@ -38,7 +42,7 @@ public class PayController extends HttpServlet
 		String p8_Url = "http://localhost:8080/yibaozhi/BackServlet";
 		String p9_SAF = "";
 		String pa_MP = "";
-		String pd_FrpId = request.getParameter("pd_FrpId");
+		String pd_FrpId = "ICBC-NET-B2C";
 		String pr_NeedResponse = "1";
 		
 		String keyValue = "69cl522AV6q613Ii4W6u8K6XuW8vM1N6bFgyv769220IuYe9u37N4y7rI4Pl";
