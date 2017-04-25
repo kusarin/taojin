@@ -123,10 +123,10 @@
 									<div style="margin-left: 250px;">
 										<ul class="nav">
 											<li><a class="home active" href="Itemlist.do">首页</a></li>
-											<li><a class="myaccount" href="#">个人账户</a></li>
-											<li><a class="shoppingcart" href="#">购物车</a></li>
-											<li><a class="checkout" href="#">我的订单</a></li>
-											<li><a class="checkout" href="#">发布二手</a></li>
+											<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
+											<li><a class="checkout" href="shopList.do">我的店铺</a></li>
+											<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
+											<li><a class="checkout" href="orderItem.do">我的订单</a></li>
 										</ul>
 									</div>
 								</div>
@@ -136,7 +136,7 @@
 						<div class="pull-right">
 							<form action="searchItem.do" method="post">
 								<div style="margin-top: 10px;">
-									<input input type="text" name="str"
+									<input type="text" name="str"
 										class="input-medium search-query" placeholder="搜索你想要的二手"
 										style="height: 20px; width: 100; border: 4px solid #FFA07A;">
 									<input type="submit" value="搜索"
@@ -208,9 +208,11 @@
 								</div>
 
 								<ul class="productpagecart">
-								
-									<li><a class="cart" href="javascript:void(0)" onclick="purchas()">现在购买</a></li>
-									<li><a class="wish" href="javascript:succ()" onclick="addCart()">加入购物车</a></li>
+
+									<li><a class="cart" href="javascript:void(0)"
+										onclick="purchas()">现在购买</a></li>
+									<li><a class="wish" href="javascript:succ()"
+										onclick="addCart()">加入购物车</a></li>
 								</ul>
 							</div>
 						</div>
@@ -280,7 +282,7 @@
 		</div>
 	</section>
 	<!--footer-->
-	<footer style="margin-top: 20px">
+	<footer style="margin-top: 100px">
 		<img src="${pageContext.request.contextPath}/image/footer-tri.png"
 			style="width: 100%;">
 		<div
@@ -291,8 +293,7 @@
 
 		</div>
 		<div style="text-align: center; margin-bottom: 10px;">
-			<a id="fd_footer" href="addComment.jsp">产品意见反馈</a> <a
-				href="http://www.2shoujie.com/joinUs" target="_top">加入我们</a>
+			<a id="fd_footer" href="addComment.jsp">产品意见反馈</a>
 		</div>
 		<div style="text-align: center; margin-bottom: 10px;">
 			<span>©2017 版权所有</span> <span>鄂ICP备14003265号-2</span>

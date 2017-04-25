@@ -32,186 +32,53 @@
 			<div class="container">
 				<div class="row">
 					<div class="span12">
-						<a href="index-2.html" class="logo pull-left"><img
-							src="img/logo.png" alt="SimpleOne" title="SimpleOne"></a>
 						<!-- Top Nav Start -->
 						<div class="pull-left">
 							<div class="navbar" id="topnav">
 								<div class="navbar-inner">
-									<ul class="nav">
-										<li><a class="home active" href="#">Home</a></li>
-										<li><a class="myaccount" href="#">My Account</a></li>
-										<li><a class="shoppingcart" href="#">Shopping Cart</a></li>
-										<li><a class="checkout" href="#">CheckOut</a></li>
-									</ul>
+									<div style="float: left; color: white; margin-top: 26px;">
+										<span>您好,</span> <a href="login.jsp"><span
+											style="color: white;">登录</span></a> <a href="register.jsp"> <span
+											style="margin-left: 20px; color: white;">注册</span></a>
+									</div>
+									<div style="margin-left: 250px;">
+										<ul class="nav">
+											<li><a class="home active" href="Itemlist.do">首页</a></li>
+											<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
+											<li><a class="checkout" href="shopList.do">我的店铺</a></li>
+											<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
+											<li><a class="checkout" href="orderItem.do">我的订单</a></li>
+										</ul>
+									</div>
 								</div>
 							</div>
 						</div>
 						<!-- Top Nav End -->
 						<div class="pull-right">
-							<form class="form-search top-search">
-								<input type="text" class="input-medium search-query"
-									placeholder="Search Here…">
+							<form action="searchItem.do" method="post">
+								<div style="margin-top: 10px;">
+									<input type="text" name="str"
+										class="input-medium search-query" placeholder="搜索你想要的二手"
+										style="height: 20px; width: 100; border: 4px solid #FFA07A">
+									<input type="submit" value="搜索"
+										style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+								</div>
+
 							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="container">
-			<div class="headerdetails">
-				<div class="pull-left">
-					<ul class="nav language pull-left">
-						<li class="dropdown hover"><a href="#"
-							class="dropdown-toggle" data-toggle="">US Doller <b
-								class="caret"></b></a>
-							<ul class="dropdown-menu currency">
-								<li><a href="#">US Doller</a></li>
-								<li><a href="#">Euro </a></li>
-								<li><a href="#">British Pound</a></li>
-							</ul></li>
-						<li class="dropdown hover"><a href="#"
-							class="dropdown-toggle" data-toggle="">English <b
-								class="caret"></b></a>
-							<ul class="dropdown-menu language">
-								<li><a href="#">English</a></li>
-								<li><a href="#">Spanish</a></li>
-								<li><a href="#">German</a></li>
-							</ul></li>
-					</ul>
-
-				</div>
-				<div class="pull-right">
-					<ul class="nav topcart pull-left">
-						<li class="dropdown hover carticon "><a href="#"
-							class="dropdown-toggle"> Shopping Cart <span
-								class="label label-orange font14">1 item(s)</span> - $589.50 <b
-								class="caret"></b></a>
-							<ul class="dropdown-menu topcartopen ">
-								<li>
-									<table>
-										<tbody>
-											<tr>
-												<td class="image"><a href="product.html"><img
-														width="50" height="50" src="img/prodcut-40x40.jpg"
-														alt="product" title="product"></a></td>
-												<td class="name"><a href="product.html">MacBook</a></td>
-												<td class="quantity">x&nbsp;1</td>
-												<td class="total">$589.50</td>
-												<td class="remove"><i class="icon-remove"></i></td>
-											</tr>
-											<tr>
-												<td class="image"><a href="product.html"><img
-														width="50" height="50" src="img/prodcut-40x40.jpg"
-														alt="product" title="product"></a></td>
-												<td class="name"><a href="product.html">MacBook</a></td>
-												<td class="quantity">x&nbsp;1</td>
-												<td class="total">$589.50</td>
-												<td class="remove"><i class="icon-remove "></i></td>
-											</tr>
-										</tbody>
-									</table>
-									<table>
-										<tbody>
-											<tr>
-												<td class="textright"><b>Sub-Total:</b></td>
-												<td class="textright">$500.00</td>
-											</tr>
-											<tr>
-												<td class="textright"><b>Eco Tax (-2.00):</b></td>
-												<td class="textright">$2.00</td>
-											</tr>
-											<tr>
-												<td class="textright"><b>VAT (17.5%):</b></td>
-												<td class="textright">$87.50</td>
-											</tr>
-											<tr>
-												<td class="textright"><b>Total:</b></td>
-												<td class="textright">$589.50</td>
-											</tr>
-										</tbody>
-									</table>
-									<div class="well pull-right buttonwrap">
-										<a class="btn btn-orange" href="#">View Cart</a> <a
-											class="btn btn-orange" href="#">Checkout</a>
-									</div>
-								</li>
-							</ul></li>
-					</ul>
-				</div>
-			</div>
-			<div id="categorymenu">
-				<nav class="subnav">
-					<ul class="nav-pills categorymenu">
-						<li><a class="active" href="index-2.html">Home</a>
-							<div>
-								<ul>
-									<li><a href="index2.html">Home Style 2</a></li>
-									<li><a href="index3.html">Home Style 3</a></li>
-									<li><a href="index4.html">Home Style 4</a></li>
-									<li><a href="index5.html">Home Style 5</a></li>
-									<li><a href="index6.html">Home Style 6</a></li>
-									<li><a href="index-2.html">Home Style 1</a></li>
-								</ul>
-							</div></li>
-						<li><a href="product.html">Products</a>
-							<div>
-								<ul>
-									<li><a href="product.html">Product style 1</a></li>
-									<li><a href="product2.html">Product style 2</a></li>
-									<li><a href="#"> Women's Accessories</a></li>
-									<li><a href="#">Men's Accessories <span
-											class="label label-success">Sale</span>
-									</a></li>
-									<li><a href="#">Dresses </a></li>
-									<li><a href="#">Shoes <span
-											class="label label-warning">(25)</span>
-									</a></li>
-									<li><a href="#">Bags <span class="label label-info">(new)</span>
-									</a></li>
-									<li><a href="#">Sunglasses </a></li>
-								</ul>
-								<ul>
-									<li><img src="img/proudctbanner.jpg" alt="" title="">
-									</li>
-								</ul>
-							</div></li>
-						<li><a href="category.html">Categories</a></li>
-						<li><a href="shopping-cart.html">Shopping Cart</a></li>
-						<li><a href="checkout.html">Checkout</a></li>
-						<li><a href="compare.html">Compare</a></li>
-						<li><a href="blog.html">Blog</a>
-							<div>
-								<ul>
-									<li><a href="blog.html">Blog page</a></li>
-									<li><a href="bloglist.html">Blog List VIew</a></li>
-								</ul>
-							</div></li>
-						<li><a href="myaccount.html">My Account</a>
-							<div>
-								<ul>
-									<li><a href="myaccount.html">My Account</a></li>
-									<li><a href="login.html">Login</a></li>
-									<li><a href="register.html">Register</a></li>
-									<li><a href="wishlist.html">Wishlist</a></li>
-								</ul>
-							</div></li>
-						<li><a href="features.html">Features</a></li>
-						<li><a href="contact.html">Contact</a></li>
-					</ul>
-				</nav>
-			</div>
-		</div>
 	</header>
 	<!-- Header End -->
-
 	<div id="maincontainer">
 		<section id="product">
 			<form action="addUser.do" method="post" class="form-horizontal">
 				<div class="container">
 					<!--  breadcrumb -->
 					<ul class="breadcrumb">
-						<li><a href="#">主页</a> <span class="divider">/</span></li>
+						<li><a href="Itemlist.do">主页</a> <span class="divider">/</span></li>
 						<li class="active">注册</li>
 					</ul>
 					<div class="row">
@@ -260,7 +127,7 @@
 												<label class="control-label"><span class="red">*</span>
 													密码:</label>
 												<div class="controls">
-													<input type="text" class="input-xlarge" name="password"
+													<input type="password" class="input-xlarge" name="password"
 														id="pwd1">
 												</div>
 											</div>
@@ -268,7 +135,7 @@
 												<label class="control-label"><span class="red">*</span>
 													确认密码::</label>
 												<div class="controls">
-													<input type="text" class="input-xlarge" id="pwd2">
+													<input type="password" class="input-xlarge" id="pwd2">
 												</div>
 											</div>
 										</fieldset>
@@ -281,9 +148,9 @@
 													.getElementById("pwd2").value;
 											if (pwd1 != pwd2) {
 												alert("两次密码不同，请重新输入");
-													return false;
-												}
+												return false;
 											}
+										}
 									</script>
 									<div class="pull-right">
 										<label class="checkbox inline"> </label>
@@ -301,78 +168,23 @@
 			</form>
 		</section>
 	</div>
+	<!--footer-->
+	<footer style="margin-top: 100px">
+		<img src="${pageContext.request.contextPath}/image/footer-tri.png"
+			style="width: 100%;">
+		<div
+			style="margin: 0px 0px 10px; text-align: center; padding-top: 10px;">
 
-	<!-- Footer -->
-	<footer id="footer">
-		<section class="footersocial">
-			<div class="container">
-				<div class="row">
-					<div class="span3 aboutus">
-						<h2>About Us</h2>
-						<p>
-							Lorem Ipsum is simply dummy text of the printing and typesetting
-							industry. Lorem Ipsum has been the industry's standard dummy text
-							ever since the 1500s, when an unknown printer took a galley of
-							type and scrambled it to make a type specimen book. <br> <br>
-							t has survived not only five centuries, but also the leap into
-							electronic typesetting, remaining essentially unchanged.
-						</p>
-					</div>
-					<div class="span3 contact">
-						<h2>Contact Us</h2>
-						<ul>
-							<li class="phone">+123 456 7890, +123 456 7890</li>
-							<li class="mobile">+123 456 7890, +123 456 78900</li>
-							<li class="email">test@test.com</li>
-							<li class="email">test@test.com</li>
-						</ul>
-					</div>
-					<div class="span3 twitter">
-						<h2>Twitter</h2>
-						<div></div>
-					</div>
-					<div class="span3 facebook">
-						<h2>Facebook</h2>
-						<div id="fb-root"></div>
+			<span>友情链接/</span> <a href="http://www.nwpu.edu.cn/" target="_top"
+				class="links">西北工业大学</a>
 
-					</div>
-				</div>
-			</div>
-		</section>
-		<section class="footerlinks">
-			<div class="container">
-				<div class="info">
-					<ul>
-						<li><a href="#">Privacy Policy</a></li>
-						<li><a href="#">Terms &amp; Conditions</a></li>
-						<li><a href="#">Affiliates</a></li>
-						<li><a href="#">Newsletter</a></li>
-					</ul>
-				</div>
-				<div id="footersocial">
-					<a href="#" title="Facebook" class="facebook">Facebook</a> <a
-						href="#" title="Twitter" class="twitter">Twitter</a> <a href="#"
-						title="Linkedin" class="linkedin">Linkedin</a> <a href="#"
-						title="rss" class="rss">rss</a> <a href="#" title="Googleplus"
-						class="googleplus">Googleplus</a> <a href="#" title="Skype"
-						class="skype">Skype</a> <a href="#" title="Flickr" class="flickr">Flickr</a>
-				</div>
-			</div>
-		</section>
-		<section class="copyrightbottom">
-			<div class="container">
-				<div class="row">
-					<div class="span6">
-						All images are copyright to their owners. More Templates <a
-							href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a>
-						- Collect from <a href="http://www.cssmoban.com/" title="网页模板"
-							target="_blank">网页模板</a>
-					</div>
-					<div class="span6 textright">ShopSimple @ 2012</div>
-				</div>
-			</div>
-		</section>
-		<a id="gotop" href="#">Back to top</a>
+		</div>
+		<div style="text-align: center; margin-bottom: 10px;">
+			<a id="fd_footer" href="addComment.jsp">产品意见反馈</a>
+		</div>
+		<div style="text-align: center; margin-bottom: 10px;">
+			<span>?2017 版权所有</span>
+		</div>
 	</footer>
 </body>
 </html>

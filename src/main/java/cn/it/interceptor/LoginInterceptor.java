@@ -18,11 +18,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			"/ItemType2.do", "/searchItem.do","/findResourceFile.do" ,
 			"RF","anage","/updatepassword.do","SR","/findItem.do","/findShop.do"
 			,"/findUser.do","/deleteComment.do","/lookComment.do","addUser.do"};
-
+	private static final String[] M_URL = {"/findResourceFile.do" ,
+		"RF","anage","/updatepassword.do","SR","/findItem.do","/findShop.do"
+		,"/findUser.do","/deleteComment.do","/lookComment.do"};
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		boolean flag = false;
+		boolean flagM = false;
 		String url = request.getRequestURL().toString();
 		System.out.println(">>>: " + url);
 		for (String s : IGNORE_URI) {
@@ -30,6 +34,20 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				flag = true;
 				break;
 			}
+		}
+		for (String s :M_URL){
+			if (url.contains(s)) {
+				flagM = true;
+				break;
+			}
+		}
+		if (flagM){
+			Object mySession = request.getSession().getAttribute("manager");
+			if (mySession == null) {
+				response.sendRedirect("/Taojin/mlogin.jsp");
+				flagM = false;
+			}
+			return flagM;
 		}
 		if (!flag) {
 			Object mySession = request.getSession().getAttribute("user");
@@ -39,7 +57,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			} else {
 				response.sendRedirect("/Taojin/login.jsp");
 			}
+			return flag;
 		}
+		
 		return flag;
 	}
 

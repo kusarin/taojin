@@ -171,7 +171,7 @@ public  class OrderServiceImpl implements OrderService {
 		order.setOrderNumber(orderNumber);  //设置订单号
 		order.setOrderTime(new java.sql.Date(new Date().getTime()));// 设置下单时间
 		String status = "待付款";
-		order.setStatus(status); // 设置订单的交易状态（待付款、已付款、待收货、已完成、已取消）
+		order.setStatus(status); // 设置订单的交易状态（待付款、已完成、已取消）
 		
 	    order.setPaymentMethod("网银支付");
 		
