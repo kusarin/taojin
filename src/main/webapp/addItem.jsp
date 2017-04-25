@@ -88,11 +88,11 @@
 						<span>店铺管理</span>
 					</h2>
 					<ul class="nav nav-list categories">
-						<li><a href="blog.html">认证店铺 </a></li>
-						<li><a href="查看记录.html">查看记录 </a></li>
+						<li><a href="addShop.jsp">认证店铺 </a></li>
+						<li><a href="#">查看记录 </a></li>
 						<li><a href="addItem.jsp">商品上架 </a></li>
 						<li><a href="shopItem.do">商品管理</a></li>
-						<li><a href="店铺基本信息.html">店铺信息管理</a></li>
+						<li><a href="toChange.do">店铺信息管理</a></li>
 					</ul>
 				</div>
 				<div class="sidewidt"></div>
