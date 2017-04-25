@@ -86,13 +86,12 @@ public  class OrderServiceImpl implements OrderService {
 	public void changeOrderStatus(int flag, String orderNumber) {
 		Order order = orderDao.findOrder(orderNumber);
 		switch (flag) {
+		case 0:
+			order.setStatus("未付款");
 		case 1:
-			order.setStatus("待收货");
-			break;
-		case 2:
 			order.setStatus("交易成功");
 			break;
-		case 3:
+		case 2:
 			order.setStatus("已取消");
 		default:
 			break;
@@ -291,5 +290,13 @@ public  class OrderServiceImpl implements OrderService {
 		
 		return orderDao.countNumbers(userId, status);
 	}
-	
+	/***
+	 * 新增收货地址
+	 * */
+	public void addAddr(String addr,int userId){
+		Address adr =new Address();
+		adr.setAddr(addr);
+		adr.setuser_ID(userId);
+		addressDao.addressAdd(adr);
+	}
 }
