@@ -28,7 +28,7 @@
 		Select * from shop where shop_id=#{id}
 	</select>
 	<insert id="addShop" parameterType="cn.it.pojo.Shop">
-	    Insert into shop(user_ID ,Name,Type,Intro,BrowsingTimes,Status) values(2,#{Name},#{Type},#{Intro},0,0)
+	    Insert into shop(user_ID ,Name,Type,Intro,BrowsingTimes,Status) values(#{user_ID},#{Name},#{Type},#{Intro},0,0)
 	</insert>
 	<select id="findShopList" resultMap="findAll">
 		Select * from shop where shop_id =#{id}
