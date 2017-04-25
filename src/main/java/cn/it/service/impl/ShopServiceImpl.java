@@ -18,7 +18,7 @@ public class ShopServiceImpl implements ShopService {
 	//@Qualifier("shopDao")
 	private ShopDao shopDao;
     
-	public List<Shop> getAllByUserid(int num){
+	public Shop getAllByUserid(int num){
 		return shopDao.getAllByUserid(num);
 	}
 	public void changeInfoByid(Shop shop){

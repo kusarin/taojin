@@ -87,8 +87,8 @@ if(confirm("确定要删除这条数据吗？")){
 						<li><a href="addShop.jsp">认证店铺 </a></li>
 						<li><a href="查看记录.html">查看记录 </a></li>
 						<li><a href="addItem.jsp">商品上架 </a></li>
-						<li><a href="shopItem.do?shopid=1">商品管理</a></li>
-						<li><a href="店铺基本信息.html">店铺信息管理</a></li>
+						<li><a href="shopItem.do">商品管理</a></li>
+						<li><a href="toChange.do">店铺信息管理</a></li>
 					</ul>
 				</div>
 				<div class="sidewidt"></div>
@@ -136,25 +136,20 @@ if(confirm("确定要删除这条数据吗？")){
 															<td>介绍</td>
 							                                <td>操作</td>
 														</tr>
-														<c:forEach items="${shopli}" var="c">
-
 															<tr>
-																<td>${c.shop_id}</td>
-																<td>${c.user_ID}</td>
-																<td>${c.name}</td>
-																<td>${c.type}</td>
-																<td>${c.intro}</td>
-																<td><c:if test="${c.status==0 }">未审核</c:if></td>
-																<td><a href="toChange.do?shop_id=${c.shop_id}">查看</a>
-																<a href="showItem.do?shop_id=${c.shop_id}">商品</a>
-																<a href="addItem.jsp?shop_id=${c.shop_id }">添加商品</a>
-																<a onclick="deleteone(${c.shop_id})"
+																<td>${shopli.shop_id}</td>
+																<td>${shopli.user_ID}</td>
+																<td>${shopli.name}</td>
+																<td>${shopli.type}</td>
+																<td>${shopli.intro}</td>
+																<td><c:if test="${shopli.status==0 }">未审核</c:if></td>
+																<td><a href="toChange.do">查看</a>
+																<a href="showItem.do">商品</a>
+																<a href="addItem.jsp?shop_id=${shopli.shop_id }">添加商品</a>
+																<a onclick="deleteone(${shopli.shop_id})"
 																	href="javascript:void(0)">删除</a></td>
 
-															</tr>
-
-														</c:forEach>
-														
+															</tr>														
 													</tbody>
 												</table>
 												<!--footer-->
