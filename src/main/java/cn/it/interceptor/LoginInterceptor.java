@@ -41,6 +41,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				break;
 			}
 		}
+		if (flagM){
+			Object mySession = request.getSession().getAttribute("manager");
+			if (mySession == null) {
+				response.sendRedirect("/Taojin/mlogin.jsp");
+				flagM = false;
+			}
+			return flagM;
+		}
 		if (!flag) {
 			Object mySession = request.getSession().getAttribute("user");
 			System.out.println(">>>: " + mySession);
@@ -51,15 +59,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			}
 			return flag;
 		}
-		if (flagM){
-			Object mySession = request.getSession().getAttribute("manager");
-			if (mySession != null) {
-				flagM = true;
-			} else {
-				response.sendRedirect("/Taojin/mlogin.jsp");
-			}
-			return flagM;
-		}
+		
 		return flag;
 	}
 
