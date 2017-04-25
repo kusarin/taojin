@@ -2,7 +2,11 @@
 pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
-
+<% 
+response.setHeader("Cache-Control","no-store"); 
+response.setHeader("Pragrma","no-cache"); 
+response.setDateHeader("Expires",0); 
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,6 +80,23 @@ function p(id,number,snumber){
 		alert("没有这种商品了！");
 	}
 }
+function comm(){
+	 var ii=0;
+	   var cks=document.getElementsByName("cartItemId");
+     for(var i =0;i<cks.length;i++){
+  	   if(cks[i].checked){
+  		   ii++;
+  	   }
+     }
+     if(ii==0){
+  	   alert("至少选择一条");
+       return;
+     }
+     document.myform.action="payingCart.do";
+     // $(".myform")
+     document.myform.submit();
+
+}
 </script>
 </head>
 <body>
@@ -123,9 +144,8 @@ function p(id,number,snumber){
 	</header>
 	<!-- Header End -->
 	
-	<form action="submitOrder.do" method="post">
+	<form action="" name="myform" method="post">
      <div class="containers">
-	  <form>
 	   <div class="orderTitle" style="color:gray;">
 	      <p>购物车</p>
 	   </div>
@@ -178,9 +198,9 @@ function p(id,number,snumber){
 		</div>
 		
 		<div class="commit">
-		    <input type="submit" value="结算"/>
+		    <input type="button" value="结算" onclick="comm()" style="width:70px;height:40px;"/>
 		</div>
-		</form>
+		
     </div> 
     </form>
     <!-- footer -->

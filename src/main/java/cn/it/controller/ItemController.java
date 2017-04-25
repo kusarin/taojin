@@ -46,19 +46,18 @@ public class ItemController {
 			) {
 
 		// 获取店铺编号shop_id
-		String id = request.getParameter("Shop_id");
-		int shop_id = Integer.parseInt(id);
+		String shop_id = request.getParameter("Shop_id");
+		int s_id = Integer.parseInt(shop_id);
 
 		// 获取前台传入的数据；
 		String name = request.getParameter("name");
-		String typeh = request.getParameter("typeh");
 		String typel = request.getParameter("typel");
 		String number = request.getParameter("number");
 		String price = request.getParameter("price");
 		String detail = request.getParameter("detail");
 
 		// 进行添加商品信息操作，并且获取提示信息
-		ModelAndView modelandview = itemservice.addItem(shop_id, name, typeh,
+		ModelAndView modelandview = itemservice.addItem(s_id, name,
 				typel, number, price, detail, file, request);
 
 		return modelandview;
@@ -148,7 +147,6 @@ public class ItemController {
 		// 获取前台传入的数据，商品编号id转为int类型；
 		int item_id = Integer.parseInt(id);
 		String name = request.getParameter("name");
-		String typeh = request.getParameter("typeh");
 		String typel = request.getParameter("typel");
 		String number = request.getParameter("number");
 		String price = request.getParameter("price");
@@ -159,7 +157,7 @@ public class ItemController {
 
 		// 进行修改商品信息操作，并且获取提示信息
 		ModelAndView modelandview = itemservice.updateItem(item_id, name,
-				typeh, typel, number, price, detail, image, file, request);
+				typel, number, price, detail, image, file, request);
 
 		// 获取商品的店铺编号
 		Item i = itemservice.findById(item_id);

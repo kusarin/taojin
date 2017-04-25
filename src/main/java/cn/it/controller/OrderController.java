@@ -23,9 +23,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
+
+
 import cn.it.pojo.Address;
 import cn.it.pojo.OrderCollection;
-import cn.it.pojo.OrderDetail;
 import cn.it.pojo.Page;
 import cn.it.service.OrderService;
 
@@ -46,21 +47,15 @@ public class OrderController {
 	 * @param(address表示收货地址，orderCollection表示订单信息，payway表示支付方式)
 	 * */
 	@RequestMapping(value="submitOrder.do", method=RequestMethod.POST)
-	public ModelAndView submmitOrder(Address address,OrderCollection orderCollection, int payway){
+	public ModelAndView submmitOrder(String addr,OrderCollection orderCollection){
 		ModelAndView view=new ModelAndView("payment");
 		
 		int userId=1;   //用户Id
-		orderService.submmitOrder(address, orderCollection,payway,userId);
-		
-		view.addObject("address", address.getAddr());
-		view.addObject("actulpayment",orderCollection.getOrder().getActulPayment());
-		List<OrderDetail> orderDe=orderCollection.getOrderDeatail();
-		view.addObject("orderDe",orderDe);
-		view.addObject("payway",payway);
+		view.addObject("order", orderService.submmitOrder(addr, orderCollection,userId));
 		return view;
 	}
 	
-   /***********
+   /***
     * 删除订单
     * */
 	@RequestMapping("deleteOrder.do")
@@ -163,8 +158,9 @@ public class OrderController {
 	@RequestMapping("lookOrderDeatil.do")
 	public ModelAndView lookOrderDeatil(String orderNumber){
 		ModelAndView view=new ModelAndView("orderInfo");
-		OrderCollection collection=orderService.getOrderDetail(orderNumber);
-		view.addObject("orderDetail",collection);
+		
+		view.addObject("order",orderService.getOrderDetail(orderNumber));
+		//收货人地址
 		return view;
 	}
 	
@@ -192,10 +188,12 @@ public class OrderController {
 	 * 
 	 * */
 	@RequestMapping("sureOrder.do")
-	public ModelAndView sureOrder(int itemId,int number){
+	public ModelAndView sureOrder(int itemId,String number){
 		int userId=1;
+//		String number = request.getParameter("number");HttpServletRequest request
+		int number1=Integer.parseInt(number);
 		ModelAndView view =new ModelAndView("sureOrder");
-		OrderCollection collection=orderService.sureOrder(itemId, userId, number);
+		OrderCollection collection=orderService.sureOrder(itemId, userId, number1);
 		view.addObject("c", collection);
 		List<Address> address=orderService.getAddress(userId);
 		view.addObject("address",address);

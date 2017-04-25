@@ -16,62 +16,85 @@ pageEncoding="UTF-8"%>
 <link href="${pageContext.request.contextPath}/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="${pageContext.request.contextPath}/css/jquery.fancybox.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/cloud-zoom.css" rel="stylesheet">
-
 <script>
-  function plus(val){
-   var num=document.getElementById("mp");
-   var value=parseInt(num.value);
-   var total=document.getElementById("total");
-   var itemprice=document.getElementById("itemprice");
-   var unitPrice=document.getElementById("unitPrice");
-   var actulpayment=document.getElementById("actulpayment");
-   var ac=document.getElementById("ac");
-   if(value<val){
-    num.value=value+1;
-    total.innerHTML=num.value;
-    itemprice.innerHTML=""+parseFloat(unitPrice.value)*parseInt(num.value);
-    actulpayment.innerHTML=itemprice.innerHTML;
-    ac.innerHTML=actulpayment.innerHTML;
-   }
-   else{
-    alert("这样的商品总共"+num.value+"件！抱歉！！");
-   }
-  }
-  function minus(){
-    var num=document.getElementById("mp");
-	var value=parseInt(num.value);
-	var total=document.getElementById("total");
-	var itemprice=document.getElementById("itemprice");
-	var unitPrice=document.getElementById("unitPrice");
-	var actulpayment=document.getElementById("actulpayment");
-	var ac=document.getElementById("ac");
-	if(value>1){
-    num.value=value-1;
-    total.innerHTML=num.value;
-    itemprice.innerHTML=""+parseFloat(unitPrice.value)*parseInt(num.value);
-    actulpayment.innerHTML=itemprice.innerHTML;
-    ac.innerHTML=actulpayment.innerHTML;
-	}
-  }
-  function test(obj) {
-	  if(obj.id=='btn1') {
-	    x=document.getElementById("btn1");
-		x.style.border="2px solid red";
-		y=document.getElementById("btn2");
-	    y.style.border="1px solid #DCDCDC";
-	    z=document.getElementById("payway");
-	    z.value=0;
-	  } 
-	  if(obj.id=='btn2'){
-	    x=document.getElementById("btn1");
-		x.style.border="1px solid #DCDCDC";
-	    y=document.getElementById("btn2");
-	    y.style.border="2px solid red";
-	    z=document.getElementById("payway");
-	    z.value=1;
-	  }  
-	}
+function  che(){
+	  var addr=document.getElementsByName("addr");
+	  var i=-1;
+	 
+	  for( var j=0;j<addr.length;j++){
+		  if(addr[j].checked){
+			  i++;
+			  break;
+		  }
+	  }
+	  if(i==-1){
+		  alert("请选择收货地址");
+		  return;
+	  }else{
+		  document.myform.action="submitOrder.do";
+	    	 // $(".myform")
+	       document.myform.submit();
+	  }
+}
+
+function checadr(){
+	var addr=document.getElementsByName("addr");
+	  var i=-1;
+	 
+	  for( var j=0;j<addr.length;j++){
+		  if(addr[j].checked){
+			  i=j;
+			  break;
+		  }
+	  }
+	  document.getElementById("adr").innerHTML=addr[i].value;
+	  
+}
+
+//弹出隐藏层  
+function ShowDiv(show_div,bg_div){  
+ document.getElementById(show_div).style.display='block';  
+ document.getElementById(bg_div).style.display='block' ;  
+ var bgdiv = document.getElementById(bg_div);  
+ bgdiv.style.width = document.body.scrollWidth;   
+ // bgdiv.style.height = $(document).height();  
+ $("#"+bg_div).height($(document).height());  
+} 
+//关闭弹出层  
+function CloseDiv(show_div,bg_div)  
+{  
+ document.getElementById(show_div).style.display='none';  
+ document.getElementById(bg_div).style.display='none';  
+} 
 </script>
+<style>  
+.black_overlay{  
+ display: none;  
+ position: absolute;  
+ top: 0%;  
+ left: 0%;  
+ width: 100%;  
+ height: 100%;  
+ background-color: black;  
+ z-index:1001;  
+ -moz-opacity: 0.8;  
+ opacity:.80;  
+ filter: alpha(opacity=80);  
+}  
+.white_content {  
+ display: none;  
+ position: absolute;  
+ top: 10%;  
+ left: 35%;  
+ width: 30%;  
+ height: 60%;    
+ background-color: white;  
+ z-index:1002;  
+ overflow: auto;  
+}  
+ 
+</style>
+
 </head>
 <body>
 <!-- Header Start -->
@@ -118,29 +141,59 @@ pageEncoding="UTF-8"%>
 	</header>
 	<!-- Header End -->
 	
-	<form action="submitOrder.do" method="post">
+	<form action="" method="post" name="myform">
     <div class="containers">
 	   <div class="orderTitle" style="color:gray;">
 	      <p>请核对订单信息</p>
 	   </div>
 	   <div class="receiver">
 	       <div class="info">
-	       <strong>收货人地址</strong><a href="#"><strong style="float:right;font-size:12px;">新增地址</strong></a>
+	       <strong>收货人地址</strong><a href="#" onclick="ShowDiv('MyDiv','fade')"><strong style="float:right;font-size:12px;">新增地址</strong></a>
 		   </div>
-		   <c:forEach items="${address}" var="adr">
+		   
 		   <div class="receiverInfo">
-			     <input checked="checked" type="radio" name="addr" value="${adr.addr}">${adr.addr}
+		   <c:forEach items="${address}" var="adr">
+			     <input type="radio" name="addr" value="${adr.addr}" onclick="checadr()">${adr.addr}
+		    </c:forEach>
 		   </div>
-		   </c:forEach>
+		  
 	   </div>
+	   <!--弹出层时背景层DIV,修改收货地址-->  
+ <div id="fade" class="black_overlay">  
+</div>  
+ <div id="MyDiv" class="white_content">  
+  <div style="text-align: right; cursor: default; height: 30px;background-color:yellow;line-height:30px;">  
+   <span style="font-size: 30px;padding-right:5px;color:red;cursor:pointer;" onclick="CloseDiv('MyDiv','fade')">x</span>  
+  </div>  
+  <div style="margin-top:20px;">
+ <table style="border-collapse:separate; border-spacing:0px 10px;font-size:14px;">
+    <tr>
+	<td>
+    收货人姓名：<input type="text"  placeholder="请填写真实姓名" >
+	</td>
+	</tr>
+	<tr>
+	<td>
+    收货地址：<br/><input type="text"  placeholder="省/市/县(可选)/街道" style="height:80px;width:100%;margin-top:10px;">
+	</td>
+	</tr>
+</table>
+ 
+ </div>
+ <div style="text-align:center;margin-top:80px;">
+ <input type="button" onclick="save()" value="保存" style="margin-right:100px;"> 
+ <input type="button" onclick="CloseDiv('MyDiv','fade')" value="取消">
+ </div>
+ </div>
+ 
 	   <div class="receive">
 	       <div class="info">
 	             <strong>支付方式</strong>
 		    </div>
              <div class="butt">
-			   <button class="btnn" id="btn1" onclick="test(this)" style="border:1px solid #DCDCDC;">货到付款</button>
-			   <button class="bttn" id="btn2" onclick="test(this)" style="border:1px solid #DCDCDC;">在线支付</button>
-			   <input type="hidden" id="payway" value="1" name="payway">
+			   
+			   <input type="radio" checked="checked" name="payAway" value="0" style="border:1px solid #DCDCDC;margin-top:-5px;">网银支付
+			   
 		     </div>
 		 </div>
 		 <div class="downline"></div>
@@ -160,12 +213,12 @@ pageEncoding="UTF-8"%>
 			</div>
 			
 		</div>
-		
-		<div class="shoper">
-			    <span>店铺：<a href="#">${c.shopName}</a></span>
-			    <input type="hidden" value="${c.shopName}" name="shopName">
-		</div>
 		<c:forEach items="${c.orderDeatail}" var="collection" varStatus="s">
+		<div class="shoper">
+			    <span>店铺：<a href="#">${collection.shopName}</a></span>
+			    <input type="hidden" value="${collection.shopName}" name="orderDeatail[${s.index}].shopName">
+		</div>
+		
 		<div class="orderDe" style="border:1px solid #80ffff;">
 		<table>
 		   <tr>
@@ -176,13 +229,16 @@ pageEncoding="UTF-8"%>
 		        <input type="hidden" value="${collection.itemId}" name="orderDeatail[${s.index}].itemId">
 		        </td>
 				 <td class="common" style="padding-left:0px;text-align:center;">
-				 <input type="button" value="-"  id="m" onclick="minus()" style="text-align:center;height:30px;width:30px;float:left;border:0;">
-				 <input type="text" value="${collection.itemNumbers}" id="mp" readonly="readonly" name="number" style="background-color:white;text-align:center;width:40px;float:left;border:1px;">
-				 <input type="button" value="+" onclick="plus(3)" style="height:30px;width:30px;text-align:center;float:left;border:0;"></td>
+				 
+				 <input type="text" value="${collection.itemNumbers}"  readonly="readonly" name="orderDeatail[${s.index}].itemNumbers" style="background-color:white;text-align:center;width:40px;float:left;border:1px;">
+				 
 				 <td class="common">${collection.unitPrice}
 				 <input type="hidden" value="${collection.unitPrice}" name="orderDeatail[${s.index}].unitPrice" id="unitPrice">
 				 </td>
-				 <td class="common" id="itemprice">${collection.itemPrice}</td>
+				 
+				 <td class="common" id="itemprice">${collection.itemPrice}
+				 <input type="hidden" value="${collection.itemPrice}" name="orderDeatail[${s.index}].itemPrice" id="unitPrice">
+				 </td>
 			 </tr>
 		 </table>
 		</div>
@@ -200,13 +256,13 @@ pageEncoding="UTF-8"%>
 			     <tr><td style="padding-top:15px;">实际支付： <span class="pay" id="actulpayment">${c.order.actulPayment}</span>
 			      <input type="hidden" value="${c.order.actulPayment}" name="order.actulPayment" id="unitPrice">
 			     </td></tr>
-			     <tr><td style="padding-top:15px;"> 寄送至：##################</td></tr>
+			     <tr><td style="padding-top:15px;"> 寄送至：<span id="adr">##################</span></td></tr>
 				 <tr><td style="padding-top:15px;padding-bottom:15px;">收货人:######</td></tr>
 		  </table>
 		</div>
 		
 		<div class="commit">
-		    <input type="submit" value="提交订单"/>
+		    <input type="button" value="提交订单" onclick="che()"/>
 		</div>
     </div> 
     </form>

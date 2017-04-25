@@ -21,19 +21,19 @@ public interface ItemDao {
 	/**
 	 * 删除商品方法
 	 * 
-	 * @param id 商品编号，int
+	 * @param item_id 商品编号，int
 	 */
 	public void ItemDelete(int item_id);
 	/**
 	 * 修改商品方法
 	 * 
-	 * @param id 商品编号，int
+	 * @param i 商品，Item
 	 */
 	public void ItemUpdate(Item i);
 	/**
 	 * 按照商品编号查看商品
 	 * 
-	 * @param id 商品编号，int
+	 * @param item_id 商品编号，int
 	 * 
 	 * @return Item 返回值为一个商品
 	 */

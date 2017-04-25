@@ -5,7 +5,7 @@ package cn.it.pojo;
  * 数据库表 resourcefile
  */
 public class ResourceFile {
-	private int id;            //资源文件编号：ID(PK)
+	private int resourcefile_id;            //资源文件编号：ID(PK)
 	private String name;       //文件的名字，便于识别
 	private String address;    //文件的存储位置
 	private String type;       //文件的类型
@@ -29,11 +29,11 @@ public class ResourceFile {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public int getId() {
-		return id;
+	public int getResourcefile_id() {
+		return resourcefile_id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setResourcefile_id(int resourcefile_id) {
+		this.resourcefile_id = resourcefile_id;
 	}
 	
 }

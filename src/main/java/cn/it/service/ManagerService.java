@@ -1,6 +1,8 @@
 package cn.it.service;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
@@ -18,4 +20,8 @@ public interface ManagerService {
 	public ModelAndView add(Manager manager);
 	
 	public ModelAndView update(Manager manager);
+
+	public int totalPage(int total);
+
+	public List<Integer> pageList(int page, int totalPage);
 }

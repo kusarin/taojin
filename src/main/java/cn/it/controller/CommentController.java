@@ -1,10 +1,6 @@
 package cn.it.controller;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.pojo.Comment;
-import cn.it.pojo.Users;
 import cn.it.service.CommentService;
 
 /**
@@ -25,26 +20,23 @@ import cn.it.service.CommentService;
 public class CommentController {
 	@Resource
 	private CommentService commentService;
+	
 	@RequestMapping("lookComment.do")
-	public ModelAndView lookComment(HttpServletRequest request){
-		ModelAndView modelandview = new ModelAndView("Comment");
-		List<Comment> list;
-		list = commentService.findAll();
-		modelandview.addObject("Comment",list);
-		return modelandview;
+	public ModelAndView lookComment(int page){
+		return commentService.lookComment(page);
 	}
 	
 	@RequestMapping("deleteComment.do")
 	public String delete(@RequestParam("id") String id){
 		int id1=Integer.parseInt(id);
 		commentService.delete(id1);
-		return "redirect:lookComment.do";
+		return "redirect:lookComment.do?page=1";
 	}
 	
 	@RequestMapping("addComment.do")
-	public void add(Comment comment,Users u){
-		comment.setDatetime(new Date());
-		comment.setUser_id(u.getUser_ID());
+	public ModelAndView add(Comment comment){
 		commentService.add(comment);
+		return new ModelAndView("redirect:Itemlist.do");
 	}
+
 }

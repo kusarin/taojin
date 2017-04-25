@@ -1,20 +1,17 @@
 package cn.it.pojo;
 
 import java.util.List;
-
+/****
+ * 
+ * 封装订单和订单细目
+ * */
 public class OrderCollection {
 	private Order order;
 	private  List<OrderDetail> orderDeatail;
-	private String shopName;
+
 
 	public Order getOrder() {
 		return order;
-	}
-	public String getShopName() {
-		return shopName;
-	}
-	public void setShopName(String shopName) {
-		this.shopName = shopName;
 	}
 	public void setOrder(Order order) {
 		this.order = order;
