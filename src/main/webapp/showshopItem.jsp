@@ -71,7 +71,7 @@
 </head>
 <body>
 
-	<!-- Header Start -->
+<!-- Header Start -->
 	<header>
 	<div class="headerstrip">
 		<div class="container">
@@ -90,9 +90,9 @@
 									<ul class="nav">
 										<li><a class="home active" href="Itemlist.do">首页</a></li>
 										<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
-										<li><a class="checkout" href="shopList.jsp">我的店铺</a></li>
-										<li><a class="shoppingcart" href="#">购物车</a></li>
-										<li><a class="checkout" href="#">我的订单</a></li>
+										<li><a class="checkout" href="shopList.do">我的店铺</a></li>
+										<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
+										<li><a class="checkout" href="orderItem.do">我的订单</a></li>
 									</ul>
 								</div>
 							</div>
@@ -161,7 +161,7 @@
 	</c:forEach>
 	</div>
 	
-	<!--footer-->
+		<!--footer-->
 	<footer style="margin-top:100px"> <img
 		src="${pageContext.request.contextPath}/image/footer-tri.png"
 		style="width: 100%;">
@@ -173,8 +173,7 @@
 
 	</div>
 	<div style="text-align: center; margin-bottom: 10px;">
-		<a id="fd_footer" href="javascript:;">产品意见反馈</a> <a
-			href="http://www.2shoujie.com/joinUs" target="_top">加入我们</a>
+		<a id="fd_footer" href="addComment.jsp">产品意见反馈</a>
 	</div>
 	<div style="text-align: center; margin-bottom: 10px;">
 		<span>©2017 版权所有</span> <span>鄂ICP备14003265号-2</span>
