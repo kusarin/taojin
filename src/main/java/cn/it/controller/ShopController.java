@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import javax.swing.text.View;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,19 +14,23 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sun.org.apache.regexp.internal.recompile;
 import com.sun.tools.internal.ws.processor.model.Request;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion.User;
 
 import cn.it.pojo.Shop;
 import cn.it.pojo.Users;
 import cn.it.service.ItemService;
 import cn.it.service.ShopService;
+import cn.it.service.UsersService;
 @Controller
 public class ShopController {
 	@Resource
    private ShopService shopService;
 	@Resource
+	private UsersService usersService;
+	@Resource
 	   private ItemService itemService;
 	@RequestMapping(value ={"/doAdd.do"},method={RequestMethod.GET,RequestMethod.POST})
-	public String doAdd(Shop shop){
+	public String doAdd(Shop shop,HttpSession session){
 		shopService.addShop(shop);
 		return "redirect:/shopList.do";
 	}
@@ -41,11 +46,9 @@ public class ShopController {
 		return "redirect:/shopList.do";
 	}
 	@RequestMapping(value = {"/shopList.do"},method={RequestMethod.GET,RequestMethod.POST})
-    public String getShoplist(Shop shop,Map<String,Object> map){
-		int num = 2;
-		List<Shop> list;
-		list = shopService.getAllByUserid(num);
-		map.put("shopli", list);		
+    public String getShoplist(Shop shop,Map<String,Object> map,HttpSession session){
+		Users user = (Users)session.getAttribute("user");
+		map.put("shopli", shopService.getAllByUserid(user.getUser_ID()));		
 		return "/shopList";
 	}
 	@RequestMapping(value = {"/delete.do"},method={RequestMethod.GET,RequestMethod.POST})

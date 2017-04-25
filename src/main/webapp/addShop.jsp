@@ -241,6 +241,9 @@
 									<div align="center">
 										<form id="myform" action="doAdd.do" method="post">
 											<table>
+											    <tr>
+													<td><input type="hidden" name="user_ID" value="${user.user_ID}"></td>
+												</tr>
 												<tr>
 													<div class="control-group">
 													<td>name</td>
