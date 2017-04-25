@@ -12,6 +12,6 @@
 <!-- 新增留言 -->
 	<insert id="add" parameterType="cn.it.pojo.Comment">
 		insert into comment(user_id,content,datetime)
-		values(#{user_id}#{content}#{datetime})
+		values(#{user_ID},#{content},<![CDATA[ now() ]]> )
 	</insert>
 </mapper>

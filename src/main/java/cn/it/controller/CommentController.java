@@ -1,7 +1,5 @@
 package cn.it.controller;
 
-import java.util.Date;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -37,9 +35,8 @@ public class CommentController {
 	
 	@RequestMapping("addComment.do")
 	public ModelAndView add(Comment comment){
-		comment.setDatetime(new Date());
 		commentService.add(comment);
-		return new ModelAndView("Itemlist.jsp");
+		return new ModelAndView("redirect:Itemlist.do");
 	}
 
 }
