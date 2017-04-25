@@ -26,8 +26,6 @@ public interface ItemService {
 	 *            店铺编号，int
 	 * @param name
 	 *            商品名称，String
-	 * @param typeh
-	 *            商品一级分类，String
 	 * @param typel
 	 *            商品二级分类，String
 	 * @param number
@@ -43,8 +41,8 @@ public interface ItemService {
 	 * 
 	 * @return ModelAndView
 	 */
-	public ModelAndView addItem(int shop_id, String name, String typeh,
-			String typel, String number, String price, String detail,
+	public ModelAndView addItem(int shop_id, String name, String typel, 
+			String number, String price, String detail,
 			MultipartFile file, HttpServletRequest request);
 
 	/**
@@ -64,8 +62,6 @@ public interface ItemService {
 	 *            商品编号，int
 	 * @param name
 	 *            商品名称，String
-	 * @param typeh
-	 *            商品一级分类，String
 	 * @param typel
 	 *            商品二级分类，String
 	 * @param number
@@ -83,9 +79,9 @@ public interface ItemService {
 	 * 
 	 * @return ModelAndView
 	 */
-	public ModelAndView updateItem(int item_id, String name, String typeh,
-			String typel, String number, String price, String detail,
-			String image, MultipartFile file, HttpServletRequest request);
+	public ModelAndView updateItem(int item_id, String name,String typel, 
+			String number, String price, String detail,String image,
+			MultipartFile file, HttpServletRequest request);
 
 	/**
 	 * 改变商品状态（“在售”=>“下架” or “下架”=>“在售”）
