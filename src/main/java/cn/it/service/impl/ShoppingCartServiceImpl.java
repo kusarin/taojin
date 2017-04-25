@@ -1,5 +1,7 @@
 package cn.it.service.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,11 +9,15 @@ import org.springframework.stereotype.Service;
 
 import cn.it.dao.CartItemDao;
 import cn.it.dao.ItemDao;
+import cn.it.dao.OrderDao;
+import cn.it.dao.OrderDetailDao;
 import cn.it.dao.ShopDao;
 import cn.it.dao.ShoppingCartDao;
 import cn.it.pojo.CartItem;
 import cn.it.pojo.CartList;
 import cn.it.pojo.Item;
+import cn.it.pojo.Order;
+import cn.it.pojo.OrderDetail;
 import cn.it.pojo.Shop;
 import cn.it.pojo.ShoppingCart;
 import cn.it.service.ShoppingCartService;
@@ -27,6 +33,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 	private ShopDao shopDao;
 	@Autowired
 	private CartItemDao cartItemDao;
+	@Autowired
+	private OrderDao orderDao;
+	@Autowired
+	private OrderDetailDao orderDetailDao;
 	/****
 	 * 添加商品到购物车
 	 * @param(number商品数量)
@@ -55,7 +65,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 				
 				double total=s.getTotal();
 				total=total+number*i.getprice();
-				shoppingCartDao.update(s.getCartId(), total);
+				shoppingCartDao.update(s.getCartId(), total,s.getTotalnumber());
 			}
 			//购物车中无此商品，添加商品到购物车,更新购物车中的支付总额
 			else{
@@ -72,7 +82,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 				cartItemDao.add(c);
 				
 				double total=s.getTotal()+i.getprice()*number;
-				shoppingCartDao.update(s.getCartId(), total);
+				int totalnumber=s.getTotalnumber();//购物车商品总数
+				totalnumber=totalnumber+1;
+				shoppingCartDao.update(s.getCartId(), total,totalnumber);
 			}	
 		}
 	  //用户无购物车,创建购物车并将
@@ -81,6 +93,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 			ShoppingCart sh=new ShoppingCart();
 			sh.setUserId(userId);
 			sh.setTotal(i.getprice()*number);
+			int totalnumber=1;
+			sh.setTotalnumber(totalnumber);
 			shoppingCartDao.add(sh);
 			
 			CartItem c=new CartItem();
@@ -125,18 +139,22 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		if(c.size()==1){
 			cartItemDao.delete(cartItemId);
 			shoppingCartDao.delete(sh.getCartId());
-		}
+		}//删除购物车中的某一项
 		else{
-			cartItemDao.delete(cartItemId);
+			
 			CartItem ca=cartItemDao.find(cartItemId);
 			double totalprice=ca.getTotalPrice();
 			double total=sh.getTotal();
-			shoppingCartDao.update(sh.getCartId(), total-totalprice);
+			int totalnumber=sh.getTotalnumber();
+			totalnumber=totalnumber-1;
+			shoppingCartDao.update(sh.getCartId(), total-totalprice,totalnumber);
+			cartItemDao.delete(cartItemId);//删除
 		}
 	}
 	
 	/****
 	 *更新某购物车中的商品数量 、小计、总额
+	 *@param(userId用户编号，itemid商品编号，flag：0表示该商品数量加1、1表示该商品数量减1)
 	 * */
 	public void updatePriceAndTotal(int userId,int itemId,int flag){
 		
@@ -149,6 +167,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		//获取此商品的总数
 		int number=i.getnumber();
 		switch(flag){
+		//加1
 		case 0:
 			if(salingNumber<number){
 				salingNumber++;
@@ -156,9 +175,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 				c.setTotalPrice(salingNumber*i.getprice());
 				cartItemDao.update(c);
 				sh.setTotal(sh.getTotal()+i.getprice());
-				shoppingCartDao.update(sh.getCartId(), sh.getTotal());
+				shoppingCartDao.update(sh.getCartId(), sh.getTotal(),sh.getTotalnumber());
 			}
 			break;
+			//减1
 		case 1:
 			if(salingNumber>1){
 				salingNumber=salingNumber-1;
@@ -166,7 +186,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 				c.setTotalPrice(salingNumber*i.getprice());
 				cartItemDao.update(c);
 				sh.setTotal(sh.getTotal()-i.getprice());
-				shoppingCartDao.update(sh.getCartId(), sh.getTotal());
+				shoppingCartDao.update(sh.getCartId(), sh.getTotal(),sh.getTotalnumber());
 			}
 			break;
 		default:
@@ -174,4 +194,78 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		}
 		}	
 	}
+	/*****
+	 * 挑选购物车中商品去结算
+	 * */
+	public CartList payingCart(Integer[] cartItemId){
+		
+		CartList clist=new CartList();
+		ShoppingCart sh=new ShoppingCart();
+		List<CartItem> cl=new ArrayList<CartItem>();
+		double total=0; //总计
+		int totalNumber=cartItemId.length; //购买总数
+		for(int i=0;i<cartItemId.length;i++){
+			CartItem c = cartItemDao.find(cartItemId[i]);
+			cl.add(c);
+			total=total+c.getTotalPrice();
+		}
+		sh.setTotal(total);
+		sh.setTotalnumber(totalNumber);
+		clist.setSh(sh);
+		clist.setCa(cl);
+		return clist;
+	}
+	
+	/***
+	 *提交订单、下单
+	 *并删除购物车 
+	 */
+	public Order commitOrder(List<CartItem> ca,int userId,String addr,int payAway){
+		Order o=new Order();
+		List<OrderDetail> or=new ArrayList<OrderDetail>();
+		String orderNumber=new OrderServiceImpl().createOrderNum();
+		double actulPayment=0;
+		int totalQuantity=0;
+		for(CartItem c:ca){
+			OrderDetail ord=new OrderDetail();
+			ord.setItemId(c.getItemId());//商品编号
+			ord.setItemNumbers(c.getTradingNumbers()); //此间商品的购买数量
+			ord.setItemPrice(c.getTotalPrice()); //此件商品的销售额
+			ord.setOrderNumber(orderNumber);//订单编号
+			ord.setShopName(c.getShopName());//此商品所属顶铺名称
+			totalQuantity++;
+			actulPayment=actulPayment+c.getTotalPrice();
+			or.add(ord);
+		}
+		o.setUserID(userId);  //用户编号
+		o.setOrderNumber(orderNumber); //订单编号
+		o.setOrderTime(new java.sql.Date(new Date().getTime()));//下单时间
+		/**
+		 * 判断支付方式
+		 * */
+		switch(payAway){
+		case 0:
+			o.setPaymentMethod("微信支付"); //支付方式
+		case 1:
+			o.setPaymentMethod("支付宝"); //支付方式
+		}
+		
+		o.setStatus("待付款");  //订单状态
+		o.setTotalQuantity(totalQuantity); //购买总数
+		o.setActulPayment(actulPayment); //支付总额
+		o.setRecivingAddress(addr); //收货地址
+		orderDao.add(o);// 插入订单到order表
+		for(OrderDetail or1:or){
+			orderDetailDao.add(or1); //插入订单细目ordetail表
+		}
+		/******
+		 * 从购物车清除这些已下单的商品
+		 * **/
+		for(CartItem cc:ca){
+			int cartItemId=cc.getCartItemId();
+			deleteItem(userId,cartItemId);
+		}
+		return o;
+	}
+	
 }

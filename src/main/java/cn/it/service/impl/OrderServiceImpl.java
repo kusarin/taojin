@@ -104,17 +104,9 @@ public  class OrderServiceImpl implements OrderService {
 	 * 
 	 * @param(id表示订单表的唯一标识) 获取某订单详细信息
 	 * */
-	public OrderCollection getOrderDetail(String orderNumber) {
-		OrderCollection orderDetail = new OrderCollection();
-		Order order = orderDao.findOrder(orderNumber);
-		if (order != null) {
-			orderDetail.setOrder(order);
-		}
-		List<OrderDetail> orlist = orderDetailDao.selectAll(orderNumber);
-		if (orlist != null) {
-			orderDetail.setOrderDeatail(orlist);
-		}
-		return orderDetail;
+	public Order getOrderDetail(String orderNumber) {
+		
+		return orderDao.findOrder(orderNumber);
 	}
 
 	/**
@@ -126,14 +118,15 @@ public  class OrderServiceImpl implements OrderService {
 		orderDetailDao.delete(orderNumber); // 删除此订单对应的订单明细
 		orderDao.delete(orderNumber); // 删除该订单号对应的订单
 	}
-	/***
+	/**
 	 *批量删除 
 	 * **/
 	public void deleteAllOrder(String[] orderNumber){
 		orderDetailDao.deleteAll(orderNumber); // 删除此订单对应的订单明细
 		orderDao.deleteAll(orderNumber); // 删除该订单号对应的订单
 	}
-	/****
+	
+	/**
 	 * 取消订单
 	 * **/
 	public void remove(int flag, String orderNumber){
@@ -171,7 +164,7 @@ public  class OrderServiceImpl implements OrderService {
 	 * @param(itemId表示商品id，paylabel支付方式标记，userId用户Id)
 	 * 
 	 * */
-	public void submmitOrder(Address address,OrderCollection orderCollection, int payway, int userId) {
+	public Order submmitOrder(String addr,OrderCollection orderCollection, int userId) {
 		
 		Order order = orderCollection.getOrder();   //创建订单
 		order.setUserID(userId);    // 设置下单用户
@@ -180,16 +173,12 @@ public  class OrderServiceImpl implements OrderService {
 		order.setOrderTime(new java.sql.Date(new Date().getTime()));// 设置下单时间
 		String status = "待付款";
 		order.setStatus(status); // 设置订单的交易状态（待付款、已付款、待收货、已完成、已取消）
-		switch (payway) {
-		case 0:
-			order.setPaymentMethod("货到付款");
-		case 1:
-			order.setPaymentMethod("第三方支付");
-		default:
-			break;
-		}
 		
-		order.setRecivingAddress(address.getAddr()); // 收货地址
+	    order.setPaymentMethod("网银支付");
+		
+		
+		
+		order.setRecivingAddress(addr); // 收货地址
 		double freight = 0; // 运费
 		order.setFreight(freight);
 		orderDao.add(order);
@@ -202,6 +191,7 @@ public  class OrderServiceImpl implements OrderService {
 			orderDe.setItemId(itemId);
 			orderDetailDao.add(orderDe);
 		}
+		return order;
 	}
 
 	/**
@@ -232,7 +222,7 @@ public  class OrderServiceImpl implements OrderService {
 	 * 
 	 * @param(itemId表示商品编号，userId用户编号，number购买某件商品的数量)
 	 * */
-	public OrderCollection sureOrder(int itemId, int userId, int number) {
+	public OrderCollection sureOrder(int itemId,int userId,int number) {
 		
 		Item item = itemDao.FindItemById(itemId);//根据商品id查询商品信息
 
@@ -278,7 +268,7 @@ public  class OrderServiceImpl implements OrderService {
 		orderCollection.setOrder(order);// 设置订单信息
 
 		orderCollection.setOrderDeatail(orderDetailList);// 设置订单细目
-		orderCollection.setShopName(shopName);
+		
 		return orderCollection; // 返回订单信息
 	}
 	
@@ -301,4 +291,5 @@ public  class OrderServiceImpl implements OrderService {
 		
 		return orderDao.countNumbers(userId, status);
 	}
+	
 }

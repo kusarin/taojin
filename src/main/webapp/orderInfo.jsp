@@ -3,105 +3,23 @@ pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+ <title>订单详情</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+ 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/sureOrder.css"/>
 <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="${pageContext.request.contextPath}/css/jquery.fancybox.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/cloud-zoom.css" rel="stylesheet">
-<title>我的订单</title>
-<style>
-.item{
-    width:300px;
-	text-align:center;
-	height:45px;
- }
-.co{
-    width:80px;
-	text-align:center;
-	height:45px;
-	
- }
-.orderNumber{
-    width:300px;
-	text-align:center;
-	height:45px;
- }
-.buyer1{
-    width:80px;
-	text-align:center;
-	height:45px;
- }
-.buyer{
-    width:80px;
-	text-align:center;
-	height:45px;
- }
-.buyer1 a p{
-	width:80px;
-	overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-.huanhang{
-    width:300px;
-	height:120px;
-		
-}
-.huanhang img{
-   width:100px;
-   height:120px;
-   
-}
-.huanhang p{
-    word-break:break-all;
-	width:200px;
-	overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-.sa{
-    width:80px;
-	height:120px;
-	text-align:center;
-}
-a:hover{
-	text-decoration:underline;
-	color:red;
-}
-</style>
-<script>
-function deleteone(orderNumber){
-	if(confirm("确定要删除这条订单吗？")){
-		window.location.href="deleteOrder.do?pageNo=${pages.pageNo}&orderNumber="+orderNumber;
-	}
-}
 
-function deleteAll(){
-	var ii=0;
-	var cks=document.getElementsByName("orderNumber");
-    for(var i =0;i<cks.length;i++){
- 	   if(cks[i].checked){
- 		   ii++;
- 	   }
-    }
-    if(ii==0){
- 	   alert("至少选择一条");
-      return;
-    }
-    if(confirm("确定要删除这"+ii+"条订单吗？")){
- 	   document.myform.action="deleteAllOrder.do?pageNo=${pages.pageNo}";
- 	   document.myform.submit();
-    }
-}
-</script>
 </head>
 <body>
-	<!-- Header Start -->
+<!-- Header Start -->
 	<header>
 	<div class="headerstrip">
 		<div class="container">
@@ -132,9 +50,10 @@ function deleteAll(){
 					<!-- Top Nav End -->
 					<div class="pull-right">
 						<form class="form-search top-search">
-							<input type="text" class="input-medium search-query"  style="width:auto;height:40px;border:4px solid #FFA07A"
-								placeholder="搜索你想要的二手"><input type="submit" value="搜索"
-								style="height:40px;width:auto;background-color:#FFA07A;border:4px solid #FFA07A;">
+							<input type="text" class="input-medium search-query"
+								placeholder="搜索你想要的二手"/ style="border:4px solid #FFA07A;">
+								<input type="submit" value="搜索"
+								style="height:42px;width:auto;background-color:#FFA07A;margin-left:-4px;border:4px solid #FFA07A;"/>
 						</form>
 					</div>
 				</div>
@@ -143,9 +62,73 @@ function deleteAll(){
 	</div>
 	</header>
 	<!-- Header End -->
-    <div></div>
-	<!--footer-->
-    <footer style="margin-top:20px">
+	
+    <div class="containers" style="margin:0 auto;margin-top:20px;">
+	 
+	  <div  style="color:gray;font-size:15px;margin:0 auto;width:700px;">
+	      <strong>订单信息</strong>
+	   </div>
+	   <div style="margin:0 auto;width:700px;margin-top:10px;margin-bottom:50px;">
+	    <table style="margin:0 auto;border-color:#FAFFF0; " border="1">
+		
+		 <tr>
+		    <td style="width:200px;text-align:center;height:30px;border-color:#FAFFF0;">订单编号</td>
+			<td style="width:500px;text-align:center;border-color:#FAFFF0;">${order.orderNumber}</td>
+		</tr>
+		<tr>
+		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">支付方式</td>
+			<td style="text-align:center;border-color:#FAFFF0;">${order.paymentMethod}</td>
+		</tr>
+		<tr>
+		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">订单状态</td>
+			<td style="text-align:center;border-color:#FAFFF0;">${order.status}</td>
+		</tr>
+		<tr>
+		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">下单时间</td>
+			<td style="text-align:center;border-color:#FAFFF0">${order.orderTime}</td>
+		</tr>
+		
+		</table>
+	  
+	   </div>
+	   
+	   <div  style="color:gray;font-size:15px;margin:0 auto;width:700px;">
+	      <strong>收货人信息</strong>
+	   </div>
+	   <div style="margin:0 auto;width:700px;margin-top:10px;margin-bottom:50px;">
+	    <table style="margin:0 auto;border-color:#FAFFF0; " border="1">
+		
+		 <tr>
+		    <td style="width:200px;text-align:center;height:30px;border-color:#FAFFF0;">收货人姓名</td>
+			<td style="width:500px;text-align:center;border-color:#FAFFF0;">请问</td>
+		</tr>
+		<tr>
+		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">收货地址</td>
+			<td style="text-align:center;border-color:#FAFFF0;">微信</td>
+		</tr>
+		</table>
+	  
+	   </div>
+	   
+	   
+	    <div  style="color:gray;font-size:15px;margin:0 auto;width:700px;">
+	      <strong>结算信息</strong>
+	   </div>
+	   <div style="margin:0 auto;width:700px;margin-top:10px;margin-bottom:50px;">
+	    <table style="margin:0 auto;border-color:#FAFFF0; " border="1">
+		
+		 <tr>
+		    <td style="width:200px;text-align:center;height:30px;border-color:#FAFFF0;">商品金额</td>
+			<td style="width:500px;text-align:center;border-color:#FAFFF0;">￥${order.actulPayment}</td>
+		</tr>
+		</table>
+	  
+	   </div>
+	  
+	   </div>
+    </div> 
+	
+	<footer style="margin-top:20px">
        <img  src="${pageContext.request.contextPath}/image/footer-tri.png" style="width:100%;">
             <div style="margin: 0px 0px 10px;text-align:center;padding-top:10px;">
 			 
@@ -161,6 +144,6 @@ function deleteAll(){
             <span>©2017   版权所有</span>
             <span>鄂ICP备14003265号-2</span>
         </div>
-    </footer>		
-</body>
+    </footer>
+ </body>
 </html>
