@@ -354,7 +354,7 @@
 												</tr>
 												<tr>
 													<div class="control-group">
-													<td></td>
+														<td></td>
 														<div class="controls">
 															<td><input type="file" name="file" accept="image/*" /></td>
 														</div>
@@ -372,35 +372,36 @@
 											<input type="submit" value="确认上架" />
 										</form>
 									</div>
-									
-									</section>
-									</div>
-									</li>
-									</ul>
-									</div>
-									</section>
-									</div>
-									</div>
-									</div>
-									</section>
-									</div>
-									<!--footer--> <footer style="margin-top:20px"> <img
-										src="${pageContext.request.contextPath}/image/footer-tri.png"
-										style="width: 100%;">
-									<div
-										style="margin: 0px 0px 10px; text-align: center; padding-top: 10px;">
 
-										<span>友情链接/</span> <a href="http://www.nwpu.edu.cn/"
-											target="_top" class="links">西北工业大学</a>
+									</section>
+								</div>
+							</li>
+						</ul>
+					</div>
+					</section>
+				</div>
+			</div>
+		</div>
+		</section>
+	</div>
+	<!--footer-->
+	<footer style="margin-top:20px"> <img
+		src="${pageContext.request.contextPath}/image/footer-tri.png"
+		style="width: 100%;">
+	<div
+		style="margin: 0px 0px 10px; text-align: center; padding-top: 10px;">
 
-									</div>
-									<div style="text-align: center; margin-bottom: 10px;">
-										<a id="fd_footer" href="addComment.jsp">产品意见反馈</a> <a
-											href="http://www.2shoujie.com/joinUs" target="_top">加入我们</a>
-									</div>
-									<div style="text-align: center; margin-bottom: 10px;">
-										<span>©2017 版权所有</span> <span>鄂ICP备14003265号-2</span>
-									</div>
-									</footer>
+		<span>友情链接/</span> <a href="http://www.nwpu.edu.cn/" target="_top"
+			class="links">西北工业大学</a>
+
+	</div>
+	<div style="text-align: center; margin-bottom: 10px;">
+		<a id="fd_footer" href="addComment.jsp">产品意见反馈</a> <a
+			href="http://www.2shoujie.com/joinUs" target="_top">加入我们</a>
+	</div>
+	<div style="text-align: center; margin-bottom: 10px;">
+		<span>©2017 版权所有</span> <span>鄂ICP备14003265号-2</span>
+	</div>
+	</footer>
 </body>
 </html>

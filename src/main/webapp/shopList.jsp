@@ -214,14 +214,10 @@ if(confirm("确定要删除这条数据吗？")){
 					</h2>
 					<ul class="nav nav-list categories">
 						<li><a href="addShop.jsp">认证店铺 </a></li>
-						<li><a href="shopList.do">查看记录 </a></li>
-						<li><a href="商品上下架.html">商品上/下架 </a>
-							<ul>
-								<li><a href="product.html">上架 </a></li>
-								<li><a href="product.html">下架</a></li>
-							</ul></li>
-						<li><a href="商品信息管理.html">商品信息管理</a></li>
-						<li><a href="shopList.do">店铺信息管理</a></li>
+						<li><a href="查看记录.html">查看记录 </a></li>
+						<li><a href="addItem.jsp">商品上架 </a></li>
+						<li><a href="shopItem.do?shopid=1">商品管理</a></li>
+						<li><a href="店铺基本信息.html">店铺信息管理</a></li>
 					</ul>
 				</div>
 				<div class="sidewidt"></div>
@@ -280,7 +276,7 @@ if(confirm("确定要删除这条数据吗？")){
 																<td><c:if test="${c.status==0 }">未审核</c:if></td>
 																<td><a href="toChange.do?shop_id=${c.shop_id}">查看</a>
 																<a href="showItem.do?shop_id=${c.shop_id}">商品</a>
-																<a href="addItem.do?shop_id=${c.shop_id }">添加商品</a>
+																<a href="addItem.jsp?shop_id=${c.shop_id }">添加商品</a>
 																<a onclick="deleteone(${c.shop_id})"
 																	href="javascript:void(0)">删除</a></td>
 
