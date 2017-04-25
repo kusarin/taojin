@@ -30,8 +30,14 @@ public class ShopController {
 	@Resource
 	   private ItemService itemService;
 	@RequestMapping(value ={"/doAdd.do"},method={RequestMethod.GET,RequestMethod.POST})
-	public String doAdd(Shop shop,HttpSession session){
-		shopService.addShop(shop);
+	public String doAdd(Shop shop,Map<String,Object> map,HttpSession session){
+		Users user = (Users)session.getAttribute("user");
+	    if(shopService.getAllByUserid(user.getUser_ID())!=null)
+	    {
+	    	map.put("error","");
+	    }
+	    else 
+	    	shopService.addShop(shop);
 		return "redirect:/shopList.do";
 	}
 	@RequestMapping(value ={"/toChange.do"},method={RequestMethod.GET,RequestMethod.POST}
