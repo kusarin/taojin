@@ -165,11 +165,6 @@ function deleteAll(){
 						<sup style="color:red;font-size:12px;">${receivingGoods}</sup>
 						</c:if>
 						</a></li>
-						<li><a href="#">待评价
-						<c:if test="${assessment!=0}">
-						<sup style="color:red;font-size:12px;">${assessment}</sup>
-						</c:if>
-						</a></li>
 						<li><a href="removeRecord.do">取消订单记录</a></li>
 					</ul>
 				</div>
@@ -238,15 +233,12 @@ function deleteAll(){
 		                    <input type="hidden" name="status" value="${orderc.order.status}">
 		                    </td>
 	                        <td class="sa" style="border-bottom:1px solid #F5F5F5;">
-	                        <a href="#"><p>订单详情</p></a>
+	                        <a href="lookOrderDeatil.do?orderNumber=${orderc.order.orderNumber}"><p>订单详情</p></a>
 	                        <c:if test="${orderc.order.status!='已取消'}">
 							<a href="removeOrder.do?flag=3&orderNumber=${orderc.order.orderNumber}"><p>取消订单</p></a>
 							</c:if>
 							<c:if test="${orderc.order.status=='待付款'}">
 							 <a href="#"><p>立即付款</p></a>
-							</c:if>
-							<c:if test="${orderc.order.status=='已完成'}">
-							<a href="#"><p>评价订单</p></a>
 							</c:if>
 							</td>
 		                </tr>
