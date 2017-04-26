@@ -1,6 +1,9 @@
 package cn.it.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -25,7 +29,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
+
+
+
+
+
+
 import cn.it.pojo.Address;
+import cn.it.pojo.Order;
 import cn.it.pojo.OrderCollection;
 import cn.it.pojo.Page;
 import cn.it.service.OrderService;
@@ -47,12 +58,14 @@ public class OrderController {
 	 * @param(address表示收货地址，orderCollection表示订单信息，payway表示支付方式)
 	 * */
 	@RequestMapping(value="submitOrder.do", method=RequestMethod.POST)
-	public ModelAndView submmitOrder(String addr,OrderCollection orderCollection){
-		ModelAndView view=new ModelAndView("payment");
+	public String submmitOrder(String addr,OrderCollection orderCollection){
+		
 		
 		int userId=1;   //用户Id
-		view.addObject("order", orderService.submmitOrder(addr, orderCollection,userId));
-		return view;
+		Order order= orderService.submmitOrder(addr, orderCollection,userId);
+		String orderNumber=order.getOrderNumber();//订单编号
+		double total=order.getActulPayment(); //支付总额
+		return "redirect:payment.do?p2_Order="+orderNumber+"&p3_Amt="+total;
 	}
 	
    /***
@@ -198,5 +211,21 @@ public class OrderController {
 		List<Address> address=orderService.getAddress(userId);
 		view.addObject("address",address);
 		return view;
+	}
+	/****
+	 * 新增收货地址
+	 * @throws UnsupportedEncodingException 
+	 * */
+	@RequestMapping("addAdr.do")
+	@ResponseBody
+	public Map<String,Object> addAdr(HttpServletRequest request) throws UnsupportedEncodingException{
+		Map<String,Object> map=new HashMap<String,Object>();
+		int userId=1;
+		String addr1=request.getParameter("addr");
+		String addr2=new String(addr1.getBytes("ISO-8859-1"), "utf-8");
+		orderService.addAddr(addr2, userId);
+		map.put("msg", "添加成功");
+		return map;
+		
 	}
 }
