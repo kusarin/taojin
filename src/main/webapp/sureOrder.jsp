@@ -142,16 +142,16 @@ function save(){
 							<div class="navbar-inner">
 							<div style="float:left;color:white;margin-top:26px;">
 							  <span>您好,</span>
-							  <a href="#"><span style="color:white;">登录</span></a>
-							  <a href="#"> <span style="margin-left:20px;color:white;">注册</span></a>
+							  <a href="login.jsp"><span style="color:white;">登录</span></a>
+							  <a href="register.jsp"> <span style="margin-left:20px;color:white;">注册</span></a>
 							 </div>
 							  <div style="margin-left:250px;">
 								<ul class="nav">
-								    <li><a class="home active" href="#">首页</a></li>
-									<li><a class="myaccount" href="#">个人账户</a></li>
-									<li><a class="shoppingcart" href="#">购物车</a></li>
-									<li><a class="checkout" href="#">我的订单</a></li>
-								    <li><a class="checkout" href="#">发布二手</a></li>
+								    <li><a class="home active" href="Itemlist.do">首页</a></li>
+									<li><a class="myaccount" href="UsersUpdate.jsp">个人账户</a></li>
+									<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
+									<li><a class="checkout" href="orderItem.do">我的订单</a></li>
+								    <li><a class="checkout" href="addItem.jsp">发布二手</a></li>
 								</ul>
 							 </div>
 							</div>
@@ -159,7 +159,7 @@ function save(){
 					</div>
 					<!-- Top Nav End -->
 					<div class="pull-right">
-						<form class="form-search top-search">
+						<form class="form-search top-search" action="searchItem.do" method="post">
 							<input type="text" class="input-medium search-query"
 								placeholder="搜索你想要的二手"/ style="border:4px solid #FFA07A;">
 								<input type="submit" value="搜索"

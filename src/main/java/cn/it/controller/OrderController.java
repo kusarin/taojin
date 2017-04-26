@@ -112,8 +112,9 @@ public class OrderController {
 		v.addObject("pages",orderService.getOrder(userId,"已取消", page));
 		
 		v.addObject("pendingPayment",orderService.countNumbers(userId, "待付款"));
-		v.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
-		v.addObject("assessment",orderService.countNumbers(userId, "待评价"));
+		//v.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
+		//v.addObject("assessment",orderService.countNumbers(userId, "待评价"));
+		v.addObject("Payment",orderService.countNumbers(userId, "已付款"));
 		return v;
 	}
 	
@@ -128,25 +129,27 @@ public class OrderController {
 		v.addObject("pages",orderService.getOrder(userId,"待付款", page));
 		
 		v.addObject("pendingPayment",orderService.countNumbers(userId, "待付款"));
-		v.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
-		v.addObject("assessment",orderService.countNumbers(userId, "待评价"));
+		//v.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
+		//v.addObject("assessment",orderService.countNumbers(userId, "待评价"));
+		v.addObject("Payment",orderService.countNumbers(userId, "已付款"));
 		return v;
 	}
 	
 	/***
-	 *待收货
+	 *已付款
 	 *订单 
 	 * */
-	@RequestMapping("receivingGoods.do")
-	public ModelAndView receivingGoods(Page<OrderCollection> page){
+	@RequestMapping("payedGoods.do")
+	public ModelAndView payedGoods(Page<OrderCollection> page){
 		int userId=1;
 		
-		ModelAndView v=new ModelAndView("receivingGoods");
-		v.addObject("pages",orderService.getOrder(userId,"待收货", page));
+		ModelAndView v=new ModelAndView("payedGoods");
+		v.addObject("pages",orderService.getOrder(userId,"已付款", page));
 		
 		v.addObject("pendingPayment",orderService.countNumbers(userId, "待付款"));
-		v.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
-		v.addObject("assessment",orderService.countNumbers(userId, "待评价"));
+		//v.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
+		//v.addObject("assessment",orderService.countNumbers(userId, "待评价"));
+		v.addObject("Payment",orderService.countNumbers(userId, "已付款"));
 		return v;
 	}
 	/***

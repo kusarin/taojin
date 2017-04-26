@@ -89,7 +89,7 @@ public  class OrderServiceImpl implements OrderService {
 		case 0:
 			order.setStatus("未付款");
 		case 1:
-			order.setStatus("交易成功");
+			order.setStatus("已付款");
 			break;
 		case 2:
 			order.setStatus("已取消");

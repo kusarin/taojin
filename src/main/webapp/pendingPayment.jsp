@@ -111,19 +111,19 @@ function deleteAll(){
 					<div class="pull-left">
 						<div class="navbar" id="topnav">
 						
-							<div class="navbar-inner">
+						<div class="navbar-inner">
 							<div style="float:left;color:white;margin-top:26px;">
 							  <span>您好,</span>
-							  <a href="#"><span style="color:white;">登录</span></a>
-							  <a href="#"> <span style="margin-left:20px;color:white;">注册</span></a>
+							  <a href="login.jsp"><span style="color:white;">登录</span></a>
+							  <a href="register.jsp"> <span style="margin-left:20px;color:white;">注册</span></a>
 							 </div>
 							  <div style="margin-left:250px;">
 								<ul class="nav">
-								    <li><a class="home active" href="#">首页</a></li>
-									<li><a class="myaccount" href="#">个人账户</a></li>
-									<li><a class="shoppingcart" href="#">购物车</a></li>
-									<li><a class="checkout" href="#">我的订单</a></li>
-								    <li><a class="checkout" href="#">发布二手</a></li>
+								    <li><a class="home active" href="Itemlist.do">首页</a></li>
+									<li><a class="myaccount" href="UsersUpdate.jsp">个人账户</a></li>
+									<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
+									<li><a class="checkout" href="orderItem.do">我的订单</a></li>
+								    <li><a class="checkout" href="addItem.jsp">发布二手</a></li>
 								</ul>
 							 </div>
 							</div>
@@ -131,7 +131,7 @@ function deleteAll(){
 					</div>
 					<!-- Top Nav End -->
 					<div class="pull-right">
-						<form class="form-search top-search">
+						<form class="form-search top-search" action="searchItem.do" method="post">
 							<input type="text" class="input-medium search-query"  style="width:auto;height:40px;border:4px solid #FFA07A"
 								placeholder="搜索你想要的二手"><input type="submit" value="搜索"
 								style="height:40px;width:auto;background-color:#FFA07A;border:4px solid #FFA07A;">
@@ -154,20 +154,15 @@ function deleteAll(){
 						<strong style="font-size:16px;">订单中心</strong>
 					</h2>
 					<ul class="nav nav-list categories">
-						<li><a href="#">我的订单</a></li>
-						<li><a href="#">待付款
+						<li><a href="orderItem.do">我的订单</a></li>
+						<li><a href="pendingPayment.do">待付款
 						<c:if test="${pendingPayment!=0}">
 						<sup style="color:red;font-size:12px;">${pendingPayment}</sup>
 						</c:if>
 						</a></li>
-						<li><a href="#">待收货
-						<c:if test="${receivingGoods!=0}">
-						<sup style="color:red;font-size:12px;">${receivingGoods}</sup>
-						</c:if>
-						</a></li>
-						<li><a href="#">待评价
-						<c:if test="${assessment!=0}">
-						<sup style="color:red;font-size:12px;">${assessment}</sup>
+						<li><a href="payedGoods.do">已付款
+						<c:if test="${Payment!=0}">
+						<sup style="color:red;font-size:12px;">${Payment}</sup>
 						</c:if>
 						</a></li>
 						<li><a href="removeRecord.do">取消订单记录</a></li>
@@ -237,7 +232,7 @@ function deleteAll(){
 		                    <td class="sa" style="border-right:1px solid #F5F5F5;border-bottom:1px solid #F5F5F5;">${orderc.order.status}
 		                    </td>
 	                        <td class="sa" style="border-bottom:1px solid #F5F5F5;">
-	                        <a href="#"><p>订单详情</p></a>
+	                        <a href="lookOrderDeatil.do?orderNumber=${orderc.order.orderNumber}"><p>订单详情</p></a>
 	                        <c:if test="${orderc.order.status!='已取消'}">
 							<a href="removeOrder.do?flag=3&orderNumber=${orderc.order.orderNumber}"><p>取消订单</p></a>
 							</c:if>
