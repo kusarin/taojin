@@ -1,6 +1,8 @@
 package cn.it.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -8,8 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+
+
 
 
 
@@ -202,5 +208,19 @@ public class OrderController {
 		List<Address> address=orderService.getAddress(userId);
 		view.addObject("address",address);
 		return view;
+	}
+	/****
+	 * 新增收货地址
+	 * */
+	@RequestMapping("addAdr.do")
+	@ResponseBody
+	public Map<String,Object> addAdr(HttpServletRequest request){
+		Map<String,Object> map=new HashMap<String,Object>();
+		int userId=1;
+		String addr1=request.getParameter("addr");
+		orderService.addAddr(addr1, userId);
+		map.put("msg", "添加成功");
+		return map;
+		
 	}
 }
