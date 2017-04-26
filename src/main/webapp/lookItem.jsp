@@ -116,9 +116,15 @@
 
 								<div class="navbar-inner">
 									<div style="float: left; color: white; margin-top: 26px;">
-										<span>您好,</span> <a href="#"><span style="color: white;">登录</span></a>
-										<a href="#"> <span
-											style="margin-left: 20px; color: white;">注册</span></a>
+										<span>您好,</span>
+										<c:if test="${user == null}">
+											<a href="login.jsp"><span style="color: white;">登录</span></a>
+											<a href="register.jsp"> <span
+												style="margin-left: 20px; color: white;"> 注册</span></a>
+										</c:if>
+										<c:if test="${user != null}">
+											<c:out value="${user.username}" />
+										</c:if>
 									</div>
 									<div style="margin-left: 250px;">
 										<ul class="nav">
