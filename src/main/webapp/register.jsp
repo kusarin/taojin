@@ -37,9 +37,15 @@
 							<div class="navbar" id="topnav">
 								<div class="navbar-inner">
 									<div style="float: left; color: white; margin-top: 26px;">
-										<span>您好,</span> <a href="login.jsp"><span
-											style="color: white;">登录</span></a> <a href="register.jsp"> <span
-											style="margin-left: 20px; color: white;">注册</span></a>
+										<span>您好,</span>
+										<c:if test="${user == null}">
+											<a href="login.jsp"><span style="color: white;">登录</span></a>
+											<a href="register.jsp"> <span
+												style="margin-left: 20px; color: white;"> 注册</span></a>
+										</c:if>
+										<c:if test="${user != null}">
+											<c:out value="${user.username}" />
+										</c:if>
 									</div>
 									<div style="margin-left: 250px;">
 										<ul class="nav">
@@ -57,8 +63,8 @@
 						<div class="pull-right">
 							<form action="searchItem.do" method="post">
 								<div style="margin-top: 10px;">
-									<input type="text" name="str"
-										class="input-medium search-query" placeholder="搜索你想要的二手"
+									<input type="text" name="str" class="input-medium search-query"
+										placeholder="搜索你想要的二手"
 										style="height: 20px; width: 100; border: 4px solid #FFA07A">
 									<input type="submit" value="搜索"
 										style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">

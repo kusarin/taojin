@@ -33,20 +33,19 @@ public class ShopController {
 	@Resource
 	   private ItemService itemService;
 	@RequestMapping(value ={"/doAdd.do"},method={RequestMethod.GET,RequestMethod.POST})
-	public String doAdd(Shop shop,Map<String,Object> map,HttpSession session,HttpServletResponse response) throws IOException{
+	public ModelAndView doAdd(Shop shop,HttpSession session) throws IOException{
 		Users user = (Users)session.getAttribute("user");
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
+		ModelAndView str = new ModelAndView("shopList");
 	    if(shopService.getAllByUserid(user.getUser_ID())==null)
 	    {
 	    	shopService.addShop(shop);
-			return "redirect:/shopList.do";
+	    	str.addObject("error", "认证成功！");
+	    	str.setViewName("/shopList");
 	    }
 	    else 	    	
-     		out.println("<script language='javascript'>");
-	        out.println("alert('店铺已存在！');");
-	        out.println("</script>");
-        	return "redirect:/shopList.do";
+     		str.addObject("error", "该用户店铺已存在！");
+	        str.setViewName("addShop");
+	    return str;
 	}
 	@RequestMapping(value ={"/toChange.do"},method={RequestMethod.GET,RequestMethod.POST}
 	)
