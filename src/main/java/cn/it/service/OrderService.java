@@ -82,4 +82,14 @@ public interface OrderService {
 	 * @param(flag对用户的操作进行标记)
 	 * */
 	public void changeOrderStatus(int flag, String orderNumber);
+	
+	/***
+	 * 新增收货地址
+	 * */
+	public void addAddr(String addr,int userId);
+	
+	/**
+	 * 根據訂單號查詢訂單
+	 * */
+	public Order findOrder(String orderNumber);
 }

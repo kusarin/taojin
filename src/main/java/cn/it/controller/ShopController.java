@@ -1,8 +1,11 @@
 package cn.it.controller;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.text.View;
 
@@ -30,15 +33,19 @@ public class ShopController {
 	@Resource
 	   private ItemService itemService;
 	@RequestMapping(value ={"/doAdd.do"},method={RequestMethod.GET,RequestMethod.POST})
-	public String doAdd(Shop shop,Map<String,Object> map,HttpSession session){
+	public ModelAndView doAdd(Shop shop,HttpSession session) throws IOException{
 		Users user = (Users)session.getAttribute("user");
-	    if(shopService.getAllByUserid(user.getUser_ID())!=null)
+		ModelAndView str = new ModelAndView("shopList");
+	    if(shopService.getAllByUserid(user.getUser_ID())==null)
 	    {
-	    	map.put("error","");
-	    }
-	    else 
 	    	shopService.addShop(shop);
-		return "redirect:/shopList.do";
+	    	str.addObject("error", "认证成功！");
+	    	str.setViewName("/shopList");
+	    }
+	    else 	    	
+     		str.addObject("error", "该用户店铺已存在！");
+	        str.setViewName("addShop");
+	    return str;
 	}
 	@RequestMapping(value ={"/toChange.do"},method={RequestMethod.GET,RequestMethod.POST}
 	)

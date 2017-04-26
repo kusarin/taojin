@@ -16,6 +16,9 @@ pageEncoding="UTF-8"%>
 <link href="${pageContext.request.contextPath}/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="${pageContext.request.contextPath}/css/jquery.fancybox.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/cloud-zoom.css" rel="stylesheet">
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.mn.js"></script>
+
 <script>
 function  che(){
 	  var addr=document.getElementsByName("addr");
@@ -66,6 +69,35 @@ function CloseDiv(show_div,bg_div)
  document.getElementById(show_div).style.display='none';  
  document.getElementById(bg_div).style.display='none';  
 } 
+
+//新增收货地址
+function save(){
+	      var addr = $("#rt").val();
+	      var div = $("#receive");
+	      if(addr.length==0){
+	    	  alert("请输入收货地址");
+	      }
+	      else{
+	      $.ajax(
+	      {
+	         url:"addAdr.do",
+	         type:"get",
+	         data:"addr="+addr,
+	         contentType:"application/json;charset=utf-8",
+	         dataType:"json",
+	         error:function(data){  
+	             alert("添加失败"); 
+	         },  
+	         success:function(data)
+	         {
+	        	   alert(data.msg);
+	        	   window.location.reload();
+		           CloseDiv('MyDiv','fade');	               
+        }
+	    });
+	   }
+	      
+}
 </script>
 <style>  
 .black_overlay{  
@@ -94,7 +126,6 @@ function CloseDiv(show_div,bg_div)
 }  
  
 </style>
-
 </head>
 <body>
 <!-- Header Start -->
@@ -108,18 +139,24 @@ function CloseDiv(show_div,bg_div)
 						<div class="navbar" id="topnav">
 						
 							<div class="navbar-inner">
-							<div style="float:left;color:white;margin-top:26px;">
-							  <span>您好,</span>
-							  <a href="#"><span style="color:white;">登录</span></a>
-							  <a href="#"> <span style="margin-left:20px;color:white;">注册</span></a>
-							 </div>
+							    <div style="float: left; color: white; margin-top: 26px;">
+										<span>您好,</span>
+										<c:if test="${user == null}">
+											<a href="login.jsp"><span style="color: white;">登录</span></a>
+											<a href="register.jsp"> <span
+												style="margin-left: 20px; color: white;"> 注册</span></a>
+										</c:if>
+										<c:if test="${user != null}">
+											<c:out value="${user.username}" />
+										</c:if>
+									</div>
 							  <div style="margin-left:250px;">
 								<ul class="nav">
-								    <li><a class="home active" href="#">首页</a></li>
-									<li><a class="myaccount" href="#">个人账户</a></li>
-									<li><a class="shoppingcart" href="#">购物车</a></li>
-									<li><a class="checkout" href="#">我的订单</a></li>
-								    <li><a class="checkout" href="#">发布二手</a></li>
+								    <li><a class="home active" href="Itemlist.do">首页</a></li>
+									<li><a class="myaccount" href="UsersUpdate.jsp">个人账户</a></li>
+									<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
+									<li><a class="checkout" href="orderItem.do">我的订单</a></li>
+								    <li><a class="checkout" href="addItem.jsp">发布二手</a></li>
 								</ul>
 							 </div>
 							</div>
@@ -127,7 +164,7 @@ function CloseDiv(show_div,bg_div)
 					</div>
 					<!-- Top Nav End -->
 					<div class="pull-right">
-						<form class="form-search top-search">
+						<form class="form-search top-search" action="searchItem.do" method="post">
 							<input type="text" class="input-medium search-query"
 								placeholder="搜索你想要的二手"/ style="border:4px solid #FFA07A;">
 								<input type="submit" value="搜索"
@@ -148,12 +185,12 @@ function CloseDiv(show_div,bg_div)
 	   </div>
 	   <div class="receiver">
 	       <div class="info">
-	       <strong>收货人地址</strong><a href="#" onclick="ShowDiv('MyDiv','fade')"><strong style="float:right;font-size:12px;">新增地址</strong></a>
+	       <strong>收货人地址</strong><a href="javascript:void(0)" onclick="ShowDiv('MyDiv','fade')"><strong style="float:right;font-size:12px;">新增地址</strong></a>
 		   </div>
 		   
-		   <div class="receiverInfo">
+		   <div class="receiverInfo"  id="receive">
 		   <c:forEach items="${address}" var="adr">
-			     <input type="radio" name="addr" value="${adr.addr}" onclick="checadr()">${adr.addr}
+			     <input type="radio" name="addr" value="${adr.addr}" onclick="checadr()"><sapn>${adr.addr}</sapn><br>
 		    </c:forEach>
 		   </div>
 		  
@@ -167,14 +204,9 @@ function CloseDiv(show_div,bg_div)
   </div>  
   <div style="margin-top:20px;">
  <table style="border-collapse:separate; border-spacing:0px 10px;font-size:14px;">
-    <tr>
-	<td>
-    收货人姓名：<input type="text"  placeholder="请填写真实姓名" >
-	</td>
-	</tr>
 	<tr>
-	<td>
-    收货地址：<br/><input type="text"  placeholder="省/市/县(可选)/街道" style="height:80px;width:100%;margin-top:10px;">
+	<td style="text-align:center;">
+    收货地址：<br/><input type="text" id="rt"  placeholder="省/市/县(可选)/街道" style="height:80px;margin-top:10px;margin-left:30%;">
 	</td>
 	</tr>
 </table>
@@ -191,9 +223,7 @@ function CloseDiv(show_div,bg_div)
 	             <strong>支付方式</strong>
 		    </div>
              <div class="butt">
-			   
 			   <input type="radio" checked="checked" name="payAway" value="0" style="border:1px solid #DCDCDC;margin-top:-5px;">网银支付
-			   
 		     </div>
 		 </div>
 		 <div class="downline"></div>
@@ -222,9 +252,9 @@ function CloseDiv(show_div,bg_div)
 		<div class="orderDe" style="border:1px solid #80ffff;">
 		<table>
 		   <tr>
-			     <td class="test1"><a href="#"><img src="${pageContext.request.contextPath}${collection.item.image}"/></a>
+			     <td class="test1"><a href="lookItem.do?id=${collection.itemId}"><img src="${pageContext.request.contextPath}${collection.item.image}"/></a>
 			     <input type="hidden" value="${collection.item.image}" name="orderDeatail[${s.index}].item.image">
-		        <a href="#"><p>${collection.item.detail}</p></a>
+		        <a href="lookItem.do?id=${collection.itemId}"><p>${collection.item.detail}</p></a>
 		        <input type="hidden" value="${collection.item.image}" name="orderDeatail[${s.index}].item.detail">
 		        <input type="hidden" value="${collection.itemId}" name="orderDeatail[${s.index}].itemId">
 		        </td>
@@ -257,7 +287,9 @@ function CloseDiv(show_div,bg_div)
 			      <input type="hidden" value="${c.order.actulPayment}" name="order.actulPayment" id="unitPrice">
 			     </td></tr>
 			     <tr><td style="padding-top:15px;"> 寄送至：<span id="adr">##################</span></td></tr>
-				 <tr><td style="padding-top:15px;padding-bottom:15px;">收货人:######</td></tr>
+				 <tr><td style="padding-top:15px;padding-bottom:15px;">收货人:<span>${username}</span>
+
+                </td></tr>
 		  </table>
 		</div>
 		
@@ -267,7 +299,7 @@ function CloseDiv(show_div,bg_div)
     </div> 
     </form>
     <!-- footer -->
-	<footer style="margin-top:20px">
+	<footer style="width:100%;height:auto; position:relative; bottom:0px;">
        <img  src="${pageContext.request.contextPath}/image/footer-tri.png" style="width:100%;">
             <div style="margin: 0px 0px 10px;text-align:center;padding-top:10px;">
 			 

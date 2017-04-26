@@ -30,11 +30,17 @@ pageEncoding="UTF-8"%>
 						<div class="navbar" id="topnav">
 						
 							<div class="navbar-inner">
-							<div style="float:left;color:white;margin-top:26px;">
-							  <span>您好,</span>
-							  <a href="#"><span style="color:white;">登录</span></a>
-							  <a href="#"> <span style="margin-left:20px;color:white;">注册</span></a>
-							 </div>
+							<div style="float: left; color: white; margin-top: 26px;">
+										<span>您好,</span>
+										<c:if test="${user == null}">
+											<a href="login.jsp"><span style="color: white;">登录</span></a>
+											<a href="register.jsp"> <span
+												style="margin-left: 20px; color: white;"> 注册</span></a>
+										</c:if>
+										<c:if test="${user != null}">
+											<c:out value="${user.username}" />
+										</c:if>
+							</div>
 							  <div style="margin-left:250px;">
 								<ul class="nav">
 								    <li><a class="home active" href="#">首页</a></li>
@@ -83,6 +89,12 @@ pageEncoding="UTF-8"%>
 		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">订单状态</td>
 			<td style="text-align:center;border-color:#FAFFF0;">${order.status}</td>
 		</tr>
+		<c:if test="${order.status=='已取消'}">
+		<tr>
+		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">取消时间</td>
+			<td style="text-align:center;border-color:#FAFFF0">${order.removeOrderTime}</td>
+		</tr>
+		</c:if>
 		<tr>
 		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">下单时间</td>
 			<td style="text-align:center;border-color:#FAFFF0">${order.orderTime}</td>
@@ -100,11 +112,11 @@ pageEncoding="UTF-8"%>
 		
 		 <tr>
 		    <td style="width:200px;text-align:center;height:30px;border-color:#FAFFF0;">收货人姓名</td>
-			<td style="width:500px;text-align:center;border-color:#FAFFF0;">请问</td>
+			<td style="width:500px;text-align:center;border-color:#FAFFF0;">${username}</td>
 		</tr>
 		<tr>
 		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">收货地址</td>
-			<td style="text-align:center;border-color:#FAFFF0;">微信</td>
+			<td style="text-align:center;border-color:#FAFFF0;">${order.recivingAddress}</td>
 		</tr>
 		</table>
 	  
