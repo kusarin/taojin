@@ -1,5 +1,6 @@
 package cn.it.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+
 
 
 
@@ -211,14 +214,16 @@ public class OrderController {
 	}
 	/****
 	 * 新增收货地址
+	 * @throws UnsupportedEncodingException 
 	 * */
 	@RequestMapping("addAdr.do")
 	@ResponseBody
-	public Map<String,Object> addAdr(HttpServletRequest request){
+	public Map<String,Object> addAdr(HttpServletRequest request) throws UnsupportedEncodingException{
 		Map<String,Object> map=new HashMap<String,Object>();
 		int userId=1;
 		String addr1=request.getParameter("addr");
-		orderService.addAddr(addr1, userId);
+		String addr2=new String(addr1.getBytes("ISO-8859-1"), "utf-8");
+		orderService.addAddr(addr2, userId);
 		map.put("msg", "添加成功");
 		return map;
 		

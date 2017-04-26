@@ -86,21 +86,13 @@ function save(){
 	         contentType:"application/json;charset=utf-8",
 	         dataType:"json",
 	         error:function(data){  
-	             alert(data.msg); 
+	             alert("添加失败"); 
 	         },  
 	         success:function(data)
 	         {
-	              alert(data.msg);
-	              //往div添加input标签
-	               var inpu=document.createElement("input");
-	               inpu.setAttribute("type","radio");
-	               inpu.setAttribute("value",addr);
-	               inpu.setAttribute("name","addr");
-	               div.appendChild(inpu);
-	               inpu.onclick = function(){
-	            	   checadr();
-	               }
-	               CloseDiv('MyDiv','fade');
+	        	   alert(data.msg);
+	        	   window.location.reload();
+		           CloseDiv('MyDiv','fade');	               
         }
 	    });
 	   }
@@ -191,9 +183,9 @@ function save(){
 	       <strong>收货人地址</strong><a href="javascript:void(0)" onclick="ShowDiv('MyDiv','fade')"><strong style="float:right;font-size:12px;">新增地址</strong></a>
 		   </div>
 		   
-		   <div class="receiverInfo" id="receive">
+		   <div class="receiverInfo"  id="receive">
 		   <c:forEach items="${address}" var="adr">
-			     <input type="radio" name="addr" value="${adr.addr}" onclick="checadr()">${adr.addr}<br>
+			     <input type="radio" name="addr" value="${adr.addr}" onclick="checadr()"><sapn>${adr.addr}</sapn><br>
 		    </c:forEach>
 		   </div>
 		  
