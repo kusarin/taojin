@@ -16,8 +16,10 @@ pageEncoding="UTF-8"%>
 <link href="${pageContext.request.contextPath}/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="${pageContext.request.contextPath}/css/jquery.fancybox.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/cloud-zoom.css" rel="stylesheet">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.mn.js"></script>
+
 <script>
-  function  readddr(){
+function  che(){
 	  var addr=document.getElementsByName("addr");
 	  var i=-1;
 	 
@@ -30,19 +32,99 @@ pageEncoding="UTF-8"%>
 	  if(i==-1){
 		  alert("请选择收货地址");
 		  return;
+	  }else{
+		  document.myform.action="commitOrderDeCart.do";
+	    	 // $(".myform")
+	       document.myform.submit();
 	  }
-  }
-function  ad(){
-	var addr=doucument.getElementsByName("addr");
-    var j=0;
-	for( ;j<addr.length;j++){
+}
+
+function checadr(){
+	var addr=document.getElementsByName("addr");
+	  var i=-1;
+	 
+	  for( var j=0;j<addr.length;j++){
 		  if(addr[j].checked){
+			  i=j;
 			  break;
 		  }
 	  }
-	  document.getElementById("rece").innerHTML= addr[j].value;
+	  document.getElementById("adr").innerHTML=addr[i].value;
+	  
+}
+
+//弹出隐藏层  
+function ShowDiv(show_div,bg_div){  
+ document.getElementById(show_div).style.display='block';  
+ document.getElementById(bg_div).style.display='block' ;  
+ var bgdiv = document.getElementById(bg_div);  
+ bgdiv.style.width = document.body.scrollWidth;   
+ // bgdiv.style.height = $(document).height();  
+ $("#"+bg_div).height($(document).height());  
+} 
+//关闭弹出层  
+function CloseDiv(show_div,bg_div)  
+{  
+ document.getElementById(show_div).style.display='none';  
+ document.getElementById(bg_div).style.display='none';  
+} 
+
+//新增收货地址
+function save(){
+	      var addr = $("#rt").val();
+	      var div = $("#receive");
+	      if(addr.length==0){
+	    	  alert("请输入收货地址");
+	      }
+	      else{
+	      $.ajax(
+	      {
+	         url:"addAdr.do",
+	         type:"get",
+	         data:"addr="+addr,
+	         contentType:"application/json;charset=utf-8",
+	         dataType:"json",
+	         error:function(data){  
+	             alert("添加失败"); 
+	         },  
+	         success:function(data)
+	         {
+	        	   alert(data.msg);
+	        	   window.location.reload();
+		           CloseDiv('MyDiv','fade');	               
+        }
+	    });
+	   }
+	      
 }
 </script>
+<style>  
+.black_overlay{  
+ display: none;  
+ position: absolute;  
+ top: 0%;  
+ left: 0%;  
+ width: 100%;  
+ height: 100%;  
+ background-color: black;  
+ z-index:1001;  
+ -moz-opacity: 0.8;  
+ opacity:.80;  
+ filter: alpha(opacity=80);  
+}  
+.white_content {  
+ display: none;  
+ position: absolute;  
+ top: 10%;  
+ left: 35%;  
+ width: 30%;  
+ height: 60%;    
+ background-color: white;  
+ z-index:1002;  
+ overflow: auto;  
+}  
+ 
+</style>
 </head>
 <body>
 <!-- Header Start -->
@@ -55,19 +137,19 @@ function  ad(){
 					<div class="pull-left">
 						<div class="navbar" id="topnav">
 						
-							<div class="navbar-inner">
+								<div class="navbar-inner">
 							<div style="float:left;color:white;margin-top:26px;">
 							  <span>您好,</span>
-							  <a href="#"><span style="color:white;">登录</span></a>
-							  <a href="#"> <span style="margin-left:20px;color:white;">注册</span></a>
+							  <a href="login.jsp"><span style="color:white;">登录</span></a>
+							  <a href="register.jsp"> <span style="margin-left:20px;color:white;">注册</span></a>
 							 </div>
 							  <div style="margin-left:250px;">
 								<ul class="nav">
-								    <li><a class="home active" href="#">首页</a></li>
-									<li><a class="myaccount" href="#">个人账户</a></li>
-									<li><a class="shoppingcart" href="#">购物车</a></li>
-									<li><a class="checkout" href="#">我的订单</a></li>
-								    <li><a class="checkout" href="#">发布二手</a></li>
+								    <li><a class="home active" href="Itemlist.do">首页</a></li>
+									<li><a class="myaccount" href="UsersUpdate.jsp">个人账户</a></li>
+									<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
+									<li><a class="checkout" href="orderItem.do">我的订单</a></li>
+								    <li><a class="checkout" href="addItem.jsp">发布二手</a></li>
 								</ul>
 							 </div>
 							</div>
@@ -89,31 +171,55 @@ function  ad(){
 	</header>
 	<!-- Header End -->
 	
-	<form action="commitOrderDeCart.do" method="post">
+	<form action="" method="post" name="myform">
     <div class="containers">
 	   <div class="orderTitle" style="color:gray;">
 	      <p>请核对订单信息</p>
 	   </div>
 	   <div class="receiver">
 	       <div class="info">
-	       <strong>收货人地址</strong><a href="#"><strong style="float:right;font-size:12px;">新增地址</strong></a>
+	       <strong>收货人地址</strong><a href="javascript:void(0)" onclick="ShowDiv('MyDiv','fade')"><strong style="float:right;font-size:12px;">新增地址</strong></a>
 		   </div>
+		   
+		   <div class="receiverInfo" id="receive">
 		   <c:forEach items="${address}" var="adr">
-		   <div class="receiverInfo">
-			     <input type="radio" name="addr" value="${adr.addr}" onclick="ad()">${adr.addr}
+			     <input type="radio" name="addr" value="${adr.addr}" onclick="checadr()">${adr.addr}<br>
+		    </c:forEach>
 		   </div>
-		   </c:forEach>
+		 
 	   </div>
+	   
+	   	   <!--弹出层时背景层DIV,修改收货地址-->  
+ <div id="fade" class="black_overlay">  
+</div>  
+ <div id="MyDiv" class="white_content">  
+  <div style="text-align: right; cursor: default; height: 30px;background-color:yellow;line-height:30px;">  
+   <span style="font-size: 30px;padding-right:5px;color:red;cursor:pointer;" onclick="CloseDiv('MyDiv','fade')">x</span>  
+  </div>  
+  <div style="margin-top:20px;">
+ <table style="border-collapse:separate; border-spacing:0px 10px;font-size:14px;">
+	<tr>
+	<td style="text-align:center;">
+    收货地址：<br/><input type="text" id="rt"  placeholder="省/市/县(可选)/街道" style="height:80px;margin-top:10px;margin-left:30%;">
+	</td>
+	</tr>
+</table>
+ 
+ </div>
+ <div style="text-align:center;margin-top:80px;">
+ <input type="button" onclick="save()" value="保存" style="margin-right:100px;"> 
+ <input type="button" onclick="CloseDiv('MyDiv','fade')" value="取消">
+ </div>
+ </div>
+	   
 	   <div class="receive">
 	       <div class="info">
 	             <strong>支付方式</strong>
 		    </div>
              <div class="butt">
              
-			   <input type="radio" name="payAway" value="0" style="border:1px solid #DCDCDC;margin-top:-5px;">微信支付
-	
-			   <input type="radio" checked="true" name="payAway" value="1"  style="border:1px solid #DCDCDC;margin-top:-5px;margin-left:40px;">支付宝
-			  
+			   <input type="radio" checked="checked" name="payAway" value="0" style="border:1px solid #DCDCDC;margin-top:-5px;">网银支付
+			   
 		     </div>
 		 </div>
 		 <div class="downline"></div>
@@ -173,13 +279,13 @@ function  ad(){
 			     <tr><td style="padding-top:15px;">实际支付： 
 			     <span class="pay" id="actulpayment">${cl.sh.total}</span>
 			     </td></tr>
-			     <tr><td style="padding-top:15px;"><p id="rece"> 寄送至：##################</p></td></tr>
-				 <tr><td style="padding-top:15px;padding-bottom:15px;">收货人:######</td></tr>
+			     <tr><td style="padding-top:15px;">寄送至：<span id="adr">##################</span></td></tr>
+				 <tr><td style="padding-top:15px;padding-bottom:15px;">收货人:${username}</td></tr>
 		  </table>
 		</div>
 		
 		<div class="commit">
-		    <input type="submit" value="提交订单" onclick="readddr()"/>
+		    <input type="button" value="提交订单" onclick="che()"/>
 		</div>
     </div> 
     </form>

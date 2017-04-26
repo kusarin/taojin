@@ -83,6 +83,12 @@ pageEncoding="UTF-8"%>
 		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">订单状态</td>
 			<td style="text-align:center;border-color:#FAFFF0;">${order.status}</td>
 		</tr>
+		<c:if test="${order.status=='已取消'}">
+		<tr>
+		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">取消时间</td>
+			<td style="text-align:center;border-color:#FAFFF0">${order.removeOrderTime}</td>
+		</tr>
+		</c:if>
 		<tr>
 		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">下单时间</td>
 			<td style="text-align:center;border-color:#FAFFF0">${order.orderTime}</td>
@@ -100,11 +106,11 @@ pageEncoding="UTF-8"%>
 		
 		 <tr>
 		    <td style="width:200px;text-align:center;height:30px;border-color:#FAFFF0;">收货人姓名</td>
-			<td style="width:500px;text-align:center;border-color:#FAFFF0;">请问</td>
+			<td style="width:500px;text-align:center;border-color:#FAFFF0;">${username}</td>
 		</tr>
 		<tr>
 		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">收货地址</td>
-			<td style="text-align:center;border-color:#FAFFF0;">微信</td>
+			<td style="text-align:center;border-color:#FAFFF0;">${order.recivingAddress}</td>
 		</tr>
 		</table>
 	  

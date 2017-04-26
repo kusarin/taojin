@@ -89,7 +89,7 @@ public  class OrderServiceImpl implements OrderService {
 		case 0:
 			order.setStatus("未付款");
 		case 1:
-			order.setStatus("交易成功");
+			order.setStatus("已付款");
 			break;
 		case 2:
 			order.setStatus("已取消");
@@ -130,7 +130,7 @@ public  class OrderServiceImpl implements OrderService {
 	 * **/
 	public void remove(int flag, String orderNumber){
 		Order o=orderDao.findOrder(orderNumber);
-		o.setOrderTime(new java.sql.Date(new Date().getTime()));// 设置取消时间
+		o.setRemoveOrderTime(new java.sql.Date(new Date().getTime()));// 设置取消时间
 		orderDao.updateTime(o);  //更新取消时间
 		changeOrderStatus( flag, orderNumber);//更改订单状态
 	}
@@ -298,5 +298,11 @@ public  class OrderServiceImpl implements OrderService {
 		adr.setAddr(addr);
 		adr.setuser_ID(userId);
 		addressDao.addressAdd(adr);
+	}
+	/**
+	 * 根據訂單號查詢訂單
+	 * */
+	public Order findOrder(String orderNumber){
+		return orderDao.findOrder(orderNumber);
 	}
 }
