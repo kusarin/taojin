@@ -19,6 +19,13 @@ if(confirm("确定要删除这条数据吗？")){
 	window.location.href="delete.do?shop_id="+shop_id;
 }
 }
+window.onload = function() {
+	var error = "${requestScope.error}";
+	if (error != "" && error != null && typeof (error) != "undefined") {
+		alert(error);
+	}
+}
+</script>
 </script>
 </head>
 <body>

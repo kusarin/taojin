@@ -1,8 +1,11 @@
 package cn.it.controller;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.text.View;
 
@@ -30,15 +33,20 @@ public class ShopController {
 	@Resource
 	   private ItemService itemService;
 	@RequestMapping(value ={"/doAdd.do"},method={RequestMethod.GET,RequestMethod.POST})
-	public String doAdd(Shop shop,Map<String,Object> map,HttpSession session){
+	public String doAdd(Shop shop,Map<String,Object> map,HttpSession session,HttpServletResponse response) throws IOException{
 		Users user = (Users)session.getAttribute("user");
-	    if(shopService.getAllByUserid(user.getUser_ID())!=null)
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+	    if(shopService.getAllByUserid(user.getUser_ID())==null)
 	    {
-	    	map.put("error","");
-	    }
-	    else 
 	    	shopService.addShop(shop);
-		return "redirect:/shopList.do";
+			return "redirect:/shopList.do";
+	    }
+	    else 	    	
+     		out.println("<script language='javascript'>");
+	        out.println("alert('店铺已存在！');");
+	        out.println("</script>");
+        	return "redirect:/shopList.do";
 	}
 	@RequestMapping(value ={"/toChange.do"},method={RequestMethod.GET,RequestMethod.POST}
 	)
