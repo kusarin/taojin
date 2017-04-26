@@ -99,6 +99,7 @@ public class OrderController {
 	 * 
 	 * 取消订单
 	 * @param(flag标记购买操作进行到那一步)
+	 * 更新商品的
 	 * */
 	@RequestMapping(value="removeOrder.do")
 	public String removeOrder(int flag,String orderNumber){
