@@ -126,7 +126,6 @@ function save(){
 }  
  
 </style>
-
 </head>
 <body>
 <!-- Header Start -->
@@ -142,8 +141,14 @@ function save(){
 							<div class="navbar-inner">
 							<div style="float:left;color:white;margin-top:26px;">
 							  <span>您好,</span>
+							  <c:if test="${empty sessionScope.user.name}">
 							  <a href="login.jsp"><span style="color:white;">登录</span></a>
 							  <a href="register.jsp"> <span style="margin-left:20px;color:white;">注册</span></a>
+							 </c:if>
+							 <c:if test="${not empty sessionScope.user.name}">
+							     <span>{sessionScope.user.name}</span>
+							     <a href="#"><span style="margin-left:20px;color:white;">退出</span></a>
+							 </c:if>
 							 </div>
 							  <div style="margin-left:250px;">
 								<ul class="nav">
@@ -218,9 +223,7 @@ function save(){
 	             <strong>支付方式</strong>
 		    </div>
              <div class="butt">
-			   
 			   <input type="radio" checked="checked" name="payAway" value="0" style="border:1px solid #DCDCDC;margin-top:-5px;">网银支付
-			   
 		     </div>
 		 </div>
 		 <div class="downline"></div>
@@ -284,7 +287,9 @@ function save(){
 			      <input type="hidden" value="${c.order.actulPayment}" name="order.actulPayment" id="unitPrice">
 			     </td></tr>
 			     <tr><td style="padding-top:15px;"> 寄送至：<span id="adr">##################</span></td></tr>
-				 <tr><td style="padding-top:15px;padding-bottom:15px;">收货人:######</td></tr>
+				 <tr><td style="padding-top:15px;padding-bottom:15px;">收货人:<span>${username}</span>
+
+                </td></tr>
 		  </table>
 		</div>
 		

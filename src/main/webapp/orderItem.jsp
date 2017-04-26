@@ -204,7 +204,7 @@ function deleteAll(){
 		                     <strong style="color:black;">${orderc.order.orderTime}</strong></span>
 		                     <span><p style="float:left;margin-right:5px;">订单号: </p>
 							 <p style="color:black;float:left;">${orderc.order.orderNumber}</p></span></td>
-			                 <td class="buyer1"><a href="#"><p>移动硬盘专营店qwertd6y7u89irtyui35uio34567i8qwerdtfy7gu789u0-34t5y6u7i89awearestuyri678d5657ii6i7</p></a></td>
+			                 <td class="buyer1"><a href="#"><p></p></a></td>
 				             <td class="buyer">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
@@ -216,8 +216,8 @@ function deleteAll(){
 						
 	                     <td class="huanhang">
 	                     <c:forEach items="${orderc.orderDeatail}" var="ord">
-	                     <a href="#"><img src="${pageContext.request.contextPath}${ord.item.image}"/></a>
-		                 <a href="#"><p>${ord.item.detail}</p></a>
+	                     <a href="lookItem.do?id=${ord.item.item_id}"><img src="${pageContext.request.contextPath}${ord.item.image}"/></a>
+		                 <a href="lookItem.do?id=${ord.item.item_id}"><p>${ord.item.detail}</p></a>
 		                 </c:forEach> 
 		                 </td>
 		                 
@@ -235,10 +235,10 @@ function deleteAll(){
 	                        <td class="sa" style="border-bottom:1px solid #F5F5F5;">
 	                        <a href="lookOrderDeatil.do?orderNumber=${orderc.order.orderNumber}"><p>订单详情</p></a>
 	                        <c:if test="${orderc.order.status!='已取消'}">
-							<a href="removeOrder.do?flag=3&orderNumber=${orderc.order.orderNumber}"><p>取消订单</p></a>
+							<a href="removeOrder.do?flag=2&orderNumber=${orderc.order.orderNumber}"><p>取消订单</p></a>
 							</c:if>
 							<c:if test="${orderc.order.status=='待付款'}">
-							 <a href="#"><p>立即付款</p></a>
+							 <a href="paymenting.do?orderNumber=${orderc.order.orderNumber}"><p>立即付款</p></a>
 							</c:if>
 							</td>
 		                </tr>
