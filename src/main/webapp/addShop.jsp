@@ -3,6 +3,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script type="text/javascript">
+	window.onload = function() {
+		var error = "${requestScope.error}";
+		if (error != "" && error != null && typeof (error) != "undefined") {
+			alert(error);
+		}
+	}
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
@@ -76,16 +84,12 @@
 					<h2 class="heading2">
 						<span>店铺管理</span>
 					</h2>
-					<ul class="nav nav-list categories">
+						<ul class="nav nav-list categories">
 						<li><a href="addShop.jsp">认证店铺 </a></li>
-						<li><a href="shopList.do">查看记录 </a></li>
-						<li><a href="商品上下架.html">商品上/下架 </a>
-							<ul>
-								<li><a href="product.html">上架 </a></li>
-								<li><a href="product.html">下架</a></li>
-							</ul></li>
-						<li><a href="商品信息管理.html">商品信息管理</a></li>
-						<li><a href="shopList.do">店铺信息管理</a></li>
+						<li><a href="#">查看记录 </a></li>
+						<li><a href="addItem.jsp">商品上架 </a></li>
+						<li><a href="shopItem.do">商品管理</a></li>
+						<li><a href="toChange.do">店铺信息管理</a></li>
 					</ul>
 				</div>
 				<div class="sidewidt"></div>
