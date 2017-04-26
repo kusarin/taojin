@@ -93,15 +93,7 @@
 										<li><a href="UsersUpdate.jsp">修改个人信息 </a></li>
 										<li><a href="changepw.jsp">更改密码</a></li>
 										<li><a href="addressList.do">更改/添加我的地址</a></li>
-									</ul> <a href="category.html">我的订单 </a>
-									<ul>
-										<li><a href="product.html">查看历史订单</a></li>
-										<li><a href="product.html">待付款</a></li>
-										<li><a href="product.html">待发货</a></li>
-										<li><a href="product.html">待收货</a></li>
-										<li><a href="product.html">待评价</a></li>
-										<li><a href="product.html">退款/售后</a></li>
-									</ul></li>
+									</ul> <a href="orderItem.do">我的订单 </a></li>
 								<li><a href="category.html">商品信息管理</a></li>
 
 								<li><a href="category.html">店铺信息管理</a></li>

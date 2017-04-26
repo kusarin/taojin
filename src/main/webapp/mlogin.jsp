@@ -83,7 +83,10 @@
 																<input type="password" name="password" />
 															</div>
 														</div>
-														<div class="controls"><input type="submit" value="登录" onclick="return check()" class="btn btn-orange" style="width :200px" />
+														<div class="control-group">
+														<div class="controls"><input type="submit" value="登录" onclick="return check()" class="btn btn-orange" style="width :150px" />
+												  		&nbsp; &nbsp; &nbsp; &nbsp;<a href="Itemlist.do">返回</a>
+												  		</div>
 												  		</div>
 												  	</fieldset>
 												  	</form>

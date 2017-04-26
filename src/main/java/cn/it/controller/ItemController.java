@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import cn.it.dao.DiscussDao;
 import cn.it.pojo.Discuss;
 import cn.it.pojo.Item;
 import cn.it.pojo.Shop;
+import cn.it.pojo.Users;
 import cn.it.service.ItemService;
 
 /**
@@ -42,12 +44,8 @@ public class ItemController {
 	@RequestMapping("addItem.do")
 	public ModelAndView addItem(
 			@RequestParam(value = "file", required = false) MultipartFile file,
-			HttpServletRequest request
+			HttpServletRequest request,HttpSession session
 			) {
-
-		// 获取店铺编号shop_id
-		String shop_id = request.getParameter("Shop_id");
-		int s_id = Integer.parseInt(shop_id);
 
 		// 获取前台传入的数据；
 		String name = request.getParameter("name");
@@ -57,8 +55,7 @@ public class ItemController {
 		String detail = request.getParameter("detail");
 
 		// 进行添加商品信息操作，并且获取提示信息
-		ModelAndView modelandview = itemservice.addItem(s_id, name,
-				typel, number, price, detail, file, request);
+		ModelAndView modelandview = itemservice.addItem(name, typel, number, price, detail, file, request, session);
 
 		return modelandview;
 	}
@@ -70,19 +67,19 @@ public class ItemController {
 	 *            ，@RequestParam("id")前台传递的商品编号
 	 * @return
 	 */
-//	@RequestMapping("deleteItem.do")
-//	public ModelAndView deleteItem(HttpServletRequest request,
-//			@RequestParam("id") String id) {
-//
-//		// 获取前台传入的数据，商品编号id转为int类型；
-//		int item_id = Integer.parseInt(id);
-//		// 进行删除商品信息操作；
-//		ModelAndView modelandview = itemservice.deleteItem(item_id);
-//		// 重定向刷新页面；
-//		modelandview.setViewName("redirect:shopItem.do");
-//
-//		return modelandview;
-//	}
+	// @RequestMapping("deleteItem.do")
+	// public ModelAndView deleteItem(HttpServletRequest request,
+	// @RequestParam("id") String id) {
+	//
+	// // 获取前台传入的数据，商品编号id转为int类型；
+	// int item_id = Integer.parseInt(id);
+	// // 进行删除商品信息操作；
+	// ModelAndView modelandview = itemservice.deleteItem(item_id);
+	// // 重定向刷新页面；
+	// modelandview.setViewName("redirect:shopItem.do");
+	//
+	// return modelandview;
+	// }
 
 	/**
 	 * 改变商品状态（“在售”=>“下架” or “下架”=>“在售”）
@@ -99,13 +96,13 @@ public class ItemController {
 		int item_id = Integer.parseInt(id);
 		// 进行修改商品状态操作；
 		ModelAndView modelandview = itemservice.updownItem(item_id);
-		
+
 		// 获取商品的店铺编号
 		Item i = itemservice.findById(item_id);
 		int shop_id = i.getshop_id();
-		
+
 		// 重定向刷新页面；
-		modelandview.setViewName("redirect:shopItem.do?shopid="+shop_id);
+		modelandview.setViewName("redirect:shopItem.do?shopid=" + shop_id);
 
 		return modelandview;
 	}
@@ -151,7 +148,7 @@ public class ItemController {
 		String number = request.getParameter("number");
 		String price = request.getParameter("price");
 		String detail = request.getParameter("detail");
-		
+
 		// 获取原图片路径
 		String image = request.getParameter("image");
 
@@ -162,9 +159,9 @@ public class ItemController {
 		// 获取商品的店铺编号
 		Item i = itemservice.findById(item_id);
 		int shop_id = i.getshop_id();
-		
+
 		// 重定向刷新页面；
-		modelandview.setViewName("redirect:shopItem.do?shopid="+shop_id);
+		modelandview.setViewName("redirect:shopItem.do?shopid=" + shop_id);
 
 		return modelandview;
 	}
@@ -185,8 +182,8 @@ public class ItemController {
 		int item_id = Integer.parseInt(id);
 
 		// 根据商品编号，获得商品；
-		Item i = itemservice.findById(item_id);		
-		
+		Item i = itemservice.findById(item_id);
+
 		// 将商品i传递到lookitem
 		modelandview.addObject("lookitem", i);
 
@@ -216,13 +213,13 @@ public class ItemController {
 
 		// 获取商品的评论列表
 		List<Discuss> disscuss = itemservice.showDisscussList(item_id);
-		//判断评论是否为空
-		if(disscuss.size()==0){
+		// 判断评论是否为空
+		if (disscuss.size() == 0) {
 			modelandview.addObject("error0", "目前还没有评论哟");
-		}else{
-			modelandview.addObject("discusslist", disscuss);	
+		} else {
+			modelandview.addObject("discusslist", disscuss);
 		}
-		
+
 		return modelandview;
 	}
 
@@ -251,56 +248,60 @@ public class ItemController {
 	 * 
 	 * @param request
 	 * @return
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping("ItemType1.do")
-	public ModelAndView showTypeItem1(HttpServletRequest request, @RequestParam("typeh") String typeh) throws UnsupportedEncodingException {
+	public ModelAndView showTypeItem1(HttpServletRequest request,
+			@RequestParam("typeh") String typeh)
+			throws UnsupportedEncodingException {
 		ModelAndView modelandview = new ModelAndView("Itemlist"); // 到Itemtype.jsp界面
-		
-		//将传入的数据转为中文
-		String stypeh=new String(typeh.getBytes("ISO-8859-1"),"utf-8");
-		
+
+		// 将传入的数据转为中文
+		String stypeh = new String(typeh.getBytes("ISO-8859-1"), "utf-8");
+
 		// 根据类型，获得商品；
 		List<Item> list;
 		list = itemservice.findByType1(stypeh);
 
 		// 将商品条目list传递到itemtype
 		modelandview.addObject("itemlist", list);
-		
+
 		// 将商品类型typeh和typel传递到前台目前显示分类
-		modelandview.addObject("show","目前显示分类");
-		modelandview.addObject("typeh", " >"+stypeh);
+		modelandview.addObject("show", "目前显示分类");
+		modelandview.addObject("typeh", " >" + stypeh);
 
 		return modelandview;
 	}
 
-	
 	/**
 	 * 按照选择的商品类型查看商品，此处输入商品一级分类和二级分类
 	 * 
 	 * @param request
 	 * @return
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping("ItemType2.do")
-	public ModelAndView showTypeItem2(HttpServletRequest request, @RequestParam("typeh") String typeh, @RequestParam("typel") String typel) throws UnsupportedEncodingException {
+	public ModelAndView showTypeItem2(HttpServletRequest request,
+			@RequestParam("typeh") String typeh,
+			@RequestParam("typel") String typel)
+			throws UnsupportedEncodingException {
 		ModelAndView modelandview = new ModelAndView("Itemlist"); // 到Itemtype.jsp界面
 
-		//将传入的数据转为中文
-		String stypeh=new String(typeh.getBytes("ISO-8859-1"),"utf-8");
-		String stypel=new String(typel.getBytes("ISO-8859-1"),"utf-8");
-		
+		// 将传入的数据转为中文
+		String stypeh = new String(typeh.getBytes("ISO-8859-1"), "utf-8");
+		String stypel = new String(typel.getBytes("ISO-8859-1"), "utf-8");
+
 		// 根据类型，获得商品；
 		List<Item> list;
 		list = itemservice.findByType2(stypeh, stypel);
 
 		// 将商品条目list传递到itemtype
 		modelandview.addObject("itemlist", list);
-		
+
 		// 将商品类型typeh和typel传递到前台
-		modelandview.addObject("show","目前显示分类");
-		modelandview.addObject("typeh", "  >"+stypeh);
-		modelandview.addObject("typel", "  >"+stypel);
+		modelandview.addObject("show", "目前显示分类");
+		modelandview.addObject("typeh", "  >" + stypeh);
+		modelandview.addObject("typel", "  >" + stypel);
 
 		return modelandview;
 	}
@@ -309,16 +310,19 @@ public class ItemController {
 	 * 根据店铺编号shop_id按照条目显示商品（店家管理商品使用）
 	 * 
 	 * @param request
-	 * @param id 前台传入的店铺编号
+	 * @param id
+	 *            前台传入的店铺编号
 	 * @return
 	 */
 	@RequestMapping("shopItem.do")
-	public ModelAndView showShopItem(HttpServletRequest request,
-			@RequestParam("shopid") String id) {
+	public ModelAndView showShopItem(HttpServletRequest request
+			,HttpSession session) {
 		ModelAndView modelandview = new ModelAndView("shopItem"); // 到shopItem.jsp界面
 
-		// 获取前台传入的数据，商品编号id转为int类型；
-		int shop_id = Integer.parseInt(id);
+		// 获取店铺编号shop_id
+		Users user = (Users)session.getAttribute("user");
+		int user_id = user.getUser_ID();
+		int shop_id = itemservice.getShopId(user_id);
 
 		// 获取商品条目list（在售）
 		List<Item> list;
@@ -339,7 +343,8 @@ public class ItemController {
 	 * 根据店铺编号shop_id按照条目显示商品（买家查看商品使用）
 	 * 
 	 * @param request
-	 * @param id 前台传入的店铺编号
+	 * @param id
+	 *            前台传入的店铺编号
 	 * @return
 	 */
 	@RequestMapping("lookshopItem.do")
@@ -349,18 +354,18 @@ public class ItemController {
 
 		// 获取前台传入的数据，商品编号id转为int类型；
 		int shop_id = Integer.parseInt(id);
-		
+
 		// 获取商品条目list（在售）
 		List<Item> list;
 		list = itemservice.findByShopId(shop_id);
 
 		// 将商品条目list（在售）传递到showshopItem
 		modelandview.addObject("showshopItem", list);
-		
+
 		// 获取商品归属的店铺信息；
 		Shop shop;
 		shop = itemservice.showShop(shop_id);
-		
+
 		// 将获取到的店铺信息shop传递到 shopinfo
 		modelandview.addObject("shopinfo", shop);
 
@@ -395,19 +400,20 @@ public class ItemController {
 
 	@RequestMapping("addItemDiscuss.do")
 	public ModelAndView addItemDiscuss(HttpServletRequest request,
-			@RequestParam("id") String id){
+			@RequestParam("id") String id) {
 
 		// 获取商品编号item_id
-		//String id = request.getParameter("item_id");
+		// String id = request.getParameter("item_id");
 		int item_id = Integer.parseInt(id);
 		String content = request.getParameter("content");
-		
-		//进行添加评论的操作
-		ModelAndView modelandview = itemservice.addDiscuss1(item_id, content, request);
-		
+
+		// 进行添加评论的操作
+		ModelAndView modelandview = itemservice.addDiscuss1(item_id, content,
+				request);
+
 		// 重定向刷新页面；
-		modelandview.setViewName("redirect:lookItem.do?id="+id);
-		
+		modelandview.setViewName("redirect:lookItem.do?id=" + id);
+
 		return modelandview;
 	}
 }

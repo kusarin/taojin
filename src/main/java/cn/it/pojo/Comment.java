@@ -46,4 +46,5 @@ public class Comment {
 	public void setDatetime(Date datetime) {
 		this.datetime = datetime;
 	}
+
 }
