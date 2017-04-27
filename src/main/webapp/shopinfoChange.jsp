@@ -25,9 +25,8 @@
 						<div class="navbar" id="topnav">
 							<div class="navbar-inner">
 								<div style="float: left; color: white; margin-top: 26px;">
-									<span>您好,</span> <a href="login.jsp"><span
-										style="color: white;">登录</span></a> <a href="register.jsp"> <span
-										style="margin-left: 20px; color: white;">注册</span></a>
+									<span>您好,</span> <span
+										style="color: white;">${user.username}</span>
 								</div>
 								<div style="margin-left: 250px;">
 									<ul class="nav">
@@ -77,14 +76,11 @@
 					</h2>
 					<ul class="nav nav-list categories">
 						<li><a href="addShop.jsp">认证店铺 </a></li>
-						<li><a href="shopList.do">查看记录 </a></li>
-						<li><a href="商品上下架.html">商品上/下架 </a>
-							<ul>
-								<li><a href="product.html">上架 </a></li>
-								<li><a href="product.html">下架</a></li>
-							</ul></li>
-						<li><a href="商品信息管理.html">商品信息管理</a></li>
-						<li><a href="shopList.do">店铺信息管理</a></li>
+						<li><a href="#">查看记录 </a></li>
+						<li><a href="addItem.jsp">商品上架 </a></li>
+						<li><a href="shopItem.do">商品管理</a></li>
+						<li><a href="toChange.do">店铺信息管理</a></li>
+					</ul>
 				</div>
 				<div class="sidewidt"></div>
 
@@ -95,7 +91,7 @@
 					<section id="latestblog">
 					<div class="blogdetail">
 						<h2 class="heading2">
-							<span>认证店铺</span>
+							<span>修改店铺基本信息</span>
 						</h2>
 						<div class="blogicons">
 							<div class="pull-left"></div>
