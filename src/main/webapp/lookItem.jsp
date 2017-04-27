@@ -128,6 +128,8 @@
 										</c:if>
 										<c:if test="${user != null}">
 											<c:out value="${user.username}" />
+											<a href="logout.do"><span style="color: white;">
+													注销</span></a>
 										</c:if>
 									</div>
 									<div style="margin-left: 250px;">
@@ -176,7 +178,7 @@
 								src=${pageContext.request.contextPath}${lookitem.image}></td>
 						</tr>
 
-						<!-- 参与评论 -->
+<!------------------------------------------- 发表评论 ----------------------------------------->
 						<form action="addItemDiscuss.do?id=${lookitem.item_id}"
 							method="post" enctype="multipart/form-data">
 							<div class="productdesc">
@@ -185,12 +187,14 @@
 								</ul>
 								<div class="tab-content">
 									<div class="tab-pane active" id="description">
-										<input type="text" name="content" style="width: 425px"><br>
+										评论内容<input type="text" name="content" style="width: 425px"><br>
+										评论星级<input type="text" name="score" style="width: 425px"><br>
 										<input type="submit" value="发表评论">
 									</div>
 								</div>
 							</div>
 						</form>
+<!------------------------------------------- 发表评论 结束------------------------------------->
 
 					</div>
 
@@ -243,14 +247,22 @@
 						<!-- 商品评论 -->
 						<div class="productdesc">
 							<ul class="nav nav-tabs" id="myTab">
-								<li class="active"><a href="#description">商品评论</a></li>
+								<li class="active"><a href="#description">商品评论（ ${dnum}条）</a></li>
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane active" id="description">
 									<p>${error0}</p>
 									<c:forEach items="${discusslist}" var="d">
 										<img src=${pageContext.request.contextPath}/image/dislogo.jpg
-											style="heigh: 20px; width: 20px">:${d.content}<br>
+											style="heigh: 20px; width: 20px">${d.username}：${d.content}<br>
+										<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+										<U>
+										<div
+											style="margin-left:auto;margin-right:2px;width:150px;">
+											<fmt:formatDate value="${d.time}"
+												pattern="YYYY-MM-dd HH:mm:ss" />
+										</div>
+										</U><br>
 									</c:forEach>
 								</div>
 							</div>
