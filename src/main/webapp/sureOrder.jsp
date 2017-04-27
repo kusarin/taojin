@@ -139,17 +139,17 @@ function save(){
 						<div class="navbar" id="topnav">
 						
 							<div class="navbar-inner">
-							<div style="float:left;color:white;margin-top:26px;">
-							  <span>您好,</span>
-							  <c:if test="${empty sessionScope.user.name}">
-							  <a href="login.jsp"><span style="color:white;">登录</span></a>
-							  <a href="register.jsp"> <span style="margin-left:20px;color:white;">注册</span></a>
-							 </c:if>
-							 <c:if test="${not empty sessionScope.user.name}">
-							     <span>{sessionScope.user.name}</span>
-							     <a href="#"><span style="margin-left:20px;color:white;">退出</span></a>
-							 </c:if>
-							 </div>
+							    <div style="float: left; color: white; margin-top: 26px;">
+										<span>您好,</span>
+										<c:if test="${user == null}">
+											<a href="login.jsp"><span style="color: white;">登录</span></a>
+											<a href="register.jsp"> <span
+												style="margin-left: 20px; color: white;"> 注册</span></a>
+										</c:if>
+										<c:if test="${user != null}">
+											<c:out value="${user.username}" />
+										</c:if>
+									</div>
 							  <div style="margin-left:250px;">
 								<ul class="nav">
 								    <li><a class="home active" href="Itemlist.do">首页</a></li>
@@ -252,9 +252,9 @@ function save(){
 		<div class="orderDe" style="border:1px solid #80ffff;">
 		<table>
 		   <tr>
-			     <td class="test1"><a href="#"><img src="${pageContext.request.contextPath}${collection.item.image}"/></a>
+			     <td class="test1"><a href="lookItem.do?id=${collection.itemId}"><img src="${pageContext.request.contextPath}${collection.item.image}"/></a>
 			     <input type="hidden" value="${collection.item.image}" name="orderDeatail[${s.index}].item.image">
-		        <a href="#"><p>${collection.item.detail}</p></a>
+		        <a href="lookItem.do?id=${collection.itemId}"><p>${collection.item.detail}</p></a>
 		        <input type="hidden" value="${collection.item.image}" name="orderDeatail[${s.index}].item.detail">
 		        <input type="hidden" value="${collection.itemId}" name="orderDeatail[${s.index}].itemId">
 		        </td>

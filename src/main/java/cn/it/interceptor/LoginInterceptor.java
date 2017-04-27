@@ -15,33 +15,34 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	private static final String[] IGNORE_URI = { "login.do", "/Itemlist.do",
 			"/lookItem.do", "/lookshopItem.do", "/ItemType1.do",
-			"/ItemType2.do", "/searchItem.do","/findResourceFile.do" ,
-			"RF","anage","/updatepassword.do","SR","/findItem.do","/findShop.do"
-			,"/findUser.do","/deleteComment.do","/lookComment.do","addUser.do"};
-	private static final String[] M_URL = {"/findResourceFile.do" ,
-		"RF","anage","/updatepassword.do","SR","/findItem.do","/findShop.do"
-		,"/findUser.do","/deleteComment.do","/lookComment.do"};
-	
+			"/ItemType2.do", "/searchItem.do", "/findResourceFile.do", "RF",
+			"anage", "/updatepassword.do", "SR", "/findItem.do",
+			"/findShop.do", "/findUser.do", "/deleteComment.do",
+			"/lookComment.do", "addUser.do" };
+	private static final String[] M_URL = { "/findResourceFile.do", "RF",
+			"anage", "/updatepassword.do", "SR", "/findItem.do",
+			"/findShop.do", "/findUser.do", "/deleteComment.do",
+			"/lookComment.do" };
+
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		boolean flag = false;
 		boolean flagM = false;
 		String url = request.getRequestURL().toString();
-		System.out.println(">>>: " + url);
 		for (String s : IGNORE_URI) {
 			if (url.contains(s)) {
 				flag = true;
 				break;
 			}
 		}
-		for (String s :M_URL){
+		for (String s : M_URL) {
 			if (url.contains(s)) {
 				flagM = true;
 				break;
 			}
 		}
-		if (flagM){
+		if (flagM) {
 			Object mySession = request.getSession().getAttribute("manager");
 			if (mySession == null) {
 				response.sendRedirect("/Taojin/mlogin.jsp");
@@ -51,7 +52,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		}
 		if (!flag) {
 			Object mySession = request.getSession().getAttribute("user");
-			System.out.println(">>>: " + mySession);
 			if (mySession != null) {
 				flag = true;
 			} else {
@@ -59,7 +59,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			}
 			return flag;
 		}
-		
+
 		return flag;
 	}
 

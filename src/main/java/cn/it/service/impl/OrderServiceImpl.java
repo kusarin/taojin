@@ -127,12 +127,24 @@ public  class OrderServiceImpl implements OrderService {
 	
 	/**
 	 * 取消订单
+	 * 更新商品的总数、销售数量
 	 * **/
 	public void remove(int flag, String orderNumber){
 		Order o=orderDao.findOrder(orderNumber);
 		o.setRemoveOrderTime(new java.sql.Date(new Date().getTime()));// 设置取消时间
 		orderDao.updateTime(o);  //更新取消时间
 		changeOrderStatus( flag, orderNumber);//更改订单状态
+		
+		/*****更新商品的总数、销售数量****/
+		List<OrderDetail> oli=orderDetailDao.selectAll(orderNumber);//此订单中的所有商品
+		for(OrderDetail ord:oli){
+			int itemId=ord.getItemId();//订单中的商品
+			
+			Item ii=itemDao.FindItemById(itemId);//item表中的商品
+			ii.setnumber(ii.getnumber()+ord.getItemNumbers());//更新商品总数
+			ii.settradingTimes(ii.gettradingTimes()-ord.getItemNumbers());//更新销售数量
+			itemDao.ItemUpdate(ii);//更新item表
+		}
 	}
 	/**
 	 * 
@@ -159,7 +171,8 @@ public  class OrderServiceImpl implements OrderService {
 	
 	/**
 	 * 提交订单
-	 * 
+	 * 生成订单记录
+	 * 更新商品数量
 	 * @param(itemId表示商品id，paylabel支付方式标记，userId用户Id)
 	 * 
 	 * */
@@ -182,13 +195,21 @@ public  class OrderServiceImpl implements OrderService {
 		order.setFreight(freight);
 		orderDao.add(order);
 
-		// 插入订单明细
+		// 插入订单明细，更新商品数量
 		List<OrderDetail> orderDetail = orderCollection.getOrderDeatail();
 		for(OrderDetail orderDe:orderDetail){
 			orderDe.setOrderNumber(orderNumber); // 设置订单编号
 			int itemId=orderDe.getItemId();
 			orderDe.setItemId(itemId);
 			orderDetailDao.add(orderDe);
+			
+			/**更新商品总数*/
+			int itemNumbers=orderDe.getItemNumbers();//购买的商品数量
+			Item item=itemDao.FindItemById(itemId);
+			item.setnumber(item.getnumber()-itemNumbers);
+			//更新此件商品的销售总数
+			item.settradingTimes(item.gettradingTimes()+itemNumbers);
+			itemDao.ItemUpdate(item);
 		}
 		return order;
 	}
