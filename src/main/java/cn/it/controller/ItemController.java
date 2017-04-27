@@ -269,7 +269,10 @@ public class ItemController {
 
 		// 将商品条目list传递到itemtype
 		modelandview.addObject("itemlist", list);
-
+		// 是否有满足条件商品的判断
+		if (list.size() == 0) {
+			modelandview.addObject("error0", "抱歉！！没有找到符合类型的商品！！！！");
+		}
 		// 将商品类型typeh和typel传递到前台目前显示分类
 		modelandview.addObject("show", "目前显示分类");
 		modelandview.addObject("typeh", " >" + stypeh);
@@ -298,6 +301,10 @@ public class ItemController {
 		// 根据类型，获得商品；
 		List<Item> list;
 		list = itemservice.findByType2(stypeh, stypel);
+		// 是否有满足条件商品的判断
+		if (list.size() == 0) {
+			modelandview.addObject("error0", "抱歉！！没有找到符合类型的商品！！！！");
+		}
 
 		// 将商品条目list传递到itemtype
 		modelandview.addObject("itemlist", list);
@@ -392,6 +399,7 @@ public class ItemController {
 		// 根据输入关键词，搜索商品
 		List<Item> list;
 		list = itemservice.findBystr(str);
+		// 是否有满足条件商品的判断
 		if (list.size() == 0) {
 			modelandview.addObject("error0", "抱歉！！没有找到符合搜索信息的商品！！！！");
 		}
