@@ -98,9 +98,6 @@
 		 var num=parseInt(document.getElementById("mp").value);
 		 window.location.href="index.do?itemId=${lookitem.item_id}&number="+num;
 	   }
-	 function succ(){
-		 alert("添加成功！");
-	 }
 </script>
 </head>
 <body>
@@ -217,7 +214,7 @@
 
 									<li><a class="cart" href="javascript:void(0)"
 										onclick="purchas()">现在购买</a></li>
-									<li><a class="wish" href="javascript:succ()"
+									<li><a class="wish" href="javascript:void(0)"
 										onclick="addCart()">加入购物车</a></li>
 								</ul>
 							</div>
