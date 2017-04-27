@@ -21,18 +21,26 @@ public class UsersController {
 	@Resource
 	private UsersService usersService;
 
-	// 添加用户
-	@RequestMapping("tologin.do")
-	public ModelAndView tologin() {
-		ModelAndView result = usersService.tologin();
-		return result;
-	}
+	// // 添加用户
+	// @RequestMapping("tologin.do")
+	// public ModelAndView tologin() {
+	// ModelAndView result = usersService.tologin();
+	// return result;
+	// }
 
 	// 登录
 	@RequestMapping("login.do")
 	public ModelAndView login(Users user, HttpSession session)
 			throws IOException {
 		ModelAndView result = usersService.login(user, session);
+		return result;
+	}
+
+	// 登出
+	@RequestMapping("logout.do")
+	public ModelAndView logout(Users user, HttpSession session)
+			throws IOException {
+		ModelAndView result = usersService.logout(user, session);
 		return result;
 	}
 

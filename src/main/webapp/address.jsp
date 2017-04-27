@@ -52,6 +52,8 @@
 										</c:if>
 										<c:if test="${user != null}">
 											<c:out value="${user.username}" />
+											<a href="logout.do"><span style="color: white;">
+													注销</span></a>
 										</c:if>
 									</div>
 									<div style="margin-left: 250px;">

@@ -41,7 +41,7 @@
 										<c:if test="${user == null}">
 											<a href="login.jsp"><span style="color: white;">登录</span></a>
 											<a href="register.jsp"> <span
-												style="margin-left: 20px; color: white;"> 注册</span></a>
+												style="margin-left: 20px; color: white;">注册</span></a>
 										</c:if>
 										<c:if test="${user != null}">
 											<c:out value="${user.username}" />
