@@ -45,6 +45,8 @@
 										</c:if>
 										<c:if test="${user != null}">
 											<c:out value="${user.username}" />
+											<a href="logout.do"><span style="color: white;">
+													注销</span></a>
 										</c:if>
 									</div>
 									<div style="margin-left: 250px;">
@@ -132,25 +134,28 @@
 														<div class="control-group">
 															<label class="control-label">电话/手机 </label>
 															<div class="controls">
-																<input type="text" name="tele" id="tele" />
+																<input type="text" name="tele" id="tele"
+																	value="${user.tele}" />
 															</div>
 														</div>
 														<div class="control-group">
 															<label class="control-label">真实姓名</label>
 															<div class="controls">
-																<input type="text" name="name" id="name" />
+																<input type="text" name="name" id="name"
+																	value="${user.name}" />
 															</div>
 														</div>
 														<div class="control-group">
 															<label class="control-label">电子邮箱</label>
 															<div class="controls">
-																<input type="text" name="email" id="email" />
+																<input type="text" name="email" id="email"
+																	value="${user.email}" />
 															</div>
 														</div>
 														<div class="control-group">
 															<label class="control-label">个人身份证</label>
 															<div class="controls">
-																<input type="text" name="ID" id="ID" />
+																<input type="text" name="ID" id="ID" value="${user.ID}" />
 															</div>
 														</div>
 														<div class="control-group">
@@ -158,32 +163,10 @@
 														</div>
 														<div class="controls">
 															<input type="submit" id="submit_id" value="确认提交"
-																class="btn btn-orange" onclick="return check()">
-															<input type="reset" value="重新输入" class="btn">
+																class="btn btn-orange"
+																onclick="return window.alert('修改完成')"> <input
+																type="reset" value="重新输入" class="btn">
 														</div>
-														<script>
-															function check() {
-																var tele = document
-																		.getElementById("tele").value;
-																var name = document
-																		.getElementById("name").value;
-																var email = document
-																		.getElementById("email").value;
-																var ID = document
-																		.getElementById("ID").value;
-																if (tele == null
-																		|| name == null
-																		|| email == null
-																		|| ID == null
-																		|| tele == ''
-																		|| name == ''
-																		|| email == ''
-																		|| ID == '') {
-																	alert("请将个人信息完善后再进行提交");
-																	return false;
-																}
-															}
-														</script>
 													</fieldset>
 												</form>
 											</section>

@@ -33,9 +33,8 @@ if(confirm("确定要删除这条数据吗？")){
 						<div class="navbar" id="topnav">
 							<div class="navbar-inner">
 								<div style="float: left; color: white; margin-top: 26px;">
-									<span>您好,</span> <a href="login.jsp"><span
-										style="color: white;">登录</span></a> <a href="register.jsp"> <span
-										style="margin-left: 20px; color: white;">注册</span></a>
+									<span>您好,</span> <span
+										style="color: white;">${user.username}</span>
 								</div>
 								<div style="margin-left: 250px;">
 									<ul class="nav">
@@ -134,6 +133,7 @@ if(confirm("确定要删除这条数据吗？")){
 															<td>店名</td>
 															<td>类型</td>
 															<td>介绍</td>
+							                                <td>审核状态</td>
 							                                <td>操作</td>
 														</tr>
 															<tr>
@@ -142,7 +142,9 @@ if(confirm("确定要删除这条数据吗？")){
 																<td>${shopli.name}</td>
 																<td>${shopli.type}</td>
 																<td>${shopli.intro}</td>
-																<td><c:if test="${shopli.status==0 }">未审核</c:if></td>
+																<td><c:if test="${shopli.status==0 }">未审核</c:if>
+																    <c:if test="${shopli.status==1 }">已审核</c:if>
+																    <c:if test="${shopli.status==2 }">审核未通过</c:if></td>
 																<td><a href="toChange.do">查看</a>
 																<a href="showItem.do">商品</a>
 																<a href="addItem.jsp?shop_id=${shopli.shop_id }">添加商品</a>

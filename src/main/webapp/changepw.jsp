@@ -45,6 +45,8 @@
 										</c:if>
 										<c:if test="${user != null}">
 											<c:out value="${user.username}" />
+											<a href="logout.do"><span style="color: white;">
+													注销</span></a>
 										</c:if>
 									</div>
 									<div style="margin-left: 250px;">
@@ -177,7 +179,11 @@
 																} else if (pw1 != pw2) {
 																	alert("两次密码不同，请重新输入");
 																	return false;
+																} else if (fwpw == pw2) {
+																	alert("新密码与原密码相同");
+																	return false;
 																}
+																alert("修改完成");
 															}
 														</script>
 													</fieldset>

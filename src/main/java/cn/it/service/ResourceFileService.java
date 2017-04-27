@@ -1,10 +1,11 @@
 package cn.it.service;
 
-import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.it.pojo.ResourceFile;
 
 /**
  * 
@@ -14,7 +15,7 @@ import cn.it.pojo.ResourceFile;
 public interface ResourceFileService {
 	public ModelAndView findAll(int page);
 
-	public ModelAndView add(ResourceFile rf);
+	public ModelAndView add(MultipartFile file, HttpServletRequest request);
 	
 	public void delete(int id);
 }

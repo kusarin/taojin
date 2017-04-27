@@ -34,9 +34,8 @@
 						<div class="navbar" id="topnav">
 							<div class="navbar-inner">
 								<div style="float: left; color: white; margin-top: 26px;">
-									<span>您好,</span> <a href="login.jsp"><span
-										style="color: white;">登录</span></a> <a href="register.jsp"> <span
-										style="margin-left: 20px; color: white;">注册</span></a>
+									<span>您好,</span> <span
+										style="color: white;">${user.username}</span>
 								</div>
 								<div style="margin-left: 250px;">
 									<ul class="nav">
