@@ -90,13 +90,20 @@
 		}
 	   
 	}
-	 function purchas(){
+	 function purchas(number){
+		 
 		 var num=parseInt(document.getElementById("mp").value);
-		 window.location.href="sureOrder.do?itemId=${lookitem.item_id}&number="+num;
+	
+	    window.location.href="sureOrder.do?itemId=${lookitem.item_id}&number="+num; 
 	   }
-	 function addCart(){
+	 function addCart(number){
 		 var num=parseInt(document.getElementById("mp").value);
+		 if(num<=number){
 		 window.location.href="index.do?itemId=${lookitem.item_id}&number="+num;
+		 }
+		 else{
+			 alert("商品数量不足，剩余："+number);
+		 }
 	   }
 </script>
 </head>
@@ -139,8 +146,8 @@
 						<div class="pull-right">
 							<form action="searchItem.do" method="post">
 								<div style="margin-top: 10px;">
-									<input type="text" name="str"
-										class="input-medium search-query" placeholder="搜索你想要的二手"
+									<input type="text" name="str" class="input-medium search-query"
+										placeholder="搜索你想要的二手"
 										style="height: 20px; width: 100; border: 4px solid #FFA07A;">
 									<input type="submit" value="搜索"
 										style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
@@ -213,9 +220,9 @@
 								<ul class="productpagecart">
 
 									<li><a class="cart" href="javascript:void(0)"
-										onclick="purchas()">现在购买</a></li>
+										onclick="purchas(${lookitem.number})">现在购买</a></li>
 									<li><a class="wish" href="javascript:void(0)"
-										onclick="addCart()">加入购物车</a></li>
+										onclick="addCart(${lookitem.number})">加入购物车</a></li>
 								</ul>
 							</div>
 						</div>
