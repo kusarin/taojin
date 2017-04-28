@@ -206,11 +206,20 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		ShoppingCart sh=new ShoppingCart();
 		List<CartItem> cl=new ArrayList<CartItem>();
 		double total=0; //总计
-		int totalNumber=cartItemId.length; //购买总数
+		int totalNumber=0; //购买总数
 		for(int i=0;i<cartItemId.length;i++){
 			CartItem c = cartItemDao.find(cartItemId[i]);
 			cl.add(c);
-			total=total+c.getTotalPrice();
+			
+			//更新小计和购买数量
+			Item ii=c.getItem();
+			int number=ii.getnumber();//商品库存
+			int number1=c.getTradingNumbers();//购物车中此件商品的数量
+			if(number1<=number){
+				totalNumber++;
+				total=total+c.getTotalPrice();
+			}
+		
 		}
 		sh.setTotal(total);
 		sh.setTotalnumber(totalNumber);
