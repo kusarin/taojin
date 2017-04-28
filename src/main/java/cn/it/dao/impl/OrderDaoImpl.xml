@@ -31,7 +31,7 @@
             
        </parameterMap>
      <select id="selectAll" resultMap="findAll">
-          select* from indent where User_ID=#{0} LIMIT #{1},#{2}
+          select* from indent where User_ID=#{0} ORDER BY orderNumber DESC LIMIT #{1},#{2} 
      </select>
      <select id="getCount" resultType="Integer" parameterType="int">
           select count(OrderNumber) from indent where User_ID=#{userId}

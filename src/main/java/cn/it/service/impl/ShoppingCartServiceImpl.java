@@ -42,9 +42,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 	 * @param(number商品数量)
 	 * */
 	@Override
-	public void addItemToCart(int userId, int number, int itemId) {
+	public int addItemToCart(int userId, int number, int itemId) {
 		
 		Item i=itemDao.FindItemById(itemId);
+		
 		/*
 		 * 在添加商品前
 		 * 判断此用户的购物车中是否有该商品
@@ -86,6 +87,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 				totalnumber=totalnumber+1;
 				shoppingCartDao.update(s.getCartId(), total,totalnumber);
 			}	
+			return 1;
 		}
 	  //用户无购物车,创建购物车并将
 		else{
@@ -109,6 +111,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 			c.setTradingNumbers(number);
 			cartItemDao.add(c);
 		}
+		return 1;
 	}
 
 	/***
@@ -245,7 +248,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		 * */
 		switch(payAway){
 		case 0:
-			o.setPaymentMethod("微信支付"); //支付方式
+			o.setPaymentMethod("网银支付"); //支付方式
 		case 1:
 			o.setPaymentMethod("支付宝"); //支付方式
 		}
@@ -264,8 +267,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		for(CartItem cc:ca){
 			int cartItemId=cc.getCartItemId();
 			deleteItem(userId,cartItemId);
+			//更新商品库存
+			Item i=itemDao.FindItemById(cc.getItemId());
+			int number1=i.getnumber();
+			number1=number1-cc.getTradingNumbers();
+			i.setnumber(number1);
+			itemDao.ItemUpdate(i);
 		}
 		return o;
 	}
-	
 }

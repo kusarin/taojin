@@ -42,6 +42,7 @@
 	color: orange;
 }
 </style>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.mn.js"></script>
 <script>
   function plus(val){
    var num=document.getElementById("mp");
@@ -93,18 +94,43 @@
 	 function purchas(number){
 		 
 		 var num=parseInt(document.getElementById("mp").value);
-	
-	    window.location.href="sureOrder.do?itemId=${lookitem.item_id}&number="+num; 
-	   }
-	 function addCart(number){
-		 var num=parseInt(document.getElementById("mp").value);
 		 if(num<=number){
-		 window.location.href="index.do?itemId=${lookitem.item_id}&number="+num;
+	     window.location.href="sureOrder.do?itemId=${lookitem.item_id}&number="+num; 
 		 }
 		 else{
 			 alert("商品数量不足，剩余："+number);
 		 }
-	   }
+	 }
+	 function addCart(number){
+		 var num=parseInt(document.getElementById("mp").value);
+		 var id = ${lookitem.item_id};
+		 if(num<=number){
+		 //window.location.href="index.do?itemId=${lookitem.item_id}&number="+num;
+			 $.ajax(
+				      {
+				         url:"index.do",
+				         type:"get",
+				         data:{"number":num,
+				        	 "itemId":id
+				        	 },
+				         contentType:"application/json;charset=utf-8",
+				         dataType:"json",
+				         error:function(data){  
+				             alert("添加失败，请先登录！！！"); 
+				             window.location.href="login.jsp";
+				         },  
+				         success:function(data)
+				         {
+				        	   alert(data.msg);
+				        	   window.location.reload();            
+			       }
+				    });
+		 }
+		 else{
+			 alert("商品数量不足，剩余："+number);
+		 }
+		 
+	 }
 </script>
 </head>
 <body>
