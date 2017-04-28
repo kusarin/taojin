@@ -7,17 +7,16 @@
 <head>
 <style>
 .left {
-	width: 130px;
+	width: 175px;
 	heigh: auto;
 	float: left;
 	margin-left: 20px;
 }
 
 .right {
-	width: auto;
+	width:auto;
 	heigh: auto;
 	margin-top: 20px;
-	margin-left: 149px;
 }
 
 .itemimage {
@@ -71,19 +70,21 @@
 						<div class="navbar" id="topnav">
 							<div class="navbar-inner">
 								<div style="float: left; color: white; margin-top: 26px;">
-										<span>您好,</span>
-										<c:if test="${user == null}">
-											<a href="login.jsp"><span style="color: white;">登录</span></a>
-											<a href="register.jsp"> <span
-												style="margin-left: 20px; color: white;"> 注册</span></a>
-										</c:if>
-										<c:if test="${user != null}">
+									<span>您好,</span>
+									<c:if test="${user == null}">
+										<a href="login.jsp"><span style="color: white;">登录</span></a>
+										<a href="register.jsp"> <span
+											style="margin-left: 20px; color: white;"> 注册</span></a>
+									</c:if>
+									<c:if test="${user != null}">
 											<c:out value="${user.username}" />
+											<a href="logout.do"><span style="color: white;">
+													注销</span></a>
 										</c:if>
-									</div>
+								</div>
 								<div style="margin-left: 250px;">
 									<ul class="nav">
-										<li><a class="home active" href="Itemlist.do">首页</a></li>
+										<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
 										<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
 										<li><a class="checkout" href="shopList.do">我的店铺</a></li>
 										<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
@@ -97,8 +98,8 @@
 					<div class="pull-right">
 						<form action="searchItem.do" method="post">
 							<div style="margin-top: 10px;">
-								<input type="text" name="str"
-									class="input-medium search-query" placeholder="搜索你想要的二手"
+								<input type="text" name="str" class="input-medium search-query"
+									placeholder="搜索你想要的二手"
 									style="height: 20px; width: 100; border: 4px solid #FFA07A">
 								<input type="submit" value="搜索"
 									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
@@ -113,18 +114,14 @@
 	</header>
 	<!-- Header End -->
 
-	<form action="ItemType.do" method="post">
-
-		<br>
-	</form>
-
-
 	<!-- 商品类型选择区域 start-->
 	<div class="left">
 		<div class="all-sort-list">
-		<div class="item">
+			<div class="item">
 				<h3>
-					<span>·</span><a href="ItemType1.do?typeh=动漫">动漫</a>、<a href="ItemType1.do?typeh=游戏">游戏</a>、<a href="ItemType1.do?typeh=乐器">乐器</a>
+					<span>·</span><a href="ItemType1.do?typeh=动漫">动漫</a>、<a
+						href="ItemType1.do?typeh=游戏">游戏</a>、<a
+						href="ItemType1.do?typeh=乐器">乐器</a>
 				</h3>
 				<div class="item-list clearfix">
 					<div class="close">x</div>
@@ -134,12 +131,11 @@
 								<a href="ItemType1.do?typeh=动漫">动漫</a>
 							</dt>
 							<dd>
-								<em>
-								<a href="ItemType2.do?typeh=动漫&typel=漫画原本">漫画原本</a></em><em>
-								<a href="ItemType2.do?typeh=动漫&typel=读者手绘">读者手绘</a></em><em>
-								<a href="ItemType2.do?typeh=动漫&typel=cos女装">cos女装</a></em><em>
-								<a href="ItemType2.do?typeh=动漫&typel=cos男装">cos男装</a></em><em>
-								<a href="ItemType2.do?typeh=动漫&typel=动漫手办">动漫手办</a></em>
+								<em> <a href="ItemType2.do?typeh=动漫&typel=漫画原本">漫画原本</a></em><em>
+									<a href="ItemType2.do?typeh=动漫&typel=读者手绘">读者手绘</a>
+								</em><em> <a href="ItemType2.do?typeh=动漫&typel=cos女装">cos女装</a></em><em>
+									<a href="ItemType2.do?typeh=动漫&typel=cos男装">cos男装</a>
+								</em><em> <a href="ItemType2.do?typeh=动漫&typel=动漫手办">动漫手办</a></em>
 							</dd>
 						</dl>
 						<dl class="fore2">
@@ -147,12 +143,11 @@
 								<a href="ItemType1.do?typeh=游戏">游戏</a>
 							</dt>
 							<dd>
-								<em>
-								<a href="ItemType2.do?typeh=游戏&typel=游戏账号">游戏账号</a></em><em>
-								<a href="ItemType2.do?typeh=游戏&typel=游戏点卡">游戏点卡</a></em><em>
-								<a href="ItemType2.do?typeh=游戏&typel=游戏装备">游戏装备</a></em><em>
-								<a href="ItemType2.do?typeh=游戏&typel=游戏金币">游戏金币</a></em><em>
-								<a href="ItemType2.do?typeh=游戏&typel=实体盘">实体盘</a></em>
+								<em> <a href="ItemType2.do?typeh=游戏&typel=游戏账号">游戏账号</a></em><em>
+									<a href="ItemType2.do?typeh=游戏&typel=游戏点卡">游戏点卡</a>
+								</em><em> <a href="ItemType2.do?typeh=游戏&typel=游戏装备">游戏装备</a></em><em>
+									<a href="ItemType2.do?typeh=游戏&typel=游戏金币">游戏金币</a>
+								</em><em> <a href="ItemType2.do?typeh=游戏&typel=实体盘">实体盘</a></em>
 							</dd>
 						</dl>
 						<dl class="fore3">
@@ -160,12 +155,11 @@
 								<a href="ItemType1.do?typeh=乐器">乐器</a>
 							</dt>
 							<dd>
-								<em>
-								<a href="ItemType2.do?typeh=乐器&typel=吉他">吉他</a></em><em>
-								<a href="ItemType2.do?typeh=乐器&typel=萨克斯">萨克斯</a></em><em>
-								<a href="ItemType2.do?typeh=乐器&typel=口琴">口琴</a></em><em>
-								<a href="ItemType2.do?typeh=乐器&typel=笛子">笛子</a></em><em>
-								<a href="ItemType2.do?typeh=乐器&typel=手风琴">手风琴</a></em>
+								<em> <a href="ItemType2.do?typeh=乐器&typel=吉他">吉他</a></em><em>
+									<a href="ItemType2.do?typeh=乐器&typel=萨克斯">萨克斯</a>
+								</em><em> <a href="ItemType2.do?typeh=乐器&typel=口琴">口琴</a></em><em>
+									<a href="ItemType2.do?typeh=乐器&typel=笛子">笛子</a>
+								</em><em> <a href="ItemType2.do?typeh=乐器&typel=手风琴">手风琴</a></em>
 							</dd>
 						</dl>
 					</div>
@@ -173,7 +167,8 @@
 			</div>
 			<div class="item">
 				<h3>
-					<span>·</span><a href="ItemType1.do?typeh=数码用品">数码用品</a>、<a href="ItemType1.do?typeh=电脑">电脑</a>
+					<span>·</span><a href="ItemType1.do?typeh=数码用品">数码用品</a>、<a
+						href="ItemType1.do?typeh=电脑">电脑</a>
 				</h3>
 				<div class="item-list clearfix">
 					<div class="close">x</div>
@@ -183,11 +178,11 @@
 								<a href="ItemType1.do?typeh=数码用品">数码用品</a>
 							</dt>
 							<dd>
-								<em>
-								<a href="ItemType2.do?typeh=数码用品&typel=手机">手机</a></em><em>
-								<a href="ItemType2.do?typeh=数码用品&typel=平板电脑">平板电脑</a></em><em>
-								<a href="ItemType2.do?typeh=数码用品&typel=游戏主机">游戏主机</a></em><em>
-								<a href="ItemType2.do?typeh=数码用品&typel=数码相机">数码相机</a></em>
+								<em> <a href="ItemType2.do?typeh=数码用品&typel=手机">手机</a></em><em>
+									<a href="ItemType2.do?typeh=数码用品&typel=平板电脑">平板电脑</a>
+								</em><em> <a href="ItemType2.do?typeh=数码用品&typel=游戏主机">游戏主机</a></em><em>
+									<a href="ItemType2.do?typeh=数码用品&typel=数码相机">数码相机</a>
+								</em>
 							</dd>
 						</dl>
 						<dl class="fore2">
@@ -195,12 +190,11 @@
 								<a href="ItemType1.do?typeh=电脑">电脑</a>
 							</dt>
 							<dd>
-								<em>
-								<a href="ItemType2.do?typeh=电脑&typel=笔记本电脑">笔记本电脑</a></em><em>
-								<a href="ItemType2.do?typeh=电脑&typel=音响">音响</a></em><em>
-								<a href="ItemType2.do?typeh=电脑&typel=耳机">耳机</a></em><em>
-								<a href="ItemType2.do?typeh=电脑&typel=手柄">手柄</a></em><em>
-								<a href="ItemType2.do?typeh=电脑&typel=其他外设">其他外设</a></em>
+								<em> <a href="ItemType2.do?typeh=电脑&typel=笔记本电脑">笔记本电脑</a></em><em>
+									<a href="ItemType2.do?typeh=电脑&typel=音响">音响</a>
+								</em><em> <a href="ItemType2.do?typeh=电脑&typel=耳机">耳机</a></em><em>
+									<a href="ItemType2.do?typeh=电脑&typel=手柄">手柄</a>
+								</em><em> <a href="ItemType2.do?typeh=电脑&typel=其他外设">其他外设</a></em>
 							</dd>
 						</dl>
 					</div>
@@ -208,7 +202,8 @@
 			</div>
 			<div class="item">
 				<h3>
-					<span>·</span><a href="ItemType1.do?typeh=运动">运动</a>、<a href="ItemType1.do?typeh=户外健身">户外健身</a>
+					<span>·</span><a href="ItemType1.do?typeh=运动">运动</a>、<a
+						href="ItemType1.do?typeh=户外健身">户外健身</a>
 				</h3>
 				<div class="item-list clearfix">
 					<div class="close">x</div>
@@ -218,12 +213,11 @@
 								<a href="ItemType1.do?typeh=运动">运动</a>
 							</dt>
 							<dd>
-								<em>
-								<a href="ItemType2.do?typeh=运动&typel=篮球">篮球</a></em><em>
-								<a href="ItemType2.do?typeh=运动&typel=足球">足球</a></em><em>
-								<a href="ItemType2.do?typeh=运动&typel=羽毛球用具">羽毛球用具</a></em><em>
-								<a href="ItemType2.do?typeh=运动&typel=网球用具">网球用具</a></em><em>
-								<a href="ItemType2.do?typeh=运动&typel=其他器材">其他器材</a></em>
+								<em> <a href="ItemType2.do?typeh=运动&typel=篮球">篮球</a></em><em>
+									<a href="ItemType2.do?typeh=运动&typel=足球">足球</a>
+								</em><em> <a href="ItemType2.do?typeh=运动&typel=羽毛球用具">羽毛球用具</a></em><em>
+									<a href="ItemType2.do?typeh=运动&typel=网球用具">网球用具</a>
+								</em><em> <a href="ItemType2.do?typeh=运动&typel=其他器材">其他器材</a></em>
 							</dd>
 						</dl>
 						<dl class="fore2">
@@ -231,12 +225,11 @@
 								<a href="ItemType1.do?typeh=户外健身">户外健身</a>
 							</dt>
 							<dd>
-								<em>
-								<a href="ItemType2.do?typeh=户外健身&typel=登山用具">登山用具</a></em><em>
-								<a href="ItemType2.do?typeh=户外健身&typel=军迷用具">军迷用具</a></em><em>
-								<a href="ItemType2.do?typeh=户外健身&typel=骑行装备">骑行装备</a></em><em>
-								<a href="ItemType2.do?typeh=户外健身&typel=帐篷用具">帐篷用具</a></em><em>
-								<a href="ItemType2.do?typeh=户外健身&typel=其他用具">其他用具</a></em>
+								<em> <a href="ItemType2.do?typeh=户外健身&typel=登山用具">登山用具</a></em><em>
+									<a href="ItemType2.do?typeh=户外健身&typel=军迷用具">军迷用具</a>
+								</em><em> <a href="ItemType2.do?typeh=户外健身&typel=骑行装备">骑行装备</a></em><em>
+									<a href="ItemType2.do?typeh=户外健身&typel=帐篷用具">帐篷用具</a>
+								</em><em> <a href="ItemType2.do?typeh=户外健身&typel=其他用具">其他用具</a></em>
 							</dd>
 						</dl>
 					</div>
@@ -244,7 +237,8 @@
 			</div>
 			<div class="item">
 				<h3>
-					<span>·</span><a href="ItemType1.do?typeh=学习">学习</a>、<a href="ItemType1.do?typeh=服装">服装</a>
+					<span>·</span><a href="ItemType1.do?typeh=学习">学习</a>、<a
+						href="ItemType1.do?typeh=服装">服装</a>
 				</h3>
 				<div class="item-list clearfix">
 					<div class="close">x</div>
@@ -254,13 +248,13 @@
 								<a href="ItemType1.do?typeh=学习">学习</a>
 							</dt>
 							<dd>
-								<em>
-								<a href="ItemType2.do?typeh=学习&typel=少儿英语">少儿英语</a></em><em>
-								<a href="ItemType2.do?typeh=学习&typel=小学教学">小学教学</a></em><em>
-								<a href="ItemType2.do?typeh=学习&typel=初中教学">初中教学</a></em><em>
-								<a href="ItemType2.do?typeh=学习&typel=高中教学">高中教学</a></em><em>
-								<a href="ItemType2.do?typeh=学习&typel=考研辅导">考研辅导</a></em><em>
-								<a href="ItemType2.do?typeh=学习&typel=托福雅思">托福雅思</a></em>
+								<em> <a href="ItemType2.do?typeh=学习&typel=少儿英语">少儿英语</a></em><em>
+									<a href="ItemType2.do?typeh=学习&typel=小学教学">小学教学</a>
+								</em><em> <a href="ItemType2.do?typeh=学习&typel=初中教学">初中教学</a></em><em>
+									<a href="ItemType2.do?typeh=学习&typel=高中教学">高中教学</a>
+								</em><em> <a href="ItemType2.do?typeh=学习&typel=考研辅导">考研辅导</a></em><em>
+									<a href="ItemType2.do?typeh=学习&typel=托福雅思">托福雅思</a>
+								</em>
 							</dd>
 						</dl>
 						<dl class="fore2">
@@ -268,12 +262,11 @@
 								<a href="ItemType1.do?typeh=服装">服装</a>
 							</dt>
 							<dd>
-								<em>
-								<a href="ItemType2.do?typeh=服装&typel=男装">男装</a></em><em>
-								<a href="ItemType2.do?typeh=服装&typel=女装">女装</a></em><em>
-								<a href="ItemType2.do?typeh=服装&typel=正装">正装</a></em><em>
-								<a href="ItemType2.do?typeh=服装&typel=运动装系列">运动装系列</a></em><em>
-								<a href="ItemType2.do?typeh=服装&typel=学士服系列">学士服系列</a></em>
+								<em> <a href="ItemType2.do?typeh=服装&typel=男装">男装</a></em><em>
+									<a href="ItemType2.do?typeh=服装&typel=女装">女装</a>
+								</em><em> <a href="ItemType2.do?typeh=服装&typel=正装">正装</a></em><em>
+									<a href="ItemType2.do?typeh=服装&typel=运动装系列">运动装系列</a>
+								</em><em> <a href="ItemType2.do?typeh=服装&typel=学士服系列">学士服系列</a></em>
 							</dd>
 						</dl>
 					</div>
@@ -291,8 +284,7 @@
 								<a href="ItemType1.do?typeh=其他商品">其他商品</a>
 							</dt>
 							<dd>
-								<em>
-								<a href="ItemType2.do?typeh=其他商品&typel=其他商品">其他商品</a></em>
+								<em> <a href="ItemType2.do?typeh=其他商品&typel=其他商品">其他商品</a></em>
 							</dd>
 						</dl>
 					</div>
@@ -351,44 +343,87 @@
 	</script>
 	<!-- 商品类型选择区域 end-->
 	
-	<div style="margin-left: 250px;">
+	<div class="right" style="margin-left:275px">
 		<h1 style="color: orange">${error0}</h1>
 		<c:forEach items="${itemlist}" var="i">
 			<li class="span3">
-				<table border="1">
-					<thead>
-						<tr>
-							<td>
-								<div>
-									<a href="lookItem.do?id=${i.item_id}"> <img
+				<div>
+					<table border="1">
+						<thead>
+							<tr>
+								<td><a href="lookItem.do?id=${i.item_id}"> <img
 										class="itemimage"
 										src=${pageContext.request.contextPath}${i.image}>
-									</a>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div>
-									<a href="lookItem.do?id=${i.item_id}"><p class="textname"
-											style="height: 20px; width: 200px">${i.name}</p></a> <a
-										href="lookItem.do?id=${i.item_id}" class="textprice">商品价格:
-										¥ ${i.price}</a>
-								</div> <br>
-								<div>
-									<a href="lookItem.do?id=${i.item_id}"><p class="textdetail"
-											style="height: 20px; width: 275px">${i.detail}</p></a>
-								</div>
-							</td>
-						</tr>
-					</thead>
-				</table> <br>
+								</a></td>
+							</tr>
+							<tr>
+								<td><a href="lookItem.do?id=${i.item_id}"><p
+											class="textname" style="height: 20px; width: 200px">${i.name}</p></a>
+									<a href="lookItem.do?id=${i.item_id}" class="textprice">商品价格:
+										¥ ${i.price}</a> <br> <a href="lookItem.do?id=${i.item_id}"><p
+											class="textdetail" style="height: 20px; width: 275px">${i.detail}</p></a>
+								</td>
+							</tr>
+						</thead>
+					</table><br>
+				</div>
 			</li>
 		</c:forEach>
 	</div>
 
+	<!-- 页码显示部分 -->
+	<div   style="width:500px">&nbsp</div>
+		<form action="Itemlist.do" method="post">
+			<!-- 上一页 按钮 -->
+			<div align="center">
+			<c:choose>
+				<c:when test="${page != 1}">
+					<a href="Itemlist.do?page=${page-1}"><input type="button"
+						name="lastPage" value="上一页" class="btn btn-orange" /></a>
+				</c:when>
+				<c:otherwise>
+					<input type="button" disabled="true" name="lastPage" value="上一页"
+						class="btn btn-orange" />
+				</c:otherwise>
+			</c:choose>
+			<!-- 页数列表 -->
+			<c:forEach items="${pageList}" var="pn">
+				<c:choose>
+					<c:when test="${pn == page}">
+																		${pn}
+																	</c:when>
+					<c:otherwise>
+						<a href="Itemlist.do?page=${pn}"><U>${pn}</U></a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<!-- 下一页 按钮 -->
+			<c:choose>
+				<c:when test="${page != totalPage}">
+					<a href="Itemlist.do?page=${page+1}"> <input type="button"
+						name="nextPage" value="下一页" class="btn btn-orange" />
+					</a>
+				</c:when>
+				<c:otherwise>
+					<input type="button" disabled="true" name="nextPage" value="下一页"
+						class="btn btn-orange" />
+				</c:otherwise>
+			</c:choose>
+			<!-- 跳转点 -->
+			&nbsp共${totalPage}页 &nbsp 
+			<input type="text" name="page" id="jump"
+				value=1
+				style="width:30px"
+				onkeyup="this.value=this.value.replace(/\D/g,'')"
+				onafterpaste="this.value=this.value.replace(/\D/g,'')"/> <input
+				type="submit" value="跳转" />
+			</div>
+	</form>
+
+
+
 	<!--footer-->
-	<footer style="margin-top:100px"> <img
+	<footer style="margin-bottom:0"> <img
 		src="${pageContext.request.contextPath}/image/footer-tri.png"
 		style="width: 100%;">
 	<div
