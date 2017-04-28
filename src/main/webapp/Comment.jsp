@@ -106,15 +106,15 @@
 									<table width="90%">
 										<tbody>
 											<tr>
-												<td width="50%">内容</td>
-												<td width="30%">发布时间</td>
+												<td width="40%">内容</td>
+												<td width="40%">发布时间</td>
 												<td width="10%">发布者ID</td>
 												<td width="10%"></td>
 											</tr>
 											<c:forEach items="${Comment}" var="i">
 												<tr>
 													<td>${i.content}</td>
-													<td>${i.datetime}</td>
+													<td><fmt:formatDate value="${i.datetime}" pattern="yyyy年MM月dd日 HH:mm:ss" /> </td>
 													<td>${i.user_ID}</td>
 													<td><a onclick="deleteone(${i.comment_id})"
 														href="javascript:void(0)">删除</a></td>
