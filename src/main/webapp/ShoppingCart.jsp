@@ -44,9 +44,9 @@ function allc(name,checked){
 }
 function cl(name,checked,tot){
 	var va=parseFloat(document.getElementById("ac").innerHTML);
-	var cn=parseFloat(document.getElementById("cn").innerHTML);
+	var cn=parseInt(document.getElementById("cn").innerHTML);
 	if(checked){
-		va=va+tot;
+		va=(va+tot).toFixed(2);
 		document.getElementById("ac").innerHTML=""+va;
 		cn++;
 		document.getElementById("cn").innerHTML=""+cn;
@@ -57,7 +57,7 @@ function cl(name,checked,tot){
 			document.getElementById("al").checked=false;
 		}
 	}else{
-		va=va-tot;
+		va=(va-tot).toFixed(2);
 		document.getElementById("ac").innerHTML=""+va;
 		cn--;
 		document.getElementById("cn").innerHTML=""+cn;

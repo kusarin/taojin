@@ -34,7 +34,7 @@ public class PayController{
 		String p1_MerId = "10001126856";
 		String p2_Order = request.getParameter("p2_Order");
 		String p3_Amt = request.getParameter("p3_Amt");
-		System.out.println("输出参数是"+p2_Order+"\t"+p3_Amt);
+		//System.out.println("输出参数是"+p2_Order+"\t"+p3_Amt);
 		String p4_Cur = "CNY";
 		String p5_Pid = "";
 		String p6_Pcat = "";
