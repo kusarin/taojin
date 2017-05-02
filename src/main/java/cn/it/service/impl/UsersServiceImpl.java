@@ -1,11 +1,15 @@
 package cn.it.service.impl;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.dao.UsersDao;
@@ -36,7 +40,7 @@ public class UsersServiceImpl implements UsersService {
 				str.addObject("error", "用户名或密码错误");
 				str.setViewName("login");
 			} else {
-				str.setViewName("redirect:Itemlist.do");
+				str.setViewName("redirect:Itemlist.do?page=1");
 				session.setAttribute("user", u);
 			}
 		}
@@ -68,10 +72,34 @@ public class UsersServiceImpl implements UsersService {
 		return str;
 	}
 
-	public ModelAndView update(Users user, HttpSession session) {
+	public ModelAndView update(Users user, HttpServletRequest request,
+			HttpSession session, MultipartFile picturefile) {
 		ModelAndView str = new ModelAndView("UsersUpdate");
 		usersDao.updateUser(user);
-		user.setType(1);
+		user.setType(1);// 暂时没用了
+
+		// 商品图片部分
+		// 获取图片存储文件的路径
+		String path = request.getServletContext().getRealPath("image");
+		// 将图片文件名命名为上传时间
+		// System.out.println(picturefile);
+		String fileName = String.valueOf(System.currentTimeMillis())
+				+ picturefile.getOriginalFilename();
+		// 获取图片文件路径
+		File targetFile = new File(path, fileName);
+		if (!targetFile.exists()) {
+			targetFile.mkdirs();
+		}
+		// 保存文件（图片）；
+		try {
+			picturefile.transferTo(targetFile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// set方法
+		user.setPicture("/image/" + fileName);
+		// 商品图片部分结束
+
 		session.setAttribute("user", user);
 		return str;
 	}
