@@ -3,8 +3,8 @@
 <mapper namespace = "cn.it.dao.DiscussDao">
 <!-- 添加某个商品的评论 -->
 	<insert id="addDiscuss1" parameterType="cn.it.pojo.Discuss">
-		insert into discuss(content,item_id) 
-		        values(#{content},#{item_id})
+		insert into discuss(content,item_id,user_id,username,score,time) 
+		        values(#{content},#{item_id},#{user_id},#{username},#{score},<![CDATA[ now() ]]>)
 	</insert>
 <!-- 查看某个商品的所有评论 -->
 	<select id="FindItemDiscuss" parameterType="int" resultType="cn.it.pojo.Discuss">

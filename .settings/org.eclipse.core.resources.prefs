@@ -3,7 +3,6 @@
 >>>>>>>=branch 'master' of git@git.oschina.net\:ershoutaojin/taojin.git
 eclipse.preferences.version=1
 encoding//src/main/webapp/Itemlist.jsp=UTF-8
-encoding//src/main/webapp/Itemtype.jsp=UTF-8
 encoding//src/main/webapp/login.jsp=UTF-8
 encoding//src/main/webapp/lookItem.jsp=UTF-8
 encoding//src/main/webapp/orderInfo.jsp=UTF-8

@@ -175,7 +175,7 @@ public interface ItemService {
 	 *            评论内容
 	 * @return
 	 */
-	public ModelAndView addDiscuss1(int item_id, String content,
+	public ModelAndView addDiscuss(int item_id, int user_id, String content, String score,
 			HttpServletRequest request);
 
 	/**

@@ -147,15 +147,17 @@ function save(){
 										</c:if>
 										<c:if test="${user != null}">
 											<c:out value="${user.username}" />
+											<a href="logout.do"><span style="color: white;">
+													注销</span></a>
 										</c:if>
 							</div>
 							  <div style="margin-left:250px;">
 								<ul class="nav">
 								    <li><a class="home active" href="Itemlist.do">首页</a></li>
-									<li><a class="myaccount" href="UsersUpdate.jsp">个人账户</a></li>
+								    <li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
+									<li><a class="checkout" href="shopList.do">我的店铺</a></li>
 									<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
 									<li><a class="checkout" href="orderItem.do">我的订单</a></li>
-								    <li><a class="checkout" href="addItem.jsp">发布二手</a></li>
 								</ul>
 							 </div>
 							</div>
@@ -229,6 +231,7 @@ function save(){
 		     </div>
 		 </div>
 		 <div class="downline"></div>
+		 <c:if test="${cl.sh.totalnumber!=0}">
 		<div class="receive">
 		      <div class="info">
 	             <strong>订单信息</strong>
@@ -246,6 +249,7 @@ function save(){
 			
 		</div>
 		<c:forEach items="${cl.ca}" var="c" varStatus="s">
+		<c:if test="${c.tradingNumbers<=c.item.number}">
 		<div class="shoper">
 			    <span>店铺：<a href="#">${c.shopName}</a></span>
 			    <input type="hidden" name="ca[${s.index}].shopName" value="${c.shopName}">
@@ -254,9 +258,9 @@ function save(){
 		<div class="orderDe" style="border:1px solid #80ffff;">
 		<table>
 		   <tr>
-			     <td class="test1"><a href="#" style="float:left;"><img src="${pageContext.request.contextPath}${c.item.image}"/></a>
+			     <td class="test1"><a href="lookItem.do?id=${c.item.item_id}" style="float:left;"><img src="${pageContext.request.contextPath}${c.item.image}"/></a>
 			   <!-- <input type="hidden" value="${c.item.image}" name="orderDeatail[${s.index}].item.image"> -->
-		       <p style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;float:left;margin-top:20px;"> <a href="#">${c.item.name}</a></p>
+		       <p style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;float:left;margin-top:20px;"> <a href="lookItem.do?id=${c.item.item_id}">${c.item.name}</a></p>
 		        </td>
 				 <td class="common" style="padding-left:0px;text-align:center;">${c.tradingNumbers}
 				 <input type="hidden" name="ca[${s.index}].tradingNumbers" value="${c.tradingNumbers}">
@@ -271,6 +275,7 @@ function save(){
 			 </tr>
 		 </table>
 		</div>
+		</c:if>
 		</c:forEach>
 		<div class="orderDe">
 		    <table class="same">
@@ -293,8 +298,37 @@ function save(){
 		<div class="commit">
 		    <input type="button" value="提交订单" onclick="che()"/>
 		</div>
+		</c:if>
     </div> 
     </form>
+    
+     <c:if test="${cl.sh.totalnumber==0}">
+    <div class="containers">
+       <div class="orderTitle" style="color:red;font-size:15px;">
+	      <p>以下商品无法购买，请重新通过“加入购物车、立即购买”来购买此商品</p>
+	   </div>
+       <c:forEach items="${cl.ca}" var="cai" varStatus="s">
+		<c:if test="${cai.tradingNumbers>cai.item.number}">
+		<div class="shoper">
+			    <span>店铺：<a href="#">${cai.shopName}</a></span>
+		</div>
+		<div class="orderDe" style="border:1px solid #80ffff;">
+		<table>
+		   <tr>
+			   <td class="test1"><a href="lookItem.do?id=${cai.item.item_id}" style="float:left;"><img src="${pageContext.request.contextPath}${cai.item.image}"/></a>
+		       <p style="width: 100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;float:left;margin-top:20px;"> <a href="lookItem.do?id=${cai.item.item_id}">${cai.item.name}</a></p>
+		       </td>
+			   <td class="common" style="padding-left:0px;text-align:center;">${cai.tradingNumbers}</td>
+			   <td class="common">${cai.item.price}</td>
+			   <td class="common" id="itemprice">${cai.totalPrice}</td>
+			   <td class="common">购买数量超过了限购数。也可能是库存不足。</td>
+			 </tr>
+		 </table>
+		</div>
+		</c:if>
+		</c:forEach>
+    </div>
+    </c:if>
     <!-- footer -->
 	<footer style="margin-top:20px">
        <img  src="${pageContext.request.contextPath}/image/footer-tri.png" style="width:100%;">

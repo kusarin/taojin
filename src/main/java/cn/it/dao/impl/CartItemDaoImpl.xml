@@ -44,7 +44,7 @@
 	     update cartitem set tradingNumbers=#{tradingNumbers},totalPrice=#{totalPrice} where cartId=#{cartId} and itemId=#{itemId}
 	</update>
 	<select id="selectAll" parameterType="int" resultMap="findList">
-	      select c.*,i.* from cartitem c,item i where c.itemId=i.Item_id and c.cartId=#{cartId}
+	      select c.*,i.* from cartitem c,item i where c.itemId=i.Item_id and c.cartId=#{cartId} ORDER BY cartItemId deSC 
 	</select>
 	<select id="find" parameterType="int" resultMap="findList">
 	      select c.*,i.* from cartitem c,item i where c.itemId=i.Item_id and c.cartItemId=#{cartItemId}
