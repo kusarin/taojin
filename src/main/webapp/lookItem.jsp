@@ -202,7 +202,7 @@
 								src=${pageContext.request.contextPath}${lookitem.image}></td>
 						</tr>
 
-<!------------------------------------------- 发表评论 ----------------------------------------->
+<!------------------------------------------- 发表评论 ---------
 						<form action="addItemDiscuss.do?id=${lookitem.item_id}"
 							method="post" enctype="multipart/form-data">
 							<div class="productdesc">
@@ -218,7 +218,7 @@
 								</div>
 							</div>
 						</form>
-<!------------------------------------------- 发表评论 结束------------------------------------->
+--------------------- 发表评论 结束------------------------------------->
 
 					</div>
 
@@ -278,7 +278,9 @@
 									<p>${error0}</p>
 									<c:forEach items="${discusslist}" var="d">
 										<img src=${pageContext.request.contextPath}/image/dislogo.jpg
-											style="heigh: 20px; width: 20px">${d.username}：${d.content}<br>
+											style="heigh: 20px; width: 20px">${d.username}：
+											<p style="width:550px">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp ${d.content}</p>
+											<br>
 										<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 										<U>
 										<div
