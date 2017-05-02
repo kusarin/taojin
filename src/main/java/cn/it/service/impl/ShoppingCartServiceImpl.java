@@ -42,9 +42,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 	 * @param(number商品数量)
 	 * */
 	@Override
-	public void addItemToCart(int userId, int number, int itemId) {
+	public int addItemToCart(int userId, int number, int itemId) {
 		
 		Item i=itemDao.FindItemById(itemId);
+		
 		/*
 		 * 在添加商品前
 		 * 判断此用户的购物车中是否有该商品
@@ -86,6 +87,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 				totalnumber=totalnumber+1;
 				shoppingCartDao.update(s.getCartId(), total,totalnumber);
 			}	
+			return 1;
 		}
 	  //用户无购物车,创建购物车并将
 		else{
@@ -109,6 +111,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 			c.setTradingNumbers(number);
 			cartItemDao.add(c);
 		}
+		return 1;
 	}
 
 	/***
@@ -203,11 +206,20 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		ShoppingCart sh=new ShoppingCart();
 		List<CartItem> cl=new ArrayList<CartItem>();
 		double total=0; //总计
-		int totalNumber=cartItemId.length; //购买总数
+		int totalNumber=0; //购买总数
 		for(int i=0;i<cartItemId.length;i++){
 			CartItem c = cartItemDao.find(cartItemId[i]);
 			cl.add(c);
-			total=total+c.getTotalPrice();
+			
+			//更新小计和购买数量
+			Item ii=c.getItem();
+			int number=ii.getnumber();//商品库存
+			int number1=c.getTradingNumbers();//购物车中此件商品的数量
+			if(number1<=number){
+				totalNumber++;
+				total=total+c.getTotalPrice();
+			}
+		
 		}
 		sh.setTotal(total);
 		sh.setTotalnumber(totalNumber);
@@ -245,7 +257,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		 * */
 		switch(payAway){
 		case 0:
-			o.setPaymentMethod("微信支付"); //支付方式
+			o.setPaymentMethod("网银支付"); //支付方式
 		case 1:
 			o.setPaymentMethod("支付宝"); //支付方式
 		}
@@ -264,8 +276,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		for(CartItem cc:ca){
 			int cartItemId=cc.getCartItemId();
 			deleteItem(userId,cartItemId);
+			//更新商品库存
+			Item i=itemDao.FindItemById(cc.getItemId());
+			int number1=i.getnumber();
+			number1=number1-cc.getTradingNumbers();
+			i.setnumber(number1);
+			itemDao.ItemUpdate(i);
 		}
 		return o;
 	}
-	
 }

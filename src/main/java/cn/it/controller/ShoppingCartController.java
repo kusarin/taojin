@@ -1,11 +1,15 @@
 package cn.it.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.pojo.CartList;
@@ -29,12 +33,15 @@ public class ShoppingCartController {
 	 * 添加商品到购物车
 	 * */
 	@RequestMapping("index.do")
-	public String addItem(String number,int itemId,HttpSession session){
+	@ResponseBody
+	public Map<String,Object> addItem(String number,int itemId,HttpSession session){
+		Map<String,Object> map=new HashMap<String,Object>();
 		Users user=(Users) session.getAttribute("user");
 		int userId=user.getUser_ID();   //用户Id
 		int number1=Integer.parseInt(number);
 		shoppingCartService.addItemToCart(userId, number1, itemId);
-		return "redirect:lookItem.do?id="+itemId;
+		map.put("msg", "添加成功");
+		return map;
 	}
 	/********
 	 *显示购物车所有商品 
