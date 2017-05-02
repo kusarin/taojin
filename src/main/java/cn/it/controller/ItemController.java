@@ -211,15 +211,19 @@ public class ItemController {
 			modelandview.addObject("looklist", list);
 		}
 
+		// 商品的评论数量
+		int dnum = 0;
 		// 获取商品的评论列表
-		List<Discuss> disscuss = itemservice.showDisscussList(item_id);
+		List<Discuss> discuss = itemservice.showDisscussList(item_id);
+		dnum = discuss.size();
+		modelandview.addObject("dnum", dnum);
 		// 判断评论是否为空
-		if (disscuss.size() == 0) {
+		if (discuss.size() == 0) {
 			modelandview.addObject("error0", "目前还没有评论哟");
 		} else {
-			modelandview.addObject("discusslist", disscuss);
+			modelandview.addObject("discusslist", discuss);
 		}
-
+		
 		return modelandview;
 	}
 
@@ -400,16 +404,19 @@ public class ItemController {
 
 	@RequestMapping("addItemDiscuss.do")
 	public ModelAndView addItemDiscuss(HttpServletRequest request,
-			@RequestParam("id") String id) {
+			@RequestParam("id") String id,HttpSession session) {
 
 		// 获取商品编号item_id
-		// String id = request.getParameter("item_id");
 		int item_id = Integer.parseInt(id);
+		// 获取用户编号user_id（评论者）
+		Users user = (Users)session.getAttribute("user");
+		int user_id = user.getUser_ID();
+		// 获取评论内容和评论星级
 		String content = request.getParameter("content");
+		String score = request.getParameter("score");
 
 		// 进行添加评论的操作
-		ModelAndView modelandview = itemservice.addDiscuss1(item_id, content,
-				request);
+		ModelAndView modelandview = itemservice.addDiscuss(item_id, user_id, content, score, request);
 
 		// 重定向刷新页面；
 		modelandview.setViewName("redirect:lookItem.do?id=" + id);

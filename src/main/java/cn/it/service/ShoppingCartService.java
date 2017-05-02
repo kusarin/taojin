@@ -15,7 +15,7 @@ public interface ShoppingCartService {
 	/**
 	 * 添加商品到购物车
 	 * */
-   public void addItemToCart(int userId, int number,int itemId);
+   public int addItemToCart(int userId, int number,int itemId);
    /****
     * 
     * 查询购物车中的商品

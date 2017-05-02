@@ -85,11 +85,20 @@ public  class OrderServiceImpl implements OrderService {
 	 * */
 	public void changeOrderStatus(int flag, String orderNumber) {
 		Order order = orderDao.findOrder(orderNumber);
+		List<OrderDetail> oli=orderDetailDao.selectAll(orderNumber);//此订单中的所有商品
 		switch (flag) {
 		case 0:
-			order.setStatus("未付款");
+			order.setStatus("待付款");
 		case 1:
 			order.setStatus("已付款");
+			/*****更新商品的总数****销售数量**/
+			for(OrderDetail ord:oli){
+				int itemId=ord.getItemId();//订单中的商品
+				Item ii=itemDao.FindItemById(itemId);//item表中的商品
+				ii.setnumber(ii.getnumber()+ord.getItemNumbers());//更新商品总数
+				ii.settradingTimes(ii.gettradingTimes()+ord.getItemNumbers());//更新销售数量
+				itemDao.ItemUpdate(ii);//更新item表
+			}
 			break;
 		case 2:
 			order.setStatus("已取消");
@@ -135,14 +144,13 @@ public  class OrderServiceImpl implements OrderService {
 		orderDao.updateTime(o);  //更新取消时间
 		changeOrderStatus( flag, orderNumber);//更改订单状态
 		
-		/*****更新商品的总数、销售数量****/
+		/*****更新商品的总数***/
 		List<OrderDetail> oli=orderDetailDao.selectAll(orderNumber);//此订单中的所有商品
 		for(OrderDetail ord:oli){
 			int itemId=ord.getItemId();//订单中的商品
 			
 			Item ii=itemDao.FindItemById(itemId);//item表中的商品
 			ii.setnumber(ii.getnumber()+ord.getItemNumbers());//更新商品总数
-			ii.settradingTimes(ii.gettradingTimes()-ord.getItemNumbers());//更新销售数量
 			itemDao.ItemUpdate(ii);//更新item表
 		}
 	}
@@ -207,9 +215,7 @@ public  class OrderServiceImpl implements OrderService {
 			int itemNumbers=orderDe.getItemNumbers();//购买的商品数量
 			Item item=itemDao.FindItemById(itemId);
 			item.setnumber(item.getnumber()-itemNumbers);
-			//更新此件商品的销售总数
-			item.settradingTimes(item.gettradingTimes()+itemNumbers);
-			itemDao.ItemUpdate(item);
+			itemDao.ItemUpdate(item);//更新商品库存
 		}
 		return order;
 	}

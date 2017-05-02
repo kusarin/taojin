@@ -20,6 +20,7 @@ import cn.it.dao.ItemDao;
 import cn.it.dao.ShopDao;
 import cn.it.dao.TypehDao;
 import cn.it.dao.TypelDao;
+import cn.it.dao.UsersDao;
 import cn.it.pojo.Discuss;
 import cn.it.pojo.Item;
 import cn.it.pojo.Shop;
@@ -48,6 +49,8 @@ public class ItemServiceImpl implements ItemService {
 	private TypehDao typehDao;
 	@Autowired
 	private TypelDao typelDao;
+	@Autowired
+	private UsersDao usersDao;
 
 	/**
 	 * 添加商品
@@ -315,8 +318,17 @@ public class ItemServiceImpl implements ItemService {
 	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Item> findItemList() {
+		// 获取所有商品
 		List<Item> shoplist = itemDao.FindAll();
-
+		
+		// 将商品数量为0的商品状态status变为1（不在售）
+		for (int i = 0; i < shoplist.size(); i++) {
+			if (shoplist.get(i).getnumber() == 0 ) {
+				shoplist.get(i).setStatus(1);
+				itemDao.ItemUpdate(shoplist.get(i));
+			}
+		}
+		
 		// 建立属于“在售”状态的商品列表list
 		List<Item> list = new ArrayList<Item>();
 		// 将属于“在售”状态的商品添加到列表list
@@ -425,11 +437,15 @@ public class ItemServiceImpl implements ItemService {
 	 * 
 	 * @param item_id
 	 *            商品编号
+	 * @param user_id
+	 *            用户编号（评论者）
 	 * @param content
 	 *            评论内容
+	 * @param score
+	 *            评论星级
 	 * @return
 	 */
-	public ModelAndView addDiscuss1(int item_id, String content,
+	public ModelAndView addDiscuss(int item_id, int user_id, String content, String score,
 			HttpServletRequest request) {
 		ModelAndView str = new ModelAndView("lookItem"); // 跳转到addItem.jsp界面
 
@@ -442,9 +458,19 @@ public class ItemServiceImpl implements ItemService {
 
 			// 定义评论；
 			Discuss d = new Discuss();
+			// 将星级强转为int
+			int sc = Integer.parseInt(score);
+			
+			// 获取用户名
+			Users user = usersDao.findById(user_id);
+			String username = user.getName();
+			
 			// 设置评论属性；
 			d.setItem_id(item_id); // 商品编号
+			d.setUser_id(user_id); // 用户编号
 			d.setContent(content); // 评论内容
+			d.setScore(sc);        // 评论星级
+			d.setUsername(username);// 用户名
 
 			// 添加评论信息；
 			discussDao.addDiscuss1(d);
