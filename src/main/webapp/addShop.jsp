@@ -147,6 +147,22 @@
 													</div>
 													</div>
 												</tr>
+												<tr>
+													<div class="control-group">
+														<td>店铺图片:</td>
+														<div class="controls">
+															<td><p>注意：上传的图片名中不能包含中文</p></td>
+														</div>
+													</div>
+												</tr>
+												<tr>
+													<div class="control-group">
+														<td></td>
+														<div class="controls">
+															<td><input type="file" name="file" accept="image/*" /></td>
+														</div>
+													</div>
+												</tr>
 											</table>
 											<input type="submit" value="添加" /> <input type="button"
 												value="返回" onclick="javaScript:history.back(-1)" />

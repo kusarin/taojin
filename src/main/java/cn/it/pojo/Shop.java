@@ -8,6 +8,13 @@ public class Shop {
 	private String Intro;
 	private int BrowsingTimes;
 	private int Status;
+	private String image; 
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	public int getStatus() {
 		return Status;
 	}
@@ -46,9 +53,10 @@ public class Shop {
 	}
 	@Override
 	public String toString() {
-		return "Shop [Shop_id=" + shop_id + ", User_ID=" + user_ID + ", Name="
+		return "Shop [shop_id=" + shop_id + ", user_ID=" + user_ID + ", Name="
 				+ Name + ", Type=" + Type + ", Intro=" + Intro
-				+ ", BrowsingTimes=" + BrowsingTimes + "]";
+				+ ", BrowsingTimes=" + BrowsingTimes + ", Status=" + Status
+				+ ", image=" + image + "]";
 	}
 	
 }
