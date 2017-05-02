@@ -44,9 +44,9 @@ function allc(name,checked){
 }
 function cl(name,checked,tot){
 	var va=parseFloat(document.getElementById("ac").innerHTML);
-	var cn=parseFloat(document.getElementById("cn").innerHTML);
+	var cn=parseInt(document.getElementById("cn").innerHTML);
 	if(checked){
-		va=va+tot;
+		va=(va+tot).toFixed(2);
 		document.getElementById("ac").innerHTML=""+va;
 		cn++;
 		document.getElementById("cn").innerHTML=""+cn;
@@ -57,7 +57,7 @@ function cl(name,checked,tot){
 			document.getElementById("al").checked=false;
 		}
 	}else{
-		va=va-tot;
+		va=(va-tot).toFixed(2);
 		document.getElementById("ac").innerHTML=""+va;
 		cn--;
 		document.getElementById("cn").innerHTML=""+cn;
@@ -77,7 +77,7 @@ function p(id,number,snumber){
 	window.location.href="updateNumberAndTotal.do?flag=0&itemId="+id;
 	}
 	else{
-		alert("没有这种商品了！");
+		alert("您所填写的商品数量超过库存！");
 	}
 }
 function comm(){
@@ -120,15 +120,17 @@ function comm(){
 										</c:if>
 										<c:if test="${user != null}">
 											<c:out value="${user.username}" />
+											<a href="logout.do"><span style="color: white;">
+													注销</span></a>
 										</c:if>
 									</div>
 							  <div style="margin-left:250px;">
 								<ul class="nav">
 								    <li><a class="home active" href="Itemlist.do">首页</a></li>
-									<li><a class="myaccount" href="UsersUpdate.jsp">个人账户</a></li>
+								    <li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
+									<li><a class="checkout" href="shopList.do">我的店铺</a></li>
 									<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
 									<li><a class="checkout" href="orderItem.do">我的订单</a></li>
-								    <li><a class="checkout" href="addItem.jsp">发布二手</a></li>
 								</ul>
 							 </div>
 							</div>
@@ -183,8 +185,8 @@ function comm(){
 		<table>
 		      <tr>
 			     <td class="test1"><input type="checkbox" name="cartItemId" onclick="cl('cartItemId',this.checked,${c.totalPrice})" value="${c.cartItemId}" style="margin-top:0px;float:left;">
-			     <a href="#"><img src="${pageContext.request.contextPath}${c.item.image}"/></a>
-		         <a href="#"><p>${c.item.name}</p></a></td>
+			     <a href="lookItem.do?id=${c.item.item_id}"><img src="${pageContext.request.contextPath}${c.item.image}"/></a>
+		         <a href="lookItem.do?id=${c.item.item_id}"><p>${c.item.name}</p></a></td>
 				 <td class="common" style="padding-left:0px;text-align:center;">
 				 <input type="button" value="-" onclick="mm(${c.item.item_id})" style="text-align:center;height:30px;width:20px;float:left;border:0;">
 				 <input type="text" value="${c.tradingNumbers}" id="mp" readonly="true" style="background-color:white;text-align:center;width:20px;float:left;border:1px;">

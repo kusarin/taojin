@@ -17,11 +17,11 @@ public class UsersServiceImpl implements UsersService {
 	@Autowired
 	private UsersDao usersDao;
 
-	public ModelAndView tologin() {
-		ModelAndView str = new ModelAndView("login");
-		str.addObject("error", "请登录后再进行操作！");
-		return str;
-	}
+	// public ModelAndView tologin() {
+	// ModelAndView str = new ModelAndView("login");
+	// str.addObject("error", "请登录后再进行操作！");
+	// return str;
+	// }
 
 	public ModelAndView login(Users user, HttpSession session)
 			throws IOException {
@@ -69,15 +69,22 @@ public class UsersServiceImpl implements UsersService {
 	}
 
 	public ModelAndView update(Users user, HttpSession session) {
-		ModelAndView str = new ModelAndView("welcome");
+		ModelAndView str = new ModelAndView("UsersUpdate");
 		usersDao.updateUser(user);
 		user.setType(1);
 		session.setAttribute("user", user);
 		return str;
 	}
 
+	public ModelAndView logout(Users user, HttpSession session) {
+		ModelAndView str = new ModelAndView("Itemlist");
+		session.invalidate();
+		str.setViewName("redirect:Itemlist.do");
+		return str;
+	}
+
 	public ModelAndView changepw(Users user, HttpSession session) {
-		ModelAndView str = new ModelAndView("welcome");
+		ModelAndView str = new ModelAndView("changepw");
 		usersDao.changepw(user);
 		session.setAttribute("user", user);
 		return str;

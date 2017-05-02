@@ -24,5 +24,7 @@ public interface UsersService {
 
 	public List<Users> findAll();
 
-	public ModelAndView tologin();
+	public ModelAndView logout(Users user, HttpSession session);
+
+	// public ModelAndView tologin();
 }
