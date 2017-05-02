@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.dao.DiscussDao;
+import cn.it.pojo.Comment;
 import cn.it.pojo.Discuss;
 import cn.it.pojo.Item;
 import cn.it.pojo.Shop;
@@ -44,8 +45,7 @@ public class ItemController {
 	@RequestMapping("addItem.do")
 	public ModelAndView addItem(
 			@RequestParam(value = "file", required = false) MultipartFile file,
-			HttpServletRequest request,HttpSession session
-			) {
+			HttpServletRequest request, HttpSession session) {
 
 		// 获取前台传入的数据；
 		String name = request.getParameter("name");
@@ -55,7 +55,8 @@ public class ItemController {
 		String detail = request.getParameter("detail");
 
 		// 进行添加商品信息操作，并且获取提示信息
-		ModelAndView modelandview = itemservice.addItem(name, typel, number, price, detail, file, request, session);
+		ModelAndView modelandview = itemservice.addItem(name, typel, number,
+				price, detail, file, request, session);
 
 		return modelandview;
 	}
@@ -223,7 +224,7 @@ public class ItemController {
 		} else {
 			modelandview.addObject("discusslist", discuss);
 		}
-		
+
 		return modelandview;
 	}
 
@@ -234,15 +235,49 @@ public class ItemController {
 	 * @return
 	 */
 	@RequestMapping("Itemlist.do")
-	public ModelAndView showItem(HttpServletRequest request) {
+	public ModelAndView showItem(HttpServletRequest request, int page) {
 		ModelAndView modelandview = new ModelAndView("Itemlist"); // 到Itemlist.jsp界面
 
 		// 获取商品条目list
 		List<Item> list;
 		list = itemservice.findItemList();
 
-		// 将商品条目list传递到itemlist
-		modelandview.addObject("itemlist", list);
+		// 分页操作区域
+		// 获取总页数
+		int total = list.size(); // 商品总数量
+		int perPage = 6; // 每页显示数量
+		int totalPage = total / perPage;
+		if (total % perPage != 0) {
+			totalPage += 1;
+		}
+		// 设置page页码有效区间
+		if (page > totalPage || page < 1) {
+			page = 1;
+			modelandview.addObject("error", "指定页码不存在!");
+		}
+		// 设置下方页码显示的部分
+		int n = 0;
+		List<Integer> pageList = new ArrayList<Integer>();
+		for (n = page - 3; n <= totalPage && n <= page + 3; n++) {
+			if (n > 0) {
+				pageList.add(n);
+			}
+		}
+
+		// 设置每页显示的商品，并且进行传递操作
+		if (page < totalPage) {
+			List<Item> i = list.subList((page - 1) * perPage, page * perPage);
+			modelandview.addObject("itemlist", i);
+		} else {
+			List<Item> i = list.subList((page - 1) * perPage, list.size());
+			modelandview.addObject("itemlist", i);
+		}
+		// 传递页码显示部分
+		modelandview.addObject("pageList", pageList);
+		modelandview.addObject("totalPage", totalPage);
+		modelandview.addObject("page", page);
+
+		// 分页操作结束
 
 		return modelandview;
 	}
@@ -256,9 +291,9 @@ public class ItemController {
 	 */
 	@RequestMapping("ItemType1.do")
 	public ModelAndView showTypeItem1(HttpServletRequest request,
-			@RequestParam("typeh") String typeh)
+			@RequestParam("typeh") String typeh, int page)
 			throws UnsupportedEncodingException {
-		ModelAndView modelandview = new ModelAndView("Itemlist"); // 到Itemtype.jsp界面
+		ModelAndView modelandview = new ModelAndView("ItemType1"); // 到Itemtype.jsp界面
 
 		// 将传入的数据转为中文
 		String stypeh = new String(typeh.getBytes("ISO-8859-1"), "utf-8");
@@ -267,12 +302,53 @@ public class ItemController {
 		List<Item> list;
 		list = itemservice.findByType1(stypeh);
 
-		// 将商品条目list传递到itemtype
-		modelandview.addObject("itemlist", list);
+		// 是否有满足条件的商品
+		if (list.size() == 0) {
+			modelandview.addObject("error0", "抱歉！！没有找到符合类型的商品！！！！");
+
+		} else {
+			// 分页操作区域
+			// 获取总页数
+			int total = list.size(); // 商品总数量
+			int perPage = 6; // 每页显示数量
+			int totalPage = total / perPage;
+			if (total % perPage != 0) {
+				totalPage += 1;
+			}
+			// 设置page页码有效区间
+			if (page > totalPage || page < 1) {
+				page = 1;
+				modelandview.addObject("error", "指定页码不存在!");
+			}
+			// 设置下方页码显示的部分
+			int n = 0;
+			List<Integer> pageList = new ArrayList<Integer>();
+			for (n = page - 3; n <= totalPage && n <= page + 3; n++) {
+				if (n > 0) {
+					pageList.add(n);
+				}
+			}
+
+			// 设置每页显示的商品，并且进行传递操作
+			if (page < totalPage) {
+				List<Item> i = list.subList((page - 1) * perPage, page
+						* perPage);
+				modelandview.addObject("itemlist", i);
+			} else {
+				List<Item> i = list.subList((page - 1) * perPage, list.size());
+				modelandview.addObject("itemlist", i);
+			}
+			// 传递页码显示部分
+			modelandview.addObject("pageList", pageList);
+			modelandview.addObject("totalPage", totalPage);
+			modelandview.addObject("page", page);
+
+			// 分页操作结束
+		}
 
 		// 将商品类型typeh和typel传递到前台目前显示分类
 		modelandview.addObject("show", "目前显示分类");
-		modelandview.addObject("typeh", " >" + stypeh);
+		modelandview.addObject("typeh", stypeh);
 
 		return modelandview;
 	}
@@ -287,9 +363,9 @@ public class ItemController {
 	@RequestMapping("ItemType2.do")
 	public ModelAndView showTypeItem2(HttpServletRequest request,
 			@RequestParam("typeh") String typeh,
-			@RequestParam("typel") String typel)
+			@RequestParam("typel") String typel, int page)
 			throws UnsupportedEncodingException {
-		ModelAndView modelandview = new ModelAndView("Itemlist"); // 到Itemtype.jsp界面
+		ModelAndView modelandview = new ModelAndView("ItemType2"); // 到Itemtype.jsp界面
 
 		// 将传入的数据转为中文
 		String stypeh = new String(typeh.getBytes("ISO-8859-1"), "utf-8");
@@ -298,14 +374,53 @@ public class ItemController {
 		// 根据类型，获得商品；
 		List<Item> list;
 		list = itemservice.findByType2(stypeh, stypel);
+		// 是否有满足条件商品的判断
+		if (list.size() == 0) {
+			modelandview.addObject("error0", "抱歉！！没有找到符合类型的商品！！！！");
+		} else {
+			// 分页操作区域
+			// 获取总页数
+			int total = list.size(); // 商品总数量
+			int perPage = 6; // 每页显示数量
+			int totalPage = total / perPage;
+			if (total % perPage != 0) {
+				totalPage += 1;
+			}
+			// 设置page页码有效区间
+			if (page > totalPage || page < 1) {
+				page = 1;
+				modelandview.addObject("error", "指定页码不存在!");
+			}
+			// 设置下方页码显示的部分
+			int n = 0;
+			List<Integer> pageList = new ArrayList<Integer>();
+			for (n = page - 3; n <= totalPage && n <= page + 3; n++) {
+				if (n > 0) {
+					pageList.add(n);
+				}
+			}
 
-		// 将商品条目list传递到itemtype
-		modelandview.addObject("itemlist", list);
+			// 设置每页显示的商品，并且进行传递操作
+			if (page < totalPage) {
+				List<Item> i = list.subList((page - 1) * perPage, page
+						* perPage);
+				modelandview.addObject("itemlist", i);
+			} else {
+				List<Item> i = list.subList((page - 1) * perPage, list.size());
+				modelandview.addObject("itemlist", i);
+			}
+			// 传递页码显示部分
+			modelandview.addObject("pageList", pageList);
+			modelandview.addObject("totalPage", totalPage);
+			modelandview.addObject("page", page);
+
+			// 分页操作结束
+		}
 
 		// 将商品类型typeh和typel传递到前台
 		modelandview.addObject("show", "目前显示分类");
-		modelandview.addObject("typeh", "  >" + stypeh);
-		modelandview.addObject("typel", "  >" + stypel);
+		modelandview.addObject("typeh", stypeh);
+		modelandview.addObject("typel", stypel);
 
 		return modelandview;
 	}
@@ -319,12 +434,12 @@ public class ItemController {
 	 * @return
 	 */
 	@RequestMapping("shopItem.do")
-	public ModelAndView showShopItem(HttpServletRequest request
-			,HttpSession session) {
+	public ModelAndView showShopItem(HttpServletRequest request,
+			HttpSession session) {
 		ModelAndView modelandview = new ModelAndView("shopItem"); // 到shopItem.jsp界面
 
 		// 获取店铺编号shop_id
-		Users user = (Users)session.getAttribute("user");
+		Users user = (Users) session.getAttribute("user");
 		int user_id = user.getUser_ID();
 		int shop_id = itemservice.getShopId(user_id);
 
@@ -383,8 +498,8 @@ public class ItemController {
 	 * @return
 	 */
 	@RequestMapping("searchItem.do")
-	public ModelAndView showSearchItem(HttpServletRequest request) {
-		ModelAndView modelandview = new ModelAndView("Itemlist"); // 到Itemlist.jsp界面
+	public ModelAndView showSearchItem(HttpServletRequest request, int page) {
+		ModelAndView modelandview = new ModelAndView("searchItem"); // 到searchItem.jsp界面
 
 		// 从前台获取搜索关键词str；
 		String str = request.getParameter("str");
@@ -392,31 +507,131 @@ public class ItemController {
 		// 根据输入关键词，搜索商品
 		List<Item> list;
 		list = itemservice.findBystr(str);
+		// 是否有满足条件商品的判断
 		if (list.size() == 0) {
 			modelandview.addObject("error0", "抱歉！！没有找到符合搜索信息的商品！！！！");
+			modelandview.addObject("search", str);
+		} else {
+			// 分页操作区域
+			// 获取总页数
+			int total = list.size(); // 商品总数量
+			int perPage = 6; // 每页显示数量
+			int totalPage = total / perPage;
+			if (total % perPage != 0) {
+				totalPage += 1;
+			}
+			// 设置page页码有效区间
+			if (page > totalPage || page < 1) {
+				page = 1;
+				modelandview.addObject("error", "指定页码不存在!");
+			}
+			// 设置下方页码显示的部分
+			int n = 0;
+			List<Integer> pageList = new ArrayList<Integer>();
+			for (n = page - 3; n <= totalPage && n <= page + 3; n++) {
+				if (n > 0) {
+					pageList.add(n);
+				}
+			}
+
+			// 设置每页显示的商品，并且进行传递操作
+			if (page < totalPage) {
+				List<Item> i = list.subList((page - 1) * perPage, page
+						* perPage);
+				modelandview.addObject("itemlist", i);
+			} else {
+				List<Item> i = list.subList((page - 1) * perPage, list.size());
+				modelandview.addObject("itemlist", i);
+			}
+			// 传递页码显示部分
+			modelandview.addObject("pageList", pageList);
+			modelandview.addObject("totalPage", totalPage);
+			modelandview.addObject("page", page);
+			modelandview.addObject("search", str);
+			// 分页操作结束
 		}
 
-		// 将商品条目list传递到searchlist
-		modelandview.addObject("itemlist", list);
+		return modelandview;
+	}
+	
+	/**
+	 * 根据输入的关键词str查询商品
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("searchItem2.do")
+	public ModelAndView showSearchItem2(HttpServletRequest request,String str, int page) {
+		ModelAndView modelandview = new ModelAndView("searchItem"); // 到searchItem.jsp界面
+
+		// 根据输入关键词，搜索商品
+		List<Item> list;
+		list = itemservice.findBystr(str);
+		// 是否有满足条件商品的判断
+		if (list.size() == 0) {
+			modelandview.addObject("error0", "抱歉！！没有找到符合搜索信息的商品！！！！");
+			modelandview.addObject("search", str);
+		} else {
+			// 分页操作区域
+			// 获取总页数
+			int total = list.size(); // 商品总数量
+			int perPage = 6; // 每页显示数量
+			int totalPage = total / perPage;
+			if (total % perPage != 0) {
+				totalPage += 1;
+			}
+			// 设置page页码有效区间
+			if (page > totalPage || page < 1) {
+				page = 1;
+				modelandview.addObject("error", "指定页码不存在!");
+			}
+			// 设置下方页码显示的部分
+			int n = 0;
+			List<Integer> pageList = new ArrayList<Integer>();
+			for (n = page - 3; n <= totalPage && n <= page + 3; n++) {
+				if (n > 0) {
+					pageList.add(n);
+				}
+			}
+
+			// 设置每页显示的商品，并且进行传递操作
+			if (page < totalPage) {
+				List<Item> i = list.subList((page - 1) * perPage, page
+						* perPage);
+				modelandview.addObject("itemlist", i);
+			} else {
+				List<Item> i = list.subList((page - 1) * perPage, list.size());
+				modelandview.addObject("itemlist", i);
+			}
+			// 传递页码显示部分
+			modelandview.addObject("pageList", pageList);
+			modelandview.addObject("totalPage", totalPage);
+			modelandview.addObject("page", page);
+			modelandview.addObject("search", str);
+			// 分页操作结束
+		}
 
 		return modelandview;
 	}
 
+	
+
 	@RequestMapping("addItemDiscuss.do")
 	public ModelAndView addItemDiscuss(HttpServletRequest request,
-			@RequestParam("id") String id,HttpSession session) {
+			@RequestParam("id") String id, HttpSession session) {
 
 		// 获取商品编号item_id
 		int item_id = Integer.parseInt(id);
 		// 获取用户编号user_id（评论者）
-		Users user = (Users)session.getAttribute("user");
+		Users user = (Users) session.getAttribute("user");
 		int user_id = user.getUser_ID();
 		// 获取评论内容和评论星级
 		String content = request.getParameter("content");
 		String score = request.getParameter("score");
 
 		// 进行添加评论的操作
-		ModelAndView modelandview = itemservice.addDiscuss(item_id, user_id, content, score, request);
+		ModelAndView modelandview = itemservice.addDiscuss(item_id, user_id,
+				content, score, request);
 
 		// 重定向刷新页面；
 		modelandview.setViewName("redirect:lookItem.do?id=" + id);
