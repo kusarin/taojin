@@ -51,7 +51,9 @@
 						<div class="navbar" id="topnav">
 							<div class="navbar-inner">
 								<div style="float: left; color: white; margin-top: 26px;">
-									<h3><span>二手淘金交易网——管理员界面</span></h3>
+									<h3>
+										<span>二手淘金交易网——管理员界面</span>
+									</h3>
 								</div>
 							</div>
 						</div>
@@ -114,7 +116,8 @@
 											<c:forEach items="${Comment}" var="i">
 												<tr>
 													<td>${i.content}</td>
-													<td><fmt:formatDate value="${i.datetime}" pattern="yyyy年MM月dd日  HH:mm:ss" /> </td>
+													<td><fmt:formatDate value="${i.datetime}"
+															pattern="yyyy年MM月dd日  HH:mm:ss" /></td>
 													<td>${i.user_ID}</td>
 													<td><a onclick="deleteone(${i.comment_id})"
 														href="javascript:void(0)">删除</a></td>
@@ -163,8 +166,8 @@
 											</c:choose>
 											&nbsp共${totalPage}页 &nbsp -向<input type="text" name="page"
 												id="jump" onkeyup="this.value=this.value.replace(/\D/g,'')"
-												onafterpaste="this.value=this.value.replace(/\D/g,'')" />页 <input
-												type="submit" value="跳转" />
+												onafterpaste="this.value=this.value.replace(/\D/g,'')" />页
+											<input type="submit" value="跳转" />
 										</form>
 									</div>
 									</section>
