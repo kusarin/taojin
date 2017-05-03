@@ -46,14 +46,22 @@ public interface LotDao {
 	 */
 	public List<Lot> FindAll();
 	/**
-	 * 按照拍卖品类型查看拍卖品；
+	 * 按照拍卖品类型查看拍卖品1；
+	 * 
+	 * @param typeh 拍卖品一级分类，String
+	 * 
+	 * @return List<Lot> 返回值为一个拍卖品列表，包括一个或者多个拍卖品
+	 */
+	public List<Lot> FindLotByType1(String typeh);
+	/**
+	 * 按照拍卖品类型查看拍卖品2；
 	 * 
 	 * @param typeh 拍卖品一级分类，String
 	 * @param typel 拍卖品二级分类，String
 	 * 
 	 * @return List<Lot> 返回值为一个拍卖品列表，包括一个或者多个拍卖品
 	 */
-	public List<Lot> FindLotByType(String typeh,String typel);
+	public List<Lot> FindLotByType2(String typeh,String typel);
 	/**
 	 * 按照拍卖品对应的店铺编号来获取拍卖品；
 	 * 用于在店铺中显示所有归属于该店铺的所有拍卖品；
@@ -63,4 +71,12 @@ public interface LotDao {
 	 * @return List<Lot> 返回值为一个拍卖品列表，包括一个或者多个拍卖品
 	 */
 	public List<Lot> FindLotByShopId(int shop_id);
+	/**
+	 * 按照输入的关键词查看拍卖品
+	 * 
+	 * @param str 传入的查询字段
+	 * 
+	 * @return List<Lot> 返回值为一个拍卖品列表，包括一个或者多个商品
+	 */
+	public List<Lot> SearchLot(String str);
 }
