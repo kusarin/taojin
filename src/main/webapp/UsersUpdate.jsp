@@ -45,6 +45,8 @@
 										</c:if>
 										<c:if test="${user != null}">
 											<c:out value="${user.username}" />
+											<img style="width: 20px; length: 20px"
+												src="${pageContext.request.contextPath}${user.picture}">
 											<a href="logout.do"><span style="color: white;">
 													注销</span></a>
 										</c:if>
@@ -126,7 +128,8 @@
 													<span>修改个人信息</span>
 												</h2>
 												<form action="updateUser.do" method="post"
-													class="form-horizontal commentform2" novalidate>
+													class="form-horizontal commentform2"
+													enctype="multipart/form-data" novalidate>
 													<fieldset>
 														<input type="hidden" name="username"
 															value="${user.username}" /> <input type="hidden"
@@ -159,7 +162,16 @@
 															</div>
 														</div>
 														<div class="control-group">
-															<div class="controls"></div>
+															<label class="control-label">上传头像</label>
+															<div class="controls">
+																<p>注意：上传的图片名中不能包含中文</p>
+															</div>
+														</div>
+														<div class="control-group">
+															<div class="controls">
+																<input type="file" name="picturefile" id="picturefile"
+																	accept="image/*" />
+															</div>
 														</div>
 														<div class="controls">
 															<input type="submit" id="submit_id" value="确认提交"

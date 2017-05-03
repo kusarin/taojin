@@ -97,6 +97,7 @@
 							<div class="registerbox">
 								<fieldset>
 									<div class="control-group">
+										<input type="hidden" name="picture" value="/image/dislogo.jpg" />
 										<label class="control-label"><span class="red">*</span>
 											帐号:</label>
 										<div class="controls">
