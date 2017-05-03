@@ -13,12 +13,94 @@
 <link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
 <link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
 <title>Insert title here</title>
+<style type="text/css"> 
+* 
+{ 
+padding-bottom: 0px; 
+margin: 0px; 
+padding-left: 0px; 
+padding-right: 0px; 
+font-size: 12px; 
+padding-top: 0px; 
+} 
+BODY 
+{ 
+padding-left: 20px; 
+padding-top: 20px; 
+} 
+.tab 
+{ 
+border-bottom: #000 0px solid; 
+border-left: #000 0px solid; 
+border-top: #000 0px solid; 
+border-right: #000 0px solid; 
+} 
+.tab UL 
+{ 
+zoom: 1; 
+clear: both; 
+} 
+.tab UL:after 
+{ 
+display: block; 
+height: 0px; 
+visibility: hidden; 
+clear: both; 
+content: ""; 
+} 
+.tab UL LI 
+{ 
+text-align: center; 
+line-height: 26px; 
+width: 60px; 
+display: inline; 
+background: #FFA07A; 
+float: left; 
+height: 26px; 
+color: #000; 
+} 
+.tab UL LI.on 
+{ 
+background: #fff; 
+color: #000; 
+} 
+.tabList 
+{ 
+border-bottom: #000 0px solid; 
+border-left: #000 0px solid; 
+height: 30px; 
+border-top: #000 0px; 
+border-right: #000 0px solid; 
+} 
+.tabList .one 
+{ 
+padding-bottom: 20px; 
+padding-left: 10px; 
+padding-right: 10px; 
+display: none; 
+color: #000; 
+padding-top: 0px; 
+} 
+.tabList .block 
+{ 
+display: block; 
+} 
+</style> 
+
 <script type="text/javascript">
 function deleteone(shop_id){
 if(confirm("确定要删除这条数据吗？")){
 	window.location.href="delete.do?shop_id="+shop_id;
 }
 }
+function setTab(name,m,n){ 
+	for( var i=1;i<=n;i++){ 
+	var menu = document.getElementById(name+i); 
+	var showDiv = document.getElementById("cont_"+name+"_"+i); 
+	menu.className = i==m ?"on":""; 
+	showDiv.style.display = i==m?"block":"none"; 
+	} 
+} 
 </script>
 </head>
 <body>
@@ -58,7 +140,15 @@ if(confirm("确定要删除这条数据吗？")){
 					</div>
 					<!-- Top Nav End -->
 					<div class="pull-right">
-						<form action="searchItem.do?page=1" method="post">
+				         <div class="tab">
+				         <ul>
+				         <li id="tow1" class="on" onclick='setTab("tow",1,3)'>商品</li>
+				         <li id="tow2" onclick='setTab("tow",2,3)'>店铺</li>
+				         </ul>
+				         </div>
+				         <div class="tabList">
+				         <div id="cont_tow_1" class="one block">
+				         <form action="searchItem.do?page=1" method="post">
 							<div style="margin-top: 10px;">
 								<input type="text" name="str" class="input-medium search-query"
 									placeholder="搜索你想要的二手"
@@ -66,8 +156,20 @@ if(confirm("确定要删除这条数据吗？")){
 								<input type="submit" value="搜索"
 									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
 							</div>
-
 						</form>
+						</div>
+						<div id="cont_tow_2" class="one">
+						<form action="searchShop.do" method="post">
+							<div style="margin-top: 10px;">
+								<input type="text" name="str" class="input-medium search-query"
+									placeholder="搜索你想要的二手"
+									style="height: 20px; width: 100; border: 4px solid #FFA07A">
+								<input type="submit" value="搜索"
+									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+							</div>
+						</form>
+						</div>
+						</div>
 					</div>
 				</div>
 			</div>
