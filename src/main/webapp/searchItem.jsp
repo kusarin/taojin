@@ -99,8 +99,8 @@
 							<div style="margin-top: 10px;">
 								<input type="text" name="str" class="input-medium search-query"
 									placeholder="搜索你想要的二手"
-									style="height: 20px; width: 100; border: 4px solid #FFA07A">
-								<input type="submit" value="搜索"
+									style="height: 20px; width: 100; border: 4px solid #FFA07A"
+									value=${search}> <input type="submit" value="搜索"
 									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
 							</div>
 
@@ -373,12 +373,13 @@
 
 	<!-- 页码显示部分 -->
 	<div style="width: 500px">&nbsp</div>
-	<form action="Itemlist.do" method="post">
+	<form action="searchItem.do" method="post">
+		<input type="hidden" name="str" value=${search}>
 		<!-- 上一页 按钮 -->
 		<div align="center">
 			<c:choose>
 				<c:when test="${page != 1}">
-					<a href="Itemlist.do?page=${page-1}"><input type="button"
+					<a href="searchItem2.do?str=${search}&page=${page-1}"><input type="button"
 						name="lastPage" value="上一页" class="btn btn-orange" /></a>
 				</c:when>
 				<c:otherwise>
@@ -391,14 +392,14 @@
 				<c:choose>
 					<c:when test="${pn == page}">${pn}</c:when>
 					<c:otherwise>
-						<a href="Itemlist.do?page=${pn}"><U>${pn}</U></a>
+						<a href="searchItem2.do?str=${search}&page=${pn}"><U>${pn}</U></a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<!-- 下一页 按钮 -->
 			<c:choose>
 				<c:when test="${page != totalPage}">
-					<a href="Itemlist.do?page=${page+1}"> <input type="button"
+					<a href="searchItem2.do?str=${search}&page=${page+1}"> <input type="button"
 						name="nextPage" value="下一页" class="btn btn-orange" />
 					</a>
 				</c:when>

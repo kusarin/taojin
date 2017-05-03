@@ -37,19 +37,20 @@
 						<div class="navbar" id="topnav">
 							<div class="navbar-inner">
 								<div style="float: left; color: white; margin-top: 26px;">
-										<span>您好,</span>
-										<c:if test="${user == null}">
-											<a href="login.jsp"><span style="color: white;">登录</span></a>
-											<a href="register.jsp"> <span
-												style="margin-left: 20px; color: white;"> 注册</span></a>
-										</c:if>
-										<c:if test="${user != null}">
-											<c:out value="${user.username}" />
-										</c:if>
-									</div>
+									<span>您好,</span>
+									<c:if test="${user == null}">
+										<a href="login.jsp"><span style="color: white;">登录</span></a>
+										<a href="register.jsp"> <span
+											style="margin-left: 20px; color: white;"> 注册</span></a>
+									</c:if>
+									<c:if test="${user != null}">
+										<c:out value="${user.username}" />
+										<a href="logout.do"><span style="color: white;"> 注销</span></a>
+									</c:if>
+								</div>
 								<div style="margin-left: 250px;">
 									<ul class="nav">
-										<li><a class="home active" href="Itemlist.do">首页</a></li>
+										<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
 										<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
 										<li><a class="checkout" href="shopList.do">我的店铺</a></li>
 										<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
@@ -61,10 +62,10 @@
 					</div>
 					<!-- Top Nav End -->
 					<div class="pull-right">
-						<form action="searchItem.do" method="post">
+						<form action="searchItem.do?page=1" method="post">
 							<div style="margin-top: 10px;">
-								<input type="text" name="str"
-									class="input-medium search-query" placeholder="搜索你想要的二手"
+								<input type="text" name="str" class="input-medium search-query"
+									placeholder="搜索你想要的二手"
 									style="height: 20px; width: 100; border: 4px solid #FFA07A">
 								<input type="submit" value="搜索"
 									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">

@@ -136,57 +136,55 @@
 <body>
 	<!-- Header Start -->
 	<header>
-		<div class="headerstrip">
-			<div class="container">
-				<div class="row">
-					<div class="span12">
-						<!-- Top Nav Start -->
-						<div class="pull-left">
-							<div class="navbar" id="topnav">
-
-								<div class="navbar-inner">
-									<div style="float: left; color: white; margin-top: 26px;">
-										<span>您好,</span>
-										<c:if test="${user == null}">
-											<a href="login.jsp"><span style="color: white;">登录</span></a>
-											<a href="register.jsp"> <span
-												style="margin-left: 20px; color: white;"> 注册</span></a>
-										</c:if>
-										<c:if test="${user != null}">
-											<c:out value="${user.username}" />
-											<a href="logout.do"><span style="color: white;">
-													注销</span></a>
-										</c:if>
-									</div>
-									<div style="margin-left: 250px;">
-										<ul class="nav">
-											<li><a class="home active" href="Itemlist.do">首页</a></li>
-											<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
-											<li><a class="checkout" href="shopList.do">我的店铺</a></li>
-											<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
-											<li><a class="checkout" href="orderItem.do">我的订单</a></li>
-										</ul>
-									</div>
+	<div class="headerstrip">
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<!-- Top Nav Start -->
+					<div class="pull-left">
+						<div class="navbar" id="topnav">
+							<div class="navbar-inner">
+								<div style="float: left; color: white; margin-top: 26px;">
+									<span>您好,</span>
+									<c:if test="${user == null}">
+										<a href="login.jsp"><span style="color: white;">登录</span></a>
+										<a href="register.jsp"> <span
+											style="margin-left: 20px; color: white;"> 注册</span></a>
+									</c:if>
+									<c:if test="${user != null}">
+										<c:out value="${user.username}" />
+										<a href="logout.do"><span style="color: white;"> 注销</span></a>
+									</c:if>
+								</div>
+								<div style="margin-left: 250px;">
+									<ul class="nav">
+										<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
+										<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
+										<li><a class="checkout" href="shopList.do">我的店铺</a></li>
+										<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
+										<li><a class="checkout" href="orderItem.do">我的订单</a></li>
+									</ul>
 								</div>
 							</div>
 						</div>
-						<!-- Top Nav End -->
-						<div class="pull-right">
-							<form action="searchItem.do" method="post">
-								<div style="margin-top: 10px;">
-									<input type="text" name="str" class="input-medium search-query"
-										placeholder="搜索你想要的二手"
-										style="height: 20px; width: 100; border: 4px solid #FFA07A;">
-									<input type="submit" value="搜索"
-										style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
-								</div>
+					</div>
+					<!-- Top Nav End -->
+					<div class="pull-right">
+						<form action="searchItem.do?page=1" method="post">
+							<div style="margin-top: 10px;">
+								<input type="text" name="str" class="input-medium search-query"
+									placeholder="搜索你想要的二手"
+									style="height: 20px; width: 100; border: 4px solid #FFA07A">
+								<input type="submit" value="搜索"
+									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+							</div>
 
-							</form>
-						</div>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 	</header>
 	<!-- Header End -->
 
@@ -204,7 +202,7 @@
 								src=${pageContext.request.contextPath}${lookitem.image}></td>
 						</tr>
 
-<!------------------------------------------- 发表评论 ----------------------------------------->
+<!------------------------------------------- 发表评论 ---------
 						<form action="addItemDiscuss.do?id=${lookitem.item_id}"
 							method="post" enctype="multipart/form-data">
 							<div class="productdesc">
@@ -220,7 +218,7 @@
 								</div>
 							</div>
 						</form>
-<!------------------------------------------- 发表评论 结束------------------------------------->
+--------------------- 发表评论 结束------------------------------------->
 
 					</div>
 
@@ -280,7 +278,9 @@
 									<p>${error0}</p>
 									<c:forEach items="${discusslist}" var="d">
 										<img src=${pageContext.request.contextPath}/image/dislogo.jpg
-											style="heigh: 20px; width: 20px">${d.username}：${d.content}<br>
+											style="heigh: 20px; width: 20px">${d.username}：
+											<p style="width:550px">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp ${d.content}</p>
+											<br>
 										<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 										<U>
 										<div

@@ -373,13 +373,13 @@
 
 	<!-- 页码显示部分 -->
 	<div style="width: 500px">&nbsp</div>
-	<form action="Itemlist.do" method="post">
+	<form action="ItemType2.do?typeh=${typeh}&typel=${typel}" method="post">
 		<!-- 上一页 按钮 -->
 		<div align="center">
 			<c:choose>
 				<c:when test="${page != 1}">
-					<a href="Itemlist.do?page=${page-1}"><input type="button"
-						name="lastPage" value="上一页" class="btn btn-orange" /></a>
+					<a href="ItemType2.do?typeh=${typeh}&typel=${typel}&page=${page-1}"><input
+						type="button" name="lastPage" value="上一页" class="btn btn-orange" /></a>
 				</c:when>
 				<c:otherwise>
 					<input type="button" disabled="true" name="lastPage" value="上一页"
@@ -391,15 +391,16 @@
 				<c:choose>
 					<c:when test="${pn == page}">${pn}</c:when>
 					<c:otherwise>
-						<a href="Itemlist.do?page=${pn}"><U>${pn}</U></a>
+						<a href="ItemType2.do?typeh=${typeh}&typel=${typel}&page=${pn}"><U>${pn}</U></a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<!-- 下一页 按钮 -->
 			<c:choose>
 				<c:when test="${page != totalPage}">
-					<a href="Itemlist.do?page=${page+1}"> <input type="button"
-						name="nextPage" value="下一页" class="btn btn-orange" />
+					<a href="ItemType2.do?typeh=${typeh}&typel=${typel}&page=${page+1}">
+						<input type="button" name="nextPage" value="下一页"
+						class="btn btn-orange" />
 					</a>
 				</c:when>
 				<c:otherwise>
