@@ -71,8 +71,15 @@ public class ShopController {
 	)
 	public String toChange(Shop shop,Map<String,Object> map,HttpSession session){
 		Users user = (Users)session.getAttribute("user");
+		if(shopService.getAllByUserid(user.getUser_ID())==null)
+		{
+			 return "/addShop";
+		}
+		else
+		{
 		map.put("shop", shopService.getAllByUserid(user.getUser_ID()));
 		return "/shopinfoChange";
+		}
 	}
 	@RequestMapping(value ={"/doChange.do"},method={RequestMethod.GET,RequestMethod.POST})
 	public String doChange(Shop shop){
@@ -84,7 +91,7 @@ public class ShopController {
 		Users user = (Users)session.getAttribute("user");
 		if(shopService.getAllByUserid(user.getUser_ID())==null)
 		{
-			 return "addShop";
+			 return "/addShop";
 		}
 		else
 		{
@@ -98,9 +105,17 @@ public class ShopController {
 		return "redirect:/shopList.do";
 	}
 	@RequestMapping(value={"/showItem.do"},method = {RequestMethod.GET,RequestMethod.POST})
-	public String showItem(Shop shop,Map<String,Object> map){
+	public String showItem(Shop shop,Map<String,Object> map,HttpSession session){
+		Users user = (Users)session.getAttribute("user");
+		if(shopService.getAllByUserid(user.getUser_ID())==null)
+		{
+			 return "/addShop";
+		}
+		else
+		{
 		map.put("shopit", itemService.findByShopId(shop.getShop_id()));
 		return "shopItem";
+		}
 	}
 	@RequestMapping(value = {"/searchShop.do"},method = {RequestMethod.GET,RequestMethod.POST})
 	public String searchShop(HttpServletRequest request,Shop shop,Map<String,Object> map){

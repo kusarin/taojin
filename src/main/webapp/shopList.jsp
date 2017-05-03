@@ -196,7 +196,7 @@ function setTab(name,m,n){
 						<li><a href="addShop.jsp">认证店铺 </a></li>
 						<li><a href="#">查看记录 </a></li>
 						<li><a href="addItem.jsp">商品上架 </a></li>
-						<li><a href="shopItem.do">商品管理</a></li>
+						<li><a href="showItem.do">商品管理</a></li>
 						<li><a href="toChange.do">店铺信息管理</a></li>
 					</ul>
 				</div>
