@@ -360,7 +360,7 @@
 											class="textname" style="height: 20px; width: 200px">${i.name}</p></a>
 									<a href="lookItem.do?id=${i.item_id}" class="textprice">商品价格:
 										¥ ${i.price}</a> <br> <a href="lookItem.do?id=${i.item_id}"><p
-											class="textdetail" style="height: 20px; width: 275px">${i.detail}</p></a>
+											class="textdetail" style="height: 20px; width: 275px" title=${i.detail}>${i.detail}</p></a>
 								</td>
 							</tr>
 						</thead>
