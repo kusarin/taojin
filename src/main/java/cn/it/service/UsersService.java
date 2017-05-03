@@ -3,8 +3,10 @@ package cn.it.service;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.pojo.Users;
@@ -16,7 +18,8 @@ public interface UsersService {
 
 	public ModelAndView add(Users user);
 
-	public ModelAndView update(Users user, HttpSession session);
+	public ModelAndView update(Users user, HttpServletRequest request,
+			HttpSession session, MultipartFile picturefile);
 
 	public ModelAndView changepw(Users user, HttpSession session);
 

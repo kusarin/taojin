@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.service.UsersService;
@@ -65,8 +67,12 @@ public class UsersController {
 
 	// 更新用户信息
 	@RequestMapping("updateUser.do")
-	public ModelAndView updateUser(Users user, HttpSession session) {
-		ModelAndView result = usersService.update(user, session);
+	public ModelAndView updateUser(
+			@RequestParam(value = "picturefile", required = false) MultipartFile picturefile,
+			Users user, HttpServletRequest request, HttpSession session) {
+		System.out.println(user.getName() + ">>>>>>>" + picturefile);
+		ModelAndView result = usersService.update(user, request, session,
+				picturefile);
 		return result;
 	}
 
