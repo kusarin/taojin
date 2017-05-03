@@ -41,9 +41,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
+
+
+
 import cn.it.pojo.Address;
+import cn.it.pojo.Item;
 import cn.it.pojo.Order;
 import cn.it.pojo.OrderCollection;
+import cn.it.pojo.OrderDetail;
 import cn.it.pojo.Page;
 import cn.it.pojo.Users;
 import cn.it.service.OrderService;
@@ -184,6 +189,27 @@ public class OrderController {
 		v.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
 		v.addObject("assessment",orderService.countNumbers(userId, "待评价"));
 		return v;
+	}
+	/*
+	 * 评价订单
+	 * */
+	@RequestMapping("evlauateItem.do")
+	public ModelAndView evlauateItem(int itemId){
+		
+		ModelAndView v=new ModelAndView("pendingEvaluation");
+		Item it=orderService.evalOrder(itemId);
+		v.addObject("it", it);
+		return v;
+	}
+	/**
+	 *提交评价 
+	 * */
+	@RequestMapping(value="commitEval.do",method=RequestMethod.POST)
+	public String commitEval(int itemId,int score,String content,HttpSession session){
+		Users user=(Users) session.getAttribute("user");
+		int userId=user.getUser_ID();   //用户Id
+		orderService.commitEvaluation(itemId, userId, score, content);
+		return "redirect:orderItem.do";
 	}
 	/*******
 	 * 查看订单详情

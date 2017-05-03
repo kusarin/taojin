@@ -34,12 +34,20 @@
 						<div class="navbar" id="topnav">
 							<div class="navbar-inner">
 								<div style="float: left; color: white; margin-top: 26px;">
-									<span>您好,</span> <span
-										style="color: white;">${user.username}</span>
+									<span>您好,</span>
+									<c:if test="${user == null}">
+										<a href="login.jsp"><span style="color: white;">登录</span></a>
+										<a href="register.jsp"> <span
+											style="margin-left: 20px; color: white;"> 注册</span></a>
+									</c:if>
+									<c:if test="${user != null}">
+										<c:out value="${user.username}" />
+										<a href="logout.do"><span style="color: white;"> 注销</span></a>
+									</c:if>
 								</div>
 								<div style="margin-left: 250px;">
 									<ul class="nav">
-										<li><a class="home active" href="Itemlist.do">首页</a></li>
+										<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
 										<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
 										<li><a class="checkout" href="shopList.do">我的店铺</a></li>
 										<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
@@ -51,10 +59,10 @@
 					</div>
 					<!-- Top Nav End -->
 					<div class="pull-right">
-						<form action="searchItem.do" method="post">
+						<form action="searchItem.do?page=1" method="post">
 							<div style="margin-top: 10px;">
-								<input input type="text" name="str"
-									class="input-medium search-query" placeholder="搜索你想要的二手"
+								<input type="text" name="str" class="input-medium search-query"
+									placeholder="搜索你想要的二手"
 									style="height: 20px; width: 100; border: 4px solid #FFA07A">
 								<input type="submit" value="搜索"
 									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
@@ -147,41 +155,28 @@
 													</div>
 													</div>
 												</tr>
+												<tr>
+													<div class="control-group">
+														<td>店铺图片:</td>
+														<div class="controls">
+															<td><p>注意：上传的图片名中不能包含中文</p></td>
+														</div>
+													</div>
+												</tr>
+												<tr>
+													<div class="control-group">
+														<td></td>
+														<div class="controls">
+															<td><input type="file" name="file" accept="image/*" /></td>
+														</div>
+													</div>
+												</tr>
 											</table>
 											<input type="submit" value="添加" /> <input type="button"
 												value="返回" onclick="javaScript:history.back(-1)" />
 										</form>
 									</div>
 									<!-- 推荐部分-->
-	<section id="related" class="row">
-		<div class="container">
-			<h1 class="heading1">
-				<a href="lookshopItem.do?shopid=${lookitem.shop_id}"><span
-					class="maintext">同店铺商品</span></a><span class="subtext"> 走过路过错过</span>
-			</h1>
-			<ul class="thumbnails">
-				<c:forEach items="${looklist}" var="i">
-					<li class="span3"><a class="prdocutname"
-						href="lookItem.do?id=${i.item_id}"
-						style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 200px">${i.name}</a>
-						<div class="thumbnail">
-							<a href="lookItem.do?id=${i.item_id}"><img class="itemimage"
-								src=${pageContext.request.contextPath}${i.image}></a>
-							<div class="pricetag">
-								<br>
-								<div class="price">
-									<div class="pricenew">
-										<div class="price" style="float: left; margin-top: 20px">
-											<p>¥${i.price}</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div></li>
-				</c:forEach>
-			</ul>
-		</div>
-	</section>
 	<!--footer-->
 	<footer style="margin-top:100px"> <img
 		src="${pageContext.request.contextPath}/image/footer-tri.png"

@@ -13,11 +13,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import cn.it.dao.AddressDao;
+import cn.it.dao.DiscussDao;
 import cn.it.dao.ItemDao;
 import cn.it.dao.OrderDao;
 import cn.it.dao.OrderDetailDao;
 import cn.it.dao.ShopDao;
+import cn.it.dao.UsersDao;
 import cn.it.pojo.Address;
+import cn.it.pojo.Discuss;
 import cn.it.pojo.Item;
 import cn.it.pojo.Order;
 import cn.it.pojo.OrderCollection;
@@ -42,6 +45,10 @@ public  class OrderServiceImpl implements OrderService {
 	private ShopDao shopDao;
 	@Autowired
 	private AddressDao addressDao;
+	@Autowired
+	private DiscussDao discussDao;
+	@Autowired
+	private UsersDao usersDao;
 	// 任意对象
 	private static Object lockObj = "lockerOrder";
 	// 订单数量
@@ -331,5 +338,33 @@ public  class OrderServiceImpl implements OrderService {
 	 * */
 	public Order findOrder(String orderNumber){
 		return orderDao.findOrder(orderNumber);
+	}
+
+	
+	/***
+	 * 评价订单
+	 * */
+	public Item evalOrder(int itemId) {
+	    
+		return itemDao.FindItemById(itemId);
+	}
+
+	/***
+	 *提交评价
+	 * */
+	public void commitEvaluation(int itemId,int userId,int score,String content) {
+		
+		String userName=usersDao.findById(userId).getName();
+		Date evalDate=new Date();
+		
+		Discuss di=new Discuss();
+		di.setContent(content);
+		di.setItem_id(itemId);
+		di.setScore(score);
+		di.setUser_id(userId);
+		di.setUsername(userName);
+		di.setTime(evalDate);
+		discussDao.addDiscuss1(di);//存储评论
+	
 	}
 }

@@ -6,8 +6,10 @@ package cn.it.service;
 import java.util.List;
 
 import cn.it.pojo.Address;
+import cn.it.pojo.Item;
 import cn.it.pojo.Order;
 import cn.it.pojo.OrderCollection;
+import cn.it.pojo.OrderDetail;
 import cn.it.pojo.Page;
 /**
  * 
@@ -92,4 +94,12 @@ public interface OrderService {
 	 * 根據訂單號查詢訂單
 	 * */
 	public Order findOrder(String orderNumber);
+	/**
+	 * 评价订单
+	 * */
+	public Item evalOrder(int itemId);
+	/**
+	 * 提交评价
+	 * */
+	public void commitEvaluation(int itemId,int userId,int score,String content);
 }
