@@ -107,7 +107,7 @@ public class UsersServiceImpl implements UsersService {
 	public ModelAndView logout(Users user, HttpSession session) {
 		ModelAndView str = new ModelAndView("Itemlist");
 		session.invalidate();
-		str.setViewName("redirect:Itemlist.do");
+		str.setViewName("redirect:Itemlist.do?page=1");
 		return str;
 	}
 
