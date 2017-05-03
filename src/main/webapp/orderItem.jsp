@@ -187,7 +187,7 @@ function deleteAll(){
 				<table style="height:auto;width:700px; font-size:14px;">
 				    <tr style="background-color:#F5F5F5;height:auto;width:700px;">
 					    <td class="item">商品</td>
-					    <td class="co">单价</td>
+					    <td class="co">评价</td>
 						<td class="co">数量</td>
 						<td class="co">实付款</td>
 						<td class="co">交易状态</td>
@@ -231,7 +231,15 @@ function deleteAll(){
 		                 
 		                 <td class="sa" style="border-right:1px solid #F5F5F5;border-bottom:1px solid #F5F5F5;">
 		                  <c:forEach items="${orderc.orderDeatail}" var="ord">
-		                     <p>${ord.unitPrice}</p>
+		                    <c:if test="${orderc.order.status=='已付款'}">
+							 <a href="evlauateItem.do?itemId=${ord.item.item_id}"><p>立即评价</p></a>
+							</c:if>
+							<div id="eval">
+							<a href="evlauateItem.do?itemId=${ord.item.item_id}" onclick="eva()"><p>立即评价</p></a>
+							</div>
+							<c:if test="${orderc.order.status!='已付款'}">
+							  <p>未评价</p>
+							</c:if>
 		                     <div style="height:120px;width:auto;"></div>
 		                 </c:forEach> 
 		                 </td>

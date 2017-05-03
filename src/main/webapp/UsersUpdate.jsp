@@ -24,6 +24,49 @@
 <link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
 <!-- fav -->
 <link rel="shortcut icon" href="assets/ico/favicon.html">
+<script type="text/javascript">
+	function setImagePreview(docObj) {
+
+		var name = docObj.value;
+		var type = name.split(".");
+		type = type[type.length - 1];
+		if ("jpg" != type && "png" != type && "jpeg" != type && "gif" != type) {
+			alert("错误的类型，请选择图片");
+			document.getElementById("txtSrc").value = null;//防止将非图片类型上传  
+			return;
+		}
+
+		if (docObj.files && docObj.files[0]) {
+
+			//alert("hello"+docObj.files[0]);  
+			//火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式      
+			document.getElementById("imgDiv").style.display = "block";
+			document.getElementById("img").src = window.URL
+					.createObjectURL(docObj.files[0]);
+		} else {
+			//IE下，使用滤镜    
+			docObj.select();
+			var imgSrc = document.selection.createRange().text;
+
+			//必须设置初始大小    
+			localImagId.style.width = "200px";
+			localImagId.style.height = "200px";
+
+			//图片异常的捕捉，防止用户修改后缀来伪造图片    
+			try {
+				localImagId.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+				localImagId.filters
+						.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+			} catch (e) {
+				alert("您上传的图片格式不正确，请重新选择!");
+				return false;
+			}
+			imgObjPreview.style.display = 'none';
+			document.selection.empty();
+		}
+		return true;
+	}
+</script>
 </head>
 <body>
 	<!-- Header Start -->
@@ -44,16 +87,16 @@
 												style="margin-left: 20px; color: white;"> 注册</span></a>
 										</c:if>
 										<c:if test="${user != null}">
-											<c:out value="${user.username}" />
 											<img style="width: 20px; length: 20px"
 												src="${pageContext.request.contextPath}${user.picture}">
+											<c:out value="${user.username}" />
 											<a href="logout.do"><span style="color: white;">
 													注销</span></a>
 										</c:if>
 									</div>
 									<div style="margin-left: 250px;">
 										<ul class="nav">
-											<li><a class="home active" href="Itemlist.do">首页</a></li>
+											<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
 											<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
 											<li><a class="checkout" href="shopList.do">我的店铺</a></li>
 											<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
@@ -65,7 +108,7 @@
 						</div>
 						<!-- Top Nav End -->
 						<div class="pull-right">
-							<form action="searchItem.do" method="post">
+							<form action="searchItem.do?page=1" method="post">
 								<div style="margin-top: 10px;">
 									<input type="text" name="str" class="input-medium search-query"
 										placeholder="搜索你想要的二手"
@@ -169,8 +212,16 @@
 														</div>
 														<div class="control-group">
 															<div class="controls">
-																<input type="file" name="picturefile" id="picturefile"
+																<input type="file" name="picturefile"
+																	onChange="setImagePreview(this);" id="picturefile"
 																	accept="image/*" />
+															</div>
+														</div>
+														<div class="control-group">
+															<label class="control-label">头像预览：</label>
+															<div style="display: none" id="imgDiv">
+																<img alt="" src="" id="img" name="图片预览" width="200"
+																	height="200" id="图片预览">
 															</div>
 														</div>
 														<div class="controls">
