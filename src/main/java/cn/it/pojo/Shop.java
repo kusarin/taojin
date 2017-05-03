@@ -8,12 +8,12 @@ public class Shop {
 	private String Intro;
 	private int BrowsingTimes;
 	private int Status;
-	private String image; 
+	private String Image; 
 	public String getImage() {
-		return image;
+		return Image;
 	}
 	public void setImage(String image) {
-		this.image = image;
+		this.Image = image;
 	}
 	public int getStatus() {
 		return Status;
@@ -56,7 +56,7 @@ public class Shop {
 		return "Shop [shop_id=" + shop_id + ", user_ID=" + user_ID + ", Name="
 				+ Name + ", Type=" + Type + ", Intro=" + Intro
 				+ ", BrowsingTimes=" + BrowsingTimes + ", Status=" + Status
-				+ ", image=" + image + "]";
+				+ ", Image=" + Image + "]";
 	}
 	
 }
