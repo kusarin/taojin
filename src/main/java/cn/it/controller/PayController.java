@@ -39,7 +39,7 @@ public class PayController{
 		String p5_Pid = "";
 		String p6_Pcat = "";
 		String p7_Pdesc = "";
-		String p8_Url = "http://localhost:8080/yibaozhi/surePayment.do";
+		String p8_Url = "http://localhost:8080/Taojin/surePayment.do";
 		String p9_SAF = "";
 		String pa_MP = "";
 		String pd_FrpId = "ICBC-NET-B2C";
