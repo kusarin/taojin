@@ -58,7 +58,7 @@
 	    Select * from shop
 	</select>
 	<select id="searchShop" parameterType="String" resultType="cn.it.pojo.Shop">
-		select * from shop where Name like "%str%"			
+		select * from shop where Name like concat(concat('%',#{str}),'%')			
 	</select>	
 	<update id="updateStatus" parameterType="int">
 		Update shop set status = #{0} where shop_id = #{1}

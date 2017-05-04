@@ -71,8 +71,15 @@ public class ShopController {
 	)
 	public String toChange(Shop shop,Map<String,Object> map,HttpSession session){
 		Users user = (Users)session.getAttribute("user");
+		if(shopService.getAllByUserid(user.getUser_ID())==null)
+		{
+			 return "/addShop";
+		}
+		else
+		{
 		map.put("shop", shopService.getAllByUserid(user.getUser_ID()));
 		return "/shopinfoChange";
+		}
 	}
 	@RequestMapping(value ={"/doChange.do"},method={RequestMethod.GET,RequestMethod.POST})
 	public String doChange(Shop shop){
@@ -82,8 +89,15 @@ public class ShopController {
 	@RequestMapping(value = {"/shopList.do"},method={RequestMethod.GET,RequestMethod.POST})
     public String getShoplist(Shop shop,Map<String,Object> map,HttpSession session){
 		Users user = (Users)session.getAttribute("user");
-		map.put("shopli", shopService.getAllByUserid(user.getUser_ID()));		
-		return "/shopList";
+		if(shopService.getAllByUserid(user.getUser_ID())==null)
+		{
+			 return "/addShop";
+		}
+		else
+		{
+			map.put("shopli", shopService.getAllByUserid(user.getUser_ID()));		
+			return "/shopList";
+		}		
 	}
 	@RequestMapping(value = {"/delete.do"},method={RequestMethod.GET,RequestMethod.POST})
 	public String doDelete(Shop shop){
@@ -91,12 +105,21 @@ public class ShopController {
 		return "redirect:/shopList.do";
 	}
 	@RequestMapping(value={"/showItem.do"},method = {RequestMethod.GET,RequestMethod.POST})
-	public String showItem(Shop shop,Map<String,Object> map){
+	public String showItem(Shop shop,Map<String,Object> map,HttpSession session){
+		Users user = (Users)session.getAttribute("user");
+		if(shopService.getAllByUserid(user.getUser_ID())==null)
+		{
+			 return "/addShop";
+		}
+		else
+		{
 		map.put("shopit", itemService.findByShopId(shop.getShop_id()));
 		return "shopItem";
+		}
 	}
 	@RequestMapping(value = {"/searchShop.do"},method = {RequestMethod.GET,RequestMethod.POST})
-	public String searchShop(String str,Shop shop,Map<String,Object> map){
+	public String searchShop(HttpServletRequest request,Shop shop,Map<String,Object> map){
+		String str = request.getParameter("str");
 		List<Shop> list;
 		list = shopService.searchShop(str);
 		map.put("search", list);

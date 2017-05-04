@@ -46,17 +46,20 @@
 						<div class="navbar" id="topnav">
 							<div class="navbar-inner">
 								<div style="float: left; color: white; margin-top: 26px;">
-									<span>您好,</span>
-									<c:if test="${user == null}">
-										<a href="login.jsp"><span style="color: white;">登录</span></a>
-										<a href="register.jsp"> <span
-											style="margin-left: 20px; color: white;"> 注册</span></a>
-									</c:if>
-									<c:if test="${user != null}">
-										<c:out value="${user.username}" />
-										<a href="logout.do"><span style="color: white;"> 注销</span></a>
-									</c:if>
-								</div>
+										<span>您好,</span>
+										<c:if test="${user == null}">
+											<a href="login.jsp"><span style="color: white;">登录</span></a>
+											<a href="register.jsp"> <span
+												style="margin-left: 20px; color: white;"> 注册</span></a>
+										</c:if>
+										<c:if test="${user != null}">
+											<img style="width: 20px; length: 20px"
+												src="${pageContext.request.contextPath}${user.picture}">
+											<c:out value="${user.username}" />
+											<a href="logout.do"><span style="color: white;">
+													注销</span></a>
+										</c:if>
+									</div>
 								<div style="margin-left: 250px;">
 									<ul class="nav">
 										<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
