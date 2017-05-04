@@ -2,6 +2,7 @@ package cn.it.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ import com.sun.org.apache.regexp.internal.recompile;
 import com.sun.tools.internal.ws.processor.model.Request;
 import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion.User;
 
+import cn.it.pojo.Item;
 import cn.it.pojo.Shop;
 import cn.it.pojo.Users;
 import cn.it.service.ItemService;
@@ -55,7 +57,7 @@ public class ShopController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		shop.setImage("/upload/" + fileName);
+	    shop.setImage("/upload/" + fileName);
 	    if(shopService.getAllByUserid(user.getUser_ID())==null)
 	    {
 	    	shopService.addShop(shop);
@@ -118,11 +120,48 @@ public class ShopController {
 		}
 	}
 	@RequestMapping(value = {"/searchShop.do"},method = {RequestMethod.GET,RequestMethod.POST})
-	public String searchShop(HttpServletRequest request,Shop shop,Map<String,Object> map){
+	public String searchShop(HttpServletRequest request,Shop shop,Map<String,Object> map,int page){
 		String str = request.getParameter("str");
 		List<Shop> list;
 		list = shopService.searchShop(str);
-		map.put("search", list);
+		if (list.size() == 0) {
+			map.put("error0", "抱歉！！没有找到符合搜索信息的商品！！！！");
+			map.put("search", str);
+		}else
+		{
+			int total = list.size(); // 商品总数量
+			int perPage = 6; // 每页显示数量
+			int totalPage = total / perPage;
+			if (total % perPage != 0) {
+				totalPage += 1;
+				map.put("error", "指定页码不存在!");
+			}
+			// 设置page页码有效区间
+			if (page > totalPage || page < 1) {
+				page = 1;
+			}
+			// 设置下方页码显示的部分
+			int n = 0;
+			List<Integer> pageList = new ArrayList<Integer>();
+			for (n = page - 3; n <= totalPage && n <= page + 3; n++) {
+				if (n > 0) {
+					pageList.add(n);
+				}
+			}
+
+			// 设置每页显示的商品，并且进行传递操作
+			if (page < totalPage) {
+				List<Shop> i = list.subList((page - 1) * perPage, page * perPage);
+				map.put("shoplist", list);
+			} else {
+				List<Shop> i = list.subList((page - 1) * perPage, list.size());
+				map.put("shoplist", list);
+			}
+			map.put("pageList", pageList);
+			map.put("totalPage", totalPage);
+			map.put("page", page);
+			map.put("search", str);
+		}
 		return "shopSearch";
 	}
 }

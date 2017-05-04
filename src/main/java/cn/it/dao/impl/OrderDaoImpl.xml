@@ -7,7 +7,7 @@
             <id column="Indent_id" property="id" javaType="int" jdbcType="INTEGER"/>
             <result column="User_ID" property="userID" javaType="int" jdbcType="INTEGER"/>
             <result column="OrderNumber" property="orderNumber" javaType="String" jdbcType="VARCHAR"/>
-            <result column="OrderTime" property="orderTime" javaType="java.sql.Date" jdbcType="DATE"/>
+            <result column="OrderTime" property="orderTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
             <result column="ActulPayment" property="actulPayment" javaType="double" jdbcType="DOUBLE"/>
             <result column="Status" property="status" javaType="String" jdbcType="VARCHAR"/>
             <result column="PaymentMethod" property="paymentMethod" javaType="String" jdbcType="VARCHAR"/>
@@ -45,6 +45,9 @@
       </update>
       <select id="findOrder" parameterType="java.lang.String" resultMap="findAll">
           select* from indent where OrderNumber=#{orderNumber}
+     </select>
+      <select id="get" parameterType="java.lang.String" resultMap="findAll">
+          select* from indent where Status=#{status}
      </select>
      <delete id="delete" parameterType="java.lang.String">
           delete from indent where OrderNumber=#{orderNumber}

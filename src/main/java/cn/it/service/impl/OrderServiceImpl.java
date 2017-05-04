@@ -1,9 +1,9 @@
 package cn.it.service.impl;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Test;
@@ -197,7 +197,8 @@ public  class OrderServiceImpl implements OrderService {
 		order.setUserID(userId);    // 设置下单用户
 		String orderNumber = new OrderServiceImpl().createOrderNum();// 创建订单号
 		order.setOrderNumber(orderNumber);  //设置订单号
-		order.setOrderTime(new java.sql.Date(new Date().getTime()));// 设置下单时间
+		
+		order.setOrderTime(new Timestamp(new Date().getTime()));// 设置下单时间
 		String status = "待付款";
 		order.setStatus(status); // 设置订单的交易状态（待付款、已完成、已取消）
 		

@@ -55,4 +55,8 @@ public interface OrderDao {
 	 * 统计不同状态的订单的数量
 	 * */
 	public int countNumbers(int userId,String status);
+	/*
+	 * 查询所有待付款的订单
+	 * */
+	public List<Order> get(String status);
 }
