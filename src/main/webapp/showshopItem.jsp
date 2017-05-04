@@ -170,6 +170,52 @@
 		</li>
 	</c:forEach>
 	</div>
+	<!-- 页码显示部分 -->
+	<div style="width: 500px">&nbsp</div>
+	<form action="lookshopItem.do?shopid=${shopinfo.shop_id}" method="post">
+		<!-- 上一页 按钮 -->
+		<div align="center">
+			<c:choose>
+				<c:when test="${page != 1}">
+					<a href="lookshopItem.do?shopid=${shopinfo.shop_id}&page=${page-1}"><input type="button"
+						name="lastPage" value="上一页" class="btn btn-orange" /></a>
+				</c:when>
+				<c:otherwise>
+					<input type="button" disabled="true" name="lastPage" value="上一页"
+						class="btn btn-orange" />
+				</c:otherwise>
+			</c:choose>
+			<!-- 页数列表 -->
+			<c:forEach items="${pageList}" var="pn">
+				<c:choose>
+					<c:when test="${pn == page}">${pn}</c:when>
+					<c:otherwise>
+						<a href="lookshopItem.do?shopid=${shopinfo.shop_id}&page=${pn}"><U>${pn}</U></a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<!-- 下一页 按钮 -->
+			<c:choose>
+				<c:when test="${page != totalPage}">
+					<a href="lookshopItem.do?shopid=${shopinfo.shop_id}&page=${page+1}"> <input type="button"
+						name="nextPage" value="下一页" class="btn btn-orange" />
+					</a>
+				</c:when>
+				<c:otherwise>
+					<input type="button" disabled="true" name="nextPage" value="下一页"
+						class="btn btn-orange" />
+				</c:otherwise>
+			</c:choose>
+			<!-- 跳转点 -->
+			&nbsp共${totalPage}页 &nbsp <input type="text" name="page" id="jump"
+				value=1 style="width: 30px"
+				onkeyup="this.value=this.value.replace(/\D/g,'')"
+				onafterpaste="this.value=this.value.replace(/\D/g,'')" /> <input
+				type="submit" value="跳转" />
+		</div>
+	</form>
+	
+	
 	
 		<!--footer-->
 	<footer style="margin-top:100px"> <img
