@@ -142,12 +142,12 @@
 													<tbody>
 
 														<tr align="center">
-															<td>商品图片</td>
-															<td>商品名称</td>
-															<td>商品数量</td>
-															<td>商品价格</td>
-															<td>商品状态</td>
-															<td>商品管理操作</td>
+															<td width=20%>商品图片</td>
+															<td width=20%>商品名称</td>
+															<td width=10%>商品数量</td>
+															<td width=10%>商品价格</td>
+															<td width=20%>商品状态</td>
+															<td width=20%>商品管理操作</td>
 														</tr>
 														<c:forEach items="${shopItem}" var="i">
 

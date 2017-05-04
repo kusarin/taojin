@@ -169,7 +169,8 @@
 																	</optgroup>
 																	<optgroup label="---电脑------------">
 																		<option value="笔记本电脑">笔记本电脑</option>
-																		<option value="音响">耳机</option>
+																		<option value="音响">音响</option>
+																		<option value="耳机">耳机</option>
 																		<option value="手柄">手柄</option>
 																		<option value="其他外设">其他外设</option>
 																	</optgroup>
