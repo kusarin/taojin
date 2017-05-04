@@ -208,11 +208,11 @@ function deleteAll(){
 				    <table  style="font-size:12px;height:auto;width:700px;color:black;">
 		                <tr style="background-color:#F5F5F5;">
 		                     <td class="orderNumber"><input type="checkbox" name="orderNumber" value="${orderc.order.orderNumber}" style="float:left;">
-		                     <span style="float:left;margin-left:20px;margin-right:5px;">
-		                     <strong style="color:black;">${orderc.order.orderTime}</strong></span>
+		                     <span style="float:left;margin-left:10px;margin-right:5px;">
+		                     <strong style="color:black;"><fmt:formatDate value="${orderc.order.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></strong></span>
 		                     <span><p style="float:left;margin-right:5px;">订单号: </p>
-							 <p style="color:black;float:left;">${orderc.order.orderNumber}</p></span></td>
-			                 <td class="buyer1"><a href="#"><p></p></a></td>
+							 <p style="color:black;margin-right:-60px;">${orderc.order.orderNumber}</p></span></td>
+			                 <td class="buyer1">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
@@ -231,16 +231,14 @@ function deleteAll(){
 		                 
 		                 <td class="sa" style="border-right:1px solid #F5F5F5;border-bottom:1px solid #F5F5F5;">
 		                  <c:forEach items="${orderc.orderDeatail}" var="ord">
+		                  <div style="margin-top:10px;margin-bottom:50px;">
 		                    <c:if test="${orderc.order.status=='已付款'}">
 							 <a href="evlauateItem.do?itemId=${ord.item.item_id}"><p>立即评价</p></a>
 							</c:if>
-							<div id="eval">
-							<a href="evlauateItem.do?itemId=${ord.item.item_id}" onclick="eva()"><p>立即评价</p></a>
-							</div>
 							<c:if test="${orderc.order.status!='已付款'}">
 							  <p>未评价</p>
 							</c:if>
-		                     <div style="height:120px;width:auto;"></div>
+		                   </div>
 		                 </c:forEach> 
 		                 </td>
 		                    <td class="sa" style="border-right:1px solid #F5F5F5;border-bottom:1px solid #F5F5F5;">${orderc.order.totalQuantity}</td>
@@ -250,11 +248,9 @@ function deleteAll(){
 		                    </td>
 	                        <td class="sa" style="border-bottom:1px solid #F5F5F5;">
 	                        <a href="lookOrderDeatil.do?orderNumber=${orderc.order.orderNumber}"><p>订单详情</p></a>
-	                        <c:if test="${orderc.order.status!='已取消'}">
-							<a href="removeOrder.do?flag=2&orderNumber=${orderc.order.orderNumber}"><p>取消订单</p></a>
-							</c:if>
 							<c:if test="${orderc.order.status=='待付款'}">
 							 <a href="paymenting.do?orderNumber=${orderc.order.orderNumber}"><p>立即付款</p></a>
+							 <a href="removeOrder.do?flag=2&orderNumber=${orderc.order.orderNumber}"><p>取消订单</p></a>
 							</c:if>
 							</td>
 		                </tr>
