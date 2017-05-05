@@ -30,9 +30,9 @@ public class OrderTimeTask {
 	    if(o.size()!=0){
 	        for(Order ol:o){
 	    	long d1=ol.getOrderTime().getTime();
-	    	//时间间隔小时数
-	    	long d3=(d2-d1)/(1000 * 60 * 60 );
-	    	if(d3>24){
+	    	//时间间隔分钟数
+	    	long d3=(d2-d1)/(1000 * 60);
+	    	if(d3>5){//下单和当前时间相差超过5分钟
 	    		ol.setStatus("已取消");
 	    		orderDao.update(ol);
 	    		/*****更新商品的总数***/
@@ -46,7 +46,7 @@ public class OrderTimeTask {
 			}
 	    }
 	 }
-	        System.out.println("使用SpringMVC框架配置定时任务");
+	        System.out.println("任务进行中.......");
 	    }
 	  }
 }
