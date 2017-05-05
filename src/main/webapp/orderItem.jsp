@@ -218,7 +218,7 @@ function deleteAll(){
 				             <td class="buyer">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
-				             <td style="text-align:center;">${orderc.order.orderNumber}<a onclick="deleteone(${orderc.order.orderNumber})" href="javascript:void(0)">删除</a></td>
+				             <td style="text-align:center;"><a onclick="deleteone(${orderc.order.orderNumber})" href="javascript:void(0)">删除</a></td>
 			            </tr>
 			            
 			            
