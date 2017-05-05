@@ -129,7 +129,7 @@ public interface ItemService {
 	public List<Item> findByType2(String typeh, String typel);
 
 	/**
-	 * 按照店铺归宿查找所有商品
+	 * 按照店铺归宿查找商品(在售)
 	 * 
 	 * @param shop_id
 	 *            店铺编号，int
