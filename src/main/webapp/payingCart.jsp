@@ -138,7 +138,7 @@ function save(){
 						<div class="navbar" id="topnav">
 						
 								<div class="navbar-inner">
-							<div style="float: left; color: white; margin-top: 26px;">
+									  <div style="float: left; color: white; margin-top: 26px;">
 										<span>您好,</span>
 										<c:if test="${user == null}">
 											<a href="login.jsp"><span style="color: white;">登录</span></a>
@@ -146,26 +146,28 @@ function save(){
 												style="margin-left: 20px; color: white;"> 注册</span></a>
 										</c:if>
 										<c:if test="${user != null}">
+											<img style="width: 20px; length: 20px"
+												src="${pageContext.request.contextPath}${user.picture}">
 											<c:out value="${user.username}" />
 											<a href="logout.do"><span style="color: white;">
 													注销</span></a>
 										</c:if>
-							</div>
-							  <div style="margin-left:250px;">
-								<ul class="nav">
-								    <li><a class="home active" href="Itemlist.do">首页</a></li>
-								    <li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
-									<li><a class="checkout" href="shopList.do">我的店铺</a></li>
-									<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
-									<li><a class="checkout" href="orderItem.do">我的订单</a></li>
-								</ul>
-							 </div>
+									</div>
+								<div style="margin-left: 250px;">
+									<ul class="nav">
+										<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
+										<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
+										<li><a class="checkout" href="shopList.do">我的店铺</a></li>
+										<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
+										<li><a class="checkout" href="orderItem.do">我的订单</a></li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
 					<!-- Top Nav End -->
 					<div class="pull-right">
-						<form class="form-search top-search">
+						<form class="form-search top-search" action="searchItem.do?page=1" method="post">
 							<input type="text" class="input-medium search-query"
 								placeholder="搜索你想要的二手"/ style="border:4px solid #FFA07A;">
 								<input type="submit" value="搜索"
@@ -231,7 +233,7 @@ function save(){
 		     </div>
 		 </div>
 		 <div class="downline"></div>
-		 <c:if test="${cl.sh.totalnumber!=0}">
+		 
 		<div class="receive">
 		      <div class="info">
 	             <strong>订单信息</strong>
@@ -277,6 +279,7 @@ function save(){
 		</div>
 		</c:if>
 		</c:forEach>
+		<c:if test="${cl.sh.totalnumber!=0}">
 		<div class="orderDe">
 		    <table class="same">
 			     <tr><td style="padding-top:15px;padding-bottom:15px;"><strong class="pay" id="total">${cl.sh.totalnumber}</strong>件商品，总商品金额：
@@ -302,10 +305,10 @@ function save(){
     </div> 
     </form>
     
-     <c:if test="${cl.sh.totalnumber==0}">
+     <c:if test="${cl.sh.totalnumber!=nu}">
     <div class="containers">
        <div class="orderTitle" style="color:red;font-size:15px;">
-	      <p>以下商品无法购买，请重新通过“加入购物车、立即购买”来购买此商品</p>
+	      <p>以下商品无法购买，请重新通过“修改购物车中的商品数量、立即购买”来购买此商品。返回<a href="showCartAllItem.do" style="color:blue;">“购物车”</a></p>
 	   </div>
        <c:forEach items="${cl.ca}" var="cai" varStatus="s">
 		<c:if test="${cai.tradingNumbers>cai.item.number}">

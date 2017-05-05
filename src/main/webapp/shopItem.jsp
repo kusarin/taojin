@@ -46,20 +46,19 @@
 						<div class="navbar" id="topnav">
 							<div class="navbar-inner">
 								<div style="float: left; color: white; margin-top: 26px;">
-										<span>您好,</span>
-										<c:if test="${user == null}">
-											<a href="login.jsp"><span style="color: white;">登录</span></a>
-											<a href="register.jsp"> <span
-												style="margin-left: 20px; color: white;"> 注册</span></a>
-										</c:if>
-										<c:if test="${user != null}">
-											<img style="width: 20px; length: 20px"
-												src="${pageContext.request.contextPath}${user.picture}">
-											<c:out value="${user.username}" />
-											<a href="logout.do"><span style="color: white;">
-													注销</span></a>
-										</c:if>
-									</div>
+									<span>您好,</span>
+									<c:if test="${user == null}">
+										<a href="login.jsp"><span style="color: white;">登录</span></a>
+										<a href="register.jsp"> <span
+											style="margin-left: 20px; color: white;"> 注册</span></a>
+									</c:if>
+									<c:if test="${user != null}">
+										<img style="width: 20px; length: 20px"
+											src="${pageContext.request.contextPath}${user.picture}">
+										<c:out value="${user.username}" />
+										<a href="logout.do"><span style="color: white;"> 注销</span></a>
+									</c:if>
+								</div>
 								<div style="margin-left: 250px;">
 									<ul class="nav">
 										<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
@@ -109,9 +108,9 @@
 					</h2>
 					<ul class="nav nav-list categories">
 						<li><a href="addShop.jsp">认证店铺 </a></li>
-						<li><a href="#">查看记录 </a></li>
+						<li><a href="shopList.do">查看记录 </a></li>
 						<li><a href="addItem.jsp">商品上架 </a></li>
-						<li><a href="shopItem.do">商品管理</a></li>
+						<li><a href="shopItem.do?page=1">商品管理</a></li>
 						<li><a href="toChange.do">店铺信息管理</a></li>
 					</ul>
 				</div>
@@ -142,12 +141,12 @@
 													<tbody>
 
 														<tr align="center">
-															<td>商品图片</td>
-															<td>商品名称</td>
-															<td>商品数量</td>
-															<td>商品价格</td>
-															<td>商品状态</td>
-															<td>商品管理操作</td>
+															<td width=20%>商品图片</td>
+															<td width=20%>商品名称</td>
+															<td width=10%>商品数量</td>
+															<td width=10%>商品价格</td>
+															<td width=20%>商品状态</td>
+															<td width=20%>商品管理操作</td>
 														</tr>
 														<c:forEach items="${shopItem}" var="i">
 
@@ -157,24 +156,17 @@
 																<td>${i.name}</td>
 																<td>${i.number}</td>
 																<td>${i.price}</td>
-																<td>在售</td>
+																<c:if test="${i.status == 0}">
+																	<td>在售</td>
+																</c:if><c:if test="${i.status == 1}">
+																	<td>已下架</td>
+																</c:if>
 																<td><a href="showchangeItem.do?id=${i.item_id}">修改商品信息</a>
-																	<a href="updownItem.do?id=${i.item_id}">下架商品</a>
+																	<c:if test="${i.status == 0}"><a href="updownItem.do?id=${i.item_id}">下架商品</a></c:if>
+																	<c:if test="${i.status == 1}"><a href="updownItem.do?id=${i.item_id}">上架商品</a></c:if>
 															</tr>
 														</c:forEach>
-														<c:forEach items="${shopItem2}" var="m">
-															<tr>
-																<td><img class="itemimage"
-																	src=${pageContext.request.contextPath}${m.image}></td>
-																<td>${m.name}</td>
-																<td>${m.number}</td>
-																<td>${m.price}</td>
-																<td>已下架</td>
-																<td><a href="showchangeItem.do?id=${m.item_id}">修改商品信息</a>
-																	<a href="updownItem.do?id=${m.item_id}">上架商品</a>
-															</tr>
 
-														</c:forEach>
 
 													</tbody>
 												</table>
@@ -191,6 +183,52 @@
 		</div>
 		</section>
 	</div>
+
+
+<!-- 页码显示部分 -->
+	<div style="width: 500px">&nbsp</div>
+	<form action="shopItem.do?" method="post">
+		<!-- 上一页 按钮 -->
+		<div align="center">
+			<c:choose>
+				<c:when test="${page != 1}">
+					<a href="shopItem.do?page=${page-1}"><input type="button"
+						name="lastPage" value="上一页" class="btn btn-orange" /></a>
+				</c:when>
+				<c:otherwise>
+					<input type="button" disabled="true" name="lastPage" value="上一页"
+						class="btn btn-orange" />
+				</c:otherwise>
+			</c:choose>
+			<!-- 页数列表 -->
+			<c:forEach items="${pageList}" var="pn">
+				<c:choose>
+					<c:when test="${pn == page}">${pn}</c:when>
+					<c:otherwise>
+						<a href="shopItem.do?page=${pn}"><U>${pn}</U></a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<!-- 下一页 按钮 -->
+			<c:choose>
+				<c:when test="${page != totalPage}">
+					<a href="shopItem.do?page=${page+1}"> <input type="button"
+						name="nextPage" value="下一页" class="btn btn-orange" />
+					</a>
+				</c:when>
+				<c:otherwise>
+					<input type="button" disabled="true" name="nextPage" value="下一页"
+						class="btn btn-orange" />
+				</c:otherwise>
+			</c:choose>
+			<!-- 跳转点 -->
+			&nbsp共${totalPage}页 &nbsp <input type="text" name="page" id="jump"
+				value=1 style="width: 30px"
+				onkeyup="this.value=this.value.replace(/\D/g,'')"
+				onafterpaste="this.value=this.value.replace(/\D/g,'')" /> <input
+				type="submit" value="跳转" />
+		</div>
+	</form>
 
 	<!--footer-->
 	<footer style="margin-top:100px"> <img

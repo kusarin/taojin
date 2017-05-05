@@ -101,9 +101,9 @@
 					</h2>
 					<ul class="nav nav-list categories">
 						<li><a href="addShop.jsp">认证店铺 </a></li>
-						<li><a href="#">查看记录 </a></li>
+						<li><a href="shopList.do">查看记录 </a></li>
 						<li><a href="addItem.jsp">商品上架 </a></li>
-						<li><a href="shopItem.do">商品管理</a></li>
+						<li><a href="shopItem.do?page=1">商品管理</a></li>
 						<li><a href="toChange.do">店铺信息管理</a></li>
 					</ul>
 				</div>
@@ -169,7 +169,8 @@
 																	</optgroup>
 																	<optgroup label="---电脑------------">
 																		<option value="笔记本电脑">笔记本电脑</option>
-																		<option value="音响">耳机</option>
+																		<option value="音响">音响</option>
+																		<option value="耳机">耳机</option>
 																		<option value="手柄">手柄</option>
 																		<option value="其他外设">其他外设</option>
 																	</optgroup>
@@ -230,7 +231,7 @@
 													<div class="control-group">
 														<td>商品图片:</td>
 														<div class="controls">
-															<td><p>注意：上传的图片名中不能包含中文</p></td>
+															<td><p style="color:red">注意：上传的图片名中不能包含中文</p></td>
 														</div>
 													</div>
 												</tr>

@@ -306,16 +306,16 @@
 	<section id="related" class="row">
 		<div class="container">
 			<h1 class="heading1">
-				<a href="lookshopItem.do?shopid=${lookitem.shop_id}"><span
+				<a href="lookshopItem.do?shopid=${lookitem.shop_id}&page=1"><span
 					class="maintext">同店铺商品</span></a><span class="subtext"> 走过路过错过</span>
 			</h1>
 			<ul class="thumbnails">
 				<c:forEach items="${looklist}" var="i">
 					<li class="span3"><a class="prdocutname"
-						href="lookItem.do?id=${i.item_id}"
+						href="lookItem.do?id=${i.item_id}" target=${i.item_id}
 						style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 200px">${i.name}</a>
 						<div class="thumbnail">
-							<a href="lookItem.do?id=${i.item_id}"><img class="itemimage"
+							<a href="lookItem.do?id=${i.item_id}" target=${i.item_id}><img class="itemimage"
 								src=${pageContext.request.contextPath}${i.image}></a>
 							<div class="pricetag">
 								<br>
