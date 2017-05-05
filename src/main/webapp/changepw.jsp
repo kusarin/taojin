@@ -132,19 +132,19 @@
 														<div class="control-group">
 															<label class="control-label">原密码 </label>
 															<div class="controls">
-																<input type="text" id="fwpw" />
+																<input type="password" id="fwpw" />
 															</div>
 														</div>
 														<div class="control-group">
 															<label class="control-label">新密码</label>
 															<div class="controls">
-																<input type="text" name="password" id="pw1" />
+																<input type="password" name="password" id="pw1" />
 															</div>
 														</div>
 														<div class="control-group">
 															<label class="control-label">请重复输入新密码</label>
 															<div class="controls">
-																<input type="text" id="pw2" />
+																<input type="password" id="pw2" />
 															</div>
 														</div>
 														<div class="control-group">
