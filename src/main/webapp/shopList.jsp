@@ -85,6 +85,11 @@ padding-top: 0px;
 { 
 display: block; 
 } 
+.shopimage {
+	width: 150px;
+	height: 100px;
+	float: left;
+}
 </style> 
 
 <script type="text/javascript">
@@ -115,17 +120,20 @@ function setTab(name,m,n){
 						<div class="navbar" id="topnav">
 							<div class="navbar-inner">
 								<div style="float: left; color: white; margin-top: 26px;">
-									<span>您好,</span>
-									<c:if test="${user == null}">
-										<a href="login.jsp"><span style="color: white;">登录</span></a>
-										<a href="register.jsp"> <span
-											style="margin-left: 20px; color: white;"> 注册</span></a>
-									</c:if>
-									<c:if test="${user != null}">
-										<c:out value="${user.username}" />
-										<a href="logout.do"><span style="color: white;"> 注销</span></a>
-									</c:if>
-								</div>
+										<span>您好,</span>
+										<c:if test="${user == null}">
+											<a href="login.jsp"><span style="color: white;">登录</span></a>
+											<a href="register.jsp"> <span
+												style="margin-left: 20px; color: white;"> 注册</span></a>
+										</c:if>
+										<c:if test="${user != null}">
+											<img style="width: 20px; length: 20px"
+												src="${pageContext.request.contextPath}${user.picture}">
+											<c:out value="${user.username}" />
+											<a href="logout.do"><span style="color: white;">
+													注销</span></a>
+										</c:if>
+									</div>
 								<div style="margin-left: 250px;">
 									<ul class="nav">
 										<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
@@ -196,7 +204,7 @@ function setTab(name,m,n){
 						<li><a href="addShop.jsp">认证店铺 </a></li>
 						<li><a href="#">查看记录 </a></li>
 						<li><a href="addItem.jsp">商品上架 </a></li>
-						<li><a href="showItem.do">商品管理</a></li>
+						<li><a href="shopItem.do">商品管理</a></li>
 						<li><a href="toChange.do">店铺信息管理</a></li>
 					</ul>
 				</div>
@@ -238,6 +246,7 @@ function setTab(name,m,n){
 													<tbody>
 
 														<tr align="center">
+														    <td>店铺图片</td>
 															<td>编号</td>
 															<td>用户名</td>
 															<td>店名</td>
@@ -247,6 +256,8 @@ function setTab(name,m,n){
 							                                <td>操作</td>
 														</tr>
 															<tr>
+															    <td><img class="shopimage"
+																	src=${pageContext.request.contextPath}${shopli.image}></td>
 																<td>${shopli.shop_id}</td>
 																<td>${shopli.user_ID}</td>
 																<td>${shopli.name}</td>
