@@ -136,6 +136,15 @@ public  class OrderServiceImpl implements OrderService {
 
 		orderDetailDao.delete(orderNumber); // 删除此订单对应的订单明细
 		orderDao.delete(orderNumber); // 删除该订单号对应的订单
+		/*****更新商品的总数***/
+		List<OrderDetail> oli=orderDetailDao.selectAll(orderNumber);//此订单中的所有商品
+		for(OrderDetail ord:oli){
+			int itemId=ord.getItemId();//订单中的商品
+			
+			Item ii=itemDao.FindItemById(itemId);//item表中的商品
+			ii.setnumber(ii.getnumber()+ord.getItemNumbers());//更新商品总数
+			itemDao.ItemUpdate(ii);//更新item表
+		}
 	}
 	/**
 	 *批量删除 
@@ -143,6 +152,17 @@ public  class OrderServiceImpl implements OrderService {
 	public void deleteAllOrder(String[] orderNumber){
 		orderDetailDao.deleteAll(orderNumber); // 删除此订单对应的订单明细
 		orderDao.deleteAll(orderNumber); // 删除该订单号对应的订单
+		for(int i=0;i<orderNumber.length;i++){
+			/*****更新商品的总数***/
+			List<OrderDetail> oli=orderDetailDao.selectAll(orderNumber[i]);//此订单中的所有商品
+			for(OrderDetail ord:oli){
+				int itemId=ord.getItemId();//订单中的商品
+				
+				Item ii=itemDao.FindItemById(itemId);//item表中的商品
+				ii.setnumber(ii.getnumber()+ord.getItemNumbers());//更新商品总数
+				itemDao.ItemUpdate(ii);//更新item表
+			}
+		}
 	}
 	
 	/**

@@ -91,6 +91,7 @@ public class ShoppingCartController {
 		v.addObject("cl", shoppingCartService.payingCart(cartItemId));
 		v.addObject("address", orderService.getAddress(userId));
 		v.addObject("username",usersService.findById(userId).getName());
+		v.addObject("nu", cartItemId.length);
 		return v;	
 	}
 	/*****

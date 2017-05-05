@@ -75,12 +75,6 @@ a:hover{
 }
 </style>
 <script>
-function deleteone(){
-	if(confirm("确定要删除这条订单吗？")){
-		
-	}
-}
-
 function deleteAll(){
 	var ii=0;
 	var cks=document.getElementsByName("orderNumber");

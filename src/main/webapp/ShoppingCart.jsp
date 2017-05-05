@@ -181,7 +181,7 @@ function comm(){
 		<c:forEach items="${clist.ca}" var="c" >
 		
 		<div class="shoper">
-			    <span>店铺：<a href="#">${c.shopName}</a></span>
+			    <span>店铺：${c.shopName}</span>
 		</div>
 		<div class="orderDe" style="border:1px solid #80ffff;">
 		<table>

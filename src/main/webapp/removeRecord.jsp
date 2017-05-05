@@ -156,7 +156,7 @@ a:hover{
 	                     <a href="#"><img src="${pageContext.request.contextPath}${ord.item.image}"/></a> 
 	                     </c:forEach>
 	                     </td>
-		                    <td class="sa" style="border-right:1px solid #F5F5F5;">${orderc.order.removeOrderTime}</td>
+		                    <td class="sa" style="border-right:1px solid #F5F5F5;"><fmt:formatDate value="${orderc.order.removeOrderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 		                    <td class="sa" style="border-right:1px solid #F5F5F5;">${orderc.order.actulPayment}</td>
 		                    <td class="sa">已完成</td>
 		                </tr>
