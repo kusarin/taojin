@@ -130,7 +130,7 @@
 			<div class="container">
 				<!--  breadcrumb -->
 				<ul class="breadcrumb">
-					<li><a href="Itemlist.do">主页</a> <span class="divider">/</span></li>
+					<li><a href="Itemlist.do?page=1">主页</a> <span class="divider">/</span></li>
 					<li class="active">个人中心</li>
 				</ul>
 				<div class="row">
