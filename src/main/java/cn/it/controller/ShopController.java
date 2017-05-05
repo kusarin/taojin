@@ -37,27 +37,27 @@ public class ShopController {
 	private UsersService usersService;
 	@Resource
 	   private ItemService itemService;
+	/**
+	 * @param shop
+	 * @param file
+	 * @param request
+	 * @param session
+	 * @return
+	 * @throws IOException
+	 */
+	/**
+	 * @param shop
+	 * @param file
+	 * @param request
+	 * @param session
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value ={"/doAdd.do"},method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView doAdd(Shop shop,MultipartFile file,
 			HttpServletRequest request,HttpSession session) throws IOException{
 		Users user = (Users)session.getAttribute("user");
 		ModelAndView str = new ModelAndView("shopList");
-		String path = request.getServletContext().getRealPath("upload");
-		// 将图片文件名命名为上传时间
-		String fileName = String.valueOf(System.currentTimeMillis())
-				+ file.getOriginalFilename();
-		// 获取图片文件路径
-		File targetFile = new File(path, fileName);
-		if (!targetFile.exists()) {
-			targetFile.mkdirs();
-		}
-		// 保存文件（图片）；
-		try {
-			file.transferTo(targetFile);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	    shop.setImage("/upload/" + fileName);
 	    if(shopService.getAllByUserid(user.getUser_ID())==null)
 	    {
 	    	shopService.addShop(shop);
@@ -120,7 +120,7 @@ public class ShopController {
 		}
 	}
 	@RequestMapping(value = {"/searchShop.do"},method = {RequestMethod.GET,RequestMethod.POST})
-	public String searchShop(HttpServletRequest request,Shop shop,Map<String,Object> map,int page){
+	public String searchShop(HttpServletRequest request,Shop shop,Map<String,Object> map,Integer  page){
 		String str = request.getParameter("str");
 		List<Shop> list;
 		list = shopService.searchShop(str);
@@ -163,5 +163,58 @@ public class ShopController {
 			map.put("search", str);
 		}
 		return "shopSearch";
+	}
+	@RequestMapping("searchShop2.do")
+	public ModelAndView showSearchItem2(HttpServletRequest request,String str, Integer page) {
+		ModelAndView modelandview = new ModelAndView("searchShop"); // 到searchItem.jsp界面
+
+		// 根据输入关键词，搜索商品
+		List<Shop> list;
+		list = shopService.searchShop(str);
+		// 是否有满足条件商品的判断
+		if (list.size() == 0) {
+			modelandview.addObject("error0", "抱歉！！没有找到符合搜索信息的商品！！！！");
+			modelandview.addObject("search", str);
+		} else {
+			// 分页操作区域
+			// 获取总页数
+			int total = list.size(); // 商品总数量
+			int perPage = 6; // 每页显示数量
+			int totalPage = total / perPage;
+			if (total % perPage != 0) {
+				totalPage += 1;
+			}
+			// 设置page页码有效区间
+			if (page > totalPage || page < 1) {
+				page = 1;
+				modelandview.addObject("error", "指定页码不存在!");
+			}
+			// 设置下方页码显示的部分
+			int n = 0;
+			List<Integer> pageList = new ArrayList<Integer>();
+			for (n = page - 3; n <= totalPage && n <= page + 3; n++) {
+				if (n > 0) {
+					pageList.add(n);
+				}
+			}
+
+			// 设置每页显示的商品，并且进行传递操作
+			if (page < totalPage) {
+				List<Shop> i = list.subList((page - 1) * perPage, page
+						* perPage);
+				modelandview.addObject("itemlist", i);
+			} else {
+				List<Shop> i = list.subList((page - 1) * perPage, list.size());
+				modelandview.addObject("itemlist", i);
+			}
+			// 传递页码显示部分
+			modelandview.addObject("pageList", pageList);
+			modelandview.addObject("totalPage", totalPage);
+			modelandview.addObject("page", page);
+			modelandview.addObject("search", str);
+			// 分页操作结束
+		}
+
+		return modelandview;
 	}
 }

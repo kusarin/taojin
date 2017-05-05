@@ -1,5 +1,6 @@
 package cn.it.service.impl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -251,16 +252,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		}
 		o.setUserID(userId);  //用户编号
 		o.setOrderNumber(orderNumber); //订单编号
-		o.setOrderTime(new java.sql.Date(new Date().getTime()));//下单时间
+		o.setOrderTime(new Timestamp(new Date().getTime()));//下单时间
 		/**
 		 * 判断支付方式
 		 * */
-		switch(payAway){
-		case 0:
-			o.setPaymentMethod("网银支付"); //支付方式
-		case 1:
-			o.setPaymentMethod("支付宝"); //支付方式
-		}
+	
+		o.setPaymentMethod("网银支付"); //支付方式
+	
 		
 		o.setStatus("待付款");  //订单状态
 		o.setTotalQuantity(totalQuantity); //购买总数
