@@ -306,7 +306,7 @@
 	<section id="related" class="row">
 		<div class="container">
 			<h1 class="heading1">
-				<a href="lookshopItem.do?shopid=${lookitem.shop_id}"><span
+				<a href="lookshopItem.do?shopid=${lookitem.shop_id}&page=1"><span
 					class="maintext">同店铺商品</span></a><span class="subtext"> 走过路过错过</span>
 			</h1>
 			<ul class="thumbnails">
