@@ -36,7 +36,7 @@ public class CommentController {
 	@RequestMapping("addComment.do")
 	public ModelAndView add(Comment comment) {
 		commentService.add(comment);
-		return new ModelAndView("redirect:Itemlist.do");
+		return new ModelAndView("redirect:Itemlist.do?page=1");
 	}
 
 }

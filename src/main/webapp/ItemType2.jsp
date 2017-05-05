@@ -353,16 +353,16 @@
 					<table border="1">
 						<thead>
 							<tr>
-								<td><a href="lookItem.do?id=${i.item_id}"> <img
+								<td><a href="lookItem.do?id=${i.item_id}" target=${i.item_id}> <img
 										class="itemimage"
 										src=${pageContext.request.contextPath}${i.image}>
 								</a></td>
 							</tr>
 							<tr>
 								<td><a href="lookItem.do?id=${i.item_id}"><p
-											class="textname" style="height: 20px; width: 200px">${i.name}</p></a>
-									<a href="lookItem.do?id=${i.item_id}" class="textprice">商品价格:
-										¥ ${i.price}</a> <br> <a href="lookItem.do?id=${i.item_id}"><p
+											class="textname" style="height: 20px; width: 200px" target=${i.item_id}>${i.name}</p></a>
+									<a href="lookItem.do?id=${i.item_id}" class="textprice" target=${i.item_id}>商品价格:
+										¥ ${i.price}</a> <br> <a href="lookItem.do?id=${i.item_id}" target=${i.item_id}><p
 											class="textdetail" style="height: 20px; width: 275px">${i.detail}</p></a>
 								</td>
 							</tr>

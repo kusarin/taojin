@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.it.dao.DiscussDao;
-import cn.it.pojo.Comment;
 import cn.it.pojo.Discuss;
 import cn.it.pojo.Item;
 import cn.it.pojo.Shop;
@@ -245,7 +243,7 @@ public class ItemController {
 		// 分页操作区域
 		// 获取总页数
 		int total = list.size(); // 商品总数量
-		int perPage = 12; // 每页显示数量
+		int perPage = 15; // 每页显示数量
 		int totalPage = total / perPage;
 		if (total % perPage != 0) {
 			totalPage += 1;
@@ -310,7 +308,7 @@ public class ItemController {
 			// 分页操作区域
 			// 获取总页数
 			int total = list.size(); // 商品总数量
-			int perPage = 12; // 每页显示数量
+			int perPage = 15; // 每页显示数量
 			int totalPage = total / perPage;
 			if (total % perPage != 0) {
 				totalPage += 1;
@@ -381,7 +379,7 @@ public class ItemController {
 			// 分页操作区域
 			// 获取总页数
 			int total = list.size(); // 商品总数量
-			int perPage = 12; // 每页显示数量
+			int perPage = 15; // 每页显示数量
 			int totalPage = total / perPage;
 			if (total % perPage != 0) {
 				totalPage += 1;
@@ -519,7 +517,7 @@ public class ItemController {
 		// 分页操作区域
 				// 获取总页数
 				int total = list.size(); // 商品总数量
-				int perPage = 12; // 每页显示数量
+				int perPage = 15; // 每页显示数量
 				int totalPage = total / perPage;
 				if (total % perPage != 0) {
 					totalPage += 1;
@@ -588,7 +586,7 @@ public class ItemController {
 			// 分页操作区域
 			// 获取总页数
 			int total = list.size(); // 商品总数量
-			int perPage = 12; // 每页显示数量
+			int perPage = 15; // 每页显示数量
 			int totalPage = total / perPage;
 			if (total % perPage != 0) {
 				totalPage += 1;
@@ -648,7 +646,7 @@ public class ItemController {
 			// 分页操作区域
 			// 获取总页数
 			int total = list.size(); // 商品总数量
-			int perPage = 12; // 每页显示数量
+			int perPage = 15; // 每页显示数量
 			int totalPage = total / perPage;
 			if (total % perPage != 0) {
 				totalPage += 1;

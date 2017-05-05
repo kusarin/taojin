@@ -92,12 +92,13 @@
 										<span>新增文件</span>
 									</h2>
 									<section class="leavecomment">
-									<form action="addRF.do" method="post" enctype="multipart/form-data">
+									<form action="addRF.do" method="post"
+										enctype="multipart/form-data">
 										<fieldset>
 											<div class="control-group">
 												<div class="controls">
-													<label class="control-label">文件</label>
-													<input type="file" name="file" accept= "*"/>
+													<label class="control-label">文件</label> <input type="file"
+														name="file" accept="*" />
 												</div>
 											</div>
 											<div class="controls">

@@ -87,7 +87,7 @@
 			<div class="container">
 				<!--  breadcrumb -->
 				<ul class="breadcrumb">
-					<li><a href="#">主页</a> <span class="divider">/</span></li>
+					<li><a href="Itemlist.do?page=1">主页</a> <span class="divider">/</span></li>
 					<li class="active">个人中心</li>
 				</ul>
 				<div class="row">
@@ -98,15 +98,12 @@
 								<span>我的个人中心</span>
 							</h2>
 							<ul class="nav nav-list categories">
-								<li><a href="category.html">我的帐户信息 </a>
-									<ul>
-										<li><a href="UsersUpdate.jsp">修改个人信息 </a></li>
-										<li><a href="changepw.jsp">更改密码</a></li>
-										<li><a href="addressList.do">更改/添加我的地址</a></li>
-									</ul> <a href="orderItem.do">我的订单 </a></li>
-								<li><a href="category.html">商品信息管理</a></li>
-
-								<li><a href="category.html">店铺信息管理</a></li>
+								<li><a href="UsersUpdate.jsp">修改个人信息 </a></li>
+								<li><a href="changepw.jsp">更改密码</a></li>
+								<li><a href="addressList.do">更改/添加我的地址</a></li>
+								<li><a href="orderItem.do">我的订单 </a></li>
+								<li><a href="shopList.do">店铺信息管理</a></li>
+							</ul>
 							</ul>
 						</div>
 						<div class="sidewidt"></div>
@@ -135,19 +132,19 @@
 														<div class="control-group">
 															<label class="control-label">原密码 </label>
 															<div class="controls">
-																<input type="text" id="fwpw" />
+																<input type="password" id="fwpw" />
 															</div>
 														</div>
 														<div class="control-group">
 															<label class="control-label">新密码</label>
 															<div class="controls">
-																<input type="text" name="password" id="pw1" />
+																<input type="password" name="password" id="pw1" />
 															</div>
 														</div>
 														<div class="control-group">
 															<label class="control-label">请重复输入新密码</label>
 															<div class="controls">
-																<input type="text" id="pw2" />
+																<input type="password" id="pw2" />
 															</div>
 														</div>
 														<div class="control-group">
