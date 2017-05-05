@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.it.dao.DiscussDao;
-import cn.it.pojo.Comment;
 import cn.it.pojo.Discuss;
 import cn.it.pojo.Item;
 import cn.it.pojo.Shop;

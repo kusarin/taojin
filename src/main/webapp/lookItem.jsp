@@ -312,10 +312,10 @@
 			<ul class="thumbnails">
 				<c:forEach items="${looklist}" var="i">
 					<li class="span3"><a class="prdocutname"
-						href="lookItem.do?id=${i.item_id}"
+						href="lookItem.do?id=${i.item_id}" target=${i.item_id}
 						style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 200px">${i.name}</a>
 						<div class="thumbnail">
-							<a href="lookItem.do?id=${i.item_id}"><img class="itemimage"
+							<a href="lookItem.do?id=${i.item_id}" target=${i.item_id}><img class="itemimage"
 								src=${pageContext.request.contextPath}${i.image}></a>
 							<div class="pricetag">
 								<br>
