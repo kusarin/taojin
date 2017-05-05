@@ -15,6 +15,47 @@
 <title>Insert title here</title>
 </head>
 <body>
+<style>
+.left {
+	width: 175px;
+	heigh: auto;
+	float: left;
+	margin-left: 20px;
+}
+
+.right {
+	width: auto;
+	heigh: auto;
+	margin-top: 20px;
+}
+
+.itemimage {
+	width: 300px;
+	height: 175px;
+	float: left;
+}
+
+.textname {
+	font-size: 20px;
+	color: black;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.textdetail {
+	font-size: 15px;
+	color: orange;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.textprice {
+	font-size: 20px;
+	color: red;
+}
+</style>
 	<!-- Header Start -->
 	<header>
 	<div class="headerstrip">
@@ -63,50 +104,122 @@
 	<!-- Header End -->
 
 	<div id="maincontainer">
-<div class="flush">
-        <form action="">
-		<table style="border-left-width: 0px; border-collapse: collapse; border-right-width: 0px;"bordercolor="#ff6600" bgcolor="#DFFFDF" cellspacing="0" cellpadding="0" width="250" align="center" border="1">
-		<thead>
-		<tr><th style="text-align: center;">店铺名</th>
-		</tr></thead>
-		<c:forEach items="${search }" var="c">
-		<tr id="${c.shop_id }">
-		<td>${c.name }</td>
-		</tr>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript">
+		$('.all-sort-list > .item').hover(
+				function() {
+					var eq = $('.all-sort-list > .shop').index(this), //获取当前滑过是第几个元素
+					h = $('.all-sort-list').offset().top, //获取当前下拉菜单距离窗口多少像素
+					s = $(window).scrollTop(), //获取游览器滚动了多少高度
+					i = $(this).offset().top, //当前元素滑过距离窗口多少像素
+					item = $(this).children('.shop-list').height(), //下拉菜单子类内容容器的高度
+					sort = $('.all-sort-list').height(); //父类分类列表容器的高度
+
+					if (item < sort) { //如果子类的高度小于父类的高度
+						if (eq == 0) {
+							$(this).children('.shop-list').css('top', (i - h));
+						} else {
+							$(this).children('.shop-list').css('top',
+									(i - h) + 1);
+						}
+					} else {
+						if (s > h) { //判断子类的显示位置，如果滚动的高度大于所有分类列表容器的高度
+							if (i - s > 0) { //则 继续判断当前滑过容器的位置 是否有一半超出窗口一半在窗口内显示的Bug,
+								$(this).children('.shop-list').css('top',
+										(s - h) + 2);
+							} else {
+								$(this).children('.shop-list').css('top',
+										(s - h) - (-(i - s)) + 2);
+							}
+						} else {
+							$(this).children('.shop-list').css('top', 3);
+						}
+					}
+
+					$(this).addClass('hover');
+					$(this).children('.shop-list').css('display', 'block');
+				}, function() {
+					$(this).removeClass('hover');
+					$(this).children('.shop-list').css('display', 'none');
+				});
+
+		$('.shop > .shop-list > .close').click(function() {
+			$(this).parent().parent().removeClass('hover');
+			$(this).parent().hide();
+		});
+	</script>
+	<!-- 商品类型选择区域 end-->
+
+	<div class="right" style="margin-left: 275px">
+		<h1 style="color: orange">${error0}</h1>
+		<c:forEach items="${shoplist}" var="c">
+			<li class="span3">
+				<div>
+					<table border="1">
+						<thead>
+							<tr>
+								<td>
+								</a></td>
+							</tr>
+							<tr>
+								<td>${c.shop_id}<p
+											class="textname" style="height: 20px; width: 200px">${c.name}</p></a>
+								</td>
+							</tr>
+						</thead>
+					</table>
+					<br>
+				</div>
+			</li>
 		</c:forEach>
-		</table></form>
-</div></div>
-<!-- 推荐部分-->
-	<section id="related" class="row">
-		<div class="container">
-			<h1 class="heading1">
-				<a href="lookshopItem.do?shopid=${lookitem.shop_id}"><span
-					class="maintext">同店铺商品</span></a><span class="subtext"> 走过路过错过</span>
-			</h1>
-			<ul class="thumbnails">
-				<c:forEach items="${looklist}" var="i">
-					<li class="span3"><a class="prdocutname"
-						href="lookItem.do?id=${i.item_id}"
-						style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 200px">${i.name}</a>
-						<div class="thumbnail">
-							<a href="lookItem.do?id=${i.item_id}"><img class="itemimage"
-								src=${pageContext.request.contextPath}${i.image}></a>
-							<div class="pricetag">
-								<br>
-								<div class="price">
-									<div class="pricenew">
-										<div class="price" style="float: left; margin-top: 20px">
-											<p>¥${i.price}</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div></li>
-				</c:forEach>
-			</ul>
+	</div>
+
+	<!-- 页码显示部分 -->
+	<div style="width: 500px">&nbsp</div>
+	<form action="searchShop.do" method="post">
+		<input type="hidden" name="str" value=${search}>
+		<!-- 上一页 按钮 -->
+		<div align="center">
+			<c:choose>
+				<c:when test="${page != 1}">
+					<a href="searchItem2.do?str=${search}&page=${page-1}"><input type="button"
+						name="lastPage" value="上一页" class="btn btn-orange" /></a>
+				</c:when>
+				<c:otherwise>
+					<input type="button" disabled="true" name="lastPage" value="上一页"
+						class="btn btn-orange" />
+				</c:otherwise>
+			</c:choose>
+			<!-- 页数列表 -->
+			<c:forEach items="${pageList}" var="pn">
+				<c:choose>
+					<c:when test="${pn == page}">${pn}</c:when>
+					<c:otherwise>
+						<a href="searchShop2.do?str=${search}&page=${pn}"><U>${pn}</U></a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<!-- 下一页 按钮 -->
+			<c:choose>
+				<c:when test="${page != totalPage}">
+					<a href="searchShop2.do?str=${search}&page=${page+1}"> <input type="button"
+						name="nextPage" value="下一页" class="btn btn-orange" />
+					</a>
+				</c:when>
+				<c:otherwise>
+					<input type="button" disabled="true" name="nextPage" value="下一页"
+						class="btn btn-orange" />
+				</c:otherwise>
+			</c:choose>
+			<!-- 跳转点 -->
+			&nbsp共${totalPage}页 &nbsp <input type="text" name="page" id="jump"
+				value=1 style="width: 30px"
+				onkeyup="this.value=this.value.replace(/\D/g,'')"
+				onafterpaste="this.value=this.value.replace(/\D/g,'')" /> <input
+				type="submit" value="跳转" />
 		</div>
-	</section>
-	<!--footer-->
+	</form>
+
 	<footer style="margin-top:100px"> <img
 		src="${pageContext.request.contextPath}/image/footer-tri.png"
 		style="width: 100%;">

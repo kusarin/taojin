@@ -50,7 +50,7 @@ public class BackController{
 				String r6_Order = request.getParameter("r6_Order");
 				String rp_PayDate = request.getParameter("rp_PayDate");
 				//修改订单状态
-				orderService.changeOrderStatus(1, r6_Order);
+				orderService.changeOrderStatus(1, r6_Order,rp_PayDate);
 				pw.println("支付成功！<br/>"
 						+"商户编号："+p1_MerId+"<br/>"
 						+"支付金额："+r3_Amt+"<br/>"

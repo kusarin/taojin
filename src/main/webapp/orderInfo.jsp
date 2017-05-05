@@ -30,7 +30,7 @@ pageEncoding="UTF-8"%>
 						<div class="navbar" id="topnav">
 						
 							<div class="navbar-inner">
-							<div style="float: left; color: white; margin-top: 26px;">
+									  <div style="float: left; color: white; margin-top: 26px;">
 										<span>您好,</span>
 										<c:if test="${user == null}">
 											<a href="login.jsp"><span style="color: white;">登录</span></a>
@@ -38,26 +38,28 @@ pageEncoding="UTF-8"%>
 												style="margin-left: 20px; color: white;"> 注册</span></a>
 										</c:if>
 										<c:if test="${user != null}">
+											<img style="width: 20px; length: 20px"
+												src="${pageContext.request.contextPath}${user.picture}">
 											<c:out value="${user.username}" />
 											<a href="logout.do"><span style="color: white;">
 													注销</span></a>
 										</c:if>
-							</div>
-							  <div style="margin-left:250px;">
-								<ul class="nav">
-								    <li><a class="home active" href="Itemlist.do">首页</a></li>
-								    <li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
-									<li><a class="checkout" href="shopList.do">我的店铺</a></li>
-									<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
-									<li><a class="checkout" href="orderItem.do">我的订单</a></li>
-								</ul>
-							 </div>
+									</div>
+								<div style="margin-left: 250px;">
+									<ul class="nav">
+										<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
+										<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
+										<li><a class="checkout" href="shopList.do">我的店铺</a></li>
+										<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
+										<li><a class="checkout" href="orderItem.do">我的订单</a></li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
 					<!-- Top Nav End -->
 					<div class="pull-right">
-						<form class="form-search top-search">
+						<form class="form-search top-search" action="searchItem.do?page=1" method="post">
 							<input type="text" class="input-medium search-query"
 								placeholder="搜索你想要的二手"/ style="border:4px solid #FFA07A;">
 								<input type="submit" value="搜索"
@@ -94,12 +96,18 @@ pageEncoding="UTF-8"%>
 		<c:if test="${order.status=='已取消'}">
 		<tr>
 		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">取消时间</td>
-			<td style="text-align:center;border-color:#FAFFF0">${order.removeOrderTime}</td>
+			<td style="text-align:center;border-color:#FAFFF0"><fmt:formatDate value="${order.removeOrderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+		</tr>
+		</c:if>
+		<c:if test="${order.status=='已付款'}">
+		<tr>
+		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">付款时间</td>
+			<td style="text-align:center;border-color:#FAFFF0"><fmt:formatDate value="${order.paytime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 		</tr>
 		</c:if>
 		<tr>
 		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">下单时间</td>
-			<td style="text-align:center;border-color:#FAFFF0">${order.orderTime}</td>
+			<td style="text-align:center;border-color:#FAFFF0"><fmt:formatDate value="${order.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 		</tr>
 		
 		</table>
@@ -139,8 +147,7 @@ pageEncoding="UTF-8"%>
 	  
 	   </div>
 	  
-	   </div>
-    </div> 
+	   </div> 
 	
 	<footer style="margin-top:20px">
        <img  src="${pageContext.request.contextPath}/image/footer-tri.png" style="width:100%;">

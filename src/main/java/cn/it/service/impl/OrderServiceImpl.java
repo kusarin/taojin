@@ -1,9 +1,9 @@
 package cn.it.service.impl;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Test;
@@ -90,19 +90,23 @@ public  class OrderServiceImpl implements OrderService {
 	 * 
 	 * @param(flag对用户的操作进行标记)
 	 * */
-	public void changeOrderStatus(int flag, String orderNumber) {
+	public void changeOrderStatus(int flag, String orderNumber,String date) {
 		Order order = orderDao.findOrder(orderNumber);
 		List<OrderDetail> oli=orderDetailDao.selectAll(orderNumber);//此订单中的所有商品
+		
 		switch (flag) {
 		case 0:
 			order.setStatus("待付款");
 		case 1:
 			order.setStatus("已付款");
+			long dd=Long.parseLong(date);
+			order.setPaytime(new Timestamp(dd));
+			orderDao.updatePayTime(order);
 			/*****更新商品的总数****销售数量**/
 			for(OrderDetail ord:oli){
 				int itemId=ord.getItemId();//订单中的商品
 				Item ii=itemDao.FindItemById(itemId);//item表中的商品
-				ii.setnumber(ii.getnumber()+ord.getItemNumbers());//更新商品总数
+				ii.setnumber(ii.getnumber()-ord.getItemNumbers());//更新商品总数
 				ii.settradingTimes(ii.gettradingTimes()+ord.getItemNumbers());//更新销售数量
 				itemDao.ItemUpdate(ii);//更新item表
 			}
@@ -143,13 +147,13 @@ public  class OrderServiceImpl implements OrderService {
 	
 	/**
 	 * 取消订单
-	 * 更新商品的总数、销售数量
+	 * 更新商品的总数
 	 * **/
 	public void remove(int flag, String orderNumber){
 		Order o=orderDao.findOrder(orderNumber);
-		o.setRemoveOrderTime(new java.sql.Date(new Date().getTime()));// 设置取消时间
+		o.setRemoveOrderTime(new Timestamp(new Date().getTime()));// 设置取消时间
 		orderDao.updateTime(o);  //更新取消时间
-		changeOrderStatus( flag, orderNumber);//更改订单状态
+		changeOrderStatus( flag, orderNumber,null);//更改订单状态
 		
 		/*****更新商品的总数***/
 		List<OrderDetail> oli=orderDetailDao.selectAll(orderNumber);//此订单中的所有商品
@@ -197,7 +201,8 @@ public  class OrderServiceImpl implements OrderService {
 		order.setUserID(userId);    // 设置下单用户
 		String orderNumber = new OrderServiceImpl().createOrderNum();// 创建订单号
 		order.setOrderNumber(orderNumber);  //设置订单号
-		order.setOrderTime(new java.sql.Date(new Date().getTime()));// 设置下单时间
+		
+		order.setOrderTime(new Timestamp(new Date().getTime()));// 设置下单时间
 		String status = "待付款";
 		order.setStatus(status); // 设置订单的交易状态（待付款、已完成、已取消）
 		
@@ -260,11 +265,6 @@ public  class OrderServiceImpl implements OrderService {
 		Item item = itemDao.FindItemById(itemId);//根据商品id查询商品信息
 
 		OrderCollection orderCollection = new OrderCollection(); // 订单信息、订单详细信息的对象
-		/** 暂不处理收货地址 */
-		// //根据ueserId，获取收货地址
-		// Address address=addressDao.select(userId);
-		// //设置收货地址信息
-		// orderCollection.setAddress(address);
 
 		/**
 		 * 支付方式暂不设定
@@ -355,15 +355,12 @@ public  class OrderServiceImpl implements OrderService {
 	public void commitEvaluation(int itemId,int userId,int score,String content) {
 		
 		String userName=usersDao.findById(userId).getName();
-		Date evalDate=new Date();
-		
 		Discuss di=new Discuss();
 		di.setContent(content);
 		di.setItem_id(itemId);
 		di.setScore(score);
 		di.setUser_id(userId);
 		di.setUsername(userName);
-		di.setTime(evalDate);
 		discussDao.addDiscuss1(di);//存储评论
 	
 	}

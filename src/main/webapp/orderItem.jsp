@@ -75,9 +75,9 @@ a:hover{
 }
 </style>
 <script>
-function deleteone(orderNumber){
+function deleteone(){
 	if(confirm("确定要删除这条订单吗？")){
-		window.location.href="deleteOrder.do?pageNo=${pages.pageNo}&orderNumber="+orderNumber;
+		
 	}
 }
 
@@ -119,27 +119,29 @@ function deleteAll(){
 											<a href="register.jsp"> <span
 												style="margin-left: 20px; color: white;"> 注册</span></a>
 										</c:if>
-									     <c:if test="${user != null}">
+										<c:if test="${user != null}">
+											<img style="width: 20px; length: 20px"
+												src="${pageContext.request.contextPath}${user.picture}">
 											<c:out value="${user.username}" />
 											<a href="logout.do"><span style="color: white;">
 													注销</span></a>
 										</c:if>
-							 </div>
-							  <div style="margin-left:250px;">
-								<ul class="nav">
-								    <li><a class="home active" href="Itemlist.do">首页</a></li>
-								    <li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
-									<li><a class="checkout" href="shopList.do">我的店铺</a></li>
-									<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
-									<li><a class="checkout" href="orderItem.do">我的订单</a></li>
-								</ul>
-							 </div>
+									</div>
+								<div style="margin-left: 250px;">
+									<ul class="nav">
+										<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
+										<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
+										<li><a class="checkout" href="shopList.do">我的店铺</a></li>
+										<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
+										<li><a class="checkout" href="orderItem.do">我的订单</a></li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
 					<!-- Top Nav End -->
 					<div class="pull-right">
-						<form class="form-search top-search" action="searchItem.do" method="post">
+						<form class="form-search top-search" action="searchItem.do?page=1" method="post">
 							<input type="text" class="input-medium search-query"  style="width:auto;height:40px;border:4px solid #FFA07A"
 								placeholder="搜索你想要的二手"><input type="submit" value="搜索"
 								style="height:40px;width:auto;background-color:#FFA07A;border:4px solid #FFA07A;">
@@ -208,15 +210,15 @@ function deleteAll(){
 				    <table  style="font-size:12px;height:auto;width:700px;color:black;">
 		                <tr style="background-color:#F5F5F5;">
 		                     <td class="orderNumber"><input type="checkbox" name="orderNumber" value="${orderc.order.orderNumber}" style="float:left;">
-		                     <span style="float:left;margin-left:20px;margin-right:5px;">
-		                     <strong style="color:black;">${orderc.order.orderTime}</strong></span>
+		                     <span style="float:left;margin-left:10px;margin-right:5px;">
+		                     <strong style="color:black;"><fmt:formatDate value="${orderc.order.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></strong></span>
 		                     <span><p style="float:left;margin-right:5px;">订单号: </p>
-							 <p style="color:black;float:left;">${orderc.order.orderNumber}</p></span></td>
-			                 <td class="buyer1"><a href="#"><p></p></a></td>
+							 <p style="color:black;margin-right:-60px;">${orderc.order.orderNumber}</p></span></td>
+			                 <td class="buyer1">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
-				             <td style="text-align:center;"><a onclick="deleteone(${orderc.order.orderNumber})" href="javascript:void(0)">删除</a></td>
+				             <td style="text-align:center;"><a onclick="deleteone()" href="deleteOrder.do?pageNo=${pages.pageNo}&orderNumber=${orderc.order.orderNumber}">删除</a></td>
 			            </tr>
 			            
 			            
@@ -231,16 +233,14 @@ function deleteAll(){
 		                 
 		                 <td class="sa" style="border-right:1px solid #F5F5F5;border-bottom:1px solid #F5F5F5;">
 		                  <c:forEach items="${orderc.orderDeatail}" var="ord">
+		                  <div style="margin-top:10px;margin-bottom:50px;">
 		                    <c:if test="${orderc.order.status=='已付款'}">
 							 <a href="evlauateItem.do?itemId=${ord.item.item_id}"><p>立即评价</p></a>
 							</c:if>
-							<div id="eval">
-							<a href="evlauateItem.do?itemId=${ord.item.item_id}" onclick="eva()"><p>立即评价</p></a>
-							</div>
 							<c:if test="${orderc.order.status!='已付款'}">
 							  <p>未评价</p>
 							</c:if>
-		                     <div style="height:120px;width:auto;"></div>
+		                   </div>
 		                 </c:forEach> 
 		                 </td>
 		                    <td class="sa" style="border-right:1px solid #F5F5F5;border-bottom:1px solid #F5F5F5;">${orderc.order.totalQuantity}</td>
@@ -250,11 +250,9 @@ function deleteAll(){
 		                    </td>
 	                        <td class="sa" style="border-bottom:1px solid #F5F5F5;">
 	                        <a href="lookOrderDeatil.do?orderNumber=${orderc.order.orderNumber}"><p>订单详情</p></a>
-	                        <c:if test="${orderc.order.status!='已取消'}">
-							<a href="removeOrder.do?flag=2&orderNumber=${orderc.order.orderNumber}"><p>取消订单</p></a>
-							</c:if>
 							<c:if test="${orderc.order.status=='待付款'}">
 							 <a href="paymenting.do?orderNumber=${orderc.order.orderNumber}"><p>立即付款</p></a>
+							 <a href="removeOrder.do?flag=2&orderNumber=${orderc.order.orderNumber}"><p>取消订单</p></a>
 							</c:if>
 							</td>
 		                </tr>
