@@ -75,9 +75,9 @@ a:hover{
 }
 </style>
 <script>
-function deleteone(o){
+function deleteone(){
 	if(confirm("确定要删除这条订单吗？")){
-		window.location.href="deleteOrder.do?pageNo=${pages.pageNo}&orderNumber="+o;
+		
 	}
 }
 
@@ -218,7 +218,7 @@ function deleteAll(){
 				             <td class="buyer">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
-				             <td style="text-align:center;"><a onclick="deleteone(${orderc.order.orderNumber})" href="javascript:void(0)">删除</a></td>
+				             <td style="text-align:center;"><a onclick="deleteone()" href="deleteOrder.do?pageNo=${pages.pageNo}&orderNumber=${orderc.order.orderNumber}">删除</a></td>
 			            </tr>
 			            
 			            
