@@ -112,7 +112,7 @@ function deleteAll(){
 						<div class="navbar" id="topnav">
 						
 							<div class="navbar-inner">
-							<div style="float: left; color: white; margin-top: 26px;">
+								  <div style="float: left; color: white; margin-top: 26px;">
 										<span>您好,</span>
 										<c:if test="${user == null}">
 											<a href="login.jsp"><span style="color: white;">登录</span></a>
@@ -120,26 +120,28 @@ function deleteAll(){
 												style="margin-left: 20px; color: white;"> 注册</span></a>
 										</c:if>
 										<c:if test="${user != null}">
+											<img style="width: 20px; length: 20px"
+												src="${pageContext.request.contextPath}${user.picture}">
 											<c:out value="${user.username}" />
 											<a href="logout.do"><span style="color: white;">
 													注销</span></a>
 										</c:if>
+									</div>
+								<div style="margin-left: 250px;">
+									<ul class="nav">
+										<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
+										<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
+										<li><a class="checkout" href="shopList.do">我的店铺</a></li>
+										<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
+										<li><a class="checkout" href="orderItem.do">我的订单</a></li>
+									</ul>
 								</div>
-							  <div style="margin-left:250px;">
-								<ul class="nav">
-								    <li><a class="home active" href="Itemlist.do">首页</a></li>
-								    <li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
-									<li><a class="checkout" href="shopList.do">我的店铺</a></li>
-									<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
-									<li><a class="checkout" href="orderItem.do">我的订单</a></li>
-								</ul>
-							 </div>
 							</div>
 						</div>
 					</div>
 					<!-- Top Nav End -->
 					<div class="pull-right">
-						<form class="form-search top-search" action="searchItem.do" method="post">
+						<form class="form-search top-search" action="searchItem.do?page=1" method="post">
 							<input type="text" class="input-medium search-query"  style="width:auto;height:40px;border:4px solid #FFA07A"
 								placeholder="搜索你想要的二手"><input type="submit" value="搜索"
 								style="height:40px;width:auto;background-color:#FFA07A;border:4px solid #FFA07A;">
