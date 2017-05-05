@@ -22,7 +22,7 @@ public class OrderTimeTask {
 	@Autowired
 	private OrderDetailDao orderDetailDao;
 	
-	    @Scheduled(cron = "10/20 * * * * ? ") // 间隔20秒执行
+	    @Scheduled(cron = "30/30 * * * * ? ") // 间隔30秒执行
 	    public void taskCycle() {
 	    	
 	    List<Order> o=orderDao.get("待付款");
