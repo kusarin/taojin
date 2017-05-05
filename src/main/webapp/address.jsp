@@ -51,6 +51,8 @@
 												style="margin-left: 20px; color: white;"> 注册</span></a>
 										</c:if>
 										<c:if test="${user != null}">
+											<img style="width: 20px; length: 20px"
+												src="${pageContext.request.contextPath}${user.picture}">
 											<c:out value="${user.username}" />
 											<a href="logout.do"><span style="color: white;">
 													注销</span></a>
@@ -58,7 +60,7 @@
 									</div>
 									<div style="margin-left: 250px;">
 										<ul class="nav">
-											<li><a class="home active" href="Itemlist.do">首页</a></li>
+											<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
 											<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
 											<li><a class="checkout" href="shopList.do">我的店铺</a></li>
 											<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
@@ -70,7 +72,7 @@
 						</div>
 						<!-- Top Nav End -->
 						<div class="pull-right">
-							<form action="searchItem.do" method="post">
+							<form action="searchItem.do?page=1" method="post">
 								<div style="margin-top: 10px;">
 									<input type="text" name="str" class="input-medium search-query"
 										placeholder="搜索你想要的二手"
@@ -87,7 +89,6 @@
 		</div>
 	</header>
 	<!-- Header End -->
-
 	<div id="maincontainer">
 		<section id="product">
 			<div class="container">
