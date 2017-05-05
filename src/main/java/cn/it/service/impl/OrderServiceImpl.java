@@ -90,7 +90,7 @@ public  class OrderServiceImpl implements OrderService {
 	 * 
 	 * @param(flag对用户的操作进行标记)
 	 * */
-	public void changeOrderStatus(int flag, String orderNumber,String date) {
+	public void changeOrderStatus(int flag, String orderNumber) {
 		Order order = orderDao.findOrder(orderNumber);
 		List<OrderDetail> oli=orderDetailDao.selectAll(orderNumber);//此订单中的所有商品
 		
@@ -99,8 +99,8 @@ public  class OrderServiceImpl implements OrderService {
 			order.setStatus("待付款");
 		case 1:
 			order.setStatus("已付款");
-			long dd=Long.parseLong(date);
-			order.setPaytime(new Timestamp(dd));
+			
+			order.setPaytime(new Timestamp(new Date().getTime()));
 			orderDao.updatePayTime(order);
 			/*****更新商品的总数****销售数量**/
 			for(OrderDetail ord:oli){
@@ -173,7 +173,7 @@ public  class OrderServiceImpl implements OrderService {
 		Order o=orderDao.findOrder(orderNumber);
 		o.setRemoveOrderTime(new Timestamp(new Date().getTime()));// 设置取消时间
 		orderDao.updateTime(o);  //更新取消时间
-		changeOrderStatus( flag, orderNumber,null);//更改订单状态
+		changeOrderStatus( flag, orderNumber);//更改订单状态
 		
 		/*****更新商品的总数***/
 		List<OrderDetail> oli=orderDetailDao.selectAll(orderNumber);//此订单中的所有商品

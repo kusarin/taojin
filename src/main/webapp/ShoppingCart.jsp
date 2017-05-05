@@ -192,7 +192,11 @@ function comm(){
 				 <td class="common" style="padding-left:0px;text-align:center;">
 				 <input type="button" value="-" onclick="mm(${c.item.item_id})" style="text-align:center;height:30px;width:20px;float:left;border:0;">
 				 <input type="text" value="${c.tradingNumbers}" id="mp" readonly="true" style="background-color:white;text-align:center;width:20px;float:left;border:1px;">
-				 <input type="button" value="+"  onclick="p(${c.item.item_id},${c.item.number},${c.tradingNumbers})" style="height:30px;width:20px;text-align:center;float:left;border:0;"></td>
+				 <input type="button" value="+"  onclick="p(${c.item.item_id},${c.item.number},${c.tradingNumbers})" style="height:30px;width:20px;text-align:center;float:left;border:0;">
+				 <c:if test="${c.tradingNumbers>c.item.number}">
+				 <p style="color:red;font-size:12px;clear:both;margin-left:-5px;">数量超过库存</p>
+				 </c:if>
+				 </td>
 				 <td class="common" style="text-align:center;">${c.item.price}</td>
 				 <td class="common" style="text-align:center;"><p name="to">${c.totalPrice}</p></td>
 				 <td class="common" style="text-align:center;"><a onclick="deleteo(${c.cartItemId})" href="javascript:void(0)">删除</a></td>

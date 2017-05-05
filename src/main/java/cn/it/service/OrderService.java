@@ -83,7 +83,7 @@ public interface OrderService {
 	 * 
 	 * @param(flag对用户的操作进行标记)
 	 * */
-	public void changeOrderStatus(int flag, String orderNumber,String date);
+	public void changeOrderStatus(int flag, String orderNumber);
 	
 	/***
 	 * 新增收货地址

@@ -308,7 +308,7 @@ function save(){
      <c:if test="${cl.sh.totalnumber!=nu}">
     <div class="containers">
        <div class="orderTitle" style="color:red;font-size:15px;">
-	      <p>以下商品无法购买，请重新通过“修改购物车中的商品数量、立即购买”来购买此商品</p>
+	      <p>以下商品无法购买，请重新通过“修改购物车中的商品数量、立即购买”来购买此商品。返回<a href="showCartAllItem.do" style="color:blue;">“购物车”</a></p>
 	   </div>
        <c:forEach items="${cl.ca}" var="cai" varStatus="s">
 		<c:if test="${cai.tradingNumbers>cai.item.number}">
