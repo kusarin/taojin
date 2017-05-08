@@ -104,7 +104,7 @@ function setTab(name,m,n){
 	<!-- Header End -->
 	<div class="right" style="margin-left: 275px">
 		<h1 style="color: orange">${error0}</h1>
-		<c:forEach items="${itemlist}" var="i">
+		<c:forEach items="${shoplist}" var="i">
 			<li class="span3">
 				<div>
 					<table border="1">
