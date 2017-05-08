@@ -128,6 +128,9 @@ function setTab(name,m,n){
 						<li><a href="addItem.jsp">商品上架 </a></li>
 						<li><a href="shopItem.do?page=1">商品管理</a></li>
 						<li><a href="toChange.do">店铺信息管理</a></li>
+						<li><a href="shopOrder.jsp">订单管理</a>
+						<ul><a href="#">已处理</a></ul>
+						<ul><a href="#">未处理</a></ul></li>
 					</ul>
 				</div>
 				<div class="sidewidt"></div>

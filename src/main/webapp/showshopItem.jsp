@@ -51,6 +51,7 @@
 	color: red;
 }
 </style>
+<link href="./css/shopSearch.css" rel="stylesheet">
 <!-- 弹窗设置点 -->
 <script type="text/javascript">
 	window.onload = function() {
@@ -59,6 +60,13 @@
 			alert(error);
 		}
 	}
+	function setTab(name,m,n){ 
+		for( var i=1;i<=n;i++){ 
+		var menu = document.getElementById(name+i); 
+		var showDiv = document.getElementById("cont_"+name+"_"+i); 
+		menu.className = i==m ?"on":""; 
+		showDiv.style.display = i==m?"block":"none"; 
+		} 
 </script>
 <title> ${shopinfo.name}</title>
 <link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
@@ -110,7 +118,15 @@
 					</div>
 					<!-- Top Nav End -->
 					<div class="pull-right">
-						<form action="searchItem.do?page=1" method="post">
+				         <div class="tab">
+				         <ul>
+				         <li id="tow1" class="on" onclick='setTab("tow",1,3)'>商品</li>
+				         <li id="tow2" onclick='setTab("tow",2,3)'>店铺</li>
+				         </ul>
+				         </div>
+				         <div class="tabList">
+				         <div id="cont_tow_1" class="one block">
+				         <form action="searchItem.do?page=1" method="post">
 							<div style="margin-top: 10px;">
 								<input type="text" name="str" class="input-medium search-query"
 									placeholder="搜索你想要的二手"
@@ -118,8 +134,20 @@
 								<input type="submit" value="搜索"
 									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
 							</div>
-
 						</form>
+						</div>
+						<div id="cont_tow_2" class="one">
+						<form action="searchShop.do?page=1" method="post">
+							<div style="margin-top: 10px;">
+								<input type="text" name="str" class="input-medium search-query"
+									placeholder="搜索你想要的二手"
+									style="height: 20px; width: 100; border: 4px solid #FFA07A">
+								<input type="submit" value="搜索"
+									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+							</div>
+						</form>
+						</div>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -15,6 +15,11 @@
 <link href="./css/shopSearch.css" rel="stylesheet">
 <title>Insert title here</title>
 <script type="text/javascript">
+function deleteone(shop_id){
+if(confirm("确定要删除这条数据吗？")){
+	window.location.href="delete.do?shop_id="+shop_id;
+}
+}
 function setTab(name,m,n){ 
 	for( var i=1;i<=n;i++){ 
 	var menu = document.getElementById(name+i); 
@@ -26,47 +31,6 @@ function setTab(name,m,n){
 </script>
 </head>
 <body>
-<style>
-.left {
-	width: 175px;
-	heigh: auto;
-	float: left;
-	margin-left: 20px;
-}
-
-.right {
-	width: auto;
-	heigh: auto;
-	margin-top: 20px;
-}
-
-.itemimage {
-	width: 300px;
-	height: 175px;
-	float: left;
-}
-
-.textname {
-	font-size: 20px;
-	color: black;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-.textdetail {
-	font-size: 15px;
-	color: orange;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-.textprice {
-	font-size: 20px;
-	color: red;
-}
-</style>
 	<!-- Header Start -->
 	<header>
 	<div class="headerstrip">
@@ -143,80 +107,96 @@ function setTab(name,m,n){
 	</div>
 	</header>
 	<!-- Header End -->
-
 	<div id="maincontainer">
-	<!-- 商品类型选择区域 end-->
-
-	<div class="right" style="margin-left: 275px">
-		<h1 style="color: orange">${error0}</h1>
-		<c:forEach items="${shoplist}" var="c">
-			<li class="span3">
-				<div>
-					<table border="1">
-						<thead>
-							<tr>
-								<td>
-								</a></td>
-							</tr>
-							<tr>
-								<td>${c.shop_id}<p
-											class="textname" style="height: 20px; width: 200px">${c.name}</p></a>
-								</td>
-							</tr>
-						</thead>
-					</table>
-					<br>
+		<section id="product">
+		<div class="container">
+			<!--  breadcrumb -->
+			<ul class="breadcrumb">
+				<li><a href="#">Home</a> <span class="divider">/</span></li>
+				<li class="active">Blog</li>
+			</ul>
+			<div class="row">
+				<!-- Sidebar Start-->
+				<aside class="span3">
+				<div class="sidewidt">
+					<h2 class="heading2">
+						<span>店铺管理</span>
+					</h2>
+					<ul class="nav nav-list categories">
+						<li><a href="addShop.jsp">认证店铺 </a></li>
+						<li><a href="shopList.do">查看记录 </a></li>
+						<li><a href="addItem.jsp">商品上架 </a></li>
+						<li><a href="shopItem.do?page=1">商品管理</a></li>
+						<li><a href="toChange.do">店铺信息管理</a></li>
+						<li><a href="#">订单管理</a>
+						<ul><a href="#">已处理</a></ul>
+						<ul><a href="#">未处理</a></ul></li>
+					</ul>
 				</div>
-			</li>
-		</c:forEach>
-	</div>
+				<div class="sidewidt"></div>
 
-	<!-- 页码显示部分 -->
-	<div style="width: 500px">&nbsp</div>
-	<form action="searchShop.do" method="post">
-		<input type="hidden" name="str" value=${search}>
-		<!-- 上一页 按钮 -->
-		<div align="center">
-			<c:choose>
-				<c:when test="${page != 1}">
-					<a href="searchshop.do?str=${search}&page=${page-1}"><input type="button"
-						name="lastPage" value="上一页" class="btn btn-orange" /></a>
-				</c:when>
-				<c:otherwise>
-					<input type="button" disabled="true" name="lastPage" value="上一页"
-						class="btn btn-orange" />
-				</c:otherwise>
-			</c:choose>
-			<!-- 页数列表 -->
-			<c:forEach items="${pageList}" var="pn">
-				<c:choose>
-					<c:when test="${pn == page}">${pn}</c:when>
-					<c:otherwise>
-						<a href="searchShop.do?str=${search}&page=${pn}"><U>${pn}</U></a>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-			<!-- 下一页 按钮 -->
-			<c:choose>
-				<c:when test="${page != totalPage}">
-					<a href="searchShop.do?str=${search}&page=${page+1}"> <input type="button"
-						name="nextPage" value="下一页" class="btn btn-orange" />
-					</a>
-				</c:when>
-				<c:otherwise>
-					<input type="button" disabled="true" name="nextPage" value="下一页"
-						class="btn btn-orange" />
-				</c:otherwise>
-			</c:choose>
-			<!-- 跳转点 -->
-			&nbsp共${totalPage}页 &nbsp <input type="text" name="page" id="jump"
-				value=1 style="width: 30px"
-				onkeyup="this.value=this.value.replace(/\D/g,'')"
-				onafterpaste="this.value=this.value.replace(/\D/g,'')" /> <input
-				type="submit" value="跳转" />
-		</div>
-	</form>
+				</aside>
+				<!-- Sidebar End-->
+				<div class="span9">
+					<!-- Blog start-->
+					<section id="latestblog">
+					<div class="blogdetail">
+						<h2 class="heading2">
+							<span>认证店铺</span>
+						</h2>
+						<div class="blogicons">
+							<div class="pull-left"></div>
+						</div>
+						<ul class="margin-none">
+							<li class="listblcok">
+								<div class="mb20">
+									<section class="leavecomment">
+									<h2 class="heading2">
+										<span>订单管理</span>
+									</h2>
+									<form action="" name="myform" method="get"></form>
+									<table
+										style="border-left-width: 0px; border-collapse: collapse; border-right-width: 0px;"
+										bordercolor="#ff6600" bgcolor="#DFFFDF" cellspacing="0"
+										cellpadding="0" width="250" align="center" border="1">
+										<tbody>
+											<tr align="middle">
+												<table width="90%" border="1" align="center">
+													<thead>
+														<tr>
+															<td colspan="10" align="center">已处理</td>
+														</tr>
+													</thead>
+													<tbody>
 
+														<tr align="center">
+															<td>订单编号</td>
+															<td>用户名</td>
+															<td>店名</td>
+															<td>类型</td>
+															<td>介绍</td>
+							                                <td>审核状态</td>
+							                                <td>操作</td>
+														</tr>
+															<tr>
+															    <td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td><c:if test="">未审核</c:if>
+																    <c:if test="">已审核</c:if>
+																    <c:if test="">审核未通过</c:if></td>
+																<td><a href="">查看</a>
+																<a href="">商品</a>
+																<a href="=">添加商品</a>
+																<a onclick=""
+																	href="javascript:void(0)">删除</a></td>
+
+															</tr>														
+													</tbody>
+												</table>
+												<!--footer-->
 	<footer style="margin-top:100px"> <img
 		src="${pageContext.request.contextPath}/image/footer-tri.png"
 		style="width: 100%;">
@@ -231,8 +211,10 @@ function setTab(name,m,n){
 		<a id="fd_footer" href="addComment.jsp">产品意见反馈</a>
 	</div>
 	<div style="text-align: center; margin-bottom: 10px;">
-		<span>2017 版权所有</span> <span>鄂ICP备14003265号-2</span>
+		<span>?2017 版权所有</span> <span>鄂ICP备14003265号-2</span>
 	</div>
 	</footer>
+
+												
 </body>
 </html>
