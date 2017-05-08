@@ -88,7 +88,7 @@
 						<div class="mb20">
 							<section class="leavecomment">
 							<h2 class="heading2">
-								<span>商品信息列表</span>
+								<span>资源文件列表</span>
 							</h2>
 							<table width="90%">
 								<tbody>

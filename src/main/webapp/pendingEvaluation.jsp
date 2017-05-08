@@ -99,7 +99,7 @@ function commit(){
 
 <div style="margin-top:30px;height:auto;">
 <div style="float:left; margin-left:390px;">
-   <img src="${it.image}" style="width:100px;height:120px;">
+   <img src="${pageContext.request.contextPath}${it.image}" style="width:100px;height:120px;">
    <p style="width:100px;height:90px;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;">${it.name}</p>
 </div>
 <input type="hidden" name="itemId" value="${it.item_id}">
