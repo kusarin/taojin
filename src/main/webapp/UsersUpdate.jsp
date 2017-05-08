@@ -206,6 +206,8 @@
 																<p>注意：上传的图片名中不能包含中文</p>
 															</div>
 														</div>
+														<input type="hidden" name="motopic"
+															value="${user.picture}" />
 														<div class="control-group">
 															<div class="controls">
 																<input type="file" name="picturefile"

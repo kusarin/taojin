@@ -70,7 +70,8 @@ public class UsersController {
 	public ModelAndView updateUser(
 			@RequestParam(value = "picturefile", required = false) MultipartFile picturefile,
 			Users user, HttpServletRequest request, HttpSession session) {
-		//System.out.println(user.getName() + ">>>>>>>" + picturefile);
+		request.getParameter("image");
+		// System.out.println(user.getName() + ">>>>>>>" + picturefile);
 		ModelAndView result = usersService.update(user, request, session,
 				picturefile);
 		return result;
