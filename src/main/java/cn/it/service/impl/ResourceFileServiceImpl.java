@@ -75,12 +75,12 @@ public class ResourceFileServiceImpl implements ResourceFileService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		System.out.println(path + "----------------------");
 		ResourceFile rf = new ResourceFile();
 		rf.setAddress("/ResourceFile/" + fileName);
 		rf.setName(fileName);
-		rf.setType(fileName.substring(fileName.indexOf('.')));
+		rf.setType(fileName.substring(fileName.indexOf('.') + 1));
 		resourceFileDao.add(rf);
 		return mav;
 	}

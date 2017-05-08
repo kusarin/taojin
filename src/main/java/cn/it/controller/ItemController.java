@@ -243,7 +243,7 @@ public class ItemController {
 		// 分页操作区域
 		// 获取总页数
 		int total = list.size(); // 商品总数量
-		int perPage = 12; // 每页显示数量
+		int perPage = 15; // 每页显示数量
 		int totalPage = total / perPage;
 		if (total % perPage != 0) {
 			totalPage += 1;
@@ -308,7 +308,7 @@ public class ItemController {
 			// 分页操作区域
 			// 获取总页数
 			int total = list.size(); // 商品总数量
-			int perPage = 12; // 每页显示数量
+			int perPage = 15; // 每页显示数量
 			int totalPage = total / perPage;
 			if (total % perPage != 0) {
 				totalPage += 1;
@@ -379,7 +379,7 @@ public class ItemController {
 			// 分页操作区域
 			// 获取总页数
 			int total = list.size(); // 商品总数量
-			int perPage = 12; // 每页显示数量
+			int perPage = 15; // 每页显示数量
 			int totalPage = total / perPage;
 			if (total % perPage != 0) {
 				totalPage += 1;
@@ -517,7 +517,7 @@ public class ItemController {
 		// 分页操作区域
 				// 获取总页数
 				int total = list.size(); // 商品总数量
-				int perPage = 12; // 每页显示数量
+				int perPage = 15; // 每页显示数量
 				int totalPage = total / perPage;
 				if (total % perPage != 0) {
 					totalPage += 1;
@@ -586,7 +586,7 @@ public class ItemController {
 			// 分页操作区域
 			// 获取总页数
 			int total = list.size(); // 商品总数量
-			int perPage = 12; // 每页显示数量
+			int perPage = 15; // 每页显示数量
 			int totalPage = total / perPage;
 			if (total % perPage != 0) {
 				totalPage += 1;
@@ -646,7 +646,7 @@ public class ItemController {
 			// 分页操作区域
 			// 获取总页数
 			int total = list.size(); // 商品总数量
-			int perPage = 12; // 每页显示数量
+			int perPage = 15; // 每页显示数量
 			int totalPage = total / perPage;
 			if (total % perPage != 0) {
 				totalPage += 1;
