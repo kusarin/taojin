@@ -17,7 +17,7 @@
 	<insert id="UsersAdd" parameterType="cn.it.pojo.Users">
 		insert into
 		users(username,password,name,tele,email,type,ID,picture)
-		values(#{username},#{password},#{name},#{tele},#{email},#{type},#{ID},#{picturefile})
+		values(#{username},#{password},#{name},#{tele},#{email},#{type},#{ID},#{picture})
 	</insert>
 
 	<delete id="UsersDelete" parameterType="cn.it.pojo.Users">
