@@ -1,6 +1,7 @@
 package cn.it.service.impl;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -93,6 +94,25 @@ public class ShopServiceImpl implements ShopService {
 	public void refuseSR(int id1) {
 		int i = 2;
 		shopDao.updateStatus(i,id1);
+	}
+	public List<Integer> pageList(int page,int totalPage){
+		int n;
+		List<Integer> pageList = new ArrayList<Integer>();
+		for(n = page - 5 ;n <= totalPage && n<= page+5;n++){
+			if(n>0){
+				pageList.add(n);
+			}
+		}
+		return pageList;
+	}
+	
+	public int totalPage(int total){
+		int perPage = 10;
+		int totalPage = total/perPage;
+		if(total % perPage != 0){
+		    totalPage += 1;
+		}
+		return totalPage;
 	}
 	@Override
 	public List<Shop> findAll() {

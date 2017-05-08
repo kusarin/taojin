@@ -104,50 +104,6 @@
 	<!-- Header End -->
 
 	<div id="maincontainer">
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript">
-		$('.all-sort-list > .item').hover(
-				function() {
-					var eq = $('.all-sort-list > .shop').index(this), //获取当前滑过是第几个元素
-					h = $('.all-sort-list').offset().top, //获取当前下拉菜单距离窗口多少像素
-					s = $(window).scrollTop(), //获取游览器滚动了多少高度
-					i = $(this).offset().top, //当前元素滑过距离窗口多少像素
-					item = $(this).children('.shop-list').height(), //下拉菜单子类内容容器的高度
-					sort = $('.all-sort-list').height(); //父类分类列表容器的高度
-
-					if (item < sort) { //如果子类的高度小于父类的高度
-						if (eq == 0) {
-							$(this).children('.shop-list').css('top', (i - h));
-						} else {
-							$(this).children('.shop-list').css('top',
-									(i - h) + 1);
-						}
-					} else {
-						if (s > h) { //判断子类的显示位置，如果滚动的高度大于所有分类列表容器的高度
-							if (i - s > 0) { //则 继续判断当前滑过容器的位置 是否有一半超出窗口一半在窗口内显示的Bug,
-								$(this).children('.shop-list').css('top',
-										(s - h) + 2);
-							} else {
-								$(this).children('.shop-list').css('top',
-										(s - h) - (-(i - s)) + 2);
-							}
-						} else {
-							$(this).children('.shop-list').css('top', 3);
-						}
-					}
-
-					$(this).addClass('hover');
-					$(this).children('.shop-list').css('display', 'block');
-				}, function() {
-					$(this).removeClass('hover');
-					$(this).children('.shop-list').css('display', 'none');
-				});
-
-		$('.shop > .shop-list > .close').click(function() {
-			$(this).parent().parent().removeClass('hover');
-			$(this).parent().hide();
-		});
-	</script>
 	<!-- 商品类型选择区域 end-->
 
 	<div class="right" style="margin-left: 275px">
@@ -182,7 +138,7 @@
 		<div align="center">
 			<c:choose>
 				<c:when test="${page != 1}">
-					<a href="searchItem2.do?str=${search}&page=${page-1}"><input type="button"
+					<a href="searchshop.do?str=${search}&page=${page-1}"><input type="button"
 						name="lastPage" value="上一页" class="btn btn-orange" /></a>
 				</c:when>
 				<c:otherwise>
@@ -195,14 +151,14 @@
 				<c:choose>
 					<c:when test="${pn == page}">${pn}</c:when>
 					<c:otherwise>
-						<a href="searchShop2.do?str=${search}&page=${pn}"><U>${pn}</U></a>
+						<a href="searchShop.do?str=${search}&page=${pn}"><U>${pn}</U></a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<!-- 下一页 按钮 -->
 			<c:choose>
 				<c:when test="${page != totalPage}">
-					<a href="searchShop2.do?str=${search}&page=${page+1}"> <input type="button"
+					<a href="searchShop.do?str=${search}&page=${page+1}"> <input type="button"
 						name="nextPage" value="下一页" class="btn btn-orange" />
 					</a>
 				</c:when>

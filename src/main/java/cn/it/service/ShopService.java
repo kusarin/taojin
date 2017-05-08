@@ -25,4 +25,6 @@ public interface ShopService {
    void refuseSR(int id1);
    List<Shop> findAll();
    List<Shop> searchShop(String str);
+   public int totalPage(int total);
+   public List<Integer> pageList(int page, int totalPage);
 }

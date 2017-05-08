@@ -1,0 +1,63 @@
+@CHARSET "UTF-8";
+.tab 
+{ 
+border-bottom: #000 0px solid; 
+border-left: #000 0px solid; 
+border-top: #000 0px solid; 
+border-right: #000 0px solid; 
+} 
+.tab UL 
+{ 
+zoom: 1; 
+clear: both; 
+} 
+.tab UL:after 
+{ 
+display: block; 
+height: 0px; 
+visibility: hidden; 
+clear: both; 
+content: ""; 
+} 
+.tab UL LI 
+{ 
+text-align: center; 
+line-height: 26px; 
+width: 60px; 
+display: inline; 
+background: #FFA07A; 
+float: left; 
+height: 26px; 
+color: #000; 
+} 
+.tab UL LI.on 
+{ 
+background: #fff; 
+color: #000; 
+} 
+.tabList 
+{ 
+border-bottom: #000 0px solid; 
+border-left: #000 0px solid; 
+height: 30px; 
+border-top: #000 0px; 
+border-right: #000 0px solid; 
+} 
+.tabList .one 
+{ 
+padding-bottom: 20px; 
+padding-left: 10px; 
+padding-right: 10px; 
+display: none; 
+color: #000; 
+padding-top: 0px; 
+} 
+.tabList .block 
+{ 
+display: block; 
+} 
+.shopimage {
+	width: 150px;
+	height: 100px;
+	float: left;
+}
