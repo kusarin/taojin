@@ -201,8 +201,12 @@
 													class="form-horizontal commentform2"
 													enctype="multipart/form-data" novalidate>
 													<fieldset>
-														<input type="hidden" name="username"
-															value="${user.username}" /> <input type="hidden"
+														<input type="hidden" name="user_ID"
+															value="${user.user_ID}" /> <input type="hidden"
+															name="username" value="${user.username}" /> <input
+															type="hidden" name="password" value="${user.password}" />
+														<input type="hidden" name="idPhoto"
+															value="${user.idPhoto}" /> <input type="hidden"
 															name="type" value=1 />
 														<div class="control-group">
 															<label class="control-label">电话/手机 </label>

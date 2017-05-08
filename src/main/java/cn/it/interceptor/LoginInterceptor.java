@@ -19,7 +19,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			"/findResourceFile.do", "RF", "anage", "/updatepassword.do", "SR",
 			"/findItem.do", "/findShop.do", "/findUser.do",
 			"/deleteComment.do", "/lookComment.do", "addUser.do",
-			"shopSearch.do" };
+			"searchShop.do" };
 	private static final String[] M_URL = { "/findResourceFile.do", "RF",
 			"anage", "/updatepassword.do", "SR", "/findItem.do",
 			"/findShop.do", "/findUser.do", "/deleteComment.do",
