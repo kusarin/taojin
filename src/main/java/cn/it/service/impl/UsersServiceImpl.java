@@ -119,6 +119,7 @@ public class UsersServiceImpl implements UsersService {
 
 	public ModelAndView changepw(Users user, HttpSession session) {
 		ModelAndView str = new ModelAndView("changepw");
+		System.out.println(">>>>>>>>>>>>}}}}]]]]" + user.getUser_ID());
 		usersDao.changepw(user);
 		session.setAttribute("user", user);
 		return str;

@@ -23,6 +23,7 @@
 <link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
 <link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
 <link rel="shortcut icon" href="assets/ico/favicon.html">
+<link href="./css/shopSearch.css" rel="stylesheet">
 <script type="text/javascript">
 	function setTab(name, m, n) {
 		for (var i = 1; i <= n; i++) {
@@ -33,36 +34,7 @@
 		}
 	}
 </script>
-<div class="tab">
-	<ul>
-		<li id="tow1" class="on" onclick='setTab("tow",1,3)'>商品</li>
-		<li id="tow2" onclick='setTab("tow",2,3)'>店铺</li>
-	</ul>
-</div>
-<div class="tabList">
-	<div id="cont_tow_1" class="one block">
-		<form action="searchItem.do?page=1" method="post">
-			<div style="margin-top: 10px;">
-				<input type="text" name="str" class="input-medium search-query"
-					placeholder="搜索你想要的二手"
-					style="height: 20px; width: 100; border: 4px solid #FFA07A">
-				<input type="submit" value="搜索"
-					style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
-			</div>
-		</form>
-	</div>
-	<div id="cont_tow_2" class="one">
-		<form action="searchShop.do?page=1" method="post">
-			<div style="margin-top: 10px;">
-				<input type="text" name="str" class="input-medium search-query"
-					placeholder="搜索你想要的二手"
-					style="height: 20px; width: 100; border: 4px solid #FFA07A">
-				<input type="submit" value="搜索"
-					style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
-			</div>
-		</form>
-	</div>
-</div>
+
 <script type="text/javascript">
 	function setImagePreview(docObj) {
 
@@ -147,16 +119,36 @@
 						</div>
 						<!-- Top Nav End -->
 						<div class="pull-right">
-							<form action="searchItem.do?page=1" method="post">
-								<div style="margin-top: 10px;">
-									<input type="text" name="str" class="input-medium search-query"
-										placeholder="搜索你想要的二手"
-										style="height: 20px; width: 100; border: 4px solid #FFA07A">
-									<input type="submit" value="搜索"
-										style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+							<div class="tab">
+								<ul>
+									<li id="tow1" class="on" onclick='setTab("tow",1,3)'>商品</li>
+									<li id="tow2" onclick='setTab("tow",2,3)'>店铺</li>
+								</ul>
+							</div>
+							<div class="tabList">
+								<div id="cont_tow_1" class="one block">
+									<form action="searchItem.do?page=1" method="post">
+										<div style="margin-top: 10px;">
+											<input type="text" name="str"
+												class="input-medium search-query" placeholder="搜索你想要的二手"
+												style="height: 20px; width: 100; border: 4px solid #FFA07A">
+											<input type="submit" value="搜索"
+												style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+										</div>
+									</form>
 								</div>
-
-							</form>
+								<div id="cont_tow_2" class="one">
+									<form action="searchShop.do?page=1" method="post">
+										<div style="margin-top: 10px;">
+											<input type="text" name="str"
+												class="input-medium search-query" placeholder="搜索你想要的二手"
+												style="height: 20px; width: 100; border: 4px solid #FFA07A">
+											<input type="submit" value="搜索"
+												style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+										</div>
+									</form>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -209,8 +201,12 @@
 													class="form-horizontal commentform2"
 													enctype="multipart/form-data" novalidate>
 													<fieldset>
-														<input type="hidden" name="username"
-															value="${user.username}" /> <input type="hidden"
+														<input type="hidden" name="user_ID"
+															value="${user.user_ID}" /> <input type="hidden"
+															name="username" value="${user.username}" /> <input
+															type="hidden" name="password" value="${user.password}" />
+														<input type="hidden" name="idPhoto"
+															value="${user.idPhoto}" /> <input type="hidden"
 															name="type" value=1 />
 														<div class="control-group">
 															<label class="control-label">电话/手机 </label>

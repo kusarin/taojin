@@ -28,7 +28,7 @@ public class AddressController {
 		return result;
 	}
 
-	// 添加地址
+	// 删除地址
 	@RequestMapping("deleteAddress.do")
 	public ModelAndView deleteAddress(Address address, HttpSession session) {
 		ModelAndView result = AddressService.delete(address, session);
