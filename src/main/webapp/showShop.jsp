@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -26,48 +26,7 @@ function setTab(name,m,n){
 </script>
 </head>
 <body>
-<style>
-.left {
-	width: 175px;
-	heigh: auto;
-	float: left;
-	margin-left: 20px;
-}
-
-.right {
-	width: auto;
-	heigh: auto;
-	margin-top: 20px;
-}
-
-.itemimage {
-	width: 300px;
-	height: 175px;
-	float: left;
-}
-
-.textname {
-	font-size: 20px;
-	color: black;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-.textdetail {
-	font-size: 15px;
-	color: orange;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-.textprice {
-	font-size: 20px;
-	color: red;
-}
-</style>
-	<!-- Header Start -->
+<!-- Header Start -->
 	<header>
 	<div class="headerstrip">
 		<div class="container">
@@ -143,24 +102,25 @@ function setTab(name,m,n){
 	</div>
 	</header>
 	<!-- Header End -->
-
-	<div id="maincontainer">
-	<!-- 商品类型选择区域 end-->
-
 	<div class="right" style="margin-left: 275px">
 		<h1 style="color: orange">${error0}</h1>
-		<c:forEach items="${shoplist}" var="c">
+		<c:forEach items="${itemlist}" var="i">
 			<li class="span3">
 				<div>
 					<table border="1">
 						<thead>
 							<tr>
-								<td>
+								<td><a href="lookItem.do?id=${i.item_id}" target=${i.item_id}> <img
+										class="itemimage"
+										src=${pageContext.request.contextPath}${i.image}>
 								</a></td>
 							</tr>
 							<tr>
-								<td>${c.shop_id}<p
-											class="textname" style="height: 20px; width: 200px">${c.name}</p></a>
+								<td><a href="lookItem.do?id=${i.item_id}" target=${i.item_id}><p
+											class="textname" style="height: 20px; width: 200px">${i.name}</p></a>
+									<a href="lookItem.do?id=${i.item_id}" class="textprice" target=${i.item_id}>商品价格:
+										¥ ${i.price}</a> <br> <a href="lookItem.do?id=${i.item_id}" target=${i.item_id}><p
+											class="textdetail" style="height: 20px; width: 275px" title=${i.detail}>${i.detail}</p></a>
 								</td>
 							</tr>
 						</thead>
@@ -173,13 +133,12 @@ function setTab(name,m,n){
 
 	<!-- 页码显示部分 -->
 	<div style="width: 500px">&nbsp</div>
-	<form action="searchShop.do" method="post">
-		<input type="hidden" name="str" value=${search}>
+	<form action="Itemlist.do" method="post">
 		<!-- 上一页 按钮 -->
 		<div align="center">
 			<c:choose>
 				<c:when test="${page != 1}">
-					<a href="searchshop.do?str=${search}&page=${page-1}"><input type="button"
+					<a href="Itemlist.do?page=${page-1}"><input type="button"
 						name="lastPage" value="上一页" class="btn btn-orange" /></a>
 				</c:when>
 				<c:otherwise>
@@ -192,14 +151,14 @@ function setTab(name,m,n){
 				<c:choose>
 					<c:when test="${pn == page}">${pn}</c:when>
 					<c:otherwise>
-						<a href="searchShop.do?str=${search}&page=${pn}"><U>${pn}</U></a>
+						<a href="Itemlist.do?page=${pn}"><U>${pn}</U></a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<!-- 下一页 按钮 -->
 			<c:choose>
 				<c:when test="${page != totalPage}">
-					<a href="searchShop.do?str=${search}&page=${page+1}"> <input type="button"
+					<a href="Itemlist.do?page=${page+1}"> <input type="button"
 						name="nextPage" value="下一页" class="btn btn-orange" />
 					</a>
 				</c:when>
@@ -217,7 +176,10 @@ function setTab(name,m,n){
 		</div>
 	</form>
 
-	<footer style="margin-top:100px"> <img
+
+
+	<!--footer-->
+	<footer style="margin-bottom:0"> <img
 		src="${pageContext.request.contextPath}/image/footer-tri.png"
 		style="width: 100%;">
 	<div
@@ -228,10 +190,11 @@ function setTab(name,m,n){
 
 	</div>
 	<div style="text-align: center; margin-bottom: 10px;">
-		<a id="fd_footer" href="addComment.jsp">产品意见反馈</a>
+		<a id="fd_footer" href="addComment.jsp">产品意见反馈</a> <a
+			href="mlogin.jsp" target="_top">产品管理</a>
 	</div>
 	<div style="text-align: center; margin-bottom: 10px;">
-		<span>2017 版权所有</span> <span>鄂ICP备14003265号-2</span>
+		<span>©2017 版权所有</span> <span>鄂ICP备14003265号-2</span>
 	</div>
 	</footer>
 </body>

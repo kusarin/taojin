@@ -82,7 +82,7 @@ public class ItemServiceImpl implements ItemService {
 		Shop ls = shopDao.getAllByUserid(user_id);
 		int shop_id = ls.getShop_id();
 		if (ls.getStatus() != 1) {
-			str.addObject("error", "店铺未注册，无法上架商品！！！");
+			str.addObject("error", "店铺未认证，无法上架商品！！！");
 		} else {
 			// 判断传入参数是否为空
 			if (name == null || name.equals("") || typel == null

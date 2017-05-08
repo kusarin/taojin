@@ -13,6 +13,7 @@
 	rel="stylesheet" />
 <link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
 <link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
+<link href="./css/shopSearch.css" rel="stylesheet">
 <style>
 .itemimage {
 	width: 150px;
@@ -29,6 +30,13 @@
 			alert(error);
 		}
 	}
+	function setTab(name,m,n){ 
+		for( var i=1;i<=n;i++){ 
+		var menu = document.getElementById(name+i); 
+		var showDiv = document.getElementById("cont_"+name+"_"+i); 
+		menu.className = i==m ?"on":""; 
+		showDiv.style.display = i==m?"block":"none"; 
+		} 
 </script>
 <!-- 缺少部分：图片上传+获取店铺ID -->
 
@@ -111,6 +119,7 @@
 	</div>
 	</header>
 	<!-- Header End -->
+	
 
 	<div id="maincontainer">
 		<section id="product">
