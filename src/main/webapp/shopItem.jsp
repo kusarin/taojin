@@ -46,19 +46,20 @@
 						<div class="navbar" id="topnav">
 							<div class="navbar-inner">
 								<div style="float: left; color: white; margin-top: 26px;">
-									<span>您好,</span>
-									<c:if test="${user == null}">
-										<a href="login.jsp"><span style="color: white;">登录</span></a>
-										<a href="register.jsp"> <span
-											style="margin-left: 20px; color: white;"> 注册</span></a>
-									</c:if>
-									<c:if test="${user != null}">
-										<img style="width: 20px; length: 20px"
-											src="${pageContext.request.contextPath}${user.picture}">
-										<c:out value="${user.username}" />
-										<a href="logout.do"><span style="color: white;"> 注销</span></a>
-									</c:if>
-								</div>
+										<span>您好,</span>
+										<c:if test="${user == null}">
+											<a href="login.jsp"><span style="color: white;">登录</span></a>
+											<a href="register.jsp"> <span
+												style="margin-left: 20px; color: white;"> 注册</span></a>
+										</c:if>
+										<c:if test="${user != null}">
+											<img style="width: 20px; length: 20px"
+												src="${pageContext.request.contextPath}${user.picture}">
+											<c:out value="${user.username}" />
+											<a href="logout.do"><span style="color: white;">
+													注销</span></a>
+										</c:if>
+									</div>
 								<div style="margin-left: 250px;">
 									<ul class="nav">
 										<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
@@ -73,7 +74,15 @@
 					</div>
 					<!-- Top Nav End -->
 					<div class="pull-right">
-						<form action="searchItem.do?page=1" method="post">
+				         <div class="tab">
+				         <ul>
+				         <li id="tow1" class="on" onclick='setTab("tow",1,3)'>商品</li>
+				         <li id="tow2" onclick='setTab("tow",2,3)'>店铺</li>
+				         </ul>
+				         </div>
+				         <div class="tabList">
+				         <div id="cont_tow_1" class="one block">
+				         <form action="searchItem.do?page=1" method="post">
 							<div style="margin-top: 10px;">
 								<input type="text" name="str" class="input-medium search-query"
 									placeholder="搜索你想要的二手"
@@ -81,8 +90,20 @@
 								<input type="submit" value="搜索"
 									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
 							</div>
-
 						</form>
+						</div>
+						<div id="cont_tow_2" class="one">
+						<form action="searchShop.do?page=1" method="post">
+							<div style="margin-top: 10px;">
+								<input type="text" name="str" class="input-medium search-query"
+									placeholder="搜索你想要的二手"
+									style="height: 20px; width: 100; border: 4px solid #FFA07A">
+								<input type="submit" value="搜索"
+									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+							</div>
+						</form>
+						</div>
+						</div>
 					</div>
 				</div>
 			</div>
