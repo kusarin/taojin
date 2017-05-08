@@ -12,86 +12,8 @@
 <link href="./TaoJin/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
 <link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
+<link href="./css/shopSearch.css" rel="stylesheet">
 <title>Insert title here</title>
-<style type="text/css"> 
-* 
-{ 
-padding-bottom: 0px; 
-margin: 0px; 
-padding-left: 0px; 
-padding-right: 0px; 
-font-size: 12px; 
-padding-top: 0px; 
-} 
-BODY 
-{ 
-padding-left: 20px; 
-padding-top: 20px; 
-} 
-.tab 
-{ 
-border-bottom: #000 0px solid; 
-border-left: #000 0px solid; 
-border-top: #000 0px solid; 
-border-right: #000 0px solid; 
-} 
-.tab UL 
-{ 
-zoom: 1; 
-clear: both; 
-} 
-.tab UL:after 
-{ 
-display: block; 
-height: 0px; 
-visibility: hidden; 
-clear: both; 
-content: ""; 
-} 
-.tab UL LI 
-{ 
-text-align: center; 
-line-height: 26px; 
-width: 60px; 
-display: inline; 
-background: #FFA07A; 
-float: left; 
-height: 26px; 
-color: #000; 
-} 
-.tab UL LI.on 
-{ 
-background: #fff; 
-color: #000; 
-} 
-.tabList 
-{ 
-border-bottom: #000 0px solid; 
-border-left: #000 0px solid; 
-height: 30px; 
-border-top: #000 0px; 
-border-right: #000 0px solid; 
-} 
-.tabList .one 
-{ 
-padding-bottom: 20px; 
-padding-left: 10px; 
-padding-right: 10px; 
-display: none; 
-color: #000; 
-padding-top: 0px; 
-} 
-.tabList .block 
-{ 
-display: block; 
-} 
-.shopimage {
-	width: 150px;
-	height: 100px;
-	float: left;
-}
-</style> 
-
 <script type="text/javascript">
 function deleteone(shop_id){
 if(confirm("确定要删除这条数据吗？")){
@@ -167,7 +89,7 @@ function setTab(name,m,n){
 						</form>
 						</div>
 						<div id="cont_tow_2" class="one">
-						<form action="searchShop.do" method="post">
+						<form action="searchShop.do?page=1" method="post">
 							<div style="margin-top: 10px;">
 								<input type="text" name="str" class="input-medium search-query"
 									placeholder="搜索你想要的二手"
@@ -202,10 +124,13 @@ function setTab(name,m,n){
 					</h2>
 					<ul class="nav nav-list categories">
 						<li><a href="addShop.jsp">认证店铺 </a></li>
-						<li><a href="#">查看记录 </a></li>
+						<li><a href="shopList.do">查看记录 </a></li>
 						<li><a href="addItem.jsp">商品上架 </a></li>
-						<li><a href="shopItem.do">商品管理</a></li>
+						<li><a href="shopItem.do?page=1">商品管理</a></li>
 						<li><a href="toChange.do">店铺信息管理</a></li>
+						<li><a href="shopOrder.jsp">订单管理</a>
+						<ul><a href="#">已处理</a></ul>
+						<ul><a href="#">未处理</a></ul></li>
 					</ul>
 				</div>
 				<div class="sidewidt"></div>

@@ -22,8 +22,19 @@
 	rel="stylesheet" />
 <link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
 <link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
-<!-- fav -->
 <link rel="shortcut icon" href="assets/ico/favicon.html">
+<link href="./css/shopSearch.css" rel="stylesheet">
+<script type="text/javascript">
+	function setTab(name, m, n) {
+		for (var i = 1; i <= n; i++) {
+			var menu = document.getElementById(name + i);
+			var showDiv = document.getElementById("cont_" + name + "_" + i);
+			menu.className = i == m ? "on" : "";
+			showDiv.style.display = i == m ? "block" : "none";
+		}
+	}
+</script>
+
 <script type="text/javascript">
 	function setImagePreview(docObj) {
 
@@ -108,16 +119,36 @@
 						</div>
 						<!-- Top Nav End -->
 						<div class="pull-right">
-							<form action="searchItem.do?page=1" method="post">
-								<div style="margin-top: 10px;">
-									<input type="text" name="str" class="input-medium search-query"
-										placeholder="搜索你想要的二手"
-										style="height: 20px; width: 100; border: 4px solid #FFA07A">
-									<input type="submit" value="搜索"
-										style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+							<div class="tab">
+								<ul>
+									<li id="tow1" class="on" onclick='setTab("tow",1,3)'>商品</li>
+									<li id="tow2" onclick='setTab("tow",2,3)'>店铺</li>
+								</ul>
+							</div>
+							<div class="tabList">
+								<div id="cont_tow_1" class="one block">
+									<form action="searchItem.do?page=1" method="post">
+										<div style="margin-top: 10px;">
+											<input type="text" name="str"
+												class="input-medium search-query" placeholder="搜索你想要的二手"
+												style="height: 20px; width: 100; border: 4px solid #FFA07A">
+											<input type="submit" value="搜索"
+												style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+										</div>
+									</form>
 								</div>
-
-							</form>
+								<div id="cont_tow_2" class="one">
+									<form action="searchShop.do?page=1" method="post">
+										<div style="margin-top: 10px;">
+											<input type="text" name="str"
+												class="input-medium search-query" placeholder="搜索你想要的二手"
+												style="height: 20px; width: 100; border: 4px solid #FFA07A">
+											<input type="submit" value="搜索"
+												style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+										</div>
+									</form>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -206,6 +237,8 @@
 																<p>注意：上传的图片名中不能包含中文</p>
 															</div>
 														</div>
+														<input type="hidden" name="motopic"
+															value="${user.picture}" />
 														<div class="control-group">
 															<div class="controls">
 																<input type="file" name="picturefile"

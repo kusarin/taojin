@@ -75,31 +75,37 @@ public class UsersServiceImpl implements UsersService {
 	public ModelAndView update(Users user, HttpServletRequest request,
 			HttpSession session, MultipartFile picturefile) {
 		ModelAndView str = new ModelAndView("UsersUpdate");
-		usersDao.updateUser(user);
 		user.setType(1);// 暂时没用了
+		// System.out.println(">>>>>>>>>> " + request.getParameter("motopic"));
 
 		// 商品图片部分
-		// 获取图片存储文件的路径
-		String path = request.getServletContext().getRealPath("image");
-		// 将图片文件名命名为上传时间
-		// System.out.println(picturefile);
-		String fileName = String.valueOf(System.currentTimeMillis())
-				+ picturefile.getOriginalFilename();
-		// 获取图片文件路径
-		File targetFile = new File(path, fileName);
-		if (!targetFile.exists()) {
-			targetFile.mkdirs();
-		}
-		// 保存文件（图片）；
-		try {
-			picturefile.transferTo(targetFile);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		// set方法
-		user.setPicture("/image/" + fileName);
-		// 商品图片部分结束
+		if (!picturefile.getOriginalFilename().equals("")
+				&& picturefile.getOriginalFilename() != null) {
+			String path = request.getServletContext().getRealPath("image");
+			// 将图片文件名命名为上传时间
 
+			String fileName = String.valueOf(System.currentTimeMillis())
+					+ picturefile.getOriginalFilename();
+			// 获取图片文件路径
+			File targetFile = new File(path, fileName);
+			if (!targetFile.exists()) {
+				targetFile.mkdirs();
+			}
+			// 保存文件（图片）；
+			try {
+				picturefile.transferTo(targetFile);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			// set方法
+			// System.out.println(picturefile + ">>>>>>>" + fileName);
+			user.setPicture("/image/" + fileName);
+		} else {
+			user.setPicture(request.getParameter("motopic"));
+		}
+		// 商品图片部分结束
+		// System.out.println(user.getPicture());
+		usersDao.updateUser(user);
 		session.setAttribute("user", user);
 		return str;
 	}
