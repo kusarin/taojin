@@ -122,7 +122,7 @@
 						</div>
 						<!-- Top Nav End -->
 						<div class="pull-right">
-							<form action="searchLot.do" method="post">
+							<form action="searchLot.do?page=1" method="post">
 								<div style="margin-top: 10px;">
 									<input input type="text" name="str"
 										class="input-medium search-query" placeholder="搜索想要的二手拍卖品"

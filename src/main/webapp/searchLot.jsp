@@ -149,12 +149,13 @@
 	</div>
 	<!-- 页码显示部分 -->
 	<div style="width: 500px">&nbsp</div>
-	<form action="Lotlist.do" method="post">
+	<form action="searchLot.do" method="post">
+		<input type="hidden" name="str" value=${search}>
 		<!-- 上一页 按钮 -->
 		<div align="center">
 			<c:choose>
 				<c:when test="${page != 1}">
-					<a href="Lotlist.do?page=${page-1}"><input type="button"
+					<a href="searchLot2.do?str=${search}&page=${page-1}"><input type="button"
 						name="lastPage" value="上一页" class="btn btn-orange" /></a>
 				</c:when>
 				<c:otherwise>
@@ -167,14 +168,14 @@
 				<c:choose>
 					<c:when test="${pn == page}">${pn}</c:when>
 					<c:otherwise>
-						<a href="Lotlist.do?page=${pn}"><U>${pn}</U></a>
+						<a href="searchLot2.do?str=${search}&page=${pn}"><U>${pn}</U></a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<!-- 下一页 按钮 -->
 			<c:choose>
 				<c:when test="${page != totalPage}">
-					<a href="Lotlist.do?page=${page+1}"> <input type="button"
+					<a href="searchLot2.do?str=${search}&page=${page+1}"> <input type="button"
 						name="nextPage" value="下一页" class="btn btn-orange" />
 					</a>
 				</c:when>
