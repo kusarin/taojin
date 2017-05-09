@@ -48,7 +48,7 @@
 </style>
 
 
-<title>商品列表</title>
+<title>拍卖品列表</title>
 <link href="./css/itemlist.css" rel="stylesheet">
 <link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
 <link href="./TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
@@ -102,7 +102,7 @@
 						<form action="searchLot.do" method="post">
 							<div style="margin-top: 10px;">
 								<input input type="text" name="str"
-									class="input-medium search-query" placeholder="搜索你想要的二手拍卖品"
+									class="input-medium search-query" placeholder="搜索想要的二手拍卖品"
 									style="height: 20px; width: 100; border: 4px solid #FFA07A">
 								<input type="submit" value="搜索"
 									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">

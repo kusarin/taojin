@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.it.pojo.Item;
 import cn.it.pojo.Lot;
 import cn.it.pojo.Shop;
+import cn.it.pojo.Users;
 
 /**
  * 
@@ -110,6 +111,11 @@ public interface LotService {
 	 * 
 	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
-	public List<Lot> findBystr(String str);
+	public List<Lot> findBystr(String str);/**
+	 * 根据用户编号查看用户
+	 * @param id
+	 * @return
+	 */
+	public Users finduser(int id);
 
 }

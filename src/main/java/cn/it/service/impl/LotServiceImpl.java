@@ -88,10 +88,12 @@ public class LotServiceImpl implements LotService {
 			int shop_id = ls.getShop_id();
 
 			// 将拍卖品起拍价和最高价转为规定格式：double
-			// 得出出价额度
+			// 加价额度固定为0.5,初始当前价格为起拍价
 			double strpri = Double.parseDouble(startprice);
 			double maxpri = Double.parseDouble(maxprice);
-			double addpri = (maxpri - strpri) / 50;
+			double addpri = 0.5;		
+			double nowpri = strpri;
+			
 
 			// 根据二阶类型获取一阶类型
 			Typel tyl = typelDao.FindTypelByName(typel);
@@ -108,6 +110,7 @@ public class LotServiceImpl implements LotService {
 			lot.setTypeh(typeh);
 			lot.setTypel(typel);
 			lot.setstartprice(strpri);
+			lot.setNowprice(nowpri);
 			lot.setMaxprice(maxpri);
 			lot.setAddprice(addpri);
 			lot.setDetail(detail);
@@ -215,6 +218,14 @@ public class LotServiceImpl implements LotService {
 			}
 		}
 		return lotlist;
+	}
+	/**
+	 * 根据用户编号查看用户
+	 * @param id
+	 * @return
+	 */
+	public Users finduser(int id){
+		return usersDao.findById(id);
 	}
 	
 }

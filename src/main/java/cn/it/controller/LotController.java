@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.pojo.Lot;
 import cn.it.pojo.Lot;
+import cn.it.pojo.Users;
 import cn.it.service.LotService;
 
 /**
@@ -73,6 +74,13 @@ public class LotController {
 
 		modelandview.addObject("lookLot", l);
 
+		// 获取拍卖人
+		int user_id=l.getUser_id();
+		Users u = lotservice.finduser(user_id);
+		
+
+		modelandview.addObject("us", u);
+		
 		return modelandview;
 	}
 
