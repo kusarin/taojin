@@ -28,14 +28,6 @@
 	<select id="FindAll" resultType="cn.it.pojo.Lot">
 		select * from lot
 	</select>
-	<!-- 查看某种类型的拍卖品信息1 -->
-	<select id="FindLotByType1" parameterType="String" resultType="cn.it.pojo.Lot">
-		select * from lot where typeh = #{typeh}
-	</select>
-	<!-- 查看某种类型的拍卖品信息2 -->
-	<select id="FindLotByType2" parameterType="String" resultType="cn.it.pojo.Lot">
-		select * from lot where typeh = #{0} and typel = #{1}
-	</select>
 	<!-- 查看归属于某个店铺的所有拍卖品 -->
 	<select id="FindLotByShopId" parameterType="int" resultType="cn.it.pojo.Lot">
 		select * from lot where shop_id = #{shop_id}

@@ -146,6 +146,7 @@
 						<h2 class="heading2">
 							<span>商品上架</span>
 						</h2>
+						<a href="addLot.jsp">&nbsp拍卖品上架 </a>
 						<ul class="margin-none">
 							<li class="listblcok">
 								<div class="mb20">

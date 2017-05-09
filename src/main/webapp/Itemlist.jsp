@@ -323,10 +323,13 @@ function setTab(name,m,n){
 					</div>
 				</div>
 			</div>
+			<div class="item bo">
+				<h3>
+					<span>·</span><a href = "Lotlist.do?page=1" style="color:orange"><b>拍卖品</b></a>
+				</h3>
+				</div>
 		</div>
-		<p>${show}</p>
-		<p>${typeh}</p>
-		<p>${typel}</p>
+		
 
 	</div>
 
