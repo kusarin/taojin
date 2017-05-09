@@ -324,9 +324,7 @@ function setTab(name,m,n){
 				</div>
 			</div>
 		</div>
-		<p>${show}</p>
-		<p>${typeh}</p>
-		<p>${typel}</p>
+		<a href = "Lotlist.do?page=1">拍卖品</a>
 
 	</div>
 

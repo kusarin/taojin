@@ -113,12 +113,13 @@ public class LotController {
 
 		// 设置每页显示的商品，并且进行传递操作
 		if (page < totalPage) {
-			List<Lot> i = list.subList((page - 1) * perPage, page * perPage);
-			modelandview.addObject("Lotlist", i);
+			List<Lot> l = list.subList((page - 1) * perPage, page * perPage);
+			modelandview.addObject("Lotlist", l);
 		} else {
-			List<Lot> i = list.subList((page - 1) * perPage, list.size());
-			modelandview.addObject("Lotlist", i);
+			List<Lot> l = list.subList((page - 1) * perPage, list.size());
+			modelandview.addObject("Lotlist", l);
 		}
+		
 		// 传递页码显示部分
 		modelandview.addObject("pageList", pageList);
 		modelandview.addObject("totalPage", totalPage);

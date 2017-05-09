@@ -12,6 +12,7 @@
 <link href="./TaoJin/css/flexslider.css" type="text/css" media="screen"
 	rel="stylesheet" />
 <link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
+<link href="./css/shopSearch.css" rel="stylesheet">
 <link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
 
 <!-- 弹窗设置点 -->
@@ -22,6 +23,14 @@
 			alert(error);
 		}
 	}
+	function setTab(name,m,n){ 
+		for( var i=1;i<=n;i++){ 
+			var menu = document.getElementById(name+i); 
+			var showDiv = document.getElementById("cont_"+name+"_"+i); 
+			menu.className = i==m ?"on":""; 
+			showDiv.style.display = i==m?"block":"none"; 
+			} 
+		} 
 </script>
 <!-- 缺少部分：图片上传+获取店铺ID -->
 
@@ -66,16 +75,36 @@
 					</div>
 					<!-- Top Nav End -->
 					<div class="pull-right">
-						<form action="searchItem.do?page=1" method="post">
-							<div style="margin-top: 10px;">
-								<input type="text" name="str" class="input-medium search-query"
-									placeholder="搜索你想要的二手"
-									style="height: 20px; width: 100; border: 4px solid #FFA07A">
-								<input type="submit" value="搜索"
-									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+						<div class="tab">
+							<ul>
+								<li id="tow1" class="on" onclick='setTab("tow",1,3)'>商品</li>
+								<li id="tow2" onclick='setTab("tow",2,3)'>店铺</li>
+							</ul>
+						</div>
+						<div class="tabList">
+							<div id="cont_tow_1" class="one block">
+								<form action="searchItem.do?page=1" method="post">
+									<div style="margin-top: 10px;">
+										<input type="text" name="str"
+											class="input-medium search-query" placeholder="搜索你想要的二手"
+											style="height: 20px; width: 100; border: 4px solid #FFA07A">
+										<input type="submit" value="搜索"
+											style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+									</div>
+								</form>
 							</div>
-
-						</form>
+							<div id="cont_tow_2" class="one">
+								<form action="searchShop.do?page=1" method="post">
+									<div style="margin-top: 10px;">
+										<input type="text" name="str"
+											class="input-medium search-query" placeholder="搜索你想要的二手"
+											style="height: 20px; width: 100; border: 4px solid #FFA07A">
+										<input type="submit" value="搜索"
+											style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+									</div>
+								</form>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -123,7 +152,8 @@
 								<div class="mb20">
 									<section class="leavecomment">
 									<div align="center">
-										<form action="addLot.do" method="post" enctype="multipart/form-data">
+										<form action="addLot.do" method="post"
+											enctype="multipart/form-data">
 											<table>
 												<input type="hidden" value="2" name="Shop_id" />
 												<tr>
@@ -219,17 +249,17 @@
 												</tr>
 												<tr>
 													<div class="control-group">
-													<td>拍卖品最高价:¥</td>
-													<div class="controls">
-														<td><input type="text" name="maxprice" /></td>
-													</div>
+														<td>拍卖品最高价:¥</td>
+														<div class="controls">
+															<td><input type="text" name="maxprice" /></td>
+														</div>
 													</div>
 												</tr>
 												<tr>
 													<div class="control-group">
 														<td>拍卖品图片:</td>
 														<div class="controls">
-															<td><p style="color:red">注意：上传的图片名中不能包含中文</p></td>
+															<td><p style="color: red">注意：上传的图片名中不能包含中文</p></td>
 														</div>
 													</div>
 												</tr>
@@ -253,7 +283,7 @@
 													<div class="control-group">
 														<td></td>
 														<div class="controls">
-															<td><p style="color:red">注意：拍卖时间为3天，拍卖品在拍期间，无法进行修改和下架操作！！！</p></td>
+															<td><p style="color: red">注意：拍卖时间为3天，拍卖品在拍期间，无法进行修改和下架操作！！！</p></td>
 														</div>
 													</div>
 												</tr>

@@ -130,7 +130,7 @@ public class LotServiceImpl implements LotService {
 				e.printStackTrace();
 			}
 			// set方法
-			lot.setImage("/upload/" + fileName);
+			lot.setImage("/lotimage/" + fileName);
 			// 图片部分结束
 
 			// 设置初始状态status为0
@@ -186,7 +186,7 @@ public class LotServiceImpl implements LotService {
 		List<Lot> lotlist=new ArrayList<Lot>();
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getStatus() == 0) {
-				list.add(list.get(i));
+				lotlist.add(list.get(i));
 			}
 		}
 		return lotlist;
