@@ -127,8 +127,15 @@
 												<form action="changepw.do" method="post"
 													class="form-horizontal commentform2" novalidate>
 													<fieldset>
-														<input type="hidden" name="username"
-															value="${user.username}" />
+														<input type="hidden" name="user_ID"
+															value="${user.user_ID}" /><input type="hidden"
+															name="username" value="${user.username}" /><input
+															type="hidden" name="tele" value="${user.tele}" /> <input
+															type="hidden" name="email" value="${user.email}" /> <input
+															type="hidden" name="ID" value="${user.ID}" /><input
+															type="hidden" name="picture" value="${user.picture}" /><input
+															type="hidden" name="name" value="${user.name}" /> <input
+															type="hidden" name="idPhoto" value="${user.idPhoto}" />
 														<div class="control-group">
 															<label class="control-label">原密码 </label>
 															<div class="controls">
