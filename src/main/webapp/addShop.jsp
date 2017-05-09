@@ -96,7 +96,7 @@
 					</h2>
 						<ul class="nav nav-list categories">
 						<li><a href="addShop.jsp">认证店铺 </a></li>
-						<li><a href="#">查看记录 </a></li>
+						<li><a href="shopList.do">查看记录 </a></li>
 						<li><a href="toChange.do">店铺信息管理</a></li>
 					</ul>
 				</div>

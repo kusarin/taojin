@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,15 +9,30 @@
 <link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
 <link href="./TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="./TaoJin/css/style.css" rel="stylesheet">
-<link href="./TaoJin/css/flexslider.css" type="text/css" media="screen"
-	rel="stylesheet" />
+<link href="./TaoJin/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
 <link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
+<link href="./css/shopSearch.css" rel="stylesheet">
 <title>Insert title here</title>
+<script type="text/javascript">
+function deleteone(shop_id){
+if(confirm("确定要删除这条数据吗？")){
+	window.location.href="delete.do?shop_id="+shop_id;
+}
+}
+function setTab(name,m,n){ 
+	for( var i=1;i<=n;i++){ 
+	var menu = document.getElementById(name+i); 
+	var showDiv = document.getElementById("cont_"+name+"_"+i); 
+	menu.className = i==m ?"on":""; 
+	showDiv.style.display = i==m?"block":"none"; 
+	} 
+} 
+</script>
 </head>
 <body>
 	<!-- Header Start -->
-<header>
+	<header>
 	<div class="headerstrip">
 		<div class="container">
 			<div class="row">
@@ -53,7 +70,15 @@
 					</div>
 					<!-- Top Nav End -->
 					<div class="pull-right">
-						<form action="searchItem.do?page=1" method="post">
+				         <div class="tab">
+				         <ul>
+				         <li id="tow1" class="on" onclick='setTab("tow",1,3)'>商品</li>
+				         <li id="tow2" onclick='setTab("tow",2,3)'>店铺</li>
+				         </ul>
+				         </div>
+				         <div class="tabList">
+				         <div id="cont_tow_1" class="one block">
+				         <form action="searchItem.do?page=1" method="post">
 							<div style="margin-top: 10px;">
 								<input type="text" name="str" class="input-medium search-query"
 									placeholder="搜索你想要的二手"
@@ -61,8 +86,20 @@
 								<input type="submit" value="搜索"
 									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
 							</div>
-
 						</form>
+						</div>
+						<div id="cont_tow_2" class="one">
+						<form action="searchShop.do?page=1" method="post">
+							<div style="margin-top: 10px;">
+								<input type="text" name="str" class="input-medium search-query"
+									placeholder="搜索你想要的二手"
+									style="height: 20px; width: 100; border: 4px solid #FFA07A">
+								<input type="submit" value="搜索"
+									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+							</div>
+						</form>
+						</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -87,10 +124,13 @@
 					</h2>
 					<ul class="nav nav-list categories">
 						<li><a href="addShop.jsp">认证店铺 </a></li>
-						<li><a href="#">查看记录 </a></li>
+						<li><a href="shopList.do">查看记录 </a></li>
 						<li><a href="addItem.jsp">商品上架 </a></li>
 						<li><a href="shopItem.do?page=1">商品管理</a></li>
 						<li><a href="toChange.do">店铺信息管理</a></li>
+						<li><a href="#">订单管理</a>
+						<ul><a href="#">已处理</a></ul>
+						<ul><a href="#">未处理</a></ul></li>
 					</ul>
 				</div>
 				<div class="sidewidt"></div>
@@ -102,7 +142,7 @@
 					<section id="latestblog">
 					<div class="blogdetail">
 						<h2 class="heading2">
-							<span>修改店铺基本信息</span>
+							<span>认证店铺</span>
 						</h2>
 						<div class="blogicons">
 							<div class="pull-left"></div>
@@ -112,47 +152,51 @@
 								<div class="mb20">
 									<section class="leavecomment">
 									<h2 class="heading2">
-										<span>店铺基本信息</span>
+										<span>订单管理</span>
 									</h2>
-									<h1 align="center">店铺信息修改</h1>
-									<div align="center">
-										<form id="myform" action="doChange.do" method="post">
-											<table>
-											
-												<input type="hidden" value="${shop.shop_id}" name="Shop_id" />
-												<tr>
-													<div class="control-group">
-													<td>name</td>
-													<div class="controls">
-													<td><input type="text" name="name"
-														value="${shop.name }" id="name"></td>
-													</div>
-													</div>
-												</tr>
-												<tr>
-													<div class="control-group">
-													<td>type</td>
-													<div class="controls">
-													<td><input type="text" name="type"
-														value="${shop.type}" id="type"></td>
-													</div>
-													</div>
-												</tr>
-												<tr>
-													<div class="control-group">
-													<td>intro</td>
-													<div class="controls">
-													<td><input type="text" name="intro"
-														value="${shop.intro}" id="intro"></td>
-													</div>
-													</div>
-											</table>
-											<input type="submit" value="修改" /> <input type="button"
-												value="返回" onclick="javaScript:history.back(-1)" />
-										</form>
-									</div>
-									<!-- 推荐部分-->
-	<!--footer-->
+									<form action="" name="myform" method="get"></form>
+									<table
+										style="border-left-width: 0px; border-collapse: collapse; border-right-width: 0px;"
+										bordercolor="#ff6600" bgcolor="#DFFFDF" cellspacing="0"
+										cellpadding="0" width="250" align="center" border="1">
+										<tbody>
+											<tr align="middle">
+												<table width="90%" border="1" align="center">
+													<thead>
+														<tr>
+															<td colspan="10" align="center">已处理</td>
+														</tr>
+													</thead>
+													<tbody>
+
+														<tr align="center">
+															<td>订单编号</td>
+															<td>用户名</td>
+															<td>店名</td>
+															<td>类型</td>
+															<td>介绍</td>
+							                                <td>审核状态</td>
+							                                <td>操作</td>
+														</tr>
+															<tr>
+															    <td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td></td>
+																<td><c:if test="">未审核</c:if>
+																    <c:if test="">已审核</c:if>
+																    <c:if test="">审核未通过</c:if></td>
+																<td><a href="">查看</a>
+																<a href="">商品</a>
+																<a href="=">添加商品</a>
+																<a onclick=""
+																	href="javascript:void(0)">删除</a></td>
+
+															</tr>														
+													</tbody>
+												</table>
+												<!--footer-->
 	<footer style="margin-top:100px"> <img
 		src="${pageContext.request.contextPath}/image/footer-tri.png"
 		style="width: 100%;">
@@ -167,8 +211,10 @@
 		<a id="fd_footer" href="addComment.jsp">产品意见反馈</a>
 	</div>
 	<div style="text-align: center; margin-bottom: 10px;">
-		<span>2017 版权所有</span> <span>鄂ICP备14003265号-2</span>
+		<span>?2017 版权所有</span> <span>鄂ICP备14003265号-2</span>
 	</div>
 	</footer>
+
+												
 </body>
 </html>

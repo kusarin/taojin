@@ -72,85 +72,87 @@ public class ItemServiceImpl implements ItemService {
 	 * 
 	 * @return ModelAndView
 	 */
-	public ModelAndView addItem(String name, String typel,
-			String number, String price, String detail, MultipartFile file,
-			HttpServletRequest request,HttpSession session) {
+	public ModelAndView addItem(String name, String typel, String number,
+			String price, String detail, MultipartFile file,
+			HttpServletRequest request, HttpSession session) {
 		ModelAndView str = new ModelAndView("addItem"); // 跳转到addItem.jsp界面
+		// 获取店铺编号shop_id
+		Users user = (Users) session.getAttribute("user");
+		int user_id = user.getUser_ID();
+		Shop ls = shopDao.getAllByUserid(user_id);
+		int shop_id = ls.getShop_id();
+		if (ls.getStatus() != 1) {
+			str.addObject("error", "店铺未认证，无法上架商品！！！");
+		} else {
+			// 判断传入参数是否为空
+			if (name == null || name.equals("") || typel == null
+					|| typel.equals("") || number == null || number.equals("")
+					|| price == null || price.equals("") || detail == null
+					|| detail.equals("")) {
 
-		// 判断传入参数是否为空
-		if (name == null || name.equals("") || typel == null
-				|| typel.equals("") || number == null || number.equals("")
-				|| price == null || price.equals("") || detail == null
-				|| detail.equals("")) {
+				// 提示信息 "输入数据不能为空！！！"
+				str.addObject("error", "输入数据不能为空！！！");
 
-			// 提示信息 "输入数据不能为空！！！"
-			str.addObject("error", "输入数据不能为空！！！");
+			} else {// 参数不为空时候，执行添加操作
 
-		} else {// 参数不为空时候，执行添加操作
+				// 将商品数量和价格转为规定格式：商品数量int，商品价格double
+				int num = Integer.parseInt(number);
+				double pri = Double.parseDouble(price);
 
-			// 获取店铺编号shop_id
-			Users user = (Users)session.getAttribute("user");
-			int user_id = user.getUser_ID();
-			Shop ls = shopDao.getAllByUserid(user_id);
-			int shop_id=ls.getShop_id();
-			
-			// 将商品数量和价格转为规定格式：商品数量int，商品价格double
-			int num = Integer.parseInt(number);
-			double pri = Double.parseDouble(price);
+				// 根据商品的二阶类型获取商品的一阶类型
+				Typel tyl = typelDao.FindTypelByName(typel);
+				int typeh_id = tyl.getTypeh_id();
+				Typeh tyh = typehDao.FindTypehById(typeh_id);
+				String typeh = tyh.getName();
+				// 获取商品一阶分类结束
 
-			// 根据商品的二阶类型获取商品的一阶类型
-			Typel tyl = typelDao.FindTypelByName(typel);
-			int typeh_id = tyl.getTypeh_id();
-			Typeh tyh = typehDao.FindTypehById(typeh_id);
-			String typeh = tyh.getName();
-			// 获取商品一阶分类结束
+				// 定义商品；
+				Item i = new Item();
+				// 设置商品属性；
+				i.setshop_id(shop_id); // 店鋪编号
+				i.setname(name); // 商品名称
+				i.settypeh(typeh); // 商品一阶类型
+				i.settypel(typel); // 商品二阶类型
+				i.setnumber(num); // 商品数量
+				i.setprice(pri); // 商品价格
+				i.setdetail(detail); // 商品描述
 
-			// 定义商品；
-			Item i = new Item();
-			// 设置商品属性；
-			i.setshop_id(shop_id);  // 店鋪编号
-			i.setname(name);        // 商品名称
-			i.settypeh(typeh);      // 商品一阶类型
-			i.settypel(typel);      // 商品二阶类型
-			i.setnumber(num);       // 商品数量
-			i.setprice(pri);        // 商品价格
-			i.setdetail(detail);    // 商品描述
+				// 商品图片部分
+				// 获取图片存储文件的路径
+				String path = request.getServletContext().getRealPath("upload");
+				// 将图片文件名命名为上传时间
+				String fileName = String.valueOf(System.currentTimeMillis())
+						+ file.getOriginalFilename();
+				// 获取图片文件路径
+				File targetFile = new File(path, fileName);
+				if (!targetFile.exists()) {
+					targetFile.mkdirs();
+				}
+				// 保存文件（图片）；
+				try {
+					file.transferTo(targetFile);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				// set方法
+				i.setimage("/upload/" + fileName);
+				// 商品图片部分结束
 
-			// 商品图片部分
-			// 获取图片存储文件的路径
-			String path = request.getServletContext().getRealPath("upload");
-			// 将图片文件名命名为上传时间
-			String fileName = String.valueOf(System.currentTimeMillis())
-					+ file.getOriginalFilename();
-			// 获取图片文件路径
-			File targetFile = new File(path, fileName);
-			if (!targetFile.exists()) {
-				targetFile.mkdirs();
+				// 设置浏览次数和出售数量初始值为0；
+				i.setbrowsingTimes(0);
+				i.settradingTimes(0);
+				// 设置商品状态为0，在售；
+				i.setStatus(0);
+
+				// 添加商品信息；
+				itemDao.ItemAdd(i);
+				request.setAttribute("item", i);
+				// 提示信息 "上架成功！！！"
+				str.addObject("error", "上架成功！！！");
+
+				// 上架成功后跳转的界面，暂时先设置为addItem【上架商品界面】
+				str.setViewName("addItem");
 			}
-			// 保存文件（图片）；
-			try {
-				file.transferTo(targetFile);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			// set方法
-			i.setimage("/upload/" + fileName);
-			// 商品图片部分结束
-
-			// 设置浏览次数和出售数量初始值为0；
-			i.setbrowsingTimes(0);
-			i.settradingTimes(0);
-			// 设置商品状态为0，在售；
-			i.setStatus(0);
-
-			// 添加商品信息；
-			itemDao.ItemAdd(i);
-			request.setAttribute("item", i);
-			// 提示信息 "上架成功！！！"
-			str.addObject("error", "上架成功！！！");
-
-			// 上架成功后跳转的界面，暂时先设置为addItem【上架商品界面】
-			str.setViewName("addItem");
 		}
 		// 返回提示信息
 
@@ -320,15 +322,15 @@ public class ItemServiceImpl implements ItemService {
 	public List<Item> findItemList() {
 		// 获取所有商品
 		List<Item> shoplist = itemDao.FindAll();
-		
+
 		// 将商品数量为0的商品状态status变为1（不在售）
 		for (int i = 0; i < shoplist.size(); i++) {
-			if (shoplist.get(i).getnumber() == 0 ) {
+			if (shoplist.get(i).getnumber() == 0) {
 				shoplist.get(i).setStatus(1);
 				itemDao.ItemUpdate(shoplist.get(i));
 			}
 		}
-		
+
 		// 建立属于“在售”状态的商品列表list
 		List<Item> list = new ArrayList<Item>();
 		// 将属于“在售”状态的商品添加到列表list
@@ -445,8 +447,8 @@ public class ItemServiceImpl implements ItemService {
 	 *            评论星级
 	 * @return
 	 */
-	public ModelAndView addDiscuss(int item_id, int user_id, String content, String score,
-			HttpServletRequest request) {
+	public ModelAndView addDiscuss(int item_id, int user_id, String content,
+			String score, HttpServletRequest request) {
 		ModelAndView str = new ModelAndView("lookItem"); // 跳转到addItem.jsp界面
 
 		// 判断传入参数是否为空
@@ -460,16 +462,16 @@ public class ItemServiceImpl implements ItemService {
 			Discuss d = new Discuss();
 			// 将星级强转为int
 			int sc = Integer.parseInt(score);
-			
+
 			// 获取用户名
 			Users user = usersDao.findById(user_id);
 			String username = user.getName();
-			
+
 			// 设置评论属性；
 			d.setItem_id(item_id); // 商品编号
 			d.setUser_id(user_id); // 用户编号
 			d.setContent(content); // 评论内容
-			d.setScore(sc);        // 评论星级
+			d.setScore(sc); // 评论星级
 			d.setUsername(username);// 用户名
 
 			// 添加评论信息；
@@ -496,19 +498,20 @@ public class ItemServiceImpl implements ItemService {
 	public Shop showShop(int shop_id) {
 		return shopDao.findByid(shop_id);
 	}
-	
+
 	/**
 	 * 根据用户编号获得对应的店铺编号
 	 * 
-	 * @param user_id 用户编号
+	 * @param user_id
+	 *            用户编号
 	 * @return
 	 */
-	public int getShopId(int user_id){
+	public int getShopId(int user_id) {
 		Shop ls = shopDao.getAllByUserid(user_id);
-		int shop_id=ls.getShop_id();
+		int shop_id = ls.getShop_id();
 		return shop_id;
 	}
-	
+
 	/**
 	 * 孙琛改的，用在管理员后台管理。
 	 */

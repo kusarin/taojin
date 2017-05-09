@@ -19,7 +19,7 @@ public interface UsersService {
 	public ModelAndView add(Users user);
 
 	public ModelAndView update(Users user, HttpServletRequest request,
-			HttpSession session, MultipartFile picturefile);
+			HttpSession session, MultipartFile picture);
 
 	public ModelAndView changepw(Users user, HttpSession session);
 
