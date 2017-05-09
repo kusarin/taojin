@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.it.dao.LotDao;
 import cn.it.pojo.Item;
 import cn.it.pojo.Lot;
 import cn.it.pojo.Users;
@@ -282,7 +283,7 @@ public class LotController {
 
 		// 获取拍卖品列表
 		List<Lot> list = lotservice.findByShopId(shop_id);
-		
+
 		// 分页操作区域
 		// 获取总页数
 		int total = list.size(); // 商品总数量
@@ -318,10 +319,41 @@ public class LotController {
 		modelandview.addObject("pageList", pageList);
 		modelandview.addObject("totalPage", totalPage);
 		modelandview.addObject("page", page);
-		
+
 		// 分页操作结束
-		
+
+		return modelandview;
+	}
+
+	@RequestMapping("auction.do")
+	public ModelAndView auction(HttpServletRequest request, HttpSession session) {
+
+		// 获取拍卖品编号
+		String id = request.getParameter("id");
+		int lot_id = Integer.parseInt(id);
+
+		// 获取出价
+		String yourprice = request.getParameter("yourprice");
+
+		// 获取用户编号
+		Users user = (Users) session.getAttribute("user");
+		int user_id = user.getUser_ID();
+
+		ModelAndView modelandview = lotservice.anction(lot_id, yourprice,
+				user_id);
+
+		// 重新获取拍卖品
+		Lot l = lotservice.findById(lot_id);
+
+		modelandview.addObject("lookLot", l);
+
+		// 获取拍卖人
+		Users u = lotservice.finduser(user_id);
+
+		modelandview.addObject("us", u);
+
 		return modelandview;
 
 	}
+
 }

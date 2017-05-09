@@ -91,9 +91,8 @@ public class LotServiceImpl implements LotService {
 			// 加价额度固定为0.5,初始当前价格为起拍价
 			double strpri = Double.parseDouble(startprice);
 			double maxpri = Double.parseDouble(maxprice);
-			double addpri = 0.5;		
+			double addpri = 0.5;
 			double nowpri = strpri;
-			
 
 			// 根据二阶类型获取一阶类型
 			Typel tyl = typelDao.FindTypelByName(typel);
@@ -184,9 +183,9 @@ public class LotServiceImpl implements LotService {
 	@Override
 	public List<Lot> findLotList() {
 		// 获取所有拍卖品
-		List<Lot> list=lotDao.FindAll();
+		List<Lot> list = lotDao.FindAll();
 		// 选出其中在拍的拍卖品
-		List<Lot> lotlist=new ArrayList<Lot>();
+		List<Lot> lotlist = new ArrayList<Lot>();
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getStatus() == 0) {
 				lotlist.add(list.get(i));
@@ -211,7 +210,7 @@ public class LotServiceImpl implements LotService {
 	public List<Lot> findBystr(String str) {
 		List<Lot> list = lotDao.SearchLot(str);
 		// 选出其中在拍的拍卖品
-		List<Lot> lotlist=new ArrayList<Lot>();
+		List<Lot> lotlist = new ArrayList<Lot>();
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getStatus() == 0) {
 				lotlist.add(list.get(i));
@@ -219,23 +218,71 @@ public class LotServiceImpl implements LotService {
 		}
 		return lotlist;
 	}
+
 	/**
 	 * 根据用户编号查看用户
+	 * 
 	 * @param id
 	 * @return
 	 */
-	public Users finduser(int id){
+	public Users finduser(int id) {
 		return usersDao.findById(id);
 	}
+
 	/**
 	 * 根据用户编号获得店铺编号
+	 * 
 	 * @param user_id
 	 * @return
 	 */
-	public int getShopId(int user_id){
+	public int getShopId(int user_id) {
 		Shop ls = shopDao.getAllByUserid(user_id);
 		int shop_id = ls.getShop_id();
 		return shop_id;
 	}
-	
+
+	/**
+	 * 对拍卖品出价
+	 * 
+	 * @param nowprice
+	 * @param user_id
+	 * @return
+	 */
+	public ModelAndView anction(int lot_id, String yourprice, int user_id) {
+		ModelAndView str = new ModelAndView("lookLot");
+		// 判断传入参数是否为空
+		if (yourprice == null || yourprice.equals("")) {
+			// 提示信息 "出价不能为空！！！"
+			str.addObject("error", "出价不能为空！！！");
+		}else {
+			Lot l = lotDao.FindLotById(lot_id);
+
+			// 将出价转为double,newprice:拍卖者出价
+			double newprice = Double.parseDouble(yourprice);
+			
+			// 获取拍卖品的当前价格、一口价、加价额度
+			double nowprice = l.getNowprice();
+			double maxprice = l.getMaxprice();
+			double addprice = l.getAddprice();
+			
+			if(newprice >= maxprice ){
+				// 提示信息 "出价不能高于最高价，建议用一口价买下该拍卖品！！！"
+				str.addObject("error", "出价不能高于最高价，建议用一口价买下该拍卖品！！！");
+			}else if(newprice < nowprice + addprice){
+				// 提示信息 "出价过低，请重新出价！！！"
+				str.addObject("error", "出价过低，请重新出价！！！");				
+			}else{
+				// 设置新属性
+				l.setNowprice(newprice);
+				l.setUser_id(user_id);
+				// 更新拍卖品信息
+				lotDao.LotUpdate(l);
+				// 提示信息 "出价成功！！！"
+				str.addObject("error", "出价成功！！！");		
+			}				
+		}
+
+		return str;
+	}
+
 }

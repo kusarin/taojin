@@ -179,9 +179,10 @@
 							</div>
 
 							<!-- 出价区域 -->
-							<form action="#" method="post">
+							<form action="auction.do" method="post">
 								<div style="margin-top: 10px; margin-left: 30px;">
-									<input input type="text" name="yourprice"
+									<input type="hidden" name="id" value=${lookLot.lot_id}>
+									<input type="text" name="yourprice"
 										class="input-medium search-query" placeholder="输入你的价格"
 										style="height: 20px; width: 100; border: 4px solid #FFA07A">
 									<input type="submit" value="出价"

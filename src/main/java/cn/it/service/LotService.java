@@ -126,4 +126,11 @@ public interface LotService {
 	 */
 	public int getShopId(int user_id);
 
+	/**
+	 * 对拍卖品出价
+	 * @param nowprice
+	 * @param user_id
+	 * @return
+	 */
+	public ModelAndView anction(int lot_id,String yourprice,int user_id);
 }
