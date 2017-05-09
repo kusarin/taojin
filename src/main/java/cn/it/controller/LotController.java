@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.pojo.Item;
 import cn.it.pojo.Lot;
-import cn.it.pojo.Lot;
 import cn.it.pojo.Users;
 import cn.it.service.LotService;
 
@@ -261,5 +260,68 @@ public class LotController {
 		}
 
 		return modelandview;
+	}
+
+	/**
+	 * 根据店铺编号shop_id按照条目显示拍卖品（店家管理商品使用）
+	 * 
+	 * @param request
+	 * @param id
+	 *            前台传入的店铺编号
+	 * @return
+	 */
+	@RequestMapping("shopLot.do")
+	public ModelAndView shopLot(HttpServletRequest request,
+			HttpSession session, int page) {
+		ModelAndView modelandview = new ModelAndView("shopLot"); // 到shopLot.jsp界面
+
+		// 获取店铺编号shop_id
+		Users user = (Users) session.getAttribute("user");
+		int user_id = user.getUser_ID();
+		int shop_id = lotservice.getShopId(user_id);
+
+		// 获取拍卖品列表
+		List<Lot> list = lotservice.findByShopId(shop_id);
+		
+		// 分页操作区域
+		// 获取总页数
+		int total = list.size(); // 商品总数量
+		int perPage = 15; // 每页显示数量
+		int totalPage = total / perPage;
+		if (total % perPage != 0) {
+			totalPage += 1;
+		}
+		// 设置page页码有效区间
+		if (page > totalPage || page < 1) {
+			page = 1;
+			modelandview.addObject("error", "指定页码不存在!");
+		}
+		// 设置下方页码显示的部分
+		int n = 0;
+		List<Integer> pageList = new ArrayList<Integer>();
+		for (n = page - 3; n <= totalPage && n <= page + 3; n++) {
+			if (n > 0) {
+				pageList.add(n);
+			}
+		}
+
+		// 设置每页显示的商品，并且进行传递操作
+		if (page < totalPage) {
+			List<Lot> l = list.subList((page - 1) * perPage, page * perPage);
+			modelandview.addObject("shoplist", l);
+		} else {
+			List<Lot> l = list.subList((page - 1) * perPage, list.size());
+			modelandview.addObject("shopLot", l);
+		}
+
+		// 传递页码显示部分
+		modelandview.addObject("pageList", pageList);
+		modelandview.addObject("totalPage", totalPage);
+		modelandview.addObject("page", page);
+		
+		// 分页操作结束
+		
+		return modelandview;
+
 	}
 }

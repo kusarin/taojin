@@ -227,5 +227,15 @@ public class LotServiceImpl implements LotService {
 	public Users finduser(int id){
 		return usersDao.findById(id);
 	}
+	/**
+	 * 根据用户编号获得店铺编号
+	 * @param user_id
+	 * @return
+	 */
+	public int getShopId(int user_id){
+		Shop ls = shopDao.getAllByUserid(user_id);
+		int shop_id = ls.getShop_id();
+		return shop_id;
+	}
 	
 }

@@ -102,7 +102,6 @@ public interface LotService {
 
 	public List<Lot> findByShopId(int shop_id);
 
-	
 	/**
 	 * 按照输入的关键词查看拍卖品；
 	 * 
@@ -111,11 +110,20 @@ public interface LotService {
 	 * 
 	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
-	public List<Lot> findBystr(String str);/**
+	public List<Lot> findBystr(String str);
+	
+	/**
 	 * 根据用户编号查看用户
 	 * @param id
 	 * @return
 	 */
 	public Users finduser(int id);
+	
+	/**
+	 * 根据用户编号获得店铺编号
+	 * @param user_id
+	 * @return
+	 */
+	public int getShopId(int user_id);
 
 }
