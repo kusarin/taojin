@@ -99,10 +99,11 @@ function commit(){
 
 <div style="margin-top:30px;height:auto;">
 <div style="float:left; margin-left:390px;">
-   <img src="${pageContext.request.contextPath}${it.image}" style="width:100px;height:120px;">
-   <p style="width:100px;height:90px;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;">${it.name}</p>
+   <img src="${pageContext.request.contextPath}${it.item.image}" style="width:100px;height:120px;">
+   <p style="width:100px;height:90px;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;">${it.item.name}</p>
 </div>
-<input type="hidden" name="itemId" value="${it.item_id}">
+<input type="hidden" name="itemId" value="${it.itemId}">
+<input type="hidden" name="orderNumber" value="${it.orderNumber}">
 <div style="margin-left:550px;margin-top:20px; width:50px;">
 <input type="radio" name="score" value="5"><img src="image/3.jpg" style="margin-top:-30px;margin-left:20px;"/> 
 <input type="radio" name="score" value="3" style="margin-top:-93px;margin-left:130px;"><img src="image/2.jpg" style="margin-top:-120px;margin-left:150px;"/>

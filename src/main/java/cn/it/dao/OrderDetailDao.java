@@ -4,6 +4,7 @@ import java.util.List;
 
 
 
+
 import cn.it.pojo.OrderDetail;
 
 /**
@@ -34,5 +35,18 @@ public interface OrderDetailDao {
 	 * 批量删除
 	 * **/
 	public void deleteAll(String[] orderNumber);
+	
+	/*****
+	 * 根据订单号、商品编号查询
+	 * **/
+	public OrderDetail findOr(String orderNumber, int itemId);
+	
+	/*更新订单中商品状态
+	 * */
+	public void update(OrderDetail or);
+	/*
+	 * 更新订单中的商品是否已经发货
+	 * */
+	public void updateFlag(OrderDetail or);
 	
 }

@@ -68,7 +68,7 @@ public  class OrderServiceImpl implements OrderService {
 		List<OrderCollection> clist = new ArrayList<OrderCollection>();
 		
 		page.setPagestart((page.getPageNo()-1)*page.getPagesize());//设置初始的页面条数
-		List<Order> olist = orderDao.selectAll(userId,page.getPagestart(),page.getPagesize());//查询结
+		List<Order> olist = orderDao.selectAll(userId,page.getPagestart(),page.getPagesize());//查询结果
 		 
 		for(Order or:olist) {
 	
@@ -92,24 +92,13 @@ public  class OrderServiceImpl implements OrderService {
 	 * */
 	public void changeOrderStatus(int flag, String orderNumber) {
 		Order order = orderDao.findOrder(orderNumber);
-		List<OrderDetail> oli=orderDetailDao.selectAll(orderNumber);//此订单中的所有商品
-		
 		switch (flag) {
 		case 0:
 			order.setStatus("待付款");
-		case 1:
-			order.setStatus("已付款");
-			
+		case 1://已付款
+			order.setStatus("待发货");
 			order.setPaytime(new Timestamp(new Date().getTime()));
-			orderDao.updatePayTime(order);
-			/*****更新商品的总数****销售数量**/
-			for(OrderDetail ord:oli){
-				int itemId=ord.getItemId();//订单中的商品
-				Item ii=itemDao.FindItemById(itemId);//item表中的商品
-				ii.setnumber(ii.getnumber()-ord.getItemNumbers());//更新商品总数
-				ii.settradingTimes(ii.gettradingTimes()+ord.getItemNumbers());//更新销售数量
-				itemDao.ItemUpdate(ii);//更新item表
-			}
+			orderDao.updatePayTime(order);//更新支付时间
 			break;
 		case 2:
 			order.setStatus("已取消");
@@ -188,7 +177,7 @@ public  class OrderServiceImpl implements OrderService {
 	/**
 	 * 
 	 * 根据订单状态获取订单记录
-	 * （status:待付款、待收货、已完成、已取消）
+	 * （status:待付款、待收货、交易完成、已取消）
 	 * */
 	public Page<OrderCollection> getOrder(int userId,String status,Page<OrderCollection> page){
 		List<OrderCollection> coll=new ArrayList<OrderCollection>();
@@ -228,8 +217,6 @@ public  class OrderServiceImpl implements OrderService {
 		
 	    order.setPaymentMethod("网银支付");
 		
-		
-		
 		order.setRecivingAddress(addr); // 收货地址
 		double freight = 0; // 运费
 		order.setFreight(freight);
@@ -241,9 +228,11 @@ public  class OrderServiceImpl implements OrderService {
 			orderDe.setOrderNumber(orderNumber); // 设置订单编号
 			int itemId=orderDe.getItemId();
 			orderDe.setItemId(itemId);
+			orderDe.setMark(0);//此商品处于待评价状态
+			orderDe.setFlag(0);//未发货
 			orderDetailDao.add(orderDe);
 			
-			/**更新商品总数*/
+			/**更新商品库存*/
 			int itemNumbers=orderDe.getItemNumbers();//购买的商品数量
 			Item item=itemDao.FindItemById(itemId);
 			item.setnumber(item.getnumber()-itemNumbers);
@@ -285,15 +274,6 @@ public  class OrderServiceImpl implements OrderService {
 		Item item = itemDao.FindItemById(itemId);//根据商品id查询商品信息
 
 		OrderCollection orderCollection = new OrderCollection(); // 订单信息、订单详细信息的对象
-
-		/**
-		 * 支付方式暂不设定
-		 * */
-
-		/***
-		 * 生成订单细目
-		 * 
-		 * */
 		
 		List<OrderDetail> orderDetailList =new ArrayList<OrderDetail>();
 		OrderDetail orderDetail = new OrderDetail();
@@ -307,6 +287,7 @@ public  class OrderServiceImpl implements OrderService {
 		Shop shop = shopDao.findByid(item.getshop_id());// 获取该商品所属的店铺名称
 		String shopName = shop.getName();
 		orderDetail.setShopName(shopName);
+		orderDetail.setShop_id(item.getshop_id());
 		orderDetailList.add(orderDetail);// 将订单明细放入容器
          
 		// 设置订单信息
@@ -364,15 +345,15 @@ public  class OrderServiceImpl implements OrderService {
 	/***
 	 * 评价订单
 	 * */
-	public Item evalOrder(int itemId) {
+	public OrderDetail evalOrder(int itemId,String orderNumber) {
 	    
-		return itemDao.FindItemById(itemId);
+		return orderDetailDao.findOr(orderNumber, itemId);
 	}
 
 	/***
 	 *提交评价
 	 * */
-	public void commitEvaluation(int itemId,int userId,int score,String content) {
+	public void commitEvaluation(int itemId,int userId,int score,String content,String orderNumber) {
 		
 		String userName=usersDao.findById(userId).getName();
 		Discuss di=new Discuss();
@@ -381,7 +362,103 @@ public  class OrderServiceImpl implements OrderService {
 		di.setScore(score);
 		di.setUser_id(userId);
 		di.setUsername(userName);
+		di.setOrderNumber(orderNumber);
 		discussDao.addDiscuss1(di);//存储评论
+		
+		//修改订单中的商品状态
 	
+		OrderDetail or=orderDetailDao.findOr(orderNumber,itemId);
+		or.setMark(1);//已评价状态
+		orderDetailDao.update(or);
+		
+		//修改订单状态
+		Order o=orderDao.findOrder(orderNumber);
+		List<OrderDetail> ol=orderDetailDao.selectAll(orderNumber);
+		
+		List<Discuss> dl=discussDao.select(orderNumber);
+		//当所有商品评价完修改订单状态
+		if(dl.size()==ol.size()){
+			o.setStatus("交易完成");
+			orderDao.update(o);
+			//评价时间
+			o.setEvalTime(new Timestamp(new Date().getTime()));
+			orderDao.updateEvalTime(o);
+		}
+	}
+	/***
+	 * 确认收货
+	 * */
+	public void sureRGoods(String orderNumber){
+		
+		/**
+		 * 更新订单交易状态
+		 * */
+		Order o =orderDao.findOrder(orderNumber);
+		o.setStatus("已收货");
+		orderDao.update(o);
+		/**
+		 * 更新确认收货时间
+		 * */
+		o.setReceGoodsTime(new Timestamp(new Date().getTime()));
+		orderDao.updateReceGoodsTime(o);
+		/*
+		 * 更新商品销售数量
+		 */
+		List<OrderDetail> oli=orderDetailDao.selectAll(orderNumber);//此订单中的所有商品
+		for(OrderDetail ord:oli){
+			int itemId=ord.getItemId();//订单中的商品
+			Item ii=itemDao.FindItemById(itemId);//item表中的商品
+			
+			ii.settradingTimes(ii.gettradingTimes()+ord.getItemNumbers());//更新销售数量
+			itemDao.ItemUpdate(ii);//更新item表
+		}
+	}
+	/*
+	 * 某个店铺中的所有待发货
+	 * 订单
+	 */
+	public Page<Order> getWaittingGoods(int shop_id,String status,Page<Order> pages){
+		
+		pages.setPagestart((pages.getPageNo()-1)*pages.getPagesize());//设置初始的页面条数
+		List<Order> o2=orderDao.getWaitting(shop_id, status, pages.getPagestart(), pages.getPagesize());//此店铺中的代发货订单
+		pages.setDatas(o2);
+		pages.setTotalrecord(o2.size());
+		
+		return pages;
+		
+	}
+	/*
+	 *确认发货,修改订单状态
+	 */
+	public void sureDeliGoods(String orderNumber,int shop_id){
+		
+		Order o=orderDao.findOrder(orderNumber);
+		List<OrderDetail> li=orderDetailDao.selectAll(orderNumber);
+		if(li.size()==1){
+			o.setStatus("待收货");
+			orderDao.update(o);
+			//发货时间
+			o.setDeverliTime(new Timestamp(new Date().getTime()));
+			orderDao.updateDeverliTime(o);
+		}
+		else{
+			for(OrderDetail or:li){//此店铺对应的此订单中的商品
+				int shopId=or.getItem().getshop_id();
+				if(shop_id==shopId){
+					or.setFlag(1);//此件商品已发货
+					orderDetailDao.updateFlag(or);
+				}
+			}
+			int num=0;
+			for(OrderDetail or1:li){
+				if(or1.getFlag()==1){
+					num++;
+				}
+			}
+			if(num==li.size()){//订单中的商品都已发货
+				o.setStatus("待收货");
+				orderDao.update(o);
+			}
+		}
 	}
 }

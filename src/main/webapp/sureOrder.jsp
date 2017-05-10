@@ -272,7 +272,9 @@ function save(){
 				 
 				 <td class="common" id="itemprice">${collection.itemPrice}
 				 <input type="hidden" value="${collection.itemPrice}" name="orderDeatail[${s.index}].itemPrice" id="unitPrice">
+				 <input type="hidden" value="${collection.shop_id}" name="orderDeatail[${s.index}].shop_id" >
 				 </td>
+				 
 			 </tr>
 		 </table>
 		</div>

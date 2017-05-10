@@ -97,9 +97,22 @@ public interface OrderService {
 	/**
 	 * 评价订单
 	 * */
-	public Item evalOrder(int itemId);
+	public OrderDetail evalOrder(int itemId,String orderNumber);
 	/**
 	 * 提交评价
 	 * */
-	public void commitEvaluation(int itemId,int userId,int score,String content);
+	public void commitEvaluation(int itemId,int userId,int score,String content,String orderNumber);
+	/***
+	 * 确认收货
+	 * */
+	public void sureRGoods(String orderNumber);
+	/*
+	 * 某个店铺中的所有待发货
+	 * 订单
+	 */
+	public Page<Order> getWaittingGoods(int shop_id,String status,Page<Order> pages);
+	/*
+	 *确认发货,修改订单状态
+	 */
+	public void sureDeliGoods(String orderNumber,int shop_id);
 }

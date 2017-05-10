@@ -99,7 +99,7 @@ pageEncoding="UTF-8"%>
 			<td style="text-align:center;border-color:#FAFFF0"><fmt:formatDate value="${order.removeOrderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 		</tr>
 		</c:if>
-		<c:if test="${order.status=='已付款'}">
+		<c:if test="${order.status=='待发货'}">
 		<tr>
 		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">付款时间</td>
 			<td style="text-align:center;border-color:#FAFFF0"><fmt:formatDate value="${order.paytime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
@@ -109,7 +109,18 @@ pageEncoding="UTF-8"%>
 		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">下单时间</td>
 			<td style="text-align:center;border-color:#FAFFF0"><fmt:formatDate value="${order.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 		</tr>
-		
+		<c:if test="${order.status=='已收货'}">
+		<tr>
+		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">收货时间</td>
+			<td style="text-align:center;border-color:#FAFFF0"><fmt:formatDate value="${order.receGoodsTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+		</tr>
+		</c:if>
+		<c:if test="${order.status=='交易完成'}">
+		<tr>
+		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">完成时间</td>
+			<td style="text-align:center;border-color:#FAFFF0"><fmt:formatDate value="${order.evalTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+		</tr>
+		</c:if>
 		</table>
 	  
 	   </div>

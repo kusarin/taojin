@@ -1,4 +1,5 @@
 package cn.it.task;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +36,8 @@ public class OrderTimeTask {
 	    	if(d3>5){//下单和当前时间相差超过5分钟
 	    		ol.setStatus("已取消");
 	    		orderDao.update(ol);
+	    		ol.setRemoveOrderTime(new Timestamp(new Date().getTime()));
+	    		orderDao.updateTime(ol);
 	    		/*****更新商品的总数***/
 				List<OrderDetail> oli=orderDetailDao.selectAll(ol.getOrderNumber());//此订单中的所有商品
 				for(OrderDetail ord:oli){

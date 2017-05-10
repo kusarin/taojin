@@ -1,6 +1,7 @@
 package cn.it.pojo;
 
 import java.util.Date;
+import java.util.List;
 /**
  * 
  * @author Administrator
@@ -21,11 +22,39 @@ public class Order {
 	private double freight;   //运费：freight
 	private int userID; //用户编号
 	private int totalQuantity; //购买总数
- 
+    private Date receGoodsTime;//收货时间
+    private Date evalTime;//评价时间
+    private Date deverliTime;//发货时间
+    private List<OrderDetail> ordl;
 	/******************************get****************************set**********/
+    
  
 	public double getFreight() {
 		return freight;
+	}
+	public List<OrderDetail> getOrdl() {
+		return ordl;
+	}
+	public void setOrdl(List<OrderDetail> ordl) {
+		this.ordl = ordl;
+	}
+	public Date getDeverliTime() {
+		return deverliTime;
+	}
+	public void setDeverliTime(Date deverliTime) {
+		this.deverliTime = deverliTime;
+	}
+	public Date getEvalTime() {
+		return evalTime;
+	}
+	public void setEvalTime(Date evalTime) {
+		this.evalTime = evalTime;
+	}
+	public Date getReceGoodsTime() {
+		return receGoodsTime;
+	}
+	public void setReceGoodsTime(Date receGoodsTime) {
+		this.receGoodsTime = receGoodsTime;
 	}
 	public int getTotalQuantity() {
 		return totalQuantity;

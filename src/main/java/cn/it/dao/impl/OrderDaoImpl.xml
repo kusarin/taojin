@@ -15,7 +15,38 @@
             <result column="Freight" property="freight" javaType="double" jdbcType="DOUBLE"/>
             <result column="TotalQuantity" property="totalQuantity" javaType="int" jdbcType="INTEGER"/>
             <result column="removeOrderTime" property="removeOrderTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
-             <result column="paytime" property="paytime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+            <result column="paytime" property="paytime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+            <result column="receGoodsTime" property="receGoodsTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+            <result column="evalTime" property="evalTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+        </resultMap>
+        <resultMap type="cn.it.pojo.Order" id="findL">
+            <id column="Indent_id" property="id" javaType="int" jdbcType="INTEGER"/>
+            <result column="User_ID" property="userID" javaType="int" jdbcType="INTEGER"/>
+            <result column="OrderNumber" property="orderNumber" javaType="String" jdbcType="VARCHAR"/>
+            <result column="OrderTime" property="orderTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+            <result column="ActulPayment" property="actulPayment" javaType="double" jdbcType="DOUBLE"/>
+            <result column="Status" property="status" javaType="String" jdbcType="VARCHAR"/>
+            <result column="PaymentMethod" property="paymentMethod" javaType="String" jdbcType="VARCHAR"/>
+            <result column="RecivingAddress" property="recivingAddress" javaType="String" jdbcType="VARCHAR"/>
+            <result column="Freight" property="freight" javaType="double" jdbcType="DOUBLE"/>
+            <result column="TotalQuantity" property="totalQuantity" javaType="int" jdbcType="INTEGER"/>
+            <result column="removeOrderTime" property="removeOrderTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+            <result column="paytime" property="paytime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+            <result column="receGoodsTime" property="receGoodsTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+            <result column="evalTime" property="evalTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+           
+            <collection property="ordl" ofType="cn.it.pojo.OrderDetail">
+            <id column="OrderDetail_id" property="id" javaType="int" jdbcType="INTEGER"/>
+                  <result column="OrderNumber" property="orderNumber" javaType="String" jdbcType="VARCHAR"/>
+                  <result column="Item_id" property="itemId" javaType="int" jdbcType="INTEGER"/>
+                  <result column="mark" property="mark" javaType="int" jdbcType="INTEGER"/>
+                  <result column="unitPrice" property="unitPrice" javaType="double" jdbcType="DOUBLE"/>
+                  <result column="itemPrice" property="itemPrice" javaType="double" jdbcType="DOUBLE"/>
+                  <result column="itemNumbers" property="itemNumbers" javaType="int" jdbcType="INTEGER"/>
+                  <result column="shopName" property="shopName" javaType="String" jdbcType="VARCHAR"/>
+                  <result column="shop_id" property="shop_id" javaType="int" jdbcType="INTEGER"/>
+                 <result column="flag" property="flag" javaType="int" jdbcType="INTEGER"/>
+            </collection>
         </resultMap>
         <parameterMap type="cn.it.pojo.Order" id="OrderParameterMap">
             <parameter property="id" resultMap="findAll"/>  
@@ -30,6 +61,8 @@
             <parameter property="totalQuantity" resultMap="findAll"/>
             <parameter property="removeOrderTime" resultMap="findAll"/>
             <parameter property="paytime" resultMap="findAll"/>
+            <parameter property="receGoodsTime" resultMap="findAll"/>
+             <parameter property="evalTime" resultMap="findAll"/>
        </parameterMap>
      <select id="selectAll" resultMap="findAll">
           select* from indent where User_ID=#{0} ORDER BY orderNumber DESC LIMIT #{1},#{2} 
@@ -71,9 +104,22 @@
      <update id="updatePayTime" parameterMap="OrderParameterMap">
            update indent set paytime=#{paytime} where OrderNumber=#{orderNumber}
      </update>
+     <update id="updateReceGoodsTime" parameterMap="OrderParameterMap">
+           update indent set receGoodsTime=#{receGoodsTime} where OrderNumber=#{orderNumber}
+     </update>
+     <update id="updateEvalTime" parameterMap="OrderParameterMap">
+           update indent set evalTime=#{evalTime} where OrderNumber=#{orderNumber}
+     </update>
+     <update id="updateDeverliTime" parameterMap="OrderParameterMap">
+           update indent set deverliTime=#{deverliTime} where OrderNumber=#{orderNumber}
+     </update>
 	 <select id="countNumbers" resultType="Integer">
 	  select count(OrderNumber) from indent where User_ID=#{0} and Status=#{1}
 	 </select>
+	 
+	 <select id="getWaitting" resultMap="findL">
+	 select i.*,o.* from indent i,orderdetail o where i.OrderNumber=o.OrderNumber and o.shop_id=#{0} and i.Status=#{1} LIMIT #{2},#{3}
+	</select>
  </mapper>
  
 

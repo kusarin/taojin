@@ -7,6 +7,9 @@
                   <id column="OrderDetail_id" property="id" javaType="int" jdbcType="INTEGER"/>
                   <result column="OrderNumber" property="orderNumber" javaType="String" jdbcType="VARCHAR"/>
                   <result column="Item_id" property="itemId" javaType="int" jdbcType="INTEGER"/>
+                  <result column="mark" property="mark" javaType="int" jdbcType="INTEGER"/>
+                   <result column="flag" property="flag" javaType="int" jdbcType="INTEGER"/>
+                   <result column="shop_id" property="shop_id" javaType="int" jdbcType="INTEGER"/>
                   <result column="unitPrice" property="unitPrice" javaType="double" jdbcType="DOUBLE"/>
                   <result column="itemPrice" property="itemPrice" javaType="double" jdbcType="DOUBLE"/>
                   <result column="itemNumbers" property="itemNumbers" javaType="int" jdbcType="INTEGER"/>
@@ -33,6 +36,10 @@
             <parameter property="itemPrice" resultMap="findList"/> 
             <parameter property="itemNumbers" resultMap="findList"/> 
             <parameter property="shopName" resultMap="findList"/> 
+            <parameter property="mark" resultMap="findList"/>
+            <parameter property="flag" resultMap="findList"/>
+            <parameter property="shop_id" resultMap="findList"/>
+            
          </parameterMap>
          
           <select id="selectAll" parameterType="java.lang.String" resultMap="findList">
@@ -40,12 +47,23 @@
 	      </select>
 	      
 	      <insert id="add" parameterMap="OrderDetailParameterMap">
-	             insert into orderdetail(Item_id,OrderNumber,unitPrice,itemPrice,itemNumbers,shopName)values(#{itemId},#{orderNumber},#{unitPrice},#{itemPrice},#{itemNumbers},#{shopName})
+	             insert into orderdetail(Item_id,OrderNumber,unitPrice,itemPrice,itemNumbers,shopName,mark,flag,shop_id)values(#{itemId},#{orderNumber},#{unitPrice},#{itemPrice},#{itemNumbers},#{shopName},#{mark},#{flag},#{shop_id})
 	      </insert>
-	      
+	      <select id="findOr" resultMap="findList">
+	            select i.*,o.* from orderdetail o,item i where i.Item_id=o.Item_id and o.OrderNumber=#{0} and o.Item_id=#{1}
+	      </select>
 	      <delete id="delete" parameterType="java.lang.String">
 	            delete from orderdetail where OrderNumber=#{orderNumber}
 	      </delete>
+	      
+	      <update id="update" parameterMap="OrderDetailParameterMap">
+	            update orderdetail set mark=#{mark} where OrderNumber=#{orderNumber} and Item_id=#{itemId}
+	      </update>
+	      
+	      <update id="updateFlag" parameterMap="OrderDetailParameterMap">
+	            update orderdetail set flag=#{flag} where OrderNumber=#{orderNumber} and Item_id=#{itemId}
+	      </update>
+	      
 	      <delete id="deleteAll">
 		        delete from orderdetail
 		     <where>

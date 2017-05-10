@@ -44,14 +44,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
+
+
+
 import cn.it.pojo.Address;
-import cn.it.pojo.Item;
 import cn.it.pojo.Order;
 import cn.it.pojo.OrderCollection;
 import cn.it.pojo.OrderDetail;
 import cn.it.pojo.Page;
 import cn.it.pojo.Users;
 import cn.it.service.OrderService;
+import cn.it.service.ShopService;
 import cn.it.service.UsersService;
 
 
@@ -66,6 +69,8 @@ public class OrderController {
 	private OrderService orderService;
 	@Autowired
 	private UsersService usersService;
+	@Autowired
+	private ShopService shopService;
 	/*******
 	 * 提交订单、下单
 	 * @param(address表示收货地址，orderCollection表示订单信息，payway表示支付方式)
@@ -194,10 +199,10 @@ public class OrderController {
 	 * 评价订单
 	 * */
 	@RequestMapping("evlauateItem.do")
-	public ModelAndView evlauateItem(int itemId){
+	public ModelAndView evlauateItem(int itemId,String orderNumber){
 		
 		ModelAndView v=new ModelAndView("pendingEvaluation");
-		Item it=orderService.evalOrder(itemId);
+		OrderDetail it=orderService.evalOrder(itemId,orderNumber);
 		v.addObject("it", it);
 		return v;
 	}
@@ -205,10 +210,18 @@ public class OrderController {
 	 *提交评价 
 	 * */
 	@RequestMapping(value="commitEval.do",method=RequestMethod.POST)
-	public String commitEval(int itemId,int score,String content,HttpSession session){
+	public String commitEval(int itemId,int score,String content,HttpSession session,String orderNumber){
 		Users user=(Users) session.getAttribute("user");
 		int userId=user.getUser_ID();   //用户Id
-		orderService.commitEvaluation(itemId, userId, score, content);
+		orderService.commitEvaluation(itemId, userId, score, content,orderNumber);
+		return "redirect:orderItem.do";
+	}
+	/****
+	 * 确认收货
+	 */
+	@RequestMapping("receivingGoods.do")
+	public String receivingGoods(String orderNumber){
+		orderService.sureRGoods(orderNumber);
 		return "redirect:orderItem.do";
 	}
 	/*******
@@ -285,4 +298,44 @@ public class OrderController {
 		double total=order.getActulPayment(); //支付总额
 		return "redirect:payment.do?p2_Order="+orderNumber+"&p3_Amt="+total;
 	}
+	/***
+	 * 待发货订单
+	 * */
+	@RequestMapping("waittingDeGoods.do")
+	public ModelAndView waittingDeGoods(int shop_id,Page<Order> page,HttpSession session){
+		
+		Users user=(Users) session.getAttribute("user");
+		int userId=user.getUser_ID();   //用户Id
+		ModelAndView v=new ModelAndView("waittingDeGoods");
+		v.addObject("pages",orderService.getWaittingGoods(shop_id, "待发货",page));
+		v.addObject("username",usersService.findById(userId).getName());
+		v.addObject("shopname", shopService.findByid(shop_id).getName());
+		v.addObject("shopid",shop_id);
+		return v;
+	}
+	/*
+	 * 确认发货
+	 * */
+	@RequestMapping("sureDelivGoods.do")
+	public String sureDelivGoods(String orderNumber,int shopId){
+		
+		orderService.sureDeliGoods(orderNumber, shopId);
+		return "redirect:alreadyReGoods.do?shop_id="+shopId;
+	}
+	/**
+	 * 已发货订单
+	 * */
+	@RequestMapping("alreadyReGoods.do")
+	public ModelAndView alreadyDeGoods(int shop_id,Page<Order> page,HttpSession session){
+		Users user=(Users) session.getAttribute("user");
+		int userId=user.getUser_ID();   //用户Id
+		ModelAndView v=new ModelAndView("alreadyReGoods");
+		
+		v.addObject("pages",orderService.getWaittingGoods(shop_id, "待收货",page));
+		v.addObject("username",usersService.findById(userId).getName());
+		v.addObject("shopname", shopService.findByid(shop_id).getName());
+		v.addObject("shopid",shop_id);
+		return v;
+	}
+	
 }

@@ -241,11 +241,16 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		int totalQuantity=0;
 		for(CartItem c:ca){
 			OrderDetail ord=new OrderDetail();
+			int itemId=c.getItemId();
+			Item iii=itemDao.FindItemById(itemId);
 			ord.setItemId(c.getItemId());//商品编号
 			ord.setItemNumbers(c.getTradingNumbers()); //此间商品的购买数量
 			ord.setItemPrice(c.getTotalPrice()); //此件商品的销售额
 			ord.setOrderNumber(orderNumber);//订单编号
 			ord.setShopName(c.getShopName());//此商品所属顶铺名称
+			ord.setShop_id(iii.getshop_id());//店铺id
+			ord.setMark(0);//此商品处于待评价状态
+			ord.setFlag(0);//未发货
 			totalQuantity++;
 			actulPayment=actulPayment+c.getTotalPrice();
 			or.add(ord);
@@ -267,6 +272,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		orderDao.add(o);// 插入订单到order表
 		for(OrderDetail or1:or){
 			orderDetailDao.add(or1); //插入订单细目ordetail表
+			
 		}
 		/******
 		 * 从购物车清除这些已下单的商品
@@ -274,11 +280,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		for(CartItem cc:ca){
 			int cartItemId=cc.getCartItemId();
 			deleteItem(userId,cartItemId);
-			//更新商品库存
+			/**
+			 * 更新商品库存
+			 * */
 			Item i=itemDao.FindItemById(cc.getItemId());
-			int number1=i.getnumber();
-			number1=number1-cc.getTradingNumbers();
-			i.setnumber(number1);
+			int number=i.getnumber();
+			number=number-cc.getTradingNumbers();
+			i.setnumber(number);
 			itemDao.ItemUpdate(i);
 		}
 		return o;
