@@ -77,6 +77,13 @@ public class UsersController {
 		return result;
 	}
 
+	// 跳转到用户信息界面
+	@RequestMapping("UsersUpdate.do")
+	public ModelAndView UsersUpdate() {
+		ModelAndView str = new ModelAndView("UsersUpdate");
+		return str;
+	}
+
 	// 更新用户信息
 	@RequestMapping("changepw.do")
 	public ModelAndView changepw(Users user, HttpSession session) {
