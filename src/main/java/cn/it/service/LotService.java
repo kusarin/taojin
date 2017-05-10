@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.it.pojo.Item;
 import cn.it.pojo.Lot;
 import cn.it.pojo.Shop;
+import cn.it.pojo.Users;
 
 /**
  * 
@@ -99,49 +100,7 @@ public interface LotService {
 	 */
 	public List<Lot> findLotList();
 
-	/**
-	 * 按照拍卖品类型查找拍卖品信息，此处输入拍卖品一级分类
-	 * 
-	 * @param typeh
-	 *            拍卖品一级分类，String
-	 * @param typel
-	 *            拍卖品二级分类，String
-	 * 
-	 * @return List<Lot> 返回值为一个拍卖品列表，包括一个或者多个拍卖品
-	 */
-	public List<Lot> findByType1(String typeh);
-
-	/**
-	 * 按照拍卖品类型查找拍卖品信息，此处输入拍卖品一级分类和二级分类
-	 * 
-	 * @param typeh
-	 *            拍卖品一级分类，String
-	 * @param typel
-	 *            拍卖品二级分类，String
-	 * 
-	 * @return List<Lot> 返回值为一个拍卖品列表，包括一个或者多个拍卖品
-	 */
-	public List<Lot> findByType2(String typeh, String typel);
-
-	/**
-	 * 按照店铺归宿查找所有拍卖品(在售)
-	 * 
-	 * @param shop_id
-	 *            店铺编号，int
-	 * 
-	 * @returnList<Lot> 返回值为一个拍卖品列表，包括一个或者多个拍卖品
-	 */
-	public List<Lot> findByShopId1(int shop_id);
-
-	/**
-	 * 按照店铺归宿查找所有拍卖品(不在售)
-	 * 
-	 * @param shop_id
-	 *            店铺编号，int
-	 * 
-	 * @returnList<Lot> 返回值为一个拍卖品列表，包括一个或者多个拍卖品
-	 */
-	public List<Lot> findByShopId2(int shop_id);
+	public List<Lot> findByShopId(int shop_id);
 
 	/**
 	 * 按照输入的关键词查看拍卖品；
@@ -152,14 +111,26 @@ public interface LotService {
 	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
 	 */
 	public List<Lot> findBystr(String str);
+	
+	/**
+	 * 根据用户编号查看用户
+	 * @param id
+	 * @return
+	 */
+	public Users finduser(int id);
+	
+	/**
+	 * 根据用户编号获得店铺编号
+	 * @param user_id
+	 * @return
+	 */
+	public int getShopId(int user_id);
 
 	/**
-	 * 查看商品对应的店铺
-	 * 
-	 * @param shop_id
-	 *            店铺编号
-	 * @return Shop 返回值为一个店铺
+	 * 对拍卖品出价
+	 * @param nowprice
+	 * @param user_id
+	 * @return
 	 */
-	public Shop showShop(int shop_id);
-
+	public ModelAndView anction(int lot_id,String yourprice,int user_id);
 }

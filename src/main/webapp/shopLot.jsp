@@ -40,7 +40,7 @@
 </script>
 <!-- 缺少部分：图片上传+获取店铺ID -->
 
-<title>商品管理</title>
+<title>拍卖品管理</title>
 </head>
 <body>
 	<!-- Header Start -->
@@ -84,7 +84,7 @@
 					<div class="pull-right">
 				         <div class="tab">
 				         <ul>
-				         <li id="tow1" class="on" onclick='setTab("tow",1,3)'>商品</li>
+				         <li id="tow1" class="on" onclick='setTab("tow",1,3)'>拍卖品</li>
 				         <li id="tow2" onclick='setTab("tow",2,3)'>店铺</li>
 				         </ul>
 				         </div>
@@ -152,9 +152,9 @@
 					<section id="latestblog">
 					<div class="blogdetail">
 						<h2 class="heading2">
-							<span>商品管理</span>
+							<span>拍卖品管理</span>
 						</h2>
-						<a href="shopLot.do?page=1">&nbsp拍卖品管理 </a>
+						<a href="shopItem.do?page=1">&nbsp商品管理 </a>
 						<ul class="margin-none">
 							<li class="listblcok">
 								<div class="mb20">
@@ -166,39 +166,37 @@
 												<table width="90%" border="1" align="center">
 													<thead>
 														<tr>
-															<td colspan="10" align="center">在售商品</td>
+															<td colspan="10" align="center">在售拍卖品</td>
 														</tr>
 													</thead>
 													<tbody>
 
 														<tr align="center">
-															<td width=20%>商品图片</td>
-															<td width=20%>商品名称</td>
-															<td width=10%>商品数量</td>
-															<td width=10%>商品价格</td>
-															<td width=20%>商品状态</td>
-															<td width=20%>商品管理操作</td>
+															<td width=20%>拍卖品图片</td>
+															<td width=20%>拍卖品名称</td>
+															<td width=15%>拍卖品起拍价</td>
+															<td width=15%>拍卖品一口价</td>
+															<td width=15%>拍卖品当前价</td>
+															<td width=15%>拍卖品状态</td>
 														</tr>
-														<c:forEach items="${shopItem}" var="i">
+														<c:forEach items="${shopLot}" var="i">
 
 															<tr>
 																<td><img class="itemimage"
 																	src=${pageContext.request.contextPath}${i.image}></td>
 																<td>${i.name}</td>
-																<td>${i.number}</td>
-																<td>${i.price}</td>
+																<td>${i.startprice}</td>
+																<td>${i.maxprice}</td>
+																<td>${i.nowprice}</td>
 																<c:if test="${i.status == 0}">
-																	<td>在售</td>
+																	<td>在拍卖</td>
 																</c:if><c:if test="${i.status == 1}">
-																	<td>已下架</td>
+																	<td>已流拍</td>
+																</c:if><c:if test="${i.status == 2}">
+																	<td>已拍出</td>
 																</c:if>
-																<td><a href="showchangeItem.do?id=${i.item_id}">修改商品信息</a>
-																	<c:if test="${i.status == 0}"><a href="updownItem.do?id=${i.item_id}">下架商品</a></c:if>
-																	<c:if test="${i.status == 1}"><a href="updownItem.do?id=${i.item_id}">上架商品</a></c:if>
-																</td>
 															</tr>
 														</c:forEach>
-
 
 													</tbody>
 												</table>
@@ -219,12 +217,12 @@
 
 <!-- 页码显示部分 -->
 	<div style="width: 500px">&nbsp</div>
-	<form action="shopItem.do?" method="post">
+	<form action="shopLot.do?" method="post">
 		<!-- 上一页 按钮 -->
 		<div align="center">
 			<c:choose>
 				<c:when test="${page != 1}">
-					<a href="shopItem.do?page=${page-1}"><input type="button"
+					<a href="shopLot.do?page=${page-1}"><input type="button"
 						name="lastPage" value="上一页" class="btn btn-orange" /></a>
 				</c:when>
 				<c:otherwise>
@@ -237,14 +235,14 @@
 				<c:choose>
 					<c:when test="${pn == page}">${pn}</c:when>
 					<c:otherwise>
-						<a href="shopItem.do?page=${pn}"><U>${pn}</U></a>
+						<a href="shopLot.do?page=${pn}"><U>${pn}</U></a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<!-- 下一页 按钮 -->
 			<c:choose>
 				<c:when test="${page != totalPage}">
-					<a href="shopItem.do?page=${page+1}"> <input type="button"
+					<a href="shopLot.do?page=${page+1}"> <input type="button"
 						name="nextPage" value="下一页" class="btn btn-orange" />
 					</a>
 				</c:when>
