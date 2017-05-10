@@ -62,4 +62,13 @@ public interface LotDao {
 	 * @return List<Lot> 返回值为一个拍卖品列表，包括一个或者多个商品
 	 */
 	public List<Lot> SearchLot(String str);
+	/**
+	 * 拍卖品时间控制，按照时间减少当前在拍拍卖品的剩余时间
+	 */
+	public void timeControl();
+	/**
+	 * 获取刚刚结束拍卖的拍卖品，用于生成订单
+	 * @return
+	 */
+	public List<Lot> getOver();
 }

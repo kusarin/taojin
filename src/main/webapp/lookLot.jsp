@@ -173,6 +173,9 @@
 									<font size=4>拍卖品当前价格:¥${lookLot.nowprice}</font>
 								</div>
 								<div class="productprice">
+									<font size=4>${timeLast}</font>
+								</div>
+								<div class="productprice">
 									<font size=4>当前出价人:${us.username}</font>
 									<br>
 								</div>
@@ -182,7 +185,9 @@
 							<form action="auction.do" method="post">
 								<div style="margin-top: 10px; margin-left: 30px;">
 									<input type="hidden" name="id" value=${lookLot.lot_id}>
-									<input type="text" name="yourprice"
+									<input type="text" name="yourprice" 
+										onkeyup="if(isNaN(value))execCommand('undo')" 
+										onafterpaste="if(isNaN(value))execCommand('undo')"
 										class="input-medium search-query" placeholder="输入你的价格"
 										style="height: 20px; width: 100; border: 4px solid #FFA07A">
 									<input type="submit" value="出价"
