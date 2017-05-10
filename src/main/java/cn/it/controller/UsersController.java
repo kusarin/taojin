@@ -78,6 +78,13 @@ public class UsersController {
 	}
 
 	// 更新用户信息
+	@RequestMapping("UsersUpdate.do")
+	public ModelAndView UsersUpdate() {
+		ModelAndView str = new ModelAndView("UsersUpdate");
+		return str;
+	}
+
+	// 更新用户信息
 	@RequestMapping("changepw.do")
 	public ModelAndView changepw(Users user, HttpSession session) {
 		ModelAndView result = usersService.changepw(user, session);
