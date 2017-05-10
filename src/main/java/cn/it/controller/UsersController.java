@@ -77,7 +77,7 @@ public class UsersController {
 		return result;
 	}
 
-	// 更新用户信息
+	// 跳转到用户信息界面
 	@RequestMapping("UsersUpdate.do")
 	public ModelAndView UsersUpdate() {
 		ModelAndView str = new ModelAndView("UsersUpdate");
