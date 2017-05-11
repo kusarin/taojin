@@ -6,6 +6,7 @@ package cn.it.service;
 import java.util.List;
 
 import cn.it.pojo.Address;
+import cn.it.pojo.Invoice;
 import cn.it.pojo.Item;
 import cn.it.pojo.Order;
 import cn.it.pojo.OrderCollection;
@@ -97,9 +98,22 @@ public interface OrderService {
 	/**
 	 * 评价订单
 	 * */
-	public Item evalOrder(int itemId);
+	public OrderDetail evalOrder(int itemId,String orderNumber);
 	/**
 	 * 提交评价
 	 * */
-	public void commitEvaluation(int itemId,int userId,int score,String content);
+	public void commitEvaluation(int itemId,int userId,int score,String content,String orderNumber);
+	/***
+	 * 确认收货
+	 * */
+	public void sureRGoods(String orderNumber);
+	/*
+	 * 某个店铺中的所有待发货/已发货
+	 * 订单
+	 */
+	public Page<Invoice> selectInvoice(int shop_id,int flag,Page<Invoice> pages);
+	/*
+	 *确认发货,修改订单状态
+	 */
+	public void sureDeliGoods(String orderNumber,int shop_id);
 }

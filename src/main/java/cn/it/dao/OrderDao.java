@@ -64,4 +64,13 @@ public interface OrderDao {
 	 * 
 	 * */
 	public void updatePayTime(Order o);
+	/**
+	 *收货时间 
+	 */
+	public void updateReceGoodsTime(Order o); 
+	/****
+	 * 评价时间
+	 * */
+	public void updateEvalTime(Order o);
+	
 }

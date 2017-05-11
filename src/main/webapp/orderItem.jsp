@@ -228,11 +228,11 @@ function deleteAll(){
 		                 <td class="sa" style="border-right:1px solid #F5F5F5;border-bottom:1px solid #F5F5F5;">
 		                  <c:forEach items="${orderc.orderDeatail}" var="ord">
 		                  <div style="margin-top:10px;margin-bottom:50px;">
-		                    <c:if test="${orderc.order.status=='已付款'}">
-							 <a href="evlauateItem.do?itemId=${ord.item.item_id}"><p>立即评价</p></a>
+		                    <c:if test="${ord.mark==0 && orderc.order.status=='已收货'}">
+							 <a href="evlauateItem.do?itemId=${ord.item.item_id}&orderNumber=${ord.orderNumber}"><p>立即评价</p></a>
 							</c:if>
-							<c:if test="${orderc.order.status!='已付款'}">
-							  <p>未评价</p>
+							<c:if test="${ord.mark==1}">
+							      <p>已评价</p>
 							</c:if>
 		                   </div>
 		                 </c:forEach> 
@@ -247,6 +247,9 @@ function deleteAll(){
 							<c:if test="${orderc.order.status=='待付款'}">
 							 <a href="paymenting.do?orderNumber=${orderc.order.orderNumber}"><p>立即付款</p></a>
 							 <a href="removeOrder.do?flag=2&orderNumber=${orderc.order.orderNumber}"><p>取消订单</p></a>
+							</c:if>
+							<c:if test="${orderc.order.status=='待收货'}">
+							<a href="receivingGoods.do?orderNumber=${orderc.order.orderNumber}"><p>确认收货</p></a>
 							</c:if>
 							</td>
 		                </tr>

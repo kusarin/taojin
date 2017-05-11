@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.it.dao.InvoiceDao">
+  
+  <insert id="add" parameterType="cn.it.pojo.Invoice">
+     insert into invoice(orderNumber,username,orderTime,deliverTime,shopNme,shop_id,flag) 
+     values (#{orderNumber},#{userName},#{orderTime},#{deliverTime},#{shopNme},#{shop_id},#{flag})
+  </insert>
+	
+	<select id="select" resultType="cn.it.pojo.Invoice">
+	   select* from invoice where shop_id=#{0} and flag=#{1} limit #{2},#{3}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+	 delete from invoice where invoice_id=#{invoice_id}
+	</delete>
+	
+	<update id="update" parameterType="cn.it.pojo.Invoice">
+	  update invoice set flag=#{flag},deliverTime=#{deliverTime}
+	</update>
+	
+	<select id="selectIn" resultType="cn.it.pojo.Invoice">
+	    select* from invoice where orderNumber=#{0} and shop_id=#{1}
+	</select>
+</mapper>

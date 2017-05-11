@@ -3,11 +3,15 @@
 <mapper namespace = "cn.it.dao.DiscussDao">
 <!-- 添加某个商品的评论 -->
 	<insert id="addDiscuss1" parameterType="cn.it.pojo.Discuss">
-		insert into discuss(content,item_id,user_id,username,score,time) 
-		        values(#{content},#{item_id},#{user_id},#{username},#{score},<![CDATA[ now() ]]>)
+		insert into discuss(content,item_id,user_id,username,score,OrderNumber,time) 
+		        values(#{content},#{item_id},#{user_id},#{username},#{score},#{orderNumber},<![CDATA[ now() ]]>)
 	</insert>
 <!-- 查看某个商品的所有评论 -->
 	<select id="FindItemDiscuss" parameterType="int" resultType="cn.it.pojo.Discuss">
 		select * from discuss where item_id = #{item_id}
+	</select>
+	
+	<select id="select" resultType="cn.it.pojo.Discuss">
+	    select * from discuss where OrderNumber=#{orderNumber}
 	</select>
 </mapper>

@@ -1,16 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
+<link href="./css/itemlist.css" rel="stylesheet">
+<link href="./TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="./TaoJin/css/style.css" rel="stylesheet">
+<link href="./TaoJin/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
+<link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
+<link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
+<link href="./css/shopSearch.css" rel="stylesheet">
+<title>Insert title here</title>
 <style>
 .left {
-	width: 130px;
+	width: 175px;
 	heigh: auto;
 	float: left;
-	margin-top: 20px;
 	margin-left: 20px;
 }
 
@@ -18,7 +27,6 @@
 	width: auto;
 	heigh: auto;
 	margin-top: 20px;
-	margin-left: 149px;
 }
 
 .itemimage {
@@ -26,10 +34,7 @@
 	height: 175px;
 	float: left;
 }
-.textshopname {
-	font-size: 30px;
-	color: red;
-}
+
 .textname {
 	font-size: 20px;
 	color: black;
@@ -40,7 +45,7 @@
 
 .textdetail {
 	font-size: 15px;
-	color:orange;
+	color: orange;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -51,34 +56,18 @@
 	color: red;
 }
 </style>
-<link href="./css/shopSearch.css" rel="stylesheet">
-<!-- 弹窗设置点 -->
 <script type="text/javascript">
-	window.onload = function() {
-		var error = "${requestScope.error}";
-		if (error != "" && error != null && typeof (error) != "undefined") {
-			alert(error);
-		}
-	}
-	function setTab(name,m,n){ 
-		for( var i=1;i<=n;i++){ 
-		var menu = document.getElementById(name+i); 
-		var showDiv = document.getElementById("cont_"+name+"_"+i); 
-		menu.className = i==m ?"on":""; 
-		showDiv.style.display = i==m?"block":"none"; 
-		} 
+function setTab(name,m,n){ 
+	for( var i=1;i<=n;i++){ 
+	var menu = document.getElementById(name+i); 
+	var showDiv = document.getElementById("cont_"+name+"_"+i); 
+	menu.className = i==m ?"on":""; 
+	showDiv.style.display = i==m?"block":"none"; 
+	} 
+} 
 </script>
-<title> ${shopinfo.name}</title>
-<link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
-<link href="./TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
-<link href="./TaoJin/css/style.css" rel="stylesheet">
-<link href="./TaoJin/css/flexslider.css" type="text/css" media="screen"
-	rel="stylesheet" />
-<link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
-<link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
 </head>
 <body>
-
 <!-- Header Start -->
 	<header>
 	<div class="headerstrip">
@@ -155,18 +144,82 @@
 	</div>
 	</header>
 	<!-- Header End -->
-	
-	
+	<!-- 商品类型选择区域 start-->
 	<div class="left">
-			<p class="textshopname" style="height: 40px; width: 200px"> ${shopinfo.name}</p>
-			<p class="textdetail" style="height: 40px; width: 200px"> ${shopinfo.intro}</p>
+		<div class="all-sort-list">
+			<div class="item">
+				<h3>
+					<span>·</span><a href="showShop.do?type=笔记本&page=1">动漫</a>、<a
+						href="showShop.do?type=日常用品&page=1">游戏</a>、<a
+						href="showShop.do?type=乐器&page=1">乐器</a>
+				</h3>
+			<div class="item">
+				<h3>
+					<span>·</span><a href="showShop.do?type=数码用品&page=1">数码用品</a>、<a
+						href="showShop.do?type=电脑&page=1">电脑</a>
+				</h3>
+			</div>
+			<div class="item">
+				<h3>
+					<span>·</span><a href="showShop.do?type=运动&page=1">运动</a>、<a
+						href="showShop.do?type=户外健身&page=1">户外健身</a>
+				</h3>
+			</div>
 		</div>
-	
+		<p>${show}</p>
+		<p>${type}</p>
+	</div>
+</div>	
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript">
+		$('.all-sort-list > .item').hover(
+				function() {
+					var eq = $('.all-sort-list > .item').index(this), //获取当前滑过是第几个元素
+					h = $('.all-sort-list').offset().top, //获取当前下拉菜单距离窗口多少像素
+					s = $(window).scrollTop(), //获取游览器滚动了多少高度
+					i = $(this).offset().top, //当前元素滑过距离窗口多少像素
+					item = $(this).children('.item-list').height(), //下拉菜单子类内容容器的高度
+					sort = $('.all-sort-list').height(); //父类分类列表容器的高度
 
-<div style="margin-left: 250px;">
-<h1 style="color:orange">${error0}</h1>
-	<c:forEach items="${showshopItem}" var="i">
-		<li class="span3">
+					if (item < sort) { //如果子类的高度小于父类的高度
+						if (eq == 0) {
+							$(this).children('.item-list').css('top', (i - h));
+						} else {
+							$(this).children('.item-list').css('top',
+									(i - h) + 1);
+						}
+					} else {
+						if (s > h) { //判断子类的显示位置，如果滚动的高度大于所有分类列表容器的高度
+							if (i - s > 0) { //则 继续判断当前滑过容器的位置 是否有一半超出窗口一半在窗口内显示的Bug,
+								$(this).children('.item-list').css('top',
+										(s - h) + 2);
+							} else {
+								$(this).children('.item-list').css('top',
+										(s - h) - (-(i - s)) + 2);
+							}
+						} else {
+							$(this).children('.item-list').css('top', 3);
+						}
+					}
+
+					$(this).addClass('hover');
+					$(this).children('.item-list').css('display', 'block');
+				}, function() {
+					$(this).removeClass('hover');
+					$(this).children('.item-list').css('display', 'none');
+				});
+
+		$('.item > .item-list > .close').click(function() {
+			$(this).parent().parent().removeClass('hover');
+			$(this).parent().hide();
+		});
+	</script>
+	<!-- 商品类型选择区域 end-->
+	<div class="right" style="margin-left: 275px">
+		<h1 style="color: orange">${error0}</h1>
+		<c:forEach items="${shoplist}" var="c">
+			<li class="span3">
+				<li class="span3">
 				<div>
 					<table border="1">
 						<thead>
@@ -186,16 +239,17 @@
 					<br>
 				</div>
 			</li>
-	</c:forEach>
+		</c:forEach>
 	</div>
+
 	<!-- 页码显示部分 -->
 	<div style="width: 500px">&nbsp</div>
-	<form action="lookshopItem.do?shopid=${shopinfo.shop_id}" method="post">
+	<form action="showAllShop.do" method="post">
 		<!-- 上一页 按钮 -->
 		<div align="center">
 			<c:choose>
 				<c:when test="${page != 1}">
-					<a href="lookshopItem.do?shopid=${shopinfo.shop_id}&page=${page-1}"><input type="button"
+					<a href="showAllShop.do?page=${page-1}"><input type="button"
 						name="lastPage" value="上一页" class="btn btn-orange" /></a>
 				</c:when>
 				<c:otherwise>
@@ -208,14 +262,14 @@
 				<c:choose>
 					<c:when test="${pn == page}">${pn}</c:when>
 					<c:otherwise>
-						<a href="lookshopItem.do?shopid=${shopinfo.shop_id}&page=${pn}"><U>${pn}</U></a>
+						<a href="showAllShop?page=${pn}"><U>${pn}</U></a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<!-- 下一页 按钮 -->
 			<c:choose>
 				<c:when test="${page != totalPage}">
-					<a href="lookshopItem.do?shopid=${shopinfo.shop_id}&page=${page+1}"> <input type="button"
+					<a href="showAllShop?page=${page+1}"> <input type="button"
 						name="nextPage" value="下一页" class="btn btn-orange" />
 					</a>
 				</c:when>
@@ -232,11 +286,11 @@
 				type="submit" value="跳转" />
 		</div>
 	</form>
-	
-	
-	
-		<!--footer-->
-	<footer style="margin-top:100px"> <img
+
+
+
+	<!--footer-->
+	<footer style="margin-bottom:0"> <img
 		src="${pageContext.request.contextPath}/image/footer-tri.png"
 		style="width: 100%;">
 	<div
@@ -247,7 +301,8 @@
 
 	</div>
 	<div style="text-align: center; margin-bottom: 10px;">
-		<a id="fd_footer" href="addComment.jsp">产品意见反馈</a>
+		<a id="fd_footer" href="addComment.jsp">产品意见反馈</a> <a
+			href="mlogin.jsp" target="_top">产品管理</a>
 	</div>
 	<div style="text-align: center; margin-bottom: 10px;">
 		<span>©2017 版权所有</span> <span>鄂ICP备14003265号-2</span>

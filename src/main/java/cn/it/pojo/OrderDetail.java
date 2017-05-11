@@ -1,5 +1,7 @@
 package cn.it.pojo;
 
+import java.util.Date;
+
 /**
  * 
  * 订单明细 OrderDetail
@@ -15,9 +17,32 @@ public class OrderDetail {
 	private double itemPrice;   //商品总价
 	private String shopName; //店铺对应的名称
 	private Item item;
+	private int mark;//标识订单中的商品是否进行过评价
+	private int flag;//标记此件商品是否发货
+	private int shop_id;
+	
     /*****************************get***************set*******/
+	
 	public int getId() {
 		return id;
+	}
+	public int getShop_id() {
+		return shop_id;
+	}
+	public void setShop_id(int shop_id) {
+		this.shop_id = shop_id;
+	}
+	public int getFlag() {
+		return flag;
+	}
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
+	public int getMark() {
+		return mark;
+	}
+	public void setMark(int mark) {
+		this.mark = mark;
 	}
 	public String getShopName() {
 		return shopName;

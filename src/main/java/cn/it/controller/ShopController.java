@@ -2,6 +2,7 @@ package cn.it.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -54,7 +56,7 @@ public class ShopController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value ={"/doAdd.do"},method={RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView doAdd(Shop shop,MultipartFile file,
+	public ModelAndView doAdd(@RequestParam(value = "file", required = false)Shop shop,MultipartFile file,
 			HttpServletRequest request,HttpSession session) throws IOException{
 		Users user = (Users)session.getAttribute("user");
 		ModelAndView str = new ModelAndView("shopList");
@@ -64,10 +66,12 @@ public class ShopController {
 	    	str.addObject("error", "认证成功！");
 	    	str.setViewName("/shopList");
 	    }
-	    else 	    	
+	    else {
      		str.addObject("error", "该用户店铺已存在！");
 	        str.setViewName("addShop");
-	    return str;
+	    }
+	    ModelAndView result = shopService.addShop(shop, request, session, file);
+		return str;
 	}
 	@RequestMapping(value ={"/toChange.do"},method={RequestMethod.GET,RequestMethod.POST}
 	)
@@ -112,12 +116,81 @@ public class ShopController {
 		if(shopService.getAllByUserid(user.getUser_ID())==null)
 		{
 			 return "/addShop";
-		}
+		} 
 		else
 		{
 		map.put("shopit", itemService.findByShopId(shop.getShop_id()));
 		return "shopItem";
 		}
+	}
+	@RequestMapping(value = {"/showAllShop.do"},method = {RequestMethod.GET,RequestMethod.POST})
+	public String showAllShop(Shop shop,Map<String, Object> map,int page){
+		List<Shop> list;
+		list = shopService.findShopList();
+		int total = list.size(); // 商品总数量
+		int perPage = 6; // 每页显示数量
+		int totalPage =  shopService.totalPage(total);
+		if (list.isEmpty()) {
+			map.put("error0", "抱歉！！没有找到符合搜索信息的店铺！！！！");
+		}else
+		{
+			// 设置page页码有效区间
+	    	if (page > totalPage || page < 1) {
+							page = 1;
+					}
+						// 设置下方页码显示的部分
+						int n = 0;
+						List<Integer> pageList = shopService.pageList(page, totalPage);
+						// 设置每页显示的商品，并且进行传递操作
+						if (page < totalPage) {
+							List<Shop> i = list.subList((page - 1) * perPage, page * perPage);
+							map.put("shoplist", list);
+						} else {
+							List<Shop> i = list.subList((page - 1) * perPage, list.size());
+							map.put("shoplist", list);
+						}
+						map.put("pageList", pageList);
+						map.put("totalPage", totalPage);
+						map.put("page", page);
+		}
+		return "showAllShop";
+		
+	}
+	@RequestMapping(value = {"/showShop.do"},method = {RequestMethod.GET,RequestMethod.POST})
+	public String showShop(String type,Shop shop,Map<String, Object> map,int page) throws UnsupportedEncodingException{
+		String stypeh = new String(type.getBytes("ISO-8859-1"), "utf-8");
+		List<Shop> list;
+		list = shopService.findByType(type);
+		int total = list.size(); // 商品总数量
+		int perPage = 6; // 每页显示数量
+		int totalPage =  shopService.totalPage(total);
+		if (list.isEmpty()) {
+			map.put("error0", "抱歉！！没有找到符合搜索信息的店铺！！！！");
+		}else
+		{
+			// 设置page页码有效区间
+	    	if (page > totalPage || page < 1) {
+							page = 1;
+					}
+						// 设置下方页码显示的部分
+						int n = 0;
+						List<Integer> pageList = shopService.pageList(page, totalPage);
+						// 设置每页显示的商品，并且进行传递操作
+						if (page < totalPage) {
+							List<Shop> i = list.subList((page - 1) * perPage, page * perPage);
+							map.put("shoplist", list);
+						} else {
+							List<Shop> i = list.subList((page - 1) * perPage, list.size());
+							map.put("shoplist", list);
+						}
+						map.put("pageList", pageList);
+						map.put("totalPage", totalPage);
+						map.put("page", page);
+		}
+		map.put("show", "目前显示分类");
+		map.put("type", type);
+		return null;
+		
 	}
 	@RequestMapping(value = {"/searchShop.do"},method = {RequestMethod.GET,RequestMethod.POST})
 	public String searchShop(HttpServletRequest request,Shop shop,Map<String,Object> map,Integer  page){
@@ -128,7 +201,7 @@ public class ShopController {
 		int perPage = 6; // 每页显示数量
 		int totalPage =  shopService.totalPage(total);
 		if (list.isEmpty()) {
-			map.put("error0", "抱歉！！没有找到符合搜索信息的商品！！！！");
+			map.put("error0", "抱歉！！没有找到符合搜索信息的店铺！！！！");
 			map.put("search", str);
 		}else
 		{
