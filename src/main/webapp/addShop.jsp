@@ -35,7 +35,7 @@
 							<div class="navbar-inner">
 								<div style="float: left; color: white; margin-top: 26px;">
 										<span>您好,</span>
-										<c:if test="${user == null}">
+										<c:if test="${user==null}">
 											<a href="login.jsp"><span style="color: white;">登录</span></a>
 											<a href="register.jsp"> <span
 												style="margin-left: 20px; color: white;"> 注册</span></a>
@@ -168,7 +168,7 @@
 													<div class="control-group">
 														<td></td>
 														<div class="controls">
-															<td><input type="file" name="file" accept="image/*" /></td>
+															<td><input type="file" name="shopimage" id="shopimage" accept="image/*" /></td>
 														</div>
 													</div>
 												</tr>
