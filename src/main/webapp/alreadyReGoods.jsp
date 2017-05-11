@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -13,7 +14,7 @@
 <link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
 <link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
 <link href="./css/shopSearch.css" rel="stylesheet">
-<title>Insert title here</title>
+<title>店铺管理-订单处理</title>
 <script type="text/javascript">
 function deleteone(shop_id){
 if(confirm("确定要删除这条数据吗？")){
@@ -127,80 +128,68 @@ function setTab(name,m,n){
 						<li><a href="shopList.do">查看记录 </a></li>
 						<li><a href="addItem.jsp">商品上架 </a></li>
 						<li><a href="shopItem.do?page=1">商品管理</a></li>
-						<li><a href="toChange.do">店铺信息管理</a></li>
-						<li><a href="waittingDeGoods.do?shop_id=${shopli.shop_id}&flag=0">订单管理</a>
-						<ul><a href="alreadyReGoods.do?shop_id=${shopli.shop_id}&flag=1">已处理</a></ul>
-						<ul><a href="waittingDeGoods.do?shop_id=${shopli.shop_id}&flag=0">未处理</a></ul></li>
+						<li><a href="toChange.do">店铺信息管理</a></li>	
+					<li><a href="waittingDeGoods.do?shop_id=${shopid}&flag=0">订单管理</a>
+						<ul><a href="alreadyReGoods.do?shop_id=${shopid}&flag=1" style="color:red;">已处理</a></ul>
+						<ul><a href="waittingDeGoods.do?shop_id=${shopid}&flag=0">未处理</a></ul></li>
 					</ul>
+					
 				</div>
 				<div class="sidewidt"></div>
 
 				</aside>
 				<!-- Sidebar End-->
-				<div class="span9">
-					<!-- Blog start-->
-					<section id="latestblog">
-					<div class="blogdetail">
-						<h2 class="heading2">
-							<span>认证店铺</span>
-						</h2>
-						<div class="blogicons">
-							<div class="pull-left"></div>
-						</div>
-						<ul class="margin-none">
-							<li class="listblcok">
-								<div class="mb20">
-									<section class="leavecomment">
-									<h2 class="heading2">
-										<span>店铺基本信息</span>
-									</h2>
-                                    <a href="addShop.jsp">添加</a>
-									<form action="shopList.do" name="myform" method="get"></form>
-									<table
-										style="border-left-width: 0px; border-collapse: collapse; border-right-width: 0px;"
-										bordercolor="#ff6600" bgcolor="#DFFFDF" cellspacing="0"
-										cellpadding="0" width="250" align="center" border="1">
-										<tbody>
-											<tr align="middle">
-												<table width="90%" border="1" align="center">
-													<thead>
-														<tr>
-															<td colspan="10" align="center">店铺信息管理</td>
-														</tr>
-													</thead>
-													<tbody>
+				<div class="span9" style="float:left;margin-top:20px;">
+			    <div style="margin-top:20px;font-size:15px;color:black;margin-bottom:10px;">
+				 <strong>已发货订单</strong>	
+				</div> 
+				<div style="height:auto;width:900px;">
+				<table style="height:auto;width:900px; font-size:14px;color:black;border-color:#F5F5F5;" border="1px">
+				    <tr align="center" style="background-color:#FAFFF0;">
+					<td style="border-color:#F5F5F5;height:40px;width:100px;">订单号</td>
+					<td style="border-color:#F5F5F5;width:200px;">下单时间</td>
+					<td style="border-color:#F5F5F5;width:100px;">收货人</td>
+					<td style="border-color:#F5F5F5;width:200px;">发货时间</td>
+					<td style="border-color:#F5F5F5;width:100px;">供货店铺</td>
+					<td style="border-color:#F5F5F5;width:100px;">发货单状态</td>
+					</tr>
+					<c:forEach items="${pages.datas}" var="i">
+						<tr align="center">
+						  <td style="border-color:#F5F5F5;height:35px;">${i.orderNumber}</td>
+						  <td style="border-color:#F5F5F5;"><fmt:formatDate value="${i.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+					      <td style="border-color:#F5F5F5;">${i.userName}</td>
+					      <td style="border-color:#F5F5F5;">
+					      
+					      <fmt:formatDate value="${i.deliverTime}" pattern="yyyy-MM-dd HH:mm:ss"/> 
+					     
+					      </td>
+						  <td style="border-color:#F5F5F5;">${i.shopNme}</td>
+						  <td style="border-color:#F5F5F5;">已发货</td>
+						</tr>	
+						</c:forEach>			
+				</table>
 
-														<tr align="center">
-														    <td>店铺图片</td>
-															<td>编号</td>
-															<td>用户名</td>
-															<td>店名</td>
-															<td>类型</td>
-															<td>介绍</td>
-							                                <td>审核状态</td>
-							                                <td>操作</td>
-														</tr>
-															<tr>
-															    <td><img class="shopimage"
-																	src=${pageContext.request.contextPath}${shopli.image}></td>
-																<td>${shopli.shop_id}</td>
-																<td>${shopli.user_ID}</td>
-																<td>${shopli.name}</td>
-																<td>${shopli.type}</td>
-																<td>${shopli.intro}</td>
-																<td><c:if test="${shopli.status==0 }">未审核</c:if>
-																    <c:if test="${shopli.status==1 }">已审核</c:if>
-																    <c:if test="${shopli.status==2 }">审核未通过</c:if></td>
-																<td><a href="toChange.do">查看</a>
-																<a href="showItem.do">商品</a>
-																<a href="addItem.jsp?shop_id=${shopli.shop_id }">添加商品</a>
-																<a onclick="deleteone(${shopli.shop_id})"
-																	href="javascript:void(0)">删除</a></td>
-
-															</tr>														
-													</tbody>
-												</table>
-												<!--footer-->
+			</div>											
+					</div>			
+						
+				<div style="height:40px;width:700px;text-align:right;padding-top:5px;margin-top:15px;">
+				    <span>总页数</span><span style="margin-right:10px;color:red;margin-left:10px;">${pages.totalpage}</span>
+				    <c:if test="${pages.pageNo>1}">
+				    <a href="waittingDeGoods.do?pageNo=${pages.pageNo-1}" style="line-height:40px;">上一页</a>
+				    </c:if>
+				    <c:if test="${pages.pageNo==1}">
+				    <span style="line-height:40px;">上一页</span>
+				    </c:if>
+					<span style="margin-left:10px;margin-right:10px;color:red;">${pages.pageNo}</span>
+					<c:if test="${pages.pageNo<pages.totalpage}">
+				    <a href="waittingDeGoods.do?pageNo=${pages.pageNo+1}" style="line-height:40px;">下一页</a>
+				    </c:if>
+				    <c:if test="${pages.pageNo==pages.totalpage}">
+				     <span style="line-height:40px;">下一页</span>
+				    </c:if>
+				</div>			
+												
+<!--footer-->
 	<footer style="margin-top:100px"> <img
 		src="${pageContext.request.contextPath}/image/footer-tri.png"
 		style="width: 100%;">

@@ -15,8 +15,11 @@
             <result column="Freight" property="freight" javaType="double" jdbcType="DOUBLE"/>
             <result column="TotalQuantity" property="totalQuantity" javaType="int" jdbcType="INTEGER"/>
             <result column="removeOrderTime" property="removeOrderTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
-             <result column="paytime" property="paytime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+            <result column="paytime" property="paytime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+            <result column="receGoodsTime" property="receGoodsTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+            <result column="evalTime" property="evalTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
         </resultMap>
+        
         <parameterMap type="cn.it.pojo.Order" id="OrderParameterMap">
             <parameter property="id" resultMap="findAll"/>  
             <parameter property="userID" resultMap="findAll"/>  
@@ -30,6 +33,8 @@
             <parameter property="totalQuantity" resultMap="findAll"/>
             <parameter property="removeOrderTime" resultMap="findAll"/>
             <parameter property="paytime" resultMap="findAll"/>
+            <parameter property="receGoodsTime" resultMap="findAll"/>
+             <parameter property="evalTime" resultMap="findAll"/>
        </parameterMap>
      <select id="selectAll" resultMap="findAll">
           select* from indent where User_ID=#{0} ORDER BY orderNumber DESC LIMIT #{1},#{2} 
@@ -70,6 +75,12 @@
      </update>
      <update id="updatePayTime" parameterMap="OrderParameterMap">
            update indent set paytime=#{paytime} where OrderNumber=#{orderNumber}
+     </update>
+     <update id="updateReceGoodsTime" parameterMap="OrderParameterMap">
+           update indent set receGoodsTime=#{receGoodsTime} where OrderNumber=#{orderNumber}
+     </update>
+     <update id="updateEvalTime" parameterMap="OrderParameterMap">
+           update indent set evalTime=#{evalTime} where OrderNumber=#{orderNumber}
      </update>
 	 <select id="countNumbers" resultType="Integer">
 	  select count(OrderNumber) from indent where User_ID=#{0} and Status=#{1}

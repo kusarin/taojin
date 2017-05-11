@@ -1,6 +1,7 @@
 package cn.it.dao;
 
 import java.util.List;
+
 import cn.it.pojo.Discuss;
 
 /**
@@ -26,4 +27,9 @@ public interface DiscussDao {
 	 * @return List<Discuss> 返回值为一个评论列表，包括一个或者多个评论
 	 */
 	public List<Discuss> FindItemDiscuss(int item_id);
+
+	/***
+	 * 根据订单号查询所有商品
+	 * */
+	public List<Discuss> select(String orderNumber);
 }
