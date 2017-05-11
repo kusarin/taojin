@@ -34,34 +34,35 @@ public class ShopServiceImpl implements ShopService {
 	public List<Shop> searchShop(String str){
 		return shopDao.searchShop(str);
 	}
+	public List<Shop> findByType(String type){
+		return shopDao.findByType(type);
+	}
     public void addShop(Shop shop){
     	shopDao.addShop(shop);
     }
     public ModelAndView addShop(Shop shop, HttpServletRequest request,
 			HttpSession session, MultipartFile file) {
 		ModelAndView str = new ModelAndView("addShop");
+			String path = request.getServletContext().getRealPath("image");
+			// 将图片文件名命名为上传时间
+
+			String fileName = String.valueOf(System.currentTimeMillis())
+					+ file.getOriginalFilename();
+			// 获取图片文件路径
+			File targetFile = new File(path, fileName);
+			if (!targetFile.exists()) {
+				targetFile.mkdirs();
+			}
+			// 保存文件（图片）；
+			try {
+				file.transferTo(targetFile);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			// set方法
+			// System.out.println(picturefile + ">>>>>>>" + fileName);
+			shop.setImage("/image/" + fileName);
 		shopDao.addShop(shop);
-		// 商品图片部分
-		// 获取图片存储文件的路径
-		String path = request.getServletContext().getRealPath("image");
-		// 将图片文件名命名为上传时间
-		// System.out.println(picturefile);
-		String fileName = String.valueOf(System.currentTimeMillis())
-				+ file.getOriginalFilename();
-		// 获取图片文件路径
-		File targetFile = new File(path, fileName);
-		if (!targetFile.exists()) {
-			targetFile.mkdirs();
-		}
-		// 保存文件（图片）；
-		try {
-			file.transferTo(targetFile);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		// set方法
-		shop.setImage("/image/" + fileName);
-		// 商品图片部分结束
 		return str;
 	}
     public void deleteShop(Shop shop){
@@ -72,9 +73,9 @@ public class ShopServiceImpl implements ShopService {
 		return shopDao.findByid(id);
 	}
 
-	public List<Shop> findShopList(int num){
+	public List<Shop> findShopList(){
 		// TODO Auto-generated method stub
-		return shopDao.findShopList(num);
+		return shopDao.findShopList();
 	}
 
 	public long viewHits(Long id) {

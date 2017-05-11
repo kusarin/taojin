@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 public interface ShopService {
    Shop findByid(int id);
    Shop getAllByUserid(int num);
-   List<Shop> findShopList(int num);
+   List<Shop> findShopList();
    public void changeInfoByid(Shop shop);
    public void addShop(Shop shop);
    public ModelAndView addShop(Shop shop, HttpServletRequest request,
@@ -27,4 +27,5 @@ public interface ShopService {
    List<Shop> searchShop(String str);
    public int totalPage(int total);
    public List<Integer> pageList(int page, int totalPage);
+   List<Shop> findByType(String type);
 }

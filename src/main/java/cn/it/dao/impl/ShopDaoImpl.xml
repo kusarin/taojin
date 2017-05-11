@@ -30,11 +30,14 @@
 	<select id="findByid" parameterType="int" resultType="cn.it.pojo.Shop">
 		Select * from shop where shop_id=#{id}
 	</select>
+	<select id="findByType" resultMap="findAll">
+	    Select * from shop where type =  #{type} 
+	</select>
 	<insert id="addShop" parameterType="cn.it.pojo.Shop">
 	    Insert into shop(user_ID,Name,Type,Intro,BrowsingTimes,Status,Image) values(#{user_ID},#{Name},#{Type},#{Intro},0,0,#{Image})
 	</insert>
 	<select id="findShopList" resultMap="findAll">
-		Select * from shop where shop_id =#{id}
+		Select * from shop where status = 1
 	</select>
 	<select id="getAllByUserid" resultMap="findAll">
 	    Select * from shop where user_ID = #{user_ID}
@@ -55,7 +58,7 @@
 	</select>
 
 	<select id="findAll"  resultType="cn.it.pojo.Shop">
-	    Select * from shop
+	    Select * from shop where status = 1
 	</select>
 	<select id="searchShop" parameterType="String" resultType="cn.it.pojo.Shop">
 		select * from shop where Name like concat(concat('%',#{str}),'%')			

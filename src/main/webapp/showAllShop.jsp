@@ -1,49 +1,74 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
+<link href="./css/itemlist.css" rel="stylesheet">
 <link href="./TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="./TaoJin/css/style.css" rel="stylesheet">
-<link href="./TaoJin/css/flexslider.css" type="text/css" media="screen"
-	rel="stylesheet" />
+<link href="./TaoJin/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
 <link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
 <link href="./css/shopSearch.css" rel="stylesheet">
+<title>Insert title here</title>
 <style>
+.left {
+	width: 175px;
+	heigh: auto;
+	float: left;
+	margin-left: 20px;
+}
+
+.right {
+	width: auto;
+	heigh: auto;
+	margin-top: 20px;
+}
+
 .itemimage {
-	width: 150px;
-	height: 100px;
+	width: 300px;
+	height: 175px;
 	float: left;
 }
+
+.textname {
+	font-size: 20px;
+	color: black;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.textdetail {
+	font-size: 15px;
+	color: orange;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.textprice {
+	font-size: 20px;
+	color: red;
+}
 </style>
-
-<!-- 弹窗设置点 -->
 <script type="text/javascript">
-	window.onload = function() {
-		var error = "${requestScope.error}";
-		if (error != "" && error != null && typeof (error) != "undefined") {
-			alert(error);
-		}
-	}
-	function setTab(name,m,n){ 
-		for( var i=1;i<=n;i++){ 
-		var menu = document.getElementById(name+i); 
-		var showDiv = document.getElementById("cont_"+name+"_"+i); 
-		menu.className = i==m ?"on":""; 
-		showDiv.style.display = i==m?"block":"none"; 
-		} 
+function setTab(name,m,n){ 
+	for( var i=1;i<=n;i++){ 
+	var menu = document.getElementById(name+i); 
+	var showDiv = document.getElementById("cont_"+name+"_"+i); 
+	menu.className = i==m ?"on":""; 
+	showDiv.style.display = i==m?"block":"none"; 
+	} 
+} 
 </script>
-<!-- 缺少部分：图片上传+获取店铺ID -->
-
-<title>商品管理</title>
 </head>
 <body>
-	<!-- Header Start -->
+<!-- Header Start -->
 	<header>
 	<div class="headerstrip">
 		<div class="container">
@@ -71,7 +96,7 @@
 								<div style="margin-left: 250px;">
 									<ul class="nav">
 										<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
-										<li><a class="myaccount" href="UsersUpdate.do">个人中心</a></li>
+										<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
 										<li><a class="checkout" href="shopList.do">我的店铺</a></li>
 										<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
 										<li><a class="checkout" href="orderItem.do">我的订单</a></li>
@@ -119,112 +144,112 @@
 	</div>
 	</header>
 	<!-- Header End -->
-	
-
-	<div id="maincontainer">
-		<section id="product">
-		<div class="container">
-			<!--  breadcrumb -->
-			<ul class="breadcrumb">
-				<li><a href="#">Home</a> <span class="divider">/</span></li>
-				<li class="active">Blog</li>
-			</ul>
-			<div class="row">
-				<!-- Sidebar Start-->
-				<aside class="span3">
-				<div class="sidewidt">
-					<h2 class="heading2">
-						<span>店铺管理</span>
-					</h2>
-					<ul class="nav nav-list categories">
-						<li><a href="addShop.jsp">认证店铺 </a></li>
-						<li><a href="shopList.do">查看记录 </a></li>
-						<li><a href="addItem.jsp">商品上架 </a></li>
-						<li><a href="shopItem.do?page=1">商品管理</a></li>
-						<li><a href="toChange.do">店铺信息管理</a></li>
-					</ul>
-				</div>
-
-				</aside>
-				<!-- Sidebar End-->
-				<div class="span9">
-					<!-- Blog start-->
-					<section id="latestblog">
-					<div class="blogdetail">
-						<h2 class="heading2">
-							<span>商品管理</span>
-						</h2>
-						<a href="shopLot.do?page=1">&nbsp拍卖品管理 </a>
-						<ul class="margin-none">
-							<li class="listblcok">
-								<div class="mb20">
-									<section class="leavecomment">
-									<div align="center">
-
-										<tbody>
-											<tr align="middle">
-												<table width="90%" border="1" align="center">
-													<thead>
-														<tr>
-															<td colspan="10" align="center">在售商品</td>
-														</tr>
-													</thead>
-													<tbody>
-
-														<tr align="center">
-															<td width=20%>商品图片</td>
-															<td width=20%>商品名称</td>
-															<td width=10%>商品数量</td>
-															<td width=10%>商品价格</td>
-															<td width=20%>商品状态</td>
-															<td width=20%>商品管理操作</td>
-														</tr>
-														<c:forEach items="${shopItem}" var="i">
-
-															<tr>
-																<td><img class="itemimage"
-																	src=${pageContext.request.contextPath}${i.image}></td>
-																<td>${i.name}</td>
-																<td>${i.number}</td>
-																<td>${i.price}</td>
-																<c:if test="${i.status == 0}">
-																	<td>在售</td>
-																</c:if><c:if test="${i.status == 1}">
-																	<td>已下架</td>
-																</c:if>
-																<td><a href="showchangeItem.do?id=${i.item_id}">修改商品信息</a>
-																	<c:if test="${i.status == 0}"><a href="updownItem.do?id=${i.item_id}">下架商品</a></c:if>
-																	<c:if test="${i.status == 1}"><a href="updownItem.do?id=${i.item_id}">上架商品</a></c:if>
-																</td>
-															</tr>
-														</c:forEach>
-
-
-													</tbody>
-												</table>
-												</form>
-									</div>
-									</section>
-								</div>
-							</li>
-						</ul>
-					</div>
-					</section>
-				</div>
+	<!-- 商品类型选择区域 start-->
+	<div class="left">
+		<div class="all-sort-list">
+			<div class="item">
+				<h3>
+					<span>·</span><a href="showShop.do?type=笔记本&page=1">动漫</a>、<a
+						href="showShop.do?type=日常用品&page=1">游戏</a>、<a
+						href="showShop.do?type=乐器&page=1">乐器</a>
+				</h3>
+			<div class="item">
+				<h3>
+					<span>·</span><a href="showShop.do?type=数码用品&page=1">数码用品</a>、<a
+						href="showShop.do?type=电脑&page=1">电脑</a>
+				</h3>
+			</div>
+			<div class="item">
+				<h3>
+					<span>·</span><a href="showShop.do?type=运动&page=1">运动</a>、<a
+						href="showShop.do?type=户外健身&page=1">户外健身</a>
+				</h3>
 			</div>
 		</div>
-		</section>
+		<p>${show}</p>
+		<p>${type}</p>
+	</div>
+</div>	
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript">
+		$('.all-sort-list > .item').hover(
+				function() {
+					var eq = $('.all-sort-list > .item').index(this), //获取当前滑过是第几个元素
+					h = $('.all-sort-list').offset().top, //获取当前下拉菜单距离窗口多少像素
+					s = $(window).scrollTop(), //获取游览器滚动了多少高度
+					i = $(this).offset().top, //当前元素滑过距离窗口多少像素
+					item = $(this).children('.item-list').height(), //下拉菜单子类内容容器的高度
+					sort = $('.all-sort-list').height(); //父类分类列表容器的高度
+
+					if (item < sort) { //如果子类的高度小于父类的高度
+						if (eq == 0) {
+							$(this).children('.item-list').css('top', (i - h));
+						} else {
+							$(this).children('.item-list').css('top',
+									(i - h) + 1);
+						}
+					} else {
+						if (s > h) { //判断子类的显示位置，如果滚动的高度大于所有分类列表容器的高度
+							if (i - s > 0) { //则 继续判断当前滑过容器的位置 是否有一半超出窗口一半在窗口内显示的Bug,
+								$(this).children('.item-list').css('top',
+										(s - h) + 2);
+							} else {
+								$(this).children('.item-list').css('top',
+										(s - h) - (-(i - s)) + 2);
+							}
+						} else {
+							$(this).children('.item-list').css('top', 3);
+						}
+					}
+
+					$(this).addClass('hover');
+					$(this).children('.item-list').css('display', 'block');
+				}, function() {
+					$(this).removeClass('hover');
+					$(this).children('.item-list').css('display', 'none');
+				});
+
+		$('.item > .item-list > .close').click(function() {
+			$(this).parent().parent().removeClass('hover');
+			$(this).parent().hide();
+		});
+	</script>
+	<!-- 商品类型选择区域 end-->
+	<div class="right" style="margin-left: 275px">
+		<h1 style="color: orange">${error0}</h1>
+		<c:forEach items="${shoplist}" var="c">
+			<li class="span3">
+				<li class="span3">
+				<div>
+					<table border="1">
+						<thead>
+							<tr>
+								<td><a href="lookshopItem.do?shopid=${c.shop_id}&page=1" target=${c.shop_id}> <img
+										class="shopimage"
+										src=${pageContext.request.contextPath}${c.image}>
+								</a></td>
+							</tr>
+							<tr>
+								<td><a href="lookshopItem.do?shopid=${c.shop_id}&page=1"><p
+											class="textname" style="height: 20px; width: 200px">${c.name}</p></a>
+								</td>
+							</tr>
+						</thead>
+					</table>
+					<br>
+				</div>
+			</li>
+		</c:forEach>
 	</div>
 
-
-<!-- 页码显示部分 -->
+	<!-- 页码显示部分 -->
 	<div style="width: 500px">&nbsp</div>
-	<form action="shopItem.do?" method="post">
+	<form action="showAllShop.do" method="post">
 		<!-- 上一页 按钮 -->
 		<div align="center">
 			<c:choose>
 				<c:when test="${page != 1}">
-					<a href="shopItem.do?page=${page-1}"><input type="button"
+					<a href="showAllShop.do?page=${page-1}"><input type="button"
 						name="lastPage" value="上一页" class="btn btn-orange" /></a>
 				</c:when>
 				<c:otherwise>
@@ -237,14 +262,14 @@
 				<c:choose>
 					<c:when test="${pn == page}">${pn}</c:when>
 					<c:otherwise>
-						<a href="shopItem.do?page=${pn}"><U>${pn}</U></a>
+						<a href="showAllShop?page=${pn}"><U>${pn}</U></a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<!-- 下一页 按钮 -->
 			<c:choose>
 				<c:when test="${page != totalPage}">
-					<a href="shopItem.do?page=${page+1}"> <input type="button"
+					<a href="showAllShop?page=${page+1}"> <input type="button"
 						name="nextPage" value="下一页" class="btn btn-orange" />
 					</a>
 				</c:when>
@@ -262,8 +287,10 @@
 		</div>
 	</form>
 
+
+
 	<!--footer-->
-	<footer style="margin-top:100px"> <img
+	<footer style="margin-bottom:0"> <img
 		src="${pageContext.request.contextPath}/image/footer-tri.png"
 		style="width: 100%;">
 	<div
@@ -274,7 +301,8 @@
 
 	</div>
 	<div style="text-align: center; margin-bottom: 10px;">
-		<a id="fd_footer" href="addComment.jsp">产品意见反馈</a>
+		<a id="fd_footer" href="addComment.jsp">产品意见反馈</a> <a
+			href="mlogin.jsp" target="_top">产品管理</a>
 	</div>
 	<div style="text-align: center; margin-bottom: 10px;">
 		<span>©2017 版权所有</span> <span>鄂ICP备14003265号-2</span>

@@ -1,6 +1,7 @@
 package cn.it.service.impl;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,6 +80,9 @@ public class LotServiceImpl implements LotService {
 			// 提示信息 "输入数据不能为空！！！"
 			str.addObject("error", "输入数据不能为空！！！");
 
+		} else if (Double.parseDouble(startprice) > Double
+				.parseDouble(maxprice)) {
+			str.addObject("error", "起拍价不能大于一口价，请重新输入信息！");
 		} else {// 参数不为空时候，执行添加操作
 
 			// 获取店铺编号shop_id
@@ -90,9 +94,12 @@ public class LotServiceImpl implements LotService {
 			// 将拍卖品起拍价和最高价转为规定格式：double
 			// 加价额度固定为0.5,初始当前价格为起拍价
 			double strpri = Double.parseDouble(startprice);
+			BigDecimal b=new BigDecimal(strpri); 
+			double strpri1= b.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
 			double maxpri = Double.parseDouble(maxprice);
+			BigDecimal c=new BigDecimal(maxpri); 
+			double maxpri1= c.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
 			double addpri = 0.5;
-			double nowpri = strpri;
 
 			// 根据二阶类型获取一阶类型
 			Typel tyl = typelDao.FindTypelByName(typel);
@@ -108,9 +115,9 @@ public class LotServiceImpl implements LotService {
 			lot.setName(name);
 			lot.setTypeh(typeh);
 			lot.setTypel(typel);
-			lot.setstartprice(strpri);
-			lot.setNowprice(nowpri);
-			lot.setMaxprice(maxpri);
+			lot.setstartprice(strpri1);
+			lot.setNowprice(strpri1);
+			lot.setMaxprice(maxpri1);
 			lot.setAddprice(addpri);
 			lot.setDetail(detail);
 
@@ -254,32 +261,32 @@ public class LotServiceImpl implements LotService {
 		if (yourprice == null || yourprice.equals("")) {
 			// 提示信息 "出价不能为空！！！"
 			str.addObject("error", "出价不能为空！！！");
-		}else {
+		} else {
 			Lot l = lotDao.FindLotById(lot_id);
 
 			// 将出价转为double,newprice:拍卖者出价
 			double newprice = Double.parseDouble(yourprice);
-			
+
 			// 获取拍卖品的当前价格、一口价、加价额度
 			double nowprice = l.getNowprice();
 			double maxprice = l.getMaxprice();
 			double addprice = l.getAddprice();
-			
-			if(newprice >= maxprice ){
-				// 提示信息 "出价不能高于最高价，建议用一口价买下该拍卖品！！！"
-				str.addObject("error", "出价不能高于最高价，建议用一口价买下该拍卖品！！！");
-			}else if(newprice < nowprice + addprice){
-				// 提示信息 "出价过低，请重新出价！！！"
-				str.addObject("error", "出价过低，请重新出价！！！");				
-			}else{
+
+			if (newprice >= maxprice) {
+				// 提示信息 "出价高于最高价，建议用一口价买下该拍卖品！！！"
+				str.addObject("error", "出价高于最高价，建议用一口价买下该拍卖品！！！");
+			} else if (newprice < nowprice + addprice) {
+				// 提示信息 "出价低于当前价格，请重新出价！！！"
+				str.addObject("error", "出价低于当前价格，请重新出价！！！");
+			} else {
 				// 设置新属性
 				l.setNowprice(newprice);
 				l.setUser_id(user_id);
 				// 更新拍卖品信息
 				lotDao.LotUpdate(l);
 				// 提示信息 "出价成功！！！"
-				str.addObject("error", "出价成功！！！");		
-			}				
+				str.addObject("error", "出价成功！！！");
+			}
 		}
 
 		return str;

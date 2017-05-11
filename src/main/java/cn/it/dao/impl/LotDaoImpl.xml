@@ -40,4 +40,13 @@
 		                      or detail like concat(concat('%',#{str}),'%')
 									
 	</select>
+	<!-- 拍卖品时间控制 -->
+	<update id="timeControl">
+		update lot set time =(time - 1) where status = 0
+	</update>
+	<!-- 获取拍卖时间到的拍卖品 -->
+	<select id="getOver" resultType="cn.it.pojo.Lot">
+		select * from lot where status = 0 and time = 0
+	</select>
+	
 </mapper>

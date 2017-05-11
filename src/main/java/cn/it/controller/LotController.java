@@ -1,6 +1,6 @@
 package cn.it.controller;
 
-import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.it.dao.LotDao;
-import cn.it.pojo.Item;
 import cn.it.pojo.Lot;
 import cn.it.pojo.Users;
 import cn.it.service.LotService;
@@ -72,7 +70,12 @@ public class LotController {
 		// 获取拍卖品
 		int lot_id = Integer.parseInt(id);
 		Lot l = lotservice.findById(lot_id);
-
+		int d = l.getTime() / (24*60);
+		int h = (l.getTime()-d*24*60)/60;
+		int m = l.getTime() - d*24*60 - h*60;
+		
+		String timeLast = "拍卖剩余时间：" + d+"天"+h+"小时"+m+"分钟";
+		modelandview.addObject("timeLast", timeLast);
 		modelandview.addObject("lookLot", l);
 
 		// 获取拍卖人
@@ -334,21 +337,32 @@ public class LotController {
 
 		// 获取出价
 		String yourprice = request.getParameter("yourprice");
+		double newprice1 = Double.parseDouble(yourprice);
+		BigDecimal b=new BigDecimal(newprice1); 
+		double p= b.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();  
+		String newprice = String.valueOf(p);
 
 		// 获取用户编号
 		Users user = (Users) session.getAttribute("user");
 		int user_id = user.getUser_ID();
 
-		ModelAndView modelandview = lotservice.anction(lot_id, yourprice,
+		ModelAndView modelandview = lotservice.anction(lot_id, newprice,
 				user_id);
 
 		// 重新获取拍卖品
 		Lot l = lotservice.findById(lot_id);
 
 		modelandview.addObject("lookLot", l);
+		
+		int d = l.getTime() / (24*60);
+		int h = (l.getTime()-d*24*60)/60;
+		int m = l.getTime() - d*24*60 - h*60;
+		
+		String timeLast = "拍卖剩余时间：" + d+"天"+h+"小时"+m+"分钟";
+		modelandview.addObject("timeLast", timeLast);
 
 		// 获取拍卖人
-		Users u = lotservice.finduser(user_id);
+		Users u = lotservice.finduser(l.getUser_id());
 
 		modelandview.addObject("us", u);
 

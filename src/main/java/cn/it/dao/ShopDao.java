@@ -9,10 +9,11 @@ public interface ShopDao {
     public void changeInfoByid(Shop shop);
     public void addShop(Shop shop);
     public void deleteShop(Shop shop);
-    List<Shop> findShopList(int num);
+    List<Shop> findShopList();
 	List<Shop> findSRList();
 	int findUserByid(int id1);
 	void updateStatus(int id,int id1);
+	List<Shop> findByType(String type);
 	List<Shop> findAll();
 	List<Shop> searchShop(String str);
 }

@@ -1,31 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page isELIgnored="false"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+.left {
+	width: 130px;
+	heigh: auto;
+	float: left;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+.right {
+	width: auto;
+	heigh: auto;
+	margin-top: 20px;
+	margin-left: 149px;
+}
+
+.itemimage {
+	width: 300px;
+	height: 175px;
+	float: left;
+}
+.textshopname {
+	font-size: 30px;
+	color: red;
+}
+.textname {
+	font-size: 20px;
+	color: black;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.textdetail {
+	font-size: 15px;
+	color:orange;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.textprice {
+	font-size: 20px;
+	color: red;
+}
+</style>
+<link href="./css/shopSearch.css" rel="stylesheet">
+<!-- 弹窗设置点 -->
+<script type="text/javascript">
+	window.onload = function() {
+		var error = "${requestScope.error}";
+		if (error != "" && error != null && typeof (error) != "undefined") {
+			alert(error);
+		}
+	}
+	function setTab(name,m,n){ 
+		for( var i=1;i<=n;i++){ 
+		var menu = document.getElementById(name+i); 
+		var showDiv = document.getElementById("cont_"+name+"_"+i); 
+		menu.className = i==m ?"on":""; 
+		showDiv.style.display = i==m?"block":"none"; 
+		} 
+</script>
+<title> ${shopinfo.name}</title>
 <link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
 <link href="./TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="./TaoJin/css/style.css" rel="stylesheet">
-<link href="./TaoJin/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
+<link href="./TaoJin/css/flexslider.css" type="text/css" media="screen"
+	rel="stylesheet" />
 <link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
 <link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
-<link href="./css/shopSearch.css" rel="stylesheet">
-<title>Insert title here</title>
-<script type="text/javascript">
-function setTab(name,m,n){ 
-	for( var i=1;i<=n;i++){ 
-	var menu = document.getElementById(name+i); 
-	var showDiv = document.getElementById("cont_"+name+"_"+i); 
-	menu.className = i==m ?"on":""; 
-	showDiv.style.display = i==m?"block":"none"; 
-	} 
-} 
-</script>
 </head>
 <body>
+
 <!-- Header Start -->
 	<header>
 	<div class="headerstrip">
@@ -102,25 +155,30 @@ function setTab(name,m,n){
 	</div>
 	</header>
 	<!-- Header End -->
-	<div class="right" style="margin-left: 275px">
-		<h1 style="color: orange">${error0}</h1>
-		<c:forEach items="${itemlist}" var="i">
-			<li class="span3">
+	
+	
+	<div class="left">
+			<p class="textshopname" style="height: 40px; width: 200px"> ${shopinfo.name}</p>
+			<p class="textdetail" style="height: 40px; width: 200px"> ${shopinfo.intro}</p>
+		</div>
+	
+
+<div style="margin-left: 250px;">
+<h1 style="color:orange">${error0}</h1>
+	<c:forEach items="${showshopItem}" var="i">
+		<li class="span3">
 				<div>
 					<table border="1">
 						<thead>
 							<tr>
-								<td><a href="lookItem.do?id=${i.item_id}" target=${i.item_id}> <img
-										class="itemimage"
-										src=${pageContext.request.contextPath}${i.image}>
+								<td><a href="lookshopItem.do?shopid=${c.shop_id}&page=1" target=${c.shop_id}> <img
+										class="shopimage"
+										src=${pageContext.request.contextPath}${c.image}>
 								</a></td>
 							</tr>
 							<tr>
-								<td><a href="lookItem.do?id=${i.item_id}" target=${i.item_id}><p
-											class="textname" style="height: 20px; width: 200px">${i.name}</p></a>
-									<a href="lookItem.do?id=${i.item_id}" class="textprice" target=${i.item_id}>商品价格:
-										¥ ${i.price}</a> <br> <a href="lookItem.do?id=${i.item_id}" target=${i.item_id}><p
-											class="textdetail" style="height: 20px; width: 275px" title=${i.detail}>${i.detail}</p></a>
+								<td><a href="lookshopItem.do?shopid=${c.shop_id}&page=1"><p
+											class="textname" style="height: 20px; width: 200px">${c.name}</p></a>
 								</td>
 							</tr>
 						</thead>
@@ -128,17 +186,16 @@ function setTab(name,m,n){
 					<br>
 				</div>
 			</li>
-		</c:forEach>
+	</c:forEach>
 	</div>
-
 	<!-- 页码显示部分 -->
 	<div style="width: 500px">&nbsp</div>
-	<form action="Itemlist.do" method="post">
+	<form action="lookshopItem.do?shopid=${shopinfo.shop_id}" method="post">
 		<!-- 上一页 按钮 -->
 		<div align="center">
 			<c:choose>
 				<c:when test="${page != 1}">
-					<a href="Itemlist.do?page=${page-1}"><input type="button"
+					<a href="lookshopItem.do?shopid=${shopinfo.shop_id}&page=${page-1}"><input type="button"
 						name="lastPage" value="上一页" class="btn btn-orange" /></a>
 				</c:when>
 				<c:otherwise>
@@ -151,14 +208,14 @@ function setTab(name,m,n){
 				<c:choose>
 					<c:when test="${pn == page}">${pn}</c:when>
 					<c:otherwise>
-						<a href="Itemlist.do?page=${pn}"><U>${pn}</U></a>
+						<a href="lookshopItem.do?shopid=${shopinfo.shop_id}&page=${pn}"><U>${pn}</U></a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<!-- 下一页 按钮 -->
 			<c:choose>
 				<c:when test="${page != totalPage}">
-					<a href="Itemlist.do?page=${page+1}"> <input type="button"
+					<a href="lookshopItem.do?shopid=${shopinfo.shop_id}&page=${page+1}"> <input type="button"
 						name="nextPage" value="下一页" class="btn btn-orange" />
 					</a>
 				</c:when>
@@ -175,11 +232,11 @@ function setTab(name,m,n){
 				type="submit" value="跳转" />
 		</div>
 	</form>
-
-
-
-	<!--footer-->
-	<footer style="margin-bottom:0"> <img
+	
+	
+	
+		<!--footer-->
+	<footer style="margin-top:100px"> <img
 		src="${pageContext.request.contextPath}/image/footer-tri.png"
 		style="width: 100%;">
 	<div
@@ -190,8 +247,7 @@ function setTab(name,m,n){
 
 	</div>
 	<div style="text-align: center; margin-bottom: 10px;">
-		<a id="fd_footer" href="addComment.jsp">产品意见反馈</a> <a
-			href="mlogin.jsp" target="_top">产品管理</a>
+		<a id="fd_footer" href="addComment.jsp">产品意见反馈</a>
 	</div>
 	<div style="text-align: center; margin-bottom: 10px;">
 		<span>©2017 版权所有</span> <span>鄂ICP备14003265号-2</span>

@@ -88,7 +88,7 @@
 								<div style="margin-left: 250px;">
 									<ul class="nav">
 										<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
-										<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
+										<li><a class="myaccount" href="UsersUpdate.do">个人中心</a></li>
 										<li><a class="checkout" href="shopList.do">我的店铺</a></li>
 										<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
 										<li><a class="checkout" href="orderItem.do">我的订单</a></li>

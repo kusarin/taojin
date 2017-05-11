@@ -116,6 +116,12 @@
 												<td><label class="control-label">用户身份证号</label></td>
 												<td>${user.ID}</td>
 											</tr>
+											<tr>
+												<td><label class="control-label">用户头像</label></td>
+												<td><img style="width: 100px; length: 100px"
+													src="${pageContext.request.contextPath}${user.picture}">
+												</td>
+											</tr>
 										</tbody>
 									</table>
 									<br>

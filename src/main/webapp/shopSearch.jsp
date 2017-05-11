@@ -40,7 +40,7 @@ function setTab(name,m,n){
 	margin-top: 20px;
 }
 
-.itemimage {
+.shopimage {
 	width: 300px;
 	height: 175px;
 	float: left;
@@ -155,11 +155,13 @@ function setTab(name,m,n){
 					<table border="1">
 						<thead>
 							<tr>
-								<td>
+								<td><a href="lookshopItem.do?shopid=${c.shop_id}&page=1" target=${c.shop_id}> <img
+										class="shopimage"
+										src=${pageContext.request.contextPath}${c.image}>
 								</a></td>
 							</tr>
 							<tr>
-								<td>${c.shop_id}<p
+								<td><a href="lookshopItem.do?shopid=${c.shop_id}&page=1"><p
 											class="textname" style="height: 20px; width: 200px">${c.name}</p></a>
 								</td>
 							</tr>

@@ -64,7 +64,7 @@
 								<div style="margin-left: 250px;">
 									<ul class="nav">
 										<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
-										<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
+										<li><a class="myaccount" href="UsersUpdate.do">个人中心</a></li>
 										<li><a class="checkout" href="shopList.do">我的店铺</a></li>
 										<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
 										<li><a class="checkout" href="orderItem.do">我的订单</a></li>
@@ -243,7 +243,7 @@
 													<div class="control-group">
 														<td>拍卖品起拍价:¥</td>
 														<div class="controls">
-															<td><input type="text" name="startprice" /></td>
+															<td><input type="text" name="startprice" onkeyup="if(isNaN(value))execCommand('undo')" onafterpaste="if(isNaN(value))execCommand('undo')"/></td>
 														</div>
 													</div>
 												</tr>
@@ -251,7 +251,7 @@
 													<div class="control-group">
 														<td>拍卖品最高价:¥</td>
 														<div class="controls">
-															<td><input type="text" name="maxprice" /></td>
+															<td><input type="text" name="maxprice" onkeyup="if(isNaN(value))execCommand('undo')" onafterpaste="if(isNaN(value))execCommand('undo')"/></td>
 														</div>
 													</div>
 												</tr>
