@@ -329,25 +329,26 @@ public class LotController {
 	}
 
 	@RequestMapping("auction.do")
-	public ModelAndView auction(HttpServletRequest request, HttpSession session) {
+	public ModelAndView auction(HttpServletRequest request, HttpSession session,int id) {
 
 		// 获取拍卖品编号
-		String id = request.getParameter("id");
-		int lot_id = Integer.parseInt(id);
+		int lot_id = id;
+		ModelAndView modelandview = new ModelAndView("lookLot");
+		if(request.getParameter("yourprice") != null){
+			// 获取出价
+			String yourprice = request.getParameter("yourprice");
+			double newprice1 = Double.parseDouble(yourprice);
+			BigDecimal b=new BigDecimal(newprice1); 
+			double p= b.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();  
+			String newprice = String.valueOf(p);
 
-		// 获取出价
-		String yourprice = request.getParameter("yourprice");
-		double newprice1 = Double.parseDouble(yourprice);
-		BigDecimal b=new BigDecimal(newprice1); 
-		double p= b.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();  
-		String newprice = String.valueOf(p);
+			// 获取用户编号
+			Users user = (Users) session.getAttribute("user");
+			int user_id = user.getUser_ID();
 
-		// 获取用户编号
-		Users user = (Users) session.getAttribute("user");
-		int user_id = user.getUser_ID();
-
-		ModelAndView modelandview = lotservice.anction(lot_id, newprice,
-				user_id);
+			 modelandview = lotservice.anction(lot_id, newprice,
+					user_id);
+		}
 
 		// 重新获取拍卖品
 		Lot l = lotservice.findById(lot_id);

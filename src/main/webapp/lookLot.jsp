@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+<meta http-equiv="refresh" content="20">
 <meta charset="utf-8">
 <title>${lookLot.name}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -163,31 +163,35 @@
 									<span class="bgnone">拍卖品：${lookLot.name}</span>
 								</h1>
 								<div class="productprice">
+									<font size=4>${timeLast}</font>
+								</div>
+								<br>
+								<div class="productprice">
 									<font size=4>拍卖品起拍价:¥${lookLot.startprice}</font>
 								</div>
+								<br>
 								<div class="productprice">
 									<font size=4>拍卖品一口价:¥${lookLot.maxprice}</font>
 								</div>
-
+								<br>
 								<div class="productprice">
 									<font size=4>拍卖品当前价格:¥${lookLot.nowprice}</font>
 								</div>
+								<br>
 								<div class="productprice">
-									<font size=4>${timeLast}</font>
+									<font size=4>当前出价人:${us.username}</font> <br>
 								</div>
+								<br>
 								<div class="productprice">
-									<font size=4>当前出价人:${us.username}</font>
-									<br>
+									<font size=4>拍卖品介绍:${lookLot.detail}</font> <br>
 								</div>
+								<br>
 							</div>
-
 							<!-- 出价区域 -->
-							<form action="auction.do" method="post">
+							<form action="auction.do?id=${lookLot.lot_id}" method="post">
 								<div style="margin-top: 10px; margin-left: 30px;">
-									<input type="hidden" name="id" value=${lookLot.lot_id}>
-									<input type="text" name="yourprice" 
-										onkeyup="if(isNaN(value))execCommand('undo')" 
-										onafterpaste="if(isNaN(value))execCommand('undo')"
+									<input type="text" name="yourprice"
+										onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46 || /\.\d\d$/.test(value))event.returnValue=false"
 										class="input-medium search-query" placeholder="输入你的价格"
 										style="height: 20px; width: 100; border: 4px solid #FFA07A">
 									<input type="submit" value="出价"
@@ -195,27 +199,13 @@
 								</div>
 							</form>
 							<!-- 出价区域 end-->
-						
+
 							<div class="span7">
 								<ul class="productpagecart">
 									<li><a class="cart" href="#">一口价购买</a></li>
 								</ul>
 							</div>
-
 						</div>
-
-						<!-- 拍卖品描述 -->
-						<div class="productdesc">
-							<ul class="nav nav-tabs" id="myTab">
-								<li class="active"><a href="#description">拍卖品描述</a></li>
-							</ul>
-							<div class="tab-content">
-								<div class="tab-pane active" id="description">
-									<p>${lookLot.detail}</p>
-								</div>
-							</div>
-						</div>
-
 					</div>
 				</div>
 			</div>

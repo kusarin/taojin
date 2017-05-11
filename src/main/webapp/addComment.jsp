@@ -3,6 +3,48 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<style>
+.left {
+	width: 175px;
+	heigh: auto;
+	float: left;
+	margin-left: 20px;
+}
+
+.right {
+	width: auto;
+	heigh: auto;
+	margin-top: 20px;
+}
+
+.itemimage {
+	width: 300px;
+	height: 175px;
+	float: left;
+}
+
+.textname {
+	font-size: 20px;
+	color: black;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.textdetail {
+	font-size: 15px;
+	color: orange;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.textprice {
+	font-size: 20px;
+	color: red;
+}
+</style>
+
 <title>留言</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
@@ -14,6 +56,16 @@
 <link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
 <!-- fav -->
 <link rel="shortcut icon" href="assets/ico/favicon.html">
+<script type="text/javascript">
+	function setTab(name, m, n) {
+		for (var i = 1; i <= n; i++) {
+			var menu = document.getElementById(name + i);
+			var showDiv = document.getElementById("cont_" + name + "_" + i);
+			menu.className = i == m ? "on" : "";
+			showDiv.style.display = i == m ? "block" : "none";
+		}
+	}
+</script>
 </head>
 <body>
 	<header>
@@ -33,13 +85,16 @@
 											style="margin-left: 20px; color: white;"> 注册</span></a>
 									</c:if>
 									<c:if test="${user != null}">
+										<img style="width: 20px; length: 20px"
+											src="${pageContext.request.contextPath}${user.picture}">
 										<c:out value="${user.username}" />
+										<a href="logout.do"><span style="color: white;"> 注销</span></a>
 									</c:if>
 								</div>
 								<div style="margin-left: 250px;">
 									<ul class="nav">
-										<li><a class="home active" href="Itemlist.do">首页</a></li>
-										<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
+										<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
+										<li><a class="myaccount" href="UsersUpdate.do">个人中心</a></li>
 										<li><a class="checkout" href="shopList.do">我的店铺</a></li>
 										<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
 										<li><a class="checkout" href="orderItem.do">我的订单</a></li>
@@ -49,18 +104,6 @@
 						</div>
 					</div>
 					<!-- Top Nav End -->
-					<div class="pull-right">
-						<form action="searchItem.do" method="post">
-							<div style="margin-top: 10px;">
-								<input type="text" name="str" class="input-medium search-query"
-									placeholder="搜索你想要的二手"
-									style="height: 20px; width: 100; border: 4px solid #FFA07A">
-								<input type="submit" value="搜索"
-									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
-							</div>
-
-						</form>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -100,7 +143,7 @@
 											<div class="controls">
 												<input type="submit" value="发送" onclick="return check()"
 													class="btn btn-orange" style="width: 200px" /> <a
-													href="./Itemlist.do">返回</a>
+													href="Itemlist.do?page=1">返回</a>
 											</div>
 										</fieldset>
 									</form>
