@@ -116,6 +116,11 @@
 												<td>${sr.type}</td>
 											</tr>
 											<tr>
+												<td><label class="control-label">店铺图片</label></td>
+												<td><img style="width: 100px; length: 100px"
+													src="${pageContext.request.contextPath}${sr.image}"></td>
+											</tr>
+											<tr>
 												<td><label class="control-label">店铺介绍</label></td>
 												<td>${sr.intro}</td>
 											</tr>
@@ -124,16 +129,32 @@
 												<td>${user.username}</td>
 											</tr>
 											<tr>
+												<td><label class="control-label">用户头像</label></td>
+												<td><img style="width: 100px; length: 100px"
+													src="${pageContext.request.contextPath}${user.picture}">
+												</td>
+											</tr>
+											<tr>
 												<td><label class="control-label">用户真实姓名</label></td>
 												<td>${user.name}</td>
 											</tr>
 											<tr>
-												<td><label class="control-label">用户联系方式</label></td>
+												<td><label class="control-label">用户移动电话</label></td>
 												<td>${user.tele}</td>
+											</tr>
+											<tr>
+												<td><label class="control-label">用户电子邮箱</label></td>
+												<td>${user.email}</td>
 											</tr>
 											<tr>
 												<td><label class="control-label">用户身份证号</label></td>
 												<td>${user.ID}</td>
+											</tr>
+											<tr>
+												<td><label class="control-label">用户身份证照片</label></td>
+												<td><img style="width: 100px; length: 100px"
+													src="${pageContext.request.contextPath}${user.idPhoto}">
+												</td>
 											</tr>
 										</tbody>
 									</table>

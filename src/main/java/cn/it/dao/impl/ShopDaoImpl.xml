@@ -58,7 +58,7 @@
 	</select>
 
 	<select id="findAll"  resultType="cn.it.pojo.Shop">
-	    Select * from shop
+	    Select * from shop where status = 1
 	</select>
 	<select id="searchShop" parameterType="String" resultType="cn.it.pojo.Shop">
 		select * from shop where Name like concat(concat('%',#{str}),'%')			
