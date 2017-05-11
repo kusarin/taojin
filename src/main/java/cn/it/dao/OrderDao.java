@@ -72,13 +72,5 @@ public interface OrderDao {
 	 * 评价时间
 	 * */
 	public void updateEvalTime(Order o);
-	/*
-	 *发货时间 
-	 */
-	public void updateDeverliTime(Order o);
-	/*********
-	 * 根据订单状态查询订单、店铺Id
-	 * @param(userId用户Id,status：订单状态)
-	 * */
-	public List<Order> getWaitting(int shopId,String status,int startNo,int pageSize);
+	
 }

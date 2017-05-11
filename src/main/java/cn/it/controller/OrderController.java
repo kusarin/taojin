@@ -47,7 +47,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
+
 import cn.it.pojo.Address;
+import cn.it.pojo.Invoice;
 import cn.it.pojo.Order;
 import cn.it.pojo.OrderCollection;
 import cn.it.pojo.OrderDetail;
@@ -298,18 +300,15 @@ public class OrderController {
 		double total=order.getActulPayment(); //支付总额
 		return "redirect:payment.do?p2_Order="+orderNumber+"&p3_Amt="+total;
 	}
+	
 	/***
 	 * 待发货订单
 	 * */
 	@RequestMapping("waittingDeGoods.do")
-	public ModelAndView waittingDeGoods(int shop_id,Page<Order> page,HttpSession session){
-		
-		Users user=(Users) session.getAttribute("user");
-		int userId=user.getUser_ID();   //用户Id
+	public ModelAndView waittingDeGoods(int shop_id,int flag,Page<Invoice> page){
+
 		ModelAndView v=new ModelAndView("waittingDeGoods");
-		v.addObject("pages",orderService.getWaittingGoods(shop_id, "待发货",page));
-		v.addObject("username",usersService.findById(userId).getName());
-		v.addObject("shopname", shopService.findByid(shop_id).getName());
+		v.addObject("pages",orderService.selectInvoice(shop_id, flag, page));
 		v.addObject("shopid",shop_id);
 		return v;
 	}
@@ -320,20 +319,16 @@ public class OrderController {
 	public String sureDelivGoods(String orderNumber,int shopId){
 		
 		orderService.sureDeliGoods(orderNumber, shopId);
-		return "redirect:alreadyReGoods.do?shop_id="+shopId;
+		return "redirect:alreadyReGoods.do?shop_id="+shopId+"&flag=1";
 	}
 	/**
 	 * 已发货订单
 	 * */
 	@RequestMapping("alreadyReGoods.do")
-	public ModelAndView alreadyDeGoods(int shop_id,Page<Order> page,HttpSession session){
-		Users user=(Users) session.getAttribute("user");
-		int userId=user.getUser_ID();   //用户Id
-		ModelAndView v=new ModelAndView("alreadyReGoods");
+	public ModelAndView alreadyDeGoods(int shop_id,int flag,Page<Invoice> page){
 		
-		v.addObject("pages",orderService.getWaittingGoods(shop_id, "待收货",page));
-		v.addObject("username",usersService.findById(userId).getName());
-		v.addObject("shopname", shopService.findByid(shop_id).getName());
+		ModelAndView v=new ModelAndView("alreadyReGoods");
+		v.addObject("pages",orderService.selectInvoice(shop_id, flag, page));
 		v.addObject("shopid",shop_id);
 		return v;
 	}

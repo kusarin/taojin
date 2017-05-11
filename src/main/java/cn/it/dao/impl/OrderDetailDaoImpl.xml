@@ -14,6 +14,7 @@
                   <result column="itemPrice" property="itemPrice" javaType="double" jdbcType="DOUBLE"/>
                   <result column="itemNumbers" property="itemNumbers" javaType="int" jdbcType="INTEGER"/>
                   <result column="shopName" property="shopName" javaType="String" jdbcType="VARCHAR"/>
+                  
                 <association property="item"  javaType="cn.it.pojo.Item">
 	                <id column="Item_id" property="item_id" javaType="int" jdbcType="INTEGER"/>
 	                <result column="Shop_id" property="shop_id" javaType="int" jdbcType="INTEGER"/>
@@ -39,11 +40,14 @@
             <parameter property="mark" resultMap="findList"/>
             <parameter property="flag" resultMap="findList"/>
             <parameter property="shop_id" resultMap="findList"/>
-            
          </parameterMap>
          
           <select id="selectAll" parameterType="java.lang.String" resultMap="findList">
                 select i.*,o.* from orderdetail o,item i where i.Item_id=o.Item_id and o.OrderNumber=#{orderNumber}
+	      </select>
+	      
+	      <select id="selectO" parameterType="java.lang.String" resultMap="findList">
+               select i.*,o.* from orderdetail o,item i where i.Item_id=o.Item_id and o.OrderNumber=#{orderNumber} GROUP BY o.shop_id 
 	      </select>
 	      
 	      <insert id="add" parameterMap="OrderDetailParameterMap">
@@ -63,7 +67,9 @@
 	      <update id="updateFlag" parameterMap="OrderDetailParameterMap">
 	            update orderdetail set flag=#{flag} where OrderNumber=#{orderNumber} and Item_id=#{itemId}
 	      </update>
-	      
+	     <update id="updateDeverliTime" parameterMap="OrderDetailParameterMap">
+           update orderdetail set deverliTime=#{deverliTime} where OrderNumber=#{orderNumber} and shop_id=#{shop_id} and Item_id=#{itemId}
+         </update>
 	      <delete id="deleteAll">
 		        delete from orderdetail
 		     <where>

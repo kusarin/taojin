@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import cn.it.dao.AddressDao;
 import cn.it.dao.DiscussDao;
+import cn.it.dao.InvoiceDao;
 import cn.it.dao.ItemDao;
 import cn.it.dao.OrderDao;
 import cn.it.dao.OrderDetailDao;
@@ -21,6 +22,7 @@ import cn.it.dao.ShopDao;
 import cn.it.dao.UsersDao;
 import cn.it.pojo.Address;
 import cn.it.pojo.Discuss;
+import cn.it.pojo.Invoice;
 import cn.it.pojo.Item;
 import cn.it.pojo.Order;
 import cn.it.pojo.OrderCollection;
@@ -49,6 +51,8 @@ public  class OrderServiceImpl implements OrderService {
 	private DiscussDao discussDao;
 	@Autowired
 	private UsersDao usersDao;
+	@Autowired
+	private InvoiceDao invoiceDao;
 	// 任意对象
 	private static Object lockObj = "lockerOrder";
 	// 订单数量
@@ -99,6 +103,7 @@ public  class OrderServiceImpl implements OrderService {
 			order.setStatus("待发货");
 			order.setPaytime(new Timestamp(new Date().getTime()));
 			orderDao.updatePayTime(order);//更新支付时间
+			addInvoice(order);//生成发货单
 			break;
 		case 2:
 			order.setStatus("已取消");
@@ -413,17 +418,17 @@ public  class OrderServiceImpl implements OrderService {
 			itemDao.ItemUpdate(ii);//更新item表
 		}
 	}
+	
 	/*
-	 * 某个店铺中的所有待发货
+	 * 某个店铺中的所有待发货/已发货
 	 * 订单
 	 */
-	public Page<Order> getWaittingGoods(int shop_id,String status,Page<Order> pages){
+	public Page<Invoice> selectInvoice(int shop_id,int flag,Page<Invoice> pages){
 		
 		pages.setPagestart((pages.getPageNo()-1)*pages.getPagesize());//设置初始的页面条数
-		List<Order> o2=orderDao.getWaitting(shop_id, status, pages.getPagestart(), pages.getPagesize());//此店铺中的代发货订单
-		pages.setDatas(o2);
-		pages.setTotalrecord(o2.size());
-		
+		List<Invoice> in=invoiceDao.select(shop_id, flag, pages.getPagestart(), pages.getPagesize());
+		pages.setDatas(in);
+		pages.setTotalrecord(in.size());
 		return pages;
 		
 	}
@@ -434,21 +439,22 @@ public  class OrderServiceImpl implements OrderService {
 		
 		Order o=orderDao.findOrder(orderNumber);
 		List<OrderDetail> li=orderDetailDao.selectAll(orderNumber);
-		if(li.size()==1){
-			o.setStatus("待收货");
-			orderDao.update(o);
-			//发货时间
-			o.setDeverliTime(new Timestamp(new Date().getTime()));
-			orderDao.updateDeverliTime(o);
-		}
-		else{
-			for(OrderDetail or:li){//此店铺对应的此订单中的商品
-				int shopId=or.getItem().getshop_id();
-				if(shop_id==shopId){
-					or.setFlag(1);//此件商品已发货
-					orderDetailDao.updateFlag(or);
-				}
+		//跟新商品发货时间和发货状态
+		for(OrderDetail or:li){//此店铺对应的此订单中的商品
+			int shopId=or.getItem().getshop_id();
+			if(shop_id==shopId){
+				or.setFlag(1);//此件商品已发货
+				orderDetailDao.updateFlag(or);
+				
+				//商品发货时间、发货状态
+               Invoice in=invoiceDao.selectIn(orderNumber,shop_id);
+               
+               in.setFlag(1);
+               in.setDeliverTime(new Timestamp(new Date().getTime()));
+               
+               invoiceDao.update(in);
 			}
+		}
 			int num=0;
 			for(OrderDetail or1:li){
 				if(or1.getFlag()==1){
@@ -459,6 +465,27 @@ public  class OrderServiceImpl implements OrderService {
 				o.setStatus("待收货");
 				orderDao.update(o);
 			}
+}
+	
+	
+	/*
+	 * 生成发货单
+	 * */
+	public void addInvoice(Order o){
+		
+		String orderNumber =o.getOrderNumber();
+		List<OrderDetail> orl= orderDetailDao.selectO(orderNumber);
+		for(OrderDetail or1:orl){
+			Invoice in= new Invoice();
+			
+			in.setOrderNumber(o.getOrderNumber());
+			in.setOrderTime(o.getOrderTime());
+			String username=(usersDao.findById(o.getUserID())).getName();
+			in.setUserName(username);
+			in.setFlag(0);
+			in.setShop_id(or1.getShop_id());
+			in.setShopNme(or1.getShopName());
+			invoiceDao.add(in);
 		}
 	}
 }

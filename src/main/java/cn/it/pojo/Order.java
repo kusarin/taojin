@@ -24,7 +24,6 @@ public class Order {
 	private int totalQuantity; //购买总数
     private Date receGoodsTime;//收货时间
     private Date evalTime;//评价时间
-    private Date deverliTime;//发货时间
     private List<OrderDetail> ordl;
 	/******************************get****************************set**********/
     
@@ -37,12 +36,6 @@ public class Order {
 	}
 	public void setOrdl(List<OrderDetail> ordl) {
 		this.ordl = ordl;
-	}
-	public Date getDeverliTime() {
-		return deverliTime;
-	}
-	public void setDeverliTime(Date deverliTime) {
-		this.deverliTime = deverliTime;
 	}
 	public Date getEvalTime() {
 		return evalTime;

@@ -6,6 +6,7 @@ package cn.it.service;
 import java.util.List;
 
 import cn.it.pojo.Address;
+import cn.it.pojo.Invoice;
 import cn.it.pojo.Item;
 import cn.it.pojo.Order;
 import cn.it.pojo.OrderCollection;
@@ -107,10 +108,10 @@ public interface OrderService {
 	 * */
 	public void sureRGoods(String orderNumber);
 	/*
-	 * 某个店铺中的所有待发货
+	 * 某个店铺中的所有待发货/已发货
 	 * 订单
 	 */
-	public Page<Order> getWaittingGoods(int shop_id,String status,Page<Order> pages);
+	public Page<Invoice> selectInvoice(int shop_id,int flag,Page<Invoice> pages);
 	/*
 	 *确认发货,修改订单状态
 	 */

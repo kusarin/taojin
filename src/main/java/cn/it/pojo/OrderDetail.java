@@ -1,5 +1,7 @@
 package cn.it.pojo;
 
+import java.util.Date;
+
 /**
  * 
  * 订单明细 OrderDetail
@@ -18,6 +20,7 @@ public class OrderDetail {
 	private int mark;//标识订单中的商品是否进行过评价
 	private int flag;//标记此件商品是否发货
 	private int shop_id;
+	
     /*****************************get***************set*******/
 	
 	public int getId() {

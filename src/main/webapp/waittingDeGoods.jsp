@@ -129,9 +129,9 @@ function setTab(name,m,n){
 						<li><a href="addItem.jsp">商品上架 </a></li>
 						<li><a href="shopItem.do?page=1">商品管理</a></li>
 						<li><a href="toChange.do">店铺信息管理</a></li>	
-					<li><a href="waittingDeGoods.do?shop_id=${shopid}">订单管理</a>
-						<ul><a href="alreadyReGoods.do?shop_id=${shopid}">已处理</a></ul>
-						<ul><a href="waittingDeGoods.do?shop_id=${shopid}" style="color:red;">未处理</ul></li>
+					<li><a href="waittingDeGoods.do?shop_id=${shopid}&flag=0">订单管理</a>
+						<ul><a href="alreadyReGoods.do?shop_id=${shopid}&flag=1">已处理</a></ul>
+						<ul><a href="waittingDeGoods.do?shop_id=${shopid}&flag=0" style="color:red;">未处理</ul></li>
 					</ul>
 					
 				</div>
@@ -149,22 +149,20 @@ function setTab(name,m,n){
 					<td style="border-color:#F5F5F5;height:40px;width:100px;">订单号</td>
 					<td style="border-color:#F5F5F5;width:200px;">下单时间</td>
 					<td style="border-color:#F5F5F5;width:100px;">收货人</td>
-					<td style="border-color:#F5F5F5;width:200px;">付款时间</td>
 					<td style="border-color:#F5F5F5;width:100px;">供货店铺</td>
 					<td style="border-color:#F5F5F5;width:100px;">发货单状态</td>
 				    <td style="border-color:#F5F5F5;width:100px;">操作</td>
 					</tr>
-					<c:forEach items="${pages.datas}" var="o">
+					<c:forEach items="${pages.datas}" var="i">
 						<tr align="center">
-						  <td style="border-color:#F5F5F5;height:35px;">${o.orderNumber}</td>
-						  <td style="border-color:#F5F5F5;"><fmt:formatDate value="${o.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-					      <td style="border-color:#F5F5F5;">${username}</td>
-					      <td style="border-color:#F5F5F5;"><fmt:formatDate value="${o.paytime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-						  <td style="border-color:#F5F5F5;">${shopname}</td>
+						  <td style="border-color:#F5F5F5;height:35px;">${i.orderNumber}</td>
+						  <td style="border-color:#F5F5F5;"><fmt:formatDate value="${i.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+					      <td style="border-color:#F5F5F5;">${i.userName}</td>
+						  <td style="border-color:#F5F5F5;">${i.shopNme}</td>
 						  <td style="border-color:#F5F5F5;">待发货</td>
-						  <td style="border-color:#F5F5F5;"><a href="sureDelivGoods.do?shopId=${shopid}&orderNumber=${o.orderNumber}">发货</a></td>
+						  <td style="border-color:#F5F5F5;"><a href="sureDelivGoods.do?shopId=${shopid}&orderNumber=${i.orderNumber}">发货</a></td>
 						</tr>	
-						</c:forEach>			
+				</c:forEach>			
 				</table>
 
 			</div>											

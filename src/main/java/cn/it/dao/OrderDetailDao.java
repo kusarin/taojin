@@ -2,9 +2,6 @@ package cn.it.dao;
 
 import java.util.List;
 
-
-
-
 import cn.it.pojo.OrderDetail;
 
 /**
@@ -48,5 +45,12 @@ public interface OrderDetailDao {
 	 * 更新订单中的商品是否已经发货
 	 * */
 	public void updateFlag(OrderDetail or);
-	
+	/*
+	 *商品发货时间 
+	 */
+	public void updateDeverliTime(OrderDetail o);
+	/**
+	 * 根据订单号查询
+	 * */
+	public List<OrderDetail> selectO(String orderNumber);
 }
