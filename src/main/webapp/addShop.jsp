@@ -123,7 +123,7 @@
 									</h2>
 									<h1 align="center">店铺添加</h1>
 									<div align="center">
-										<form id="myform" action="doAdd.do" method="post">
+										<form id="myform" action="doAdd.do?id=${user.user_ID}" enctype="multipart/form-data" method="post">
 											<table>
 											    <tr>
 													<td><input type="hidden" name="user_ID" value="${user.user_ID}"></td>
@@ -156,9 +156,8 @@
 													</div>
 													</div>
 												</tr>
-												<tr>
-													<div class="control-group">
-														<td>店铺图片:</td>
+												<div class="control-group">
+														<td>身份证图片:</td>
 														<div class="controls">
 															<td><p>注意：上传的图片名中不能包含中文</p></td>
 														</div>
@@ -168,7 +167,7 @@
 													<div class="control-group">
 														<td></td>
 														<div class="controls">
-															<td><input type="file" name="shopimage" id="shopimage" accept="image/*" /></td>
+															<td><input type="file" name="file" id="file" accept="image/*" /></td>
 														</div>
 													</div>
 												</tr>

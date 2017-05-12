@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -116,7 +117,7 @@
 									</h2>
 									<h1 align="center">店铺信息修改</h1>
 									<div align="center">
-										<form id="myform" action="doChange.do" method="post">
+										<form id="myform" action="doChange.do?id=${shop.shop_id}" enctype="multipart/form-data" method="post">
 											<table>
 											
 												<input type="hidden" value="${shop.shop_id}" name="Shop_id" />
@@ -146,6 +147,23 @@
 														value="${shop.intro}" id="intro"></td>
 													</div>
 													</div>
+													</tr>
+													<tr>
+													<div class="control-group">
+														<td>店铺图片:</td>
+														<div class="controls">
+															<td><p>注意：上传的图片名中不能包含中文</p></td>
+														</div>
+													</div>
+												</tr>
+												<tr>
+													<div class="control-group">
+														<td></td>
+														<div class="controls">
+															<td><input type="file" name="file" id="file" accept="image/*" /></td>
+														</div>
+													</div>
+												</tr>
 											</table>
 											<input type="submit" value="修改" /> <input type="button"
 												value="返回" onclick="javaScript:history.back(-1)" />
