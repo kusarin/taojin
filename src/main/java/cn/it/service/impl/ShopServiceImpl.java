@@ -40,31 +40,6 @@ public class ShopServiceImpl implements ShopService {
     public void addShop(Shop shop){
     	shopDao.addShop(shop);
     }
-    public ModelAndView addShop(Shop shop, HttpServletRequest request,
-			HttpSession session, MultipartFile file) {
-		ModelAndView str = new ModelAndView("addShop");
-			String path = request.getServletContext().getRealPath("image");
-			// 将图片文件名命名为上传时间
-
-			String fileName = String.valueOf(System.currentTimeMillis())
-					+ file.getOriginalFilename();
-			// 获取图片文件路径
-			File targetFile = new File(path, fileName);
-			if (!targetFile.exists()) {
-				targetFile.mkdirs();
-			}
-			// 保存文件（图片）；
-			try {
-				file.transferTo(targetFile);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			// set方法
-			// System.out.println(picturefile + ">>>>>>>" + fileName);
-			shop.setImage("/image/" + fileName);
-		shopDao.addShop(shop);
-		return str;
-	}
     public void deleteShop(Shop shop){
     	shopDao.deleteShop(shop);
     }
