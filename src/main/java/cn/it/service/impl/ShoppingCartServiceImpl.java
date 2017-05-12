@@ -272,6 +272,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		o.setTotalQuantity(totalQuantity); //购买总数
 		o.setActulPayment(actulPayment); //支付总额
 		o.setRecivingAddress(addr); //收货地址
+		o.setLabel(0);//普通商品订单
 		orderDao.add(o);// 插入订单到order表
 		for(OrderDetail or1:or){
 			orderDetailDao.add(or1); //插入订单细目ordetail表

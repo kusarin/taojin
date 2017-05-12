@@ -29,6 +29,40 @@
 	               <result column="tradingTimes" property="tradingTimes" javaType="int" jdbcType="INTEGER"/>
 	          </association>
               </resultMap>
+              
+              
+              <resultMap type="cn.it.pojo.OrderDetail" id="findL">
+                  <id column="OrderDetail_id" property="id" javaType="int" jdbcType="INTEGER"/>
+                  <result column="OrderNumber" property="orderNumber" javaType="String" jdbcType="VARCHAR"/>
+                  <result column="Item_id" property="itemId" javaType="int" jdbcType="INTEGER"/>
+                  <result column="mark" property="mark" javaType="int" jdbcType="INTEGER"/>
+                  <result column="flag" property="flag" javaType="int" jdbcType="INTEGER"/>
+                  <result column="shop_id" property="shop_id" javaType="int" jdbcType="INTEGER"/>
+                  <result column="unitPrice" property="unitPrice" javaType="double" jdbcType="DOUBLE"/>
+                  <result column="itemPrice" property="itemPrice" javaType="double" jdbcType="DOUBLE"/>
+                  <result column="itemNumbers" property="itemNumbers" javaType="int" jdbcType="INTEGER"/>
+                  <result column="shopName" property="shopName" javaType="String" jdbcType="VARCHAR"/>
+              <association property="lot"  javaType="cn.it.pojo.Lot">
+                    <id column="lot_id" property="lot_id" javaType="int" jdbcType="INTEGER"/>
+	                <result column="shop_id" property="shop_id" javaType="int" jdbcType="INTEGER"/>
+	                <result column="user_id" property="user_id" javaType="int" jdbcType="INTEGER"/>
+	                <result column="name" property="name" javaType="String" jdbcType="VARCHAR"/>
+	               <result column="typeh" property="typeh" javaType="String" jdbcType="VARCHAR"/>
+	               <result column="typel" property="typel" javaType="String" jdbcType="VARCHAR"/>
+	               <result column="maxprice" property="maxprice" javaType="double" jdbcType="DOUBLE"/>
+	               <result column="startprice" property="startprice" javaType="double" jdbcType="DOUBLE"/>
+	               <result column="nowprice" property="nowprice" javaType="double" jdbcType="DOUBLE"/>
+	               <result column="addprice" property="addprice" javaType="double" jdbcType="DOUBLE"/>
+	               <result column="detail" property="detail" javaType="String" jdbcType="VARCHAR"/>
+	               <result column="image" property="image" javaType="String" jdbcType="VARCHAR"/>
+	               <result column="status" property="status" javaType="int" jdbcType="INTEGER"/>
+	               <result column="time" property="time" javaType="int" jdbcType="INTEGER"/>
+	               <result column="address" property="address" javaType="String" jdbcType="VARCHAR"/>
+               </association>
+            </resultMap>
+            
+            
+            
          <parameterMap type="cn.it.pojo.OrderDetail" id="OrderDetailParameterMap">
             <parameter property="id" resultMap="findList"/>  
             <parameter property="orderNumber" resultMap="findList"/>  
@@ -44,6 +78,10 @@
          
           <select id="selectAll" parameterType="java.lang.String" resultMap="findList">
                 select i.*,o.* from orderdetail o,item i where i.Item_id=o.Item_id and o.OrderNumber=#{orderNumber}
+	      </select>
+	      
+	      <select id="getLot" parameterType="java.lang.String" resultMap="findL">
+	          select l.*,o.* from orderdetail o,lot l where l.lot_id=o.Item_id and o.OrderNumber=#{orderNumber}
 	      </select>
 	      
 	      <select id="selectO" parameterType="java.lang.String" resultMap="findList">

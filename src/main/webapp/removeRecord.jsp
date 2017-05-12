@@ -123,6 +123,7 @@ a:hover{
 						</c:if>
 						</a></li>
 						<li><a href="removeRecord.do">取消订单记录</a></li>
+						<li><a href="getLotOrder.do">我的拍卖订单</a></li>
 					</ul>
 				</div>
 				</aside>
