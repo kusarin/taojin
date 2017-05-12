@@ -537,6 +537,9 @@ public class OrderServiceImpl implements OrderService {
 		ord.setFlag(0);// 未发货
 
 		orderDetailDao.add(ord);
+		//修改拍卖品状态
+		l.setStatus(1);
+		lotDao.LotUpdate(l);
 		return o;
 	}
 
