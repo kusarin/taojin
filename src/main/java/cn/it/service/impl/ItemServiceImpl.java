@@ -404,11 +404,32 @@ public class ItemServiceImpl implements ItemService {
 		List<Item> list2 = new ArrayList<Item>();
 		// 将属于“已下架”状态的商品添加到列表list2
 		for (int i = 0; i < shoplist2.size(); i++) {
-			if (shoplist2.get(i).getStatus() == 1) {
+			if (shoplist2.get(i).getStatus() == 1 & shoplist2.get(i).getnumber() != 0) {
 				list2.add(shoplist2.get(i));
 			}
 		}
 		return list2;
+	}
+
+	/**
+	 * 通过调用itemDao.FindItemByShopId(shop_id)， 根据店铺编号查看商品 从中获取status=1的“已下架的商品”
+	 * 
+	 * @param shop_id
+	 *            店铺编号，int
+	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
+	 */
+	public List<Item> findByShopId3(int shop_id) {
+		// 获取所有属于该店铺的商品
+		List<Item> shoplist3 = itemDao.FindItemByShopId(shop_id);
+		// 建立属于“已下架”状态的商品列表list2
+		List<Item> list3 = new ArrayList<Item>();
+		// 将属于“已下架”状态的商品添加到列表list2
+		for (int i = 0; i < shoplist3.size(); i++) {
+			if (shoplist3.get(i).getStatus() == 1 & shoplist3.get(i).getnumber() == 0) {
+				list3.add(shoplist3.get(i));
+			}
+		}
+		return list3;
 	}
 
 	/**

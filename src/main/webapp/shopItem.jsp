@@ -190,11 +190,16 @@
 																<c:if test="${i.status == 0}">
 																	<td>在售</td>
 																</c:if><c:if test="${i.status == 1}">
+																	<c:if test="${i.number == 0}">
+																	<td>已售空</td>
+																	</c:if>
+																	<c:if test="${i.number != 0}">
 																	<td>已下架</td>
+																	</c:if>
 																</c:if>
 																<td><a href="showchangeItem.do?id=${i.item_id}">修改商品信息</a>
 																	<c:if test="${i.status == 0}"><a href="updownItem.do?id=${i.item_id}">下架商品</a></c:if>
-																	<c:if test="${i.status == 1}"><a href="updownItem.do?id=${i.item_id}">上架商品</a></c:if>
+																	<c:if test="${i.status == 1}"><c:if test="${i.number != 0}"><a href="updownItem.do?id=${i.item_id}">上架商品</a></c:if></c:if>
 																</td>
 															</tr>
 														</c:forEach>

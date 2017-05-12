@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.it.dao.AddressDao;
 import cn.it.dao.LotDao;
 import cn.it.dao.ShopDao;
 import cn.it.dao.TypehDao;
@@ -45,7 +46,8 @@ public class LotServiceImpl implements LotService {
 	private TypelDao typelDao;
 	@Autowired
 	private UsersDao usersDao;
-
+	@Autowired
+	private AddressDao addressDao;
 	/**
 	 * 添加拍卖品
 	 * 
@@ -255,13 +257,15 @@ public class LotServiceImpl implements LotService {
 	 * @param user_id
 	 * @return
 	 */
-	public ModelAndView anction(int lot_id, String yourprice, int user_id) {
+	public ModelAndView anction(int lot_id, String yourprice, int user_id,String addr) {
 		ModelAndView str = new ModelAndView("lookLot");
 		// 判断传入参数是否为空
 		if (yourprice == null || yourprice.equals("")) {
 			// 提示信息 "出价不能为空！！！"
 			str.addObject("error", "出价不能为空！！！");
-		} else {
+		} else if(addr == null ||addr.equalsIgnoreCase("")){
+			str.addObject("error", "请选择收货地址！！！");
+		}else{
 			Lot l = lotDao.FindLotById(lot_id);
 
 			// 将出价转为double,newprice:拍卖者出价
@@ -280,6 +284,7 @@ public class LotServiceImpl implements LotService {
 				str.addObject("error", "出价低于当前价格，请重新出价！！！");
 			} else {
 				// 设置新属性
+				l.setAddress(addr);
 				l.setNowprice(newprice);
 				l.setUser_id(user_id);
 				// 更新拍卖品信息
