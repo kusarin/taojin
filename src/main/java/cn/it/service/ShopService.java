@@ -17,8 +17,8 @@ public interface ShopService {
    public void addShop(Shop shop);
    public ModelAndView doChange(int shop_id, String name, String type,
 			String intro,String image,MultipartFile file, HttpServletRequest request);
-   public ModelAndView doAdd(String name, String type,
-			String intro,MultipartFile file, HttpServletRequest request, HttpSession session);
+   public ModelAndView doAdd(String name, String username, String email, String ID,String type,
+			String intro, MultipartFile file, HttpServletRequest request, HttpSession session);
    public void deleteShop(Shop shop); 
    long viewHits(Long id);
    List<Shop> findSR();

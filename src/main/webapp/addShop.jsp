@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -130,7 +131,31 @@
 												</tr>
 												<tr>
 													<div class="control-group">
-													<td>name</td>
+													<td>真实姓名</td>
+													<div class="controls">
+													<td><input type="text" name="username" value="${user.name}"></td>
+													</div>
+													</div>
+												</tr>
+												<tr>
+													<div class="control-group">
+													<td>电子邮箱</td>
+													<div class="controls">
+													<td><input type="text" name="email" value="${user.email}"></td>
+													</div>
+													</div>
+												</tr>
+												<tr>
+													<div class="control-group">
+													<td>个人身份证</td>
+													<div class="controls">
+													<td><input type="text" name="ID" value="${user.ID}"></td>
+													</div>
+													</div>
+												</tr>
+												<tr>
+													<div class="control-group">
+													<td>店铺名称</td>
 													<div class="controls">
 													<td><input type="text" name="name"></td>
 													</div>
@@ -138,7 +163,7 @@
 												</tr>
 												<tr>
 													<div class="control-group">
-													<td>type</td>
+													<td>店铺类型</td>
 													<div class="controls">
 													<td><select name="type">
 													<option selected="selected">笔记本</option>
@@ -150,7 +175,7 @@
 												</tr>
 												<tr>
 													<div class="control-group">
-													<td>intro</td>
+													<td>店铺简介</td>
 													<div class="controls">
 													<td><input type="text" name="intro"></td>
 													</div>

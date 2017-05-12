@@ -87,11 +87,14 @@
 						<span>店铺管理</span>
 					</h2>
 					<ul class="nav nav-list categories">
-						<li><a href="addShop.jsp">认证店铺 </a></li>
-						<li><a href="#">查看记录 </a></li>
+						<c:if test="${shop.shop_id==null }"><li><a href="addShop.jsp">认证店铺 </a></li></c:if>
+						<li><a href="shopList.do">查看记录 </a></li>
 						<li><a href="addItem.jsp">商品上架 </a></li>
 						<li><a href="shopItem.do?page=1">商品管理</a></li>
 						<li><a href="toChange.do">店铺信息管理</a></li>
+						<li><a href="waittingDeGoods.do?shop_id=${shop.shop_id}&flag=0">订单管理</a>
+						<ul><a href="alreadyReGoods.do?shop_id=${shop.shop_id}&flag=1">已处理</a></ul>
+						<ul><a href="waittingDeGoods.do?shop_id=${shop.shop_id}&flag=0">未处理</a></ul></li>
 					</ul>
 				</div>
 				<div class="sidewidt"></div>

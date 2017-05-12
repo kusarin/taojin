@@ -100,7 +100,7 @@ public class ShopServiceImpl implements ShopService {
 		return shopDao.findAll();
 	}
 	@Override
-	public ModelAndView doAdd(String name, String type,
+	public ModelAndView doAdd(String name,String username, String email, String ID, String type,
 			String intro,MultipartFile file, HttpServletRequest request,HttpSession session){
 		ModelAndView str = new ModelAndView("addShop");
 		Users user = (Users) session.getAttribute("user");
@@ -111,7 +111,7 @@ public class ShopServiceImpl implements ShopService {
 		}
 		else{
 			if (name == null || name.equals("") || type == null
-					|| type.equals("") || intro == null || intro.equals("")
+					|| type.equals("") ||username == null || username.equals("")||email == null || email.equals("")||ID == null || ID.equals("")|| intro == null || intro.equals("")
 					) {
 
 				// 提示信息 "输入数据不能为空！！！"
@@ -121,10 +121,14 @@ public class ShopServiceImpl implements ShopService {
 
 				// 定义商品；
 				Shop i = new Shop();
+				Users u = new Users();
 				i.setUser_ID(user_id);
 				i.setName(name); // 商品名称
 				i.setType(type); // 商品一阶类型
 				i.setIntro(intro); // 商品数量
+				u.setEmail(email);
+				u.setID(ID);
+				u.setName(username);
 				// 商品图片部分
 				// 获取图片存储文件的路径
 				String path = request.getServletContext().getRealPath("image");
@@ -143,13 +147,13 @@ public class ShopServiceImpl implements ShopService {
 					e.printStackTrace();
 				}
 				// set方法
-				user.setIdPhoto("/image/" + fileName);
+				u.setIdPhoto("/image/" + fileName);
 				// 商品图片部分结束
 				i.setStatus(0);
 
 				// 添加商品信息；
 				shopDao.addShop(i);
-				usersDao.updateUser(user);
+				usersDao.updateUser(u);
 				request.setAttribute("shop", i);
 				// 提示信息 "上架成功！！！"
 				str.addObject("error", "注册成功！！！");

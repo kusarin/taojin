@@ -58,11 +58,14 @@ public class ShopController {
 	@RequestMapping(value ={"/doAdd.do"},method={RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView doAdd(@RequestParam(value = "file", required = false)MultipartFile file,HttpServletRequest request,HttpSession session){
 		String name = request.getParameter("name");
+		String username = request.getParameter("username");
+		String email = request.getParameter("email");
+		String ID = request.getParameter("ID");
 		String type = request.getParameter("type");
 		String intro = request.getParameter("intro");
 
 		// 进行添加商品信息操作，并且获取提示信息
-		ModelAndView modelandview = shopService.doAdd(name, type, intro,
+		ModelAndView modelandview = shopService.doAdd(name,username,email,ID, type, intro,
 				 file, request,session);
 
 		return modelandview;
