@@ -449,7 +449,11 @@ public class ItemController {
 		// 获取商品条目list2（已下架）
 		List<Item> list2;
 		list2 = itemservice.findByShopId2(shop_id);
+		// 获取商品条目list2（已售空）
+		List<Item> list3;
+		list3 = itemservice.findByShopId3(shop_id);
 		list.addAll(list2);
+		list.addAll(list3);
 
 		// 分页操作区域
 		// 获取总页数
