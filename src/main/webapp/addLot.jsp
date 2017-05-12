@@ -243,7 +243,7 @@
 													<div class="control-group">
 														<td>拍卖品起拍价:¥</td>
 														<div class="controls">
-															<td><input type="text" name="startprice" onkeyup="if(isNaN(value))execCommand('undo')" onafterpaste="if(isNaN(value))execCommand('undo')"/></td>
+															<td><input type="text" name="startprice" onkeyup="value=value.replace(/[^\d.]/g,'')"/></td>
 														</div>
 													</div>
 												</tr>
@@ -251,7 +251,7 @@
 													<div class="control-group">
 														<td>拍卖品最高价:¥</td>
 														<div class="controls">
-															<td><input type="text" name="maxprice" onkeyup="if(isNaN(value))execCommand('undo')" onafterpaste="if(isNaN(value))execCommand('undo')"/></td>
+															<td><input type="text" name="maxprice" onkeyup="value=value.replace(/[^\d.]/g,'')" onafterpaste="if(isNaN(value))execCommand('undo')"/></td>
 														</div>
 													</div>
 												</tr>

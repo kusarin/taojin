@@ -187,15 +187,30 @@
 								</div>
 								<br>
 							</div>
+
 							<!-- 出价区域 -->
 							<form action="auction.do?id=${lookLot.lot_id}" method="post">
+								
 								<div style="margin-top: 10px; margin-left: 30px;">
 									<input type="text" name="yourprice"
-										onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46 || /\.\d\d$/.test(value))event.returnValue=false"
+										onkeyup="value=value.replace(/[^\d.]/g,'')"
 										class="input-medium search-query" placeholder="输入你的价格"
 										style="height: 20px; width: 100; border: 4px solid #FFA07A">
 									<input type="submit" value="出价"
 										style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+								</div>
+								<div class="receiver">
+									<div class="info">
+										<br>&nbsp<strong>收货地址预选</strong>
+									</div>
+									<div class="receiverInfo" id="receive">
+										<c:forEach items="${address}" var="adr">
+											<input type="radio" name="addr" value="${adr.addr}"
+												onclick="checadr()">
+											<sapn>&nbsp ${adr.addr}</sapn>
+											<br>
+										</c:forEach>
+									</div>
 								</div>
 							</form>
 							<!-- 出价区域 end-->

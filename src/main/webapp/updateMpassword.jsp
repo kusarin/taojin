@@ -110,7 +110,7 @@ pageEncoding="UTF-8"%>
 														<input type="hidden" name="account"
 															value="${manager.account}" />
 														<div class="control-group">
-															<label class="control-label">密码</label>
+															<label class="control-label">新密码</label>
 															<div class="controls">
 																<input type="password" name="password" id="pwd1"/> 
 															</div>

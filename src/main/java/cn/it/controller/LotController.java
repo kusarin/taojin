@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.it.dao.AddressDao;
+import cn.it.pojo.Address;
 import cn.it.pojo.Lot;
 import cn.it.pojo.Users;
 import cn.it.service.LotService;
@@ -31,6 +33,9 @@ public class LotController {
 
 	@Autowired
 	private LotService lotservice;
+
+	@Autowired
+	private AddressDao addressDao;
 
 	/**
 	 * 上架拍卖品
@@ -64,24 +69,30 @@ public class LotController {
 	 */
 	@RequestMapping("lookLot.do")
 	public ModelAndView lookLot(HttpServletRequest request,
-			@RequestParam("id") String id) {
+			@RequestParam("id") String id, HttpSession session) {
 		ModelAndView modelandview = new ModelAndView("lookLot");
 
 		// 获取拍卖品
 		int lot_id = Integer.parseInt(id);
 		Lot l = lotservice.findById(lot_id);
-		int d = l.getTime() / (24*60);
-		int h = (l.getTime()-d*24*60)/60;
-		int m = l.getTime() - d*24*60 - h*60;
-		
-		String timeLast = "拍卖剩余时间：" + d+"天"+h+"小时"+m+"分钟";
+		int d = l.getTime() / (24 * 60);
+		int h = (l.getTime() - d * 24 * 60) / 60;
+		int m = l.getTime() - d * 24 * 60 - h * 60;
+
+		String timeLast = "拍卖剩余时间：" + d + "天" + h + "小时" + m + "分钟";
 		modelandview.addObject("timeLast", timeLast);
 		modelandview.addObject("lookLot", l);
 
 		// 获取拍卖人
 		int user_id = l.getUser_id();
+		// 获取当前用户的地址
+		Users user = (Users) session.getAttribute("user");
+		if (user != null) {
+			int userid = user.getUser_ID();
+			List<Address> address = addressDao.addressFind(userid);
+			modelandview.addObject("address", address);
+		}
 		Users u = lotservice.finduser(user_id);
-
 		modelandview.addObject("us", u);
 
 		return modelandview;
@@ -329,37 +340,41 @@ public class LotController {
 	}
 
 	@RequestMapping("auction.do")
-	public ModelAndView auction(HttpServletRequest request, HttpSession session,int id) {
+	public ModelAndView auction(HttpServletRequest request,
+			HttpSession session, int id, String addr) {
 
 		// 获取拍卖品编号
 		int lot_id = id;
 		ModelAndView modelandview = new ModelAndView("lookLot");
-		if(request.getParameter("yourprice") != null){
+		if (request.getParameter("yourprice") == null
+				|| request.getParameter("yourprice").equalsIgnoreCase("")) {
+		} else {
 			// 获取出价
 			String yourprice = request.getParameter("yourprice");
 			double newprice1 = Double.parseDouble(yourprice);
-			BigDecimal b=new BigDecimal(newprice1); 
-			double p= b.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();  
+			BigDecimal b = new BigDecimal(newprice1);
+			double p = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 			String newprice = String.valueOf(p);
-
 			// 获取用户编号
 			Users user = (Users) session.getAttribute("user");
 			int user_id = user.getUser_ID();
 
-			 modelandview = lotservice.anction(lot_id, newprice,
-					user_id);
+			modelandview = lotservice.anction(lot_id, newprice, user_id, addr);
 		}
-
+		Users user = (Users) session.getAttribute("user");
+		int user_id = user.getUser_ID();
+		List<Address> address = addressDao.addressFind(user_id);
+		modelandview.addObject("address", address);
 		// 重新获取拍卖品
 		Lot l = lotservice.findById(lot_id);
 
 		modelandview.addObject("lookLot", l);
-		
-		int d = l.getTime() / (24*60);
-		int h = (l.getTime()-d*24*60)/60;
-		int m = l.getTime() - d*24*60 - h*60;
-		
-		String timeLast = "拍卖剩余时间：" + d+"天"+h+"小时"+m+"分钟";
+
+		int d = l.getTime() / (24 * 60);
+		int h = (l.getTime() - d * 24 * 60) / 60;
+		int m = l.getTime() - d * 24 * 60 - h * 60;
+
+		String timeLast = "拍卖剩余时间：" + d + "天" + h + "小时" + m + "分钟";
 		modelandview.addObject("timeLast", timeLast);
 
 		// 获取拍卖人

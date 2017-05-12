@@ -8,9 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.it.pojo.Item;
 import cn.it.pojo.Lot;
-import cn.it.pojo.Shop;
 import cn.it.pojo.Users;
 
 /**
@@ -132,5 +130,5 @@ public interface LotService {
 	 * @param user_id
 	 * @return
 	 */
-	public ModelAndView anction(int lot_id,String yourprice,int user_id);
+	public ModelAndView anction(int lot_id,String yourprice,int user_id,String addr);
 }
