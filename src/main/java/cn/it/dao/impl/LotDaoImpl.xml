@@ -7,8 +7,8 @@
 <!-- 增删改方法 -->
 	<!-- 添加拍卖品 -->
 	<insert id="LotAdd" parameterType="cn.it.pojo.Lot">
-		insert into lot(shop_id,name,typeh,typel,detail,image,status,startprice,nowprice,maxprice,addprice,time)
-		        values(#{shop_id},#{name},#{typeh},#{typel},#{detail},#{image},#{status},#{startprice},#{nowprice},#{maxprice},#{addprice},#{time})
+		insert into lot(shop_id,name,typeh,typel,detail,image,status,startprice,nowprice,maxprice,addprice,time,address)
+		        values(#{shop_id},#{name},#{typeh},#{typel},#{detail},#{image},#{status},#{startprice},#{nowprice},#{maxprice},#{addprice},#{time},#{address})
 	</insert>
 	<!-- 删除拍卖品 -->
 	<delete id="LotDelete" parameterType="int">
@@ -17,7 +17,7 @@
 	<!-- 修改拍卖品信息 -->
 	<update id="LotUpdate" parameterType="cn.it.pojo.Lot">
 		update lot set user_id=#{user_id},name=#{name},typeh=#{typeh},typel=#{typel},startprice=#{startprice},
-					   nowprice=#{nowprice},maxprice=#{maxprice},detail=#{detail},image=#{image},status=#{status}
+					   nowprice=#{nowprice},maxprice=#{maxprice},detail=#{detail},image=#{image},status=#{status},address = #{address}
 		where lot_id = #{lot_id}					
 	</update>
 	<!-- 查看单个拍卖品信息 -->

@@ -56,22 +56,38 @@ public class ShopController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value ={"/doAdd.do"},method={RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView doAdd(@RequestParam(value = "file", required = false)Shop shop,MultipartFile file,
-			HttpServletRequest request,HttpSession session) throws IOException{
+	public String doAdd(Shop shop,HttpServletRequest request,Map<String,Object> map,MultipartFile shopimage,HttpSession session){
 		Users user = (Users)session.getAttribute("user");
-		ModelAndView str = new ModelAndView("shopList");
 	    if(shopService.getAllByUserid(user.getUser_ID())==null)
 	    {
+
+	    	String path = request.getServletContext().getRealPath("image");
+			// 将图片文件名命名为上传时间
+
+			String fileName = String.valueOf(System.currentTimeMillis())
+					+ shopimage.getOriginalFilename();
+			// 获取图片文件路径
+			File targetFile = new File(path, fileName);
+			if (!targetFile.exists()) {
+				targetFile.mkdirs();
+			}
+			// 保存文件（图片）；
+			try {
+				shopimage.transferTo(targetFile);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			// set方法
+			System.out.println(shopimage + ">>>>>>>" + fileName);
+			shop.setImage("/image/" + fileName);
 	    	shopService.addShop(shop);
-	    	str.addObject("error", "认证成功！");
-	    	str.setViewName("/shopList");
+	    	map.put("error", "认证成功！");
+	    	return "/shopList";
 	    }
 	    else {
-     		str.addObject("error", "该用户店铺已存在！");
-	        str.setViewName("addShop");
+     		map.put("error", "该用户店铺已存在！");
+	        return "/addShop";
 	    }
-	    ModelAndView result = shopService.addShop(shop, request, session, file);
-		return str;
 	}
 	@RequestMapping(value ={"/toChange.do"},method={RequestMethod.GET,RequestMethod.POST}
 	)

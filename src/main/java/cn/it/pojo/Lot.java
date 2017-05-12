@@ -28,7 +28,7 @@ public class Lot {
 	private double addprice;    // 拍卖品加价额度
 	
 	private int time;        // 拍卖品拍卖时间，单位分钟，初始为0，最大值为[3*24*60]，在Service层进行对比操作。
-
+	private String address;   //当前出价者选择的收货地址
 	private Shop shop;       //属性：店铺，继承店铺的所有属性
 /**************************************set********get*********************************************/
 	
@@ -134,6 +134,12 @@ public class Lot {
 				                      +maxprice+"   "+detail+"   "
 				                      +image+"   "+status+"   "
 				                      +time+"   " +")";
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 }

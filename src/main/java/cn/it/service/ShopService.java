@@ -15,8 +15,6 @@ public interface ShopService {
    List<Shop> findShopList();
    public void changeInfoByid(Shop shop);
    public void addShop(Shop shop);
-   public ModelAndView addShop(Shop shop, HttpServletRequest request,
-			HttpSession session, MultipartFile file);
    public void deleteShop(Shop shop); 
    long viewHits(Long id);
    List<Shop> findSR();
