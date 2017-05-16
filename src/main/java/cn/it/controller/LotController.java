@@ -75,26 +75,30 @@ public class LotController {
 		// 获取拍卖品
 		int lot_id = Integer.parseInt(id);
 		Lot l = lotservice.findById(lot_id);
-		int d = l.getTime() / (24 * 60);
-		int h = (l.getTime() - d * 24 * 60) / 60;
-		int m = l.getTime() - d * 24 * 60 - h * 60;
+		if(l.getStatus() != 0){
+			modelandview.addObject("error", "该拍卖品已结束拍卖！");
+			modelandview.setViewName("Lotlist");
+		}else{
+			int d = l.getTime() / (24 * 60);
+			int h = (l.getTime() - d * 24 * 60) / 60;
+			int m = l.getTime() - d * 24 * 60 - h * 60;
 
-		String timeLast = "拍卖剩余时间：" + d + "天" + h + "小时" + m + "分钟";
-		modelandview.addObject("timeLast", timeLast);
-		modelandview.addObject("lookLot", l);
+			String timeLast = "拍卖剩余时间：" + d + "天" + h + "小时" + m + "分钟";
+			modelandview.addObject("timeLast", timeLast);
+			modelandview.addObject("lookLot", l);
 
-		// 获取拍卖人
-		int user_id = l.getUser_id();
-		// 获取当前用户的地址
-		Users user = (Users) session.getAttribute("user");
-		if (user != null) {
-			int userid = user.getUser_ID();
-			List<Address> address = addressDao.addressFind(userid);
-			modelandview.addObject("address", address);
+			// 获取拍卖人
+			int user_id = l.getUser_id();
+			// 获取当前用户的地址
+			Users user = (Users) session.getAttribute("user");
+			if (user != null) {
+				int userid = user.getUser_ID();
+				List<Address> address = addressDao.addressFind(userid);
+				modelandview.addObject("address", address);
+			}
+			Users u = lotservice.finduser(user_id);
+			modelandview.addObject("us", u);
 		}
-		Users u = lotservice.finduser(user_id);
-		modelandview.addObject("us", u);
-
 		return modelandview;
 	}
 
@@ -388,8 +392,22 @@ public class LotController {
 	
 	@RequestMapping("updateLot.do")
 	private ModelAndView updateLot(int id){
-		int lot_id =id;
-		return lotservice.changeLot(lot_id);
+		return lotservice.updateLot(id);
+	}
+	
+	@RequestMapping("changeLot.do")
+	private ModelAndView changeLot(
+			@RequestParam(value = "file", required = false) MultipartFile file,
+			HttpServletRequest request
+			){
+		String name = request.getParameter("name");
+		String typel = request.getParameter("typel");
+		String startprice = request.getParameter("startprice");
+		String maxPrice = request.getParameter("maxprice");
+		String detail = request.getParameter("detail");
+		String lot_id = request.getParameter("lot_id");
+		return lotservice.changeLot(name, typel, startprice,
+				maxPrice, detail, file, request,lot_id);
 		
 	}
 }

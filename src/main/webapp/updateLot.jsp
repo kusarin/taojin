@@ -34,7 +34,7 @@
 </script>
 <!-- 缺少部分：图片上传+获取店铺ID -->
 
-<title>拍卖品上架</title>
+<title>拍卖品重新上架</title>
 </head>
 <body>
 	<!-- Header Start -->
@@ -117,8 +117,8 @@
 		<div class="container">
 			<!--  breadcrumb -->
 			<ul class="breadcrumb">
-				<li><a href="#">Home</a> <span class="divider">/</span></li>
-				<li class="active">Blog</li>
+				<li><a href="#">店铺管理</a> <span class="divider">/</span></li>
+				<li class="active">拍卖品上架</li>
 			</ul>
 			<div class="row">
 				<!-- Sidebar Start-->
@@ -154,12 +154,21 @@
 									<div align="center">
 										<form action="changeLot.do" method="post"
 											enctype="multipart/form-data">
+											<input type="hidden" name="lot_id" value=${lot.lot_id} />
 											<table>
 												<tr>
 													<div class="control-group">
 														<td>拍卖品名称:</td>
 														<div class="controls">
-															<td><input type="text" name="name" value="lot.name"></td>
+															<td><input type="text" name="name" value=${lot.name}></td>
+														</div>
+													</div>
+												</tr>
+												<tr>
+													<div class="control-group">
+														<div class="controls">
+															<td>拍卖品原本类型:</td>
+															<td>>${lot.typeh}> ${lot.typel}</td>
 														</div>
 													</div>
 												</tr>
@@ -167,7 +176,7 @@
 													<div class="control-group">
 														<td>拍卖品类型:</td>
 														<div class="controls">
-															<td><select id="code" name="typel" value="typel">
+															<td><select id="code" name="typel">
 																	<optgroup label="---动漫------------">
 																		<option value="漫画原本">漫画原本</option>
 																		<option value="读者手绘">读者手绘</option>
@@ -238,12 +247,12 @@
 														</div>
 													</div>
 												</tr>
-												<input type="hidden" name="id" value="lot.lot_id" />
+												<input type="hidden" name="id" value=${lot.lot_id} />
 												<tr>
 													<div class="control-group">
 														<td>拍卖品起拍价:¥</td>
 														<div class="controls">
-															<td><input value="lot.startprice" type="text" name="startprice" onkeyup="value=value.replace(/[^\d.]/g,'')"/></td>
+															<td><input value=${lot.startprice} type="text" name="startprice" onkeyup="value=value.replace(/[^\d.]/g,'')"/></td>
 														</div>
 													</div>
 												</tr>
@@ -251,7 +260,7 @@
 													<div class="control-group">
 														<td>拍卖品最高价:¥</td>
 														<div class="controls">
-															<td><input value="lot.maxprice" type="text" name="maxprice" onkeyup="value=value.replace(/[^\d.]/g,'')" onafterpaste="if(isNaN(value))execCommand('undo')"/></td>
+															<td><input value=${lot.maxprice} type="text" name="maxprice" onkeyup="value=value.replace(/[^\d.]/g,'')" onafterpaste="if(isNaN(value))execCommand('undo')"/></td>
 														</div>
 													</div>
 												</tr>
@@ -275,7 +284,7 @@
 													<div class="control-group">
 														<td>拍卖品描述:</td>
 														<div class="controls">
-															<td><input value="lot.detail" type="text" name="detail" /></td>
+															<td><input value=${lot.detail} type="text" name="detail" /></td>
 														</div>
 													</div>
 												</tr>
@@ -288,7 +297,7 @@
 													</div>
 												</tr>
 											</table>
-											<input type="submit" value="确认上架" />
+											<input type="submit" value="重新上架" />
 										</form>
 									</div>
 

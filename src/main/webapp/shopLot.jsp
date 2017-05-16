@@ -191,7 +191,7 @@
 																<c:if test="${i.status == 0}">
 																	<td>拍卖中</td>
 																</c:if><c:if test="${i.status == 2}">
-																	<td>流拍/<a href="updateLot.do?id=i.lot_id">修改信息（重新上架）</a></td>
+																	<td>流拍/<a href="updateLot.do?id=${i.lot_id}" >修改信息（重新上架）</a></td>
 																</c:if><c:if test="${i.status == 1}">
 																	<td>已拍出</td>
 																</c:if>

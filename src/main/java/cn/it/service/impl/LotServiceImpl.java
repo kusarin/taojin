@@ -302,10 +302,100 @@ public class LotServiceImpl implements LotService {
 	}
 
 	@Override
-	public ModelAndView changeLot(int lot_id) {
+	public ModelAndView updateLot(int lot_id) {
 		ModelAndView mav = new ModelAndView("updateLot");
 		mav.addObject("lot",lotDao.FindLotById(lot_id));
 		return mav;
+	}
+
+	@Override
+	public ModelAndView changeLot(String name, String typel, String startprice,
+			String maxprice, String detail, MultipartFile file,
+			HttpServletRequest request,String lot_id) {
+		ModelAndView str = new ModelAndView("updateLot");
+		if (name == null || name.equals("") || typel == null
+				|| typel.equals("") || startprice == null
+				|| startprice.equals("") || maxprice == null
+				|| maxprice.equals("") || detail == null || detail.equals("")) {
+
+			// 提示信息 "输入数据不能为空！！！"
+			str.addObject("error", "输入数据不能为空！！！");
+
+		} else if (Double.parseDouble(startprice) > Double
+				.parseDouble(maxprice)) {
+			str.addObject("error", "起拍价不能大于一口价，请重新输入信息！");
+		} else {// 参数不为空时候，执行添加操作
+			 int id = Integer.parseInt(lot_id);
+			// 将拍卖品起拍价和最高价转为规定格式：double
+			// 加价额度固定为0.5,初始当前价格为起拍价
+			double strpri = Double.parseDouble(startprice);
+			BigDecimal b = new BigDecimal(strpri);
+			double strpri1 = b.setScale(2, BigDecimal.ROUND_HALF_UP)
+					.doubleValue();
+			double maxpri = Double.parseDouble(maxprice);
+			BigDecimal c = new BigDecimal(maxpri);
+			double maxpri1 = c.setScale(2, BigDecimal.ROUND_HALF_UP)
+					.doubleValue();
+			double addpri = 0.5;
+
+			// 根据二阶类型获取一阶类型
+			Typel tyl = typelDao.FindTypelByName(typel);
+			int typeh_id = tyl.getTypeh_id();
+			Typeh tyh = typehDao.FindTypehById(typeh_id);
+			String typeh = tyh.getName();
+			// 获取一阶分类结束
+
+			// 定义拍卖品
+			Lot lot = new Lot();
+			// 设置拍卖品属性
+			lot.setLot_id(id);
+			lot.setName(name);
+			lot.setTypeh(typeh);
+			lot.setTypel(typel);
+			lot.setstartprice(strpri1);
+			lot.setNowprice(strpri1);
+			lot.setMaxprice(maxpri1);
+			lot.setAddprice(addpri);
+			lot.setDetail(detail);
+
+			// 拍卖品图片部分
+			// 获取图片存储文件的路径
+			String path = request.getServletContext().getRealPath("lotimage");
+			// 将图片文件名命名为上传时间
+			String fileName = String.valueOf(System.currentTimeMillis())
+					+ file.getOriginalFilename();
+			// 获取图片文件路径
+			File targetFile = new File(path, fileName);
+			if (!targetFile.exists()) {
+				targetFile.mkdirs();
+			}
+			// 保存文件（图片）；
+			try {
+				file.transferTo(targetFile);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			// set方法
+			lot.setImage("/lotimage/" + fileName);
+			// 图片部分结束
+
+			// 设置初始状态status为0
+			lot.setStatus(0);
+			// 设置初始时间为3天
+			int time = 3 * 24 * 60;
+			lot.setTime(time);
+
+			// 添加拍卖品信息
+			lotDao.LotUpdate(lot);
+
+			request.setAttribute("lot", lot);
+			// 提示信息 "上架成功！！！"
+			str.addObject("error", "重新上架拍卖品成功！！！");
+
+			// 上架成功后跳转的界面，暂时先设置为addLot【上架拍卖品界面】
+			str.setViewName("addLot");
+		}
+		return str;
 	}
 
 }
