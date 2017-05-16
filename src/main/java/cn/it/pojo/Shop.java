@@ -15,6 +15,7 @@ public class Shop {
 	public void setImage(String image) {
 		this.Image = image;
 	}
+	
 	public int getBrowsingTimes() {
 		return BrowsingTimes;
 	}

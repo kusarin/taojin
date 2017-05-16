@@ -295,4 +295,5 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 		}
 		return o;
 	}
+
 }

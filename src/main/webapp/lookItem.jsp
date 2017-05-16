@@ -260,8 +260,9 @@
 									<span class="bgnone">${lookitem.name}</span>
 								</h1>
 								<div class="productprice">
-									<h2>商品价格:¥${lookitem.price}</h2>
-									<span>浏览次数<span>
+									
+									<span><h2>浏览次数:${lookitem.browsingTimes}</h2></span>
+									<span><h2>商品价格:¥${lookitem.price}</h2></span>
 								</div>
 
 								<div class="productprice">
