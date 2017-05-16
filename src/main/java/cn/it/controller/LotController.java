@@ -385,5 +385,11 @@ public class LotController {
 		return modelandview;
 
 	}
-
+	
+	@RequestMapping("updateLot.do")
+	private ModelAndView updateLot(int id){
+		int lot_id =id;
+		return lotservice.changeLot(lot_id);
+		
+	}
 }

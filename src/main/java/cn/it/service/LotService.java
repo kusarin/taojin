@@ -131,4 +131,7 @@ public interface LotService {
 	 * @return
 	 */
 	public ModelAndView anction(int lot_id,String yourprice,int user_id,String addr);
+
+
+	public ModelAndView changeLot(int lot_id);
 }

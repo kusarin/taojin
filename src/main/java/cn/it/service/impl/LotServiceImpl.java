@@ -301,4 +301,11 @@ public class LotServiceImpl implements LotService {
 		return str;
 	}
 
+	@Override
+	public ModelAndView changeLot(int lot_id) {
+		ModelAndView mav = new ModelAndView("updateLot");
+		mav.addObject("lot",lotDao.FindLotById(lot_id));
+		return mav;
+	}
+
 }
