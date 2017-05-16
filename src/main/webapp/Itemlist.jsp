@@ -58,15 +58,33 @@
 <link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
 <link href="./css/shopSearch.css" rel="stylesheet">
 <script type="text/javascript">
-function setTab(name,m,n){ 
-	for( var i=1;i<=n;i++){ 
-		var menu = document.getElementById(name+i); 
-		var showDiv = document.getElementById("cont_"+name+"_"+i); 
-		menu.className = i==m ?"on":""; 
-		showDiv.style.display = i==m?"block":"none"; 
-		} 
-	} 
-	</script>
+	function setTab(name, m, n) {
+		for ( var i = 1; i <= n; i++) {
+			var menu = document.getElementById(name + i);
+			var showDiv = document.getElementById("cont_" + name + "_" + i);
+			menu.className = i == m ? "on" : "";
+			showDiv.style.display = i == m ? "block" : "none";
+		}
+	}
+	function key(s) {
+		if (s == 1) {
+			var k = document.getElementById("key");
+			k.style.display = 'block';
+			var k1 = document.getElementById("key1");
+			k1.style.display = 'none';
+		}
+		if (s == 2) {
+			var k1 = document.getElementById("key1");
+			k1.style.display = 'block';
+			var k = document.getElementById("key");
+			k.style.display = 'none';
+		}
+	}
+	function ch() {
+		var k = document.getElementById("key");
+		k.style.display = 'none';
+	}
+</script>
 </head>
 <body>
 
@@ -81,20 +99,19 @@ function setTab(name,m,n){
 						<div class="navbar" id="topnav">
 							<div class="navbar-inner">
 								<div style="float: left; color: white; margin-top: 26px;">
-										<span>您好,</span>
-										<c:if test="${user == null}">
-											<a href="login.jsp"><span style="color: white;">登录</span></a>
-											<a href="register.jsp"> <span
-												style="margin-left: 20px; color: white;"> 注册</span></a>
-										</c:if>
-										<c:if test="${user != null}">
-											<img style="width: 20px; length: 20px"
-												src="${pageContext.request.contextPath}${user.picture}">
-											<c:out value="${user.username}" />
-											<a href="logout.do"><span style="color: white;">
-													注销</span></a>
-										</c:if>
-									</div>
+									<span>您好,</span>
+									<c:if test="${user == null}">
+										<a href="login.jsp"><span style="color: white;">登录</span></a>
+										<a href="register.jsp"> <span
+											style="margin-left: 20px; color: white;"> 注册</span></a>
+									</c:if>
+									<c:if test="${user != null}">
+										<img style="width: 20px; length: 20px"
+											src="${pageContext.request.contextPath}${user.picture}">
+										<c:out value="${user.username}" />
+										<a href="logout.do"><span style="color: white;"> 注销</span></a>
+									</c:if>
+								</div>
 								<div style="margin-left: 250px;">
 									<ul class="nav">
 										<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
@@ -109,35 +126,37 @@ function setTab(name,m,n){
 					</div>
 					<!-- Top Nav End -->
 					<div class="pull-right">
-				         <div class="tab">
-				         <ul>
-				         <li id="tow1" class="on" onclick='setTab("tow",1,3)'>商品</li>
-				         <li id="tow2" onclick='setTab("tow",2,3)'>店铺</li>
-				         </ul>
-				         </div>
-				         <div class="tabList">
-				         <div id="cont_tow_1" class="one block">
-				         <form action="searchItem.do?page=1" method="post">
-							<div style="margin-top: 10px;">
-								<input type="text" name="str" class="input-medium search-query"
-									placeholder="搜索你想要的二手"
-									style="height: 20px; width: 100; border: 4px solid #FFA07A">
-								<input type="submit" value="搜索"
-									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
-							</div>
-						</form>
+						<div class="tab">
+							<ul>
+								<li id="tow1" class="on" onclick='setTab("tow",1,3)'>商品</li>
+								<li id="tow2" onclick='setTab("tow",2,3)'>店铺</li>
+							</ul>
 						</div>
-						<div id="cont_tow_2" class="one">
-						<form action="searchShop.do?page=1" method="post">
-							<div style="margin-top: 10px;">
-								<input type="text" name="str" class="input-medium search-query"
-									placeholder="搜索你想要的二手"
-									style="height: 20px; width: 100; border: 4px solid #FFA07A">
-								<input type="submit" value="搜索"
-									style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+						<div class="tabList">
+							<div id="cont_tow_1" class="one block">
+								<form action="searchItem.do?page=1" method="post">
+									<div style="margin-top: 10px;">
+										<input type="text" name="str"
+											class="input-medium search-query" placeholder="搜索你想要的二手"
+											style="height: 20px; width: 100; border: 4px solid #FFA07A"
+											onclick="key(1)" onchange="ch()"> <input
+											type="submit" value="搜索"
+											style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+									</div>
+								</form>
 							</div>
-						</form>
-						</div>
+							<div id="cont_tow_2" class="one">
+								<form action="searchShop.do?page=1" method="post">
+									<div style="margin-top: 10px;">
+										<input type="text" name="str"
+											class="input-medium search-query" placeholder="搜索你想要的二手"
+											style="height: 20px; width: 100; border: 4px solid #FFA07A"
+											onclick="key(2)" onchange="ch()"> <input
+											type="submit" value="搜索"
+											style="height: 30px; width: 40; background-color: #FFA07A; border: 4px solid #FFA07A;">
+									</div>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -146,7 +165,29 @@ function setTab(name,m,n){
 	</div>
 	</header>
 	<!-- Header End -->
+	<!-- 刘亚斌修改 -->
+	<div id="key"
+		style="width: 183px; border: 1px solid gray; height: auto; float: right; margin-right: 140px; border-top: 1px solid #FFA07A; display: none;">
+		<c:forEach items="${keyw}" var="k">
 
+
+			<p
+				style="width: 180px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+				<a href="searchItem.do?page=1&str=${k.keyWord}">${k.keyWord}</a>
+			</p>
+
+		</c:forEach>
+	</div>
+
+	<div id="key1"
+		style="width: 183px; border: 1px solid gray; height: auto; float: right; margin-right: 140px; border-top: 1px solid #FFA07A; display: none;">
+		<c:forEach items="${keyw}" var="k">
+			<p
+				style="width: 180px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+				<a href="searchShop.do?page=1&str=${k.keyWord}">${k.keyWord}</a>
+			</p>
+		</c:forEach>
+	</div>
 	<!-- 商品类型选择区域 start-->
 	<div class="left">
 		<div class="all-sort-list">
@@ -325,11 +366,11 @@ function setTab(name,m,n){
 			</div>
 			<div class="item bo">
 				<h3>
-					<span>·</span><a href = "Lotlist.do?page=1" style="color:orange"><b>拍卖品</b></a>
+					<span>·</span><a href="Lotlist.do?page=1" style="color: orange"><b>拍卖品</b></a>
 				</h3>
-				</div>
+			</div>
 		</div>
-		
+
 
 	</div>
 
@@ -387,18 +428,20 @@ function setTab(name,m,n){
 					<table border="1">
 						<thead>
 							<tr>
-								<td><a href="lookItem.do?id=${i.item_id}" target=${i.item_id}> <img
-										class="itemimage"
+								<td><a href="lookItem.do?id=${i.item_id}"
+									target=${i.item_id}> <img class="itemimage"
 										src=${pageContext.request.contextPath}${i.image}>
 								</a></td>
 							</tr>
 							<tr>
-								<td><a href="lookItem.do?id=${i.item_id}" target=${i.item_id}><p
-											class="textname" style="height: 20px; width: 200px">${i.name}</p></a>
-									<a href="lookItem.do?id=${i.item_id}" class="textprice" target=${i.item_id}>商品价格:
-										¥ ${i.price}</a> <br> <a href="lookItem.do?id=${i.item_id}" target=${i.item_id}><p
-											class="textdetail" style="height: 20px; width: 275px" title=${i.detail}>${i.detail}</p></a>
-								</td>
+								<td><a href="lookItem.do?id=${i.item_id}"
+									target=${i.item_id}><p class="textname"
+											style="height: 20px; width: 200px">${i.name}</p></a> <a
+									href="lookItem.do?id=${i.item_id}" class="textprice"
+									target=${i.item_id}>商品价格: ¥ ${i.price}</a> <br> <a
+									href="lookItem.do?id=${i.item_id}" target=${i.item_id}><p
+											class="textdetail" style="height: 20px; width: 275px"
+											title=${i.detail}>${i.detail}</p></a></td>
 							</tr>
 						</thead>
 					</table>

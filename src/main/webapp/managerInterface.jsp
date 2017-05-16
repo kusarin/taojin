@@ -16,6 +16,23 @@
 			<link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
 			<!-- fav -->
 			<link rel="shortcut icon" href="assets/ico/favicon.html">
+			
+	<script>
+	function s() {
+		if (document.getElementById("uu").style.display == "block") {
+
+			document.getElementById("uu").style.display = "none";
+
+		}
+
+		else {
+			document.getElementById("uu").style.display = "block";
+		}
+	}
+	function mouseUp(x) {
+		document.getElementById('a' + x).style.color = "red";
+	}
+</script>
 	</head>
 <body>
 <!-- Header Start -->
@@ -64,6 +81,42 @@
 								<li><a class="itemManage" href="./itemManage.do?page=1">商品信息管理</a></li>
 								<li><a class="comment" href="./lookComment.do?page=1">用户留言管理</a></li>
 								<li><a class="RFmanage" href="./findResourceFile.do?page=1">文件资源管理</a></li>
+							    <li style="margin-top: 10px;cursor:pointer;"onclick="s()">销售分类排行榜</li>
+								<div id="uu" style="display: none;">
+									<ul>
+
+										<li><a href="getSalesRanking.do?typeh=动漫"
+											style="text-decoration: none; color: black;"
+											onmouseup="mouseUp(1)" id="a1">动漫</a></li>
+										<li><a href="getSalesRanking.do?typeh=游戏"
+											style="text-decoration: none; color: black;"
+											onmouseup="mouseUp(2)" id="a2">游戏</a></li>
+										<li><a href="getSalesRanking.do?typeh=乐器"
+											style="text-decoration: none; color: black;"
+											onmouseup="mouseUp(3)" id="a3">乐器</a></li>
+										<li><a href="getSalesRanking.do?typeh=数码用品"
+											style="text-decoration: none; color: black;"
+											onmouseup="mouseUp(4)" id="a4">数码用品</a></li>
+										<li><a href="getSalesRanking.do?typeh=电脑"
+											style="text-decoration: none; color: black;"
+											onmouseup="mouseUp(5)" id="a5">电脑</a></li>
+										<li><a href="getSalesRanking.do?typeh=运动"
+											style="text-decoration: none; color: black;"
+											onmouseup="mouseUp(6)" id="a6">运动</a></li>
+										<li><a href="getSalesRanking.do?typeh=户外健身"
+											style="text-decoration: none; color: black;"
+											onmouseup="mouseUp(7)" id="a7">户外健身</a></li>
+										<li><a href="getSalesRanking.do?typeh=学习"
+											style="text-decoration: none; color: black;"
+											onmouseup="mouseUp(8)" id="a8">学习</a></li>
+										<li><a href="getSalesRanking.do?typeh=服装"
+											style="text-decoration: none; color: black;"
+											onmouseup="mouseUp(9)" id="a9">服装</a></li>
+										<li><a href="getSalesRanking.do?typeh=其他商品"
+											style="text-decoration: none; color: black;"
+											onmouseup="mouseUp(10)" id="a10">其他商品</a></li>
+									</ul>
+								</div>
 							</ul>
 						</div>
 						<div class="sidewidt"></div>
