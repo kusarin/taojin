@@ -26,7 +26,7 @@ public class OrderTimeTask {
 	    @Scheduled(cron = "30/30 * * * * ? ") // 间隔30秒执行
 	    public void taskCycle() {
 	    	
-	    List<Order> o=orderDao.get("待付款");
+	    List<Order> o=orderDao.get("待付款",0);
 	    long d2=new Date().getTime();//当前时间
 	    if(o.size()!=0){
 	        for(Order ol:o){

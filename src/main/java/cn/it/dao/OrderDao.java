@@ -27,7 +27,7 @@ public interface OrderDao {
       * 根据用户编号查询该用户的所有订单*
       * 
       * */
-     public List<Order> selectAll(int userId,int startNo,int pageSize);
+     public List<Order> selectAll(int userId,int label,int startNo,int pageSize);
      /**
       * 
       * 根据订单号删除订单 
@@ -40,12 +40,12 @@ public interface OrderDao {
 	/**
 	 * 计算订单记录总数
 	 * */
-	public int getCount(int userId);
+	public int getCount(int userId,int label);
 	/*********
 	 * 根据订单状态查询订单
 	 * @param(userId用户Id,status：订单状态)
 	 * */
-	public List<Order> select(int userId,String status,int startNo,int pageSize);
+	public List<Order> select(int userId,int label,String status,int startNo,int pageSize);
 	/****
 	 * 设置取消时间
 	 * 
@@ -54,11 +54,11 @@ public interface OrderDao {
 	/***
 	 * 统计不同状态的订单的数量
 	 * */
-	public int countNumbers(int userId,String status);
+	public int countNumbers(int userId,String status,int label);
 	/*
 	 * 查询所有待付款的订单
 	 * */
-	public List<Order> get(String status);
+	public List<Order> get(String status,int label);
 	/****
 	 * 设置付款时间
 	 * 

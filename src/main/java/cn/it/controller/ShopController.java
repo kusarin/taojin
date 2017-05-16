@@ -28,6 +28,7 @@ import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion.User;
 import cn.it.pojo.Item;
 import cn.it.pojo.Shop;
 import cn.it.pojo.Users;
+import cn.it.service.InfoSearchService;
 import cn.it.service.ItemService;
 import cn.it.service.ShopService;
 import cn.it.service.UsersService;
@@ -39,6 +40,8 @@ public class ShopController {
 	private UsersService usersService;
 	@Resource
 	   private ItemService itemService;
+	@Autowired
+	private InfoSearchService infoSearchService;//刘亚斌修改，加入关键字统计
 	/**
 	 * @param shop
 	 * @param file
@@ -197,7 +200,7 @@ public class ShopController {
 		
 	}
 	@RequestMapping(value = {"/searchShop.do"},method = {RequestMethod.GET,RequestMethod.POST})
-	public String searchShop(HttpServletRequest request,Shop shop,Map<String,Object> map,Integer  page){
+	public String searchShop(HttpServletRequest request,Shop shop,Map<String,Object> map,Integer  page,HttpSession session){
 		String str = request.getParameter("str");
 		List<Shop> list;
 		list = shopService.searchShop(str);
@@ -228,6 +231,12 @@ public class ShopController {
 			map.put("totalPage", totalPage);
 			map.put("page", page);
 			map.put("search", str);
+			//刘亚斌修改
+			Users user=(Users) session.getAttribute("user");
+			if(user!=null){
+			int userId=user.getUser_ID();   //用户Id
+			infoSearchService.searchItemInfo(str, userId);
+			}
 		}
 		return "shopSearch";
 	}

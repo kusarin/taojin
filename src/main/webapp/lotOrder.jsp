@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
@@ -13,7 +13,7 @@ pageEncoding="UTF-8"%>
 <link href="${pageContext.request.contextPath}/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="${pageContext.request.contextPath}/css/jquery.fancybox.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/cloud-zoom.css" rel="stylesheet">
-<title>我的订单</title>
+<title>我拍卖品订单</title>
 <style>
 .item{
     width:300px;
@@ -170,7 +170,6 @@ function deleteAll(){
 						</c:if>
 						</a></li>
 						<li><a href="removeRecord.do">取消订单记录</a></li>
-						<li><a href="getLotOrder.do">我的拍卖订单</a></li>
 					</ul>
 				</div>
 				</aside>
@@ -178,7 +177,7 @@ function deleteAll(){
 			<!-- Sidebar End-->
 			<div class="span9" style="float:left;margin-top:20px;">
 			    <div style="margin-top:20px;font-size:15px;color:#808A87;margin-bottom:10px;">
-				 <strong>我的订单</strong>	
+				 <strong>我的拍卖品订单</strong>	
 				</div> 
 				<div style="height:auto;width:700px;">
 				<table style="height:auto;width:700px; font-size:14px;">
@@ -221,8 +220,8 @@ function deleteAll(){
 						
 	                     <td class="huanhang">
 	                     <c:forEach items="${orderc.orderDeatail}" var="ord">
-	                     <a href="lookItem.do?id=${ord.item.item_id}"><img src="${pageContext.request.contextPath}${ord.item.image}"/></a>
-		                 <a href="lookItem.do?id=${ord.item.item_id}"><p>${ord.item.detail}</p></a>
+	                     <a href="lookLot.do?id=${ord.lot.lot_id}"><img src="${pageContext.request.contextPath}${ord.lot.image}"/></a>
+		                 <a href="lookLot.do?id=${ord.lot.lot_id}"><p>${ord.lot.detail}</p></a>
 		                 </c:forEach> 
 		                 </td>
 		                 
@@ -230,7 +229,7 @@ function deleteAll(){
 		                  <c:forEach items="${orderc.orderDeatail}" var="ord">
 		                  <div style="margin-top:10px;margin-bottom:50px;">
 		                    <c:if test="${ord.mark==0 && orderc.order.status=='已收货'}">
-							 <a href="evlauateItem.do?itemId=${ord.item.item_id}&orderNumber=${ord.orderNumber}"><p>立即评价</p></a>
+							 <a href="evlauateItem.do?itemId=${ord.lot.lot_id}&orderNumber=${ord.orderNumber}"><p>立即评价</p></a>
 							</c:if>
 							<c:if test="${ord.mark==1}">
 							      <p>已评价</p>

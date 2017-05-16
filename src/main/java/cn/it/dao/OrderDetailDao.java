@@ -53,4 +53,10 @@ public interface OrderDetailDao {
 	 * 根据订单号查询
 	 * */
 	public List<OrderDetail> selectO(String orderNumber);
+	/**
+	 * 根据订单号查询
+	 * 所包含的拍卖品
+	 * */
+	public List<OrderDetail> getLot(String orderNumber);
+	
 }

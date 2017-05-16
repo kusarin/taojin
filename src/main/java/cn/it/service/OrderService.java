@@ -8,6 +8,7 @@ import java.util.List;
 import cn.it.pojo.Address;
 import cn.it.pojo.Invoice;
 import cn.it.pojo.Item;
+import cn.it.pojo.Lot;
 import cn.it.pojo.Order;
 import cn.it.pojo.OrderCollection;
 import cn.it.pojo.OrderDetail;
@@ -116,4 +117,27 @@ public interface OrderService {
 	 *确认发货,修改订单状态
 	 */
 	public void sureDeliGoods(String orderNumber,int shop_id);
+	
+	/*
+	 * 拍卖品订单
+	 * */
+	public Order createLotOrder(int lot_id,String addr);
+	/**
+	 * 用户的拍卖订单
+	 * */
+	public Page<OrderCollection> getLotOrder(int userId,
+			Page<OrderCollection> page);
+	/**
+	 * 确认拍卖品订单
+	 * */
+	public Lot sureLotOrder(int lot_id);
+	/**
+	 * 返回店铺名
+	 * */
+	public String getShopName(int shop_id);
+	/**
+	 * 非一口价拍
+	 * 生成拍卖品订单
+	 * */
+	public Order productLotOrder(int lot_id);
 }

@@ -17,7 +17,7 @@
 	</delete>
 	
 	<update id="update" parameterType="cn.it.pojo.Invoice">
-	  update invoice set flag=#{flag},deliverTime=#{deliverTime}
+	  update invoice set flag=#{flag},deliverTime=#{deliverTime} where invoice_id=#{invoice_id}
 	</update>
 	
 	<select id="selectIn" resultType="cn.it.pojo.Invoice">

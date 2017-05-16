@@ -1,5 +1,6 @@
 package cn.it.pojo;
 
+
 import java.util.Date;
 /*****
  * 发货单
