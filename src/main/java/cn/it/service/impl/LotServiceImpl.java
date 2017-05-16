@@ -48,6 +48,7 @@ public class LotServiceImpl implements LotService {
 	private UsersDao usersDao;
 	@Autowired
 	private AddressDao addressDao;
+
 	/**
 	 * 添加拍卖品
 	 * 
@@ -96,11 +97,13 @@ public class LotServiceImpl implements LotService {
 			// 将拍卖品起拍价和最高价转为规定格式：double
 			// 加价额度固定为0.5,初始当前价格为起拍价
 			double strpri = Double.parseDouble(startprice);
-			BigDecimal b=new BigDecimal(strpri); 
-			double strpri1= b.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+			BigDecimal b = new BigDecimal(strpri);
+			double strpri1 = b.setScale(2, BigDecimal.ROUND_HALF_UP)
+					.doubleValue();
 			double maxpri = Double.parseDouble(maxprice);
-			BigDecimal c=new BigDecimal(maxpri); 
-			double maxpri1= c.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+			BigDecimal c = new BigDecimal(maxpri);
+			double maxpri1 = c.setScale(2, BigDecimal.ROUND_HALF_UP)
+					.doubleValue();
 			double addpri = 0.5;
 
 			// 根据二阶类型获取一阶类型
@@ -257,15 +260,16 @@ public class LotServiceImpl implements LotService {
 	 * @param user_id
 	 * @return
 	 */
-	public ModelAndView anction(int lot_id, String yourprice, int user_id,String addr) {
+	public ModelAndView anction(int lot_id, String yourprice, int user_id,
+			String addr) {
 		ModelAndView str = new ModelAndView("lookLot");
 		// 判断传入参数是否为空
 		if (yourprice == null || yourprice.equals("")) {
 			// 提示信息 "出价不能为空！！！"
 			str.addObject("error", "出价不能为空！！！");
-		} else if(addr == null ||addr.equalsIgnoreCase("")){
+		} else if (addr == null || addr.equalsIgnoreCase("")) {
 			str.addObject("error", "请选择收货地址！！！");
-		}else{
+		} else {
 			Lot l = lotDao.FindLotById(lot_id);
 
 			// 将出价转为double,newprice:拍卖者出价

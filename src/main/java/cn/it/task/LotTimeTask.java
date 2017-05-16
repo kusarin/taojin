@@ -29,8 +29,6 @@ public class LotTimeTask {
 				l.setStatus(1);
 				lotDao.LotUpdate(l);
 			}
-
 		}
-
 	}
 }
