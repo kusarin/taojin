@@ -574,9 +574,9 @@ public class ItemController {
 	 * 
 	 * @param request
 	 * @return
-	 */
+	 */ 
 	@RequestMapping("searchItem.do")
-	public ModelAndView showSearchItem(HttpServletRequest request, int page) {
+	public ModelAndView showSearchItem(HttpServletRequest request, int page,HttpSession session) {
 		ModelAndView modelandview = new ModelAndView("searchItem"); // 到searchItem.jsp界面
 
 		// 从前台获取搜索关键词str；
@@ -627,6 +627,13 @@ public class ItemController {
 			modelandview.addObject("page", page);
 			modelandview.addObject("search", str);
 			// 分页操作结束
+			
+			//刘亚斌修改
+			Users user=(Users) session.getAttribute("user");
+			if(user!=null){
+			int userId=user.getUser_ID();   //用户Id
+			infoSearchService.searchItemInfo(str, userId);
+			}
 		}
 
 		return modelandview;
