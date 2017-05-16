@@ -312,6 +312,7 @@ public class LotServiceImpl implements LotService {
 	public ModelAndView changeLot(String name, String typel, String startprice,
 			String maxprice, String detail, MultipartFile file,
 			HttpServletRequest request,String lot_id) {
+		int id = Integer.parseInt(lot_id);
 		ModelAndView str = new ModelAndView("updateLot");
 		if (name == null || name.equals("") || typel == null
 				|| typel.equals("") || startprice == null
@@ -320,12 +321,13 @@ public class LotServiceImpl implements LotService {
 
 			// 提示信息 "输入数据不能为空！！！"
 			str.addObject("error", "输入数据不能为空！！！");
-
+			str.addObject("lot", lotDao.FindLotById(id));
 		} else if (Double.parseDouble(startprice) > Double
 				.parseDouble(maxprice)) {
+			str.addObject("lot", lotDao.FindLotById(id));
 			str.addObject("error", "起拍价不能大于一口价，请重新输入信息！");
 		} else {// 参数不为空时候，执行添加操作
-			 int id = Integer.parseInt(lot_id);
+			 
 			// 将拍卖品起拍价和最高价转为规定格式：double
 			// 加价额度固定为0.5,初始当前价格为起拍价
 			double strpri = Double.parseDouble(startprice);
@@ -385,11 +387,11 @@ public class LotServiceImpl implements LotService {
 			int time = 3 * 24 * 60;
 			lot.setTime(time);
 
-			// 添加拍卖品信息
+			// 修改拍卖品信息
 			lotDao.LotUpdate(lot);
 
 			request.setAttribute("lot", lot);
-			// 提示信息 "上架成功！！！"
+			// 提示信息 "重新上架成功！！！"
 			str.addObject("error", "重新上架拍卖品成功！！！");
 
 			// 上架成功后跳转的界面，暂时先设置为addLot【上架拍卖品界面】
