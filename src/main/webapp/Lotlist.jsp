@@ -56,7 +56,14 @@
 <link href="./TaoJin/css/flexslider.css" type="text/css" media="screen"
 	rel="stylesheet" />
 <link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
-
+<script type="text/javascript">
+	window.onload = function() {
+		var error = "${requestScope.error}";
+		if (error != "" && error != null && typeof (error) != "undefined") {
+			alert(error);
+		}
+	}
+</script>
 </head>
 
 <body>

@@ -17,7 +17,7 @@
 	<!-- 修改拍卖品信息 -->
 	<update id="LotUpdate" parameterType="cn.it.pojo.Lot">
 		update lot set user_id=#{user_id},name=#{name},typeh=#{typeh},typel=#{typel},startprice=#{startprice},
-					   nowprice=#{nowprice},maxprice=#{maxprice},detail=#{detail},image=#{image},status=#{status},address = #{address}
+					   nowprice=#{nowprice},maxprice=#{maxprice},detail=#{detail},image=#{image},status=#{status},address = #{address},time = #{time}
 		where lot_id = #{lot_id}					
 	</update>
 	<!-- 查看单个拍卖品信息 -->

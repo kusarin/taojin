@@ -131,4 +131,12 @@ public interface LotService {
 	 * @return
 	 */
 	public ModelAndView anction(int lot_id,String yourprice,int user_id,String addr);
+
+
+	public ModelAndView updateLot(int lot_id);
+
+
+	public ModelAndView changeLot(String name, String typel, String startprice,
+			String maxPrice, String detail, MultipartFile file,
+			HttpServletRequest request,String lot_id);
 }
