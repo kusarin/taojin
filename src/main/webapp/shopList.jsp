@@ -59,7 +59,7 @@ function setTab(name,m,n){
 								<div style="margin-left: 250px;">
 									<ul class="nav">
 										<li><a class="home active" href="Itemlist.do?page=1">首页</a></li>
-										<li><a class="myaccount" href="UsersUpdate.jsp">个人中心</a></li>
+										<li><a class="myaccount" href="UsersUpdate.do">个人中心</a></li>
 										<li><a class="checkout" href="shopList.do">我的店铺</a></li>
 										<li><a class="shoppingcart" href="showCartAllItem.do">购物车</a></li>
 										<li><a class="checkout" href="orderItem.do">我的订单</a></li>
@@ -123,7 +123,7 @@ function setTab(name,m,n){
 						<span>店铺管理</span>
 					</h2>
 					<ul class="nav nav-list categories">
-						<li><a href="addShop.jsp">认证店铺 </a></li>
+						<c:if test="${shopli.shop_id==null }"><li><a href="addShop.jsp">认证店铺 </a></li></c:if>
 						<li><a href="shopList.do">查看记录 </a></li>
 						<li><a href="addItem.jsp">商品上架 </a></li>
 						<li><a href="shopItem.do?page=1">商品管理</a></li>

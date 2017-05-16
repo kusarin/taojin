@@ -48,8 +48,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
+
 import cn.it.pojo.Address;
 import cn.it.pojo.Invoice;
+import cn.it.pojo.Lot;
 import cn.it.pojo.Order;
 import cn.it.pojo.OrderCollection;
 import cn.it.pojo.OrderDetail;
@@ -332,5 +334,52 @@ public class OrderController {
 		v.addObject("shopid",shop_id);
 		return v;
 	}
+	/**
+	 * 一口价
+	 * 提交拍卖品订单
+	 * */
+	@RequestMapping("maPai.do")
+	public String maPai(int lot_id,String addr){
+		
+		Order o=orderService.createLotOrder(lot_id,addr);
+		String orderNumber=o.getOrderNumber();
+		double total=o.getActulPayment();
+		return "redirect:payment.do?p2_Order="+orderNumber+"&p3_Amt="+total;
+	}
+	/**
+	 * 用户的拍卖订单
+	 * */
+	@RequestMapping("getLotOrder.do")
+	public ModelAndView getLotOrder(HttpSession session,Page<OrderCollection> page){
+		Users user=(Users) session.getAttribute("user");
+		int userId=user.getUser_ID();   //用户Id
+		
+		ModelAndView view=new ModelAndView("lotOrder");
+		view.addObject("pages",orderService.getLotOrder(userId, page));
+		view.addObject("pendingPayment",orderService.countNumbers(userId, "待付款"));
+		view.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
+		view.addObject("assessment",orderService.countNumbers(userId, "待评价"));
+		return view;
+	}
 	
+	/*
+	 * 
+	 * 一口价拍
+	 */
+	@RequestMapping("sureLot.do")
+	public ModelAndView sureLot(int lot_id,HttpSession session){
+		
+		Users user=(Users) session.getAttribute("user");
+		int userId=user.getUser_ID();   //用户Id
+
+		ModelAndView view =new ModelAndView("sureLot");
+		Lot l=orderService.sureLotOrder(lot_id);
+		view.addObject("l",l);
+		view.addObject("shopname", orderService.getShopName(l.getShop_id()));
+		
+		List<Address> address=orderService.getAddress(userId);
+		view.addObject("address",address);
+		view.addObject("username",usersService.findById(userId).getName());
+		return view;
+	}
 }

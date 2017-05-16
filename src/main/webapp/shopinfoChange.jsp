@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -86,11 +87,14 @@
 						<span>店铺管理</span>
 					</h2>
 					<ul class="nav nav-list categories">
-						<li><a href="addShop.jsp">认证店铺 </a></li>
-						<li><a href="#">查看记录 </a></li>
+						<c:if test="${shop.shop_id==null }"><li><a href="addShop.jsp">认证店铺 </a></li></c:if>
+						<li><a href="shopList.do">查看记录 </a></li>
 						<li><a href="addItem.jsp">商品上架 </a></li>
 						<li><a href="shopItem.do?page=1">商品管理</a></li>
 						<li><a href="toChange.do">店铺信息管理</a></li>
+						<li><a href="waittingDeGoods.do?shop_id=${shop.shop_id}&flag=0">订单管理</a>
+						<ul><a href="alreadyReGoods.do?shop_id=${shop.shop_id}&flag=1">已处理</a></ul>
+						<ul><a href="waittingDeGoods.do?shop_id=${shop.shop_id}&flag=0">未处理</a></ul></li>
 					</ul>
 				</div>
 				<div class="sidewidt"></div>
@@ -116,7 +120,7 @@
 									</h2>
 									<h1 align="center">店铺信息修改</h1>
 									<div align="center">
-										<form id="myform" action="doChange.do" method="post">
+										<form id="myform" action="doChange.do?id=${shop.shop_id}" enctype="multipart/form-data" method="post">
 											<table>
 											
 												<input type="hidden" value="${shop.shop_id}" name="Shop_id" />
@@ -146,6 +150,23 @@
 														value="${shop.intro}" id="intro"></td>
 													</div>
 													</div>
+													</tr>
+													<tr>
+													<div class="control-group">
+														<td>店铺图片:</td>
+														<div class="controls">
+															<td><p>注意：上传的图片名中不能包含中文</p></td>
+														</div>
+													</div>
+												</tr>
+												<tr>
+													<div class="control-group">
+														<td></td>
+														<div class="controls">
+															<td><input type="file" name="file" id="file" accept="image/*" /></td>
+														</div>
+													</div>
+												</tr>
 											</table>
 											<input type="submit" value="修改" /> <input type="button"
 												value="返回" onclick="javaScript:history.back(-1)" />

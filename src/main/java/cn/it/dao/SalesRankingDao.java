@@ -1,4 +1,7 @@
 package cn.it.dao;
+
+import cn.it.pojo.SalesRanking;
+
 /*****
  * 
  * ***
@@ -6,4 +9,6 @@ package cn.it.dao;
  * */
 public interface SalesRankingDao {
 
+//	void add(SalesRanking ras);
+//   
 }

@@ -217,7 +217,7 @@
 
 							<div class="span7">
 								<ul class="productpagecart">
-									<li><a class="cart" href="#">一口价购买</a></li>
+									<li><a class="cart" href="sureLot.do?lot_id=${lookLot.lot_id}">一口价购买</a></li>
 								</ul>
 							</div>
 						</div>

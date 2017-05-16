@@ -1,23 +1,94 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page isELIgnored="false"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link href="${pageContext.request.contextPath}/css/bootstrap.css"
+	rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/css/bootstrap-responsive.css"
+	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/style.css"
+	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/flexslider.css"
+	type="text/css" media="screen" rel="stylesheet" />
+<link href="${pageContext.request.contextPath}/css/jquery.fancybox.css"
+	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/cloud-zoom.css"
+	rel="stylesheet">
 <title>管理员界面</title>
-			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-			<link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
-			<link href="./TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
-			<link href="./TaoJin/css/style.css" rel="stylesheet">
-			<link href="./TaoJin/css/flexslider.css" type="text/css" media="screen"
-				rel="stylesheet" />
-			<link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
-			<link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
-			<!-- fav -->
-			<link rel="shortcut icon" href="assets/ico/favicon.html">
-			
-	<script>
+<style>
+.item {
+	width: 300px;
+	text-align: center;
+	height: 45px;
+}
+
+.co {
+	width: 80px;
+	text-align: center;
+	height: 45px;
+}
+
+.orderNumber {
+	width: 300px;
+	text-align: center;
+	height: 45px;
+}
+
+.buyer1 {
+	width: 80px;
+	text-align: center;
+	height: 45px;
+}
+
+.buyer {
+	width: 80px;
+	text-align: center;
+	height: 45px;
+}
+
+.buyer1 a p {
+	width: 80px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.huanhang {
+	width: 300px;
+	height: 120px;
+}
+
+.huanhang img {
+	width: 100px;
+	height: 120px;
+}
+
+.huanhang p {
+	word-break: break-all;
+	width: 200px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.sa {
+	width: 80px;
+	height: 120px;
+	text-align: center;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: red;
+}
+</style>
+<script>
 	function s() {
 		if (document.getElementById("uu").style.display == "block") {
 
@@ -33,9 +104,9 @@
 		document.getElementById('a' + x).style.color = "red";
 	}
 </script>
-	</head>
+</head>
 <body>
-<!-- Header Start -->
+	<!-- Header Start -->
 <header>
 	<div class="headerstrip">
 		<div class="container">
@@ -59,13 +130,14 @@
 <!-- Header End -->
 
 	<div id="maincontainer">
-		<section id="product">
+	
 			<div class="container">
 				<!--  breadcrumb -->
 				<ul class="breadcrumb">
 					<li>管理员界面 <span class="divider">/</span></li>
 					<li class="active">账号相关</li>
 				</ul>
+				<div style="float:left;">
 				<div class="row">
 					<!-- Sidebar Start-->
 					<aside class="span3">
@@ -73,15 +145,15 @@
 							<h2 class="heading2">
 								<span>管理员功能</span>
 							</h2>
-							<ul class="nav nav-list categories">
-								<li><a class="managerInterface" href="managerInterface.jsp">管理员账户管理</a></li>
+						<ul class="nav nav-list categories">
+							<li><a class="managerInterface" href="managerInterface.jsp">管理员账户管理</a></li>
 								<li><a class="SRmanage" href="./lookSR.do?page=1">店铺认证管理</a></li>
 								<li><a class="userManage" href="./userManage.do?page=1">用户信息管理</a></li>
 								<li><a class="shopManage" href="./shopManage.do?page=1">店铺信息管理</a></li>
 								<li><a class="itemManage" href="./itemManage.do?page=1">商品信息管理</a></li>
 								<li><a class="comment" href="./lookComment.do?page=1">用户留言管理</a></li>
 								<li><a class="RFmanage" href="./findResourceFile.do?page=1">文件资源管理</a></li>
-							    <li style="margin-top: 10px;cursor:pointer;"onclick="s()">销售分类排行榜</li>
+							    <li style="margin-top: 10px;color:red;cursor:pointer;"onclick="s()">销售分类排行榜</li>
 								<div id="uu" style="display: none;">
 									<ul>
 
@@ -117,59 +189,55 @@
 											onmouseup="mouseUp(10)" id="a10">其他商品</a></li>
 									</ul>
 								</div>
-							</ul>
-						</div>
-						<div class="sidewidt"></div>
-					</aside>
-					<!-- Sidebar End-->
 
-					<div class="span9">
-						<!-- Blog start-->
-						<section id="latestblog">
-							<div class="blogdetail">
-								<div class="blogicons">
-									<div class="pull-left"></div>
-								</div>
-								<ul class="margin-none">
-									<li class="listblcok">
-										<div class="mb20" align="center">
-											<section class="leavecomment">
-												<h2 class="heading2">
-													<span>欢迎你！管理员${manager.account}！</span>
-												</h2>
-													<div class="control-group">
-														<label class="control-label"><a href="addmanager.jsp"><button class="btn btn-orange" style="width :200px">新增管理员</button></a> 
-														</label>
-													</div>
-													<div class="control-group">
-														<label class="control-label"><a href="updateMpassword.jsp"><button class="btn btn-orange" style="width :200px">修改密码</button></a> 
-														</label>
-													</div>
-											</section>
-										</div>
-									</li>
-								</ul>
-							</div>
-						</section>
+						</ul>
 					</div>
+				</aside>
+			</div>
+			</div>
+			<!-- Sidebar End-->
+			<div class="span9" style="float: left; margin-top: 20px;">
+			   <div style="height: auto; width: 900px;">
+				<table
+					style="height: auto; width: 900px; font-size: 14px; color: black; border-color: #F5F5F5;"
+					border="1px">
+					<tr align="center" style="background-color: #FAFFF0;">
+						<td style="border-color: #F5F5F5; height: 40px; width: 100px;">排行</td>
+						<td style="border-color: #F5F5F5; width: 200px;">商品名称</td>
+						<td style="border-color: #F5F5F5; width: 100px;">商品交易额</td>
+
+					</tr>
+					<c:forEach items="${sales}" var="ss">
+						<tr align="center">
+							<td style="border-color: #F5F5F5; height: 35px;">${ss.ranking}</td>
+							<td style="border-color: #F5F5F5;">${ss.itemName}</td>
+							<td style="border-color: #F5F5F5;">${ss.salesAmount}</td>
+
+						</tr>
+					</c:forEach>
+				</table>
 				</div>
 			</div>
-		</section>
+		</div>
 	</div>
-<!--footer-->
-	<footer style="margin-top:100px"> <img
-		src="${pageContext.request.contextPath}/image/footer-tri.png"
-		style="width: 100%;">
-	<div
-		style="margin: 0px 0px 10px; text-align: center; padding-top: 10px;">
+	<!--footer-->
+	<footer style="margin-top: 20px">
+		<img src="${pageContext.request.contextPath}/image/footer-tri.png"
+			style="width: 100%;">
+		<div
+			style="margin: 0px 0px 10px; text-align: center; padding-top: 10px;">
 
-		<span>友情链接/</span> <a href="http://www.nwpu.edu.cn/" target="_top"
-			class="links">西北工业大学</a>
+			<span>友情链接/</span> <a href="http://www.nwpu.edu.cn/" target="_top"
+				class="links">西北工业大学</a>
 
-	</div>
-	<div style="text-align: center; margin-bottom: 10px;">
-		<span>©2017 版权所有</span> <span>鄂ICP备14003265号-2</span>
-	</div>
+		</div>
+		<div style="text-align: center; margin-bottom: 10px;">
+			<a id="fd_footer" href="javascript:;">产品意见反馈</a> <a
+				href="http://www.2shoujie.com/joinUs" target="_top">加入我们</a>
+		</div>
+		<div style="text-align: center; margin-bottom: 10px;">
+			<span>©2017 版权所有</span> <span>鄂ICP备14003265号-2</span>
+		</div>
 	</footer>
 </body>
 </html>

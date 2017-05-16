@@ -14,6 +14,7 @@
             <result column="RecivingAddress" property="recivingAddress" javaType="String" jdbcType="VARCHAR"/>
             <result column="Freight" property="freight" javaType="double" jdbcType="DOUBLE"/>
             <result column="TotalQuantity" property="totalQuantity" javaType="int" jdbcType="INTEGER"/>
+            <result column="label" property="label" javaType="int" jdbcType="INTEGER"/>
             <result column="removeOrderTime" property="removeOrderTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
             <result column="paytime" property="paytime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
             <result column="receGoodsTime" property="receGoodsTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
@@ -34,17 +35,18 @@
             <parameter property="removeOrderTime" resultMap="findAll"/>
             <parameter property="paytime" resultMap="findAll"/>
             <parameter property="receGoodsTime" resultMap="findAll"/>
-             <parameter property="evalTime" resultMap="findAll"/>
+            <parameter property="evalTime" resultMap="findAll"/>
+             <parameter property="label" resultMap="findAll"/>
        </parameterMap>
      <select id="selectAll" resultMap="findAll">
-          select* from indent where User_ID=#{0} ORDER BY orderNumber DESC LIMIT #{1},#{2} 
+          select* from indent where User_ID=#{0} and label=#{1} ORDER BY orderNumber DESC LIMIT #{2},#{3} 
      </select>
-     <select id="getCount" resultType="Integer" parameterType="int">
-          select count(OrderNumber) from indent where User_ID=#{userId}
+     <select id="getCount" resultType="Integer">
+          select count(OrderNumber) from indent where User_ID=#{0} and label=#{1}
      </select>
      <insert id="add" parameterMap="OrderParameterMap">
-           insert into indent(User_ID,OrderNumber,OrderTime,ActulPayment,Status,PaymentMethod,RecivingAddress,freight,TotalQuantity,removeOrderTime) 
-           values(#{userID},#{orderNumber},#{orderTime},#{actulPayment},#{status},#{paymentMethod},#{recivingAddress},#{freight},#{totalQuantity},#{removeOrderTime})
+           insert into indent(User_ID,OrderNumber,OrderTime,ActulPayment,Status,PaymentMethod,RecivingAddress,freight,TotalQuantity,removeOrderTime,label) 
+           values(#{userID},#{orderNumber},#{orderTime},#{actulPayment},#{status},#{paymentMethod},#{recivingAddress},#{freight},#{totalQuantity},#{removeOrderTime},#{label})
      </insert>
       <update id="update" parameterMap="OrderParameterMap">
            update indent set Status=#{status} where OrderNumber=#{orderNumber}
@@ -52,8 +54,8 @@
       <select id="findOrder" parameterType="java.lang.String" resultMap="findAll">
           select* from indent where OrderNumber=#{orderNumber}
      </select>
-      <select id="get" parameterType="java.lang.String" resultMap="findAll">
-          select* from indent where Status=#{status}
+      <select id="get" resultMap="findAll">
+          select* from indent where Status=#{0} and label=#{1}
      </select>
      <delete id="delete" parameterType="java.lang.String">
           delete from indent where OrderNumber=#{orderNumber}
@@ -68,7 +70,7 @@
 		</where>
 	</delete>
 	<select id="select" resultMap="findAll">
-	select* from indent where User_ID=#{0} and Status=#{1} LIMIT #{2},#{3}
+	select* from indent where User_ID=#{0} and label=#{1} and Status=#{2} LIMIT #{3},#{4}
 	</select>
 	<update id="updateTime" parameterMap="OrderParameterMap">
            update indent set removeOrderTime=#{removeOrderTime} where OrderNumber=#{orderNumber}
@@ -83,7 +85,7 @@
            update indent set evalTime=#{evalTime} where OrderNumber=#{orderNumber}
      </update>
 	 <select id="countNumbers" resultType="Integer">
-	  select count(OrderNumber) from indent where User_ID=#{0} and Status=#{1}
+	  select count(OrderNumber) from indent where User_ID=#{0} and Status=#{1} and label=#{2}
 	 </select>
  </mapper>
  

@@ -43,7 +43,7 @@
 	    Select * from shop where user_ID = #{user_ID}
 	</select>
 	<update id="changeInfoByid" parameterType="cn.it.pojo.Shop">
-		Update shop set Name=#{name},Type=#{type},Intro=#{intro} where shop_id = #{shop_id}
+		Update shop set Name=#{name},Type=#{type},Intro=#{intro},Image=#{Image} where shop_id = #{shop_id}
 	</update>
 	<delete id="deleteShop" parameterType="int">
 	    Delete from shop where shop_id =#{shop_id}

@@ -19,7 +19,7 @@ public class Lot {
 	private String detail;   // 拍卖品描述：detail；
 	private String image;    // 拍卖品图片：image；
 	
-	private int status;      // 拍卖品状态：0/1/2；0表示在售状态，1表示流拍状态，2表示卖出。
+	private int status;      // 拍卖品状态：0/1/2；0表示在售状态，2表示流拍状态，1表示卖出。
 	
 	private double startprice;// 拍卖品底价
 	private double nowprice; // 拍卖品当前价格（拍卖价）

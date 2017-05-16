@@ -1,7 +1,7 @@
 package cn.it.pojo;
 
 import java.util.Date;
-import java.util.List;
+
 /**
  * 
  * @author Administrator
@@ -24,18 +24,18 @@ public class Order {
 	private int totalQuantity; //购买总数
     private Date receGoodsTime;//收货时间
     private Date evalTime;//评价时间
-    private List<OrderDetail> ordl;
+    private int label;//标识是普通商品还是拍卖品生成的订单
 	/******************************get****************************set**********/
     
  
 	public double getFreight() {
 		return freight;
 	}
-	public List<OrderDetail> getOrdl() {
-		return ordl;
+	public int getLabel() {
+		return label;
 	}
-	public void setOrdl(List<OrderDetail> ordl) {
-		this.ordl = ordl;
+	public void setLabel(int label) {
+		this.label = label;
 	}
 	public Date getEvalTime() {
 		return evalTime;

@@ -16,7 +16,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.it.dao.ShopDao;
+import cn.it.dao.UsersDao;
+import cn.it.pojo.Item;
 import cn.it.pojo.Shop;
+import cn.it.pojo.Typeh;
+import cn.it.pojo.Typel;
 import cn.it.pojo.Users;
 import cn.it.service.ShopService;
 @Service("ShopService")
@@ -24,7 +28,8 @@ public class ShopServiceImpl implements ShopService {
 	@Autowired
 	//@Qualifier("shopDao")
 	private ShopDao shopDao;
-    
+    @Autowired
+    private UsersDao usersDao;
 	public Shop getAllByUserid(int num){
 		return shopDao.getAllByUserid(num);
 	}
@@ -93,6 +98,114 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public List<Shop> findAll() {
 		return shopDao.findAll();
+	}
+	@Override
+	public ModelAndView doAdd(String name,String username, String email, String ID, String type,
+			String intro,MultipartFile file, HttpServletRequest request,HttpSession session){
+		ModelAndView str = new ModelAndView("addShop");
+		Users user = (Users) session.getAttribute("user");
+		int user_id = user.getUser_ID();
+		Shop ls = shopDao.getAllByUserid(user_id);
+		if(ls!=null){
+			str.addObject("error", "该用户已注册店铺！！！");
+		}
+		else{
+			if (name == null || name.equals("") || type == null
+					|| type.equals("") ||username == null || username.equals("")||email == null || email.equals("")||ID == null || ID.equals("")|| intro == null || intro.equals("")
+					) {
+
+				// 提示信息 "输入数据不能为空！！！"
+				str.addObject("error", "输入数据不能为空！！！");
+
+			} else {// 参数不为空时候，执行添加操作
+
+				// 定义商品；
+				Shop i = new Shop();
+				Users u = new Users();
+				i.setUser_ID(user_id);
+				i.setName(name); // 商品名称
+				i.setType(type); // 商品一阶类型
+				i.setIntro(intro); // 商品数量
+				u.setEmail(email);
+				u.setID(ID);
+				u.setName(username);
+				// 商品图片部分
+				// 获取图片存储文件的路径
+				String path = request.getServletContext().getRealPath("image");
+				// 将图片文件名命名为上传时间
+				String fileName = String.valueOf(System.currentTimeMillis())
+						+ file.getOriginalFilename();
+				// 获取图片文件路径
+				File targetFile = new File(path, fileName);
+				if (!targetFile.exists()) {
+					targetFile.mkdirs();
+				}
+				// 保存文件（图片）；
+				try {
+					file.transferTo(targetFile);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				// set方法
+				u.setIdPhoto("/image/" + fileName);
+				// 商品图片部分结束
+				i.setStatus(0);
+
+				// 添加商品信息；
+				shopDao.addShop(i);
+				usersDao.updateUser(u);
+				request.setAttribute("shop", i);
+				// 提示信息 "上架成功！！！"
+				str.addObject("error", "注册成功！！！");
+
+				// 上架成功后跳转的界面，暂时先设置为addItem【上架商品界面】
+				str.setViewName("addShop");
+		}
+			}
+				return str;
+		
+	}
+	@Override
+	public ModelAndView doChange(int shop_id, String name, String type,
+			String intro, String image,	MultipartFile file, HttpServletRequest request) {
+		ModelAndView str = new ModelAndView("shopinfoChange");
+		// System.out.println(">>>>>>>>>> " + request.getParameter("motopic"));
+		Shop i = shopDao.findByid(shop_id);
+		// 设置商品新属性；
+		i.setName(name); // 商品名称
+		i.setType(type); // 商品一阶类型
+		i.setIntro(intro); // 商品数量
+		// 商品图片部分
+		if (file.getOriginalFilename().equals("")
+				|| file.getOriginalFilename() == null) {
+			// 如果没有上传新的图片文件；
+			i.setImage(image);
+		} else {// 如果上传了新的图片文件
+		String path = request.getServletContext().getRealPath("image");
+		// 将图片文件名命名为上传时间
+		String fileName = String.valueOf(System.currentTimeMillis())
+				+ file.getOriginalFilename();
+		// 获取图片文件路径
+		File targetFile = new File(path, fileName);
+		if (!targetFile.exists()) {
+			targetFile.mkdirs();
+		}
+		// 保存文件（图片）；
+		try {
+			file.transferTo(targetFile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			// set方法
+			// System.out.println(picturefile + ">>>>>>>" + fileName);
+			i.setImage("/image/" + fileName);
+			request.setAttribute("shop", i);
+		// 商品图片部分结束
+		// System.out.println(user.getPicture());
+		}
+		shopDao.changeInfoByid(i);
+		return str;
+		
 	}
 
 }

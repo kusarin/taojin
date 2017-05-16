@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
@@ -34,7 +34,7 @@ function  che(){
 		  alert("请选择收货地址");
 		  return;
 	  }else{
-		  document.myform.action="submitOrder.do";
+		  document.myform.action="maPai.do";
 	    	 // $(".myform")
 	       document.myform.submit();
 	  }
@@ -247,51 +247,37 @@ function save(){
 			</div>
 			
 		</div>
-		<c:forEach items="${c.orderDeatail}" var="collection" varStatus="s">
+		
 		<div class="shoper">
-			    <span>店铺：<a href="#">${collection.shopName}</a></span>
-			    <input type="hidden" value="${collection.shopName}" name="orderDeatail[${s.index}].shopName">
+			    <span>店铺：<a href="#">${shopname}</a></span>
 		</div>
 		
 		<div class="orderDe" style="border:1px solid #80ffff;">
 		<table>
 		   <tr>
-			     <td class="test1"><a href="lookItem.do?id=${collection.itemId}"><img src="${pageContext.request.contextPath}${collection.item.image}"/></a>
-			     <input type="hidden" value="${collection.item.image}" name="orderDeatail[${s.index}].item.image">
-		        <a href="lookItem.do?id=${collection.itemId}"><p>${collection.item.detail}</p></a>
-		        <input type="hidden" value="${collection.item.image}" name="orderDeatail[${s.index}].item.detail">
-		        <input type="hidden" value="${collection.itemId}" name="orderDeatail[${s.index}].itemId">
+			     <td class="test1"><a href="lookLot.do?id=${l.lot_id}"><img src="${pageContext.request.contextPath}${l.image}"/></a>
+		        <a href="lookLot.do?id=${l.lot_id}"><p>${l.detail}</p></a>
+		        <input type="hidden" name="lot_id" value="${l.lot_id}">
 		        </td>
 				 <td class="common" style="padding-left:0px;text-align:center;">
 				 
-				 <input type="text" value="${collection.itemNumbers}"  readonly="readonly" name="orderDeatail[${s.index}].itemNumbers" style="background-color:white;text-align:center;width:40px;float:left;border:1px;">
+				 <input type="text" value="1"  readonly="readonly"  style="background-color:white;text-align:center;width:40px;float:left;border:1px;">
 				 </td>
-				 <td class="common">${collection.unitPrice}
-				 <input type="hidden" value="${collection.unitPrice}" name="orderDeatail[${s.index}].unitPrice" id="unitPrice">
-				 </td>
-				 
-				 <td class="common" id="itemprice">${collection.itemPrice}
-				 <input type="hidden" value="${collection.itemPrice}" name="orderDeatail[${s.index}].itemPrice" id="unitPrice">
-				 <input type="hidden" value="${collection.shop_id}" name="orderDeatail[${s.index}].shop_id" >
-				 </td>
-				 
+				 <td class="common">${l.maxprice} </td>
+				 <td class="common" id="itemprice">${l.maxprice}</td> 
 			 </tr>
 		 </table>
 		</div>
-		</c:forEach>
 		<div class="orderDe">
 		    <table class="same">
-			     <tr><td style="padding-top:15px;padding-bottom:15px;"><strong class="pay" id="total">${c.order.totalQuantity}</strong>件商品，总商品金额：<strong class="pay" id="ac">${c.order.actulPayment}</strong>
-			     <input type="hidden" value="${c.order.totalQuantity}" name="order.totalQuantity"></td></tr>
-			     <tr><td style="padding-bottom:15px;"> 运费：<strong class="pay">${c.order.freight}</strong></td></tr>
+			     <tr><td style="padding-top:15px;padding-bottom:15px;"><strong class="pay" id="total">1</strong>件商品，总商品金额：<strong class="pay" id="ac">${l.maxprice}</strong></td></tr>
+			     <tr><td style="padding-bottom:15px;"> 运费：<strong class="pay">0.0</strong></td></tr>
 			</table>
 		</div>
 		
 		<div class="orderDe" style="margin-top:0px;border:1px solid #80ffff;">
 		  <table  class="same" style="background-color:#f0ffff;">
-			     <tr><td style="padding-top:15px;">实际支付： <span class="pay" id="actulpayment">${c.order.actulPayment}</span>
-			      <input type="hidden" value="${c.order.actulPayment}" name="order.actulPayment" id="unitPrice">
-			     </td></tr>
+			     <tr><td style="padding-top:15px;">实际支付： <span class="pay" id="actulpayment">${l.maxprice}</span>  </td></tr>
 			     <tr><td style="padding-top:15px;"> 寄送至：<span id="adr">##################</span></td></tr>
 				 <tr><td style="padding-top:15px;padding-bottom:15px;">收货人:<span>${username}</span>
 

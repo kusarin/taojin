@@ -56,38 +56,19 @@ public class ShopController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value ={"/doAdd.do"},method={RequestMethod.GET,RequestMethod.POST})
-	public String doAdd(Shop shop,HttpServletRequest request,Map<String,Object> map,MultipartFile shopimage,HttpSession session){
-		Users user = (Users)session.getAttribute("user");
-	    if(shopService.getAllByUserid(user.getUser_ID())==null)
-	    {
+	public ModelAndView doAdd(@RequestParam(value = "file", required = false)MultipartFile file,HttpServletRequest request,HttpSession session){
+		String name = request.getParameter("name");
+		String username = request.getParameter("username");
+		String email = request.getParameter("email");
+		String ID = request.getParameter("ID");
+		String type = request.getParameter("type");
+		String intro = request.getParameter("intro");
 
-	    	String path = request.getServletContext().getRealPath("image");
-			// 将图片文件名命名为上传时间
+		// 进行添加商品信息操作，并且获取提示信息
+		ModelAndView modelandview = shopService.doAdd(name,username,email,ID, type, intro,
+				 file, request,session);
 
-			String fileName = String.valueOf(System.currentTimeMillis())
-					+ shopimage.getOriginalFilename();
-			// 获取图片文件路径
-			File targetFile = new File(path, fileName);
-			if (!targetFile.exists()) {
-				targetFile.mkdirs();
-			}
-			// 保存文件（图片）；
-			try {
-				shopimage.transferTo(targetFile);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			// set方法
-			System.out.println(shopimage + ">>>>>>>" + fileName);
-			shop.setImage("/image/" + fileName);
-	    	shopService.addShop(shop);
-	    	map.put("error", "认证成功！");
-	    	return "/shopList";
-	    }
-	    else {
-     		map.put("error", "该用户店铺已存在！");
-	        return "/addShop";
-	    }
+		return modelandview;
 	}
 	@RequestMapping(value ={"/toChange.do"},method={RequestMethod.GET,RequestMethod.POST}
 	)
@@ -103,10 +84,17 @@ public class ShopController {
 		return "/shopinfoChange";
 		}
 	}
-	@RequestMapping(value ={"/doChange.do"},method={RequestMethod.GET,RequestMethod.POST})
-	public String doChange(Shop shop){
-		shopService.changeInfoByid(shop);
-		return "redirect:/shopList.do";
+	@RequestMapping("doChange.do")
+	public ModelAndView doChange(@RequestParam(value = "file", required = false) MultipartFile file,
+	Shop shop, HttpServletRequest request, HttpSession session,@RequestParam("id") String id) {
+		int shop_id = Integer.parseInt(id);
+		String name = request.getParameter("name");
+		String type = request.getParameter("type");
+		String intro = request.getParameter("intro");
+		String image = request.getParameter("image");
+		ModelAndView result = shopService.doChange(shop_id, name,
+				type, intro,image, file, request);
+		return result;
 	}
 	@RequestMapping(value = {"/shopList.do"},method={RequestMethod.GET,RequestMethod.POST})
     public String getShoplist(Shop shop,Map<String,Object> map,HttpSession session){

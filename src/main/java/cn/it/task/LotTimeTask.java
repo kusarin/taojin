@@ -8,13 +8,16 @@ import org.springframework.stereotype.Component;
 
 import cn.it.dao.LotDao;
 import cn.it.pojo.Lot;
+import cn.it.service.OrderService;
 
 @Component
 public class LotTimeTask {
 
 	@Autowired
 	private LotDao lotDao;
-
+    @Autowired
+    private OrderService orderService;
+	
 	@Scheduled(cron = "0 0/1 * * * ? ")
 	public void lotTask() {
 		lotDao.timeControl();
@@ -26,6 +29,8 @@ public class LotTimeTask {
 				lotDao.LotUpdate(l);
 			} else {
 				// 生成订单
+				int lot_id=l.getLot_id();
+				orderService.productLotOrder(lot_id);
 				l.setStatus(1);
 				lotDao.LotUpdate(l);
 			}

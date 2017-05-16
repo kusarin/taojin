@@ -148,6 +148,15 @@ public interface ItemService {
 	public List<Item> findByShopId2(int shop_id);
 
 	/**
+	 * 通过调用itemDao.FindItemByShopId(shop_id)， 根据店铺编号查看商品 从中获取status=1的“已售空的商品”
+	 * 
+	 * @param shop_id
+	 *            店铺编号，int
+	 * @return List<Item> 返回值为一个商品列表，包括一个或者多个商品
+	 */
+	public List<Item> findByShopId3(int shop_id);
+
+	/**
 	 * 按照输入的关键词查看商品；
 	 * 
 	 * @param str
