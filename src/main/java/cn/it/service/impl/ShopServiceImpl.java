@@ -111,7 +111,7 @@ public class ShopServiceImpl implements ShopService {
 		}
 		else{
 			if (name == null || name.equals("") || type == null
-					|| type.equals("") ||username == null || username.equals("")||email == null || email.equals("")||ID == null || ID.equals("")|| intro == null || intro.equals("")
+					|| type.equals("") ||username == null || username.equals("")||email == null || email.equals("")||ID == null || ID.equals("")|| intro == null || intro.equals("")||file == null || file.equals("")
 					) {
 
 				// 提示信息 "输入数据不能为空！！！"
@@ -148,6 +148,7 @@ public class ShopServiceImpl implements ShopService {
 				}
 				// set方法
 				u.setIdPhoto("/image/" + fileName);
+				i.setImage("/image/dislogo.jpg");
 				// 商品图片部分结束
 				i.setStatus(0);
 
