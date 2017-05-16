@@ -66,4 +66,7 @@
 	<update id="updateStatus" parameterType="int">
 		Update shop set status = #{0} where shop_id = #{1}
 	</update>
+	<update id="update" parameterMap="ShopParameterMap">
+	     update shop set BrowsingTimes=#{BrowsingTimes} where Shop_id=#{shop_id}
+	</update>
 </mapper>

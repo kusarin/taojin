@@ -30,4 +30,6 @@ public interface ShopService {
    public int totalPage(int total);
    public List<Integer> pageList(int page, int totalPage);
    List<Shop> findByType(String type);
+    
+   public void updateBrowsingTimes(int shopId);
 }

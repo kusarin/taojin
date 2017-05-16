@@ -207,5 +207,13 @@ public class ShopServiceImpl implements ShopService {
 		return str;
 		
 	}
-
+	/*
+	 * 更新店铺浏览次数
+	 * */
+     public void updateBrowsingTimes(int shopId){
+		   Shop shop=shopDao.findByid(shopId);
+		  
+    	 shopDao.update(shopId);
+		   
+	   }
 }
