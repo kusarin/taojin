@@ -19,5 +19,5 @@ public interface ShopDao {
 	/**
 	 * 更新店铺浏览次数
 	 * */
-	void update(int shopId);
+	void update(Shop shop);
 }

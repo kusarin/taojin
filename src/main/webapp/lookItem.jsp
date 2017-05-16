@@ -261,6 +261,7 @@
 								</h1>
 								<div class="productprice">
 									<h2>商品价格:¥${lookitem.price}</h2>
+									<span>浏览次数<span>
 								</div>
 
 								<div class="productprice">

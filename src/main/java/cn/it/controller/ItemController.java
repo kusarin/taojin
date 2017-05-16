@@ -20,6 +20,7 @@ import cn.it.pojo.Shop;
 import cn.it.pojo.Users;
 import cn.it.service.InfoSearchService;
 import cn.it.service.ItemService;
+import cn.it.service.ShopService;
 
 /**
  * 
@@ -36,6 +37,8 @@ public class ItemController {
 	private ItemService itemservice;
     @Autowired
     private InfoSearchService infoSearchService;//刘亚斌修改
+    @Autowired
+    private ShopService shopService;
 	/**
 	 * 上架商品
 	 * 
@@ -565,7 +568,11 @@ public class ItemController {
 
 		// 将获取到的店铺信息shop传递到 shopinfo
 		modelandview.addObject("shopinfo", shop);
-
+        /**
+         * 更新店铺浏览次数
+         * 刘亚斌修改
+         * */
+		shopService.updateBrowsingTimes(shop_id);
 		return modelandview;
 	}
 
