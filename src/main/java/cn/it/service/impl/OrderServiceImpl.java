@@ -472,7 +472,8 @@ public class OrderServiceImpl implements OrderService {
 			}
 		}
 		int num = 0;
-		for (OrderDetail or1 : li) {
+		List<OrderDetail> ll = orderDetailDao.selectAll(orderNumber);
+		for (OrderDetail or1 : ll) {
 			if (or1.getFlag() == 1) {
 				num++;
 			}

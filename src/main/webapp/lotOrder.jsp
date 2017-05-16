@@ -13,7 +13,7 @@ pageEncoding="UTF-8"%>
 <link href="${pageContext.request.contextPath}/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="${pageContext.request.contextPath}/css/jquery.fancybox.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/cloud-zoom.css" rel="stylesheet">
-<title>我拍卖品订单</title>
+<title>我的拍卖品订单</title>
 <style>
 .item{
     width:300px;
@@ -170,6 +170,7 @@ function deleteAll(){
 						</c:if>
 						</a></li>
 						<li><a href="removeRecord.do">取消订单记录</a></li>
+						<li><a href="getLotOrder.do">我的拍卖订单</a></li>
 					</ul>
 				</div>
 				</aside>
