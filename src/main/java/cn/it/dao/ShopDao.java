@@ -16,4 +16,8 @@ public interface ShopDao {
 	List<Shop> findByType(String type);
 	List<Shop> findAll();
 	List<Shop> searchShop(String str);
+	/**
+	 * 更新店铺浏览次数
+	 * */
+	void update(Shop shop);
 }

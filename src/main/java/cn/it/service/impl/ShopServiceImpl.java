@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionalEventListener;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +26,7 @@ import cn.it.pojo.Typeh;
 import cn.it.pojo.Typel;
 import cn.it.pojo.Users;
 import cn.it.service.ShopService;
-@Service("ShopService")
+@Service("shopService")
 public class ShopServiceImpl implements ShopService {
 	@Autowired
 	//@Qualifier("shopDao")
@@ -111,7 +114,7 @@ public class ShopServiceImpl implements ShopService {
 		}
 		else{
 			if (name == null || name.equals("") || type == null
-					|| type.equals("") ||username == null || username.equals("")||email == null || email.equals("")||ID == null || ID.equals("")|| intro == null || intro.equals("")
+					|| type.equals("") ||username == null || username.equals("")||email == null || email.equals("")||ID == null || ID.equals("")|| intro == null || intro.equals("")||file == null || file.equals("")
 					) {
 
 				// 提示信息 "输入数据不能为空！！！"
@@ -148,6 +151,7 @@ public class ShopServiceImpl implements ShopService {
 				}
 				// set方法
 				u.setIdPhoto("/image/" + fileName);
+				i.setImage("/image/dislogo.jpg");
 				// 商品图片部分结束
 				i.setStatus(0);
 
@@ -207,5 +211,15 @@ public class ShopServiceImpl implements ShopService {
 		return str;
 		
 	}
-
+	/*
+	 * 更新店铺浏览次数
+	 * */
+     public void updateBrowsingTimes(int shopId){
+		   Shop shop=shopDao.findByid(shopId);
+		  int browsingTimes =shop.getBrowsingTimes();
+		  browsingTimes++;
+		  shop.setBrowsingTimes(browsingTimes);
+    	 shopDao.update(shop);
+		   
+	   }
 }
