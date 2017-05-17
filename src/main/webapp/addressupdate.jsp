@@ -170,7 +170,7 @@
 															</div>
 														</div>
 														<div class="controls">
-															<input type="submit" id="submit_id" value="添加新地址"
+															<input type="submit" id="submit_id" value="修改当前地址"
 																class="btn btn-orange" onclick="return check()">
 														</div>
 														<script>
