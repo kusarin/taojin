@@ -9,7 +9,7 @@
   </insert>
 	
 	<select id="select" resultType="cn.it.pojo.Invoice">
-	   select* from invoice where shop_id=#{0} and flag=#{1} limit #{2},#{3}
+	   select* from invoice where shop_id=#{0} and flag=#{1} ORDER BY orderNumber desc limit #{2},#{3}
 	</select>
 	
 	<delete id="delete" parameterType="int">

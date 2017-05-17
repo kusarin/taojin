@@ -160,6 +160,7 @@
 								<td style="border-color: #F5F5F5; width: 200px;">发货时间</td>
 								<td style="border-color: #F5F5F5; width: 100px;">供货店铺</td>
 								<td style="border-color: #F5F5F5; width: 100px;">发货单状态</td>
+								<td style="border-color: #F5F5F5; width: 100px;">操作</td>
 							</tr>
 							<c:forEach items="${pages.datas}" var="i">
 								<tr align="center">
@@ -171,6 +172,7 @@
 											value="${i.deliverTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 									<td style="border-color: #F5F5F5;">${i.shopNme}</td>
 									<td style="border-color: #F5F5F5;">已发货</td>
+									<td style="border-color: #F5F5F5;"><a href="lookInvoiceOrder.do?orderNumber=${i.orderNumber}&shop_id=${shopid}">查看</a></td>
 								</tr>
 							</c:forEach>
 						</table>

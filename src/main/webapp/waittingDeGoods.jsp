@@ -170,7 +170,9 @@
 									<td style="border-color: #F5F5F5;">${i.shopNme}</td>
 									<td style="border-color: #F5F5F5;">待发货</td>
 									<td style="border-color: #F5F5F5;"><a
-										href="sureDelivGoods.do?shopId=${shopid}&orderNumber=${i.orderNumber}">发货</a></td>
+										href="sureDelivGoods.do?shopId=${shopid}&orderNumber=${i.orderNumber}">发货</a><br>
+										<a href="lookInvoiceOrder.do?orderNumber=${i.orderNumber}&shop_id=${shopid}">查看</a>
+										</td>
 								</tr>
 							</c:forEach>
 						</table>

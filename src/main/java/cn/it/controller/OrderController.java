@@ -382,4 +382,18 @@ public class OrderController {
 		view.addObject("username",usersService.findById(userId).getName());
 		return view;
 	}
+	/*
+	 * 查看发货单详情
+	 * */
+	@RequestMapping("lookInvoiceOrder.do")
+	public ModelAndView lookInvoiceOrder(String orderNumber,int shop_id){
+		ModelAndView v=new ModelAndView("lookInvoice");
+		v.addObject("o", orderService.findOrder(orderNumber));//订单
+		v.addObject("inv", orderService.getInvoice(orderNumber, shop_id));//发货单
+		v.addObject("u", orderService.getU(orderNumber));//收货人
+		v.addObject("il", orderService.getOrderDetail(orderNumber, shop_id));//商品
+		
+		return v;
+		
+	}
 }
