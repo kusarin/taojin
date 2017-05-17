@@ -124,7 +124,7 @@
 	</header>
 	<!-- Header End -->
 	<div class="left">
-		<h1 style="color: red">&nbsp拍卖品：</h1>
+		<h3 style="color: red">&nbsp拍卖品：</h3>
 	</div>
 	<div class="right" style="margin-left: 275px">
 		<c:forEach items="${Lotlist}" var="i">
@@ -142,7 +142,7 @@
 								<td><a href="lookLot.do?id=${i.lot_id}" target=${i.lot_id}><p
 											class="textname" style="height: 20px; width: 200px">${i.name}</p></a>
 									<a href="lookLot.do?id=${i.lot_id}" class="textprice"
-									target=${i.lot_id}>拍卖品类型: >${i.typeh}>${i.typel} </a> <br>
+									target=${i.lot_id}>拍卖品类型:${i.typel} </a> <br>
 									<a href="lookLot.do?id=${i.lot_id}" target=${i.lot_id}><p
 											class="textdetail" style="height: 20px; width: 275px"
 											title=${i.detail}>${i.detail}</p></a></td>

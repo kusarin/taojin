@@ -117,8 +117,8 @@
 		<div class="container">
 			<!--  breadcrumb -->
 			<ul class="breadcrumb">
-				<li><a href="#">Home</a> <span class="divider">/</span></li>
-				<li class="active">Blog</li>
+				<li><a href="#">店铺管理</a> <span class="divider">/</span></li>
+				<li class="active">拍卖品上架</li>
 			</ul>
 			<div class="row">
 				<!-- Sidebar Start-->
@@ -175,6 +175,7 @@
 																		<option value="cos女装">cos女装</option>
 																		<option value="cos男装">cos男装</option>
 																		<option value="动漫手办">动漫手办</option>
+																		<option value="其他动漫产品">其他动漫产品</option>
 																	</optgroup>
 																	<optgroup label="---游戏------------">
 																		<option value="游戏账号">游戏账号</option>
@@ -182,6 +183,7 @@
 																		<option value="游戏装备">游戏装备</option>
 																		<option value="游戏金币">游戏金币</option>
 																		<option value="实体盘">实体盘</option>
+																		<option value="其他游戏相关">其他游戏相关</option>
 																	</optgroup>
 																	<optgroup label="---乐器------------">
 																		<option value="吉他">吉他</option>
@@ -189,12 +191,14 @@
 																		<option value="口琴">口琴</option>
 																		<option value="笛子">笛子</option>
 																		<option value="手风琴">手风琴</option>
+																		<option value="其他乐器">其他乐器</option>
 																	</optgroup>
 																	<optgroup label="---数码用品--------">
 																		<option value="手机">手机</option>
 																		<option value="平板电脑">平板电脑</option>
 																		<option value="游戏主机">游戏主机</option>
 																		<option value="数码相机">数码相机</option>
+																		<option value="其他数码设备">其他数码设备</option>
 																	</optgroup>
 																	<optgroup label="---电脑------------">
 																		<option value="笔记本电脑">笔记本电脑</option>
@@ -224,6 +228,7 @@
 																		<option value="高中教学">高中教学</option>
 																		<option value="考研辅导">考研辅导</option>
 																		<option value="托福雅思">托福雅思</option>
+																		<option value="其他资料">其他资料</option>
 																	</optgroup>
 																	<optgroup label="---服装------------">
 																		<option value="男装">男装</option>
@@ -231,6 +236,7 @@
 																		<option value="正装">正装</option>
 																		<option value="运动装系列">运动装系列</option>
 																		<option value="学士服系列">学士服系列</option>
+																		<option value="其他">其他</option>
 																	</optgroup>
 																	<optgroup label="---其他商品--------">
 																		<option value="其他商品">其他商品</option>

@@ -73,12 +73,19 @@ public class LotServiceImpl implements LotService {
 			String maxprice, String detail, MultipartFile file,
 			HttpServletRequest request, HttpSession session) {
 		ModelAndView str = new ModelAndView("addLot"); // 跳转到addLot.jsp界面
-
+		try {
+			Double.parseDouble(startprice);
+			Double.parseDouble(maxprice);
+		} catch (Exception e) {
+			str.addObject("error", "非法输入！！！");
+			return str;
+		}
 		// 判断传入参数是否为空
 		if (name == null || name.equals("") || typel == null
 				|| typel.equals("") || startprice == null
 				|| startprice.equals("") || maxprice == null
-				|| maxprice.equals("") || detail == null || detail.equals("")) {
+				|| maxprice.equals("") || detail == null || detail.equals("")
+			) {
 
 			// 提示信息 "输入数据不能为空！！！"
 			str.addObject("error", "输入数据不能为空！！！");
@@ -93,7 +100,6 @@ public class LotServiceImpl implements LotService {
 			int user_id = user.getUser_ID();
 			Shop ls = shopDao.getAllByUserid(user_id);
 			int shop_id = ls.getShop_id();
-
 			// 将拍卖品起拍价和最高价转为规定格式：double
 			// 加价额度固定为0.5,初始当前价格为起拍价
 			double strpri = Double.parseDouble(startprice);
@@ -125,26 +131,31 @@ public class LotServiceImpl implements LotService {
 			lot.setMaxprice(maxpri1);
 			lot.setAddprice(addpri);
 			lot.setDetail(detail);
-
-			// 拍卖品图片部分
-			// 获取图片存储文件的路径
-			String path = request.getServletContext().getRealPath("lotimage");
-			// 将图片文件名命名为上传时间
-			String fileName = String.valueOf(System.currentTimeMillis())
-					+ file.getOriginalFilename();
-			// 获取图片文件路径
-			File targetFile = new File(path, fileName);
-			if (!targetFile.exists()) {
-				targetFile.mkdirs();
+			
+			if(file.isEmpty()){
+				lot.setImage("/loyimage/wutu.jpg");
+			}else{
+				// 拍卖品图片部分
+				// 获取图片存储文件的路径
+				String path = request.getServletContext().getRealPath("lotimage");
+				// 将图片文件名命名为上传时间
+				String fileName = String.valueOf(System.currentTimeMillis())
+						+ file.getOriginalFilename();
+				// 获取图片文件路径
+				File targetFile = new File(path, fileName);
+				if (!targetFile.exists()) {
+					targetFile.mkdirs();
+				}
+				// 保存文件（图片）；
+				try {
+					file.transferTo(targetFile);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				// set方法
+				lot.setImage("/lotimage/" + fileName);
 			}
-			// 保存文件（图片）；
-			try {
-				file.transferTo(targetFile);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			// set方法
-			lot.setImage("/lotimage/" + fileName);
+			
 			// 图片部分结束
 
 			// 设置初始状态status为0
@@ -263,6 +274,12 @@ public class LotServiceImpl implements LotService {
 	public ModelAndView anction(int lot_id, String yourprice, int user_id,
 			String addr) {
 		ModelAndView str = new ModelAndView("lookLot");
+		try {
+			Double.parseDouble(yourprice);
+		} catch (Exception e) {
+			str.addObject("error", "非法输入！！！");
+			return str;
+		}
 		// 判断传入参数是否为空
 		if (yourprice == null || yourprice.equals("")) {
 			// 提示信息 "出价不能为空！！！"
@@ -304,16 +321,23 @@ public class LotServiceImpl implements LotService {
 	@Override
 	public ModelAndView updateLot(int lot_id) {
 		ModelAndView mav = new ModelAndView("updateLot");
-		mav.addObject("lot",lotDao.FindLotById(lot_id));
+		mav.addObject("lot", lotDao.FindLotById(lot_id));
 		return mav;
 	}
 
 	@Override
 	public ModelAndView changeLot(String name, String typel, String startprice,
 			String maxprice, String detail, MultipartFile file,
-			HttpServletRequest request,String lot_id) {
+			HttpServletRequest request, String lot_id) {
 		int id = Integer.parseInt(lot_id);
 		ModelAndView str = new ModelAndView("updateLot");
+		try {
+			Double.parseDouble(startprice);
+			Double.parseDouble(maxprice);
+		} catch (Exception e) {
+			str.addObject("error", "非法输入！！！");
+			return str;
+		}
 		if (name == null || name.equals("") || typel == null
 				|| typel.equals("") || startprice == null
 				|| startprice.equals("") || maxprice == null
@@ -327,7 +351,7 @@ public class LotServiceImpl implements LotService {
 			str.addObject("lot", lotDao.FindLotById(id));
 			str.addObject("error", "起拍价不能大于一口价，请重新输入信息！");
 		} else {// 参数不为空时候，执行添加操作
-			 
+
 			// 将拍卖品起拍价和最高价转为规定格式：double
 			// 加价额度固定为0.5,初始当前价格为起拍价
 			double strpri = Double.parseDouble(startprice);

@@ -85,8 +85,8 @@
 		<div class="container">
 			<!--  breadcrumb -->
 			<ul class="breadcrumb">
-				<li><a href="#">Home</a> <span class="divider">/</span></li>
-				<li class="active">Blog</li>
+				<li><a href="#">店铺管理</a> <span class="divider">/</span></li>
+				<li class="active">认证店铺</li>
 			</ul>
 			<div class="row">
 				<!-- Sidebar Start-->
