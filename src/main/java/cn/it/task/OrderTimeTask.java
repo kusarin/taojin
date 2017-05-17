@@ -46,10 +46,11 @@ public class OrderTimeTask {
 				Item ii=itemDao.FindItemById(itemId);//item表中的商品
 				ii.setnumber(ii.getnumber()+ord.getItemNumbers());//更新商品总数
 				itemDao.ItemUpdate(ii);//更新item表
+				System.out.println("任务进行中.......");
 			}
 	    }
 	 }
-	        System.out.println("任务进行中.......");
+	        
 	    }
 	  }
 }
