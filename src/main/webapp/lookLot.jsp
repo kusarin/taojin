@@ -190,7 +190,7 @@
 
 							<!-- 出价区域 -->
 							<form action="auction.do?id=${lookLot.lot_id}" method="post">
-								
+
 								<div style="margin-top: 10px; margin-left: 30px;">
 									<input type="text" name="yourprice"
 										onkeyup="value=value.replace(/[^\d.]/g,'')"
@@ -201,13 +201,13 @@
 								</div>
 								<div class="receiver">
 									<div class="info">
-										<br>&nbsp<strong>收货地址预选</strong>
+										<br>&nbsp<strong>收货地址选择</strong>
 									</div>
 									<div class="receiverInfo" id="receive">
 										<c:forEach items="${address}" var="adr">
 											<input type="radio" name="addr" value="${adr.addr}"
 												onclick="checadr()">
-											<sapn>&nbsp ${adr.addr}</sapn>
+											&nbsp<sapn> ${adr.addr}</sapn>
 											<br>
 										</c:forEach>
 									</div>

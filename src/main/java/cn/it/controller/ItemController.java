@@ -565,14 +565,14 @@ public class ItemController {
 		// 获取商品归属的店铺信息；
 		Shop shop;
 		shop = itemservice.showShop(shop_id);
-
-		// 将获取到的店铺信息shop传递到 shopinfo
-		modelandview.addObject("shopinfo", shop);
-        /**
+		 /**
          * 更新店铺浏览次数
          * 刘亚斌修改
          * */
 		shopService.updateBrowsingTimes(shop_id);
+		// 将获取到的店铺信息shop传递到 shopinfo
+		modelandview.addObject("shopinfo", shop);
+       
 		return modelandview;
 	}
 

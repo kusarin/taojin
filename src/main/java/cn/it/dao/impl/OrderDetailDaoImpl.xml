@@ -27,6 +27,7 @@
 	               <result column="Image" property="image" javaType="String" jdbcType="VARCHAR"/>
 	               <result column="BrowingTiems" property="browingtimes" javaType="int" jdbcType="INTEGER"/>
 	               <result column="tradingTimes" property="tradingTimes" javaType="int" jdbcType="INTEGER"/>
+	               <result column="Status" property="status" javaType="int" jdbcType="INTEGER"/>
 	          </association>
               </resultMap>
               
