@@ -28,10 +28,15 @@ function commit(){
 			  break;
 		  }
 	  }
-	  if(i==-1 || sc.length==0){
-		  alert("请选择评论");
+	  if(i==-1){
+		  alert("请选择评分");
 		  return;
-	  }else{
+	  }
+	  if(sc.length==0){
+		  alert("请选择填写评论内容");
+		  return;
+	  }
+	  else{
 		  document.myform.action="commitEval.do";
 	    	 // $(".myform")
 	       document.myform.submit();

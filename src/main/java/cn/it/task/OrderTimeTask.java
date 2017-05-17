@@ -52,5 +52,38 @@ public class OrderTimeTask {
 	 }
 	        
 	    }
-	  }
+	    List<Order> oo=orderDao.get("待收货");
+	    if(oo.size()!=0){
+	    	
+	    	for(Order or:oo){
+	    		long d1=or.getOrderTime().getTime();
+		    	//时间间隔分钟数
+		    	long d3=(d2-d1)/(1000 * 60);
+		    	
+		    	if(d3>5){//下单和当前时间相差超过5分钟
+		    		/**
+		    		 * 更新订单交易状态
+		    		 * */
+		    		or.setStatus("已收货");
+		    		orderDao.update(or);
+		    		/**
+		    		 * 更新确认收货时间
+		    		 * */
+		    		or.setReceGoodsTime(new Timestamp(new Date().getTime()));
+		    		orderDao.updateReceGoodsTime(or);
+		    		/*
+		    		 * 更新商品销售数量
+		    		 */
+		    		List<OrderDetail> oli = orderDetailDao.selectAll(or.getOrderNumber());// 此订单中的所有商品
+		    		for (OrderDetail ord : oli) {
+		    			int itemId = ord.getItemId();// 订单中的商品
+		    			Item ii = itemDao.FindItemById(itemId);// item表中的商品
+
+		    			ii.settradingTimes(ii.gettradingTimes() + ord.getItemNumbers());// 更新销售数量
+		    			itemDao.ItemUpdate(ii);// 更新item表
+		    		}
+		    	}
+		    	}
+	    	}
+	    }
 }

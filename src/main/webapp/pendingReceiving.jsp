@@ -250,6 +250,7 @@ function deleteAll(){
 		                    </td>
 	                        <td class="sa" style="border-bottom:1px solid #F5F5F5;">
 	                        <a href="lookOrderDeatil.do?orderNumber=${orderc.order.orderNumber}"><p>订单详情</p></a>
+	                        <a href="receivingGoods.do?orderNumber=${orderc.order.orderNumber}"><p>确认收货</p></a>
 							</td>
 		                </tr>
 		            </table>  
