@@ -7,10 +7,9 @@
 <head>
 <style>
 .left {
-	width: 130px;
+	width: 175px;
 	heigh: auto;
 	float: left;
-	margin-top: 20px;
 	margin-left: 20px;
 }
 
@@ -18,7 +17,6 @@
 	width: auto;
 	heigh: auto;
 	margin-top: 20px;
-	margin-left: 149px;
 }
 
 .itemimage {
@@ -27,8 +25,11 @@
 	float: left;
 }
 .textshopname {
-	font-size: 30px;
-	color: red;
+	font-size: 20px;
+	color: black;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 .textname {
 	font-size: 20px;
@@ -36,19 +37,6 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-}
-
-.textdetail {
-	font-size: 15px;
-	color:orange;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-.textprice {
-	font-size: 20px;
-	color: red;
 }
 </style>
 <link href="./css/shopSearch.css" rel="stylesheet">
@@ -76,6 +64,7 @@
 	rel="stylesheet" />
 <link href="./TaoJin/css/jquery.fancybox.css" rel="stylesheet">
 <link href="./TaoJin/css/cloud-zoom.css" rel="stylesheet">
+<link href="./css/itemlist.css" rel="stylesheet">
 </head>
 <body>
 
@@ -155,17 +144,39 @@
 	</div>
 	</header>
 	<!-- Header End -->
-	
-	
+	<!-- 商品类型选择区域 start-->
 	<div class="left">
-			<p class="textshopname" style="height: 40px; width: 200px"> ${shopinfo.name}</p>
-			<p class="textdetail" style="height: 40px; width: 200px"> ${shopinfo.intro}</p>
+		<div class="all-sort-list">
+			<div class="item">
+				<h3>
+					<span>·</span><a href="showShop.do?type=动漫&page=1">动漫</a>、<a
+						href="showShop.do?type=2&page=1">游戏</a>、<a
+						href="showShop.do?type=乐器&page=1">乐器</a>
+				</h3>
+			</div>
+			<div class="item">
+				<h3>
+					<span>·</span><a href="showShop.do?type=数码用品&page=1">数码用品</a>、<a
+						href="showShop.do?type=电脑&page=1">电脑</a>
+				</h3>
+			</div>
+			<div class="item">
+				<h3>
+					<span>·</span><a href="showShop.do?type=运动&page=1">运动</a>、<a
+						href="showShop.do?type=户外健身&page=1">户外健身</a>
+				</h3>
+			</div>
+			
 		</div>
-	
+		<p>${show}</p>
+		<p>${type}</p>
+	</div>
 
-<div style="margin-left: 250px;">
-<h1 style="color:orange">${error0}</h1>
-	<c:forEach items="${showshopItem}" var="i">
+<!-- 店铺类型选择区域 end-->
+
+	<div class="right" style="margin-left: 275px">
+		<h1 style="color: orange">${error0}</h1>
+	<c:forEach items="${shoplist}" var="c">
 		<li class="span3">
 				<div>
 					<table border="1">

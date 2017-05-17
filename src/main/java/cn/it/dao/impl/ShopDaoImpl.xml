@@ -31,7 +31,7 @@
 		Select * from shop where shop_id=#{id}
 	</select>
 	<select id="findByType" resultMap="findAll">
-	    Select * from shop where type =  #{type} 
+	    Select * from shop where type =  #{type} and status = 1 
 	</select>
 	<insert id="addShop" parameterType="cn.it.pojo.Shop">
 	    Insert into shop(user_ID,Name,Type,Intro,BrowsingTimes,Status,Image) values(#{user_ID},#{Name},#{Type},#{Intro},0,0,#{Image})
