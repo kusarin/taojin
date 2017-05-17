@@ -58,7 +58,7 @@ public interface OrderDao {
 	/*
 	 * 查询所有待付款的订单
 	 * */
-	public List<Order> get(String status,int label);
+	public List<Order> get(String status);
 	/****
 	 * 设置付款时间
 	 * 

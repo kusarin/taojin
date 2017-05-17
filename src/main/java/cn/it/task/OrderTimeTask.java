@@ -26,7 +26,7 @@ public class OrderTimeTask {
 	    @Scheduled(cron = "30/30 * * * * ? ") // 间隔30秒执行
 	    public void taskCycle() {
 	    	
-	    List<Order> o=orderDao.get("待付款",0);
+	    List<Order> o=orderDao.get("待付款");
 	    long d2=new Date().getTime();//当前时间
 	    if(o.size()!=0){
 	        for(Order ol:o){
@@ -46,10 +46,11 @@ public class OrderTimeTask {
 				Item ii=itemDao.FindItemById(itemId);//item表中的商品
 				ii.setnumber(ii.getnumber()+ord.getItemNumbers());//更新商品总数
 				itemDao.ItemUpdate(ii);//更新item表
+				System.out.println("任务进行中.......");
 			}
 	    }
 	 }
-	        System.out.println("任务进行中.......");
+	        
 	    }
 	  }
 }
