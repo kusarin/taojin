@@ -18,7 +18,7 @@ public class ChatMassage {
 	// 用户
 	private List<String> users = new ArrayList<String>();
 	// 最大聊天室人数
-	private final int USER_NUMBER = 3;
+	private final int USER_NUMBER = 2;
 	// 聊天室人数
 	public static int userNum = 0;
 	// 对话信息
