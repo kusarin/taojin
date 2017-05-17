@@ -164,10 +164,10 @@ public class ShopController {
 		
 	}
 	@RequestMapping(value = {"/showShop.do"},method = {RequestMethod.GET,RequestMethod.POST})
-	public String showShop(String type,Shop shop,Map<String, Object> map,int page) throws UnsupportedEncodingException{
-		String stypeh = new String(type.getBytes("ISO-8859-1"), "utf-8");
+	public String showShop(@RequestParam("type")String type,Shop shop,Map<String, Object> map,int page) throws UnsupportedEncodingException{
+		String stype = new String(type.getBytes("ISO-8859-1"), "utf-8");
 		List<Shop> list;
-		list = shopService.findByType(type);
+		list = shopService.findByType(stype);
 		int total = list.size(); // 商品总数量
 		int perPage = 6; // 每页显示数量
 		int totalPage =  shopService.totalPage(total);
@@ -195,7 +195,7 @@ public class ShopController {
 						map.put("page", page);
 		}
 		map.put("show", "目前显示分类");
-		map.put("type", type);
+		map.put("type", stype);
 		return null;
 		
 	}
