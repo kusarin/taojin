@@ -11,9 +11,11 @@ import org.springframework.stereotype.Service;
 
 
 
+
 import cn.it.dao.ItemDao;
 //import cn.it.dao.SalesRankingDao;
 import cn.it.pojo.Item;
+import cn.it.pojo.Page;
 import cn.it.pojo.SalesRanking;
 import cn.it.service.SalesRankingService;
 
@@ -80,6 +82,14 @@ public class SalesRankingServiceImpl implements SalesRankingService {
 		}
 		return sales;
 		
+	}
+	/*
+	 * 销售分类
+	 * 分页
+	 * */
+	Page<SalesRanking> fenye(Page<SalesRanking> page){
+		page.setPagestart(page.getPageNo());
+		return null;
 	}
 	
 }
