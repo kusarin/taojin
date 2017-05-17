@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./css/itemlist.css" rel="stylesheet">
 <link href="./TaoJin/css/bootstrap.css" rel="stylesheet">
 <link href="./css/itemlist.css" rel="stylesheet">
 <link href="./TaoJin/css/bootstrap-responsive.css" rel="stylesheet">
@@ -56,6 +57,18 @@
 	color: red;
 }
 </style>
+<script type="text/javascript">
+	function chatlogin() {
+		var name = ${user.username};
+			$.ajax({
+				url : "chatlogin.do",
+				data : "name=" + name,
+				dataType:'json',
+			    
+			});
+			window.location.href = "chat_main.jsp";
+	}
+</script>
 <script type="text/javascript">
 function setTab(name,m,n){ 
 	for( var i=1;i<=n;i++){ 
@@ -149,10 +162,11 @@ function setTab(name,m,n){
 		<div class="all-sort-list">
 			<div class="item">
 				<h3>
-					<span>·</span><a href="showShop.do?type=笔记本&page=1">动漫</a>、<a
-						href="showShop.do?type=日常用品&page=1">游戏</a>、<a
+					<span>·</span><a href="showShop.do?type=动漫&page=1">动漫</a>、<a
+						href="showShop.do?type=2&page=1">游戏</a>、<a
 						href="showShop.do?type=乐器&page=1">乐器</a>
 				</h3>
+			</div>
 			<div class="item">
 				<h3>
 					<span>·</span><a href="showShop.do?type=数码用品&page=1">数码用品</a>、<a
@@ -165,7 +179,6 @@ function setTab(name,m,n){
 						href="showShop.do?type=户外健身&page=1">户外健身</a>
 				</h3>
 			</div>
-		</div>
 		<p>${show}</p>
 		<p>${type}</p>
 	</div>
@@ -218,7 +231,6 @@ function setTab(name,m,n){
 	<div class="right" style="margin-left: 275px">
 		<h1 style="color: orange">${error0}</h1>
 		<c:forEach items="${shoplist}" var="c">
-			<li class="span3">
 				<li class="span3">
 				<div>
 					<table border="1">
@@ -231,7 +243,7 @@ function setTab(name,m,n){
 							</tr>
 							<tr>
 								<td><a href="lookshopItem.do?shopid=${c.shop_id}&page=1"><p
-											class="textname" style="height: 20px; width: 200px">${c.name}</p></a>
+											class="textname" style="height: 20px; width: 200px">${c.name}</p></a><button onclick="chatlogin()">联系店主</button>
 								</td>
 							</tr>
 						</thead>

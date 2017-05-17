@@ -2,10 +2,11 @@
 pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
- <title>订单评价</title>
+ <title>发货单详情</title>
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
  
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sureOrder.css"/>
@@ -15,34 +16,8 @@ pageEncoding="UTF-8"%>
 <link href="${pageContext.request.contextPath}/css/flexslider.css" type="text/css" media="screen" rel="stylesheet"  />
 <link href="${pageContext.request.contextPath}/css/jquery.fancybox.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/cloud-zoom.css" rel="stylesheet">
+
 </head>
-<script>
-function commit(){
-	 var addr=document.getElementsByName("score");
-	 var sc=document.getElementById("sc").value;
-	  var i=-1;
-	 
-	  for( var j=0;j<addr.length;j++){
-		  if(addr[j].checked){
-			  i++;
-			  break;
-		  }
-	  }
-	  if(i==-1){
-		  alert("请选择评分");
-		  return;
-	  }
-	  if(sc.length==0){
-		  alert("请选择填写评论内容");
-		  return;
-	  }
-	  else{
-		  document.myform.action="commitEval.do";
-	    	 // $(".myform")
-	       document.myform.submit();
-	  }
-}
-</script>
 <body>
 <!-- Header Start -->
 	<header>
@@ -55,7 +30,7 @@ function commit(){
 						<div class="navbar" id="topnav">
 						
 							<div class="navbar-inner">
-								  <div style="float: left; color: white; margin-top: 26px;">
+									  <div style="float: left; color: white; margin-top: 26px;">
 										<span>您好,</span>
 										<c:if test="${user == null}">
 											<a href="login.jsp"><span style="color: white;">登录</span></a>
@@ -98,35 +73,90 @@ function commit(){
 	</header>
 	<!-- Header End -->
 	
-<div class="containers">
-
-<form action="" name="myform" method="post">
-
-<div style="margin-top:30px;height:auto;">
-<div style="float:left; margin-left:390px;">
-   <img src="${pageContext.request.contextPath}${it.item.image}" style="width:100px;height:120px;">
-   <p style="width:100px;height:90px;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;">${it.item.name}</p>
-</div>
-<input type="hidden" name="itemId" value="${it.itemId}">
-<input type="hidden" name="orderNumber" value="${it.orderNumber}">
-<div style="margin-left:550px;margin-top:20px; width:50px;">
-<input type="radio" name="score" value="5"><img src="image/3.jpg" style="margin-top:-30px;margin-left:20px;"/> 
-<input type="radio" name="score" value="3" style="margin-top:-93px;margin-left:130px;"><img src="image/2.jpg" style="margin-top:-120px;margin-left:150px;"/>
-<input type="radio" name="score" value="1" style="margin-top:-167px;margin-left:250px;"><img src="image/1.jpg" style="margin-top:-200px;margin-left:270px;"/>
-</div>
-<div style="margin-left:550px;margin-top:-60px; width:100px;">
-     <p>评论内容：</p>
-	 <input type="text" id="sc" name="content" placeholder="分享你的感受" style="height:100px;width:500px;">
-</div>
-</div>
-<div style="margin-top:20px;margin-left:550px;">
-<input type="button" value="提交" style="width:150px;height:40px;" onclick="commit()">
-</div>
-</form>
-</div>
-<!-- footer-->	
+    <div class="containers" style="margin:0 auto;margin-top:20px;">
+	 
+	 <div  style="color:gray;font-size:15px;margin:0 auto;width:700px;">
+	      <strong>基本信息</strong>
+	   </div>
+	   <div style="margin:0 auto;width:700px;margin-top:10px;margin-bottom:50px;">
+	    <table style="margin:0 auto;border-color:#FAFFF0; " border="1">
+		
+		 <tr>
+		    <td style="width:200px;text-align:center;height:30px;border-color:#FAFFF0;">订单编号</td>
+			<td style="width:500px;text-align:center;border-color:#FAFFF0;">${inv.orderNumber}</td>
+		</tr>
+		<tr>
+		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">下单时间</td>
+			<td style="text-align:center;border-color:#FAFFF0;"><fmt:formatDate value="${inv.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+			
+		</tr>
+		<c:if test="${inv.flag==0}">
+		<tr>
+		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">订单状态</td>
+			<td style="text-align:center;border-color:#FAFFF0;">待发货</td>
+		</tr>
+		</c:if>
+		<c:if test="${inv.flag==1}">
+		<tr>
+		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">订单状态</td>
+			<td style="text-align:center;border-color:#FAFFF0;">已发货</td>
+		</tr>
+		<tr>
+		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">发货时间</td>
+			<td style="text-align:center;border-color:#FAFFF0;"><fmt:formatDate value="${inv.deliverTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+			
+		</tr>
+		</c:if>
+		</table>
+	  
+	   </div>
+	   
+	   <div  style="color:gray;font-size:15px;margin:0 auto;width:700px;">
+	      <strong>收货人信息</strong>
+	   </div>
+	   <div style="margin:0 auto;width:700px;margin-top:10px;margin-bottom:50px;">
+	    <table style="margin:0 auto;border-color:#FAFFF0; " border="1">
+		
+		 <tr>
+		    <td style="width:200px;text-align:center;height:30px;border-color:#FAFFF0;">收货人姓名</td>
+			<td style="width:500px;text-align:center;border-color:#FAFFF0;">${u.name}</td>
+		</tr>
+		<tr>
+		    <td style="text-align:center;height:30px;border-color:#FAFFF0;">收货地址</td>
+			<td style="text-align:center;border-color:#FAFFF0;">${o.recivingAddress}</td>
+		</tr>
+		</table>
+	  
+	   </div>
+	   
+	   
+	    <div  style="color:gray;font-size:15px;margin:0 auto;width:700px;">
+	      <strong>商品信息</strong>
+	   </div>
+	   <div style="margin:0 auto;width:700px;margin-top:10px;margin-bottom:50px;">
+	    <table style="margin:0 auto;border-color:#FAFFF0; " border="1">
+		
+		 <tr>
+		    <td style="width:200px;text-align:center;height:30px;border-color:#FAFFF0;">商品名称</td>
+			<td style="width:500px;text-align:center;border-color:#FAFFF0;">图片</td>
+			<td style="width:500px;text-align:center;border-color:#FAFFF0;">发货数量</td>
+		</tr>
+		<c:forEach items="${il}" var="od">
+		 <tr>
+		    <td style="width:200px;text-align:center;height:30px;border-color:#FAFFF0;">${od.item.name}</td>
+			<td style="width:500px;text-align:center;border-color:#FAFFF0;"><img src="${pageContext.request.contextPath}${od.item.image}" style="height:60px; width:50px;"></td>
+			<td style="width:500px;text-align:center;border-color:#FAFFF0;">${od.itemNumbers}</td>
+		</tr>
+		</c:forEach>
+		</table>
+	  
+	   </div>
+	  
+	  
+	   </div> 
+	
 	<footer style="margin-top:20px">
-       <img  src="image/footer-tri.png" style="width:100%;">
+       <img  src="${pageContext.request.contextPath}/image/footer-tri.png" style="width:100%;">
             <div style="margin: 0px 0px 10px;text-align:center;padding-top:10px;">
 			 
              <span>友情链接/</span>
@@ -138,7 +168,7 @@ function commit(){
                <a href="http://www.2shoujie.com/joinUs" target="_top">加入我们</a>
             </div>
         <div style="text-align:center;margin-bottom:10px;">
-            <span>?2017   版权所有</span>
+            <span>©2017   版权所有</span>
             <span>鄂ICP备14003265号-2</span>
         </div>
     </footer>

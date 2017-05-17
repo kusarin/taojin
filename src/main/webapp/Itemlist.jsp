@@ -369,6 +369,11 @@
 					<span>·</span><a href="Lotlist.do?page=1" style="color: orange"><b>拍卖品</b></a>
 				</h3>
 			</div>
+			<div class="item bo">
+				<h3>
+					<span>·</span><a href="showAllShop.do?page=1" style="color: orange"><b>店铺浏览</b></a>
+				</h3>
+			</div>
 		</div>
 
 

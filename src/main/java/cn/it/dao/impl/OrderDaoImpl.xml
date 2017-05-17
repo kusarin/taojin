@@ -55,7 +55,7 @@
           select* from indent where OrderNumber=#{orderNumber}
      </select>
       <select id="get" resultMap="findAll">
-          select* from indent where Status=#{0} and label=#{1}
+          select* from indent where Status=#{0}
      </select>
      <delete id="delete" parameterType="java.lang.String">
           delete from indent where OrderNumber=#{orderNumber}

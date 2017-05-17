@@ -159,6 +159,7 @@
 	
 	<div class="left">
 			<p class="textshopname" style="height: 40px; width: 200px"> ${shopinfo.name}</p>
+			<p>浏览次数：${shopinfo.browsingTimes}</p>
 			<p class="textdetail" style="height: 40px; width: 200px"> ${shopinfo.intro}</p>
 		</div>
 	

@@ -137,9 +137,8 @@ public class OrderController {
 		v.addObject("pages",orderService.getOrder(userId,"已取消", page));
 		
 		v.addObject("pendingPayment",orderService.countNumbers(userId, "待付款"));
-		//v.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
-		//v.addObject("assessment",orderService.countNumbers(userId, "待评价"));
-		v.addObject("Payment",orderService.countNumbers(userId, "已付款"));
+		v.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
+		v.addObject("Payment",orderService.countNumbers(userId, "待发货"));
 		return v;
 	}
 	
@@ -156,14 +155,14 @@ public class OrderController {
 		v.addObject("pages",orderService.getOrder(userId,"待付款", page));
 		
 		v.addObject("pendingPayment",orderService.countNumbers(userId, "待付款"));
-		//v.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
-		//v.addObject("assessment",orderService.countNumbers(userId, "待评价"));
+		v.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
+		
 		v.addObject("Payment",orderService.countNumbers(userId, "已付款"));
 		return v;
 	}
 	
 	/***
-	 *已付款
+	 *待发货
 	 *订单 
 	 * */
 	@RequestMapping("payedGoods.do")
@@ -173,30 +172,29 @@ public class OrderController {
 		int userId=user.getUser_ID();   //用户Id
 		
 		ModelAndView v=new ModelAndView("payedGoods");
-		v.addObject("pages",orderService.getOrder(userId,"已付款", page));
+		v.addObject("pages",orderService.getOrder(userId,"待发货", page));
 		
 		v.addObject("pendingPayment",orderService.countNumbers(userId, "待付款"));
-		//v.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
-		//v.addObject("assessment",orderService.countNumbers(userId, "待评价"));
-		v.addObject("Payment",orderService.countNumbers(userId, "已付款"));
+		v.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
+		v.addObject("Payment",orderService.countNumbers(userId, "待发货"));
 		return v;
 	}
 	/***
-	 *待评价
+	 *待收货
 	 *订单 
 	 * */
-	@RequestMapping("pendingEvaluation.do")
+	@RequestMapping("pendingReceiving.do")
 	public ModelAndView saledGoods(Page<OrderCollection> page,HttpSession session){
 		
 		Users user=(Users) session.getAttribute("user");
 		int userId=user.getUser_ID();   //用户Id
 	
-		ModelAndView v=new ModelAndView("pendingEvaluation");
-		v.addObject("pages",orderService.getOrder(userId,"待评价", page));
+		ModelAndView v=new ModelAndView("pendingReceiving");
+		v.addObject("pages",orderService.getOrder(userId,"待收货", page));
 		
 		v.addObject("pendingPayment",orderService.countNumbers(userId, "待付款"));
 		v.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
-		v.addObject("assessment",orderService.countNumbers(userId, "待评价"));
+		v.addObject("Payment",orderService.countNumbers(userId, "待发货"));
 		return v;
 	}
 	/*
@@ -255,7 +253,7 @@ public class OrderController {
 		view.addObject("pages",orderService.getAllOrder(userId, page));
 		view.addObject("pendingPayment",orderService.countNumbers(userId, "待付款"));
 		view.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
-		view.addObject("assessment",orderService.countNumbers(userId, "待评价"));
+		view.addObject("Payment",orderService.countNumbers(userId, "待发货"));
 		return view;
 	}
 	
@@ -358,7 +356,7 @@ public class OrderController {
 		view.addObject("pages",orderService.getLotOrder(userId, page));
 		view.addObject("pendingPayment",orderService.countNumbers(userId, "待付款"));
 		view.addObject("receivingGoods",orderService.countNumbers(userId, "待收货"));
-		view.addObject("assessment",orderService.countNumbers(userId, "待评价"));
+		view.addObject("Payment",orderService.countNumbers(userId, "待发货"));
 		return view;
 	}
 	
@@ -381,5 +379,19 @@ public class OrderController {
 		view.addObject("address",address);
 		view.addObject("username",usersService.findById(userId).getName());
 		return view;
+	}
+	/*
+	 * 查看发货单详情
+	 * */
+	@RequestMapping("lookInvoiceOrder.do")
+	public ModelAndView lookInvoiceOrder(String orderNumber,int shop_id){
+		ModelAndView v=new ModelAndView("lookInvoice");
+		v.addObject("o", orderService.findOrder(orderNumber));//订单
+		v.addObject("inv", orderService.getInvoice(orderNumber, shop_id));//发货单
+		v.addObject("u", orderService.getU(orderNumber));//收货人
+		v.addObject("il", orderService.getOrderDetail(orderNumber, shop_id));//商品
+		
+		return v;
+		
 	}
 }

@@ -31,6 +31,7 @@ import cn.it.pojo.OrderCollection;
 import cn.it.pojo.OrderDetail;
 import cn.it.pojo.Page;
 import cn.it.pojo.Shop;
+import cn.it.pojo.Users;
 import cn.it.service.OrderService;
 
 /**
@@ -472,7 +473,8 @@ public class OrderServiceImpl implements OrderService {
 			}
 		}
 		int num = 0;
-		for (OrderDetail or1 : li) {
+		List<OrderDetail> ll = orderDetailDao.selectAll(orderNumber);
+		for (OrderDetail or1 : ll) {
 			if (or1.getFlag() == 1) {
 				num++;
 			}
@@ -620,5 +622,36 @@ public class OrderServiceImpl implements OrderService {
 		orderDetailDao.add(ord);
 		return o;
 	}
-
+	/*
+	 * 发货单信息
+	 * */
+	public Invoice getInvoice(String orderNumber,int shop_id){
+		return invoiceDao.selectIn(orderNumber, shop_id);
+	}
+	/*
+	 * 商品信息
+	 * */
+	public List<OrderDetail> getOrderDetail(String orderNumber,int shopid){
+		Order o = orderDao.findOrder(orderNumber);
+		List<OrderDetail> il=new ArrayList<OrderDetail>();
+		List<OrderDetail> li = orderDetailDao.selectAll(orderNumber);
+		for (OrderDetail or : li) {// 此店铺对应的此订单中的商品
+			int shopId = or.getItem().getshop_id();
+			if (shopid == shopId) {
+				
+				il.add(or);
+			}
+			}
+		return il;	
+	}
+	/*
+	 * 收货人信息
+	 * */
+	public Users getU(String orderNumber){
+		Order o = orderDao.findOrder(orderNumber);
+		int userId=o.getUserID();
+		Users u=usersDao.findById(userId);
+		return u;
+		
+	}
 }

@@ -43,6 +43,18 @@
 }
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.mn.js"></script>
+<script type="text/javascript">
+	function chatlogin() {
+		var name = ${user.username};
+			$.ajax({
+				url : "chatlogin.do",
+				data : "name=" + name,
+				dataType:'json',
+			    
+			});
+			window.location.href = "chat_main.jsp";
+	}
+</script>
 <script>
   function plus(val){
    var num=document.getElementById("mp");
@@ -260,8 +272,9 @@
 									<span class="bgnone">${lookitem.name}</span>
 								</h1>
 								<div class="productprice">
-									<h2>商品价格:¥${lookitem.price}</h2>
-									<span>浏览次数<span>
+									
+									<span><h2>浏览次数:${lookitem.browsingTimes}</h2></span>
+									<span><h2>商品价格:¥${lookitem.price}</h2></span>
 								</div>
 
 								<div class="productprice">
@@ -282,6 +295,8 @@
 										onclick="purchas(${lookitem.number})">现在购买</a></li>
 									<li><a class="wish" href="javascript:void(0)"
 										onclick="addCart(${lookitem.number})">加入购物车</a></li>
+									<li><a class="wish" href="javascript:void(0)"
+										onclick="chatlogin()">联系店主</a></li>
 								</ul>
 							</div>
 						</div>
