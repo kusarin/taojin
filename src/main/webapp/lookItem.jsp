@@ -43,6 +43,18 @@
 }
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.mn.js"></script>
+<script type="text/javascript">
+	function chatlogin() {
+		var name = ${user.username};
+			$.ajax({
+				url : "chatlogin.do",
+				data : "name=" + name,
+				dataType:'json',
+			    
+			});
+			window.location.href = "chat_main.jsp";
+	}
+</script>
 <script>
   function plus(val){
    var num=document.getElementById("mp");
@@ -283,6 +295,8 @@
 										onclick="purchas(${lookitem.number})">现在购买</a></li>
 									<li><a class="wish" href="javascript:void(0)"
 										onclick="addCart(${lookitem.number})">加入购物车</a></li>
+									<li><a class="wish" href="javascript:void(0)"
+										onclick="chatlogin()">联系店主</a></li>
 								</ul>
 							</div>
 						</div>
