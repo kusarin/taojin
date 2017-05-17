@@ -117,12 +117,17 @@ a:hover{
 						<sup style="color:red;font-size:12px;">${pendingPayment}</sup>
 						</c:if>
 						</a></li>
-						<li><a href="payedGoods.do">已付款
+						<li><a href="payedGoods.do">待发货
 						<c:if test="${Payment!=0}">
 						<sup style="color:red;font-size:12px;">${Payment}</sup>
 						</c:if>
 						</a></li>
-						<li><a href="removeRecord.do">取消订单记录</a></li>
+						<li><a href="pendingReceiving.do">待收货
+						<c:if test="${receivingGoods!=0}">
+						<sup style="color:red;font-size:12px;">${receivingGoods}</sup>
+						</c:if>
+						</a></li>
+						<li><a href="removeRecord.do" style="color:red;">取消订单记录</a></li>
 						<li><a href="getLotOrder.do">我的拍卖订单</a></li>
 					</ul>
 				</div>
@@ -140,7 +145,7 @@ a:hover{
 						<td class="item">商品</td>
 						<td class="co">取消时间</td>
 						<td class="co">支付</td>
-						<td class="co">退款状态</td>
+						<td class="co">状态</td>
 					</tr>
 				</table>
 				</div>
@@ -159,7 +164,7 @@ a:hover{
 	                     </td>
 		                    <td class="sa" style="border-right:1px solid #F5F5F5;"><fmt:formatDate value="${orderc.order.removeOrderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 		                    <td class="sa" style="border-right:1px solid #F5F5F5;">${orderc.order.actulPayment}</td>
-		                    <td class="sa">已完成</td>
+		                    <td class="sa">取消完成</td>
 		                </tr>
 		            </table>  
 				</div>

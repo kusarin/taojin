@@ -170,12 +170,12 @@ function deleteAll(){
 						<sup style="color:red;font-size:12px;">${pendingPayment}</sup>
 						</c:if>
 						</a></li>
-						<li><a href="payedGoods.do" style="color:red;">待发货
+						<li><a href="payedGoods.do">待发货
 						<c:if test="${Payment!=0}">
 						<sup style="color:red;font-size:12px;">${Payment}</sup>
 						</c:if>
 						</a></li>
-						<li><a href="pendingReceiving.do">待收货
+						<li><a href="pendingReceiving.do" style="color:red;">待收货
 						<c:if test="${receivingGoods!=0}">
 						<sup style="color:red;font-size:12px;">${receivingGoods}</sup>
 						</c:if>
@@ -189,7 +189,7 @@ function deleteAll(){
 			<!-- Sidebar End-->
 			<div class="span9" style="float:left;margin-top:20px;">
 			    <div style="margin-top:20px;font-size:15px;color:#808A87;margin-bottom:10px;">
-				 <strong>待发货订单</strong>	
+				 <strong>待收货订单</strong>	
 				</div> 
 				<div style="height:auto;width:700px;">
 				<table style="height:auto;width:700px; font-size:14px;">

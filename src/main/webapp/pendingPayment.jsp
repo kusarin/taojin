@@ -165,14 +165,19 @@ function deleteAll(){
 					</h2>
 					<ul class="nav nav-list categories">
 						<li><a href="orderItem.do">我的订单</a></li>
-						<li><a href="pendingPayment.do">待付款
+						<li><a href="pendingPayment.do" style="color:red;">待付款
 						<c:if test="${pendingPayment!=0}">
 						<sup style="color:red;font-size:12px;">${pendingPayment}</sup>
 						</c:if>
 						</a></li>
-						<li><a href="payedGoods.do">已付款
+						<li><a href="payedGoods.do">待发货
 						<c:if test="${Payment!=0}">
 						<sup style="color:red;font-size:12px;">${Payment}</sup>
+						</c:if>
+						</a></li>
+						<li><a href="pendingReceiving.do">待收货
+						<c:if test="${receivingGoods!=0}">
+						<sup style="color:red;font-size:12px;">${receivingGoods}</sup>
 						</c:if>
 						</a></li>
 						<li><a href="removeRecord.do">取消订单记录</a></li>
@@ -206,16 +211,17 @@ function deleteAll(){
 				
 				
 				<c:if test="${pages.totalpage!=0}">
+				<form action="" method="post" name="myform">
 				<c:forEach items="${pages.datas}" var="orderc">
 				<div style="height:auto;width:700px;margin-bottom:20px;">
 				    <table  style="font-size:12px;height:auto;width:700px;color:black;">
 		                <tr style="background-color:#F5F5F5;">
 		                     <td class="orderNumber"><input type="checkbox" name="orderNumber" value="${orderc.order.orderNumber}" style="float:left;">
-		                     <span style="float:left;margin-left:20px;margin-right:5px;">
-		                     <strong style="color:black;">${orderc.order.orderTime}</strong></span>
+		                     <span style="float:left;margin-left:10px;margin-right:5px;">
+		                     <strong style="color:black;"><fmt:formatDate value="${orderc.order.orderTime}" pattern="yyyy-MM-dd HH:mm:ss"/></strong></span>
 		                     <span><p style="float:left;margin-right:5px;">订单号: </p>
-							 <p style="color:black;float:left;">${orderc.order.orderNumber}</p></span></td>
-			                 <td class="buyer1"><a href="#"><p>移动硬盘专营店qwertd6y7u89irtyui35uio34567i8qwerdtfy7gu789u0-34t5y6u7i89awearestuyri678d5657ii6i7</p></a></td>
+							 <p style="color:black;margin-right:-60px;">${orderc.order.orderNumber}</p></span></td>
+			                 <td class="buyer1">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
 				             <td class="buyer">&nbsp;</td>
@@ -253,7 +259,7 @@ function deleteAll(){
 		            </table>  
 				</div>
 				</c:forEach>
-			
+			</form>
 				
 				
 				<div style="height:40px;width:700px;text-align:right;padding-top:5px;margin-top:15px;">

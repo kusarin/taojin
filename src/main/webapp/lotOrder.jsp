@@ -164,13 +164,18 @@ function deleteAll(){
 						<sup style="color:red;font-size:12px;">${pendingPayment}</sup>
 						</c:if>
 						</a></li>
-						<li><a href="payedGoods.do">已付款
+						<li><a href="payedGoods.do">待发货
 						<c:if test="${Payment!=0}">
 						<sup style="color:red;font-size:12px;">${Payment}</sup>
 						</c:if>
 						</a></li>
+						<li><a href="pendingReceiving.do">待收货
+						<c:if test="${receivingGoods!=0}">
+						<sup style="color:red;font-size:12px;">${receivingGoods}</sup>
+						</c:if>
+						</a></li>
 						<li><a href="removeRecord.do">取消订单记录</a></li>
-						<li><a href="getLotOrder.do">我的拍卖订单</a></li>
+						<li><a href="getLotOrder.do" style="color:red;">我的拍卖订单</a></li>
 					</ul>
 				</div>
 				</aside>
